@@ -28,7 +28,7 @@
  *
  * @apiParam {Number} id Blog's unique ID.
  *
- * @apiSuccess {String} blogname Name of the blog.
+ * @apiSuccess posts_fields Dashboard responses include the fields returned in /posts responses (with all the various type-specific fields), but without the blog object. Instead, a blog_name field identifies the blog for each post returned.
  */
 
 
