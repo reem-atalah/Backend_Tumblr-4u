@@ -1,11 +1,14 @@
+// --------------------------------- User --------------------------------------
+
 /**
  * @api {get} /user/:id Retrieve User information
- * @apiName GetUser
+ * @apiName getUser
  * @apiGroup User
+ * @apiVersion 0.50.1
+ * 
+ * @apiParam {String} id User's unique ID.
  *
- * @apiParam {Number} id User's unique ID.
- *
- * @apiSuccess {String} [name = abeer] The user's tumblr short name.
+ * @apiSuccess {String} name The user's tumblr short name.
  * @apiSuccess {Number} following The number of blogs the user is following.
  * @apiSuccess {String} default_post_format The default posting format - html, markdown, or raw.
  * @apiSuccess {Number} likes The total count of the user's likes.
@@ -20,31 +23,35 @@
  * @apiSuccess {String} blogs.type indicates whether a blog is public or private.
  */
 
-
+//done
 /**
- * @api {get} /user/:dashboard Retrieve a User's Dashboard
- * @apiName GetDasgboard
+ * @api {get} /:user_id/:dashboard Retrieve a User's Dashboard
+ * @apiName getDashboard
  * @apiGroup User
- *
- * @apiParam {Number} id Blog's unique ID.
+ * @apiVersion 0.50.1
+ * 
+ * @apiParam {String} user_id The ID of the blog user has the post
+ * @apiParam {String} token User's token
  *
  * @apiSuccess posts_fields Dashboard responses include the fields returned in /posts responses (with all the various type-specific fields), but without the blog object. Instead, a blog_name field identifies the blog for each post returned.
  */
 
 
-
+// --------------------------------- Blog --------------------------------------
+//done
 /**
- * @api {get} /blog/:blog-id/info Retrieve Blog information
- * @apiName GetBlog
+ * @api {get} /blog/:blog_id/info Retrieve Blog information
+ * @apiName getBlog
  * @apiGroup Blog
- *
- * @apiParam {Number} blog-id Blog's unique ID.
+ *@apiVersion 0.50.1
+ * @apiParam {String} blog_id Blog's unique ID.
+ * @apiParam {String} [token] User's token
  *
  * @apiSuccess {String} title The display title of the blog.
  * @apiSuccess {String} name The short blog name that appears before tumblr.com in a standard blog hostname.
  * @apiSuccess {Number} updated The time of the most recent post, in seconds since the epoch.
  * @apiSuccess {String} description You guessed it! The blog's description.
- * @apiSuccess {Boolean} ask Indicates whether the blog allows questions.
+ * @apiSuccess {Boolean} [ask] Indicates whether the blog allows questions.
  * @apiSuccess {Boolean} [ask_anon] Indicates whether the blog allows anonymous questions; returned only if ask is true.
  * @apiSuccess {Number} [likes] Number of likes for this user, returned only if this is the user's primary blog and sharing of likes is enabled.
  * @apiSuccess {Boolean} [is_blocked_from_primary] Indicates whether this blog has been blocked by the calling user's primary blog; returned only if there is an authenticated user making this call.
@@ -78,99 +85,127 @@
  * @apiSuccess {String} created_by User who created this blog.
  */
 
-
-/**
- * @api {get} /blog/:blog-id/avatar Retrieve a Blog Avatar
- * @apiName GetBlogAvatar
+ //done
+ /**
+ * @api {get} /blog/:blog_id/activity  Retrieve Blog's Activity Feed
+ * @apiName getBlogActivityFeed
  * @apiGroup Blog
- *
- * @apiParam {Number} blog-id Blog's unique ID.
+ * @apiVersion 0.50.1
+ * 
+ * @apiParam {String} blog_id The ID of the blog's activity'
+ * @apiParam {String} token User's token
+ * 
+ * @apiSuccess {Notes[]} Notes array of notes
+ * @apiSuccess {Followers[]} Fans array of biggest fans/followers
+ * @apiSuccess {Post} Top post information
+ * @apiSuccess {Number} Total followers to this blog
+*/
+
+
+//done
+/**
+ * @api {get} /blog/:blog_id/avatar Retrieve a Blog Avatar
+ * @apiName getBlogAvatar
+ * @apiGroup Blog
+ *@apiVersion 0.50.1
+ * @apiParam {Number} blog_id Blog's unique ID.
+ * @apiParam {String} [token] User's token
  *
  * @apiSuccess {String} avatar_url The URL of the avatar image. 
  */
 
-
+//done
 /**
- * @api {get} /blog/:blog-id/blocks Retrieve Blog's Blocks
- * @apiName GetBlogBlocks
+ * @api {get} /blog/:blog_id/blocks Retrieve Blog's Blocks
+ * @apiName getBlogBlocks
  * @apiGroup Blog
+ * @apiVersion 0.50.1
+ * @apiParam {Number} blog_id Blog's unique ID.
+ * @apiParam {String} token User's token
  *
- * @apiParam {Number} blog-id Blog's unique ID.
- *
- * @apiSuccess {Array} blocked_tumblelogs Blog objects that are blocked.
+ * @apiSuccess {Array} blocked_tumbleblogs Blog objects that are blocked.
  */
 
-
+//done
 /**
- * @api {post} /blog/:blog-id/blocks Block a Blog
- * @apiName PostBlogBlock
+ * @api {post} /blog/:blog_id/blocks Block a Blog  
+ * @apiName postBlogBlock
  * @apiGroup Blog
- *
- * @apiParam {Number} blocking-blog-id Blocking blog id.
- * @apiParam {Number} blocked-blog-id Blocked blog id.(if the blog isn't blocked via a post)
+ * @apiVersion 0.50.1
+ * @apiParam {Number} blocking_blog_id Blocking blog id.
+ * @apiParam {Number} blocked_blog_id Blocked blog id.(if the blog isn't blocked via a post)
  * @apiParam {Number} [post-id] Post id of blocked blog.(if the blog is blocked via a post)
+ * @apiParam {Boolean} [Is_primary] flag indicates that the blocking is primary.
+ * @apiParam {String} token User's token
  *
  * @apiSuccess {Boolean} is_deleted Deletion flag.
+ * @apiSuccess {Boolean} is_blocked_from_primary changes flag to true .
  */
 
-
+//done
 /**
- * @api {delete} /blog/:blog-id/blocks Remove a Block
- * @apiName RemoveBlogBlock
+ * @api {post} /blog/:blog_id/blocks Remove a Block
+ * @apiName removeBlogBlock
  * @apiGroup Blog
- *
- * @apiParam {Number} blocking-blog-id Blocking blog id.
- * @apiParam {Number} blocked-blog-id Blocked blog id.(if the blog isn't blocked via a post)
+ * @apiVersion 0.50.1
+ * @apiParam {Number} blocking_blog_id Blocking blog id.
+ * @apiParam {Number} blocked_blog_id Blocked blog id.(if the blog isn't blocked via a post)
  * @apiParam {Number} [post-id] Post id of blocked blog.(if the blog is blocked via a post)
- *
- * @apiSuccess {Boolean} is_removed Removing block flag.
+ * @apiParam {String} token User's token
+
+ * @apiSuccess {Boolean} is_blocked_from_primary Removing block flag.
  */
 
+//done
 /**
- * @api {get} /blog/:blog-id/likes Retrieve Blog's Likes
- * @apiName GetBlogLikes
+ * @api {get} /blog/:blog_id/likes Retrieve Blog's Likes
+ * @apiName getBlogLikes
  * @apiGroup Blog
+ * @apiVersion 0.50.1
+ * @apiParam {Number} blog_id Blog's unique ID.
+ * @apiParam {String} token User's token
  *
- * @apiParam {Number} blog-id Blog's unique ID.
- *
- * @apiSuccess {Array} liked_posts An array of post objects (posts liked by the user).
+ * @apiSuccess {Posts[]} liked_posts An array of post objects (posts liked by the user).
  * @apiSuccess {Number} liked_count Total number of liked posts.
  */
 
-
+//done
 /**
- * @api {get} /blog/:blog-id/following Retrieve Blog's Following
- * @apiName GetBlogFollowing
+ * @api {get} /blog/:blog_id/following Retrieve Blog's Following
+ * @apiName getBlogFollowing
  * @apiGroup Blog
+ * @apiVersion 0.50.1
+ * @apiParam {Number} blog_id Primary Blog ID.
+ * @apiParam {String} token User's token
  *
- * @apiParam {Number} blog-id Primary Blog ID.
- *
- * @apiSuccess {Array} blogs An array of short blog infos that this blog follows, in order from most recently-followed to first.
+ * @apiSuccess {Following[]} blogs An array of short blog infos that this blog follows, in order from most recently-followed to first.
  * @apiSuccess {Number} total_blogs Total number of followed blogs.
  */
 
+//done
 /**
- * @api {get} /blog/:blog-id/followers Retrieve Blog's Followers
- * @apiName GetBlogFollowers
+ * @api {get} /blog/:blog_id/followers Retrieve Blog's Followers
+ * @apiName getBlogFollowers
  * @apiGroup Blog
- *
- * @apiParam {Number} blog-id Blog's unique ID.
+ * @apiVersion 0.50.1
+ * @apiParam {Number} blog_id Blog's unique ID.
+ * @apiParam {String} token User's token
  *
  * @apiSuccess {Number} total_users The number of users currently following the blog
- * @apiSuccess {Array} users Each item is a follower, containing these fields:
- * @apiSuccess {String} name The user's name on tumblr.
- * @apiSuccess {Boolean} following Whether the caller is following the user.
- * @apiSuccess {String} url The URL of the user's primary blog.
+ * @apiSuccess {User[]} users Each item is a follower, containing these fields:
+ * @apiSuccess {String} [name] The user's name on tumblr.
+ * @apiSuccess {Boolean} [following] Whether the caller is following the user.
+ * @apiSuccess {String} [url] The URL of the user's primary blog.
  */
 
-
+//done
 /**
- * @api {get} /blog/:blog-id/posts Retrieve Published Posts
- * @apiName GetPosts
+ * @api {get} /blog/:blog_id/posts Retrieve Published Posts
+ * @apiName getPosts
  * @apiGroup Blog
- *
- * @apiParam {String} blog-id Any blog identifier.
- * @apiParam {String} api-key Your OAuth Consumer Key.
+ * @apiVersion 0.50.1
+ * @apiParam {String} blog_id Any blog identifier.
+ * @apiParam {String} token User's token
  *
  * @apiSuccess {String} blog_name The short name used to uniquely identify a blog.
  * @apiSuccess {Number} id The post's unique ID.
@@ -235,3 +270,240 @@
  * @apiSuccess {String} [Legacy_Answer_Posts.question] The question being asked.
  * @apiSuccess {String} [Legacy_Answer_Posts.answer] The answer given.
  */
+
+// --------------------------------- Post --------------------------------------
+//done
+/**
+ * @api {Delete} /blog/:blog_id/:post_id/delete Delete a Post
+ * @apiName deletePost
+ * @apiGroup Post
+ * @apiVersion 0.50.1
+ *
+ * @apiParam {String} post_id The ID of the post to delete
+ * @apiParam {String} blog_id The ID of the bloghas the post
+ * @apiParam {String} token User's token
+ * 
+ * @apiSuccess {String} is_deleted make the flag true
+ */
+
+//done
+/**
+ * @api {get} /blog/:blog_id/queue  GetQueuedPosts
+ * @apiDescription Gives you a list of the currently queued posts for the specified blog.
+ * @apiName getQueuedPosts
+ * @apiGroup Post
+ * @apiVersion 0.50.1
+ * @apiParam {String} post_id The ID of the post to delete
+ * @apiParam {String} blog_id The ID of the bloghas the post
+ * @apiParam {String} token User's token
+ * 
+ * @apiSuccess {Array} Queued_posts
+ */
+
+//done
+/**
+ * @api {put} /blog/:blog_id/queue/reorder   Reorder Queued Posts
+ * @apiDescription This allows you to reorder a post within the queue, moving it after an existing queued post, or to the top.
+ * @apiName reorderQueuedPosts
+ * @apiGroup Post
+ * @apiVersion 0.50.1
+ * 
+ * @apiParam {String} blog_id The ID of the bloghas the post
+ * @apiParam {String} post_id Post ID to move.
+ * @apiParam {String} [insert_after="0"] Which post ID to move it after, or 0 to make it the first post
+ * @apiParam {Array} UnOrdered_Queued_posts all queued posts
+ * @apiParam {String} token User's token
+ * 
+ * @apiSuccess {Array} Ordered_Queued_posts change time of each post
+ */
+
+//done
+/**
+ * @api {post} /blog/:blog_id/queue/shuffle  Shuffle Queued Posts
+ * @apiDescription This randomly shuffles the queue for the specified blog.
+ * @apiName shuffleQueuedPosts
+ * @apiGroup Post
+ * @apiVersion 0.50.1
+ * 
+ * @apiParam {String} blog_id The ID of the bloghas the post
+ * @apiParam {String} [insert_after="0"] Which post ID to move it after, or 0 to make it the first post
+ * @apiParam {Array} UnOrdered_Queued_posts all queued posts
+ * @apiParam {String} token User's token
+ * 
+ * @apiSuccess {Array} Ordered_Queued_posts change time of each post after shuffeling
+*/
+
+//done
+/**
+ * @api {get} /blog/:blog_id/draft Retrieve Draft Posts
+ * @apiName retrieveDraftPosts
+ * @apiGroup Post
+ * @apiVersion 0.50.1
+ * 
+ * @apiParam {String} blog_id The ID of the bloghas the post
+ * @apiParam {String} token User's token
+ * 
+ * @apiSuccess {Array} Draft_posts array of posts was posted as drafts
+*/
+
+
+// --------------------------------- Inbox --------------------------------------
+
+//done
+/**
+ * @api {get} /blog/:blog_id/inbox Retrieve Inbox Posts
+ * @apiName retrieveInboxPosts
+ * @apiGroup Inbox
+ * @apiVersion 0.50.1
+ * 
+ * @apiParam {String} blog_id The ID of the blog has the post
+ * @apiParam {String} token User's token
+ * 
+ * @apiSuccess {Post[]} Submission array of submission posts
+ * @apiSuccess {Post[]} Ask array of ask posts
+*/
+
+//done
+/**
+ * @api {delete} /blog/:blog_id/inbox Delete All Messages
+ * @apiName deleteInboxPosts
+ * @apiGroup Inbox
+ * @apiVersion 0.50.1
+ * 
+ * @apiParam {String} blog_id The ID of the blog has the post
+ * @apiParam {String} token User's token
+ * 
+ * @apiSuccess {Boolean} removed true if we removed succesfully message
+*/
+//delete all appears when there's > 1 post
+
+// --------------------------------- Submission --------------------------------------
+//done
+/**
+ * @api {post} /blog/:blog_id/submit Make Submission Posts
+ * @apiName makeSubmissionPosts
+ * @apiGroup Submission
+ * @apiVersion 0.50.1
+ * 
+ * @apiParam {String} blog_id The ID of the blog I want to submit at
+ * @apiParam {String} token User's token
+ * @apiParam {String} type The type of post. One of the following: text, photo, quote, link, video
+ * @apiParam {String[]} tags Tags applied to the post
+ * @apiParam {String} title of the post
+ * @apiParam {String} text of the post
+ * 
+ * @apiSuccess {String} id The ID of the submitted post
+ * @apiSuccess {String} post_url The location of the post
+ * @apiSuccess {String} slug Short text summary to the end of the post URL
+ * @apiSuccess {String} date The GMT date and time of the post
+ * @apiSuccess {Number} timestamp The time of the post, in seconds since the epoch
+ * @apiSuccess {String} [state=false] Indicates the current state of the post (submission)
+ * @apiSuccess {String} short_url Short url for the post
+ * @apiSuccess {String} post_author Author of post, only available when submission is not anonymous
+ * @apiSuccess {Boolean} is_submission 	Indicates post is a submission (true)
+ * @apiSuccess {String} anonymous_name Name on an anonymous submission
+*/
+
+//done
+/**
+ * @api {delete} /blog/:blog_id/inbox Delete Submission Posts
+ * @apiName deleteSubmissionPosts
+ * @apiGroup Submission
+ * @apiVersion 0.50.1
+ * 
+ * @apiParam {String} blog_id The ID of the blog has the submission
+ * @apiParam {String} token User's token
+ * 
+ * @apiSuccess {boolean} is_deleted true if we removed succesfully the submission post
+*/
+
+//done
+/**
+ * @api {put} /blog/:blog_id/inbox Edit Submission Posts
+ * @apiName editSubmissionPosts
+ * @apiGroup Submission
+ * @apiVersion 0.50.1
+ * 
+ * @apiParam {String} blog_id The ID of the blog having the submitted post
+ * @apiParam {String} token User's token
+ * @apiParam {String[]} tags Tags applied to the post
+ * @apiParam {String} title of the post
+ * @apiParam {String} text of the post
+ * 
+ * @apiSuccess {post} the sumbission post updated 
+*/
+
+//done
+/**
+ * @api {post} /blog/:blog_id/inbox Post Submission Posts
+ * @apiName postSubmissionPosts
+ * @apiGroup Submission
+ * @apiVersion 0.50.1
+ * 
+ * @apiParam {String} blog_id The ID of the blog has the post
+ * @apiParam {String} token User's token
+ * 
+ * @apiSuccess {boolean} posted return true when it's successfullay posyed in the dashboard and removed from inbox
+*/
+
+//done
+/**
+ * @api {put} /blog/:blog_id/inbox Queue Submission Posts
+ * @apiName queueSubmissionPosts
+ * @apiGroup Submission
+ * @apiVersion 0.50.1
+ * 
+ * @apiParam {String} blog_id The ID of the bloghas the post
+ * @apiParam {String} token User's token
+ * 
+ * @apiSuccess {boolean} queued return true when post is changed from submission post to queue post
+*/
+
+// --------------------------------- Ask --------------------------------------
+//done
+/**
+ * @api {post} /blog/:blog_id/ask Make Ask Posts
+ * @apiName makeAskPosts
+ * @apiGroup Ask
+ * @apiVersion 0.50.1
+ * 
+ * @apiParam {String} blog_id The ID of the blog has the post
+ * @apiParam {String} token User's token
+ * @apiParam {String} text text of the question/ask
+ * 
+ * @apiSuccess {String} id The ID of the asking/questionniere post
+ * @apiSuccess {String} state Indicates the current state of the post (ask)
+ * @apiSuccess {String} post_author Author of post, only available when submission is not anonymous
+ * @apiSuccess {String} anonymous_name Name on an anonymous ask
+*/
+
+//done
+/**
+ * @api {post} /blog/:blog_id/inbox Answer Ask Posts
+ * @apiName answerAskPosts
+ * @apiGroup Ask
+ * @apiVersion 0.50.1
+ * 
+ * @apiParam {String} blog_id The ID of the blog has the post
+ * @apiParam {String} token User's token
+ * @apiParam {String} text answer of the ask
+ * @apiParam {String[]} tags Tags applied to the post
+ * @apiParam {String} type post type (now, queue,draft,private,schedule)
+ * 
+ * @apiSuccess {boolean} answered return true when post is changed from submission post to different post type
+
+*/
+
+//done
+/**
+ * @api {delete} /blog/:blog_id/inbox Delete Ask Posts
+ * @apiName seleteAskPosts
+ * @apiGroup Ask
+ * @apiVersion 0.50.1
+ * 
+ * @apiParam {String} blog_id The ID of the blog has the ask post
+ * @apiParam {String} token User's token
+ * 
+ * @apiSuccess {boolean} is_deleted true if we removed succesfully the submission post
+
+*/
