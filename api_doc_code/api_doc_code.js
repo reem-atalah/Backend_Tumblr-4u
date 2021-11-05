@@ -68,7 +68,7 @@
  *      {
  *          "error":"No Access Right"
  *      }
-*/
+ */
 
 /**
  * @api {post} /user/:user_id/follow_tag Follow Tag
@@ -102,7 +102,7 @@
  *      {
  *          "error":"No Access Right"
  *      }
-*/
+ */
 
 /**
  * @api {post} /user/:user_id/get_followed_tags  Tags Followed
@@ -135,7 +135,7 @@
  *      {
  *          "error":"No Access Right"
  *      }
-*/
+ */
 
 // --------------------------------- Blog --------------------------------------
 
@@ -171,7 +171,7 @@
  *      {
  *          "error":"No Access Right"
  *      }
-*/
+ */
 
 
 /**
@@ -239,8 +239,8 @@
  */
 
 
- 
- /**
+
+/**
  * @api {get} /blog/:blog_id/activity  Retrieve Blog's Activity Feed
  * @apiName getBlogActivityFeed
  * @apiGroup Blog
@@ -271,7 +271,7 @@
  *      {
  *          "error":"No Access Right"
  *      }
-*/
+ */
 
 /**
  * @api {get} /blog/:blog_id/blocks Retrieve Blog's Blocks
@@ -454,7 +454,7 @@
  * @apiSuccess {Following[]} blogs An array of short blog infos that this blog follows, in order from most recently-followed to first.
  * @apiSuccess {Number} total_blogs Total number of followed blogs.
  * 
-  * 
+ * 
  * @apiError UserNotFound No such a user with this id is found
  * @apiError BlogNotFound No such a blog with this id is found
  * @apiError BadRequest Can't access the following page
@@ -591,7 +591,7 @@
  *      {
  *          "error":"No Access Right"
  *      }
-*/
+ */
 
 // --------------------------------- Post --------------------------------------
 
@@ -629,7 +629,7 @@
  *      {
  *          "error":"No Access Right"
  *      }
-*/
+ */
 
 
 /**
@@ -663,7 +663,7 @@
  *      {
  *          "error":"No Access Right"
  *      }
-*/
+ */
 
 
 /**
@@ -699,7 +699,7 @@
  *      {
  *          "error":"No Access Right"
  *      }
-*/
+ */
 
 /**
  * @api {Delete} /blog/:blog_id/:post_id/delete Delete a Post
@@ -841,7 +841,7 @@
  *      {
  *          "error":"No Access Right"
  *      }
-*/
+ */
 
 
 /**
@@ -874,7 +874,7 @@
  *      {
  *          "error":"No Access Right"
  *      }
-*/
+ */
 
 
 /**
@@ -908,7 +908,7 @@
  *      {
  *          "error":"No Access Right"
  *      }
-*/
+ */
 
 
 // --------------------------------- Inbox --------------------------------------
@@ -946,7 +946,7 @@
  *      {
  *          "error":"No Access Right"
  *      }
-*/
+ */
 
 
 /**
@@ -979,7 +979,7 @@
  *      {
  *          "error":"No Access Right"
  *      }
-*/
+ */
 
 // --------------------------------- Submission --------------------------------------
 
@@ -1022,7 +1022,7 @@
  *      {
  *          "error":"No Access Right"
  *      }
-*/
+ */
 
 
 /**
@@ -1055,7 +1055,7 @@
  *      {
  *          "error":"No Access Right"
  *      }
-*/
+ */
 
 
 /**
@@ -1091,7 +1091,7 @@
  *      {
  *          "error":"No Access Right"
  *      }
-*/
+ */
 
 
 /**
@@ -1124,7 +1124,7 @@
  *      {
  *          "error":"No Access Right"
  *      }
-*/
+ */
 
 
 /**
@@ -1158,7 +1158,7 @@
  *      {
  *          "error":"No Access Right"
  *      }
-*/
+ */
 
 // --------------------------------- Ask --------------------------------------
 
@@ -1197,7 +1197,7 @@
  *      {
  *          "error":"No Access Right"
  *      }
-*/
+ */
 
 
 /**
@@ -1233,7 +1233,7 @@
  *      {
  *          "error":"No Access Right"
  *      }
-*/
+ */
 
 
 /**
@@ -1269,3 +1269,413 @@
 
 */
 
+
+/*
+===================================================================================================
+===================================================================================================
+===================================================================================================
+===================================================================================================
+===================================================================================================
+===================================================================================================
+===================================================================================================
+*/
+
+/*--------------------------------------------------*/
+/* =========================== ///  Changing Your Email Address  /// ============================ */
+/*--------------------------------------------------*/
+
+/**
+ * @api {put} /user/email/ Changing Your Email Address.
+ * 
+ * @apiName changeUserEmail
+ * @apiGroup User's methods
+ * @apiVersion 0.0.0 
+ * @apiPermission User
+ * 
+ * @apiParam {String} Token User's token
+ * @apiParam {String} Email User's new email
+ * @apiParam {String} Password User's password
+ *
+ * @apiSuccessExample Response Data:
+ *      HTTP/1.1 200 OK
+ *      {
+ *          "message": "Email Changed Successfully"
+ *      }
+ *
+ * @apiErrorExample Response Error:
+ *      HTTP/1.1 400 BAD REQUEST
+ *      {
+ *          "error": "Error In Input Data"
+ *      }
+ *      HTTP/1.1 401 Unauthorized
+ *      {
+ *          "error": "User Is Unauthorized"
+ *      }
+ */
+
+/*=================== End =====================*/
+
+
+/*--------------------------------------------------*/
+/* =========================== ///  Resetting your password  /// ============================ */
+/*--------------------------------------------------*/
+
+/**
+ * @api {put} /user/resetPassword/ Resetting your password.
+ * 
+ * @apiName resetPassword
+ * @apiGroup User's methods
+ * @apiVersion 0.0.0 
+ * @apiPermission User
+ * 
+ * @apiParam {String} Token User's token
+ * @apiParam {String} Current_Password Current user's password
+ * @apiParam {String} New_Password New user's password
+ *
+ * @apiSuccessExample Response Data:
+ *      HTTP/1.1 200 OK
+ *      {
+ *          "message": "Password Updated Successfully"
+ *      }
+ *
+ * @apiErrorExample Response Error:
+ *      HTTP/1.1 400 BAD REQUEST
+ *      {
+ *          "error": "Error In Input Data"
+ *      }
+ *      HTTP/1.1 401 Unauthorized
+ *      {
+ *          "error": "User Is Unauthorized"
+ *      }
+ */
+
+/*=================== End =====================*/
+
+
+/*--------------------------------------------------*/
+/* =========================== ///  Deleting Your Account  /// ============================ */
+/*--------------------------------------------------*/
+
+/**
+ * @api {delete} /user/deleteAccount/ Deleting Your Account.
+ * 
+ * @apiName deleteAccount
+ * @apiGroup User's methods
+ * @apiVersion 0.0.0 
+ * @apiPermission User
+ * 
+ * @apiParam {String} Token User's token
+ * @apiParam {String} Email User's email
+ * @apiParam {String} Password User's password
+ *
+ * @apiSuccessExample Response Data:
+ *      HTTP/1.1 200 OK
+ *      {
+ *          "message": "Account Deleted Successfully"
+ *      }
+ *
+ * @apiErrorExample Response Error:
+ *      HTTP/1.1 400 BAD REQUEST
+ *      {
+ *          "error": "Error In Input Data"
+ *      }
+ *      HTTP/1.1 401 Unauthorized
+ *      {
+ *          "error": "User Is Unauthorized"
+ *      }
+ */
+
+/*=================== End =====================*/
+
+
+/*--------------------------------------------------*/
+/* =========================== ///  Email Verification  /// ============================ */
+/*--------------------------------------------------*/
+
+/**
+ * @api {put} /user/emailVerification/:Token Email Verification.
+ * 
+ * @apiName emailVerification
+ * @apiGroup User's methods
+ * @apiVersion 0.0.0 
+ * @apiPermission User
+ * 
+ *
+ * @apiSuccessExample Response Data:
+ *      HTTP/1.1 200 OK
+ *      {
+ *          "message": "Email Verifid Successfully"
+ *      }
+ *
+ * @apiErrorExample Response Error:
+ *      HTTP/1.1 400 BAD REQUEST
+ *      {
+ *          "error": "Error In Input Data"
+ *      }
+ *      HTTP/1.1 401 Unauthorized
+ *      {
+ *          "error": "User Is Unauthorized"
+ *      }
+ */
+
+/*=================== End =====================*/
+
+
+/*--------------------------------------------------*/
+/* =========================== ///  Access and manage data associated with your account  /// ============================ */
+/*--------------------------------------------------*/
+
+/**
+ * @api {get} /user/data/ Access and manage data associated with your account.
+ * 
+ * @apiName accessdData
+ * @apiGroup User's methods
+ * @apiVersion 0.0.0 
+ * @apiPermission User
+ * 
+ * @apiParam {String} Token User's token
+ *
+ *  @apiSuccessExample Response Data:
+ *      HTTP/1.1 200 OK
+ *      {
+ *          "message": "Data Will Be Sent Via Email"
+ *      }
+ *
+ * @apiErrorExample Response Error:
+ *      HTTP/1.1 400 BAD REQUEST
+ *      {
+ *          "error": "Error In Input Data"
+ *      }
+ *      HTTP/1.1 401 Unauthorized
+ *      {
+ *          "error": "User Is Unauthorized"
+ *      }
+ */
+
+/*=================== End =====================*/
+
+/*
+===================================================================================================
+===================================================================================================
+===================================================================================================
+===================================================================================================
+===================================================================================================
+===================================================================================================
+===================================================================================================
+*/
+
+/*--------------------------------------------------*/
+/* =========================== ///  Create a new blog  /// ============================ */
+/*--------------------------------------------------*/
+
+/**
+ * @api {post} /new/blog/ Create a new blog.
+ * 
+ * @apiName newBlog
+ * @apiGroup Blog's methods
+ * @apiVersion 0.0.0 
+ * @apiPermission User
+ * 
+ * @apiParam {String} Token User's token
+ * @apiParam {String} Title Blog's Title
+ * @apiParam {String} Url Blog's Url
+ * @apiParam {String} [Password] Blog's password
+ *
+ *  @apiSuccessExample Response Data:
+ *      HTTP/1.1 200 OK
+ *      {
+ *          "message": "Blog Created Successfully"
+ *      }
+ *
+ * @apiErrorExample Response Error:
+ *      HTTP/1.1 400 BAD REQUEST
+ *      {
+ *          "error": "Error In Input Data"
+ *      }
+ *      HTTP/1.1 401 Unauthorized
+ *      {
+ *          "error": "User Is Unauthorized"
+ *      }
+ */
+
+/*=================== End =====================*/
+
+
+/*--------------------------------------------------*/
+/* =========================== ///  Adding Members  /// ============================ */
+/*--------------------------------------------------*/
+
+/**
+ * @api {post} /members/ Adding members.
+ * 
+ * @apiName addMember
+ * @apiGroup Blog's methods
+ * @apiVersion 0.0.0 
+ * @apiPermission User
+ * 
+ * @apiParam {String} Token User's token
+ * @apiParam {String} Member Member's email
+ *
+ *  @apiSuccessExample Response Data:
+ *      HTTP/1.1 200 OK
+ *      {
+ *          "message": "Invitation Sent Via Email"
+ *      }
+ *
+ * @apiErrorExample Response Error:
+ *      HTTP/1.1 400 BAD REQUEST
+ *      {
+ *          "error": "Error In Input Data"
+ *      }
+ *      HTTP/1.1 401 Unauthorized
+ *      {
+ *          "error": "User Is Unauthorized"
+ *      }
+ */
+
+/*=================== End =====================*/
+
+/*--------------------------------------------------*/
+/* =========================== ///  Join Group  /// ============================ */
+/*--------------------------------------------------*/
+
+/**
+ * @api {post} /join/:Token Join Group.
+ * 
+ * @apiName joinGroup
+ * @apiGroup Blog's methods
+ * @apiVersion 0.0.0 
+ * @apiPermission User
+ * 
+ *  @apiSuccessExample Response Data:
+ *      HTTP/1.1 200 OK
+ *      {
+ *          "message": "Member Added Successfully"
+ *      }
+ *
+ * @apiErrorExample Response Error:
+ *      HTTP/1.1 400 BAD REQUEST
+ *      {
+ *          "error": "Error In Input Data"
+ *      }
+ *      HTTP/1.1 401 Unauthorized
+ *      {
+ *          "error": "User Is Unauthorized"
+ *      }
+ */
+
+/*=================== End =====================*/
+
+/*--------------------------------------------------*/
+/* =========================== ///  Remove Member  /// ============================ */
+/*--------------------------------------------------*/
+
+/**
+ * @api {delete} /members/ Remove member.
+ * 
+ * @apiName removeMember
+ * @apiGroup Blog's methods
+ * @apiVersion 0.0.0 
+ * @apiPermission User
+ * 
+ * @apiParam {String} Token User's token
+ * @apiParam {String} Member Blog's Id
+ *
+ *  @apiSuccessExample Response Data:
+ *      HTTP/1.1 200 OK
+ *      {
+ *          "message": "Blog Removed Successfully"
+ *      }
+ *
+ * @apiErrorExample Response Error:
+ *      HTTP/1.1 400 BAD REQUEST
+ *      {
+ *          "error": "Error In Input Data"
+ *      }
+ *      HTTP/1.1 401 Unauthorized
+ *      {
+ *          "error": "User Is Unauthorized"
+ *      }
+ */
+
+/*=================== End =====================*/
+
+/*--------------------------------------------------*/
+/* =========================== ///  Promote To Admin  /// ============================ */
+/*--------------------------------------------------*/
+
+/**
+ * @api {put} /members/ Promote to Admin.
+ * 
+ * @apiName promoteBlog
+ * @apiGroup Blog's methods
+ * @apiVersion 0.0.0 
+ * @apiPermission User
+ * 
+ * @apiParam {String} Token User's token
+ * @apiParam {String} Member Blog's Id
+ *
+ * @apiSuccessExample Response Data:
+ *      HTTP/1.1 200 OK
+ *      {
+ *          "message": "Blog Promoted To Admin Successfully"
+ *      }
+ *
+ * @apiErrorExample Response Error:
+ *      HTTP/1.1 400 BAD REQUEST
+ *      {
+ *          "error": "Error In Input Data"
+ *      }
+ *      HTTP/1.1 401 Unauthorized
+ *      {
+ *          "error": "User Is Unauthorized"
+ *      }
+ */
+
+/*=================== End =====================*/
+
+
+/*--------------------------------------------------*/
+/* =========================== ///  Leave This Blog  /// ============================ */
+/*--------------------------------------------------*/
+
+/**
+ * @api {delete} /members/leave/ Leave this blog.
+ * 
+ * @apiName leaveBlog
+ * @apiGroup Blog's methods
+ * @apiVersion 0.0.0 
+ * @apiPermission User
+ * 
+ * @apiParam {String} Token User's token
+ * @apiParam {String} Blog's group Id
+ *
+ * @apiSuccessExample Response Data:
+ *      HTTP/1.1 200 OK
+ *      {
+ *          "message": "Blog Leave Group Successfully"
+ *      }
+ *
+ * @apiErrorExample Response Error:
+ *      HTTP/1.1 400 BAD REQUEST
+ *      {
+ *          "error": "Error In Input Data"
+ *      }
+ *      HTTP/1.1 401 Unauthorized
+ *      {
+ *          "error": "User Is Unauthorized"
+ *      }
+ */
+
+/*=================== End =====================*/
+
+
+/*
+===================================================================================================
+===================================================================================================
+===================================================================================================
+===================================================================================================
+===================================================================================================
+===================================================================================================
+===================================================================================================
+*/
