@@ -68,8 +68,74 @@
  *      {
  *          "error":"No Access Right"
  *      }
- */
+*/
 
+/**
+ * @api {post} /user/:user_id/follow_tag Follow Tag
+ * @apiName followTag
+ * @apiGroup User
+ * @apiSampleRequest api.tumblr.com/user/:user_id/follow_tag
+ * @apiPermission User, admin, super admin
+ * @apidescription can share with anyone, we'll send post url
+ * @apiVersion 0.50.1
+ * 
+ * @apiParam {String} user_id The ID of the user wants to follow a tag 
+ * @apiParam {String} token User's token
+ * @apiParam {String} tag_text the tag
+ * 
+ * 
+ * @apiExample Example usage:
+ * curl -i https://localhost/user/300/follow_tag
+ * 
+ * @apiSuccess {boolean}  returns true when the tag is successfully put in the folllowed tags
+ * 
+ * @apiError UserNotFound No such a user with this id is found
+ * @apiError BlogNotFound No such a blog with this id is found
+ * @apiError BadRequest Can't access the tag,or doesn't exist 
+ * @apiError Unauthorized you must log in first
+ * @apiErrorExample Response Error:
+ *      HTTP/1.1 400 BAD REQUEST
+ *      {
+ *          "error":"No Access Right"
+ *      }
+ *      HTTP/1.1 401 Unauthorized
+ *      {
+ *          "error":"No Access Right"
+ *      }
+*/
+
+/**
+ * @api {post} /user/:user_id/get_followed_tags  Tags Followed
+ * @apiName getFollowedTags
+ * @apiGroup User
+ * @apiSampleRequest api.tumblr.com/user/:user_id/get_followed_tags
+ * @apiPermission User, admin, super admin
+ * @apidescription get the tag followed by the user, used in search
+ * @apiVersion 0.50.1
+ * 
+ * @apiParam {String} user_id The ID of the user followed tags
+ * @apiParam {String} token User's token
+ * 
+ * 
+ * @apiExample Example usage:
+ * curl -i https://localhost/user/300/get_followed_tags
+ * 
+ * @apiSuccess {String[]} tags array of strings have all tags followed by the user
+ * 
+ * @apiError UserNotFound No such a user with this id is found
+ * @apiError BlogNotFound No such a blog with this id is found
+ * @apiError BadRequest Can't access the tag,or doesn't exist 
+ * @apiError Unauthorized you must log in first
+ * @apiErrorExample Response Error:
+ *      HTTP/1.1 400 BAD REQUEST
+ *      {
+ *          "error":"No Access Right"
+ *      }
+ *      HTTP/1.1 401 Unauthorized
+ *      {
+ *          "error":"No Access Right"
+ *      }
+*/
 
 // --------------------------------- Blog --------------------------------------
 
@@ -490,9 +556,114 @@
  *      {
  *          "error":"No Access Right"
  *      }
- */
+*/
 
 // --------------------------------- Post --------------------------------------
+
+
+
+/**
+ * @api {post} /posts/:post_blog_id/:post_id/remove_comment Remove Comments
+ * @apiName commentRemover
+ * @apiGroup Post
+ * @apiSampleRequest api.tumblr.com/posts/:post_blog_id/:post_id/remove_comment
+ * @apiPermission User, admin, super admin
+ * @apidescription removes the comment on a post
+ * @apiVersion 0.50.1
+ * 
+ * @apiParam {String} post_id The ID of the post 
+ * @apiParam {String} token User's token
+ * 
+ * 
+ * @apiExample Example usage:
+ * curl -i https://localhost/post/4/344/remove_comment
+ * 
+ * @apiSuccess {boolean}  returns true when the comment is successfully removed
+ * 
+ * @apiError UserNotFound No such a user with this id is found
+ * @apiError BlogNotFound No such a blog with this id is found
+ * @apiError BadRequest Can't access the post or the comment is arleady removed
+ * @apiError Unauthorized you must log in first
+ * @apiErrorExample Response Error:
+ *      HTTP/1.1 400 BAD REQUEST
+ *      {
+ *          "error":"No Access Right"
+ *      }
+ *      HTTP/1.1 401 Unauthorized
+ *      {
+ *          "error":"No Access Right"
+ *      }
+*/
+
+
+/**
+ * @api {get} /posts/:post_id/:count_reblogs Count Reblogs
+ * @apiName countReblogs
+ * @apiGroup Post
+ * @apiSampleRequest api.tumblr.com/posts/:post_id/:count_reblogs
+ * @apiPermission User, admin, super admin
+ * @apidescription count the number of reblogs of a certain post
+ * @apiVersion 0.50.1
+ * 
+ * @apiParam {String} post_id The ID of the post 
+ * @apiParam {String} token User's token
+ * 
+ * 
+ * @apiExample Example usage:
+ * curl -i https://localhost/post/4/count_reblogs
+ * 
+ * @apiSuccess {number}  count return number of reblogs of a post
+ * 
+ * @apiError UserNotFound No such a user with this id is found
+ * @apiError BlogNotFound No such a blog with this id is found
+ * @apiError BadRequest Can't access the post
+ * @apiError Unauthorized you must log in first
+ * @apiErrorExample Response Error:
+ *      HTTP/1.1 400 BAD REQUEST
+ *      {
+ *          "error":"No Access Right"
+ *      }
+ *      HTTP/1.1 401 Unauthorized
+ *      {
+ *          "error":"No Access Right"
+ *      }
+*/
+
+
+/**
+ * @api {post} /post/:post_blog_id/:commenter_blog_id/make_comment Make Comment
+ * @apiName makeComment
+ * @apiGroup Post
+ * @apiSampleRequest api.tumblr.com/post/:post_blog_id/:commenter_blog_id/make_comment
+ * @apiPermission User, admin, super admin
+ * @apidescription a commenter blog can make comments on any posts
+ * @apiVersion 0.50.1
+ * 
+ * @apiParam {String} post_blog_id The ID of the post 
+ * @apiParam {String} token User's token
+ * @apiParam {String} text comment text  
+ * @apiParam {String} commenter_id id of the blog writting comment
+ * 
+ * 
+ * @apiExample Example usage:
+ * curl -i https://localhost/post/4/344/make_comment
+ * 
+ * @apiSuccess {boolean} commented true when comment is posted
+ * 
+ * @apiError UserNotFound No such a user with this id is found
+ * @apiError BlogNotFound No such a blog with this id is found
+ * @apiError BadRequest Can't access the post, post maybe deleted
+ * @apiError Unauthorized you must log in first
+ * @apiErrorExample Response Error:
+ *      HTTP/1.1 400 BAD REQUEST
+ *      {
+ *          "error":"No Access Right"
+ *      }
+ *      HTTP/1.1 401 Unauthorized
+ *      {
+ *          "error":"No Access Right"
+ *      }
+*/
 
 /**
  * @api {Delete} /blog/:blog_id/:post_id/delete Delete a Post
@@ -657,6 +828,40 @@
  * @apiError UserNotFound No such a user with this id is found
  * @apiError BlogNotFound No such a blog with this id is found
  * @apiError BadRequest Can't access the drafts posts page
+ * @apiError Unauthorized you must log in first
+ * @apiErrorExample Response Error:
+ *      HTTP/1.1 400 BAD REQUEST
+ *      {
+ *          "error":"No Access Right"
+ *      }
+ *      HTTP/1.1 401 Unauthorized
+ *      {
+ *          "error":"No Access Right"
+ *      }
+*/
+
+
+/**
+ * @api {post} /posts/:post_id/share_with Share With
+ * @apiName sharePostWith
+ * @apiGroup Post
+ * @apiSampleRequest api.tumblr.com/posts/:post_id/share_with
+ * @apiPermission User, admin, super admin
+ * @apidescription can share with anyone, we'll send post url
+ * @apiVersion 0.50.1
+ * 
+ * @apiParam {String} post_id The ID of the post 
+ * @apiParam {String} token User's token
+ * 
+ * 
+ * @apiExample Example usage:
+ * curl -i https://localhost/posts/344/share_with
+ * 
+ * @apiSuccess {boolean}  returns true when the link is successfully shared and recieved 
+ * 
+ * @apiError UserNotFound No such a user with this id is found
+ * @apiError BlogNotFound No such a blog with this id is found
+ * @apiError BadRequest Can't access the post 
  * @apiError Unauthorized you must log in first
  * @apiErrorExample Response Error:
  *      HTTP/1.1 400 BAD REQUEST
@@ -1027,3 +1232,4 @@
  *      }
 
 */
+
