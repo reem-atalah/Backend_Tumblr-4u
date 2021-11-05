@@ -139,6 +139,41 @@
 
 // --------------------------------- Blog --------------------------------------
 
+
+/**
+ * @api {delete} /blog/:blog_id/remove_blog Remove Blog
+ * @apiName blogRemover
+ * @apiGroup Blog
+ * @apiSampleRequest api.tumblr.com/blog/:blog_id/remove_blog 
+ * @apiPermission User, admin, super admin
+ * @apidescription removes a post
+ * @apiVersion 0.50.1
+ * 
+ * @apiParam {String} blog_id The ID of the blog wanted to be removed
+ * @apiParam {String} token User's token
+ * 
+ * 
+ * @apiExample Example usage:
+ * curl -i https://localhost/blog/34/remove_blog
+ * 
+ * @apiSuccess {boolean}  returns true when the blog is successfully removed
+ * 
+ * @apiError UserNotFound No such a user with this id is found
+ * @apiError BlogNotFound No such a blog with this id is found
+ * @apiError BadRequest Can't access the blog or the blog is arleady deleted or doesn't exist
+ * @apiError Unauthorized you must log in first
+ * @apiErrorExample Response Error:
+ *      HTTP/1.1 400 BAD REQUEST
+ *      {
+ *          "error":"No Access Right"
+ *      }
+ *      HTTP/1.1 401 Unauthorized
+ *      {
+ *          "error":"No Access Right"
+ *      }
+*/
+
+
 /**
  * @api {get} /blog/:blog_id/info Retrieve Blog information
  * @apiName getBlog
@@ -562,6 +597,7 @@
 
 
 
+
 /**
  * @api {post} /posts/:post_blog_id/:post_id/remove_comment Remove Comments
  * @apiName commentRemover
@@ -675,7 +711,7 @@
  * @apiExample Example usage:
  * curl -i https://localhost/blog/335/4/delete
  * 
- * @apidescription removes a post for the pister owner
+ * @apidescription removes a post for the poster owner
  * @apiVersion 0.50.1
  *
  * @apiParam {String} post_id The ID of the post to delete
