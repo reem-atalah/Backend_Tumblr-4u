@@ -23,7 +23,7 @@
  * @apiSuccess {String} blogs.type indicates whether a blog is public or private.
  */
 
-//done
+
 /**
  * @api {get} /:user_id/:dashboard Retrieve a User's Dashboard
  * @apiName getDashboard
@@ -38,7 +38,7 @@
 
 
 // --------------------------------- Blog --------------------------------------
-//done
+
 /**
  * @api {get} /blog/:blog_id/info Retrieve Blog information
  * @apiName getBlog
@@ -85,7 +85,7 @@
  * @apiSuccess {String} created_by User who created this blog.
  */
 
- //done
+ 
  /**
  * @api {get} /blog/:blog_id/activity  Retrieve Blog's Activity Feed
  * @apiName getBlogActivityFeed
@@ -102,7 +102,7 @@
 */
 
 
-//done
+
 /**
  * @api {get} /blog/:blog_id/avatar Retrieve a Blog Avatar
  * @apiName getBlogAvatar
@@ -114,7 +114,7 @@
  * @apiSuccess {String} avatar_url The URL of the avatar image. 
  */
 
-//done
+
 /**
  * @api {get} /blog/:blog_id/blocks Retrieve Blog's Blocks
  * @apiName getBlogBlocks
@@ -126,7 +126,7 @@
  * @apiSuccess {Array} blocked_tumbleblogs Blog objects that are blocked.
  */
 
-//done
+
 /**
  * @api {post} /blog/:blog_id/blocks Block a Blog  
  * @apiName postBlogBlock
@@ -142,7 +142,7 @@
  * @apiSuccess {Boolean} is_blocked_from_primary changes flag to true .
  */
 
-//done
+
 /**
  * @api {post} /blog/:blog_id/blocks Remove a Block
  * @apiName removeBlogBlock
@@ -156,7 +156,7 @@
  * @apiSuccess {Boolean} is_blocked_from_primary Removing block flag.
  */
 
-//done
+
 /**
  * @api {get} /blog/:blog_id/likes Retrieve Blog's Likes
  * @apiName getBlogLikes
@@ -169,7 +169,7 @@
  * @apiSuccess {Number} liked_count Total number of liked posts.
  */
 
-//done
+
 /**
  * @api {get} /blog/:blog_id/following Retrieve Blog's Following
  * @apiName getBlogFollowing
@@ -182,7 +182,7 @@
  * @apiSuccess {Number} total_blogs Total number of followed blogs.
  */
 
-//done
+
 /**
  * @api {get} /blog/:blog_id/followers Retrieve Blog's Followers
  * @apiName getBlogFollowers
@@ -198,7 +198,7 @@
  * @apiSuccess {String} [url] The URL of the user's primary blog.
  */
 
-//done
+
 /**
  * @api {get} /blog/:blog_id/posts Retrieve Published Posts
  * @apiName getPosts
@@ -272,7 +272,7 @@
  */
 
 // --------------------------------- Post --------------------------------------
-//done
+
 /**
  * @api {Delete} /blog/:blog_id/:post_id/delete Delete a Post
  * @apiName deletePost
@@ -286,7 +286,7 @@
  * @apiSuccess {String} is_deleted make the flag true
  */
 
-//done
+
 /**
  * @api {get} /blog/:blog_id/queue  GetQueuedPosts
  * @apiDescription Gives you a list of the currently queued posts for the specified blog.
@@ -300,7 +300,7 @@
  * @apiSuccess {Array} Queued_posts
  */
 
-//done
+
 /**
  * @api {put} /blog/:blog_id/queue/reorder   Reorder Queued Posts
  * @apiDescription This allows you to reorder a post within the queue, moving it after an existing queued post, or to the top.
@@ -317,7 +317,7 @@
  * @apiSuccess {Array} Ordered_Queued_posts change time of each post
  */
 
-//done
+
 /**
  * @api {post} /blog/:blog_id/queue/shuffle  Shuffle Queued Posts
  * @apiDescription This randomly shuffles the queue for the specified blog.
@@ -333,7 +333,7 @@
  * @apiSuccess {Array} Ordered_Queued_posts change time of each post after shuffeling
 */
 
-//done
+
 /**
  * @api {get} /blog/:blog_id/draft Retrieve Draft Posts
  * @apiName retrieveDraftPosts
@@ -349,7 +349,7 @@
 
 // --------------------------------- Inbox --------------------------------------
 
-//done
+
 /**
  * @api {get} /blog/:blog_id/inbox Retrieve Inbox Posts
  * @apiName retrieveInboxPosts
@@ -363,7 +363,7 @@
  * @apiSuccess {Post[]} Ask array of ask posts
 */
 
-//done
+
 /**
  * @api {delete} /blog/:blog_id/inbox Delete All Messages
  * @apiName deleteInboxPosts
@@ -378,7 +378,7 @@
 //delete all appears when there's > 1 post
 
 // --------------------------------- Submission --------------------------------------
-//done
+
 /**
  * @api {post} /blog/:blog_id/submit Make Submission Posts
  * @apiName makeSubmissionPosts
@@ -404,7 +404,7 @@
  * @apiSuccess {String} anonymous_name Name on an anonymous submission
 */
 
-//done
+
 /**
  * @api {delete} /blog/:blog_id/inbox Delete Submission Posts
  * @apiName deleteSubmissionPosts
@@ -417,7 +417,7 @@
  * @apiSuccess {boolean} is_deleted true if we removed succesfully the submission post
 */
 
-//done
+
 /**
  * @api {put} /blog/:blog_id/inbox Edit Submission Posts
  * @apiName editSubmissionPosts
@@ -433,7 +433,7 @@
  * @apiSuccess {post} the sumbission post updated 
 */
 
-//done
+
 /**
  * @api {post} /blog/:blog_id/inbox Post Submission Posts
  * @apiName postSubmissionPosts
@@ -446,7 +446,7 @@
  * @apiSuccess {boolean} posted return true when it's successfullay posyed in the dashboard and removed from inbox
 */
 
-//done
+
 /**
  * @api {put} /blog/:blog_id/inbox Queue Submission Posts
  * @apiName queueSubmissionPosts
@@ -460,7 +460,7 @@
 */
 
 // --------------------------------- Ask --------------------------------------
-//done
+
 /**
  * @api {post} /blog/:blog_id/ask Make Ask Posts
  * @apiName makeAskPosts
@@ -477,7 +477,7 @@
  * @apiSuccess {String} anonymous_name Name on an anonymous ask
 */
 
-//done
+
 /**
  * @api {post} /blog/:blog_id/inbox Answer Ask Posts
  * @apiName answerAskPosts
@@ -494,7 +494,7 @@
 
 */
 
-//done
+
 /**
  * @api {delete} /blog/:blog_id/inbox Delete Ask Posts
  * @apiName seleteAskPosts
