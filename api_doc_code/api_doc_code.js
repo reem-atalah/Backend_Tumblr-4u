@@ -593,10 +593,8 @@
  *      }
 */
 
+
 // --------------------------------- Post --------------------------------------
-
-
-
 
 /**
  * @api {post} /posts/:post_blog_id/:post_id/remove_comment Remove Comments
