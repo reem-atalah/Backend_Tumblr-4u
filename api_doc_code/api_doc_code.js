@@ -68,7 +68,7 @@
  *      {
  *          "error":"No Access Right"
  *      }
-*/
+ */
 
 /**
  * @api {post} /user/:user_id/follow_tag Follow Tag
@@ -102,7 +102,7 @@
  *      {
  *          "error":"No Access Right"
  *      }
-*/
+ */
 
 /**
  * @api {post} /user/:user_id/get_followed_tags  Tags Followed
@@ -135,7 +135,7 @@
  *      {
  *          "error":"No Access Right"
  *      }
-*/
+ */
 
 // --------------------------------- Blog --------------------------------------
 
@@ -171,7 +171,7 @@
  *      {
  *          "error":"No Access Right"
  *      }
-*/
+ */
 
 
 /**
@@ -239,8 +239,8 @@
  */
 
 
- 
- /**
+
+/**
  * @api {get} /blog/:blog_id/activity  Retrieve Blog's Activity Feed
  * @apiName getBlogActivityFeed
  * @apiGroup Blog
@@ -271,7 +271,7 @@
  *      {
  *          "error":"No Access Right"
  *      }
-*/
+ */
 
 /**
  * @api {get} /blog/:blog_id/blocks Retrieve Blog's Blocks
@@ -454,7 +454,7 @@
  * @apiSuccess {Following[]} blogs An array of short blog infos that this blog follows, in order from most recently-followed to first.
  * @apiSuccess {Number} total_blogs Total number of followed blogs.
  * 
-  * 
+ * 
  * @apiError UserNotFound No such a user with this id is found
  * @apiError BlogNotFound No such a blog with this id is found
  * @apiError BadRequest Can't access the following page
@@ -591,7 +591,266 @@
  *      {
  *          "error":"No Access Right"
  *      }
-*/
+ */
+
+
+/**
+ * @api {post} /blog/:blog-id/follow Follow a blog
+ * @apiName followBlogPost
+ * @apiGroup Blog
+ * @apiSampleRequest api.tumblr.com/blog/:blog_id/follow
+ * @apiPermission User, admin, super admin
+ * 
+ * @apiExample Example usage:
+ * curl -i https://localhost/blog/335/4/blog/follow
+ * 
+ * @apidescription Follow a blog
+ * @apiVersion 0.50.1
+ *
+ * @apiParam {Number} following-blog-id Primary blog ID.
+ * @apiParam {Number} followed-blog-id ID of the followed blog.
+ *
+ * @apiSuccess {Object} blog The followed blog info.
+ * 
+ * @apiError BlogNotFound No such a blog with this id is found.
+ * @apiError BadRequest Can't follow.
+ * @apiError Unauthorized you must log in first
+ * @apiErrorExample Response Error:
+ *      HTTP/1.1 400 BAD REQUEST
+ *      {
+ *          "error":"No Access Right"
+ *      }
+ *      HTTP/1.1 401 Unauthorized
+ *      {
+ *          "error":"No Access Right"
+ *      }
+ */
+
+/**
+ * @api {post} /blog/:blog-id/unfollow Unfollow a blog
+ * @apiName unfollowBlogPost
+ * @apiGroup Blog
+ * @apiSampleRequest api.tumblr.com/blog/:blog_id/unfollow
+ * @apiPermission User, admin, super admin
+ * 
+ * @apiExample Example usage:
+ * curl -i https://localhost/blog/335/4/blog/unfollow
+ * 
+ * @apidescription Unfollow a blog
+ * @apiVersion 0.50.1
+ *
+ * @apiParam {Number} following-blog-id Primary blog ID.
+ * @apiParam {Number} unfollowed-blog-id ID of the followed blog.
+ *
+ * @apiSuccess Returns 200: OK (blog successfully unfollowed) or a 404 (if the blog was not found).
+ * 
+ * @apiError BlogNotFound No such a blog with this id is found.
+ * @apiError BadRequest Can't unfollow.
+ * @apiError Unauthorized you must log in first
+ * @apiErrorExample Response Error:
+ *      HTTP/1.1 400 BAD REQUEST
+ *      {
+ *          "error":"No Access Right"
+ *      }
+ *      HTTP/1.1 401 Unauthorized
+ *      {
+ *          "error":"No Access Right"
+ *      }
+ */
+
+
+/**
+ * @api {post} /blog/:blog-id/pfiltered_tags Post tag filters
+ * @apiName postTagFilters
+ * @apiGroup Blog
+ * @apiSampleRequest api.tumblr.com/blog/:blog_id/filtered_tags
+ * @apiPermission User, admin, super admin
+ * 
+ * @apiExample Example usage:
+ * curl -i https://localhost/blog/335/4/blog/filtered_tags
+ * 
+ * @apidescription Post tag filters
+ * @apiVersion 0.50.1
+ *
+ * @apiParam {Number} blog-id Blog ID to filter by tags.
+ * @apiParam {Array} filtered_tags One or more than one tag string to add to your list of filters.
+ *
+ * @apiSuccess Returns 201 Created on success, with an empty response object.
+ * 
+ * @apiError BlogNotFound No such a blog with this id is found.
+ * @apiError BadRequest If given an invalid/empty tag to filter.
+ * @apiError Unauthorized you must log in first
+ * @apiErrorExample Response Error:
+ *      HTTP/1.1 400 BAD REQUEST
+ *      {
+ *          "error":"No Access Right"
+ *      }
+ *      HTTP/1.1 401 Unauthorized
+ *      {
+ *          "error":"No Access Right"
+ *      }
+ */
+
+
+/**
+ * @api {get} /blog/:blog-id/gfiltered_tags Get tag filters
+ * @apiName getTagFilters
+ * @apiGroup Blog
+ * @apiSampleRequest api.tumblr.com/blog/:blog_id/filtered_tags
+ * @apiPermission User, admin, super admin
+ * 
+ * @apiExample Example usage:
+ * curl -i https://localhost/blog/335/4/blog/filtered_tags
+ * 
+ * @apidescription Get tag filters
+ * @apiVersion 0.50.1
+ *
+ * @apiParam {Number} blog-id Blog ID to filter by tags.
+ *
+ * @apiSuccess {Array} filtered_tags Your list of filters.
+ * 
+ * @apiError BlogNotFound No such a blog with this id is found.
+ * @apiError BadRequest Can't get filters.
+ * @apiError Unauthorized you must log in first
+ * @apiErrorExample Response Error:
+ *      HTTP/1.1 400 BAD REQUEST
+ *      {
+ *          "error":"No Access Right"
+ *      }
+ *      HTTP/1.1 401 Unauthorized
+ *      {
+ *          "error":"No Access Right"
+ *      }
+ */
+
+/**
+ * @api {delete} /blog/:blog-id/dfiltered_tags Delete tag filters
+ * @apiName deleteTagFilters
+ * @apiGroup Blog
+ * @apiSampleRequest api.tumblr.com/blog/:blog_id/filtered_tags
+ * @apiPermission User, admin, super admin
+ * 
+ * @apiExample Example usage:
+ * curl -i https://localhost/blog/335/4/blog/filtered_tags
+ * 
+ * @apidescription Delete tag filters
+ * @apiVersion 0.50.1
+ *
+ * @apiParam {Number} blog-id Blog ID to filter by tags.
+ * @apiParam {String} tag Tag to stop filtering.
+ *
+ * @apiSuccess Returns 201 Created on success, with an empty response object.
+ * 
+ * @apiError BlogNotFound No such a blog with this id is found.
+ * @apiError BadRequest If given an invalid/empty tag to delete.
+ * @apiError Unauthorized you must log in first
+ * @apiErrorExample Response Error:
+ *      HTTP/1.1 400 BAD REQUEST
+ *      {
+ *          "error":"No Access Right"
+ *      }
+ *      HTTP/1.1 401 Unauthorized
+ *      {
+ *          "error":"No Access Right"
+ */
+
+
+
+/**
+ * @api {post} /blog/:blog-id/pfiltered_content Post content filters
+ * @apiName postContentFilters
+ * @apiGroup Blog
+ * @apiSampleRequest api.tumblr.com/blog/:blog_id/filtered_content
+ * @apiPermission User, admin, super admin
+ * 
+ * @apiExample Example usage:
+ * curl -i https://localhost/blog/335/4/blog/filtered_content
+ * 
+ * @apidescription Post content filters
+ * @apiVersion 0.50.1
+ *
+ * @apiParam {Number} blog-id Blog ID to filter by content.
+ * @apiParam {Array} filtered_content One or more than one string to add to your list of filters.
+ *
+ * @apiSuccess Returns 201 Created on success, with an empty response object.
+ * 
+ * @apiError BlogNotFound No such a blog with this id is found.
+ * @apiError BadRequest If given an invalid/empty string to filter, or if given an already-filtered string.
+ * @apiError Unauthorized you must log in first
+ * @apiErrorExample Response Error:
+ *      HTTP/1.1 400 BAD REQUEST
+ *      {
+ *          "error":"No Access Right"
+ *      }
+ *      HTTP/1.1 401 Unauthorized
+ *      {
+ *          "error":"No Access Right"
+ *      }
+ */
+
+
+/**
+ * @api {get} /bgetlog/:blog-id/gfiltered_tags Get content filters
+ * @apiName getContentFilters
+ * @apiGroup Blog
+ * @apiSampleRequest api.tumblr.com/blog/:blog_id/filtered_content
+ * @apiPermission User, admin, super admin
+ * 
+ * @apiExample Example usage:
+ * curl -i https://localhost/blog/335/4/blog/filtered_content
+ * 
+ * @apidescription Get content filters
+ * @apiVersion 0.50.1
+ *
+ * @apiParam {Number} blog-id Blog ID to filter by content.
+ *
+ * @apiSuccess {Array} filtered_tags Your list of filters.
+ * 
+ * @apiError BlogNotFound No such a blog with this id is found.
+ * @apiError BadRequest Can't get filters.
+ * @apiError Unauthorized you must log in first
+ * @apiErrorExample Response Error:
+ *      HTTP/1.1 400 BAD REQUEST
+ *      {
+ *          "error":"No Access Right"
+ *      }
+ *      HTTP/1.1 401 Unauthorized
+ *      {
+ *          "error":"No Access Right"
+ *      }
+ */
+
+/**
+ * @api {delete} /bgetlog/:blog-id/dfiltered_tags Delete content filters
+ * @apiName deleteContentFilters
+ * @apiGroup Blog
+ * @apiSampleRequest api.tumblr.com/blog/:blog_id/filtered_content
+ * @apiPermission User, admin, super admin
+ * 
+ * @apiExample Example usage:
+ * curl -i https://localhost/blog/335/4/blog/filtered_content
+ * 
+ * @apidescription Delete tag filters
+ * @apiVersion 0.50.1
+ *
+ * @apiParam {Number} blog-id Blog ID to filter by content.
+ * @apiParam {String} filtered_content Content filter string to remove.
+ *
+ * @apiSuccess Returns 201 Created on success, with an empty response object.
+ * 
+ * @apiError BlogNotFound No such a blog with this id is found.
+ * @apiError BadRequest If given an invalid/empty content filter to delete.
+ * @apiError Unauthorized you must log in first
+ * @apiErrorExample Response Error:
+ *      HTTP/1.1 400 BAD REQUEST
+ *      {
+ *          "error":"No Access Right"
+ *      }
+ *      HTTP/1.1 401 Unauthorized
+ *      {
+ *          "error":"No Access Right"
+ */
+
 
 
 // --------------------------------- Post --------------------------------------
@@ -627,7 +886,7 @@
  *      {
  *          "error":"No Access Right"
  *      }
-*/
+ */
 
 
 /**
@@ -661,7 +920,7 @@
  *      {
  *          "error":"No Access Right"
  *      }
-*/
+ */
 
 
 /**
@@ -697,7 +956,7 @@
  *      {
  *          "error":"No Access Right"
  *      }
-*/
+ */
 
 /**
  * @api {Delete} /blog/:blog_id/:post_id/delete Delete a Post
@@ -839,7 +1098,7 @@
  *      {
  *          "error":"No Access Right"
  *      }
-*/
+ */
 
 
 /**
@@ -872,7 +1131,7 @@
  *      {
  *          "error":"No Access Right"
  *      }
-*/
+ */
 
 
 /**
@@ -906,7 +1165,224 @@
  *      {
  *          "error":"No Access Right"
  *      }
-*/
+ */
+
+
+/**
+ * @api {post} /blog/:blog-id/post Create a New Blog Post (Legacy)
+ * @apiName postBlogPost
+ * @apiGroup Post
+ * @apiSampleRequest api.tumblr.com/blog/:blog_id/post
+ * @apiPermission User, admin, super admin
+ * 
+ * @apiExample Example usage:
+ * curl -i https://localhost/blog/335/4/post
+ * 
+ * @apidescription Create a New Blog Post (Legacy), one of the following types: text, photo, quote, link, chat, audio, video.
+ * @apiVersion 0.50.1
+ *
+ * @apiParam {Number} blog-id ID of the blog that the post will be created in.
+ * @apiParam {String} type=text The type of post to create. Specify one of the following: text, photo, quote, link, chat, audio, video.
+ * @apiParam {String} [state=published] The state of the post. Specify one of the following: published, draft, queue, private.
+ * @apiParam {String} [tags] Comma-separated tags for this post.
+ * @apiParam {String} [date=The date and time of the POST request] Date of creation.
+ * @apiParam {String} [text_post] Fields requested for text posts:
+ * @apiParam {String} [title] The optional title of the post.
+ * @apiParam {String} body The body of the post.
+ * @apiParam {String} [photo_post] Fields requested for photo posts:
+ * @apiParam {String} [caption] Caption of set or single photo.
+ * @apiParam {Array} [photos] Array of photos each has:
+ * @apiParam {String} [caption] Caption of single photo.
+ * @apiParam {String} link The "click-through URL" for the photo.
+ * @apiParam {String} [quote_post] Fields requested for quote posts:
+ * @apiParam {String} text The full text of the quote.
+ * @apiParam {String} [source] Full HTML for the source of the quote Example: <a href="...">Steve Jobs</a>.
+ * @apiParam {String} [link_post] Fields requested for link posts:
+ * @apiParam {String} link The link!.
+ * @apiParam {String} [title] The title of the page the link points to.
+ * @apiParam {String} [summary] Summary of the page the link points to.
+ * @apiParam {String} [description] A user-supplied description.
+ * @apiParam {String} [link_author] The author of the article the link points to.
+ * @apiParam {String} [chat_post] Fields requested for chat posts:
+ * @apiParam {String} [title] The optional title of the chat.
+ * @apiParam {String} body The full chat body.
+ * @apiParam {String} [audio_post] Fields requested for audio posts:
+ * @apiParam {String} [caption] User supplied caption.
+ * @apiParam {String} external_url The URL of the site that hosts the audio file (not Tumblr).
+ * @apiParam {String} data An audio file, limit 10MB.
+ * @apiParam {String} [video_post] Fields requested for video posts:
+ * @apiParam {String} [caption] User supplied caption.
+ * @apiParam {String} data A video file, limited to 500MB and 10 minutes.
+ * @apiParam {String} embed HTML embed code for the video or a URI to the video. If you provide an unsupported service's URI you may receive a 400 response.	.
+ *
+ * @apiSuccess {String} response Returns 201: Created or an error code.
+ * 
+ * @apiError BadRequest Can't post.
+ * @apiError Unauthorized you must log in first
+ * @apiErrorExample Response Error:
+ *      HTTP/1.1 400 BAD REQUEST
+ *      {
+ *          "error":"No Access Right"
+ *      }
+ *      HTTP/1.1 401 Unauthorized
+ *      {
+ *          "error":"No Access Right"
+ *      }
+ */
+
+/**
+ * @api {post} /blog/:blog-id/:post-id/edit Edit a Blog Post (Legacy)
+ * @apiName editBlogPost
+ * @apiGroup Post
+ * @apiSampleRequest api.tumblr.com/blog/:blog_id/post/edit
+ * @apiPermission User, admin, super admin
+ * 
+ * @apiExample Example usage:
+ * curl -i https://localhost/blog/335/4/post/edit
+ * 
+ * @apidescription Edit a Blog Post (Legacy)
+ * @apiVersion 0.50.1
+ *
+ * @apiParam {String} request_parameters These parameters are in addition to the common parameters listed under /post.
+ * @apiParam {Number} post-id The ID of the post to edit.
+ *
+ * @apiSuccess {String} response Returns 200: OK (successfully edited) or an error code.
+ * 
+ * @apiError BadRequest Can't edit.
+ * @apiError Unauthorized you must log in first
+ * @apiErrorExample Response Error:
+ *      HTTP/1.1 400 BAD REQUEST
+ *      {
+ *          "error":"No Access Right"
+ *      }
+ *      HTTP/1.1 401 Unauthorized
+ *      {
+ *          "error":"No Access Right"
+ *      }
+ */
+
+/**
+ * @api {post} /blog/:blog-id/:post-id/reblog Reblog a Post (Legacy)
+ * @apiName reblogBlogPost
+ * @apiGroup Post
+ * @apiSampleRequest api.tumblr.com/blog/:blog_id/post/reblog
+ * @apiPermission User, admin, super admin
+ * 
+ * @apiExample Example usage:
+ * curl -i https://localhost/blog/335/4/post/reblog
+ * 
+ * @apidescription Reblog a Post (Legacy)
+ * @apiVersion 0.50.1
+ *
+ * @apiParam {String} request_parameters These parameters are in addition to the common parameters listed under /post.
+ * @apiParam {Number} post-id The ID of the rebloged post.
+ * @apiParam {String} [description] Optional description on the rebloged post.
+ *
+ * @apiSuccess Returns 201: Created or an error code.
+ * 
+ * @apiError BadRequest Can't reblog.
+ * @apiError Unauthorized you must log in first
+ * @apiErrorExample Response Error:
+ *      HTTP/1.1 400 BAD REQUEST
+ *      {
+ *          "error":"No Access Right"
+ *      }
+ *      HTTP/1.1 401 Unauthorized
+ *      {
+ *          "error":"No Access Right"
+ *      }
+ */
+
+/**
+ * @api {get} /blog/:blog-id/:post-id/notes Get notes for a specific Post
+ * @apiName getBlogPostNotes
+ * @apiGroup Post
+ * @apiSampleRequest api.tumblr.com/blog/:blog_id/:post-id/notes
+ * @apiPermission User, admin, super admin
+ * 
+ * @apiExample Example usage:
+ * curl -i https://localhost/blog/335/4/post/notes
+ * 
+ * @apidescription Get notes for a specific Post
+ * @apiVersion 0.50.1
+ *
+ * @apiParam {Number} blog-id The ID of the blog that have the post to get its notes.
+ * @apiParam {Number} post-id The ID of the post to fetch notes for.
+ *
+ * @apiSuccess {Array} notes An array of note objects.
+ * 
+ * @apiError BadRequest Can't get notes.
+ * @apiErrorExample Response Error:
+ *      HTTP/1.1 400 BAD REQUEST
+ *      {
+ *          "error":"No Access Right"
+ *      }
+ */
+
+
+/**
+ * @api {post} /blog/:blog-id/:post-id/like Like a blog post
+ * @apiName likeBlogPost
+ * @apiGroup Post
+ * @apiSampleRequest api.tumblr.com/blog/:blog_id/:post-id/like
+ * @apiPermission User, admin, super admin
+ * 
+ * @apiExample Example usage:
+ * curl -i https://localhost/blog/335/4/post/like
+ * 
+ * @apidescription Like a blog post
+ * @apiVersion 0.50.1
+ *
+ * @apiParam {Number} blog-id Primary blog ID (only primary blogs can like posts).
+ * @apiParam {Number} post-id The ID of the liked post.
+ *
+ * @apiSuccess Returns 200: OK (post successfully liked ) or a 404 (post ID was not found)
+ * 
+ * @apiError PostNotFound No such a blog with this id is found.
+ * @apiError BadRequest Can't like.
+ * @apiError Unauthorized you must log in first
+ * @apiErrorExample Response Error:
+ *      HTTP/1.1 400 BAD REQUEST
+ *      {
+ *          "error":"No Access Right"
+ *      }
+ *      HTTP/1.1 401 Unauthorized
+ *      {
+ *          "error":"No Access Right"
+ *      }
+ */
+
+/**
+ * @api {post} /blog/:blog-id/:post-id/unlike Unlike a blog post
+ * @apiName unlikeBlogPost
+ * @apiGroup Post
+ * @apiSampleRequest api.tumblr.com/blog/:blog_id/:post-id/unlike
+ * @apiPermission User, admin, super admin
+ * 
+ * @apiExample Example usage:
+ * curl -i https://localhost/blog/335/4/post/unlike
+ * 
+ * @apidescription Unlike a blog post
+ * @apiVersion 0.50.1
+ *
+ * @apiParam {Number} blog-id Primary blog ID (only primary blogs can unlike posts).
+ * @apiParam {Number} post-id The ID of the post to unlike.
+ *
+ * @apiSuccess Returns 200: OK (post successfully unliked ) or a 404 (post ID was not found)
+ * 
+ * @apiError PostNotFound No such a blog with this id is found.
+ * @apiError BadRequest Can't unlike.
+ * @apiError Unauthorized you must log in first
+ * @apiErrorExample Response Error:
+ *      HTTP/1.1 400 BAD REQUEST
+ *      {
+ *          "error":"No Access Right"
+ *      }
+ *      HTTP/1.1 401 Unauthorized
+ *      {
+ *          "error":"No Access Right"
+ *      }
+ */
 
 
 // --------------------------------- Inbox --------------------------------------
@@ -944,7 +1420,7 @@
  *      {
  *          "error":"No Access Right"
  *      }
-*/
+ */
 
 
 /**
@@ -977,7 +1453,7 @@
  *      {
  *          "error":"No Access Right"
  *      }
-*/
+ */
 
 // --------------------------------- Submission --------------------------------------
 
@@ -1020,7 +1496,7 @@
  *      {
  *          "error":"No Access Right"
  *      }
-*/
+ */
 
 
 /**
@@ -1053,7 +1529,7 @@
  *      {
  *          "error":"No Access Right"
  *      }
-*/
+ */
 
 
 /**
@@ -1089,7 +1565,7 @@
  *      {
  *          "error":"No Access Right"
  *      }
-*/
+ */
 
 
 /**
@@ -1122,7 +1598,7 @@
  *      {
  *          "error":"No Access Right"
  *      }
-*/
+ */
 
 
 /**
@@ -1156,7 +1632,7 @@
  *      {
  *          "error":"No Access Right"
  *      }
-*/
+ */
 
 // --------------------------------- Ask --------------------------------------
 
@@ -1195,7 +1671,7 @@
  *      {
  *          "error":"No Access Right"
  *      }
-*/
+ */
 
 
 /**
@@ -1231,7 +1707,7 @@
  *      {
  *          "error":"No Access Right"
  *      }
-*/
+ */
 
 
 /**
@@ -1267,3 +1743,413 @@
 
 */
 
+
+/*
+===================================================================================================
+===================================================================================================
+===================================================================================================
+===================================================================================================
+===================================================================================================
+===================================================================================================
+===================================================================================================
+*/
+
+/*--------------------------------------------------*/
+/* =========================== ///  Changing Your Email Address  /// ============================ */
+/*--------------------------------------------------*/
+
+/**
+ * @api {put} /user/email/ Changing Your Email Address.
+ * 
+ * @apiName changeUserEmail
+ * @apiGroup User's methods
+ * @apiVersion 0.0.0 
+ * @apiPermission User
+ * 
+ * @apiParam {String} Token User's token
+ * @apiParam {String} Email User's new email
+ * @apiParam {String} Password User's password
+ *
+ * @apiSuccessExample Response Data:
+ *      HTTP/1.1 200 OK
+ *      {
+ *          "message": "Email Changed Successfully"
+ *      }
+ *
+ * @apiErrorExample Response Error:
+ *      HTTP/1.1 400 BAD REQUEST
+ *      {
+ *          "error": "Error In Input Data"
+ *      }
+ *      HTTP/1.1 401 Unauthorized
+ *      {
+ *          "error": "User Is Unauthorized"
+ *      }
+ */
+
+/*=================== End =====================*/
+
+
+/*--------------------------------------------------*/
+/* =========================== ///  Resetting your password  /// ============================ */
+/*--------------------------------------------------*/
+
+/**
+ * @api {put} /user/resetPassword/ Resetting your password.
+ * 
+ * @apiName resetPassword
+ * @apiGroup User's methods
+ * @apiVersion 0.0.0 
+ * @apiPermission User
+ * 
+ * @apiParam {String} Token User's token
+ * @apiParam {String} Current_Password Current user's password
+ * @apiParam {String} New_Password New user's password
+ *
+ * @apiSuccessExample Response Data:
+ *      HTTP/1.1 200 OK
+ *      {
+ *          "message": "Password Updated Successfully"
+ *      }
+ *
+ * @apiErrorExample Response Error:
+ *      HTTP/1.1 400 BAD REQUEST
+ *      {
+ *          "error": "Error In Input Data"
+ *      }
+ *      HTTP/1.1 401 Unauthorized
+ *      {
+ *          "error": "User Is Unauthorized"
+ *      }
+ */
+
+/*=================== End =====================*/
+
+
+/*--------------------------------------------------*/
+/* =========================== ///  Deleting Your Account  /// ============================ */
+/*--------------------------------------------------*/
+
+/**
+ * @api {delete} /user/deleteAccount/ Deleting Your Account.
+ * 
+ * @apiName deleteAccount
+ * @apiGroup User's methods
+ * @apiVersion 0.0.0 
+ * @apiPermission User
+ * 
+ * @apiParam {String} Token User's token
+ * @apiParam {String} Email User's email
+ * @apiParam {String} Password User's password
+ *
+ * @apiSuccessExample Response Data:
+ *      HTTP/1.1 200 OK
+ *      {
+ *          "message": "Account Deleted Successfully"
+ *      }
+ *
+ * @apiErrorExample Response Error:
+ *      HTTP/1.1 400 BAD REQUEST
+ *      {
+ *          "error": "Error In Input Data"
+ *      }
+ *      HTTP/1.1 401 Unauthorized
+ *      {
+ *          "error": "User Is Unauthorized"
+ *      }
+ */
+
+/*=================== End =====================*/
+
+
+/*--------------------------------------------------*/
+/* =========================== ///  Email Verification  /// ============================ */
+/*--------------------------------------------------*/
+
+/**
+ * @api {put} /user/emailVerification/:Token Email Verification.
+ * 
+ * @apiName emailVerification
+ * @apiGroup User's methods
+ * @apiVersion 0.0.0 
+ * @apiPermission User
+ * 
+ *
+ * @apiSuccessExample Response Data:
+ *      HTTP/1.1 200 OK
+ *      {
+ *          "message": "Email Verifid Successfully"
+ *      }
+ *
+ * @apiErrorExample Response Error:
+ *      HTTP/1.1 400 BAD REQUEST
+ *      {
+ *          "error": "Error In Input Data"
+ *      }
+ *      HTTP/1.1 401 Unauthorized
+ *      {
+ *          "error": "User Is Unauthorized"
+ *      }
+ */
+
+/*=================== End =====================*/
+
+
+/*--------------------------------------------------*/
+/* =========================== ///  Access and manage data associated with your account  /// ============================ */
+/*--------------------------------------------------*/
+
+/**
+ * @api {get} /user/data/ Access and manage data associated with your account.
+ * 
+ * @apiName accessdData
+ * @apiGroup User's methods
+ * @apiVersion 0.0.0 
+ * @apiPermission User
+ * 
+ * @apiParam {String} Token User's token
+ *
+ *  @apiSuccessExample Response Data:
+ *      HTTP/1.1 200 OK
+ *      {
+ *          "message": "Data Will Be Sent Via Email"
+ *      }
+ *
+ * @apiErrorExample Response Error:
+ *      HTTP/1.1 400 BAD REQUEST
+ *      {
+ *          "error": "Error In Input Data"
+ *      }
+ *      HTTP/1.1 401 Unauthorized
+ *      {
+ *          "error": "User Is Unauthorized"
+ *      }
+ */
+
+/*=================== End =====================*/
+
+/*
+===================================================================================================
+===================================================================================================
+===================================================================================================
+===================================================================================================
+===================================================================================================
+===================================================================================================
+===================================================================================================
+*/
+
+/*--------------------------------------------------*/
+/* =========================== ///  Create a new blog  /// ============================ */
+/*--------------------------------------------------*/
+
+/**
+ * @api {post} /new/blog/ Create a new blog.
+ * 
+ * @apiName newBlog
+ * @apiGroup Blog's methods
+ * @apiVersion 0.0.0 
+ * @apiPermission User
+ * 
+ * @apiParam {String} Token User's token
+ * @apiParam {String} Title Blog's Title
+ * @apiParam {String} Url Blog's Url
+ * @apiParam {String} [Password] Blog's password
+ *
+ *  @apiSuccessExample Response Data:
+ *      HTTP/1.1 200 OK
+ *      {
+ *          "message": "Blog Created Successfully"
+ *      }
+ *
+ * @apiErrorExample Response Error:
+ *      HTTP/1.1 400 BAD REQUEST
+ *      {
+ *          "error": "Error In Input Data"
+ *      }
+ *      HTTP/1.1 401 Unauthorized
+ *      {
+ *          "error": "User Is Unauthorized"
+ *      }
+ */
+
+/*=================== End =====================*/
+
+
+/*--------------------------------------------------*/
+/* =========================== ///  Adding Members  /// ============================ */
+/*--------------------------------------------------*/
+
+/**
+ * @api {post} /members/ Adding members.
+ * 
+ * @apiName addMember
+ * @apiGroup Blog's methods
+ * @apiVersion 0.0.0 
+ * @apiPermission User
+ * 
+ * @apiParam {String} Token User's token
+ * @apiParam {String} Member Member's email
+ *
+ *  @apiSuccessExample Response Data:
+ *      HTTP/1.1 200 OK
+ *      {
+ *          "message": "Invitation Sent Via Email"
+ *      }
+ *
+ * @apiErrorExample Response Error:
+ *      HTTP/1.1 400 BAD REQUEST
+ *      {
+ *          "error": "Error In Input Data"
+ *      }
+ *      HTTP/1.1 401 Unauthorized
+ *      {
+ *          "error": "User Is Unauthorized"
+ *      }
+ */
+
+/*=================== End =====================*/
+
+/*--------------------------------------------------*/
+/* =========================== ///  Join Group  /// ============================ */
+/*--------------------------------------------------*/
+
+/**
+ * @api {post} /join/:Token Join Group.
+ * 
+ * @apiName joinGroup
+ * @apiGroup Blog's methods
+ * @apiVersion 0.0.0 
+ * @apiPermission User
+ * 
+ *  @apiSuccessExample Response Data:
+ *      HTTP/1.1 200 OK
+ *      {
+ *          "message": "Member Added Successfully"
+ *      }
+ *
+ * @apiErrorExample Response Error:
+ *      HTTP/1.1 400 BAD REQUEST
+ *      {
+ *          "error": "Error In Input Data"
+ *      }
+ *      HTTP/1.1 401 Unauthorized
+ *      {
+ *          "error": "User Is Unauthorized"
+ *      }
+ */
+
+/*=================== End =====================*/
+
+/*--------------------------------------------------*/
+/* =========================== ///  Remove Member  /// ============================ */
+/*--------------------------------------------------*/
+
+/**
+ * @api {delete} /members/ Remove member.
+ * 
+ * @apiName removeMember
+ * @apiGroup Blog's methods
+ * @apiVersion 0.0.0 
+ * @apiPermission User
+ * 
+ * @apiParam {String} Token User's token
+ * @apiParam {String} Member Blog's Id
+ *
+ *  @apiSuccessExample Response Data:
+ *      HTTP/1.1 200 OK
+ *      {
+ *          "message": "Blog Removed Successfully"
+ *      }
+ *
+ * @apiErrorExample Response Error:
+ *      HTTP/1.1 400 BAD REQUEST
+ *      {
+ *          "error": "Error In Input Data"
+ *      }
+ *      HTTP/1.1 401 Unauthorized
+ *      {
+ *          "error": "User Is Unauthorized"
+ *      }
+ */
+
+/*=================== End =====================*/
+
+/*--------------------------------------------------*/
+/* =========================== ///  Promote To Admin  /// ============================ */
+/*--------------------------------------------------*/
+
+/**
+ * @api {put} /members/ Promote to Admin.
+ * 
+ * @apiName promoteBlog
+ * @apiGroup Blog's methods
+ * @apiVersion 0.0.0 
+ * @apiPermission User
+ * 
+ * @apiParam {String} Token User's token
+ * @apiParam {String} Member Blog's Id
+ *
+ * @apiSuccessExample Response Data:
+ *      HTTP/1.1 200 OK
+ *      {
+ *          "message": "Blog Promoted To Admin Successfully"
+ *      }
+ *
+ * @apiErrorExample Response Error:
+ *      HTTP/1.1 400 BAD REQUEST
+ *      {
+ *          "error": "Error In Input Data"
+ *      }
+ *      HTTP/1.1 401 Unauthorized
+ *      {
+ *          "error": "User Is Unauthorized"
+ *      }
+ */
+
+/*=================== End =====================*/
+
+
+/*--------------------------------------------------*/
+/* =========================== ///  Leave This Blog  /// ============================ */
+/*--------------------------------------------------*/
+
+/**
+ * @api {delete} /members/leave/ Leave this blog.
+ * 
+ * @apiName leaveBlog
+ * @apiGroup Blog's methods
+ * @apiVersion 0.0.0 
+ * @apiPermission User
+ * 
+ * @apiParam {String} Token User's token
+ * @apiParam {String} Blog's group Id
+ *
+ * @apiSuccessExample Response Data:
+ *      HTTP/1.1 200 OK
+ *      {
+ *          "message": "Blog Leave Group Successfully"
+ *      }
+ *
+ * @apiErrorExample Response Error:
+ *      HTTP/1.1 400 BAD REQUEST
+ *      {
+ *          "error": "Error In Input Data"
+ *      }
+ *      HTTP/1.1 401 Unauthorized
+ *      {
+ *          "error": "User Is Unauthorized"
+ *      }
+ */
+
+/*=================== End =====================*/
+
+
+/*
+===================================================================================================
+===================================================================================================
+===================================================================================================
+===================================================================================================
+===================================================================================================
+===================================================================================================
+===================================================================================================
+*/
