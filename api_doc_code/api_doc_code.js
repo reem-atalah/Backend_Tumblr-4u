@@ -1388,24 +1388,55 @@
 
 
 /**
- * @api {get} /blog/post/:tagged Get Posts with Tag
- * @apiName getPostsWithTags
+ * @api {get} /blog/post/:search_content Get Posts with search content
+ * @apiName getPostsWithSearchContent
  * @apiGroup Post
- * @apiSampleRequest api.tumblr.com/blog/:blog_id/filtered_content
+ * @apiSampleRequest api.tumblr.com/post/:search_content
  * @apiPermission User, admin, super admin
  * 
  * @apiExample Example usage:
- * curl -i https://localhost/posr/335/tagged
+ * curl -i https://localhost/blog/335/post/search_content
  * 
- * @apidescription Get Posts with Tag
+ * @apidescription Get Posts with search content
  * @apiVersion 0.50.1
  *
- * @apiParam {String} tag The tag on the posts you'd like to retrieve.
+ * @apiParam {String} search_content The content in the posts you'd like to retrieve.
  *
- * @apiSuccess {post[]} tagged_post the posts with the tag.
+ * @apiSuccess {post[]} search_content_posts the posts with the search content.
  * 
  * @apiError PostNotFound No such a post with this id is found.
- * @apiError BadRequest can't get posts with this tag.
+ * @apiError BadRequest can't get posts with this search content.
+ * @apiError Unauthorized you must log in first
+ * @apiErrorExample Response Error:
+ *      HTTP/1.1 400 BAD REQUEST
+ *      {
+ *          "error":"No Access Right"
+ *      }
+ *      HTTP/1.1 401 Unauthorized
+ *      {
+ *          "error":"No Access Right"
+ */
+
+/**
+ * @api {get} /blog/:blog-id/post/:search_content Get Posts with search content in a specific blog
+ * @apiName getPostsWithSearchContentInBlog
+ * @apiGroup Post
+ * @apiSampleRequest api.tumblr.com/post/:search_content
+ * @apiPermission User, admin, super admin
+ * 
+ * @apiExample Example usage:
+ * curl -i https://localhost/blog/blog-id/335/post/search_content
+ * 
+ * @apidescription Get Posts with search content in a specific blog
+ * @apiVersion 0.50.1
+ *
+ * @apiParam {Number} blog-id The ID of the blog to search in.
+ * @apiParam {String} search_content The content in the posts you'd like to retrieve.
+ *
+ * @apiSuccess {post[]} search_content_posts the posts with the search content.
+ * 
+ * @apiError PostNotFound No such a post with this id is found.
+ * @apiError BadRequest can't get posts with this search content.
  * @apiError Unauthorized you must log in first
  * @apiErrorExample Response Error:
  *      HTTP/1.1 400 BAD REQUEST
