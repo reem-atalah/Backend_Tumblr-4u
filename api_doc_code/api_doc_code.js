@@ -602,7 +602,7 @@
  * @apiPermission User, admin, super admin
  * 
  * @apiExample Example usage:
- * curl -i https://localhost/blog/335/4/blog/follow
+ * curl -i https://localhost/blog/335/follow
  * 
  * @apidescription Follow a blog
  * @apiVersion 0.50.1
@@ -634,7 +634,7 @@
  * @apiPermission User, admin, super admin
  * 
  * @apiExample Example usage:
- * curl -i https://localhost/blog/335/4/blog/unfollow
+ * curl -i https://localhost/blog/335/unfollow
  * 
  * @apidescription Unfollow a blog
  * @apiVersion 0.50.1
@@ -667,7 +667,7 @@
  * @apiPermission User, admin, super admin
  * 
  * @apiExample Example usage:
- * curl -i https://localhost/blog/335/4/blog/filtered_tags
+ * curl -i https://localhost/blog/335/pfiltered_tags
  * 
  * @apidescription Post tag filters
  * @apiVersion 0.50.1
@@ -700,7 +700,7 @@
  * @apiPermission User, admin, super admin
  * 
  * @apiExample Example usage:
- * curl -i https://localhost/blog/335/4/blog/filtered_tags
+ * curl -i https://localhost/blog/335/gfiltered_tags
  * 
  * @apidescription Get tag filters
  * @apiVersion 0.50.1
@@ -731,7 +731,7 @@
  * @apiPermission User, admin, super admin
  * 
  * @apiExample Example usage:
- * curl -i https://localhost/blog/335/4/blog/filtered_tags
+ * curl -i https://localhost/blog/335/dfiltered_tags
  * 
  * @apidescription Delete tag filters
  * @apiVersion 0.50.1
@@ -764,7 +764,7 @@
  * @apiPermission User, admin, super admin
  * 
  * @apiExample Example usage:
- * curl -i https://localhost/blog/335/4/blog/filtered_content
+ * curl -i https://localhost/blog/335/pfiltered_content
  * 
  * @apidescription Post content filters
  * @apiVersion 0.50.1
@@ -790,14 +790,14 @@
 
 
 /**
- * @api {get} /bgetlog/:blog-id/gfiltered_tags Get content filters
+ * @api {get} /blog/:blog-id/gfiltered_tags Get content filters
  * @apiName getContentFilters
  * @apiGroup Blog
  * @apiSampleRequest api.tumblr.com/blog/:blog_id/filtered_content
  * @apiPermission User, admin, super admin
  * 
  * @apiExample Example usage:
- * curl -i https://localhost/blog/335/4/blog/filtered_content
+ * curl -i https://localhost/blog/335/gfiltered_content
  * 
  * @apidescription Get content filters
  * @apiVersion 0.50.1
@@ -821,14 +821,14 @@
  */
 
 /**
- * @api {delete} /bgetlog/:blog-id/dfiltered_tags Delete content filters
+ * @api {delete} /blog/:blog-id/dfiltered_tags Delete content filters
  * @apiName deleteContentFilters
  * @apiGroup Blog
  * @apiSampleRequest api.tumblr.com/blog/:blog_id/filtered_content
  * @apiPermission User, admin, super admin
  * 
  * @apiExample Example usage:
- * curl -i https://localhost/blog/335/4/blog/filtered_content
+ * curl -i https://localhost/blog/335/dfiltered_content
  * 
  * @apidescription Delete tag filters
  * @apiVersion 0.50.1
@@ -1238,7 +1238,7 @@
  * @apiPermission User, admin, super admin
  * 
  * @apiExample Example usage:
- * curl -i https://localhost/blog/335/4/post/edit
+ * curl -i https://localhost/post/335/4/edit
  * 
  * @apidescription Edit a Blog Post (Legacy)
  * @apiVersion 0.50.1
@@ -1269,7 +1269,7 @@
  * @apiPermission User, admin, super admin
  * 
  * @apiExample Example usage:
- * curl -i https://localhost/blog/335/4/post/reblog
+ * curl -i https://localhost/post/335/4/reblog
  * 
  * @apidescription Reblog a Post (Legacy)
  * @apiVersion 0.50.1
@@ -1301,7 +1301,7 @@
  * @apiPermission User, admin, super admin
  * 
  * @apiExample Example usage:
- * curl -i https://localhost/blog/335/4/post/notes
+ * curl -i https://localhost/post/335/4/notes
  * 
  * @apidescription Get notes for a specific Post
  * @apiVersion 0.50.1
@@ -1328,7 +1328,7 @@
  * @apiPermission User, admin, super admin
  * 
  * @apiExample Example usage:
- * curl -i https://localhost/blog/335/4/post/like
+ * curl -i https://localhost/post/335/4/like
  * 
  * @apidescription Like a blog post
  * @apiVersion 0.50.1
@@ -1360,7 +1360,7 @@
  * @apiPermission User, admin, super admin
  * 
  * @apiExample Example usage:
- * curl -i https://localhost/blog/335/4/post/unlike
+ * curl -i https://localhost/post/335/4/unlike
  * 
  * @apidescription Unlike a blog post
  * @apiVersion 0.50.1
@@ -1382,6 +1382,68 @@
  *      {
  *          "error":"No Access Right"
  *      }
+ */
+
+
+/**
+ * @api {get} /blog/post/:search_content Get Posts with search content
+ * @apiName getPostsWithSearchContent
+ * @apiGroup Post
+ * @apiSampleRequest api.tumblr.com/post/:search_content
+ * @apiPermission User, admin, super admin
+ * 
+ * @apiExample Example usage:
+ * curl -i https://localhost/blog/335/post/search_content
+ * 
+ * @apidescription Get Posts with search content
+ * @apiVersion 0.50.1
+ *
+ * @apiParam {String} search_content The content in the posts you'd like to retrieve.
+ *
+ * @apiSuccess {post[]} search_content_posts the posts with the search content.
+ * 
+ * @apiError PostNotFound No such a post with this id is found.
+ * @apiError BadRequest can't get posts with this search content.
+ * @apiError Unauthorized you must log in first
+ * @apiErrorExample Response Error:
+ *      HTTP/1.1 400 BAD REQUEST
+ *      {
+ *          "error":"No Access Right"
+ *      }
+ *      HTTP/1.1 401 Unauthorized
+ *      {
+ *          "error":"No Access Right"
+ */
+
+/**
+ * @api {get} /blog/:blog-id/post/:search_content Get Posts with search content in a specific blog
+ * @apiName getPostsWithSearchContentInBlog
+ * @apiGroup Post
+ * @apiSampleRequest api.tumblr.com/post/:search_content
+ * @apiPermission User, admin, super admin
+ * 
+ * @apiExample Example usage:
+ * curl -i https://localhost/blog/blog-id/335/post/search_content
+ * 
+ * @apidescription Get Posts with search content in a specific blog
+ * @apiVersion 0.50.1
+ *
+ * @apiParam {Number} blog-id The ID of the blog to search in.
+ * @apiParam {String} search_content The content in the posts you'd like to retrieve.
+ *
+ * @apiSuccess {post[]} search_content_posts the posts with the search content.
+ * 
+ * @apiError PostNotFound No such a post with this id is found.
+ * @apiError BadRequest can't get posts with this search content.
+ * @apiError Unauthorized you must log in first
+ * @apiErrorExample Response Error:
+ *      HTTP/1.1 400 BAD REQUEST
+ *      {
+ *          "error":"No Access Right"
+ *      }
+ *      HTTP/1.1 401 Unauthorized
+ *      {
+ *          "error":"No Access Right"
  */
 
 
