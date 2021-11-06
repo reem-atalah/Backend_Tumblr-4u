@@ -1938,6 +1938,300 @@
 ===================================================================================================
 */
 
+/*
+===================================================================================================
+===================================================================================================
+===================================================================================================
+===================================================================================================
+===================================================================================================
+===================================================================================================
+===================================================================================================
+*/
+
+/*--------------------------------------------------*/
+/* =========================== ///  Changing Your Email Address  /// ============================ */
+/*--------------------------------------------------*/
+
+/**
+ * @api {put} /user/email/ Changing Your Email Address.
+ * 
+ * @apiName changeUserEmail
+ * @apiGroup User's methods
+ * @apiVersion 0.0.0 
+ * @apiPermission User
+ * 
+ * @apiParam {String} Token User's token
+ * @apiParam {String} Email User's new email
+ * @apiParam {String} Password User's password
+ *
+ * @apiSuccessExample Response Data:
+ *      HTTP/1.1 200 OK
+ *      {
+ *          "message": "Email Changed Successfully"
+ *      }
+ *
+ * @apiErrorExample Response Error:
+ *      HTTP/1.1 400 BAD REQUEST
+ *      {
+ *          "error": "Error In Input Data"
+ *      }
+ *      HTTP/1.1 401 Unauthorized
+ *      {
+ *          "error": "User Is Unauthorized"
+ *      }
+ */
+
+/*=================== End =====================*/
+
+
+/*--------------------------------------------------*/
+/* =========================== ///  Update password  /// ============================ */
+/*--------------------------------------------------*/
+
+/**
+ * @api {put} /user/updatePassword/ Update your password.
+ * 
+ * @apiName update Password
+ * @apiGroup User's methods
+ * @apiVersion 0.0.0 
+ * @apiPermission User
+ * 
+ * @apiParam {String} Token User's token
+ * @apiParam {String} Current_Password Current user's password
+ * @apiParam {String} New_Password New user's password
+ *
+ * @apiSuccessExample Response Data:
+ *      HTTP/1.1 200 OK
+ *      {
+ *          "message": "Password Updated Successfully"
+ *      }
+ *
+ * @apiErrorExample Response Error:
+ *      HTTP/1.1 400 BAD REQUEST
+ *      {
+ *          "error": "Error In Input Data"
+ *      }
+ *      HTTP/1.1 401 Unauthorized
+ *      {
+ *          "error": "User Is Unauthorized"
+ *      }
+ */
+
+/*=================== End =====================*/
+
+
+/*--------------------------------------------------*/
+/* =========================== ///  Deleting Your Account  /// ============================ */
+/*--------------------------------------------------*/
+
+/**
+ * @api {delete} /user/deleteAccount/ Deleting Your Account.
+ * 
+ * @apiName deleteAccount
+ * @apiGroup User's methods
+ * @apiVersion 0.0.0 
+ * @apiPermission User
+ * 
+ * @apiParam {String} Token User's token
+ * @apiParam {String} Email User's email
+ * @apiParam {String} Password User's password
+ *
+ * @apiSuccessExample Response Data:
+ *      HTTP/1.1 200 OK
+ *      {
+ *          "message": "Account Deleted Successfully"
+ *      }
+ *
+ * @apiErrorExample Response Error:
+ *      HTTP/1.1 400 BAD REQUEST
+ *      {
+ *          "error": "Error In Input Data"
+ *      }
+ *      HTTP/1.1 401 Unauthorized
+ *      {
+ *          "error": "User Is Unauthorized"
+ *      }
+ */
+
+/*=================== End =====================*/
+
+
+/*--------------------------------------------------*/
+/* =========================== ///  Email Verification  /// ============================ */
+/*--------------------------------------------------*/
+
+/**
+ * @api {put} /user/emailVerification/:Token Email Verification.
+ * 
+ * @apiName emailVerification
+ * @apiGroup User's methods
+ * @apiVersion 0.0.0 
+ * @apiPermission User
+ * 
+ *
+ * @apiSuccessExample Response Data:
+ *      HTTP/1.1 200 OK
+ *      {
+ *          "message": "Email Verifid Successfully"
+ *      }
+ *
+ * @apiErrorExample Response Error:
+ *      HTTP/1.1 400 BAD REQUEST
+ *      {
+ *          "error": "Error In Input Data"
+ *      }
+ *      HTTP/1.1 401 Unauthorized
+ *      {
+ *          "error": "User Is Unauthorized"
+ *      }
+ */
+
+/*=================== End =====================*/
+
+
+/*--------------------------------------------------*/
+/* =========================== ///  Access and manage data associated with your account  /// ============================ */
+/*--------------------------------------------------*/
+
+/**
+ * @api {get} /user/data/ Access and manage data associated with your account.
+ * 
+ * @apiName accessdData
+ * @apiGroup User's methods
+ * @apiVersion 0.0.0 
+ * @apiPermission User
+ * 
+ * @apiParam {String} Token User's token
+ *
+ *  @apiSuccessExample Response Data:
+ *      HTTP/1.1 200 OK
+ *      {
+ *          "message": "Data Will Be Sent Via Email"
+ *      }
+ *
+ * @apiErrorExample Response Error:
+ *      HTTP/1.1 400 BAD REQUEST
+ *      {
+ *          "error": "Error In Input Data"
+ *      }
+ *      HTTP/1.1 401 Unauthorized
+ *      {
+ *          "error": "User Is Unauthorized"
+ *      }
+ */
+
+/*=================== End =====================*/
+
+/*--------------------------------------------------*/
+/* =========================== ///  Get User Settings  /// ============================ */
+/*--------------------------------------------------*/
+
+/**
+ * @api {get} /user/settings/ Get User Settings.
+ * 
+ * @apiName userSettings
+ * @apiGroup User's methods
+ * @apiVersion 0.0.0 
+ * @apiPermission User
+ * 
+ * @apiParam {String} Token User's token
+ *
+ *  @apiSuccessExample Response Data:
+ *      HTTP/1.1 200 OK
+ *      {
+ *          "message": "{ Object Contains User Settings }"
+ *      }
+ *
+ * @apiErrorExample Response Error:
+ *      HTTP/1.1 400 BAD REQUEST
+ *      {
+ *          "error": "Error In Input Data"
+ *      }
+ *      HTTP/1.1 401 Unauthorized
+ *      {
+ *          "error": "User Is Unauthorized"
+ *      }
+ */
+
+/*=================== End =====================*/
+
+
+/*--------------------------------------------------*/
+/* =========================== ///  Forgot Password  /// ============================ */
+/*--------------------------------------------------*/
+
+/**
+ * @api {get} /user/forgot_password/ Forgot Password.
+ * 
+ * @apiName forgotPassword
+ * @apiGroup User's methods
+ * @apiVersion 0.0.0 
+ * @apiPermission User
+ * 
+ * @apiParam {String} Email User's email.
+ *
+ *  @apiSuccessExample Response Data:
+ *      HTTP/1.1 200 OK
+ *      {
+ *          "message": "{ Send Email To Reset Password }"
+ *      }
+ *
+ * @apiErrorExample Response Error:
+ *      HTTP/1.1 400 BAD REQUEST
+ *      {
+ *          "error": "Error In Input Data"
+ *      }
+ *      HTTP/1.1 401 Unauthorized
+ *      {
+ *          "error": "User Is Unauthorized"
+ *      }
+ */
+
+/*=================== End =====================*/
+
+
+/*--------------------------------------------------*/
+/* =========================== ///  Reset Password  /// ============================ */
+/*--------------------------------------------------*/
+
+/**
+ * @api {put} /user/reset_password/:Token Reset Password.
+ * 
+ * @apiName resetPassword
+ * @apiGroup User's methods
+ * @apiVersion 0.0.0 
+ * @apiPermission User
+ * 
+ *  @apiSuccessExample Response Data:
+ *      HTTP/1.1 200 OK
+ *      {
+ *          "message": "{ Password Updated Successfully }"
+ *      }
+ *
+ * @apiErrorExample Response Error:
+ *      HTTP/1.1 400 BAD REQUEST
+ *      {
+ *          "error": "Error In Input Data"
+ *      }
+ *      HTTP/1.1 401 Unauthorized
+ *      {
+ *          "error": "User Is Unauthorized"
+ *      }
+ */
+
+/*=================== End =====================*/
+
+
+/*
+===================================================================================================
+===================================================================================================
+===================================================================================================
+===================================================================================================
+===================================================================================================
+===================================================================================================
+===================================================================================================
+*/
+
 /*--------------------------------------------------*/
 /* =========================== ///  Create a new blog  /// ============================ */
 /*--------------------------------------------------*/
@@ -2143,6 +2437,145 @@
 
 /*=================== End =====================*/
 
+
+/*--------------------------------------------------*/
+/* =========================== ///  Get Blog Settings  /// ============================ */
+/*--------------------------------------------------*/
+
+/**
+ * @api {get} /blog/appearance/ Get Blog Settings.
+ * 
+ * @apiName blogSettings
+ * @apiGroup Blog's methods
+ * @apiVersion 0.0.0 
+ * @apiPermission User
+ * 
+ * @apiParam {String} Token User's token
+ * @apiParam {String} Id Blog's Id
+ *
+ *  @apiSuccessExample Response Data:
+ *      HTTP/1.1 200 OK
+ *      {
+ *          "message": "{ Object Contains Blog Settings }"
+ *      }
+ *
+ * @apiErrorExample Response Error:
+ *      HTTP/1.1 400 BAD REQUEST
+ *      {
+ *          "error": "Error In Input Data"
+ *      }
+ *      HTTP/1.1 401 Unauthorized
+ *      {
+ *          "error": "User Is Unauthorized"
+ *      }
+ */
+
+/*=================== End =====================*/
+
+/*--------------------------------------------------*/
+/* =========================== ///  Edit Blog Settings  /// ============================ */
+/*--------------------------------------------------*/
+
+/**
+ * @api {put} /blog/appearance/ Edit Blog Settings.
+ * 
+ * @apiName eidtBlogSettings
+ * @apiGroup Blog's methods
+ * @apiVersion 0.0.0 
+ * @apiPermission User
+ * 
+ * @apiParam {String} Token User's token
+ * @apiParam {String} Id Blog's Id
+ * @apiParam {String} New_Settings Blog's new settings
+ *
+ *  @apiSuccessExample Response Data:
+ *      HTTP/1.1 200 OK
+ *      {
+ *          "message": "Settings updated successfully"
+ *      }
+ *
+ * @apiErrorExample Response Error:
+ *      HTTP/1.1 400 BAD REQUEST
+ *      {
+ *          "error": "Error In Input Data"
+ *      }
+ *      HTTP/1.1 401 Unauthorized
+ *      {
+ *          "error": "User Is Unauthorized"
+ *      }
+ */
+
+/*=================== End =====================*/
+
+
+/*--------------------------------------------------*/
+/* =========================== ///  Get Blog Theme  /// ============================ */
+/*--------------------------------------------------*/
+
+/**
+ * @api {get} /blog/theme/ Get Blog's Theme.
+ * 
+ * @apiName blogTheme
+ * @apiGroup Blog's methods
+ * @apiVersion 0.0.0 
+ * @apiPermission User
+ * 
+ * @apiParam {String} Token User's token
+ * @apiParam {String} Id Blog's Id
+ *
+ *  @apiSuccessExample Response Data:
+ *      HTTP/1.1 200 OK
+ *      {
+ *          "message": "Object Contains Blog Theme"
+ *      }
+ *
+ * @apiErrorExample Response Error:
+ *      HTTP/1.1 400 BAD REQUEST
+ *      {
+ *          "error": "Error In Input Data"
+ *      }
+ *      HTTP/1.1 401 Unauthorized
+ *      {
+ *          "error": "User Is Unauthorized"
+ *      }
+ */
+
+/*=================== End =====================*/
+
+/*--------------------------------------------------*/
+/* =========================== ///  Edit Blog Theme  /// ============================ */
+/*--------------------------------------------------*/
+
+/**
+ * @api {put} /blog/theme/ Edit Blog Theme.
+ * 
+ * @apiName eidtBlogTheme
+ * @apiGroup Blog's methods
+ * @apiVersion 0.0.0 
+ * @apiPermission User
+ * 
+ * @apiParam {String} Token User's token
+ * @apiParam {String} Id Blog's Id
+ * @apiParam {String} New_Theme Blog's new theme
+ *
+ *  @apiSuccessExample Response Data:
+ *      HTTP/1.1 200 OK
+ *      {
+ *          "message": "Theme updated successfully"
+ *      }
+ *
+ * @apiErrorExample Response Error:
+ *      HTTP/1.1 400 BAD REQUEST
+ *      {
+ *          "error": "Error In Input Data"
+ *      }
+ *      HTTP/1.1 401 Unauthorized
+ *      {
+ *          "error": "User Is Unauthorized"
+ *      }
+ */
+
+/*=================== End =====================*/
 
 /*
 ===================================================================================================
