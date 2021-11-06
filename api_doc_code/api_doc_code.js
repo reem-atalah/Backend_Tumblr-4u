@@ -1744,7 +1744,93 @@
 /*=================== End =====================*/
 
 
+/*
+===================== ///////// <---------> ================ <---------> ///////// =====================> 
+===================== ///////// <---------> Get Explore Posts <---------> ///////// =====================> 
+===================== ///////// <---------> ================ <---------> ///////// =====================> 
+*/
 
+/**
+ * @api {get} /explore Get Explore Posts 
+ * @apiName getExplorePosts
+ * @apiGroup Post
+ * @apiPermission User, Admin, Super_Admin
+ * 
+ * @apidescription Get Posts for the explore page
+ * @apiVersion 0.0.0
+ *
+ * @apiParam {String} Token User's Secret Code.
+ * @apiParam {String} type where the type of posts are {text/photos/gifs/quotes/chats/audio/videos/asks/staff picks/trending/for you}
+ *
+ * @apiSuccessExample Response Data:
+ *      HTTP/1.1 200 OK
+ *      {
+ *          "meta": {
+ *                       "status": 200,
+ *                       "msg": "OK"
+ *                  },
+ * 
+ *          "response":{
+ *                      "data": "[ type_posts the posts with certain type as choosen ]"
+ *                     }   
+ *      }
+ * 
+ * @apiErrorExample Response Error:
+ *      HTTP/1.1 400 BAD REQUEST
+ *      {
+ *          "error": "Error In Input Data"
+ *      }
+ *      HTTP/1.1 401 Unauthorized
+ *      {
+ *          "error": "User Is Unauthorized"
+ *      }
+ */
+
+/*=================== End =====================*/
+
+/*
+===================== ///////// <---------> ================ <---------> ///////// =====================> 
+===================== ///////// <---------> Retrieve Radar Post <---------> ///////// =====================> 
+===================== ///////// <---------> ================ <---------> ///////// =====================> 
+*/
+
+/**
+ * @api {get} getRadar/ Retrieve Radar Post
+ * @apiName getRadar
+ * @apiGroup Post
+ * @apiPermission User, Admin, Super_Admin
+ * @apidescription The most popular post, having many notes is represented
+ * @apiVersion 0.0.0
+ * 
+ * @apiParam {String} Token User's Secret Code.
+ * @apiParam {String} id Radar Post id 
+ *
+ * @apiSuccessExample Response Data:
+ *      HTTP/1.1 200 OK
+ *      {
+ *          "meta": {
+ *                       "status": 200,
+ *                       "msg": "OK"
+ *                  },
+ * 
+ *          "response":{
+ *                      "data": "{Object} radar post object has all its aspects"
+ *                     }   
+ *      }
+ * 
+ * @apiErrorExample Response Error:
+ *      HTTP/1.1 400 BAD REQUEST
+ *      {
+ *          "error": "Error In Input Data"
+ *      }
+ *      HTTP/1.1 401 Unauthorized
+ *      {
+ *          "error": "User Is Unauthorized"
+ *      }
+ * 
+ */
+
+/*=================== End =====================*/
 
 
 //=====================================================================================================
@@ -2790,7 +2876,7 @@
  * @apiVersion 0.0.0 
  * @apiPermission User, Admin, Super_Admin
  * 
- * @apiParam {String} Token User's token
+ * @apiParam {String} Token User's Secret Code.
  * @apiParam {String} Member Blog's Id
  *
  * @apiSuccessExample Response Data:
@@ -2832,7 +2918,7 @@
  * @apiVersion 0.0.0 
  * @apiPermission User, Admin, Super_Admin
  * 
- * @apiParam {String} Token User's token
+ * @apiParam {String} Token User's Secret Code.
  * @apiParam {String} Member Blog's Id
  *
  * @apiSuccessExample Response Data:
@@ -2875,7 +2961,7 @@
  * @apiVersion 0.0.0 
  * @apiPermission User, Admin, Super_Admin
  * 
- * @apiParam {String} Token User's token
+ * @apiParam {String} Token User's Secret Code.
  * @apiParam {String} Blog's group Id
  *
  * @apiSuccessExample Response Data:
@@ -2917,7 +3003,7 @@
  * @apiVersion 0.0.0 
  * @apiPermission User, Admin, Super_Admin
  * 
- * @apiParam {String} Token User's token
+ * @apiParam {String} Token User's Secret Code.
  * @apiParam {String} Id Blog's Id
  *
  * @apiSuccessExample Response Data:
@@ -2959,7 +3045,7 @@
  * @apiVersion 0.0.0 
  * @apiPermission User, Admin, Super_Admin
  * 
- * @apiParam {String} Token User's token
+ * @apiParam {String} Token User's Secret Code.
  * @apiParam {String} Id Blog's Id
  * @apiParam {String} New_Settings Blog's new settings
  *
@@ -3002,7 +3088,7 @@
  * @apiVersion 0.0.0 
  * @apiPermission User, Admin, Super_Admin
  * 
- * @apiParam {String} Token User's token
+ * @apiParam {String} Token User's Secret Code.
  * @apiParam {String} Id Blog's Id
  *
  * @apiSuccessExample Response Data:
@@ -3045,7 +3131,7 @@
  * @apiVersion 0.0.0 
  * @apiPermission User, Admin, Super_Admin
  * 
- * @apiParam {String} Token User's token
+ * @apiParam {String} Token User's Secret Code.
  * @apiParam {String} Id Blog's Id
  * @apiParam {String} New_Theme Blog's new theme
  *
@@ -3076,147 +3162,182 @@
 
 
 /*
-===================================================================================================
-===================================================================================================
-===================================================================================================
-===================================================================================================
-===================================================================================================
-===================================================================================================
-===================================================================================================
+===================== ///////// <---------> ============= <---------> ///////// =====================> 
+===================== ///////// <--------->  Check out these blogs   <---------> ///////// =====================> 
+===================== ///////// <---------> ============= <---------> ///////// =====================> 
 */
 
+/**
+ * @api {get} /Check_out_these_blogs Check out these blogs
+ * @apiName getCheckBlog
+ * @apiGroup Blog
+ * @apiPermission  User, admin, super admin
+ * @apidescription retrieve unfollowed blogs as recommendations to be followed
+ * @apiVersion 0.0.0
+ * 
+ * @apiParam {String} Token User's Secret Code.
+ * @apiParam {String} user_id  user's ID to know who he/she follows
+ *
+ * @apiSuccessExample Response Data:
+ *      HTTP/1.1 200 OK
+ *      {
+ *          "meta": {
+ *                       "status": 200,
+ *                       "msg": "OK"
+ *                  },
+ * 
+ *          "response":{
+ *                       "data": "[gets some of the blogs not followed by the user]"
+ *                     }   
+ *      }
+ * @apiErrorExample Response Error:
+ *      HTTP/1.1 400 BAD REQUEST
+ *      {
+ *          "error": "Error In Input Data"
+ *      }
+ *      HTTP/1.1 401 Unauthorized
+ *      {
+ *          "error": "User Is Unauthorized"
+ *      }
+ * 
+ */
 
+/*=================== End =====================*/
 
+//=====================================================================================================
+//=====================================================================================================
+//=====================================================================================================
+/*
+===================== ///////// <---------> ============== <---------> ///////// =====================> 
+===================== ///////// <---------> Inbox's Methods <---------> ///////// =====================> 
+===================== ///////// <---------> ============== <---------> ///////// =====================> 
+*/
+//=====================================================================================================
+//=====================================================================================================
+//=====================================================================================================
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// --------------------------------- Inbox --------------------------------------
-
+/*
+===================== ///////// <---------> ============= <---------> ///////// =====================> 
+===================== ///////// <---------> Retrieve Inbox Posts <---------> ///////// =====================> 
+===================== ///////// <---------> ============= <---------> ///////// =====================> 
+*/
 
 /**
- * @api {get} /blog/:blog_id/inbox Retrieve Inbox Posts
+ * @api {get} /blog/inbox Retrieve Inbox Posts
  * @apiName retrieveInboxPosts
  * @apiGroup Inbox
- * @apiSampleRequest api.tumblr.com/blog/{blog-identifier}/:blog_id/inbox
- * @apiPermission User, admin, super admin
+ * @apiPermission User, Admin, Super_Admin
  * @apidescription gets all the submission and ask posts in a page arranged according to time
- * @apiVersion 0.50.1
+ * @apiVersion 0.0.0
  * 
+ * @apiParam {String} Token User's Secret Code.
  * @apiParam {String} blog_id The ID of the blog has the post
- * @apiParam {String} token User's token
- * 
- * @apiExample Example usage:
- * curl -i https://localhost/blog/335/inbox
- * 
- * @apiSuccess {Post[]} Submission array of submission posts
- * @apiSuccess {Post[]} Ask array of ask posts
  * 
  * 
- * @apiError UserNotFound No such a user with this id is found
- * @apiError BlogNotFound No such a blog with this id is found
- * @apiError BadRequest Can't access the inbox page
- * @apiError Unauthorized you must log in first
+ * @apiSuccessExample Response Data:
+ *      HTTP/1.1 200 OK
+ *      {
+ *          "meta": {
+ *                       "status": 200,
+ *                       "msg": "OK"
+ *                  },
+ * 
+ *          "response":{
+ *                       "data": "[ Ask Posts , Submission Posts ]"
+ *                     }   
+ *      }
  * @apiErrorExample Response Error:
  *      HTTP/1.1 400 BAD REQUEST
  *      {
- *          "error":"No Access Right"
+ *          "error": "Error In Input Data"
  *      }
  *      HTTP/1.1 401 Unauthorized
  *      {
- *          "error":"No Access Right"
+ *          "error": "User Is Unauthorized"
  *      }
  */
 
 
+/*=================== End =====================*/
+
+
+
+/*
+===================== ///////// <---------> ============= <---------> ///////// =====================> 
+===================== ///////// <---------> Delete All Messages <---------> ///////// =====================> 
+===================== ///////// <---------> ============= <---------> ///////// =====================> 
+*/
+
 /**
- * @api {delete} /blog/:blog_id/inbox/delete Delete All Messages
+ * @api {delete} /blog/inbox/delete Delete All Messages
  * @apiName deleteInboxPosts
  * @apiGroup Inbox
- * @apiSampleRequest api.tumblr.com/blog/:blog_id/inbox/delete
- * @apiPermission User, admin, super admin
+ * @apiPermission User, Admin, Super_Admin
  * @apidescription remove all posts in the inbox page
- * @apiVersion 0.50.1
+ * @apiVersion 0.0.0
  * 
+ * @apiParam {String} Token User's Secret Code.
  * @apiParam {String} blog_id The ID of the blog has the post
- * @apiParam {String} token User's token
  * 
- * @apiExample Example usage:
- * curl -i https://localhost/blog/335/inbox/delete
+ * @apiSuccessExample Response Data:
+ *      HTTP/1.1 200 OK
+ *      {
+ *          "meta": {
+ *                       "status": 200,
+ *                       "msg": "OK"
+ *                  },
  * 
- * @apiSuccess {Boolean} removed true if we removed succesfully message
- * 
- * @apiError UserNotFound No such a user with this id is found
- * @apiError BlogNotFound No such a blog with this id is found
- * @apiError BadRequest Can't delete messages, maybe no messages exists or it's one message
- * @apiError Unauthorized you must log in first
+ *          "response":{
+ *                       "message": "Success"
+ *                     }   
+ *      }
  * @apiErrorExample Response Error:
  *      HTTP/1.1 400 BAD REQUEST
  *      {
- *          "error":"No Access Right"
+ *          "error": "Error In Input Data"
  *      }
  *      HTTP/1.1 401 Unauthorized
  *      {
- *          "error":"No Access Right"
+ *          "error": "User Is Unauthorized"
  *      }
  */
 
-// --------------------------------- Submission --------------------------------------
+/*=================== End =====================*/
+
+
+//=====================================================================================================
+//=====================================================================================================
+//=====================================================================================================
+/*
+===================== ///////// <---------> ============== <---------> ///////// =====================> 
+===================== ///////// <---------> Submission's Methods <---------> ///////// =====================> 
+===================== ///////// <---------> ============== <---------> ///////// =====================> 
+*/
+//=====================================================================================================
+//=====================================================================================================
+//=====================================================================================================
+
+
+/*
+===================== ///////// <---------> ============= <---------> ///////// =====================> 
+===================== ///////// <---------> Make Submission Posts <---------> ///////// =====================> 
+===================== ///////// <---------> ============= <---------> ///////// =====================> 
+*/
 
 /**
- * @api {post} /blog/:blog_id/submit Make Submission Posts
+ * @api {post} /blog/submit Make Submission Posts
  * @apiName makeSubmissionPosts
  * @apiGroup Submission
- * @apiSampleRequest api.tumblr.com/blog/:blog_id/submit
- * @apiPermission Guest,User, admin, super admin
+ * @apiPermission User, Admin, Super_Admin
  * @apidescription Submit a post on a blogs dashboard, take permission to post
- * @apiVersion 0.50.1
+ * @apiVersion 0.0.0
  * 
+ * @apiParam {String} Token User's Secret Code.
  * @apiParam {String} blog_id The ID of the blog I want to submit at
- * @apiParam {String} token User's token
  * @apiParam {String} type The type of post. One of the following: text, photo, quote, link, video
  * @apiParam {String[]} tags Tags applied to the post
  * @apiParam {String} title of the post
  * @apiParam {String} text of the post
- * 
- * @apiExample Example usage:
- * curl -i https://localhost/blog/335/submit
  * 
  * @apiSuccess {String} id The ID of the submitted post
  * @apiSuccess {String} post_url The location of the post
@@ -3230,270 +3351,273 @@
  * @apiSuccess {String} anonymous_name Name on an anonymous submission
  * 
  *  
- * @apiError UserNotFound No such a user with this id is found
- * @apiError BlogNotFound No such a blog with this id is found
- * @apiError BadRequest Can't access the sumbission page
  * @apiErrorExample Response Error:
  *      HTTP/1.1 400 BAD REQUEST
  *      {
- *          "error":"No Access Right"
- *      }
- */
-
-
-/**
- * @api {delete} /blog/:blog_id/inbox/delete_submit Delete Submission Posts
- * @apiName deleteSubmissionPosts
- * @apiGroup Submission
- * @apiSampleRequest api.tumblr.com/blog/:blog_id/inbox/delete_submit
- * @apiPermission User, admin, super admin
- * @apidescription  Delete Submission Posts from inbox page
- * @apiVersion 0.50.1
- * 
- * @apiParam {String} blog_id The ID of the blog has the submission
- * @apiParam {String} token User's token
- * 
- * @apiExample Example usage:
- * curl -i https://localhost/blog/335/inbox/delete_submit
- * 
- * @apiSuccess {boolean} is_deleted true if we removed succesfully the submission post
- *  
- * @apiError UserNotFound No such a user with this id is found
- * @apiError BlogNotFound No such a blog with this id is found
- * @apiError BadRequest Can't delete submission post, maybe arleady deleted/doesn't exist
- * @apiError Unauthorized you must log in first
- * @apiErrorExample Response Error:
- *      HTTP/1.1 400 BAD REQUEST
- *      {
- *          "error":"No Access Right"
+ *          "error": "Error In Input Data"
  *      }
  *      HTTP/1.1 401 Unauthorized
  *      {
- *          "error":"No Access Right"
+ *          "error": "User Is Unauthorized"
  *      }
  */
 
 
+/*=================== End =====================*/
+
+
+
+/*
+===================== ///////// <---------> ============= <---------> ///////// =====================> 
+===================== ///////// <---------> Delete Submission Posts <---------> ///////// =====================> 
+===================== ///////// <---------> ============= <---------> ///////// =====================> 
+*/
+
 /**
- * @api {put} /blog/:blog_id/inbox/edit_submit Edit Submission Posts
+ * @api {delete} /blog/inbox/delete_submit Delete Submission Posts
+ * @apiName deleteSubmissionPosts
+ * @apiGroup Submission
+ * @apiPermission User, Admin, Super_Admin
+ * @apidescription  Delete Submission Posts from inbox page
+ * @apiVersion 0.0.0
+ * 
+ * @apiParam {String} Token User's Secret Code.
+ * @apiParam {String} blog_id The ID of the blog has the submission
+ * 
+ * @apiSuccessExample Response Data:
+ *      HTTP/1.1 200 OK
+ *      {
+ *          "meta": {
+ *                       "status": 200,
+ *                       "msg": "OK"
+ *                  },
+ * 
+ *          "response":{
+ *                       "message": "Success"
+ *                     }   
+ *      }
+ * @apiErrorExample Response Error:
+ *      HTTP/1.1 400 BAD REQUEST
+ *      {
+ *          "error": "Error In Input Data"
+ *      }
+ *      HTTP/1.1 401 Unauthorized
+ *      {
+ *          "error": "User Is Unauthorized"
+ *      }
+ */
+
+/*=================== End =====================*/
+
+/*
+===================== ///////// <---------> ============= <---------> ///////// =====================> 
+===================== ///////// <---------> Edit Submission Posts <---------> ///////// =====================> 
+===================== ///////// <---------> ============= <---------> ///////// =====================> 
+*/
+
+/**
+ * @api {put} /blog/:inbox/edit_submit Edit Submission Posts
  * @apiName editSubmissionPosts
  * @apiGroup Submission
- * @apiSampleRequest api.tumblr.com/blog/:blog_id/inbox/edit_submit
- * @apiPermission User, admin, super admin
+ * @apiPermission User, Admin, Super_Admin
  * @apidescription edit text in the submission post, only can done by the blog will have this post on their dashboard
- * @apiVersion 0.50.1
+ * @apiVersion 0.0.0
  * 
+ * @apiParam {String} Token User's Secret Code.
  * @apiParam {String} blog_id The ID of the blog having the submitted post
- * @apiParam {String} token User's token
  * @apiParam {String[]} tags Tags applied to the post
  * @apiParam {String} title of the post
  * @apiParam {String} text of the post
  * 
- * @apiExample Example usage:
- * curl -i https://localhost/blog/335/inbox/edit_submit
  * 
- * @apiSuccess {post} the sumbission post updated 
- *  
- * @apiError UserNotFound No such a user with this id is found
- * @apiError BlogNotFound No such a blog with this id is found
- * @apiError BadRequest Can't edit post, maybe deleted
- * @apiError Unauthorized you must log in first
- * @apiErrorExample Response Error:
- *      HTTP/1.1 400 BAD REQUEST
- *      {
- *          "error":"No Access Right"
- *      }
- *      HTTP/1.1 401 Unauthorized
- *      {
- *          "error":"No Access Right"
- *      }
- */
-
-
-/**
- * @api {post} /blog/:blog_id/inbox/post_submit Post Submission Posts
- * @apiName postSubmissionPosts
- * @apiGroup Submission
- * @apiSampleRequest api.tumblr.com/blog/:blog_id/inbox/post_submit
- * @apiPermission User, admin, super admin
- * @apidescription posts the submission posts in the dashboard of the blog
- * @apiVersion 0.50.1
- * 
- * @apiParam {String} blog_id The ID of the blog has the post
- * @apiParam {String} token User's token
- * 
- * @apiExample Example usage:
- * curl -i https://localhost/blog/335/inbox/post_submit
- * 
- * @apiSuccess {boolean} posted return true when it's successfullay posyed in the dashboard and removed from inbox
- * 
- * @apiError UserNotFound No such a user with this id is found
- * @apiError BlogNotFound No such a blog with this id is found
- * @apiError BadRequest Can't post, maybe arleady posted or doesn't exist post
- * @apiError Unauthorized you must log in first
- * @apiErrorExample Response Error:
- *      HTTP/1.1 400 BAD REQUEST
- *      {
- *          "error":"No Access Right"
- *      }
- *      HTTP/1.1 401 Unauthorized
- *      {
- *          "error":"No Access Right"
- *      }
- */
-
-
-/**
- * @api {put} /blog/:blog_id/inbox/queue_submit Queue Submission Posts
- * @apiName queueSubmissionPosts
- * @apiGroup Submission
- * @apiSampleRequest api.tumblr.com/blog/:blog_id/inbox/queue_submit
- * @apiPermission User, admin, super admin
- * @apidescription put the submitted post with the queue posts
- * @apiVersion 0.50.1
- * 
- * @apiParam {String} blog_id The ID of the bloghas the post
- * @apiParam {String} token User's token
- * 
- * @apiExample Example usage:
- * curl -i https://localhost/blog/335/inbox/queue_submit
- * 
- * @apiSuccess {boolean} queued return true when post is changed from submission post to queue post
- * 
- *  
- * @apiError UserNotFound No such a user with this id is found
- * @apiError BlogNotFound No such a blog with this id is found
- * @apiError BadRequest Can't put in queue, maybe doesn't exist
- * @apiError Unauthorized you must log in first
- * @apiErrorExample Response Error:
- *      HTTP/1.1 400 BAD REQUEST
- *      {
- *          "error":"No Access Right"
- *      }
- *      HTTP/1.1 401 Unauthorized
- *      {
- *          "error":"No Access Right"
- *      }
- */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// --------------------------------- Ask --------------------------------------
-
-
-
-
-
-
-
-
-// --------------------------------- Settings -------------------------------------------------
-
-/**
- * @api {put} user/:user-id/settings/privacy Update privacy settings
- * @apiName updateSettingsPrivacy
- * @apiGroup settings
- * @apiSampleRequest api.tumblr.com/user/:user-id/settings/privacy
- * @apiPermission User, admin, super admin
- * 
- * @apiExample Example usage:
- * curl -i https://localhost/settings/335/privacy
- * 
- * @apidescription Update privacy settings
- * @apiVersion 0.50.1
- *
- * @apiParam {String} token User's token.
- * @apiParam {Number} id User ID.
- * @apiParam {Boolean} active=1 Let others see that you're active.
- * @apiParam {Boolean} improved_search=1 Let Tumblr use your search history to help provide more relevant recommendations.
- *
  * @apiSuccessExample Response Data:
  *      HTTP/1.1 200 OK
  *      {
- *          "message": "Settings updated successfully"
- *      }
+ *          "meta": {
+ *                       "status": 200,
+ *                       "msg": "OK"
+ *                  },
  * 
+ *          "response":{
+ *                       "message": "Success"
+ *                     }   
+ *      }
  * @apiErrorExample Response Error:
  *      HTTP/1.1 400 BAD REQUEST
  *      {
- *          "error":"No Access Right"
+ *          "error": "Error In Input Data"
  *      }
  *      HTTP/1.1 401 Unauthorized
  *      {
- *          "error":"No Access Right"
+ *          "error": "User Is Unauthorized"
+ *      }
  */
 
+
+/*=================== End =====================*/
+
+
+/*
+===================== ///////// <---------> ============= <---------> ///////// =====================> 
+===================== ///////// <---------> Post Submission Posts <---------> ///////// =====================> 
+===================== ///////// <---------> ============= <---------> ///////// =====================> 
+*/
+
 /**
- * @api {put} user/:user-id/settings/notifications Update notifications settings
+ * @api {post} /blog/inbox/post_submit Post Submission Posts
+ * @apiName postSubmissionPosts
+ * @apiGroup Submission
+ * @apiPermission User, Admin, Super_Admin
+ * @apidescription posts the submission posts in the dashboard of the blog
+ * @apiVersion 0.0.0
+ * 
+ * @apiParam {String} Token User's Secret Code.
+ * @apiParam {String} blog_id The ID of the blog has the post
+ * 
+ * @apiSuccessExample Response Data:
+ *      HTTP/1.1 200 OK
+ *      {
+ *          "meta": {
+ *                       "status": 200,
+ *                       "msg": "OK"
+ *                  },
+ * 
+ *          "response":{
+ *                       "message": "Success"
+ *                     }   
+ *      }
+ * @apiErrorExample Response Error:
+ *      HTTP/1.1 400 BAD REQUEST
+ *      {
+ *          "error": "Error In Input Data"
+ *      }
+ *      HTTP/1.1 401 Unauthorized
+ *      {
+ *          "error": "User Is Unauthorized"
+ *      }
+ */
+
+/*=================== End =====================*/
+
+/*
+===================== ///////// <---------> ============= <---------> ///////// =====================> 
+===================== ///////// <---------> Queue Submission Posts <---------> ///////// =====================> 
+===================== ///////// <---------> ============= <---------> ///////// =====================> 
+*/
+
+/**
+ * @api {put} /blog/inbox/queue_submit Queue Submission Posts
+ * @apiName queueSubmissionPosts
+ * @apiGroup Submission
+ * @apiPermission User, Admin, Super_Admin
+ * @apidescription put the submitted post with the queue posts
+ * @apiVersion 0.0.0
+ * 
+ * @apiParam {String} Token User's Secret Code.
+ * @apiParam {String} blog_id The ID of the bloghas the post
+ * 
+ * 
+ * @apiSuccessExample Response Data:
+ *      HTTP/1.1 200 OK
+ *      {
+ *          "meta": {
+ *                       "status": 200,
+ *                       "msg": "OK"
+ *                  },
+ * 
+ *          "response":{
+ *                       "message": "Success"
+ *                     }   
+ *      }
+ * @apiErrorExample Response Error:
+ *      HTTP/1.1 400 BAD REQUEST
+ *      {
+ *          "error": "Error In Input Data"
+ *      }
+ *      HTTP/1.1 401 Unauthorized
+ *      {
+ *          "error": "User Is Unauthorized"
+ *      }
+ */
+
+/*=================== End =====================*/
+
+
+//=====================================================================================================
+//=====================================================================================================
+//=====================================================================================================
+/*
+===================== ///////// <---------> ============== <---------> ///////// =====================> 
+===================== ///////// <---------> Settings's Methods <---------> ///////// =====================> 
+===================== ///////// <---------> ============== <---------> ///////// =====================> 
+*/
+//=====================================================================================================
+//=====================================================================================================
+//=====================================================================================================
+
+/*
+===================== ///////// <---------> ============= <---------> ///////// =====================> 
+===================== ///////// <---------> Update privacy settings <---------> ///////// =====================> 
+===================== ///////// <---------> ============= <---------> ///////// =====================> 
+*/
+
+/**
+ * @api {put} user/settings/privacy Update privacy settings
+ * @apiName updateSettingsPrivacy
+ * @apiGroup settings
+ * @apiPermission User, Admin, Super_Admin
+ * 
+ * @apidescription Update privacy settings
+ * @apiVersion 0.0.0
+ *
+ * @apiParam {String} Token User's Secret Code.
+ * @apiParam {String} id User ID.
+ * @apiParam {Boolean} active=1 Let others see that you're active.
+ * @apiParam {Boolean} improved_search=1 Let Tumblr use your search history to help provide more relevant recommendations.
+ *
+ *  @apiSuccessExample Response Data:
+ *      HTTP/1.1 200 OK
+ *      {
+ *          "meta": {
+ *                       "status": 200,
+ *                       "msg": "OK"
+ *                  },
+ * 
+ *          "response":{
+ *                       "message": "Settings updated successfully"
+ *                     }   
+ *      }
+ * @apiErrorExample Response Error:
+ *      HTTP/1.1 400 BAD REQUEST
+ *      {
+ *          "error": "Error In Input Data"
+ *      }
+ *      HTTP/1.1 401 Unauthorized
+ *      {
+ *          "error": "User Is Unauthorized"
+ *      }
+ */
+
+/*=================== End =====================*/
+
+
+/*
+===================== ///////// <---------> ============= <---------> ///////// =====================> 
+===================== ///////// <---------> Update notifications settings <---------> ///////// =====================> 
+===================== ///////// <---------> ============= <---------> ///////// =====================> 
+*/
+
+/**
+ * @api {put} user/settings/notifications Update notifications settings
  * @apiName updateSettingsNotifications
  * @apiGroup settings
- * @apiSampleRequest api.tumblr.com/user/:user-id/settings/notifications
- * @apiPermission User, admin, super admin
- * 
- * @apiExample Example usage:
- * curl -i https://localhost/settings/335/notifications
+ * @apiPermission User, Admin, Super_Admin
  * 
  * @apidescription Update notifications settings
- * @apiVersion 0.50.1
+ * @apiVersion 0.0.0
  *
- * @apiParam {String} token User's token.
- * @apiParam {Number} id User ID.
+ * @apiParam {String} Token User's Secret Code.
+ * @apiParam {String} id User ID.
  * @apiParam {Boolean} new_followers=1 Email you if you have a new follower.
  * @apiParam {Boolean} new_replies=0 Email you if you have a new reply.
  * @apiParam {Boolean} mentions=1 Email you if you have a new mention.
@@ -3505,33 +3629,46 @@
  * @apiSuccessExample Response Data:
  *      HTTP/1.1 200 OK
  *      {
- *          "message": "Settings updated successfully"
- *      }
+ *          "meta": {
+ *                       "status": 200,
+ *                       "msg": "OK"
+ *                  },
  * 
+ *          "response":{
+ *                       "message": "Settings updated successfully"
+ *                     }   
+ *      }
  * @apiErrorExample Response Error:
  *      HTTP/1.1 400 BAD REQUEST
  *      {
- *          "error":"No Access Right"
+ *          "error": "Error In Input Data"
  *      }
  *      HTTP/1.1 401 Unauthorized
  *      {
- *          "error":"No Access Right"
+ *          "error": "User Is Unauthorized"
+ *      }
  */
 
+/*=================== End =====================*/
+
+
+/*
+===================== ///////// <---------> ============= <---------> ///////// =====================> 
+===================== ///////// <---------> Update dashboard settings <---------> ///////// =====================> 
+===================== ///////// <---------> ============= <---------> ///////// =====================> 
+*/
+
 /**
- * @api {put} user/:user-id/settings/dashboard Update dashboard settings
+ * @api {put} user/settings/dashboard Update dashboard settings
  * @apiName updateSettingsDashboard
  * @apiGroup settings
- * @apiSampleRequest api.tumblr.com/user/:user-id/settings/dashboard
- * @apiPermission User, admin, super admin
+ * @apiPermission User, Admin, Super_Admin
  * 
- * @apiExample Example usage:
- * curl -i https://localhost/settings/335/dashboard
  * 
  * @apidescription Update dashboard settings
- * @apiVersion 0.50.1
+ * @apiVersion 0.0.0
  *
- * @apiParam {String} token User's token.
+ * @apiParam {String} Token User's Secret Code.
  * @apiParam {Number} id User ID.
  * @apiParam {Boolean} sounds=1 Messaging sounds.
  * @apiParam {Boolean} best_stuff_first=1 This switch puts stuff you'll like at the top of your dash.
@@ -3542,33 +3679,45 @@
  * @apiSuccessExample Response Data:
  *      HTTP/1.1 200 OK
  *      {
- *          "message": "Settings updated successfully"
- *      }
+ *          "meta": {
+ *                       "status": 200,
+ *                       "msg": "OK"
+ *                  },
  * 
+ *          "response":{
+ *                       "message": "Settings updated successfully"
+ *                     }   
+ *      }
  * @apiErrorExample Response Error:
  *      HTTP/1.1 400 BAD REQUEST
  *      {
- *          "error":"No Access Right"
+ *          "error": "Error In Input Data"
  *      }
  *      HTTP/1.1 401 Unauthorized
  *      {
- *          "error":"No Access Right"
+ *          "error": "User Is Unauthorized"
+ *      }
  */
+
+/*=================== End =====================*/
+
+
+/*
+===================== ///////// <---------> ============= <---------> ///////// =====================> 
+===================== ///////// <---------> Update account settings <---------> ///////// =====================> 
+===================== ///////// <---------> ============= <---------> ///////// =====================> 
+*/
 
 /**
  * @api {put} user/:user-id/settings/account Update account settings
  * @apiName updateSettingsAccount
  * @apiGroup settings
- * @apiSampleRequest api.tumblr.com/user/:user-id/settings/account
- * @apiPermission User, admin, super admin
- * 
- * @apiExample Example usage:
- * curl -i https://localhost/settings/335/account
+ * @apiPermission User, Admin, Super_Admin
  * 
  * @apidescription Update account settings
- * @apiVersion 0.50.1
+ * @apiVersion 0.0.0
  *
- * @apiParam {String} token User's token.
+ * @apiParam {String} Token User's Secret Code.
  * @apiParam {Number} id User ID.
  * @apiParam {String} login_options Login services.
  * @apiParam {Boolean} find_blog_with_email Let people find your blogs through this address.
@@ -3584,86 +3733,81 @@
  * @apiSuccessExample Response Data:
  *      HTTP/1.1 200 OK
  *      {
- *          "message": "Settings updated successfully"
- *      }
+ *          "meta": {
+ *                       "status": 200,
+ *                       "msg": "OK"
+ *                  },
  * 
+ *          "response":{
+ *                       "message": "Settings updated successfully"
+ *                     }   
+ *      }
  * @apiErrorExample Response Error:
  *      HTTP/1.1 400 BAD REQUEST
  *      {
- *          "error":"No Access Right"
+ *          "error": "Error In Input Data"
  *      }
  *      HTTP/1.1 401 Unauthorized
  *      {
- *          "error":"No Access Right"
+ *          "error": "User Is Unauthorized"
+ *      }
  */
 
+/*=================== End =====================*/
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+//=====================================================================================================
+//=====================================================================================================
+//=====================================================================================================
+/*
+===================== ///////// <---------> ============== <---------> ///////// =====================> 
+===================== ///////// <---------> Ads's Methods <---------> ///////// =====================> 
+===================== ///////// <---------> ============== <---------> ///////// =====================> 
+*/
+//=====================================================================================================
+//=====================================================================================================
+//=====================================================================================================
 
 /*
-===================================================================================================
-===================================================================================================
-===================================================================================================
-===================================================================================================
-===================================================================================================
-===================================================================================================
-===================================================================================================
+===================== ///////// <---------> ============= <---------> ///////// =====================> 
+===================== ///////// <---------> Retrieve Ads <---------> ///////// =====================> 
+===================== ///////// <---------> ============= <---------> ///////// =====================> 
 */
+
+/**
+ * @api {get} getAds/ Retrieve Ads
+ * @apiName getAds
+ * @apiGroup Ads
+ *
+ * @apiPermission User, Admin, Super_Admin
+ * @apidescription Sponsored Ads appears in Dashboard/Explore pages at the right bottom
+ * @apiVersion 0.0.0
+ *
+ * @apiParam {String} Token User's Secret Code.
+ * @apiParam {String} id Ad id 
+ *
+ * @apiSuccessExample Response Data:
+ *      HTTP/1.1 200 OK
+ *      {
+ *          "meta": {
+ *                       "status": 200,
+ *                       "msg": "OK"
+ *                  },
+ * 
+ *          "response":{
+ *                       "message": "{Object} ad ad object has all its aspects"
+ *                     }   
+ *      }
+ * @apiErrorExample Response Error:
+ *      HTTP/1.1 400 BAD REQUEST
+ *      {
+ *          "error": "Error In Input Data"
+ *      }
+ *      HTTP/1.1 401 Unauthorized
+ *      {
+ *          "error": "User Is Unauthorized"
+ *      }
+ * 
+ */
+
+/*=================== End =====================*/
