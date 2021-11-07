@@ -3810,4 +3810,229 @@
  * 
  */
 
+<<<<<<< HEAD
 /*=================== End =====================*/
+=======
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+===================================================================================================
+===================================================================================================
+===================================================================================================
+===================================================================================================
+===================================================================================================
+===================================================================================================
+===================================================================================================
+*/
+
+// --------------------------------- User --------------------------------------
+
+//get helo page
+/**
+ * @api {get} /help Retrieve Help Center
+ * @apiName getHelp
+ * @apiGroup User
+ * @apiSampleRequest api.tumblr.com/help
+ * @apiPermission Guest, User, admin, super admin
+ * @apidescription Gets information to help new users to know more about the application
+ * @apiVersion 0.50.1
+ *
+ * @apiExample Example usage:
+ * curl -i https://localhost/help
+ * 
+ * @apiSuccess {boolean} gotHelp true when it goes correctly to the page
+ * 
+ * @apiError PageNotFound No such a apage,maybe link is corrupted
+ * @apiErrorExample Response Error:
+ * HTTP/1.1 404 UserNotFound
+ * {
+ *      errro:"Page not found"
+ * }
+ * 
+ */
+
+// --------------------------------- Blog --------------------------------------
+
+// Check out these blogs
+/**
+ * @api {get} /:user_id/Check_out_these_blogs Check out these blogs
+ * @apiName getCheckBlog
+ * @apiGroup Blog
+ * @apiSampleRequest api.tumblr.com/:user_id/Check_out_these_blogs
+ * @apiPermission  User, admin, super admin
+ * @apidescription retrieve unfollowed blogs as recommendations to be followed
+ * @apiVersion 0.50.1
+ * @apiParam {String} user_id  user's ID to know who he/she follows
+ * @apiParam {String} [token] User's token
+ *
+ * @apiExample Example usage:
+ * curl -i https://localhost/395/Check_out_these_blogs
+ * 
+ * @apiSuccess {blog[]} blogs gets some of the blogs not followed by the user
+ * 
+ * @apiError UserNotFound No such a user with this id is found
+ * @apiError BadRequest Can't access the dashboard
+ * @apiError Unauthorized you must log in first
+ * @apiErrorExample Response Error:
+ * HTTP/1.1 400 BAD REQUEST
+ * {
+ *      errro:"No Access Right"
+ * }
+ * HTTP/1.1 401 Unauthorized
+ * {
+ *      errro:"Not Authenticated"
+ * }
+ */
+
+
+// --------------------------------- Post --------------------------------------
+
+/**
+ * @api {get} /explore/:type Get Explore Posts 
+ * @apiName getExplorePosts
+ * @apiGroup Post
+ * @apiSampleRequest api.https://www.tumblr.com/explore/asks
+ * @apiPermission Guest, User, admin, super admin
+ * 
+ * @apiExample Example usage:
+ * curl -i https://localhost/explore/asks
+ * 
+ * @apidescription Get Posts for the explore page
+ * @apiVersion 0.50.1
+ *
+ * @apiParam {String} type where the type of posts are {text/photos/gifs/quotes/chats/audio/videos/asks/staff picks/trending/for you}
+ *
+ * @apiSuccess {post[]} type_posts the posts with certain type as choosen
+ * 
+ * @apiError PostNotFound No such a type of posts
+ * @apiErrorExample Response Error:
+ *      HTTP/1.1 400 BAD REQUEST
+ *      {
+ *          "error":"No Access Right"
+ *      }
+ */
+
+
+/**
+ * @api {get} /:radar_id Retrieve Radar Post
+ * @apiName getRadar
+ * @apiGroup Post
+ * @apiSampleRequest api.tumblr.com/dashboard/:radar_id
+ * @apiPermission  User, admin, super admin
+ * @apidescription The most popular post, having many notes is represented
+ * @apiVersion 0.50.1
+ * 
+ * @apiParam {String} id Radar Post id 
+ *
+ * @apiExample Example usage:
+ * curl -i https://localhost/dashboard/4
+ * 
+ * @apiSuccess {Object} radar post object has all its aspects
+ * 
+ * @apiError IdNotFound wrong id, no post with this id
+ * @apiError BadRequest Can't access the dashboard
+ * @apiError Unauthorized you must log in first
+ * 
+ * @apiErrorExample Response Error:
+ *      HTTP/1.1 400 BAD REQUEST
+ *      {
+ *          "error":"No Access Right, wrong id"
+ *      }
+ *      HTTP/1.1 401 Unauthorized
+ *      {
+ *          "error":"Not Authenticated"
+ *      }
+ * 
+ * 
+ */
+
+
+// --------------------------------- Ads --------------------------------------
+
+/**
+ * @api {get} /:Ad_id Retrieve Ads
+ * @apiName getAds
+ * @apiGroup Ads
+ * @apiSampleRequest api.tumblr.com/dashboard/:Ad_id
+ * @apiSampleRequest api.tumblr.com/explore/:Ad_id
+ * @apiPermission Guest, User, admin, super admin
+ * @apidescription Sponsored Ads appears in Dashboard/Explore pages at the right bottom
+ * @apiVersion 0.50.1
+ * 
+ * @apiParam {String} id Ad id 
+ *
+ * @apiExample Example usage:
+ * curl -i https://localhost/dashboard/4
+ * 
+ * @apiSuccess {Object} ad ad object has all its aspects
+ * 
+ * @apiError IdNotFound wrong id, no ad with this id
+ * @apiError BadRequest Can't access the dashboard
+ * @apiError Unauthorized you must log in first
+ * 
+ * @apiErrorExample Response Error:
+ *      HTTP/1.1 400 BAD REQUEST
+ *      {
+ *          "error":"No Access Right"
+ *      }
+ *      HTTP/1.1 401 Unauthorized
+ *      {
+ *          "error":"Not Authenticated"
+ *      }
+ * 
+ */
+>>>>>>> 535e9f7490013ebe1c70fdb048d7eafc3ebb3674
