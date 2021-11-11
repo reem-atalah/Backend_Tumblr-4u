@@ -17,15 +17,14 @@
 */
 
 /**
- * @api {get} /blog/inbox Retrieve Inbox Posts
+ * @api {get} /:blog_id/:post_id/inbox Retrieve Inbox Posts
  * @apiName retrieveInboxPosts
  * @apiGroup Inbox
  * @apiPermission User, Admin, Super_Admin
  * @apidescription gets all the submission and ask posts in a page arranged according to time
  * @apiVersion 0.0.0
+ * @apiSampleRequest api.tumblr.com/:blog_id/:post_id/inbox  \-H "Authorization: Bearer < YOUR_API_TOKEN>"
  * 
- * @apiParam {String} Token User's Secret Code.
- * @apiParam {String} blog_id The ID of the blog has the post
  * 
  * 
  * @apiSuccessExample Response Data:
@@ -63,15 +62,14 @@
 */
 
 /**
- * @api {delete} /blog/inbox/delete Delete All Messages
+ * @api {delete} /:blog_id/:post_id/inbox/delete Delete All Messages
  * @apiName deleteInboxPosts
  * @apiGroup Inbox
  * @apiPermission User, Admin, Super_Admin
  * @apidescription remove all posts in the inbox page
  * @apiVersion 0.0.0
- * 
- * @apiParam {String} Token User's Secret Code.
- * @apiParam {String} blog_id The ID of the blog has the post
+ * @apiSampleRequest api.tumblr.com/:blog_id/:post_id/inbox/delete  \-H "Authorization: Bearer < YOUR_API_TOKEN>"
+ *
  * 
  * @apiSuccessExample Response Data:
  *      HTTP/1.1 200 OK

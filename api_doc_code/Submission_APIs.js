@@ -18,14 +18,14 @@
 */
 
 /**
- * @api {post} /blog/submit Make Submission Posts
+ * @api {post} /blog/:blog_id/submit Make Submission Posts
  * @apiName makeSubmissionPosts
  * @apiGroup Submission
+ * @apiSampleRequest api.tumblr.com/blog/:blog_id/submit\-H "Authorization: Bearer < YOUR_API_TOKEN>"
  * @apiPermission User, Admin, Super_Admin
  * @apidescription Submit a post on a blogs dashboard, take permission to post
  * @apiVersion 0.0.0
  * 
- * @apiParam {String} Token User's Secret Code.
  * @apiParam {String} blog_id The ID of the blog I want to submit at
  * @apiParam {String} type The type of post. One of the following: text, photo, quote, link, video
  * @apiParam {String[]} tags Tags applied to the post
@@ -67,14 +67,14 @@
 */
 
 /**
- * @api {delete} /blog/inbox/delete_submit Delete Submission Posts
+ * @api {delete} /blog/:blog_id/inbox/delete_submit Delete Submission Posts
  * @apiName deleteSubmissionPosts
  * @apiGroup Submission
+ * @apiSampleRequest api.tumblr.com/blog/:blog_id/inbox/delete_submit\-H "Authorization: Bearer < YOUR_API_TOKEN>"
  * @apiPermission User, Admin, Super_Admin
  * @apidescription  Delete Submission Posts from inbox page
  * @apiVersion 0.0.0
  * 
- * @apiParam {String} Token User's Secret Code.
  * @apiParam {String} blog_id The ID of the blog has the submission
  * 
  * @apiSuccessExample Response Data:
@@ -112,11 +112,11 @@
  * @api {put} /blog/:inbox/edit_submit Edit Submission Posts
  * @apiName editSubmissionPosts
  * @apiGroup Submission
+ * @apiSampleRequest api.tumblr.com/blog/:blog_id/inbox/edit_submit\-H "Authorization: Bearer < YOUR_API_TOKEN>"
  * @apiPermission User, Admin, Super_Admin
  * @apidescription edit text in the submission post, only can done by the blog will have this post on their dashboard
  * @apiVersion 0.0.0
  * 
- * @apiParam {String} Token User's Secret Code.
  * @apiParam {String} blog_id The ID of the blog having the submitted post
  * @apiParam {String[]} tags Tags applied to the post
  * @apiParam {String} title of the post
@@ -160,11 +160,11 @@
  * @api {post} /blog/inbox/post_submit Post Submission Posts
  * @apiName postSubmissionPosts
  * @apiGroup Submission
+ * @apiSampleRequest api.tumblr.com/blog/:blog_id/inbox/post_submit\-H "Authorization: Bearer < YOUR_API_TOKEN>"
  * @apiPermission User, Admin, Super_Admin
  * @apidescription posts the submission posts in the dashboard of the blog
  * @apiVersion 0.0.0
  * 
- * @apiParam {String} Token User's Secret Code.
  * @apiParam {String} blog_id The ID of the blog has the post
  * 
  * @apiSuccessExample Response Data:
@@ -202,11 +202,11 @@
  * @api {put} /blog/inbox/queue_submit Queue Submission Posts
  * @apiName queueSubmissionPosts
  * @apiGroup Submission
+ * @apiSampleRequest api.tumblr.com/blog/:blog_id/inbox/queue_submit\-H "Authorization: Bearer < YOUR_API_TOKEN>"
  * @apiPermission User, Admin, Super_Admin
  * @apidescription put the submitted post with the queue posts
  * @apiVersion 0.0.0
  * 
- * @apiParam {String} Token User's Secret Code.
  * @apiParam {String} blog_id The ID of the bloghas the post
  * 
  * 

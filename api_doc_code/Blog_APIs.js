@@ -24,9 +24,8 @@
  * @apiPermission User, Admin, Super_Admin
  * @apidescription removes a post
  * @apiVersion 0.0.0
+ * @apiSampleRequest api.tumblr.com/blog/:blog_id/remove_blog  \-H "Authorization: Bearer < YOUR_API_TOKEN>"
  * 
- * @apiParam {String} Token User's Secret Code.
- * @apiParam {String} blog_id The ID of the blog wanted to be removed
  * 
  * @apiSuccessExample Response Data:
  *      HTTP/1.1 200 OK
@@ -62,15 +61,13 @@
 
 
 /**
- * @api {get} /blog/info Retrieve Blog information
+ * @api {get} /blog/:blog_id/info Retrieve Blog information
  * @apiName getBlog
  * @apiGroup Blog
  * @apiPermission User, Admin, Super_Admin
  * @apidescription retrieve all that can be needed by front end to represent the blog
  * @apiVersion 0.0.0
- * 
- * @apiParam {String} Token User's Secret Code.
- * @apiParam {String} blog_id Blog's unique ID.
+ * @apiSampleRequest api.tumblr.com/blog/:blog_id/info  \-H "Authorization: Bearer < YOUR_API_TOKEN>"
  *
  *@apiSuccessExample Response Data:
  *      HTTP/1.1 200 OK
@@ -111,9 +108,7 @@
  * @apiPermission User, Admin, Super_Admin
  * @apidescription gets the blog's activity page
  * @apiVersion 0.0.0
- * 
- * @apiParam {String} Token User's Secret Code.
- * @apiParam {String} blog_id The ID of the blog's activity'
+ * @apiSampleRequest api.tumblr.com/blog/:blog_id/activity  \-H "Authorization: Bearer < YOUR_API_TOKEN>"
  * 
  * @apiSuccessExample Response Data:
  *      HTTP/1.1 200 OK
@@ -149,15 +144,13 @@
 
 
 /**
- * @api {get} /blog/blocks Retrieve Blog's Blocks
+ * @api {get} /blog/:blog_id/blocks Retrieve Blog's Blocks
  * @apiName getBlogBlocks
  * @apiGroup Blog
  * @apiPermission User, Admin, Super_Admin
  * @apidescription gets the blogs I blocked  
  * @apiVersion 0.0.0
- * 
- * @apiParam {String} Token User's Secret Code.
- * @apiParam {String} blog_id Blog's unique ID.
+ * @apiSampleRequest api.tumblr.com/blog/:blog_id/blocks  \-H "Authorization: Bearer < YOUR_API_TOKEN>"
  *
  * @apiSuccessExample Response Data:
  *      HTTP/1.1 200 OK
@@ -193,15 +186,14 @@
 */
 
 /**
- * @api {post} /blog/block Block a Blog  
+ * @api {post} /blog/:blog_id/block Block a Blog  
  * @apiName postBlogBlock
  * @apiGroup Blog
  * @apiPermission User, Admin, Super_Admin
  * @apidescription blocks a blog so you can't see the blog or its posts
  * @apiVersion 0.0.0
+ * @apiSampleRequest api.tumblr.com/blog/:blog_id/block  \-H "Authorization: Bearer < YOUR_API_TOKEN>"
  * 
- * @apiParam {String} Token User's Secret Code.
- * @apiParam {String} blocking_blog_id Blocking blog id.
  * @apiParam {String} blocked_blog_id Blocked blog id.(if the blog isn't blocked via a post)
  * @apiParam {String} [post-id] Post id of blocked blog.(if the blog is blocked via a post)
  * @apiParam {Boolean} [Is_primary] flag indicates that the blocking is primary.
@@ -241,15 +233,14 @@
 */
 
 /**
- * @api {post} /blog/remove_blocks Remove a Block
+ * @api {post} /blog/:blog_id/remove_blocks Remove a Block
  * @apiName removeBlogBlock
  * @apiGroup Blog
  * @apiPermission User, Admin, Super_Admin
  * @apidescription removes a block from a blog
  * @apiVersion 0.0.0
-
- * @apiParam {String} Token User's Secret Code.
- * @apiParam {String} blocking_blog_id Blocking blog id.
+ * @apiSampleRequest api.tumblr.com/blog/:blog_id/remove_blocks  \-H "Authorization: Bearer < YOUR_API_TOKEN>"
+ * 
  * @apiParam {String} blocked_blog_id Blocked blog id.(if the blog isn't blocked via a post)
  * @apiParam {String} [post-id] Post id of blocked blog.(if the blog is blocked via a post)
  * 
@@ -286,15 +277,14 @@
 */
 
 /**
- * @api {get} /blog/archive Retrieve Blog's Archive
+ * @api {get} /blog/:blog_id/archive  Retrieve Blog's Archive
  * @apiName getBlogLikes
  * @apiGroup Blog
  * @apiPermission User, Admin, Super_Admin
  * @apidescription gets the page of blog's archive page
  * @apiVersion 0.0.0
+ * @apiSampleRequest api.tumblr.com/blog/:blog_id/archive  \-H "Authorization: Bearer < YOUR_API_TOKEN>"
  * 
- * @apiParam {String} Token User's Secret Code.
- * @apiParam {String} blog_id Blog's unique ID.
  *
  * 
  * @apiSuccessExample Response Data:
@@ -330,16 +320,14 @@
 */
 
 /**
- * @api {get} /blog/likes Retrieve Blog's Likes
+ * @api {get} /blog/:blog_id/likes Retrieve Blog's Likes
  * @apiName getBlogLikes
  * @apiGroup Blog
- * 
+ * @apiSampleRequest api.tumblr.com/blog/:blog_id/likes  \-H "Authorization: Bearer < YOUR_API_TOKEN>"
  * @apiPermission User, Admin, Super_Admin
  * @apidescription gets the page of user's likes
  * @apiVersion 0.0.0
  * 
- * @apiParam {String} Token User's Secret Code.
- * @apiParam {Number} blog_id Blog's unique ID.
  * @apiSuccessExample Response Data:
  *      HTTP/1.1 200 OK
  *      {
@@ -373,15 +361,14 @@
 */
 
 /**
- * @api {get} /blog/following Retrieve Blog's Following
+ * @api {get} /blog/:blog_id/following Retrieve Blog's Following
  * @apiName getBlogFollowing
  * @apiGroup Blog
  * @apiPermission User, Admin, Super_Admin
  * @apidescription gets a pgae with all blogs who I'm following a blog
  * @apiVersion 0.0.0
+ * @apiSampleRequest api.tumblr.com/blog/:blog_id/following  \-H "Authorization: Bearer < YOUR_API_TOKEN>"
  * 
- * @apiParam {String} Token User's Secret Code.
- * @apiParam {String} blog_id Blog's unique ID.
  * @apiSuccessExample Response Data:
  *      HTTP/1.1 200 OK
  *      {
@@ -415,15 +402,14 @@
 */
 
 /**
- * @api {get} /blog/followers Retrieve Blog's Followers
+ * @api {get} /blog/:blog_id/followers Retrieve Blog's Followers
  * @apiName getBlogFollowers
  * @apiGroup Blog
  * @apiPermission User, Admin, Super_Admin
  * @apidescription gets a pgae with all blogs following a blog
  * @apiVersion 0.0.0
- * 
- * @apiParam {String} Token User's Secret Code.
- * @apiParam {String} blog_id Blog's unique ID.
+ * @apiSampleRequest api.tumblr.com/blog/:blog_id/followers  \-H "Authorization: Bearer < YOUR_API_TOKEN>"
+ *
  * @apiSuccessExample Response Data:
  *      HTTP/1.1 200 OK
  *      {
@@ -457,15 +443,14 @@
 */
 
 /**
- * @api {get} /blog/posts Retrieve Published Posts
+ * @api {get} /blog/:blog_id/posts Retrieve Published Posts
  * @apiName getPosts
  * @apiGroup Blog
  * @apiPermission User, Admin, Super_Admin
  * @apidescription gets the puplished posts page of a blog
  * @apiVersion 0.0.0
- * 
- * @apiParam {String} Token User's Secret Code.
- * @apiParam {String} blog_id Blog's unique ID.
+ * @apiSampleRequest api.tumblr.com/blog/:blog_id/posts  \-H "Authorization: Bearer < YOUR_API_TOKEN>"
+ *
  *
  * @apiSuccess {String} blog_name The short name used to uniquely identify a blog.
  * @apiSuccess {Number} id The post's unique ID.
@@ -549,7 +534,7 @@
 */
 
 /**
- * @api {post} /blog/follow Follow a blog
+ * @api {post} /blog/:blog_id/follow Follow a blog
  * @apiName followBlogPost
  * @apiGroup Blog
  * @apiPermission User, Admin, Super_Admin
@@ -557,8 +542,7 @@
  * @apidescription Follow a blog
  * @apiVersion 0.0.0
  *
- * @apiParam {String} Token User's Secret Code.
- * @apiParam {String} following-blog-id Primary blog ID.
+ * @apiSampleRequest api.tumblr.com/blog/:blog_id/follow  \-H "Authorization: Bearer < YOUR_API_TOKEN>"
  * @apiParam {String} followed-blog-id ID of the followed blog.
  *
  * @apiSuccessExample Response Data:
@@ -596,16 +580,14 @@
 */
 
 /**
- * @api {post} /blog/unfollow Unfollow a blog
+ * @api {post} /blog/:blog_id/unfollow Unfollow a blog
  * @apiName unfollowBlogPost
  * @apiGroup Blog
  * @apiPermission User, Admin, Super_Admin
- * 
+ * @apiSampleRequest api.tumblr.com/blog/:blog_id/unfollow  \-H "Authorization: Bearer < YOUR_API_TOKEN>"
  * @apidescription Unfollow a blog
  * @apiVersion 0.0.0
  *
- * @apiParam {String} Token User's Secret Code.
- * @apiParam {String} following-blog-id Primary blog ID.
  * @apiParam {String} unfollowed-blog-id ID of the followed blog.
  *
  * @apiSuccessExample Response Data:
@@ -642,16 +624,14 @@
 */
 
 /**
- * @api {post} /blog/pfiltered_tags Post tag filters
+ * @api {post} /blog/:blog_id/pfiltered_tags Post tag filters
  * @apiName postTagFilters
  * @apiGroup Blog
  * @apiPermission User, Admin, Super_Admin
- * 
+ * @apiSampleRequest api.tumblr.com/blog/:blog_id/pfiltered_tags  \-H "Authorization: Bearer < YOUR_API_TOKEN>"
  * @apidescription Post tag filters
  * @apiVersion 0.0.0
  *
- * @apiParam {String} Token User's Secret Code.
- * @apiParam {String} blog-id Blog ID to filter by tags.
  * @apiParam {Array} filtered_tags One or more than one tag string to add to your list of filters.
  *
  * @apiSuccessExample Response Data:
@@ -686,16 +666,14 @@
 */
 
 /**
- * @api {get} /blog/gfiltered_tags Get tag filters
+ * @api {get} /blog/:blog_id/gfiltered_tags Get tag filters
  * @apiName getTagFilters
  * @apiGroup Blog
  * @apiPermission User, Admin, Super_Admin
  * 
  * @apidescription Get tag filters
  * @apiVersion 0.0.0
- *
- * @apiParam {String} Token User's Secret Code.
- * @apiParam {String} blog-id Blog ID to filter by tags.
+ * @apiSampleRequest api.tumblr.com/blog/:blog_id/gfiltered_tags  \-H "Authorization: Bearer < YOUR_API_TOKEN>"
  * @apiSuccessExample Response Data:
  *      HTTP/1.1 200 OK
  *      {
@@ -729,16 +707,14 @@
 */
 
 /**
- * @api {delete} /blog/dfiltered_tags Delete tag filters
+ * @api {delete} /blog/:blog_id/dfiltered_tags Delete tag filters
  * @apiName deleteTagFilters
  * @apiGroup Blog
  * @apiPermission User, Admin, Super_Admin
- * 
+ * @apiSampleRequest api.tumblr.com/blog/:blog_id/dfiltered_tags  \-H "Authorization: Bearer < YOUR_API_TOKEN>"
  * @apidescription Delete tag filters
  * @apiVersion 0.0.0
  *
- * @apiParam {String} Token User's Secret Code.
- * @apiParam {String} blog-id Blog ID to filter by tags.
  * @apiParam {String} tag Tag to stop filtering.
  *
  * @apiSuccessExample Response Data:
@@ -773,16 +749,14 @@
 */
 
 /**
- * @api {post} /blog/pfiltered_content Post content filters
+ * @api {post} /blog/:blog_id/pfiltered_content Post content filters
  * @apiName postContentFilters
  * @apiGroup Blog
  * @apiPermission User, Admin, Super_Admin
- * 
+ * @apiSampleRequest api.tumblr.com/blog/:blog_id/pfiltered_content  \-H "Authorization: Bearer < YOUR_API_TOKEN>"
  * @apidescription Post content filters
  * @apiVersion 0.0.0
  *
- * @apiParam {String} Token User's Secret Code.
- * @apiParam {String} blog-id Blog ID to filter by content.
  * @apiParam {Array} filtered_content One or more than one string to add to your list of filters.
  *
  * @apiSuccessExample Response Data:
@@ -818,17 +792,15 @@
 */
 
 /**
- * @api {get} /blog/:blog-id/gfiltered_tags Get content filters
+ * @api {get} /blog/:blog-id/gfiltered_tags_content Get content filters
  * @apiName getContentFilters
  * @apiGroup Blog
  * @apiPermission User, Admin, Super_Admin
  * 
- * 
+ * @apiSampleRequest api.tumblr.com/blog/:blog_id/gfiltered_tags_content  \-H "Authorization: Bearer < YOUR_API_TOKEN>"
  * @apidescription Get content filters
  * @apiVersion 0.0.0
  *
- * @apiParam {String} Token User's Secret Code.
- * @apiParam {String} blog-id Blog ID to filter by content.
  *
  * @apiSuccessExample Response Data:
  *      HTTP/1.1 200 OK
@@ -862,16 +834,14 @@
 */
 
 /**
- * @api {delete} /blog/dfiltered_tags Delete content filters
+ * @api {delete} /blog/:blog_id/dfiltered_tags_content Delete content filters
  * @apiName deleteContentFilters
  * @apiGroup Blog
  * @apiPermission User, Admin, Super_Admin
- * 
+ * @apiSampleRequest api.tumblr.com/blog/:blog_id/dfiltered_tags_content  \-H "Authorization: Bearer < YOUR_API_TOKEN>"
  * @apidescription Delete tag filters
  * @apiVersion 0.0.0
  *
- * @apiParam {String} Token User's Secret Code.
- * @apiParam {String} blog-id Blog ID to filter by content.
  * @apiParam {String} filtered_content Content filter string to remove.
  *
  * @apiSuccessExample Response Data:
@@ -908,14 +878,14 @@
 */
 
 /**
- * @api {post} /new/blog/ Create a new blog.
+ * @api {post} /user/:user_id/new/create_blog/ Create a new blog.
  * 
  * @apiName newBlog
  * @apiGroup Blog
  * @apiVersion 0.0.0 
  * @apiPermission User, Admin, Super_Admin
+ * @apiSampleRequest api.tumblr.com/user/:user_id/new/create_blog  \-H "Authorization: Bearer < YOUR_API_TOKEN>"
  * 
- * @apiParam {String} Token User's Secret Code.
  * @apiParam {String} Title Blog's Title
  * @apiParam {String} Url Blog's Url
  * @apiParam {String} [Password] Blog's password
@@ -952,14 +922,14 @@
 ===================== ///////// <---------> ============= <---------> ///////// =====================> 
 */
 /**
- * @api {post} /members/ Adding members.
+ * @api {post} /:blog_group_id/members/add Adding members.
  * 
  * @apiName addMember
  * @apiGroup Blog
  * @apiVersion 0.0.0 
  * @apiPermission User, Admin, Super_Admin
+ * @apiSampleRequest api.tumblr.com/:blog_group_id/members/add  \-H "Authorization: Bearer < YOUR_API_TOKEN>"
  * 
- * @apiParam {String} Token User's Secret Code.
  * @apiParam {String} Member Member's email
  *
  * @apiSuccessExample Response Data:
@@ -994,14 +964,14 @@
 */
 
 /**
- * @api {post} /join/:Token Join Group.
+ * @api {post} /:blog_group_id/join Join Group.
  * 
  * @apiName joinGroup
  * @apiGroup Blog
  * @apiVersion 0.0.0 
  * @apiPermission User, Admin, Super_Admin
- * 
- * @apiSuccessExample Response Data:
+ * @apiSampleRequest api.tumblr.com/:blog_group_id/join  \-H "Authorization: Bearer < YOUR_API_TOKEN>"
+* @apiSuccessExample Response Data:
  *      HTTP/1.1 200 OK
  *      {
  *          "meta": {
@@ -1034,15 +1004,13 @@
 */
 
 /**
- * @api {delete} /members/ Remove member.
+ * @api {delete} /:blog_group_id//:blog_delete_id/members/delete Remove member.
  * 
  * @apiName removeMember
  * @apiGroup Blog
  * @apiVersion 0.0.0 
  * @apiPermission User, Admin, Super_Admin
- * 
- * @apiParam {String} Token User's Secret Code.
- * @apiParam {String} Member Blog's Id
+ * @apiSampleRequest api.tumblr.com/:blog_group_id/:blog_delete_id/members/delete  \-H "Authorization: Bearer < YOUR_API_TOKEN>"
  *
  * @apiSuccessExample Response Data:
  *      HTTP/1.1 200 OK
@@ -1076,15 +1044,14 @@
 */
 
 /**
- * @api {put} /members/ Promote to Admin.
+ * @api {put} /:blog_group_id/:blog_promote_id/members/promote Promote to Admin.
  * 
  * @apiName promoteBlog
  * @apiGroup Blog
  * @apiVersion 0.0.0 
  * @apiPermission User, Admin, Super_Admin
- * 
- * @apiParam {String} Token User's Secret Code.
- * @apiParam {String} Member Blog's Id
+ * @apiSampleRequest api.tumblr.com/:blog_group_id/:blog_promote_id/members/promote  \-H "Authorization: Bearer < YOUR_API_TOKEN>"
+ *
  *
  * @apiSuccessExample Response Data:
  *      HTTP/1.1 200 OK
@@ -1119,15 +1086,14 @@
 ===================== ///////// <---------> ============= <---------> ///////// =====================> 
 */
 /**
- * @api {delete} /members/leave/ Leave this blog.
+ * @api {delete} /:blog_group_id/:blog_leave_id/members/leave Leave this blog.
  * 
  * @apiName leaveBlog
  * @apiGroup Blog
  * @apiVersion 0.0.0 
  * @apiPermission User, Admin, Super_Admin
+ * @apiSampleRequest api.tumblr.com/:blog_group_id/:blog_leave_id/members/leave  \-H "Authorization: Bearer < YOUR_API_TOKEN>"
  * 
- * @apiParam {String} Token User's Secret Code.
- * @apiParam {String} Blog's group Id
  *
  * @apiSuccessExample Response Data:
  *      HTTP/1.1 200 OK
@@ -1161,15 +1127,14 @@
 */
 
 /**
- * @api {get} /blog/appearance/ Get Blog Settings.
+ * @api {get} /:blog_id/appearance  Get Blog Settings.
  * 
  * @apiName blogSettings
  * @apiGroup Blog
  * @apiVersion 0.0.0 
  * @apiPermission User, Admin, Super_Admin
+ * @apiSampleRequest api.tumblr.com/:blog_id/appearance  \-H "Authorization: Bearer < YOUR_API_TOKEN>"
  * 
- * @apiParam {String} Token User's Secret Code.
- * @apiParam {String} Id Blog's Id
  *
  * @apiSuccessExample Response Data:
  *      HTTP/1.1 200 OK
@@ -1203,15 +1168,14 @@
 */
 
 /**
- * @api {put} /blog/appearance/ Edit Blog Settings.
+ * @api {put} /:blog_id/edit_appearance/ Edit Blog Settings.
  * 
  * @apiName eidtBlogSettings
  * @apiGroup Blog
  * @apiVersion 0.0.0 
  * @apiPermission User, Admin, Super_Admin
+ * @apiSampleRequest api.tumblr.com/:blog_id/edit_appearance  \-H "Authorization: Bearer < YOUR_API_TOKEN>"
  * 
- * @apiParam {String} Token User's Secret Code.
- * @apiParam {String} Id Blog's Id
  * @apiParam {String} New_Settings Blog's new settings
  *
  * @apiSuccessExample Response Data:
@@ -1246,13 +1210,13 @@
 */
 
 /**
- * @api {get} /blog/theme/ Get Blog's Theme.
+ * @api {get} /:blog_id/theme/ Get Blog's Theme.
  * 
  * @apiName blogTheme
  * @apiGroup Blog
  * @apiVersion 0.0.0 
  * @apiPermission User, Admin, Super_Admin
- * 
+ * @apiSampleRequest api.tumblr.com/:blog_id/theme  \-H "Authorization: Bearer < YOUR_API_TOKEN>"
  * @apiParam {String} Token User's Secret Code.
  * @apiParam {String} Id Blog's Id
  *
@@ -1289,15 +1253,14 @@
 */
 
 /**
- * @api {put} /blog/theme/ Edit Blog Theme.
+ * @api {put} /:blog_id/edit_theme Edit Blog Theme.
  * 
  * @apiName eidtBlogTheme
  * @apiGroup Blog
  * @apiVersion 0.0.0 
  * @apiPermission User, Admin, Super_Admin
+ * @apiSampleRequest api.tumblr.com/:blog_id/edit_theme  \-H "Authorization: Bearer < YOUR_API_TOKEN>"
  * 
- * @apiParam {String} Token User's Secret Code.
- * @apiParam {String} Id Blog's Id
  * @apiParam {String} New_Theme Blog's new theme
  *
  * @apiSuccessExample Response Data:
@@ -1333,15 +1296,14 @@
 */
 
 /**
- * @api {get} /Check_out_these_blogs Check out these blogs
+ * @api {get} /:user_id/Check_out_these_blogs Check out these blogs
  * @apiName getCheckBlog
  * @apiGroup Blog
  * @apiPermission  User, admin, super admin
  * @apidescription retrieve unfollowed blogs as recommendations to be followed
  * @apiVersion 0.0.0
+ * @apiSampleRequest api.tumblr.com/:user_id/Check_out_these_blogs  \-H "Authorization: Bearer < YOUR_API_TOKEN>"
  * 
- * @apiParam {String} Token User's Secret Code.
- * @apiParam {String} user_id  user's ID to know who he/she follows
  *
  * @apiSuccessExample Response Data:
  *      HTTP/1.1 200 OK
