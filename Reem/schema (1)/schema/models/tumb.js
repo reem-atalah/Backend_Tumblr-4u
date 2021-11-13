@@ -1,10 +1,10 @@
 const mongoose = require("mongoose")
 var blog = new mongoose.Schema({
-    id: {
-        type: "String",
-        required: true,
+    // id: {
+    //     type: "String",
+    //     required: true,
 
-    },
+    // },
     title: {
         type: "String",
         required: true,
@@ -353,11 +353,11 @@ var block = new mongoose.Schema({
 //     }
 // });
 
-var post= new mongoose.Schema({
-    id: {
-        type: "String",
-        required: true,
-    },
+var post = new mongoose.Schema({
+    // id: {
+    //     type: "String",
+    //     required: true,
+    // },
     blogId: {
         type: "String",
         required: true,
