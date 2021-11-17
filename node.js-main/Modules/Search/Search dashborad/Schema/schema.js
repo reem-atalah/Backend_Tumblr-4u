@@ -24,14 +24,7 @@ const BLOG_SCHEMA = MONGOOSE.Schema({
 
 
 const POST= new MONGOOSE.Schema({
-    blog_id: {
-        type: "String",
-        required: true,
-    },
-    post_url: {
-        type: "String",
-        required: true,
-    },
+    
     tags: [String]
     }, {
     Timestamps: true,

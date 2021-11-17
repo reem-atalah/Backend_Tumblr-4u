@@ -7,8 +7,22 @@
 // const jwt = require('jsonwebtoken');
 // const { StatusCodes } = require('http-status-codes');
 const SEARCH_SCHEMA = require('../Model/model');
-// /* =========== /// <==> End <==> ===========*/
 
+
+/* ====================== /// <==> Calling Connection Function OF Database <==> /// ====================== */
+const mongoose = require('mongoose');
+/* =========== /// <==> End <==> ===========*/ 
+
+/* ====================== /// <==> Variables Declaration <==> /// ====================== */
+const Connection = async() => {
+    await mongoose.connect(process.env.CONNECTIONSTRING, {}).then(
+        (result) => { console.log('Database Connection Is Done'); }).catch(
+        (error) => { console.log('Error In Database Connection'); }
+    );
+};
+
+// /* =========== /// <==> End <==> ===========*/
+ 
 // /* ====================== /// <==> User Functions <==> /// ====================== */
 
 /* ----------- <---> AutoComplete <---> ----------- */ // *** <===> Done <===>  *** //
@@ -51,32 +65,31 @@ function search() {
 // 2. hashtags autocomplete from search
 // 3. mention blogs autocomplete from search
 
-const autoCompleteSearchDash = async(request,response) => {
-    var regex= new RegExp(request.query["term"],'i');
-    console.log("regex: ",regex);
+const autoCompleteSearchDash = async(data,request,response) => {
+    //request.query["term"]
+      var regex= new RegExp(data,'i');
+      // console.log("regex: ", regex)
+      // return regex;
 
       var tagSpecified;
-      var searchHashTags=SEARCH_SCHEMA.POSTS.find(tagSpecified={tags:{$in: regex}},{'Word':1}).sort({"updated_at":-1}).sort({"created_at":-1}).limit(10);
+      var searchHashTags=await SEARCH_SCHEMA.POSTS.find(tagSpecified={tags:{$in: regex}});
       // gets all posts with the needed tag
-      searchHashTags.exec(function (err,data) {
-          // result array will have all tags needed from each post
-          var result=[];
-          if(!err)
-          {
-              if(data && data.length && data.length>0)
-              {
-                  data.forEach(searchHashTag=>{
-                      let obj={
-                          label: tagSpecified,
-                          post_url: searchHashTag.post_url
-                      };
-                      result.push(obj);
-                  });
-              }
-              console.log("result: ",result);
-              response.jsonp(result);
-          }
-      });
+
+      // console.log("tagSpecified: ",tagSpecified.tags.$in)
+      var result=[]; 
+      searchHashTags.forEach(data => {
+            data.tags.forEach(semiData => {
+                if(semiData.match(regex))
+                {
+                    // console.log("semiData: ",semiData);
+                    
+                    result.push(semiData);
+                }
+            })
+        })
+        // console.log("result: ",result)
+        response.jsonp(result);
+        return result;
 };
 
 // const SignUp = async(request, response) => {

@@ -8,7 +8,10 @@ const server = express();
 const dotenv = require('dotenv');
 const Connection = require('./Configurations/configuration');
 const SEARCH_DASHBOARD=require('./Modules/Search/Search dashborad/Routes/APIs');
+const SEARCH_CONTROL = require('./Modules/Search/Search dashborad/Controller/control');
+const SEARCH_SEED= require('./Configurations/seed_db');
 const SEARCH_SCHEMA = require('./Modules/Search/Search dashborad/Model/model');
+
 
 /* =========== /// <==> End <==> ===========*/
 
@@ -25,36 +28,31 @@ server.use(express.json());
 server.use(SEARCH_DASHBOARD);
 server.use(express.json());
 server.use(express.urlencoded({extended: false}))
-server.use(express.static(path.join(__dirname, 'public')));
+// server.use(express.static(path.join(__dirname, 'public')));
 /* =========== /// <==> End <==> ===========*/
 
+// SEARCH_SEED.seedDB();
+// SEARCH_CONTROL.autoCompleteSearchDash();
+
 server.get('/', async(request, response) => {
-    
-    var regex= new RegExp(request.query["term"],'i');
-    console.log("regex: ",regex);
+    //request.query["term"]
+    var regex= new RegExp('kem','i');
 
       var tagSpecified;
-      var searchHashTags=SEARCH_SCHEMA.POSTS.find(tagSpecified={tags:{$in: regex}},{'Word':1}).sort({"updated_at":-1}).sort({"created_at":-1}).limit(10);
+      var searchHashTags=await SEARCH_SCHEMA.POSTS.find(tagSpecified={tags:{$in: regex}});
       // gets all posts with the needed tag
-      searchHashTags.exec(function (err,data) {
-          // result array will have all tags needed from each post
-          var result=[];
-          if(!err)
-          {
-              if(data && data.length && data.length>0)
-              {
-                  data.forEach(searchHashTag=>{
-                      let obj={
-                          label: tagSpecified,
-                          post_url: searchHashTag.post_url
-                      };
-                      result.push(obj);
-                  });
-              }
-              console.log("result: ",result);
-              response.jsonp(result);
-          }
-      });
+
+      var result=[]; 
+      searchHashTags.forEach(data => {
+            data.tags.forEach(semiData => {
+                if(semiData.match(regex))
+                {
+                    // console.log("semiData: ",semiData);
+                    result.push(semiData);
+                }
+            })
+        })
+        response.jsonp(result);
 });
 
 /* ====================== /// <==> Listen Server To Port <==> /// ====================== */
