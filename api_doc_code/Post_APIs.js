@@ -17,14 +17,17 @@
 */
 
 /**
- * @api {put} /:blog_id/:post_id/pin Pin Post.
+ * @api {put} /pin/post Pin Post.
  * 
  * @apiName pinPost
  * @apiGroup Post
- * @apiSampleRequest api.tumblr.com/:blog_id/:post_id/pin\-H "Authorization: Bearer < YOUR_API_TOKEN>"
  * @apiVersion 0.0.0 
  * @apiPermission User, Admin, Super_Admin
  * 
+ * @apiParam {String} Token User's Secret Code.
+ * @apiParam {String} Post_Id Post's ID
+ * @apiParam {String} Blog_Id Blog's Id
+ *
  * @apiSuccessExample Response Data:
  *      HTTP/1.1 200 OK
  *      {
@@ -59,14 +62,16 @@
 */
 
 /**
- * @api {post} /:blog_id/:post_id/:comment_id/remove_comment Remove Comments
+ * @api {post} /posts/remove_comment Remove Comments
  * @apiName commentRemover
  * @apiGroup Post
- * @apiSampleRequest api.tumblr.com/:blog_id/:post_id/:comment_id/remove_comment\-H "Authorization: Bearer < YOUR_API_TOKEN>"
  * @apiPermission User, Admin, Super_Admin
  * @apidescription removes the comment on a post
  * @apiVersion 0.0.0
  * 
+ * @apiParam {String} Token User's Secret Code.
+ * @apiParam {String} Comment_Id Comment Id.
+ * @apiParam {String} Post_Id Post Id.
  * 
  * @apiSuccessExample Response Data:
  *      HTTP/1.1 200 OK
@@ -102,14 +107,15 @@
 */
 
 /**
- * @api {get} /:blog_id/:post_id/count_reblogs Count Reblogs
+ * @api {get} /posts/count_reblogs Count Reblogs
  * @apiName countReblogs
  * @apiGroup Post
- * @apiSampleRequest api.tumblr.com/:blog_id/:post_id/count_reblogs\-H "Authorization: Bearer < YOUR_API_TOKEN>"
  * @apiPermission User, Admin, Super_Admin
  * @apidescription count the number of reblogs of a certain post
  * @apiVersion 0.0.0
  * 
+ * @apiParam {String} Token User's Secret Code.
+ * @apiParam {String} post_id The ID of the post 
  * 
  * @apiSuccessExample Response Data:
  *      HTTP/1.1 200 OK
@@ -145,14 +151,15 @@
 */
 
 /**
- * @api {post} /:blog_id/:post_id/make_comment Make Comment
+ * @api {post} /post/make_comment Make Comment
  * @apiName makeComment
  * @apiGroup Post
- * @apiSampleRequest api.tumblr.com/:blog_id/:post_id/make_comment\-H "Authorization: Bearer < YOUR_API_TOKEN>"
  * @apiPermission User, Admin, Super_Admin
  * @apidescription a commenter blog can make comments on any posts
  * @apiVersion 0.0.0
  * 
+ * @apiParam {String} Token User's Secret Code.
+ * @apiParam {String} post_blog_id The ID of the post 
  * @apiParam {String} text comment text  
  * @apiParam {String} commenter_id id of the blog writting comment
  * 
@@ -191,15 +198,18 @@
 */
 
 /**
- * @api {Delete} /:blog_id/:post_id/delete_post Delete a Post
+ * @api {Delete} /post/delete Delete a Post
  * @apiName deletePost
  * @apiGroup Post
- * @apiSampleRequest api.tumblr.com/:blog_id/:post_id/delete_post\-H "Authorization: Bearer < YOUR_API_TOKEN>"
  * @apiPermission User, Admin, Super_Admin
  * 
  * @apidescription removes a post for the poster owner
  * @apiVersion 0.0.0
  *
+ * @apiParam {String} Token User's Secret Code.
+ * @apiParam {String} post_id The ID of the post to delete
+ * @apiParam {String} blog_id The ID of the bloghas the post
+ * 
  * @apiSuccessExample Response Data:
  *      HTTP/1.1 200 OK
  *      {
@@ -234,14 +244,16 @@
 */
 
 /**
- * @api {get} /:blog_id/queue  GetQueuedPosts
+ * @api {get} /blog/queue  GetQueuedPosts
  * @apiDescription Gives you a list of the currently queued posts for the specified blog.
  * @apiName getQueuedPosts
  * 
  * @apiGroup Post
- * @apiSampleRequest api.tumblr.com/:blog_id/queue\-H "Authorization: Bearer < YOUR_API_TOKEN>"
  * @apiPermission User, Admin, Super_Admin
  * @apiVersion 0.0.0
+ * 
+ * @apiParam {String} Token User's Secret Code.
+ * @apiParam {String} blog_id The ID of the blog has the post
  * 
  * @apiSuccessExample Response Data:
  *      HTTP/1.1 200 OK
@@ -276,15 +288,16 @@
 */
 
 /**
- * @api {put} /:blog_id/:post_id/queue/reorder   Reorder Queued Posts
+ * @api {put} /blog/queue/reorder   Reorder Queued Posts
  * @apiDescription This allows you to reorder a post within the queue, moving it after an existing queued post, or to the top.
  * @apiName reorderQueuedPosts
  * @apiGroup Post
- * @apiSampleRequest api.tumblr.com/:blog_id/:post_id/queue/reorder\-H "Authorization: Bearer < YOUR_API_TOKEN>"
- * 
  * @apiPermission User, Admin, Super_Admin
  * @apiVersion 0.0.0
  * 
+ * @apiParam {String} Token User's Secret Code.
+ * @apiParam {String} blog_id The ID of the bloghas the post
+ * @apiParam {String} post_id Post ID to move.
  * @apiParam {String} [insert_after="0"] Which post ID to move it after, or 0 to make it the first post
  * @apiParam {Array} UnOrdered_Queued_posts all queued posts
  * 
@@ -321,14 +334,15 @@
 */
 
 /**
- * @api {post} /:blog_id/queue/shuffle  Shuffle Queued Posts
+ * @api {post} /blog/queue/shuffle  Shuffle Queued Posts
  * @apiDescription This randomly shuffles the queue for the specified blog.
  * @apiName shuffleQueuedPosts
  * @apiGroup Post
  * @apiPermission User, Admin, Super_Admin
  * @apiVersion 0.0.0
- * @apiSampleRequest api.tumblr.com/:blog_id/queue/shuffle\-H "Authorization: Bearer < YOUR_API_TOKEN>"
  * 
+ * @apiParam {String} Token User's Secret Code.
+ * @apiParam {String} blog_id The ID of the bloghas the post
  * @apiParam {String} [insert_after="0"] Which post ID to move it after, or 0 to make it the first post
  * @apiParam {Array} UnOrdered_Queued_posts all queued posts
  * 
@@ -365,13 +379,15 @@
 */
 
 /**
- * @api {get} /:blog_id//draft Retrieve Draft Posts
+ * @api {get} /blog/draft Retrieve Draft Posts
  * @apiName retrieveDraftPosts
  * @apiGroup Post
  * @apiPermission User, Admin, Super_Admin
  * @apidescription get the posts which were published as drafts to the owner of the post
  * @apiVersion 0.0.0
- * @apiSampleRequest api.tumblr.com/:blog_id/draft\-H "Authorization: Bearer < YOUR_API_TOKEN>"
+ * 
+ * @apiParam {String} Token User's Secret Code.
+ * @apiParam {String} blog_id The ID of the blog has the post
  * 
  * @apiSuccessExample Response Data:
  *      HTTP/1.1 200 OK
@@ -406,14 +422,16 @@
 */
 
 /**
- * @api {post} /:blog_id/:post_id/share_with Share With
+ * @api {post} /posts/share_with Share With
  * @apiName sharePostWith
  * @apiGroup Post
  * @apiPermission User, Admin, Super_Admin
  * @apidescription can share with anyone, we'll send post url
  * @apiVersion 0.0.0
- * @apiSampleRequest api.tumblr.com/:blog_id/:post_id/share_with\-H "Authorization: Bearer < YOUR_API_TOKEN>"
  * 
+ * 
+ * @apiParam {String} Token User's Secret Code.
+ * @apiParam {String} post_id The ID of the post
  * 
  * @apiSuccessExample Response Data:
  *      HTTP/1.1 200 OK
@@ -448,18 +466,17 @@
 */
 
 /**
- * @api {post} /:blog_id/create_post Create a New Blog Post
+ * @api {post} /blog/post Create a New Blog Post
  * @apiName postBlogPost
  * @apiGroup Post
- * 
  * @apiPermission User, Admin, Super_Admin
- * @apiSampleRequest api.tumblr.com/:blog_id/create_post\-H "Authorization: Bearer < YOUR_API_TOKEN>"
- * 
+
  * 
  * @apidescription Create a New Blog Post (Legacy), one of the following types: text, photo, quote, link, chat, audio, video.
  * @apiVersion 0.0.0
  *
- * 
+ * @apiParam {String} Token User's Secret Code.
+ * @apiParam {String} blog-id ID of the blog that the post will be created in.
  * @apiParam {String} type=text The type of post to create. Specify one of the following: text, photo, quote, link, chat, audio, video.
  * @apiParam {String} [state=published] The state of the post. Specify one of the following: published, draft, queue, private.
  * @apiParam {String} [tags] Comma-separated tags for this post.
@@ -528,16 +545,18 @@
 */
 
 /**
- * @api {post} /:blog_id/edit_post Edit a Blog Post
+ * @api {post} /blog/edit Edit a Blog Post
  * @apiName editBlogPost
  * @apiGroup Post
- * @apiSampleRequest api.tumblr.com/:blog_id/edit_post\-H "Authorization: Bearer < YOUR_API_TOKEN>"
+ * 
  * @apiPermission User, Admin, Super_Admin
  * 
  * @apidescription Edit a Blog Post (Legacy)
  * @apiVersion 0.0.0
  *
+ * @apiParam {String} Token User's Secret Code.
  * @apiParam {String} request_parameters These parameters are in addition to the common parameters listed under /post.
+ * @apiParam {String} post-id The ID of the post to edit.
  *
  * @apiSuccessExample Response Data:
  *      HTTP/1.1 200 OK
@@ -572,15 +591,18 @@
 */
 
 /**
- * @api {post} /:blog_id/:post_id/reblog Reblog a Post
+ * @api {post} /blog/reblog Reblog a Post
  * @apiName reblogBlogPost
  * @apiGroup Post
  * @apiPermission User, Admin, Super_Admin
- * @apiSampleRequest api.tumblr.com/:blog_id/:post_id/reblog\-H "Authorization: Bearer < YOUR_API_TOKEN>"
+ * 
  * @apidescription Reblog a Post (Legacy)
  * @apiVersion 0.0.0
  *
+ * @apiParam {String} Token User's Secret Code.
  * @apiParam {String} request_parameters These parameters are in addition to the common parameters listed under /post.
+ * @apiParam {String} post-id The ID of the rebloged post.
+ * @apiParam {String} blog-id The ID of the blog.
  * @apiParam {String} [description] Optional description on the rebloged post.
  *
  * @apiSuccessExample Response Data:
@@ -616,14 +638,18 @@
 */
 
 /**
- * @api {get} /:blog_id/:post_id/notes Get notes for a specific Post
+ * @api {get} /blog/notes Get notes for a specific Post
  * @apiName getBlogPostNotes
  * @apiGroup Post
  * @apiPermission User, Admin, Super_Admin
- * @apiSampleRequest api.tumblr.com/:blog_id/:post_id/notes\-H "Authorization: Bearer < YOUR_API_TOKEN>"
+ * 
  * @apidescription Get notes for a specific Post
  * @apiVersion 0.0.0
  * 
+ * @apiParam {String} Token User's Secret Code.
+ * @apiParam {String} blog-id The ID of the blog that have the post to get its notes.
+ * @apiParam {String} post-id The ID of the post to fetch notes for.
+ *
  * @apiSuccessExample Response Data:
  *      HTTP/1.1 200 OK
  *      {
@@ -658,14 +684,17 @@
 */
 
 /**
- * @api {post} /:blog_id/:post_id/like Like a blog post
+ * @api {post} /blog/like Like a blog post
  * @apiName likeBlogPost
  * @apiGroup Post
  * @apiPermission User, Admin, Super_Admin
- * @apiSampleRequest api.tumblr.com/:blog_id/:post_id/like\-H "Authorization: Bearer < YOUR_API_TOKEN>"
+ * 
  * @apidescription Like a blog post
  * @apiVersion 0.0.0
  *
+ * @apiParam {String} Token User's Secret Code.
+ * @apiParam {String} blog-id Primary blog ID (only primary blogs can like posts).
+ * @apiParam {String} post-id The ID of the liked post.
  *
  * @apiSuccessExample Response Data:
  *      HTTP/1.1 200 OK
@@ -701,13 +730,17 @@
 */
 
 /**
- * @api {post} /:blog_id/:post_id/unlike Unlike a blog post
+ * @api {post} /blog/unlike Unlike a blog post
  * @apiName unlikeBlogPost
  * @apiGroup Post
  * @apiPermission User, Admin, Super_Admin
- * @apiSampleRequest api.tumblr.com/:blog_id/:post_id/unlike\-H "Authorization: Bearer < YOUR_API_TOKEN>"
+ * 
  * @apidescription Unlike a blog post
  * @apiVersion 0.0.0
+ *
+ * @apiParam {String} Token User's Secret Code.
+ * @apiParam {String} blog-id Primary blog ID (only primary blogs can unlike posts).
+ * @apiParam {String} post-id The ID of the post to unlike.
  *
  * @apiSuccessExample Response Data:
  *      HTTP/1.1 200 OK
@@ -742,14 +775,16 @@
 */
 
 /**
- * @api {get} /:search_content Get Posts with search content
+ * @api {get} /blog/post/ Get Posts with search content
  * @apiName getPostsWithSearchContent
  * @apiGroup Post
  * @apiPermission User, Admin, Super_Admin
- * @apiSampleRequest api.tumblr.com/:search_content \-H "Authorization: Bearer < YOUR_API_TOKEN>"
+ * 
  * @apidescription Get Posts with search content
  * @apiVersion 0.0.0
  *
+ * @apiParam {String} Token User's Secret Code.
+ * @apiParam {String} search_content The content in the posts you'd like to retrieve.
  *
  * @apiSuccessExample Response Data:
  *      HTTP/1.1 200 OK
@@ -785,14 +820,17 @@
 */
 
 /**
- * @api {get} /:blog_id/search Get Posts with search content in a specific blog
+ * @api {get} /blog/search_content Get Posts with search content in a specific blog
  * @apiName getPostsWithSearchContentInBlog
  * @apiGroup Post
  * @apiPermission User, Admin, Super_Admin
- * @apiSampleRequest api.tumblr.com/:blog_id/:search\-H "Authorization: Bearer < YOUR_API_TOKEN>"
+ * 
  * @apidescription Get Posts with search content in a specific blog
  * @apiVersion 0.0.0
  *
+ * @apiParam {String} Token User's Secret Code.
+ * @apiParam {String} post-id The ID of the post.
+ * @apiParam {String} blog-id The ID of the blog to search in.
  * @apiParam {String} search_content The content in the posts you'd like to retrieve.
  *
  * @apiSuccessExample Response Data:
@@ -833,10 +871,11 @@
  * @apiName getExplorePosts
  * @apiGroup Post
  * @apiPermission User, Admin, Super_Admin
- * @apiSampleRequest api.tumblr.com/explore
+ * 
  * @apidescription Get Posts for the explore page
  * @apiVersion 0.0.0
  *
+ * @apiParam {String} Token User's Secret Code.
  * @apiParam {String} type where the type of posts are {text/photos/gifs/quotes/chats/audio/videos/asks/staff picks/trending/for you}
  *
  * @apiSuccessExample Response Data:
@@ -872,13 +911,14 @@
 */
 
 /**
- * @api {get} /getRadar/ Retrieve Radar Post
+ * @api {get} getRadar/ Retrieve Radar Post
  * @apiName getRadar
  * @apiGroup Post
  * @apiPermission User, Admin, Super_Admin
  * @apidescription The most popular post, having many notes is represented
  * @apiVersion 0.0.0
- * @apiSampleRequest api.tumblr.com/getRadar
+ * 
+ * @apiParam {String} Token User's Secret Code.
  * @apiParam {String} id Radar Post id 
  *
  * @apiSuccessExample Response Data:
