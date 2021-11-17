@@ -8,32 +8,51 @@ const joi = require('joi');
 
 /* ====================== /// <==> Post Joi Validations <==> /// ====================== */
 const postJoi = {
-    CreatePostValidations: {
+    createPostValidations: {
         body: joi.object().required().keys({
-            title: joi.string().required(),
-            description: joi.string().required(),
+            postHtml: joi.string().required(),
+            type: joi.string(),
+            state: joi.string(),
+            tags: joi.array(),
+        }),
+        params: joi.object().required().keys({
+            blogId: joi.string().required()
         })
     },
-    EditPostValidations: {
+    editPostValidations: {
         body: joi.object().required().keys({
-            postId: joi.string().required(),
-            title: joi.string().required(),
-            description: joi.string().required(),
+            postHtml: joi.string().required()
+        }),
+        params: joi.object().required().keys({
+            postId: joi.string().required()
         })
     },
-    DeletePostValidations: {
-        body: joi.object().required().keys({
-            postId: joi.string().required(),
+    deletePostValidations: {
+        params: joi.object().required().keys({
+            postId: joi.string().required()
         })
     },
-    GetPostsValidations: {
-        body: joi.object().required().keys({})
+    likePostValidations: {
+        params: joi.object().required().keys({
+            postId: joi.string().required()
+        })
     },
-    BlockPostValidations: {
-        body: joi.object().required().keys({
-            postId: joi.string().required(),
+    commentPostValidations: {
+        params: joi.object().required().keys({
+            postId: joi.string().required()
+        })
+    },
+    shareWithValidations: {
+        params: joi.object().required().keys({
+            postId: joi.string().required()
+        })
+    },
+    reblogPostValidations: {
+        params: joi.object().required().keys({
+            postId: joi.string().required()
         })
     }
+    
 };
 /* =========== /// <==> End <==> ===========*/
 

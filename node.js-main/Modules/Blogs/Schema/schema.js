@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////
-/// <==> /// This File Contains Post Module Schema /// <==> ///
+/// <==> /// This File Contains Blog Module Schema /// <==> ///
 ///////////////////////////////////////////////////////////////
 
 /* ====================== /// <==> Variables Declaration <==> /// ====================== */
@@ -9,31 +9,16 @@ const jwt = require('jsonwebtoken');
 /* =========== /// <==> End <==> ===========*/
 
 /* ====================== /// <==> Post Module Schema <==> /// ====================== */
-const postSchema = mongoose.Schema({
-    blogId: {
-        type: String,
-        required: true
-    },
-    postHtml: {
-        type: String,
-        required: true
-    },
-    type: {
-        type: String,
-        required: true
-    },
-    state: {
-        type: String,
-        required: true
-    },
-    tags: { type: [String] },
-    //date: { type: Date }
+const blogSchema = mongoose.Schema({
+    postsIds: {
+        type: [String]
+    }
     
 }, {
-    Timestamps: true
+    Timestamps: true,
 });
 /* =========== /// <==> End <==> ===========*/
 
 /* ====================== /// <==> Export Post Module Schema <==> /// ====================== */
-module.exports = postSchema;
+module.exports = blogSchema;
 /* =========== /// <==> End <==> ===========*/

@@ -15,22 +15,34 @@ const postEndPoints = require('../endPoints');
 /* ====================== /// <==> User APIs <==> /// ====================== */
 
 /* ----------- <---> Create Post <---> ----------- */
-router.post('/Create_Post', ValidateRequest(postJoi.CreatePostValidations), isAuthorized(postEndPoints.Create_Post), postFunctions.Create_Post);
+router.post('/:blogId/posts/create_post', ValidateRequest(postJoi.createPostValidations), isAuthorized(postEndPoints.createPost), postFunctions.createPost);
 
 /* ----------- <---> Edit Post <---> ----------- */ // *** <===> Done <===>  *** //
-router.patch('/Edit_Post', ValidateRequest(postJoi.EditPostValidations), isAuthorized(postEndPoints.Edit_Post), postFunctions.Edit_Post);
+router.patch('/:blogId/posts/:postId/edit_post', ValidateRequest(postJoi.editPostValidations), isAuthorized(postEndPoints.editPost), postFunctions.editPost);
 
 /* ----------- <---> Delete Post <---> ----------- */ // *** <===> Done <===>  *** //
-router.patch('/Delete_Post', ValidateRequest(postJoi.DeletePostValidations), isAuthorized(postEndPoints.Delete_Post), postFunctions.Delete_Post);
+router.patch('/:blogId/posts/:postId/delete_post', ValidateRequest(postJoi.deletePostValidations), isAuthorized(postEndPoints.deletePost), postFunctions.deletePost);
 
-/* ----------- <---> Get My Posts <---> ----------- */ // *** <===> Done <===>  *** //
-router.get('/Get_Posts', ValidateRequest(postJoi.GetPostsValidations), isAuthorized(postEndPoints.Get_Posts), postFunctions.Get_Posts);
+/* ----------- <---> Like Post <---> ----------- */ // *** <===> Done <===>  *** //
+router.patch('/:blogId/posts/:postId/like_post', ValidateRequest(postJoi.likePostValidations), isAuthorized(postEndPoints.likePost), postFunctions.likePost);
 
-/* ----------- <---> Get All Posts <---> ----------- */ // *** <===> Done <===>  *** //
-router.get('/Get_All_Posts', ValidateRequest(postJoi.GetPostsValidations), isAuthorized(postEndPoints.Get_All_Posts), postFunctions.Get_All_Posts);
+/* ----------- <---> Comment Post <---> ----------- */ // *** <===> Done <===>  *** //
+router.patch('/:blogId/posts/:postId/comment_post', ValidateRequest(postJoi.commentPostValidations), isAuthorized(postEndPoints.commentPost), postFunctions.commentPost);
 
-/* ----------- <---> Block Posts <---> ----------- */ // *** <===> Done <===>  *** //
-router.patch('/Block_Post', ValidateRequest(postJoi.BlockPostValidations), isAuthorized(postEndPoints.Block_Post), postFunctions.Block_Post);
+/* ----------- <---> Share Post With a Friend <---> ----------- */ // *** <===> Done <===>  *** //
+router.patch('/:blogId/posts/:postId/share_with', ValidateRequest(postJoi.shareWithValidations), isAuthorized(postEndPoints.shareWith), postFunctions.shareWith);
+
+/* ----------- <---> Reblog Post <---> ----------- */ // *** <===> Done <===>  *** //
+router.patch('/:blogId/posts/:postId/reblog_post', ValidateRequest(postJoi.reblogPostValidations), isAuthorized(postEndPoints.reblogPost), postFunctions.reblogPost);
+
+// /* ----------- <---> Get My Posts <---> ----------- */ // *** <===> Done <===>  *** //
+// router.get('/Get_Posts', ValidateRequest(postJoi.GetPostsValidations), isAuthorized(postEndPoints.Get_Posts), postFunctions.Get_Posts);
+
+// /* ----------- <---> Get All Posts <---> ----------- */ // *** <===> Done <===>  *** //
+// router.get('/Get_All_Posts', ValidateRequest(postJoi.GetPostsValidations), isAuthorized(postEndPoints.Get_All_Posts), postFunctions.Get_All_Posts);
+
+// /* ----------- <---> Block Posts <---> ----------- */ // *** <===> Done <===>  *** //
+// router.patch('/Block_Post', ValidateRequest(postJoi.BlockPostValidations), isAuthorized(postEndPoints.Block_Post), postFunctions.Block_Post);
 
 /* =========== /// <==> End <==> ===========*/
 

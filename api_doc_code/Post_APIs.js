@@ -3,16 +3,343 @@
 //=====================================================================================================
 /*
 ===================== ///////// <---------> ============ <---------> ///////// =====================> 
-===================== ///////// <---------> Post Methods  <---------> ///////// =====================> 
+===================== ///////// <---------> Post Methods <---------> ///////// =====================> 
 ===================== ///////// <---------> ============ <---------> ///////// =====================> 
 */
 //=====================================================================================================
 //=====================================================================================================
 //=====================================================================================================
 
+
+/*
+===================== ///////// <---------> ============= <---------> ///////// =====================> 
+===================== ///////// <---------> Create a Blog Post <---------> ///////// =====================> 
+===================== ///////// <---------> ============== <---------> ///////// =====================> 
+*/
+
+/**
+ * @api {post} /:blogId/posts/create_post Create a New Blog Post
+ * @apiName postBlogPost
+ * @apiGroup Post
+ * @apiPermission User, Admin, Super_Admin
+
+ * 
+ * @apidescription Create a New Blog Post (Legacy), one of the following types: text, photo, quote, link, chat, audio, video.
+ * @apiVersion 0.0.0
+ *
+ * @apiParam {String} blogId ID of the blog that the post will be created in.
+ * @apiParam {String} postHtml The post content in html format.
+ * @apiParam {String} type=text The type of post to create. Specify one of the following: text, photo, quote, link, chat, audio, video.
+ * @apiParam {String} [state=published] The state of the post. Specify one of the following: published, queued, draft, private.
+ * @apiParam {String} [tags] Comma-separated tags for this post.
+ * @apiParam {String} [date=The date and time of the POST request] Date of creation.
+ *
+ * 
+ * @apiSuccessExample Response Data:
+ *      HTTP/1.1 200 OK
+ *      {
+ *          "meta": {
+ *                       "status": 200,
+ *                       "msg": "OK"
+ *                  },
+ * 
+ *          "response":{
+ *                      "message": "Post Created Successfully"
+ *                     }   
+ *      }
+ * 
+ * @apiErrorExample Response Error:
+ *      HTTP/1.1 400 BAD REQUEST
+ *      {
+ *          "error": "Error In Input Data"
+ *      }
+ *      HTTP/1.1 401 Unauthorized
+ *      {
+ *          "error": "User Is Unauthorized"
+ *      }
+ */
+
+/*=================== End =====================*/
+
+
+/*
+===================== ///////// <---------> ================ <---------> ///////// =====================> 
+===================== ///////// <---------> Edit a Blog Post <---------> ///////// =====================> 
+===================== ///////// <---------> ================ <---------> ///////// =====================> 
+*/
+
+/**
+ * @api {post} /:blogId/posts/:postId/edit_post Edit a Blog Post
+ * @apiName editBlogPost
+ * @apiGroup Post
+ * 
+ * @apiPermission User, Admin, Super_Admin
+ * 
+ * @apidescription Edit a Blog Post (Legacy)
+ * @apiVersion 0.0.0
+ *
+ * @apiParam {String} blogId ID of the blog that contains the post.
+ * @apiParam {String} postId The ID of the post to edit.
+ * @apiParam {String} request_parameters These parameters are in addition to the common parameters listed under /post.
+ *
+ * @apiSuccessExample Response Data:
+ *      HTTP/1.1 200 OK
+ *      {
+ *          "meta": {
+ *                       "status": 200,
+ *                       "msg": "OK"
+ *                  },
+ * 
+ *          "response":{
+ *                      "message": "Post Edit Successfully"
+ *                     }   
+ *      }
+ * 
+ * @apiErrorExample Response Error:
+ *      HTTP/1.1 400 BAD REQUEST
+ *      {
+ *          "error": "Error In Input Data"
+ *      }
+ *      HTTP/1.1 401 Unauthorized
+ *      {
+ *          "error": "User Is Unauthorized"
+ *      }
+ */
+
+/*=================== End =====================*/
+
+
+/*
+===================== ///////// <---------> ================= <---------> ///////// =====================> 
+===================== ///////// <---------> Delete a Blog Post <---------> ///////// =====================> 
+===================== ///////// <---------> ================= <---------> ///////// =====================> 
+*/
+
+/**
+ * @api {Delete} /:blogId/posts/:postId/delete_post Delete a Post
+ * @apiName deletePost
+ * @apiGroup Post
+ * @apiPermission User, Admin, Super_Admin
+ * 
+ * @apidescription removes a post for the poster owner
+ * @apiVersion 0.0.0
+ *
+ * @apiParam {String} blogId The ID of the blog that has the post to delete
+ * @apiParam {String} postId The ID of the post to delete
+ * 
+ * @apiSuccessExample Response Data:
+ *      HTTP/1.1 200 OK
+ *      {
+ *          "meta": {
+ *                       "status": 200,
+ *                       "msg": "OK"
+ *                  },
+ * 
+ *          "response":{
+ *                      "message": "Post Deleted Successfully"
+ *                     }   
+ *      }
+ * 
+ * @apiErrorExample Response Error:
+ *      HTTP/1.1 400 BAD REQUEST
+ *      {
+ *          "error": "Error In Input Data"
+ *      }
+ *      HTTP/1.1 401 Unauthorized
+ *      {
+ *          "error": "User Is Unauthorized"
+ *      } 
+ */
+
+/*=================== End =====================*/
+
+
+/*
+===================== ///////// <---------> ================ <---------> ///////// =====================> 
+===================== ///////// <---------> Like a Blog Post <---------> ///////// =====================> 
+===================== ///////// <---------> ================ <---------> ///////// =====================> 
+*/
+
+/**
+ * @api {post} /:blogId/posts/:postId/like_post Like a blog post
+ * @apiName likeBlogPost
+ * @apiGroup Post
+ * @apiPermission User, Admin, Super_Admin
+ * 
+ * @apidescription Like a blog post
+ * @apiVersion 0.0.0
+ *
+ * @apiParam {String} blogId Primary blog ID (only primary blogs can like posts).
+ * @apiParam {String} postId The ID of the liked post.
+ *
+ * @apiSuccessExample Response Data:
+ *      HTTP/1.1 200 OK
+ *      {
+ *          "meta": {
+ *                       "status": 200,
+ *                       "msg": "OK"
+ *                  },
+ * 
+ *          "response":{
+ *                      "message": "Post Successfully Liked"
+ *                     }   
+ *      }
+ * 
+ * @apiErrorExample Response Error:
+ *      HTTP/1.1 400 BAD REQUEST
+ *      {
+ *          "error": "Error In Input Data"
+ *      }
+ *      HTTP/1.1 401 Unauthorized
+ *      {
+ *          "error": "User Is Unauthorized"
+ *      }
+ */
+
+/*=================== End =====================*/
+
+
+/*
+===================== ///////// <---------> ================= <---------> ///////// =====================> 
+===================== ///////// <---------> Make Comment <---------> ///////// =====================> 
+===================== ///////// <---------> ================= <---------> ///////// =====================> 
+*/
+
+/**
+ * @api {post} /:blogId/posts/:postId/comment_post Make Comment
+ * @apiName makeComment
+ * @apiGroup Post
+ * @apiPermission User, Admin, Super_Admin
+ * @apidescription a commenter blog can make comments on any posts
+ * @apiVersion 0.0.0
+ * 
+ * @apiParam {String} blogId ID of the blog that contains the post.
+ * @apiParam {String} postId The ID of the post 
+ * @apiParam {String} text comment text  
+ * 
+ * 
+ * @apiSuccessExample Response Data:
+ *      HTTP/1.1 200 OK
+ *      {
+ *          "meta": {
+ *                       "status": 200,
+ *                       "msg": "OK"
+ *                  },
+ * 
+ *          "response":{
+ *                      "message": "Comment Created Successfully"
+ *                     }   
+ *      }
+ * 
+ * @apiErrorExample Response Error:
+ *      HTTP/1.1 400 BAD REQUEST
+ *      {
+ *          "error": "Error In Input Data"
+ *      }
+ *      HTTP/1.1 401 Unauthorized
+ *      {
+ *          "error": "User Is Unauthorized"
+ *      } 
+ */
+
+/*=================== End =====================*/
+
+
 /*
 ===================== ///////// <---------> =========== <---------> ///////// =====================> 
-===================== ///////// <--------->   Pin Post <---------> ///////// =====================> 
+===================== ///////// <---------> Share With <---------> ///////// =====================> 
+===================== ///////// <---------> ============ <---------> ///////// =====================> 
+*/
+
+/**
+ * @api {post} /:blogId/posts/:postId/share_with Share With
+ * @apiName sharePostWith
+ * @apiGroup Post
+ * @apiPermission User, Admin, Super_Admin
+ * @apidescription can share with anyone, we'll send post url
+ * @apiVersion 0.0.0
+ * 
+ * 
+ * @apiParam {String} blogId ID of the blog that contains the post.
+ * @apiParam {String} postId The ID of the post
+ * 
+ * @apiSuccessExample Response Data:
+ *      HTTP/1.1 200 OK
+ *      {
+ *          "meta": {
+ *                       "status": 200,
+ *                       "msg": "OK"
+ *                  },
+ * 
+ *          "response":{
+ *                      "message": "Post Shared Successfully"
+ *                     }   
+ *      }
+ * 
+ * @apiErrorExample Response Error:
+ *      HTTP/1.1 400 BAD REQUEST
+ *      {
+ *          "error": "Error In Input Data"
+ *      }
+ *      HTTP/1.1 401 Unauthorized
+ *      {
+ *          "error": "User Is Unauthorized"
+ *      }
+ */
+
+/*=================== End =====================*/
+
+
+/*
+===================== ///////// <---------> ================ <---------> ///////// =====================> 
+===================== ///////// <---------> Reblog a Blog Post <---------> ///////// =====================> 
+===================== ///////// <---------> ================ <---------> ///////// =====================> 
+*/
+
+/**
+ * @api {post} /:blogId/posts/:postId/reblog_post Reblog a Post
+ * @apiName reblogBlogPost
+ * @apiGroup Post
+ * @apiPermission User, Admin, Super_Admin
+ * 
+ * @apidescription Reblog a Post (Legacy)
+ * @apiVersion 0.0.0
+ *
+ * @apiParam {String} blogId The ID of the blog.
+ * @apiParam {String} postId The ID of the rebloged post.
+ * @apiParam {String} request_parameters These parameters are in addition to the common parameters listed under /post.
+ * @apiParam {String} [description] Optional description on the rebloged post.
+ *
+ * @apiSuccessExample Response Data:
+ *      HTTP/1.1 200 OK
+ *      {
+ *          "meta": {
+ *                       "status": 200,
+ *                       "msg": "OK"
+ *                  },
+ * 
+ *          "response":{
+ *                      "message": "Post Rebloged Successfully"
+ *                     }   
+ *      }
+ * 
+ * @apiErrorExample Response Error:
+ *      HTTP/1.1 400 BAD REQUEST
+ *      {
+ *          "error": "Error In Input Data"
+ *      }
+ *      HTTP/1.1 401 Unauthorized
+ *      {
+ *          "error": "User Is Unauthorized"
+ *      }
+ */
+
+/*=================== End =====================*/
+
+
+/*
+===================== ///////// <---------> =========== <---------> ///////// =====================> 
+===================== ///////// <---------> Pin a Blog Post <---------> ///////// =====================> 
 ===================== ///////// <---------> =========== <---------> ///////// =====================> 
 */
 
@@ -57,7 +384,7 @@
 
 /*
 ===================== ///////// <---------> ================= <---------> ///////// =====================> 
-===================== ///////// <--------->   Remove Comments <---------> ///////// =====================> 
+===================== ///////// <---------> Remove Comments <---------> ///////// =====================> 
 ===================== ///////// <---------> ================= <---------> ///////// =====================> 
 */
 
@@ -102,7 +429,7 @@
 
 /*
 ===================== ///////// <---------> ================= <---------> ///////// =====================> 
-===================== ///////// <--------->   Count Reblogs <---------> ///////// =====================> 
+===================== ///////// <---------> Count Reblogs <---------> ///////// =====================> 
 ===================== ///////// <---------> ================= <---------> ///////// =====================> 
 */
 
@@ -146,100 +473,7 @@
 
 /*
 ===================== ///////// <---------> ================= <---------> ///////// =====================> 
-===================== ///////// <--------->   Make Comment <---------> ///////// =====================> 
-===================== ///////// <---------> ================= <---------> ///////// =====================> 
-*/
-
-/**
- * @api {post} /post/make_comment Make Comment
- * @apiName makeComment
- * @apiGroup Post
- * @apiPermission User, Admin, Super_Admin
- * @apidescription a commenter blog can make comments on any posts
- * @apiVersion 0.0.0
- * 
- * @apiParam {String} Token User's Secret Code.
- * @apiParam {String} post_blog_id The ID of the post 
- * @apiParam {String} text comment text  
- * @apiParam {String} commenter_id id of the blog writting comment
- * 
- * 
- * @apiSuccessExample Response Data:
- *      HTTP/1.1 200 OK
- *      {
- *          "meta": {
- *                       "status": 200,
- *                       "msg": "OK"
- *                  },
- * 
- *          "response":{
- *                      "message": "Comment Created Successfully"
- *                     }   
- *      }
- * 
- * @apiErrorExample Response Error:
- *      HTTP/1.1 400 BAD REQUEST
- *      {
- *          "error": "Error In Input Data"
- *      }
- *      HTTP/1.1 401 Unauthorized
- *      {
- *          "error": "User Is Unauthorized"
- *      } 
- */
-
-/*=================== End =====================*/
-
-
-/*
-===================== ///////// <---------> ================= <---------> ///////// =====================> 
-===================== ///////// <--------->   Delete a Post <---------> ///////// =====================> 
-===================== ///////// <---------> ================= <---------> ///////// =====================> 
-*/
-
-/**
- * @api {Delete} /post/delete Delete a Post
- * @apiName deletePost
- * @apiGroup Post
- * @apiPermission User, Admin, Super_Admin
- * 
- * @apidescription removes a post for the poster owner
- * @apiVersion 0.0.0
- *
- * @apiParam {String} Token User's Secret Code.
- * @apiParam {String} post_id The ID of the post to delete
- * @apiParam {String} blog_id The ID of the bloghas the post
- * 
- * @apiSuccessExample Response Data:
- *      HTTP/1.1 200 OK
- *      {
- *          "meta": {
- *                       "status": 200,
- *                       "msg": "OK"
- *                  },
- * 
- *          "response":{
- *                      "message": "Post Deleted Successfully"
- *                     }   
- *      }
- * 
- * @apiErrorExample Response Error:
- *      HTTP/1.1 400 BAD REQUEST
- *      {
- *          "error": "Error In Input Data"
- *      }
- *      HTTP/1.1 401 Unauthorized
- *      {
- *          "error": "User Is Unauthorized"
- *      } 
- */
-
-/*=================== End =====================*/
-
-
-/*
-===================== ///////// <---------> ================= <---------> ///////// =====================> 
-===================== ///////// <--------->   GetQueuedPosts <---------> ///////// =====================> 
+===================== ///////// <---------> GetQueuedPosts <---------> ///////// =====================> 
 ===================== ///////// <---------> ================= <---------> ///////// =====================> 
 */
 
@@ -283,7 +517,7 @@
 
 /*
 ===================== ///////// <---------> ====================== <---------> ///////// =====================> 
-===================== ///////// <--------->   Reorder Queued Posts <---------> ///////// =====================> 
+===================== ///////// <---------> Reorder Queued Posts <---------> ///////// =====================> 
 ===================== ///////// <---------> ====================== <---------> ///////// =====================> 
 */
 
@@ -329,7 +563,7 @@
 
 /*
 ===================== ///////// <---------> ====================== <---------> ///////// =====================> 
-===================== ///////// <--------->   Shuffle Queued Posts <---------> ///////// =====================> 
+===================== ///////// <---------> Shuffle Queued Posts <---------> ///////// =====================> 
 ===================== ///////// <---------> ====================== <---------> ///////// =====================> 
 */
 
@@ -374,7 +608,7 @@
 
 /*
 ===================== ///////// <---------> ====================== <---------> ///////// =====================> 
-===================== ///////// <--------->   Retrieve Draft Posts <---------> ///////// =====================> 
+===================== ///////// <---------> Retrieve Draft Posts <---------> ///////// =====================> 
 ===================== ///////// <---------> ====================== <---------> ///////// =====================> 
 */
 
@@ -415,225 +649,10 @@
 
 /*=================== End =====================*/
 
-/*
-===================== ///////// <---------> =========== <---------> ///////// =====================> 
-===================== ///////// <--------->  Share With <---------> ///////// =====================> 
-===================== ///////// <---------> ============ <---------> ///////// =====================> 
-*/
-
-/**
- * @api {post} /posts/share_with Share With
- * @apiName sharePostWith
- * @apiGroup Post
- * @apiPermission User, Admin, Super_Admin
- * @apidescription can share with anyone, we'll send post url
- * @apiVersion 0.0.0
- * 
- * 
- * @apiParam {String} Token User's Secret Code.
- * @apiParam {String} post_id The ID of the post
- * 
- * @apiSuccessExample Response Data:
- *      HTTP/1.1 200 OK
- *      {
- *          "meta": {
- *                       "status": 200,
- *                       "msg": "OK"
- *                  },
- * 
- *          "response":{
- *                      "message": "Post Shared Successfully"
- *                     }   
- *      }
- * 
- * @apiErrorExample Response Error:
- *      HTTP/1.1 400 BAD REQUEST
- *      {
- *          "error": "Error In Input Data"
- *      }
- *      HTTP/1.1 401 Unauthorized
- *      {
- *          "error": "User Is Unauthorized"
- *      }
- */
-
-/*=================== End =====================*/
-
-/*
-===================== ///////// <---------> ============= <---------> ///////// =====================> 
-===================== ///////// <--------->  New Blog Post <---------> ///////// =====================> 
-===================== ///////// <---------> ============== <---------> ///////// =====================> 
-*/
-
-/**
- * @api {post} /blog/post Create a New Blog Post
- * @apiName postBlogPost
- * @apiGroup Post
- * @apiPermission User, Admin, Super_Admin
-
- * 
- * @apidescription Create a New Blog Post (Legacy), one of the following types: text, photo, quote, link, chat, audio, video.
- * @apiVersion 0.0.0
- *
- * @apiParam {String} Token User's Secret Code.
- * @apiParam {String} blog-id ID of the blog that the post will be created in.
- * @apiParam {String} type=text The type of post to create. Specify one of the following: text, photo, quote, link, chat, audio, video.
- * @apiParam {String} [state=published] The state of the post. Specify one of the following: published, draft, queue, private.
- * @apiParam {String} [tags] Comma-separated tags for this post.
- * @apiParam {String} [date=The date and time of the POST request] Date of creation.
- * @apiParam {String} [text_post] Fields requested for text posts:
- * @apiParam {String} [title] The optional title of the post.
- * @apiParam {String} body The body of the post.
- * @apiParam {String} [photo_post] Fields requested for photo posts:
- * @apiParam {String} [caption] Caption of set or single photo.
- * @apiParam {Array} [photos] Array of photos each has:
- * @apiParam {String} [caption] Caption of single photo.
- * @apiParam {String} link The "click-through URL" for the photo.
- * @apiParam {String} [quote_post] Fields requested for quote posts:
- * @apiParam {String} text The full text of the quote.
- * @apiParam {String} [source] Full HTML for the source of the quote Example: <a href="...">Steve Jobs</a>.
- * @apiParam {String} [link_post] Fields requested for link posts:
- * @apiParam {String} link The link!.
- * @apiParam {String} [title] The title of the page the link points to.
- * @apiParam {String} [summary] Summary of the page the link points to.
- * @apiParam {String} [description] A user-supplied description.
- * @apiParam {String} [link_author] The author of the article the link points to.
- * @apiParam {String} [chat_post] Fields requested for chat posts:
- * @apiParam {String} [title] The optional title of the chat.
- * @apiParam {String} body The full chat body.
- * @apiParam {String} [audio_post] Fields requested for audio posts:
- * @apiParam {String} [caption] User supplied caption.
- * @apiParam {String} external_url The URL of the site that hosts the audio file (not Tumblr).
- * @apiParam {String} data An audio file, limit 10MB.
- * @apiParam {String} [video_post] Fields requested for video posts:
- * @apiParam {String} [caption] User supplied caption.
- * @apiParam {String} data A video file, limited to 500MB and 10 minutes.
- * @apiParam {String} embed HTML embed code for the video or a URI to the video. If you provide an unsupported service's URI you may receive a 400 response.	.
- *
- * 
- * @apiSuccessExample Response Data:
- *      HTTP/1.1 200 OK
- *      {
- *          "meta": {
- *                       "status": 200,
- *                       "msg": "OK"
- *                  },
- * 
- *          "response":{
- *                      "message": "Post Created Successfully"
- *                     }   
- *      }
- * 
- * @apiErrorExample Response Error:
- *      HTTP/1.1 400 BAD REQUEST
- *      {
- *          "error": "Error In Input Data"
- *      }
- *      HTTP/1.1 401 Unauthorized
- *      {
- *          "error": "User Is Unauthorized"
- *      }
- */
-
-/*=================== End =====================*/
-
 
 /*
 ===================== ///////// <---------> ================ <---------> ///////// =====================> 
-===================== ///////// <--------->  Edit a Blog Post <---------> ///////// =====================> 
-===================== ///////// <---------> ================ <---------> ///////// =====================> 
-*/
-
-/**
- * @api {post} /blog/edit Edit a Blog Post
- * @apiName editBlogPost
- * @apiGroup Post
- * 
- * @apiPermission User, Admin, Super_Admin
- * 
- * @apidescription Edit a Blog Post (Legacy)
- * @apiVersion 0.0.0
- *
- * @apiParam {String} Token User's Secret Code.
- * @apiParam {String} request_parameters These parameters are in addition to the common parameters listed under /post.
- * @apiParam {String} post-id The ID of the post to edit.
- *
- * @apiSuccessExample Response Data:
- *      HTTP/1.1 200 OK
- *      {
- *          "meta": {
- *                       "status": 200,
- *                       "msg": "OK"
- *                  },
- * 
- *          "response":{
- *                      "message": "Post Edit Successfully"
- *                     }   
- *      }
- * 
- * @apiErrorExample Response Error:
- *      HTTP/1.1 400 BAD REQUEST
- *      {
- *          "error": "Error In Input Data"
- *      }
- *      HTTP/1.1 401 Unauthorized
- *      {
- *          "error": "User Is Unauthorized"
- *      }
- */
-
-/*=================== End =====================*/
-
-/*
-===================== ///////// <---------> ================ <---------> ///////// =====================> 
-===================== ///////// <--------->  Reblog a Post <---------> ///////// =====================> 
-===================== ///////// <---------> ================ <---------> ///////// =====================> 
-*/
-
-/**
- * @api {post} /blog/reblog Reblog a Post
- * @apiName reblogBlogPost
- * @apiGroup Post
- * @apiPermission User, Admin, Super_Admin
- * 
- * @apidescription Reblog a Post (Legacy)
- * @apiVersion 0.0.0
- *
- * @apiParam {String} Token User's Secret Code.
- * @apiParam {String} request_parameters These parameters are in addition to the common parameters listed under /post.
- * @apiParam {String} post-id The ID of the rebloged post.
- * @apiParam {String} blog-id The ID of the blog.
- * @apiParam {String} [description] Optional description on the rebloged post.
- *
- * @apiSuccessExample Response Data:
- *      HTTP/1.1 200 OK
- *      {
- *          "meta": {
- *                       "status": 200,
- *                       "msg": "OK"
- *                  },
- * 
- *          "response":{
- *                      "message": "Post Rebloged Successfully"
- *                     }   
- *      }
- * 
- * @apiErrorExample Response Error:
- *      HTTP/1.1 400 BAD REQUEST
- *      {
- *          "error": "Error In Input Data"
- *      }
- *      HTTP/1.1 401 Unauthorized
- *      {
- *          "error": "User Is Unauthorized"
- *      }
- */
-
-/*=================== End =====================*/
-
-/*
-===================== ///////// <---------> ================ <---------> ///////// =====================> 
-===================== ///////// <--------->  Get notes <---------> ///////// =====================> 
+===================== ///////// <---------> Get notes <---------> ///////// =====================> 
 ===================== ///////// <---------> ================ <---------> ///////// =====================> 
 */
 
@@ -679,53 +698,7 @@
 
 /*
 ===================== ///////// <---------> ================ <---------> ///////// =====================> 
-===================== ///////// <--------->  Like a blog post <---------> ///////// =====================> 
-===================== ///////// <---------> ================ <---------> ///////// =====================> 
-*/
-
-/**
- * @api {post} /blog/like Like a blog post
- * @apiName likeBlogPost
- * @apiGroup Post
- * @apiPermission User, Admin, Super_Admin
- * 
- * @apidescription Like a blog post
- * @apiVersion 0.0.0
- *
- * @apiParam {String} Token User's Secret Code.
- * @apiParam {String} blog-id Primary blog ID (only primary blogs can like posts).
- * @apiParam {String} post-id The ID of the liked post.
- *
- * @apiSuccessExample Response Data:
- *      HTTP/1.1 200 OK
- *      {
- *          "meta": {
- *                       "status": 200,
- *                       "msg": "OK"
- *                  },
- * 
- *          "response":{
- *                      "message": "Post Successfully Liked"
- *                     }   
- *      }
- * 
- * @apiErrorExample Response Error:
- *      HTTP/1.1 400 BAD REQUEST
- *      {
- *          "error": "Error In Input Data"
- *      }
- *      HTTP/1.1 401 Unauthorized
- *      {
- *          "error": "User Is Unauthorized"
- *      }
- */
-
-/*=================== End =====================*/
-
-
-/*
-===================== ///////// <---------> ================ <---------> ///////// =====================> 
-===================== ///////// <--------->  Unlike a blog post <---------> ///////// =====================> 
+===================== ///////// <---------> Unlike a Blog Post <---------> ///////// =====================> 
 ===================== ///////// <---------> ================ <---------> ///////// =====================> 
 */
 
@@ -770,7 +743,7 @@
 
 /*
 ===================== ///////// <---------> ================ <---------> ///////// =====================> 
-===================== ///////// <--------->  Get Posts with search content <---------> ///////// =====================> 
+===================== ///////// <---------> Get Posts with search content <---------> ///////// =====================> 
 ===================== ///////// <---------> ================ <---------> ///////// =====================> 
 */
 
@@ -815,7 +788,7 @@
 
 /*
 ===================== ///////// <---------> ================ <---------> ///////// =====================> 
-===================== ///////// <--------->  Get Posts with search content in a specific blog <---------> ///////// =====================> 
+===================== ///////// <---------> Get Posts with search content in a specific blog <---------> ///////// =====================> 
 ===================== ///////// <---------> ================ <---------> ///////// =====================> 
 */
 
