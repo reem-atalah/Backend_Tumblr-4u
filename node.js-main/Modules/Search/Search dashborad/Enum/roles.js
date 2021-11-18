@@ -1,15 +1,15 @@
 // ////////////////////////////////////////////////////////////////
-// //// <==> This File Contains All User Module Roles <==> ////
+// //// <==> This File Contains All Search Module Roles <==> ////
 // ////////////////////////////////////////////////////////////////
 
-// /* ======================== <-- User Modul Roles --> ======================== */
-// const roles = Object.freeze({
-//     SUPER_ADMIN: 'superAdmin',
-//     ADMIN: 'admin',
-//     USER: 'user',
-// });
+// /* ======================== <-- Search Modul Roles --> ======================== */
+const roles = Object.freeze({
+    SUPER_ADMIN: 'superAdmin',
+    ADMIN: 'admin',
+    USER: 'user',
+});
 // /* =========== <--> End <--> =========== */
 
-// /* ======================== <-- Export User Roles --> ======================== */
-// module.exports = roles;
+// /* ======================== <-- Export Search Roles --> ======================== */
+module.exports = roles;
 // /* =========== <--> End <--> =========== */

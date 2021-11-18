@@ -11,26 +11,26 @@ const userRbac = require('../Rbac/rbac');
 /* ======================== <-- Authorization Function --> ======================== */
 const isAuthorized = (endPoint) => {
 
-    return async(request, response, next) => {
+    return async(req, res, next) => {
         try {
-            if (request.headers.authorization) {
-                const token = request.headers.authorization.split(' ')[1];
+            if (req.headers.authorization) {
+                const token = req.headers.authorization.split(' ')[1];
                 if (token) {
                     const decoded = jwt.verify(token, process.env.KEY);
                     const isAllowed = await userRbac.can(decoded.role.toString(), endPoint);
                     if (isAllowed) {
-                        request.decoded = decoded;
+                        req.decoded = decoded;
                         next();
                     } else
-                        response.status(StatusCodes.UNAUTHORIZED).json('Not Authorized');
+                        res.status(StatusCodes.UNAUTHORIZED).json('Not Authorized');
                 } else
-                    response.status(StatusCodes.BAD_REQUEST).json('Token is Required');
+                    res.status(StatusCodes.BAD_REQUEST).json('Token is Required');
 
             } else
-                response.status(StatusCodes.BAD_REQUEST).json('Token is Required');
+                res.status(StatusCodes.BAD_REQUEST).json('Token is Required');
 
         } catch (error) {
-            response.status(StatusCodes.BAD_REQUEST).json('Error In Is Autorized Function');
+            res.status(StatusCodes.BAD_REQUEST).json('Error In Is Autorized Function');
         }
     };
 };

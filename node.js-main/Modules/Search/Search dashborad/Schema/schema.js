@@ -3,11 +3,11 @@
 // ///////////////////////////////////////////////////////////////
 
 // /* ====================== /// <==> Variables Declaration <==> /// ====================== */
-const MONGOOSE = require('mongoose');
+const mongoose= require('mongoose');
 // /* =========== /// <==> End <==> ===========*/
 
 // /* ====================== /// <==> User Module Schema <==> /// ====================== */
-const BLOG_SCHEMA = MONGOOSE.Schema({
+const BlogSchema = mongoose.Schema({
     name: {
         type: "String",
         required: true,
@@ -23,7 +23,7 @@ const BLOG_SCHEMA = MONGOOSE.Schema({
 });
 
 
-const POST= new MONGOOSE.Schema({
+const Posts = new mongoose.Schema({
     
     tags: [String]
     }, {
@@ -35,8 +35,8 @@ const POST= new MONGOOSE.Schema({
 
 // /* ====================== /// <==> Export User Module Schema <==> /// ====================== */
 module.exports = {
-    BLOG: BLOG_SCHEMA,
-    POST: POST
+    blog: BlogSchema,
+    post: Posts
 }
 
 // /* =========== /// <==> End <==> ===========*/

@@ -3,7 +3,7 @@
 //////////////////////////////////////////////////////////////////
 
 /* ======================== <-- Variables Declarations --> ======================== */
-const roles = require('../../../Modules/Users/Enum/roles');
+const roles = require('../../../Modules/Search/Search dashborad/Enum/roles');
 const userPolicies = require('./userPolicies');
 const adminPolicies = require('./adminPolicies');
 const superAdminPolicies = require('./superAdminPolicies');
