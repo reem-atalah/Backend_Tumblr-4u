@@ -4,7 +4,7 @@
 
 /* ====================== /// <==> Variables Declaration <==> /// ====================== */
 const mongoose = require('mongoose');
-const postSchema = require('../Schema/schema');
+const blogSchema = require('../Schema/schema');
 /* =========== /// <==> End <==> ===========*/
 
 /* ====================== /// <==> Create Post Model <==> /// ====================== */

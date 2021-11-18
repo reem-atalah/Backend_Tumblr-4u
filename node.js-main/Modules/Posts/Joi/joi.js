@@ -13,7 +13,7 @@ const postJoi = {
             postHtml: joi.string().required(),
             type: joi.string(),
             state: joi.string(),
-            tags: joi.array(),
+            //tags: joi.array()
         }),
         params: joi.object().required().keys({
             blogId: joi.string().required()
