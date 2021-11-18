@@ -10,13 +10,17 @@ const jwt = require('jsonwebtoken');
 
 /* ====================== /// <==> User Module Schema <==> /// ====================== */
 const userSchema = mongoose.Schema({
-    username: { type: String },
+    name: { type: String },
     email: { type: String },
     password: { type: String },
-    cpassword: { type: String },
-    phone: { type: String },
-    location: { type: String },
-    role: { type: String },
+    age: { type: Number },
+    city: { type: String },
+    country: { type: String },
+
+    favoriteBlogs: [{ type: String }],
+    bodyColor: { type: String, deafult: 'trurBlue' },
+
+    role: { type: String, default: 'user' },
     isDeleted: { type: Boolean, default: false },
     isVerified: { type: Boolean, default: false },
     isActivated: { type: Boolean, default: true },
@@ -31,7 +35,6 @@ const userSchema = mongoose.Schema({
 /* ------------ Hashing Password In Sign Up ------------ */
 userSchema.pre('save', async function() {
     this.password = await bcrypt.hash(this.password, 8);
-    this.cpassword = await bcrypt.hash(this.cpassword, 8);
 });
 
 /* =========== <--> End <--> =========== */

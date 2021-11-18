@@ -6,7 +6,7 @@
 const express = require('express');
 const server = express();
 const dotenv = require('dotenv');
-const Connection = require('./Configurations/configuration');
+const connection = require('./Configurations/configuration');
 const userRoutes = require('./Modules/Users/Routes/APIs');
 const postRoutes = require('./Modules/Posts/Routes/APIs');
 const reportRoutes = require('./Modules/Report/Routes/APIs');
@@ -18,7 +18,7 @@ dotenv.config();
 /* =========== /// <==> End <==> ===========*/
 
 /* ====================== /// <==> Calling Connection Function OF Database <==> /// ====================== */
-Connection();
+connection();
 /* =========== /// <==> End <==> ===========*/
 
 /* ====================== /// <==> MiddleWares <==> /// ====================== */
@@ -30,7 +30,11 @@ server.use(advertisingRoutes);
 /* =========== /// <==> End <==> ===========*/
 
 /* ====================== /// <==> Listen Server To Port <==> /// ====================== */
-server.listen(process.env.PORT, () => {
+const app = server.listen(process.env.PORT, () => {
     console.log('Server Is Built (:');
 });
+/* =========== /// <==> End <==> ===========*/
+
+/* ====================== /// <==> Export Server <==> /// ====================== */
+module.exports = app;
 /* =========== /// <==> End <==> ===========*/
