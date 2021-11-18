@@ -30,7 +30,9 @@ server.use(postRoutes);
 /* =========== /// <==> End <==> ===========*/
 
 /* ====================== /// <==> Listen Server To Port <==> /// ====================== */
-server.listen(process.env.PORT, () => {
+const app = server.listen(process.env.PORT, () => {
     console.log('Server Is Built (:');
 });
+
+module.exports = app;
 /* =========== /// <==> End <==> ===========*/

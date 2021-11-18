@@ -17,6 +17,9 @@ const postEndPoints = require('../endPoints');
 /* ----------- <---> Create Post <---> ----------- */
 router.post('/:blogId/posts/create_post', ValidateRequest(postJoi.createPostValidations), /**isAuthorized(postEndPoints.createPost),**/ postFunctions.createPost);
 
+/* ----------- <---> Show Post <---> ----------- */
+//router.get('/:blogId/posts/show_Post', ValidateRequest(postJoi.showPostValidations), /**isAuthorized(postEndPoints.createPost),**/ postFunctions.showPost);
+
 /* ----------- <---> Edit Post <---> ----------- */ // *** <===> Done <===>  *** //
 //router.patch('/:blogId/posts/:postId/edit_post', ValidateRequest(postJoi.editPostValidations), isAuthorized(postEndPoints.editPost), postFunctions.editPost);
 

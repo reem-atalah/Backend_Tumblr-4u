@@ -8,7 +8,7 @@ const blogSchema = require('../Schema/schema');
 /* =========== /// <==> End <==> ===========*/
 
 /* ====================== /// <==> Create Post Model <==> /// ====================== */
-const blogs = mongoose.model('Blogs', blogSchema);
+const blogs = mongoose.model('blogs', blogSchema);
 /* =========== /// <==> End <==> ===========*/
 
 /* ====================== /// <==> Export Post Model <==> /// ====================== */
