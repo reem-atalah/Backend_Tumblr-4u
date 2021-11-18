@@ -14,7 +14,12 @@ const blogs = require('../../Blogs/Model/model');
 
 /* ====================== /// <==> Post Functions <==> /// ====================== */
 /* ----------- <---> Create Post <---> ----------- */ // *** <===> Done <===>  *** //
-// Assumption: Account Must Be Not ( Blocked Or Deleted Or Deactivated )
+/**
+ * Creates a blog post and saves its content in the database.
+ * @function
+ * @param {string} req - Holds the request body: postHtml, type, state, tags.
+ * @param {string} res - Holds the response status and message.
+ */
 const createPost = async(req, res, ) => {
     try {
         let blogId = req.params.blogId;
@@ -39,14 +44,12 @@ const createPost = async(req, res, ) => {
 };
 
 /* ----------- <---> Edit Post <---> ----------- */ // *** <===> Done <===>  *** //
-// Assumption: Edit Post Function Just Updates ( Title , Content ) 
-// Assumption: Account Must Be Not ( Blocked Or Deleted Or Deactivated ) , Post Must Not Be ( Blocked Or Deleted )
+// Assumption: Edit Post Function Just Updates ( postHtml ) 
 const editPost = async(request, response) => {
     
 };
 
 /* ----------- <---> Delete Post <---> ----------- */ // *** <===> Done <===>  *** //
-// Assumption: Account Must Be Not ( Blocked Or Deleted Or Deactivated ) , Post Must Not Be ( Blocked Or Deleted )
 const deletePost = async(request, response) => {
     
 };
