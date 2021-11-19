@@ -1,0 +1,13 @@
+{
+    "source": {
+        "include": ["./Modules/Blogs/Controller",
+            "./Modules/Users/Controller"
+        ],
+        "includePattern": ".js$",
+        "excludePattern": "(node_modules/|docs)"
+    },
+    "opts": {
+        "recurse": true,
+        "destination": "./docs/"
+    }
+}
