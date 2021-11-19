@@ -16,20 +16,7 @@ chai.use(chaiHttp);
 /* ====================== /// <==> Unit Testing <==> /// ====================== */
 describe('Post APIs', () => {
 
-    //----------------// <=====> Sign Up <=====> //----------------//
-
-    // describe("Get /", () => {
-    //     it("It Should Hello", (done) => {
-
-    //         chai.request(server)
-    //             .get("/")
-    //             .end((err, response) => {
-    //                 response.should.have.status(200);
-    //                 response.body.should.be.eq('Hello, World! (<:>)');
-    //                 done();
-    //             });
-    //     });
-    // });
+    //----------------// <=====> Create Post <=====> //----------------//
 
     describe("Post Blog Post", () => {
 
@@ -50,15 +37,6 @@ describe('Post APIs', () => {
                     done();
                 });
         });
-
-        // it("It should NOT GET all the tasks", (done) => {
-        //     chai.request(server)
-        //         .get("/api/task")
-        //         .end((err, response) => {
-        //             response.should.have.status(404);
-        //             done();
-        //         });
-        // });
 
     });
 });
