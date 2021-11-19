@@ -1,0 +1,14 @@
+{
+    "source": {
+        "include": ["./Modules/Users/Controller",
+            "./Configurations",
+            "./Common/Middlewares"
+        ],
+        "includePattern": ".js$",
+        "excludePattern": "(node_modules/|docs)"
+    },
+    "opts": {
+        "recurse": true,
+        "destination": "./docs/"
+    }
+}

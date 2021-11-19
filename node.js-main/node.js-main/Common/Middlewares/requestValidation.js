@@ -7,6 +7,14 @@ const { StatusCodes } = require('http-status-codes');
 /* =========== /// <==> End <==> ===========*/
 
 /* ====================== /// <==> Validate Request Fucntion <==> /// ====================== */
+/**
+ * This Function Checks Validity OF Sent Request.
+ * 
+ * @param {string} schema - schema
+ * 
+ * @returns {object} - { Object }
+ */
+
 const ValidateRequest = (schema) => {
     return (request, response, next) => {
 
@@ -19,13 +27,32 @@ const ValidateRequest = (schema) => {
             });
 
             if (validationErorrs.length) {
-                response.status(StatusCodes.BAD_REQUEST).json(validationErorrs[0]);
+                response.status(StatusCodes.BAD_REQUEST).json({
+                    "meta": {
+                        "status": 400,
+                        "msg": "BAD_REQUEST"
+                    },
+
+                    "response": {
+                        "error": validationErorrs[0],
+                        "data": ""
+                    }
+                });
                 console.log('Error in Sent Request');
             } else
                 next();
         } catch (error) {
-            console.log('Error In Validate Request Function');
-            response.status(StatusCodes.INTERNAL_SERVER_ERROR).json('Error In Validate Request Function');
+            response.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+                "meta": {
+                    "status": 400,
+                    "msg": "BAD_REQUEST"
+                },
+
+                "response": {
+                    "error": 'Error In Validate Request Function',
+                    "data": ""
+                }
+            });
         }
     };
 };

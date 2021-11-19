@@ -42,9 +42,9 @@ describe('User APIs', () => {
         //----------------// <=====> 1-Case <=====> //----------------//
         it("It Should Create New User", (done) => {
             const user = {
-                email: "Ayman009@gmail.com",
+                email: "Ayman011@gmail.com",
                 password: "123",
-                blogName: "CMP-009",
+                blogName: "CMP-011",
                 age: "21",
                 city: "Giza",
                 country: "Egypt"
