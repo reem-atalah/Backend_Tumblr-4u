@@ -10,27 +10,27 @@ const jwt = require('jsonwebtoken');
 
 /* ====================== /// <==> Post Module Schema <==> /// ====================== */
 const postSchema = mongoose.Schema({
-    blogId: {
-        type: String,
-        required: true
-    },
-    postHtml: {
-        type: String,
-        required: true
-    },
-    type: {
-        type: String,
-        required: true
-    },
-    state: {
-        type: String,
-        required: true
-    },
-    tags: { type: [String] }
-    //date: { type: Date }
+  blogId: {
+    type: String,
+    required: true
+  },
+  postHtml: {
+    type: String,
+    required: true
+  },
+  type: {
+    type: String,
+    required: true
+  },
+  state: {
+    type: String,
+    required: true
+  },
+  tags: { type: [String] }
+  //date: { type: Date }
     
 }, {
-    Timestamps: true
+  Timestamps: true
 });
 /* =========== /// <==> End <==> ===========*/
 

@@ -4,7 +4,8 @@
   "main": "script.js",
   "scripts": {
     "start": "nodemon script.js",
-    "test": "mocha --timeout 10000 --recursive --exit"
+    "test": "mocha --reporter mochawesome --reporter-options reportDir=Report,reportFilename=Test_Report --timeout 100000 --recursive --exit",
+        "doc": "jsdoc -c jsdoc.json"
   },
   "keywords": [],
   "author": "",

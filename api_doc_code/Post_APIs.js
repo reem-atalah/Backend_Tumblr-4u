@@ -62,6 +62,54 @@
 /*=================== End =====================*/
 
 
+
+/*
+===================== ///////// <---------> ============= <---------> ///////// =====================> 
+===================== ///////// <---------> Show a Blog Post <---------> ///////// =====================> 
+===================== ///////// <---------> ============== <---------> ///////// =====================> 
+*/
+
+/**
+ * @api {get} /posts/:postId/show_post Create a New Blog Post
+ * @apiName showBlogPost
+ * @apiGroup Post
+ * @apiPermission User, Admin, Super_Admin
+
+ * 
+ * @apidescription Shows a Blog Post.
+ * @apiVersion 0.0.0
+ *
+ * @apiParam {String} posrId ID of the post.
+ *
+ * 
+ * @apiSuccessExample Response Data:
+ *      HTTP/1.1 200 OK
+ *      {
+ *          "meta": {
+ *                       "status": 200,
+ *                       "msg": "OK"
+ *                  },
+ * 
+ *          "response":{
+ *                      "message": "Post Created Successfully"
+ *                     }   
+ *      }
+ * 
+ * @apiErrorExample Response Error:
+ *      HTTP/1.1 400 BAD REQUEST
+ *      {
+ *          "error": "Error In Input Data"
+ *      }
+ *      HTTP/1.1 401 Unauthorized
+ *      {
+ *          "error": "User Is Unauthorized"
+ *      }
+ */
+
+/*=================== End =====================*/
+
+
+
 /*
 ===================== ///////// <---------> ================ <---------> ///////// =====================> 
 ===================== ///////// <---------> Edit a Blog Post <---------> ///////// =====================> 
@@ -69,7 +117,7 @@
 */
 
 /**
- * @api {post} /:blogId/posts/:postId/edit_post Edit a Blog Post
+ * @api {put} /posts/:postId/edit_post Edit a Blog Post
  * @apiName editBlogPost
  * @apiGroup Post
  * 
@@ -78,9 +126,8 @@
  * @apidescription Edit a Blog Post (Legacy)
  * @apiVersion 0.0.0
  *
- * @apiParam {String} blogId ID of the blog that contains the post.
  * @apiParam {String} postId The ID of the post to edit.
- * @apiParam {String} request_parameters These parameters are in addition to the common parameters listed under /post.
+ * @apiParam {String} postHtml Post content after editing.
  *
  * @apiSuccessExample Response Data:
  *      HTTP/1.1 200 OK
@@ -116,7 +163,7 @@
 */
 
 /**
- * @api {Delete} /:blogId/posts/:postId/delete_post Delete a Post
+ * @api {Delete} /posts/:postId/delete_post Delete a Post
  * @apiName deletePost
  * @apiGroup Post
  * @apiPermission User, Admin, Super_Admin
@@ -124,7 +171,6 @@
  * @apidescription removes a post for the poster owner
  * @apiVersion 0.0.0
  *
- * @apiParam {String} blogId The ID of the blog that has the post to delete
  * @apiParam {String} postId The ID of the post to delete
  * 
  * @apiSuccessExample Response Data:
@@ -161,7 +207,7 @@
 */
 
 /**
- * @api {post} /:blogId/posts/:postId/like_post Like a blog post
+ * @api {post} /posts/:postId/like_post Like a blog post
  * @apiName likeBlogPost
  * @apiGroup Post
  * @apiPermission User, Admin, Super_Admin
@@ -169,7 +215,6 @@
  * @apidescription Like a blog post
  * @apiVersion 0.0.0
  *
- * @apiParam {String} blogId Primary blog ID (only primary blogs can like posts).
  * @apiParam {String} postId The ID of the liked post.
  *
  * @apiSuccessExample Response Data:
@@ -206,14 +251,13 @@
 */
 
 /**
- * @api {post} /:blogId/posts/:postId/comment_post Make Comment
+ * @api {post} /posts/:postId/comment_post Make Comment
  * @apiName makeComment
  * @apiGroup Post
  * @apiPermission User, Admin, Super_Admin
  * @apidescription a commenter blog can make comments on any posts
  * @apiVersion 0.0.0
  * 
- * @apiParam {String} blogId ID of the blog that contains the post.
  * @apiParam {String} postId The ID of the post 
  * @apiParam {String} text comment text  
  * 
@@ -252,7 +296,7 @@
 */
 
 /**
- * @api {post} /:blogId/posts/:postId/share_with Share With
+ * @api {post} /posts/:postId/share_with Share With
  * @apiName sharePostWith
  * @apiGroup Post
  * @apiPermission User, Admin, Super_Admin
@@ -260,7 +304,6 @@
  * @apiVersion 0.0.0
  * 
  * 
- * @apiParam {String} blogId ID of the blog that contains the post.
  * @apiParam {String} postId The ID of the post
  * 
  * @apiSuccessExample Response Data:
@@ -305,9 +348,8 @@
  * @apidescription Reblog a Post (Legacy)
  * @apiVersion 0.0.0
  *
- * @apiParam {String} blogId The ID of the blog.
+ * @apiParam {String} blogId The ID of the reblogging blog.
  * @apiParam {String} postId The ID of the rebloged post.
- * @apiParam {String} request_parameters These parameters are in addition to the common parameters listed under /post.
  * @apiParam {String} [description] Optional description on the rebloged post.
  *
  * @apiSuccessExample Response Data:

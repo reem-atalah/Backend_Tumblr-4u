@@ -15,10 +15,16 @@ const postEndPoints = require('../endPoints');
 /* ====================== /// <==> User APIs <==> /// ====================== */
 
 /* ----------- <---> Create Post <---> ----------- */
-router.post('/:blogId/posts/create_post', ValidateRequest(postJoi.createPostValidations), /**isAuthorized(postEndPoints.createPost),**/ postFunctions.createPost);
+router.post('/:blogId/posts/create_post',
+    ValidateRequest(postJoi.createPostValidations),
+    /** isAuthorized(postEndPoints.createPost),**/ 
+    postFunctions.createPost);
 
 /* ----------- <---> Show Post <---> ----------- */
-router.get('/posts/:postId/show_Post', /**ValidateRequest(postJoi.showPostValidations),**/ /**isAuthorized(postEndPoints.createPost),**/ postFunctions.showPost);
+router.get('/posts/:postId/show_post',
+    /** ValidateRequest(postJoi.showPostValidations),**/
+    /** isAuthorized(postEndPoints.createPost),**/
+    postFunctions.showPost);
 
 /* ----------- <---> Edit Post <---> ----------- */ // *** <===> Done <===>  *** //
 //router.patch('/:blogId/posts/:postId/edit_post', ValidateRequest(postJoi.editPostValidations), isAuthorized(postEndPoints.editPost), postFunctions.editPost);

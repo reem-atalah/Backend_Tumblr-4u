@@ -16,14 +16,15 @@ const blogs = require('../../Blogs/Model/model');
 /* ----------- <---> Create Post <---> ----------- */ // *** <===> Done <===>  *** //
 
 /**
- * Creates a blog post and saves its content in the database.
  * @function
  * @name createPost
+ * @description Creates a blog post and saves its content in the database.
  * @param {string} req - Holds the request body: postHtml, type, state, tags.
  * @param {string} res - Holds the response status and message.
  * 
- * @returns response status and message
+ * @returns {string} response status and message.
  */
+
 const createPost = async(req, res) => {
   try {
     const blogId = req.params.blogId;
