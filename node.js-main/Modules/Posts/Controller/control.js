@@ -14,10 +14,7 @@ const blogs = require('../../Blogs/Model/model');
 
 /* ====================== /// <==> Post Functions <==> /// ====================== */
 /* ----------- <---> Create Post <---> ----------- */ // *** <===> Done <===>  *** //
-const blogValidation = async(blogId) => {
-    let existingBlog = await blogs.findOne({_id: blogId});
-    return existingBlog;
-};
+
 /**
  * Creates a blog post and saves its content in the database.
  * @function
@@ -33,7 +30,16 @@ const createPost = async(req, res) => {
         let tags = req.body.tags;
         //let date = Date.now;
 
-        if(blogValidation(blogId)) {
+        // const blogValidation = async(blogId) => {
+        //     let existingBlog = await blogs.findOne({_id: blogId});
+        //     console.log("existing blog: ",existingBlog);
+        //     return existingBlog;
+        // };
+
+        let existingBlog = await blogs.findOne({_id: blogId});
+
+        if(existingBlog) {
+            console.log(blogId)
             newPost = new posts({blogId, postHtml, type, state, tags}); 
             newPost = await newPost.save();
             res.status(StatusCodes.OK).json('Post Created Successfully (<:>)');
@@ -68,6 +74,6 @@ const postFunctions = module.exports = {
     //commentPost,
     //shareWith,
     //reblogPost,
-    blogValidation
+    //blogValidation
 };
 /* =========== /// <==> End <==> ===========*/

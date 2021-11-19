@@ -38,7 +38,7 @@ describe('Post APIs', () => {
                 postHtml: "</>",
                 type: "link",
                 state: "published",
-                tags: "#tumblr"
+                tags: "tumblr"
             };
 
             chai.request(server)
