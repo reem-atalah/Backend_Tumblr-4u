@@ -14,19 +14,17 @@ const blogs = require('../../Blogs/Model/model');
 
 /* ====================== /// <==> Post Functions <==> /// ====================== */
 /* ----------- <---> Create Post <---> ----------- */ // *** <===> Done <===>  *** //
+const blogValidation = async(blogId) => {
+    let existingBlog = await blogs.findOne({_id: blogId});
+    return existingBlog;
+};
 /**
  * Creates a blog post and saves its content in the database.
  * @function
  * @param {string} req - Holds the request body: postHtml, type, state, tags.
  * @param {string} res - Holds the response status and message.
  */
-
- const blogValidation = async(blogId) => {
-    let existingBlog = await blogs.findOne({_id: blogId});
-    return existingBlog;
-};
-
-const createPost = async(req, res, ) => {
+const createPost = async(req, res) => {
     try {
         let blogId = req.params.blogId;
         let postHtml = req.body.postHtml;
@@ -35,9 +33,8 @@ const createPost = async(req, res, ) => {
         let tags = req.body.tags;
         //let date = Date.now;
 
-        
         if(blogValidation(blogId)) {
-            newPost = new posts({blogId, postHtml, type, state, tags, date}); 
+            newPost = new posts({blogId, postHtml, type, state, tags}); 
             newPost = await newPost.save();
             res.status(StatusCodes.OK).json('Post Created Successfully (<:>)');
         } else {

@@ -18,36 +18,35 @@ describe('Post APIs', () => {
 
     //----------------// <=====> Sign Up <=====> //----------------//
 
-    describe("Get /", () => {
-        it("It Should Hello", (done) => {
+    // describe("Get /", () => {
+    //     it("It Should Hello", (done) => {
 
-            chai.request(server)
-                .get("/")
-                .end((err, response) => {
-                    response.should.have.status(200);
-                    response.body.should.be.eq('Hello, World! (<:>)');
-                    done();
-                });
-        });
-    });
+    //         chai.request(server)
+    //             .get("/")
+    //             .end((err, response) => {
+    //                 response.should.have.status(200);
+    //                 response.body.should.be.eq('Hello, World! (<:>)');
+    //                 done();
+    //             });
+    //     });
+    // });
 
     describe("Post Blog Post", () => {
 
         it("It Should Create New Post", (done) => {
             const blogPost = {
-                blogId: "61968c974f161173940ea9cb",
-                postHtml:"firstPostHtml",
-                type: "text",
+                postHtml: "</>",
+                type: "link",
                 state: "published",
-                tags: ["hey","hello"]
+                tags: "#tumblr"
             };
 
             chai.request(server)
-                .post("/:blogId/posts/create_post")
+                .post("/61968c974f161173940ea9cb/posts/create_post")
                 .send(blogPost)
-                .end((err, response) => {
-                    response.should.have.status(200);
-                    response.body.should.be.eq('Post Created Successfully (<:>)');
+                .end((err, res) => {
+                    res.should.have.status(200);
+                    res.body.should.be.eq('Post Created Successfully (<:>)');
                     done();
                 });
         });
