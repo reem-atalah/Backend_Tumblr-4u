@@ -1,20 +1,21 @@
-/////////////////////////////////////////////////////////////
-//// <==> This File Contains All User Role Policies <==> ////
-/////////////////////////////////////////////////////////////
+// ///////////////////////////////////////////////////////////
+// // <==> This File Contains All User Admin Role Policies <==> ////
+// ///////////////////////////////////////////////////////////
 
-/* ======================== <-- Variables Declarations --> ======================== */
+/* =================== <-- Variables Declarations --> =================== */
 // const userEndPoints = require('../../../Modules/Users/endPoints');
 // const postEndPoints = require('../../../Modules/Posts/endPoints');
 // const reportEndPoints = require('../../../Modules/Report/endPoints');
-// const advertisingEndPoints = require('../../../Modules/Advertising/endPoints');
-const searchEndPoints = require('../../../Modules/Search/Search dashborad/endPoints');
+const searchEndPt=require('../../../Modules/Search/Search dashborad/endPoints');
 
 /* =========== <--> End <--> =========== */
 
-/* ======================== <-- Search Role Policies --> ======================== */
+/* =================== <-- User Admin Role Policies --> =================== */
+const userAdminPolicies = [searchEndPt.getSearchDash,
 
-const searchPolicies = [searchEndPoints.getSearchDash];
+];
+/* =========== <--> End <--> =========== */
 
-/* ======================== <-- Export Search Role Policies --> ======================== */
-module.exports = searchPolicies;
+/* =================== <-- Export Admin Role Policies --> =================== */
+module.exports = userAdminPolicies;
 /* =========== <--> End <--> =========== */

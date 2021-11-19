@@ -1,25 +1,25 @@
-//////////////////////////////////////////////////////////////////
-//// <==> This File Match Between Roles & Them EndPoints <==> ////
-//////////////////////////////////////////////////////////////////
+// ////////////////////////////////////////////////////////////////
+// // <==> This File Match Between Roles & Them EndPoints <==> ////
+// ////////////////////////////////////////////////////////////////
 
-/* ======================== <-- Variables Declarations --> ======================== */
+/* ================= <-- Variables Declarations --> ================= */
 const roles = require('../../../Modules/Search/Search dashborad/Enum/roles');
 const userPolicies = require('./userPolicies');
 const adminPolicies = require('./adminPolicies');
 const superAdminPolicies = require('./superAdminPolicies');
 /* =========== <--> End <--> =========== */
 
-/* ======================== <-- Match Between Roles & Them EndPoints --> ======================== */
+/* ============== <-- Match Between Roles & Them EndPoints --> ============== */
 const opts = {
-    [roles.SUPER_ADMIN]: {
-        can: superAdminPolicies
-    },
-    [roles.ADMIN]: {
-        can: adminPolicies
-    },
-    [roles.USER]: {
-        can: userPolicies
-    },
+  [roles.SUPER_ADMIN]: {
+    can: superAdminPolicies,
+  },
+  [roles.ADMIN]: {
+    can: adminPolicies,
+  },
+  [roles.USER]: {
+    can: userPolicies,
+  },
 };
 /* =========== <--> End <--> =========== */
 

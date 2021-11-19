@@ -2,15 +2,15 @@
 // //// <==> This File Contains All Search Module EndPoints <==> ////
 // ////////////////////////////////////////////////////////////////
 
-// /* ======================== <-- User Modul EndPoints --> ======================== */
+// /* ==================== <-- User Modul EndPoints --> =================== */
 
-const getSearchDash = 'Guest: search_dashboard';
+const getSearchDash = 'User: search_dashboard';
 
 const searchEndPoints = {
-    getSearchDash
+  getSearchDash,
 };
 // /* =========== <--> End <--> =========== */
 
-// /* ======================== <-- Export User EndPoints --> ======================== */
+// /* ==================== <-- Export User EndPoints --> ==================== */
 module.exports = searchEndPoints;
 // /* =========== <--> End <--> =========== */

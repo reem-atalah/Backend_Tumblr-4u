@@ -2,16 +2,16 @@
 // /// <==> /// This File Creates blogs Collection /// <==> ///
 // ///////////////////////////////////////////////////////////
 
-// /* ====================== /// <==> Variables Declaration <==> /// ====================== */
+// /* =============== /// <==> Variables Declaration <==> /// =============== */
 const mongoose = require('mongoose');
 const searchScema = require('../Schema/schema');
 // /* =========== /// <==> End <==> ===========*/
 
-// /* ====================== /// <==> Create User Model <==> /// ====================== */
-const blogs = mongoose.model('Blogs', searchScema.blog);
-const posts = mongoose.model('Posts', searchScema.post);
+// /* ================= /// <==> Create User Model <==> /// ================= */
+const Blogs = mongoose.model('Blogs', searchScema.blog);
+const Posts = mongoose.model('Posts', searchScema.post);
 // /* =========== /// <==> End <==> ===========*/
 
-// /* ====================== /// <==> Export User Model <==> /// ====================== */
-module.exports = {blogs,posts};
+// /* ================= /// <==> Export User Model <==> /// ================= */
+module.exports = {Blogs, Posts};
 // /* =========== /// <==> End <==> ===========*/
