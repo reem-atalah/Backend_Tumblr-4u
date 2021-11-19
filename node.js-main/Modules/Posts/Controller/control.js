@@ -18,8 +18,11 @@ const blogs = require('../../Blogs/Model/model');
 /**
  * Creates a blog post and saves its content in the database.
  * @function
+ * @name createPost
  * @param {string} req - Holds the request body: postHtml, type, state, tags.
  * @param {string} res - Holds the response status and message.
+ * 
+ * @returns response status and message
  */
 const createPost = async(req, res) => {
     try {
@@ -39,15 +42,17 @@ const createPost = async(req, res) => {
         let existingBlog = await blogs.findOne({_id: blogId});
 
         if(existingBlog) {
-            console.log(blogId)
+            console.log("blog id: ",blogId, "blog: ", existingBlog);
             newPost = new posts({blogId, postHtml, type, state, tags}); 
             newPost = await newPost.save();
             res.status(StatusCodes.OK).json('Post Created Successfully (<:>)');
         } else {
+            console.log("blog not found");
             res.status(StatusCodes.BAD_REQUEST).json('Blog Not Found (<:>)');
         };
 
     } catch (error) {
+        console.log("catch errorrr");
         res.status(StatusCodes.INTERNAL_SERVER_ERROR).json('Error In Create Post Function (<:>)');
     };
 };
