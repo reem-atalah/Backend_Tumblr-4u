@@ -19,6 +19,11 @@ const postJoi = {
             blogId: joi.string().required()
         })
     },
+    showPostValidations: {
+        params: joi.object().required().keys({
+            postId: joi.string().required()
+        })
+    },
     editPostValidations: {
         body: joi.object().required().keys({
             postHtml: joi.string().required()

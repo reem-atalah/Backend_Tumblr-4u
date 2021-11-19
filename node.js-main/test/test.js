@@ -42,7 +42,7 @@ describe('Post APIs', () => {
 
     describe("Don't Post Blog Post", () => {
 
-        it("It Should Create New Post Because Blog Doesn't Exist", (done) => {
+        it("It Should Not Create New Post Because Blog Doesn't Exist", (done) => {
             const blogPost = {
                 postHtml: '</>',
                 type: 'video',
@@ -60,7 +60,7 @@ describe('Post APIs', () => {
                 });
         });
 
-        describe("Internal Server Error", () => {
+        describe("Create Post Internal Server Error", () => {
 
             it("It Should Not Create New Post Due To Server Error", (done) => {
                 const blogPost = {
@@ -80,6 +80,27 @@ describe('Post APIs', () => {
                     });
             });
         });
+
+        describe("Get Post and Show it", () => {
+
+            it("It Should Show Post", (done) => {
+                const blogPost = {
+                    postHtml: '</>',
+                    type: 'video',
+                    state: 'published',
+                    tags: 'engineering'
+                };
+    
+                chai.request(server)
+                    .get('/posts/6196df230578db004e05d179/show_Post') 
+                    .end((err, res) => {
+                        res.should.have.status(200);
+                        res.body.should.be.eq('</>');
+                        done();
+                    });
+            });
+        });
+
     });
 
 });
