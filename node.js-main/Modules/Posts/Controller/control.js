@@ -58,6 +58,16 @@ const createPost = async(req, res) => {
   };
 };
 
+/**
+ * @function
+ * @name showPost
+ * @description Shows a blog post by its id.
+ * @param {string} req - Holds the request body: post id.
+ * @param {string} res - Holds the response status and the blog post content if OK.
+ * 
+ * @returns {string} the blog post content in the form of html string.
+ */
+
 /* ----------- <---> Show Post <---> ----------- */ // *** <===> Done <===>  *** //
 // Assumption: Edit Post Function Just Updates ( postHtml ) 
 const showPost = async(req, res) => {
