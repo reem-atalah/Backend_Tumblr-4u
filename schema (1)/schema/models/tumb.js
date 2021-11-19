@@ -353,7 +353,7 @@ var block = new mongoose.Schema({
 //     }
 // });
 
-var post= new mongoose.Schema({
+var post = new mongoose.Schema({
     id: {
         type: "String",
         required: true,
@@ -375,7 +375,7 @@ var post= new mongoose.Schema({
     date: { type: Date },
     timeStamp: { type: "Number" },
     scheduleTime: { type: Date },
-    
+
     data: {
         id: {
             type: "String",
@@ -671,47 +671,47 @@ var notifications = new mongoose.Schema({
     postsMissed: String,
 
 });
-var report=new mongoose.Schema({
-    id:String,
-    reportingBlogId:String,
-    reportedPostId:String,
-    reportType:String,
-    reportContent:String
+var report = new mongoose.Schema({
+    id: String,
+    reportingBlogId: String,
+    reportedPostId: String,
+    reportType: String,
+    reportContent: String
 })
 const blogSchm = mongoose.model("blogs", blog)
-// const groupblogSchm = mongoose.model("group_blogs", groupblog)
-// const trendingblogSchm = mongoose.model("trending_blogs", trendingblog)
+    // const groupblogSchm = mongoose.model("group_blogs", groupblog)
+    // const trendingblogSchm = mongoose.model("trending_blogs", trendingblog)
 const themeSchm = mongoose.model("themes", theme)
 const blogsettingsSchm = mongoose.model("blog_settings", blogSettings)
 const blockSchm = mongoose.model("blocks", block)
-// const likeSchm = mongoose.model("likes", like)
-// const askSchm = mongoose.model("asks", ask)
-// const messageSchm = mongoose.model("messages", message)
+    // const likeSchm = mongoose.model("likes", like)
+    // const askSchm = mongoose.model("asks", ask)
+    // const messageSchm = mongoose.model("messages", message)
 const reportSchm = mongoose.model("reports", report)
 
 // const notesSchm = mongoose.model("notes", notes)
 // const followSchm = mongoose.model("follows", follow)
 const postSchm = mongoose.model("posts", post)
 const chatSchm = mongoose.model("chats", chat)
-// const textPostsSchm = mongoose.model("text_Posts", textPost)
-// const photopostSchm = mongoose.model("photo_Posts", photoPost)
-// const quotePostsSchm = mongoose.model("quote_Posts", quotePost)
-// const linkpostSchm = mongoose.model("link_posts", linkPost)
-// const chatPostSchm = mongoose.model("chat_Posts", chatPost)
-// const audioPostSchm = mongoose.model("audioPosts", audioPost)
-// const videoPostSchm = mongoose.model("video_posts", videoPost)
-// const answerPostSchm = mongoose.model("answer_Posts", answerPost)
-// const submissionpostSchm = mongoose.model("submission_posts", submissionPost)
-// const reblogpostsSchm = mongoose.model("reblog_posts", reblogPost)
-// const trendingpostSchm = mongoose.model("trending_posts", trendingPost)
+    // const textPostsSchm = mongoose.model("text_Posts", textPost)
+    // const photopostSchm = mongoose.model("photo_Posts", photoPost)
+    // const quotePostsSchm = mongoose.model("quote_Posts", quotePost)
+    // const linkpostSchm = mongoose.model("link_posts", linkPost)
+    // const chatPostSchm = mongoose.model("chat_Posts", chatPost)
+    // const audioPostSchm = mongoose.model("audioPosts", audioPost)
+    // const videoPostSchm = mongoose.model("video_posts", videoPost)
+    // const answerPostSchm = mongoose.model("answer_Posts", answerPost)
+    // const submissionpostSchm = mongoose.model("submission_posts", submissionPost)
+    // const reblogpostsSchm = mongoose.model("reblog_posts", reblogPost)
+    // const trendingpostSchm = mongoose.model("trending_posts", trendingPost)
 const userSchm = mongoose.model("users", user)
-// const userSettingsSchm = mongoose.model("users_settings", userSettings)
-// const filtersSchm = mongoose.model("filters", filters)
+    // const userSettingsSchm = mongoose.model("users_settings", userSettings)
+    // const filtersSchm = mongoose.model("filters", filters)
 const notificationsSchm = mongoose.model("notifications", notifications)
 
 
 module.exports = {
-    report:reportSchm,
+    report: reportSchm,
     Blog: blogSchm,
     // GroupBlog: groupblogSchm,
     // TrendingBlog: trendingblogSchm,
@@ -723,8 +723,8 @@ module.exports = {
     // follow: followSchm,
     // ask: askSchm, 
     // message: messageSchm,
-    posts: postSchm
-    , chat: chatSchm,
+    posts: postSchm,
+    chat: chatSchm,
     // textPost: textPostsSchm,
     // photoPost: photopostSchm,
     // quotePost: quotePostsSchm,
