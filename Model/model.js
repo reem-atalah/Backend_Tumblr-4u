@@ -5,16 +5,14 @@
 
 /* ================ /// <==> Variables Declaration <==> /// ================ */
 const mongoose = require('mongoose');
-const userSchema = require('../Schema/schema');
-const postSchema = require('../Schema/schema');
-const blogSchema = require('../Schema/schema');
+const schema = require('../Schema/schema');
 
 /* =========== /// <==> End <==> ===========*/
 
 /* ================ /// <==> Create  Model <==> /// ================ */
-const users = mongoose.model('Users', userSchema);
-const Posts = mongoose.model('Posts', postSchema);
-const blogs = mongoose.model('blogs', blogSchema);
+const users = mongoose.model('Users', schema.userSchema);
+const Posts = mongoose.model('Posts', schema.postSchema);
+const blogs = mongoose.model('blogs', schema.blogSchema);
 
 /* =========== /// <==> End <==> ===========*/
 
