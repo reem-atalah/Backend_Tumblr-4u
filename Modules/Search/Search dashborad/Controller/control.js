@@ -1,10 +1,10 @@
 // ///////////////////////////////////////////////////////////
 // /// <==> /// This File Contains Search Functions /// <==> ///
 // ///////////////////////////////////////////////////////////
-/**
- * Search module
- * @module searchDashboard
- */
+// /**
+//  * Search module
+//  * @module searchDashboard
+//  */
 // /* =============== /// <==> Variables Declaration <==> /// =============== */
 const schema = require('../../../../Model/model');
 

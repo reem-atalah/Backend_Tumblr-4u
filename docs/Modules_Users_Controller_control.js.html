@@ -34,7 +34,7 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const {StatusCodes} = require('http-status-codes');
-const Users = require('../../../Model/model');
+const schema = require('../../../Model/model');
 /* =========== /// &lt;==> End &lt;==> ===========*/
 
 /* ====================== /// &lt;==> User Functions &lt;==> /// ================== */
@@ -55,21 +55,22 @@ const Users = require('../../../Model/model');
  * @returns {object} - { Object }
  */
 
-const signUp = async (request, response) => {
+const signUp = async (req, res) => {
   try {
-    const {email, password, blogName, age, city, country} = request.body;
+    const {email, password, blogName, age, city, country} = req.body;
 
-    const oldUserEmail = await Users.findOne({email, isDeleted: false});
-    const oldUserBlog = await Users.findOne({name: blogName, isDeleted: false});
+    const oldUserEmail = await schema.users.findOne({email, isDeleted: false});
+    // eslint-disable-next-line max-len
+    const oldUserBlog=await schema.users.findOne({name: blogName, isDeleted: false});
 
     if (oldUserEmail) {
-      response.status(StatusCodes.BAD_REQUEST).json({
+      res.status(StatusCodes.BAD_REQUEST).json({
         'meta': {
           'status': 400,
           'msg': 'BAD_REQUEST',
         },
 
-        'response': {
+        'res': {
           'error': 'Email is Already Exists (&lt;:>)',
           'data': '',
         },
@@ -79,19 +80,20 @@ const signUp = async (request, response) => {
 
     // --------------- Search On Blogs Name ----------------//
     else if (oldUserBlog) {
-      response.status(StatusCodes.BAD_REQUEST).json({
+      res.status(StatusCodes.BAD_REQUEST).json({
         'meta': {
           'status': 400,
           'msg': 'BAD_REQUEST',
         },
 
-        'response': {
+        'res': {
           'error': 'Blog Name is Already Exists (&lt;:>)',
           'data': '',
         },
       });
     } else {
-      const newUser = new Users({
+      // eslint-disable-next-line new-cap
+      const newUser = new schema.users({
         email,
         password,
         name: blogName,
@@ -99,33 +101,33 @@ const signUp = async (request, response) => {
         city,
         country,
       });
-      // const data =  await newUser.save();
+      // const data = await newUser.save();
       await newUser.save();
 
       // --------------- Create Primary Blog ----------------//
 
       const token = jwt.sign({email, role: 'user'}, process.env.KEY);
 
-      response.status(StatusCodes.CREATED).json({
+      res.status(StatusCodes.CREATED).json({
         'meta': {
           'status': 201,
           'msg': 'CREATED',
         },
 
-        'response': {
+        'res': {
           'message': 'Sign Up Successfully (&lt;:>)',
           'data': token,
         },
       });
     }
   } catch (error) {
-    response.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
       'meta': {
         'status': 500,
         'msg': 'INTERNAL_SERVER_ERROR',
       },
 
-      'response': {
+      'res': {
         'error': 'Error In Sign Up Function (&lt;:>)',
         'data': '',
       },
@@ -145,10 +147,10 @@ const signUp = async (request, response) => {
  * @returns {object} - { Object }
  */
 
-const login = async (request, response) => {
+const login = async (req, res) => {
   try {
-    const {email, password} = request.body;
-    const oldUser = await Users.findOne({email, isDeleted: false});
+    const {email, password} = req.body;
+    const oldUser = await schema.users.findOne({email, isDeleted: false});
     if (oldUser) {
       const match = await bcrypt.compare(password, oldUser.password);
       if (match) {
@@ -156,51 +158,51 @@ const login = async (request, response) => {
           email: oldUser.email,
           role: oldUser.role},
         process.env.KEY);
-        response.status(StatusCodes.OK).json({
+        res.status(StatusCodes.OK).json({
           'meta': {
             'status': 200,
             'msg': 'OK',
           },
 
-          'response': {
+          'res': {
             'message': 'LogIn Successfully (&lt;:>)',
             'data': token,
           },
         });
       } else {
-        response.status(StatusCodes.BAD_REQUEST).json({
+        res.status(StatusCodes.BAD_REQUEST).json({
           'meta': {
             'status': 400,
             'msg': 'BAD_REQUEST',
           },
 
-          'response': {
+          'res': {
             'error': 'InCorrect Password (&lt;:>)',
             'data': '',
           },
         });
       }
     } else {
-      response.status(StatusCodes.BAD_REQUEST).json({
+      res.status(StatusCodes.BAD_REQUEST).json({
         'meta': {
           'status': 400,
           'msg': 'BAD_REQUEST',
         },
 
-        'response': {
+        'res': {
           'error': 'Email Is Not Found (&lt;:>)',
           'data': '',
         },
       });
     }
   } catch (error) {
-    response.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
       'meta': {
         'status': 500,
         'msg': 'INTERNAL_SERVER_ERROR',
       },
 
-      'response': {
+      'res': {
         'error': 'Error In LogIn Function (&lt;:>)',
         'data': '',
       },
@@ -215,12 +217,12 @@ const login = async (request, response) => {
  * @name followBlog
  * @description this function makes the user whose id sent in
  *              params follow the blog whose id in the body
- * @param {string} req - Holds the blogId in params and the
+ * @param {Object} req - Holds the blogId in params and the
  *                       blockedBlogId in body
- * @param {string} res - Holds the response status and
+ * @param {Object} res - Holds the res status and
  *                      message based on the status.
  *
- * @returns response status and message or error massege in case of errors.
+ * @returns res status and message or error massege in case of errors.
  */
 
 
@@ -228,8 +230,8 @@ const followBlog = async (req, res) => {
   try {
     const userId = req.params.userId;
     const blogId = req.body.blogId;
-    const blog = await blogs.findOne({'_id': blogId}, 'followers');
-    const user= await users.findOne({'_id': userId}, 'following_blogs');
+    const blog = await schema.blogs.findOne({'_id': blogId}, 'followers');
+    const user= await schema.users.findOne({'_id': userId}, 'following_blogs');
     console.log(blogId);
     if (blog) {
       if (user) {
@@ -243,7 +245,7 @@ const followBlog = async (req, res) => {
             'msg': 'OK',
           },
 
-          'response': {
+          'res': {
             'message': 'Blog Followed Successfully',
             'data': '',
           },
@@ -256,7 +258,7 @@ const followBlog = async (req, res) => {
           'msg': 'BAD_REQUEST',
         },
 
-        'response': {
+        'res': {
           'error': 'Blog not found',
           'data': '',
         },
@@ -268,7 +270,7 @@ const followBlog = async (req, res) => {
         'status': 500,
         'msg': 'INTERNAL_SERVER_ERROR',
       },
-      'response': {
+      'res': {
         'error': 'Error In followBlog Function',
         'data': '',
       },
@@ -285,20 +287,20 @@ const followBlog = async (req, res) => {
    * @name unfollowBlog
    * @description this function removes the user whose id sent in
    *               params from followers of the blog whose id in the body
-   * @param {string} req - Holds the blogId in params and
+   * @param {Object} req - Holds the blogId in params and
    *                       the blockedBlogId in body
-   * @param {string} res - Holds the response status and message
+   * @param {Object} res - Holds the res status and message
    *                       based on the status.
    *
-   * @returns response status and message or error massege in case of errors.
+   * @returns res status and message or error massege in case of errors.
    */
 
 const unfollowBlog = async (req, res) => {
   try {
     const userId = req.params.userId;
     const blogId = req.body.blogId;
-    const blog = await blogs.findOne({'_id': blogId}, 'followers');
-    const user= await users.findOne({'_id': userId}, 'following_blogs');
+    const blog = await schema.blogs.findOne({'_id': blogId}, 'followers');
+    const user= await schema.users.findOne({'_id': userId}, 'following_blogs');
     if (blog) {
       if (user) {
         blog.followers.pull(userId);
@@ -311,7 +313,7 @@ const unfollowBlog = async (req, res) => {
             'msg': 'OK',
           },
 
-          'response': {
+          'res': {
             'message': 'Blog Unfollowed Successfully',
             'data': '',
           },
@@ -324,7 +326,7 @@ const unfollowBlog = async (req, res) => {
           'msg': 'BAD_REQUEST',
         },
 
-        'response': {
+        'res': {
           'error': 'Blog not found',
           'data': '',
         },
@@ -336,7 +338,7 @@ const unfollowBlog = async (req, res) => {
         'status': 500,
         'msg': 'INTERNAL_SERVER_ERROR',
       },
-      'response': {
+      'res': {
         'error': 'Error In unfollowBlog Function',
         'data': '',
       },
@@ -364,13 +366,13 @@ module.exports = {
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-searchDashboard.html">searchDashboard</a></li></ul><h3>Global</h3><ul><li><a href="global.html#blockBlog">blockBlog</a></li><li><a href="global.html#createPost">createPost</a></li><li><a href="global.html#followBlog">followBlog</a></li><li><a href="global.html#isAuthorized">isAuthorized</a></li><li><a href="global.html#login">login</a></li><li><a href="global.html#mongoose">mongoose</a></li><li><a href="global.html#showPost">showPost</a></li><li><a href="global.html#signUp">signUp</a></li><li><a href="global.html#unblockBlog">unblockBlog</a></li><li><a href="global.html#unfollowBlog">unfollowBlog</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#autoCompleteSearchDash">autoCompleteSearchDash</a></li><li><a href="global.html#blockBlog">blockBlog</a></li><li><a href="global.html#createPost">createPost</a></li><li><a href="global.html#followBlog">followBlog</a></li><li><a href="global.html#isAuthorized">isAuthorized</a></li><li><a href="global.html#login">login</a></li><li><a href="global.html#mongoose">mongoose</a></li><li><a href="global.html#search">search</a></li><li><a href="global.html#showPost">showPost</a></li><li><a href="global.html#signUp">signUp</a></li><li><a href="global.html#unblockBlog">unblockBlog</a></li><li><a href="global.html#unfollowBlog">unfollowBlog</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Sat Nov 20 2021 15:30:59 GMT+0200 (Eastern European Standard Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Sat Nov 20 2021 23:40:08 GMT+0200 (Eastern European Standard Time)
 </footer>
 
 <script> prettyPrint(); </script>
