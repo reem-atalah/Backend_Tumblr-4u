@@ -17,10 +17,10 @@ const schema = require('../../../Model/model');
  * @function
  * @name createPost
  * @description Creates a blog post and saves its content in the database.
- * @param {string} req - Holds the request body: postHtml, type, state, tags.
- * @param {string} res - Holds the res status and message.
+ * @param {Object} req - Holds the request body: postHtml, type, state, tags.
+ * @param {Object} res - Holds the res status and message.
  *
- * @returns {string} res status and message.
+ * @returns {Object} res status and message.
  */
 
 const createPost = async (req, res) => {
@@ -60,10 +60,10 @@ const createPost = async (req, res) => {
  * @function
  * @name showPost
  * @description Shows a blog post by its id.
- * @param {string} req - Holds the request body: post id.
- * @param {string} res - Holds res status and the blog post content if OK.
+ * @param {Object} req - Holds the request body: post id.
+ * @param {Object} res - Holds res status and the blog post content if OK.
  *
- * @returns {string} the blog post content in the form of html string.
+ * @returns {Object} the blog post content in the form of html string.
  */
 
 /* ----------- <---> Show Post <---> ---- */ // *** <===> Done <===>  *** //

@@ -6,7 +6,7 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const {StatusCodes} = require('http-status-codes');
-const Users = require('../../../Model/model');
+const schema = require('../../../Model/model');
 /* =========== /// <==> End <==> ===========*/
 
 /* ====================== /// <==> User Functions <==> /// ================== */
@@ -31,8 +31,9 @@ const signUp = async (request, response) => {
   try {
     const {email, password, blogName, age, city, country} = request.body;
 
-    const oldUserEmail = await Users.findOne({email, isDeleted: false});
-    const oldUserBlog = await Users.findOne({name: blogName, isDeleted: false});
+    const oldUserEmail = await schema.users.findOne({email, isDeleted: false});
+    // eslint-disable-next-line max-len
+    const oldUserBlog=await schema.users.findOne({name: blogName, isDeleted: false});
 
     if (oldUserEmail) {
       response.status(StatusCodes.BAD_REQUEST).json({
@@ -63,7 +64,8 @@ const signUp = async (request, response) => {
         },
       });
     } else {
-      const newUser = new Users({
+      // eslint-disable-next-line new-cap
+      const newUser = new schema.users({
         email,
         password,
         name: blogName,
@@ -120,7 +122,7 @@ const signUp = async (request, response) => {
 const login = async (request, response) => {
   try {
     const {email, password} = request.body;
-    const oldUser = await Users.findOne({email, isDeleted: false});
+    const oldUser = await schema.users.findOne({email, isDeleted: false});
     if (oldUser) {
       const match = await bcrypt.compare(password, oldUser.password);
       if (match) {
@@ -187,9 +189,9 @@ const login = async (request, response) => {
  * @name followBlog
  * @description this function makes the user whose id sent in
  *              params follow the blog whose id in the body
- * @param {string} req - Holds the blogId in params and the
+ * @param {Object} req - Holds the blogId in params and the
  *                       blockedBlogId in body
- * @param {string} res - Holds the response status and
+ * @param {Object} res - Holds the response status and
  *                      message based on the status.
  *
  * @returns response status and message or error massege in case of errors.
@@ -200,8 +202,8 @@ const followBlog = async (req, res) => {
   try {
     const userId = req.params.userId;
     const blogId = req.body.blogId;
-    const blog = await blogs.findOne({'_id': blogId}, 'followers');
-    const user= await users.findOne({'_id': userId}, 'following_blogs');
+    const blog = await schema.blogs.findOne({'_id': blogId}, 'followers');
+    const user= await schema.users.findOne({'_id': userId}, 'following_blogs');
     console.log(blogId);
     if (blog) {
       if (user) {
@@ -257,9 +259,9 @@ const followBlog = async (req, res) => {
    * @name unfollowBlog
    * @description this function removes the user whose id sent in
    *               params from followers of the blog whose id in the body
-   * @param {string} req - Holds the blogId in params and
+   * @param {Object} req - Holds the blogId in params and
    *                       the blockedBlogId in body
-   * @param {string} res - Holds the response status and message
+   * @param {Object} res - Holds the response status and message
    *                       based on the status.
    *
    * @returns response status and message or error massege in case of errors.
@@ -269,8 +271,8 @@ const unfollowBlog = async (req, res) => {
   try {
     const userId = req.params.userId;
     const blogId = req.body.blogId;
-    const blog = await blogs.findOne({'_id': blogId}, 'followers');
-    const user= await users.findOne({'_id': userId}, 'following_blogs');
+    const blog = await schema.blogs.findOne({'_id': blogId}, 'followers');
+    const user= await schema.users.findOne({'_id': userId}, 'following_blogs');
     if (blog) {
       if (user) {
         blog.followers.pull(userId);

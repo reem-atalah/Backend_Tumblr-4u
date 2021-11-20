@@ -33,8 +33,8 @@ async () => {
  * @function
  * @name  autoCompleteSearchDash
  * @description Applies search on posts/tags
- * @param {string} req - Holds the request body: wordName.
- * @param {string} res - Holds the response array having 3 arrays.
+ * @param {Object} req - Holds the request body: wordName.
+ * @param {Object} res - Holds the response array having 3 arrays.
  *                     - array 1: has the tags in posts with this regex
  *                     - array 2: has the blogs this regex
  *                     - array 3: has the posts with interested tags this regex
@@ -47,7 +47,7 @@ const autoCompleteSearchDash = async (req, res) => {
   const regex= new RegExp(req.body.wordName, 'i');
 
   // gets all posts with the needed tag
-  const searchTags= await schema.posts.find(tagSpecified={tags: {$in: regex}});
+  const searchTags= await schema.Posts.find(tagSpecified={tags: {$in: regex}});
   // gets all mention blogs with the regex
   const searchMentionBlogs= await schema.blogs.find({name: regex});
   // gets all posts with the followed tags
