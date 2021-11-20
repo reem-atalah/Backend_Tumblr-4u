@@ -1,7 +1,3 @@
-/* eslint-disable linebreak-style */
-/* eslint-disable no-trailing-spaces */
-/* eslint-disable linebreak-style */
-   
 // ///////////////////////////////////////////////////////////////////
 // / <==> /// This File Is The Unit Testing OF Search APIS  /// <==> ///
 // ///////////////////////////////////////////////////////////////////
@@ -91,7 +87,7 @@ describe('Blog Methods', () => {
   describe('Blog blocks a blog', () => {
     let itShouldDo='It should put the blockedBlogId in blockedBlogs';
     itShouldDo+='array of the blog';
-    
+
     it(itShouldDo, (done) => {
       const blockedBlogId = {blockedBlogId: '61976787dacdf3325998179c'};
       chai.request(server)
@@ -108,7 +104,7 @@ describe('Blog Methods', () => {
     });
     itShouldDo='It doesn\'t  find the blog in the database';
     itShouldDo+='and returns blog not found';
-    
+
     it(itShouldDo, (done) => {
       const blockedBlogId = {blockedBlogId: '61976787dacdf3395998179c'};
       chai.request(server)
@@ -127,7 +123,7 @@ describe('Blog Methods', () => {
   describe('Blog unblocks a blog', () => {
     let itShouldDo='It should remove the blockedBlogId from blockedBlogs';
     itShouldDo+='array of the blog';
-    
+
     it(itShouldDo, (done) => {
       const unblockedBlogId = {unblockedBlogId: '61976787dacdf3325998179c'};
       chai.request(server)
@@ -144,7 +140,7 @@ describe('Blog Methods', () => {
     });
     itShouldDo='It doesn\'t find the blog in the database';
     itShouldDo+='and returns blog not found';
-    
+
     it(itShouldDo, (done) => {
       const unblockedBlogId = {unblockedBlogId: '61976787dacdf3395998179c'};
       chai.request(server)
