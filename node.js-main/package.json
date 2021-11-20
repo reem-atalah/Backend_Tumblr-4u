@@ -5,7 +5,7 @@
   "scripts": {
     "start": "nodemon script.js",
     "test": "mocha --reporter mochawesome --reporter-options reportDir=Report,reportFilename=Test_Report --timeout 100000 --recursive --exit",
-        "doc": "jsdoc -c jsdoc.json"
+    "doc": "jsdoc -c jsdoc.json"
   },
   "keywords": [],
   "author": "",
@@ -19,6 +19,7 @@
     "jest": "^27.3.1",
     "joi": "^17.4.2",
     "jsonwebtoken": "^8.5.1",
+    "mochawesome": "^7.0.1",
     "mongoose": "^6.0.7"
   },
   "devDependencies": {
