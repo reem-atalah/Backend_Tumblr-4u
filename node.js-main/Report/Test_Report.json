@@ -1,0 +1,334 @@
+{
+  "stats": {
+    "suites": 6,
+    "tests": 8,
+    "passes": 8,
+    "pending": 0,
+    "failures": 0,
+    "start": "2021-11-20T00:13:19.590Z",
+    "end": "2021-11-20T00:13:25.175Z",
+    "duration": 5585,
+    "testsRegistered": 8,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "01fbc8a8-1b5a-425f-8e19-9c6b0332f218",
+      "title": "",
+      "fullFile": "",
+      "file": "",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "06d634c9-5865-41cc-b39c-a612a32198e6",
+          "title": "User Methods",
+          "fullFile": "C:\\Users\\EGY\\Desktop\\Backend_Tumblr-4u-rawaa\\node.js-main\\test\\test.js",
+          "file": "\\test\\test.js",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [],
+          "suites": [
+            {
+              "uuid": "102e9c6e-f914-4862-8802-f1a2329386c2",
+              "title": "User follows a blog",
+              "fullFile": "C:\\Users\\EGY\\Desktop\\Backend_Tumblr-4u-rawaa\\node.js-main\\test\\test.js",
+              "file": "\\test\\test.js",
+              "beforeHooks": [],
+              "afterHooks": [],
+              "tests": [
+                {
+                  "title": "It should put the userId in followers array of blog andput blogId in the following_blogs array of the user",
+                  "fullTitle": "User Methods User follows a blog It should put the userId in followers array of blog andput blogId in the following_blogs array of the user",
+                  "timedOut": false,
+                  "duration": 3210,
+                  "state": "passed",
+                  "speed": "slow",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "const blogId = {blogId: '61976787dacdf3325998179c'};\nchai.request(server)\n    .post('/user/follow/6193e580747ad05f7f98513e')\n    .send(blogId)\n    .end((err, res) => {\n      res.should.have.status(200);\n      res.body.should.be.a('object');\n      res.body.should.have.property('response')\n          .have.property('message')\n          .eq('Blog Followed Successfully');\n      done();\n    });",
+                  "err": {},
+                  "uuid": "3a1e82db-b766-49a0-8be3-6190db6de48a",
+                  "parentUUID": "102e9c6e-f914-4862-8802-f1a2329386c2",
+                  "isHook": false,
+                  "skipped": false
+                },
+                {
+                  "title": "It doesn't  find the blog in the databaseand returns blog not found",
+                  "fullTitle": "User Methods User follows a blog It doesn't  find the blog in the databaseand returns blog not found",
+                  "timedOut": false,
+                  "duration": 298,
+                  "state": "passed",
+                  "speed": "slow",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "const blogId = {blogId: '61976787dacdf332598179c0'};\nchai.request(server)\n    .post('/user/follow/6193e580747ad05f7f98513e')\n    .send(blogId)\n    .end((err, res) => {\n      res.should.have.status(404);\n      res.body.should.be.a('object');\n      res.body.should.have.property('response')\n          .have.property('error')\n          .eq('Blog not found');\n      done();\n    });",
+                  "err": {},
+                  "uuid": "7981063b-63c8-4855-a626-3cc0ca37a523",
+                  "parentUUID": "102e9c6e-f914-4862-8802-f1a2329386c2",
+                  "isHook": false,
+                  "skipped": false
+                }
+              ],
+              "suites": [],
+              "passes": [
+                "3a1e82db-b766-49a0-8be3-6190db6de48a",
+                "7981063b-63c8-4855-a626-3cc0ca37a523"
+              ],
+              "failures": [],
+              "pending": [],
+              "skipped": [],
+              "duration": 3508,
+              "root": false,
+              "rootEmpty": false,
+              "_timeout": 10000
+            },
+            {
+              "uuid": "ed0c0172-36d1-4987-818f-0cef570ffead",
+              "title": "User unfollows a blog",
+              "fullFile": "C:\\Users\\EGY\\Desktop\\Backend_Tumblr-4u-rawaa\\node.js-main\\test\\test.js",
+              "file": "\\test\\test.js",
+              "beforeHooks": [],
+              "afterHooks": [],
+              "tests": [
+                {
+                  "title": "It should remove the userId from followers array of blog and remove blogId from following_blogs of the user",
+                  "fullTitle": "User Methods User unfollows a blog It should remove the userId from followers array of blog and remove blogId from following_blogs of the user",
+                  "timedOut": false,
+                  "duration": 311,
+                  "state": "passed",
+                  "speed": "slow",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "const blogId = {blogId: '61976787dacdf3325998179c'};\nchai.request(server)\n    .post('/user/unfollow/6193e580747ad05f7f98513e')\n    .send(blogId)\n    .end((err, res) => {\n      res.should.have.status(200);\n      res.body.should.be.a('object');\n      res.body.should.have.property('response')\n          .have.property('message')\n          .eq('Blog Unfollowed Successfully');\n      done();\n    });",
+                  "err": {},
+                  "uuid": "a9fb8f43-f323-4596-a158-d163e092347e",
+                  "parentUUID": "ed0c0172-36d1-4987-818f-0cef570ffead",
+                  "isHook": false,
+                  "skipped": false
+                },
+                {
+                  "title": "It doesn't find the blog in the databaseand returns blog not found",
+                  "fullTitle": "User Methods User unfollows a blog It doesn't find the blog in the databaseand returns blog not found",
+                  "timedOut": false,
+                  "duration": 290,
+                  "state": "passed",
+                  "speed": "slow",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "const blogId = {blogId: '61976787dacdf332598179c0'};\nchai.request(server)\n    .post('/user/unfollow/6193e580747ad05f7f98513e')\n    .send(blogId)\n    .end((err, res) => {\n      res.should.have.status(404);\n      res.body.should.be.a('object');\n      res.body.should.have.property('response')\n          .have.property('error')\n          .eq('Blog not found');\n      done();\n    });",
+                  "err": {},
+                  "uuid": "bbd2c11f-0033-46d3-8664-8c22e2973a8c",
+                  "parentUUID": "ed0c0172-36d1-4987-818f-0cef570ffead",
+                  "isHook": false,
+                  "skipped": false
+                }
+              ],
+              "suites": [],
+              "passes": [
+                "a9fb8f43-f323-4596-a158-d163e092347e",
+                "bbd2c11f-0033-46d3-8664-8c22e2973a8c"
+              ],
+              "failures": [],
+              "pending": [],
+              "skipped": [],
+              "duration": 601,
+              "root": false,
+              "rootEmpty": false,
+              "_timeout": 10000
+            }
+          ],
+          "passes": [],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 0,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 10000
+        },
+        {
+          "uuid": "008f8083-786a-41c0-8221-b99aeb7fd4ca",
+          "title": "Blog Methods",
+          "fullFile": "C:\\Users\\EGY\\Desktop\\Backend_Tumblr-4u-rawaa\\node.js-main\\test\\test.js",
+          "file": "\\test\\test.js",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [],
+          "suites": [
+            {
+              "uuid": "f3d7ec37-c69c-4fa5-a8b4-f1bd6d947c8e",
+              "title": "Blog blocks a blog",
+              "fullFile": "C:\\Users\\EGY\\Desktop\\Backend_Tumblr-4u-rawaa\\node.js-main\\test\\test.js",
+              "file": "\\test\\test.js",
+              "beforeHooks": [],
+              "afterHooks": [],
+              "tests": [
+                {
+                  "title": "It should put the blockedBlogId in blockedBlogsarray of the blog",
+                  "fullTitle": "Blog Methods Blog blocks a blog It should put the blockedBlogId in blockedBlogsarray of the blog",
+                  "timedOut": false,
+                  "duration": 320,
+                  "state": "passed",
+                  "speed": "slow",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "const blockedBlogId = {blockedBlogId: '61976787dacdf3325998179c'};\nchai.request(server)\n    .post('/blog/block/6195847fe6c15a39f0470726')\n    .send(blockedBlogId)\n    .end((err, res) => {\n      res.should.have.status(200);\n      res.body.should.be.a('object');\n      res.body.should.have.property('response')\n          .have.property('message')\n          .eq('Blog blocked Successfully');\n      done();\n    });",
+                  "err": {},
+                  "uuid": "9a0afdc2-7c49-4e92-89a2-fe209111d191",
+                  "parentUUID": "f3d7ec37-c69c-4fa5-a8b4-f1bd6d947c8e",
+                  "isHook": false,
+                  "skipped": false
+                },
+                {
+                  "title": "It doesn't  find the blog in the databaseand returns blog not found",
+                  "fullTitle": "Blog Methods Blog blocks a blog It doesn't  find the blog in the databaseand returns blog not found",
+                  "timedOut": false,
+                  "duration": 159,
+                  "state": "passed",
+                  "speed": "slow",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "const blockedBlogId = {blockedBlogId: '61976787dacdf3395998179c'};\nchai.request(server)\n    .post('/blog/block/6195847fe6c15a39f0470726')\n    .send(blockedBlogId)\n    .end((err, res) => {\n      res.should.have.status(404);\n      res.body.should.be.a('object');\n      res.body.should.have.property('response')\n          .have.property('error')\n          .eq('Blog NOT FOUND');\n      done();\n    });",
+                  "err": {},
+                  "uuid": "dc181594-0049-4370-8a2f-b993c02181b3",
+                  "parentUUID": "f3d7ec37-c69c-4fa5-a8b4-f1bd6d947c8e",
+                  "isHook": false,
+                  "skipped": false
+                }
+              ],
+              "suites": [],
+              "passes": [
+                "9a0afdc2-7c49-4e92-89a2-fe209111d191",
+                "dc181594-0049-4370-8a2f-b993c02181b3"
+              ],
+              "failures": [],
+              "pending": [],
+              "skipped": [],
+              "duration": 479,
+              "root": false,
+              "rootEmpty": false,
+              "_timeout": 10000
+            },
+            {
+              "uuid": "1f623b05-7f38-4a0e-a793-27bfa57323ae",
+              "title": "Blog unblocks a blog",
+              "fullFile": "C:\\Users\\EGY\\Desktop\\Backend_Tumblr-4u-rawaa\\node.js-main\\test\\test.js",
+              "file": "\\test\\test.js",
+              "beforeHooks": [],
+              "afterHooks": [],
+              "tests": [
+                {
+                  "title": "It should remove the blockedBlogId from blockedBlogsarray of the blog",
+                  "fullTitle": "Blog Methods Blog unblocks a blog It should remove the blockedBlogId from blockedBlogsarray of the blog",
+                  "timedOut": false,
+                  "duration": 291,
+                  "state": "passed",
+                  "speed": "slow",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "const unblockedBlogId = {unblockedBlogId: '61976787dacdf3325998179c'};\nchai.request(server)\n    .post('/blog/unblock/6195847fe6c15a39f0470726')\n    .send(unblockedBlogId)\n    .end((err, res) => {\n      res.should.have.status(200);\n      res.body.should.be.a('object');\n      res.body.should.have.property('response')\n          .have.property('message')\n          .eq('Blog unblocked Successfully');\n      done();\n    });",
+                  "err": {},
+                  "uuid": "18f7703c-c3f4-4aec-bf22-00e3cfb93d02",
+                  "parentUUID": "1f623b05-7f38-4a0e-a793-27bfa57323ae",
+                  "isHook": false,
+                  "skipped": false
+                },
+                {
+                  "title": "It doesn't find the blog in the databaseand returns blog not found",
+                  "fullTitle": "Blog Methods Blog unblocks a blog It doesn't find the blog in the databaseand returns blog not found",
+                  "timedOut": false,
+                  "duration": 664,
+                  "state": "passed",
+                  "speed": "slow",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "const unblockedBlogId = {unblockedBlogId: '61976787dacdf3395998179c'};\nchai.request(server)\n    .post('/blog/unblock/6195847fe6c15a39f0470726')\n    .send(unblockedBlogId)\n    .end((err, res) => {\n      res.should.have.status(404);\n      res.body.should.be.a('object');\n      res.body.should.have.property('response')\n          .have.property('error')\n          .eq('Blog NOT FOUND');\n      done();\n    });",
+                  "err": {},
+                  "uuid": "81262562-abf5-4838-a860-96f366fd7e9a",
+                  "parentUUID": "1f623b05-7f38-4a0e-a793-27bfa57323ae",
+                  "isHook": false,
+                  "skipped": false
+                }
+              ],
+              "suites": [],
+              "passes": [
+                "18f7703c-c3f4-4aec-bf22-00e3cfb93d02",
+                "81262562-abf5-4838-a860-96f366fd7e9a"
+              ],
+              "failures": [],
+              "pending": [],
+              "skipped": [],
+              "duration": 955,
+              "root": false,
+              "rootEmpty": false,
+              "_timeout": 10000
+            }
+          ],
+          "passes": [],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 0,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 10000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 10000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "9.1.3"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "Test_Report",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.0.1"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "Report",
+        "reportFilename": "Test_Report"
+      },
+      "version": "6.0.1"
+    }
+  }
+}
