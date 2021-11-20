@@ -1,0 +1,366 @@
+{
+  "stats": {
+    "suites": 6,
+    "tests": 8,
+    "passes": 0,
+    "pending": 0,
+    "failures": 8,
+    "start": "2021-11-20T12:58:03.851Z",
+    "end": "2021-11-20T12:58:04.121Z",
+    "duration": 270,
+    "testsRegistered": 8,
+    "passPercent": 0,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "fe81060b-0129-440a-bd02-71c911e995b6",
+      "title": "",
+      "fullFile": "",
+      "file": "",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "76bb3f54-fc5a-4830-8aa6-e10790e931ba",
+          "title": "User Methods",
+          "fullFile": "D:\\faculty\\CMP3\\software engineering\\merge\\test\\userBlogTest.js",
+          "file": "\\test\\userBlogTest.js",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [],
+          "suites": [
+            {
+              "uuid": "a5aff5ca-07e0-4061-8955-99bef95615e0",
+              "title": "User follows a blog",
+              "fullFile": "D:\\faculty\\CMP3\\software engineering\\merge\\test\\userBlogTest.js",
+              "file": "\\test\\userBlogTest.js",
+              "beforeHooks": [],
+              "afterHooks": [],
+              "tests": [
+                {
+                  "title": "It should put the userId in followers array of blog andput blogId in the following_blogs array of the user",
+                  "fullTitle": "User Methods User follows a blog It should put the userId in followers array of blog andput blogId in the following_blogs array of the user",
+                  "timedOut": false,
+                  "duration": 83,
+                  "state": "failed",
+                  "speed": null,
+                  "pass": false,
+                  "fail": true,
+                  "pending": false,
+                  "context": null,
+                  "code": "const blogId = {blogId: '61976787dacdf3325998179c'};\nchai\n    .request(server)\n    .post('/user/follow/6193e580747ad05f7f98513e')\n    .send(blogId)\n    .end((err, res) => {\n      res.should.have.status(200);\n      res.body.should.be.a('object');\n      res.body.should.have.property('res')\n          .have.property('message')\n          .eq('Blog Followed Successfully');\n      done();\n    });",
+                  "err": {
+                    "message": "AssertionError: expected { Object (_events, _eventsCount, ...) } to have status code 200 but got 400",
+                    "estack": "AssertionError: expected { Object (_events, _eventsCount, ...) } to have status code 200 but got 400\n    at D:\\faculty\\CMP3\\software engineering\\merge\\test\\userBlogTest.js:28:29\n    at Test.Request.callback (node_modules\\superagent\\lib\\node\\index.js:716:12)\n    at D:\\faculty\\CMP3\\software engineering\\merge\\node_modules\\superagent\\lib\\node\\index.js:916:18\n    at IncomingMessage.<anonymous> (node_modules\\superagent\\lib\\node\\parsers\\json.js:19:7)\n    at IncomingMessage.emit (node:events:402:35)\n    at endReadableNT (node:internal/streams/readable:1343:12)\n    at processTicksAndRejections (node:internal/process/task_queues:83:21)",
+                    "diff": "- 400\n+ 200\n"
+                  },
+                  "uuid": "5aea700f-bd10-417d-a3b3-aaa4d62be79f",
+                  "parentUUID": "a5aff5ca-07e0-4061-8955-99bef95615e0",
+                  "isHook": false,
+                  "skipped": false
+                },
+                {
+                  "title": "It doesn't  find the blog in the databaseand returns blog not found",
+                  "fullTitle": "User Methods User follows a blog It doesn't  find the blog in the databaseand returns blog not found",
+                  "timedOut": false,
+                  "duration": 15,
+                  "state": "failed",
+                  "speed": null,
+                  "pass": false,
+                  "fail": true,
+                  "pending": false,
+                  "context": null,
+                  "code": "const blogId = {blogId: '61976787dacdf332598179c0'};\nchai\n    .request(server)\n    .post('/user/follow/6193e580747ad05f7f98513e')\n    .send(blogId)\n    .end((err, res) => {\n      res.should.have.status(404);\n      res.body.should.be.a('object');\n      res.body.should.have.property('res')\n          .have.property('error')\n          .eq('Blog not found');\n      done();\n    });",
+                  "err": {
+                    "message": "AssertionError: expected { Object (_events, _eventsCount, ...) } to have status code 404 but got 400",
+                    "estack": "AssertionError: expected { Object (_events, _eventsCount, ...) } to have status code 404 but got 400\n    at D:\\faculty\\CMP3\\software engineering\\merge\\test\\userBlogTest.js:45:29\n    at Test.Request.callback (node_modules\\superagent\\lib\\node\\index.js:716:12)\n    at D:\\faculty\\CMP3\\software engineering\\merge\\node_modules\\superagent\\lib\\node\\index.js:916:18\n    at IncomingMessage.<anonymous> (node_modules\\superagent\\lib\\node\\parsers\\json.js:19:7)\n    at IncomingMessage.emit (node:events:402:35)\n    at endReadableNT (node:internal/streams/readable:1343:12)\n    at processTicksAndRejections (node:internal/process/task_queues:83:21)",
+                    "diff": "- 400\n+ 404\n"
+                  },
+                  "uuid": "584eb1ab-a686-4fb7-b7c5-05f0d19b93b3",
+                  "parentUUID": "a5aff5ca-07e0-4061-8955-99bef95615e0",
+                  "isHook": false,
+                  "skipped": false
+                }
+              ],
+              "suites": [],
+              "passes": [],
+              "failures": [
+                "5aea700f-bd10-417d-a3b3-aaa4d62be79f",
+                "584eb1ab-a686-4fb7-b7c5-05f0d19b93b3"
+              ],
+              "pending": [],
+              "skipped": [],
+              "duration": 98,
+              "root": false,
+              "rootEmpty": false,
+              "_timeout": 100000
+            },
+            {
+              "uuid": "bbba2bb5-dcac-4d9e-b26f-d64c6943755b",
+              "title": "User unfollows a blog",
+              "fullFile": "D:\\faculty\\CMP3\\software engineering\\merge\\test\\userBlogTest.js",
+              "file": "\\test\\userBlogTest.js",
+              "beforeHooks": [],
+              "afterHooks": [],
+              "tests": [
+                {
+                  "title": "It should remove the userId from followers array of blog and remove blogId from following_blogs of the user",
+                  "fullTitle": "User Methods User unfollows a blog It should remove the userId from followers array of blog and remove blogId from following_blogs of the user",
+                  "timedOut": false,
+                  "duration": 13,
+                  "state": "failed",
+                  "speed": null,
+                  "pass": false,
+                  "fail": true,
+                  "pending": false,
+                  "context": null,
+                  "code": "const blogId = {blogId: '61976787dacdf3325998179c'};\nchai\n    .request(server)\n    .post('/user/unfollow/6193e580747ad05f7f98513e')\n    .send(blogId)\n    .end((err, res) => {\n      res.should.have.status(200);\n      res.body.should.be.a('object');\n      res.body.should.have.property('res')\n          .have.property('message')\n          .eq('Blog Unfollowed Successfully');\n      done();\n    });",
+                  "err": {
+                    "message": "AssertionError: expected { Object (_events, _eventsCount, ...) } to have status code 200 but got 400",
+                    "estack": "AssertionError: expected { Object (_events, _eventsCount, ...) } to have status code 200 but got 400\n    at D:\\faculty\\CMP3\\software engineering\\merge\\test\\userBlogTest.js:64:29\n    at Test.Request.callback (node_modules\\superagent\\lib\\node\\index.js:716:12)\n    at D:\\faculty\\CMP3\\software engineering\\merge\\node_modules\\superagent\\lib\\node\\index.js:916:18\n    at IncomingMessage.<anonymous> (node_modules\\superagent\\lib\\node\\parsers\\json.js:19:7)\n    at IncomingMessage.emit (node:events:402:35)\n    at endReadableNT (node:internal/streams/readable:1343:12)\n    at processTicksAndRejections (node:internal/process/task_queues:83:21)",
+                    "diff": "- 400\n+ 200\n"
+                  },
+                  "uuid": "b9c9adf3-df91-400d-9e80-3ccf1662d83e",
+                  "parentUUID": "bbba2bb5-dcac-4d9e-b26f-d64c6943755b",
+                  "isHook": false,
+                  "skipped": false
+                },
+                {
+                  "title": "It doesn't find the blog in the databaseand returns blog not found",
+                  "fullTitle": "User Methods User unfollows a blog It doesn't find the blog in the databaseand returns blog not found",
+                  "timedOut": false,
+                  "duration": 17,
+                  "state": "failed",
+                  "speed": null,
+                  "pass": false,
+                  "fail": true,
+                  "pending": false,
+                  "context": null,
+                  "code": "const blogId = {blogId: '61976787dacdf332598179c0'};\nchai\n    .request(server)\n    .post('/user/unfollow/6193e580747ad05f7f98513e')\n    .send(blogId)\n    .end((err, res) => {\n      res.should.have.status(404);\n      res.body.should.be.a('object');\n      res.body.should.have.property('res')\n          .have.property('error')\n          .eq('Blog not found');\n      done();\n    });",
+                  "err": {
+                    "message": "AssertionError: expected { Object (_events, _eventsCount, ...) } to have status code 404 but got 400",
+                    "estack": "AssertionError: expected { Object (_events, _eventsCount, ...) } to have status code 404 but got 400\n    at D:\\faculty\\CMP3\\software engineering\\merge\\test\\userBlogTest.js:81:29\n    at Test.Request.callback (node_modules\\superagent\\lib\\node\\index.js:716:12)\n    at D:\\faculty\\CMP3\\software engineering\\merge\\node_modules\\superagent\\lib\\node\\index.js:916:18\n    at IncomingMessage.<anonymous> (node_modules\\superagent\\lib\\node\\parsers\\json.js:19:7)\n    at IncomingMessage.emit (node:events:402:35)\n    at endReadableNT (node:internal/streams/readable:1343:12)\n    at processTicksAndRejections (node:internal/process/task_queues:83:21)",
+                    "diff": "- 400\n+ 404\n"
+                  },
+                  "uuid": "16ff2bb4-13ff-4437-8a32-878b9311b1a3",
+                  "parentUUID": "bbba2bb5-dcac-4d9e-b26f-d64c6943755b",
+                  "isHook": false,
+                  "skipped": false
+                }
+              ],
+              "suites": [],
+              "passes": [],
+              "failures": [
+                "b9c9adf3-df91-400d-9e80-3ccf1662d83e",
+                "16ff2bb4-13ff-4437-8a32-878b9311b1a3"
+              ],
+              "pending": [],
+              "skipped": [],
+              "duration": 30,
+              "root": false,
+              "rootEmpty": false,
+              "_timeout": 100000
+            }
+          ],
+          "passes": [],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 0,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 100000
+        },
+        {
+          "uuid": "4ce149a7-1278-4cf7-8c81-3a74dee07c47",
+          "title": "Blog Methods",
+          "fullFile": "D:\\faculty\\CMP3\\software engineering\\merge\\test\\userBlogTest.js",
+          "file": "\\test\\userBlogTest.js",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [],
+          "suites": [
+            {
+              "uuid": "e5d3e006-031f-4b09-92bd-7fbfa2ae5258",
+              "title": "Blog blocks a blog",
+              "fullFile": "D:\\faculty\\CMP3\\software engineering\\merge\\test\\userBlogTest.js",
+              "file": "\\test\\userBlogTest.js",
+              "beforeHooks": [],
+              "afterHooks": [],
+              "tests": [
+                {
+                  "title": "It should put the blockedBlogId in blockedBlogsarray of the blog",
+                  "fullTitle": "Blog Methods Blog blocks a blog It should put the blockedBlogId in blockedBlogsarray of the blog",
+                  "timedOut": false,
+                  "duration": 15,
+                  "state": "failed",
+                  "speed": null,
+                  "pass": false,
+                  "fail": true,
+                  "pending": false,
+                  "context": null,
+                  "code": "const blockedBlogId = {blockedBlogId: '61976787dacdf3325998179c'};\nchai\n    .request(server)\n    .post('/blog/block/6195847fe6c15a39f0470726')\n    .send(blockedBlogId)\n    .end((err, res) => {\n      res.should.have.status(200);\n      res.body.should.be.a('object');\n      res.body.should.have.property('res')\n          .have.property('message')\n          .eq('Blog blocked Successfully');\n      done();\n    });",
+                  "err": {
+                    "message": "AssertionError: expected { Object (_events, _eventsCount, ...) } to have status code 200 but got 400",
+                    "estack": "AssertionError: expected { Object (_events, _eventsCount, ...) } to have status code 200 but got 400\n    at D:\\faculty\\CMP3\\software engineering\\merge\\test\\userBlogTest.js:103:29\n    at Test.Request.callback (node_modules\\superagent\\lib\\node\\index.js:716:12)\n    at D:\\faculty\\CMP3\\software engineering\\merge\\node_modules\\superagent\\lib\\node\\index.js:916:18\n    at IncomingMessage.<anonymous> (node_modules\\superagent\\lib\\node\\parsers\\json.js:19:7)\n    at IncomingMessage.emit (node:events:402:35)\n    at endReadableNT (node:internal/streams/readable:1343:12)\n    at processTicksAndRejections (node:internal/process/task_queues:83:21)",
+                    "diff": "- 400\n+ 200\n"
+                  },
+                  "uuid": "75c1c2b7-f237-4906-80c4-b342a854c471",
+                  "parentUUID": "e5d3e006-031f-4b09-92bd-7fbfa2ae5258",
+                  "isHook": false,
+                  "skipped": false
+                },
+                {
+                  "title": "It doesn't  find the blog in the databaseand returns blog not found",
+                  "fullTitle": "Blog Methods Blog blocks a blog It doesn't  find the blog in the databaseand returns blog not found",
+                  "timedOut": false,
+                  "duration": 17,
+                  "state": "failed",
+                  "speed": null,
+                  "pass": false,
+                  "fail": true,
+                  "pending": false,
+                  "context": null,
+                  "code": "const blockedBlogId = {blockedBlogId: '61976787dacdf3395998179c'};\nchai\n    .request(server)\n    .post('/blog/block/6195847fe6c15a39f0470726')\n    .send(blockedBlogId)\n    .end((err, res) => {\n      res.should.have.status(404);\n      res.body.should.be.a('object');\n      res.body.should.have.property('res')\n          .have.property('error')\n          .eq('Blog NOT FOUND');\n      done();\n    });",
+                  "err": {
+                    "message": "AssertionError: expected { Object (_events, _eventsCount, ...) } to have status code 404 but got 400",
+                    "estack": "AssertionError: expected { Object (_events, _eventsCount, ...) } to have status code 404 but got 400\n    at D:\\faculty\\CMP3\\software engineering\\merge\\test\\userBlogTest.js:121:29\n    at Test.Request.callback (node_modules\\superagent\\lib\\node\\index.js:716:12)\n    at D:\\faculty\\CMP3\\software engineering\\merge\\node_modules\\superagent\\lib\\node\\index.js:916:18\n    at IncomingMessage.<anonymous> (node_modules\\superagent\\lib\\node\\parsers\\json.js:19:7)\n    at IncomingMessage.emit (node:events:402:35)\n    at endReadableNT (node:internal/streams/readable:1343:12)\n    at processTicksAndRejections (node:internal/process/task_queues:83:21)",
+                    "diff": "- 400\n+ 404\n"
+                  },
+                  "uuid": "59c2b41b-68a3-4311-861c-d3433c42ab06",
+                  "parentUUID": "e5d3e006-031f-4b09-92bd-7fbfa2ae5258",
+                  "isHook": false,
+                  "skipped": false
+                }
+              ],
+              "suites": [],
+              "passes": [],
+              "failures": [
+                "75c1c2b7-f237-4906-80c4-b342a854c471",
+                "59c2b41b-68a3-4311-861c-d3433c42ab06"
+              ],
+              "pending": [],
+              "skipped": [],
+              "duration": 32,
+              "root": false,
+              "rootEmpty": false,
+              "_timeout": 100000
+            },
+            {
+              "uuid": "b5426218-b6cd-4bfd-94ef-0265a972e185",
+              "title": "Blog unblocks a blog",
+              "fullFile": "D:\\faculty\\CMP3\\software engineering\\merge\\test\\userBlogTest.js",
+              "file": "\\test\\userBlogTest.js",
+              "beforeHooks": [],
+              "afterHooks": [],
+              "tests": [
+                {
+                  "title": "It should remove the blockedBlogId from blockedBlogsarray of the blog",
+                  "fullTitle": "Blog Methods Blog unblocks a blog It should remove the blockedBlogId from blockedBlogsarray of the blog",
+                  "timedOut": false,
+                  "duration": 15,
+                  "state": "failed",
+                  "speed": null,
+                  "pass": false,
+                  "fail": true,
+                  "pending": false,
+                  "context": null,
+                  "code": "const unblockedBlogId = {unblockedBlogId: '61976787dacdf3325998179c'};\nchai\n    .request(server)\n    .post('/blog/unblock/6195847fe6c15a39f0470726')\n    .send(unblockedBlogId)\n    .end((err, res) => {\n      res.should.have.status(200);\n      res.body.should.be.a('object');\n      res.body.should.have.property('res')\n          .have.property('message')\n          .eq('Blog unblocked Successfully');\n      done();\n    });",
+                  "err": {
+                    "message": "AssertionError: expected { Object (_events, _eventsCount, ...) } to have status code 200 but got 400",
+                    "estack": "AssertionError: expected { Object (_events, _eventsCount, ...) } to have status code 200 but got 400\n    at D:\\faculty\\CMP3\\software engineering\\merge\\test\\userBlogTest.js:141:29\n    at Test.Request.callback (node_modules\\superagent\\lib\\node\\index.js:716:12)\n    at D:\\faculty\\CMP3\\software engineering\\merge\\node_modules\\superagent\\lib\\node\\index.js:916:18\n    at IncomingMessage.<anonymous> (node_modules\\superagent\\lib\\node\\parsers\\json.js:19:7)\n    at IncomingMessage.emit (node:events:402:35)\n    at endReadableNT (node:internal/streams/readable:1343:12)\n    at processTicksAndRejections (node:internal/process/task_queues:83:21)",
+                    "diff": "- 400\n+ 200\n"
+                  },
+                  "uuid": "e127864c-59b9-42bc-bf74-de8de5ec7f10",
+                  "parentUUID": "b5426218-b6cd-4bfd-94ef-0265a972e185",
+                  "isHook": false,
+                  "skipped": false
+                },
+                {
+                  "title": "It doesn't find the blog in the databaseand returns blog not found",
+                  "fullTitle": "Blog Methods Blog unblocks a blog It doesn't find the blog in the databaseand returns blog not found",
+                  "timedOut": false,
+                  "duration": 13,
+                  "state": "failed",
+                  "speed": null,
+                  "pass": false,
+                  "fail": true,
+                  "pending": false,
+                  "context": null,
+                  "code": "const unblockedBlogId = {unblockedBlogId: '61976787dacdf3395998179c'};\nchai\n    .request(server)\n    .post('/blog/unblock/6195847fe6c15a39f0470726')\n    .send(unblockedBlogId)\n    .end((err, res) => {\n      res.should.have.status(404);\n      res.body.should.be.a('object');\n      res.body.should.have.property('res')\n          .have.property('error')\n          .eq('Blog NOT FOUND');\n      done();\n    });",
+                  "err": {
+                    "message": "AssertionError: expected { Object (_events, _eventsCount, ...) } to have status code 404 but got 400",
+                    "estack": "AssertionError: expected { Object (_events, _eventsCount, ...) } to have status code 404 but got 400\n    at D:\\faculty\\CMP3\\software engineering\\merge\\test\\userBlogTest.js:159:29\n    at Test.Request.callback (node_modules\\superagent\\lib\\node\\index.js:716:12)\n    at D:\\faculty\\CMP3\\software engineering\\merge\\node_modules\\superagent\\lib\\node\\index.js:916:18\n    at IncomingMessage.<anonymous> (node_modules\\superagent\\lib\\node\\parsers\\json.js:19:7)\n    at IncomingMessage.emit (node:events:402:35)\n    at endReadableNT (node:internal/streams/readable:1343:12)\n    at processTicksAndRejections (node:internal/process/task_queues:83:21)",
+                    "diff": "- 400\n+ 404\n"
+                  },
+                  "uuid": "37561fb0-f53e-40b0-a524-d27175335e2b",
+                  "parentUUID": "b5426218-b6cd-4bfd-94ef-0265a972e185",
+                  "isHook": false,
+                  "skipped": false
+                }
+              ],
+              "suites": [],
+              "passes": [],
+              "failures": [
+                "e127864c-59b9-42bc-bf74-de8de5ec7f10",
+                "37561fb0-f53e-40b0-a524-d27175335e2b"
+              ],
+              "pending": [],
+              "skipped": [],
+              "duration": 28,
+              "root": false,
+              "rootEmpty": false,
+              "_timeout": 100000
+            }
+          ],
+          "passes": [],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 0,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 100000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 100000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "9.1.3"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "Test_Report",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.0.1"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "Report",
+        "reportFilename": "Test_Report"
+      },
+      "version": "6.0.1"
+    }
+  }
+}

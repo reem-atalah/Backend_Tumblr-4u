@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: Modules/Blogs/Controller/control.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: Modules/Blogs/Controller/control.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>
+/* ================ /// &lt;==> Variables Declaration &lt;==> /// ================ */
+const {StatusCodes} = require('http-status-codes');
+const {blogs} = require('../../../Model/model');
+
+/* =========== /// &lt;==> End &lt;==> ===========*/
+
+
+/* ==================== /// &lt;==> Blog Functions &lt;==> /// ==================== */
+
+
+/**
+ *
+ * @function
+ * @name blockBlog
+ * @description this function blocks the blog whose id
+ *              sent in the body from the blog whose id in params
+ * @param {string} req - Holds the blogId in
+ *                       params and the blockedBlogId in body
+ * @param {string} res - Holds the response
+ *                       status and message based on the status.
+ *
+ * @returns response status and message or error massege in case of errors.
+ */
+
+
+const blockBlog = async (req, res) => {
+  console.log(req.params);
+
+  try {
+    const blogId = req.params.blogId;
+    const blockedBlogId = req.body.blockedBlogId;
+
+    await blogs.findOne({'_id': blockedBlogId}, function(err, blockedBlog) {
+      if (err) return handleError(err);
+      if (blockedBlog) {
+        blogs.findOne({'_id': blogId}, 'blockedBlogs', function(err, blog) {
+          if (err) return handleError(err);
+          blog.blockedBlogs.push(blockedBlogId);
+          blog.save();
+          res.status(StatusCodes.OK).json({
+            'meta': {
+              'status': 200,
+              'msg': 'OK',
+            },
+
+            'response': {
+              'message': 'Blog blocked Successfully',
+              'data': '',
+            },
+          });
+        });
+      } else {
+        res.status(StatusCodes.NOT_FOUND).json({
+          'meta': {
+            'status': 404,
+            'msg': 'BAD_REQUEST',
+          },
+
+          'response': {
+            'error': 'Blog NOT FOUND',
+            'data': '',
+          },
+        });
+      }
+    }).clone().catch(function(err) {
+      console.log(err);
+    });
+  } catch (error) {
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+      'meta': {
+        'status': 500,
+        'msg': 'INTERNAL_SERVER_ERROR',
+      },
+
+      'response': {
+        'error': 'Error In blockBlog Function',
+        'data': '',
+      },
+    });
+  }
+};
+/* -------- &lt;---> Unfollow Blog &lt;---> ------- */ // *** &lt;===> Done &lt;===>  *** //
+
+
+/**
+ *
+ * @function
+ * @name unblockBlog
+ * @description this function remove the blog whose id sent in
+ *              the body from blocked blogs of the blog whose id in params
+ * @param {string} req - Holds the blogId in params
+ *                       and the unblockedBlogId in body
+ * @param {string} res - Holds the response status and
+ *                       message based on the status.
+ *
+ * @returns response status and message or error massege in case of errors.
+ */
+
+
+const unblockBlog = async (req, res) => {
+  try {
+    const blogId = req.params.blogId;
+    const unblockedBlogId = req.body.unblockedBlogId;
+
+    await blogs.findOne({'_id': unblockedBlogId}, function(err, unblockedBlog) {
+      if (err) return handleError(err);
+      if (unblockedBlog) {
+        blogs.findOne({'_id': blogId}, 'blockedBlogs', function(err, blog) {
+          if (err) return handleError(err);
+          blog.blockedBlogs.pull(unblockedBlogId);
+          blog.save();
+          res.status(StatusCodes.OK).json({
+            'meta': {
+              'status': 200,
+              'msg': 'OK',
+            },
+
+            'response': {
+              'message': 'Blog unblocked Successfully',
+              'data': '',
+            },
+          });
+        });
+      } else {
+        res.status(StatusCodes.NOT_FOUND).json({
+          'meta': {
+            'status': 404,
+            'msg': 'BAD_REQUEST',
+          },
+
+          'response': {
+            'error': 'Blog NOT FOUND',
+            'data': '',
+          },
+        });
+      }
+    }).clone().catch(function(err) {
+      console.log(err);
+    });
+  } catch (error) {
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+      'meta': {
+        'status': 500,
+        'msg': 'INTERNAL_SERVER_ERROR',
+      },
+
+      'response': {
+        'error': 'Error In unblockBlog Function',
+        'data': '',
+      },
+    });
+  }
+};
+
+
+/* =========== /// &lt;==> End &lt;==> ===========*/
+
+/* ================= /// &lt;==> Export User Functions &lt;==> /// ================ */
+
+module.exports = {
+  blockBlog,
+  unblockBlog,
+
+};
+/* =========== /// &lt;==> End &lt;==> ===========*/
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-searchDashboard.html">searchDashboard</a></li></ul><h3>Global</h3><ul><li><a href="global.html#blockBlog">blockBlog</a></li><li><a href="global.html#createPost">createPost</a></li><li><a href="global.html#followBlog">followBlog</a></li><li><a href="global.html#isAuthorized">isAuthorized</a></li><li><a href="global.html#login">login</a></li><li><a href="global.html#mongoose">mongoose</a></li><li><a href="global.html#showPost">showPost</a></li><li><a href="global.html#signUp">signUp</a></li><li><a href="global.html#unblockBlog">unblockBlog</a></li><li><a href="global.html#unfollowBlog">unfollowBlog</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Sat Nov 20 2021 15:30:59 GMT+0200 (Eastern European Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: Modules/Posts/Controller/control.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: Modules/Posts/Controller/control.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>// /////////////////////////////////////////////////////////
+// / &lt;==> /// This File Contains Post Functions /// &lt;==> ///
+// /////////////////////////////////////////////////////////
+
+/* =============== /// &lt;==> Variables Declaration &lt;==> /// =============== */
+// const bcrypt = require('bcrypt');
+// const jwt = require('jsonwebtoken');
+const {StatusCodes} = require('http-status-codes');
+const schema = require('../../../Model/model');
+
+/* =========== /// &lt;==> End &lt;==> ===========*/
+
+/* =============== /// &lt;==> Post Functions &lt;==> /// =============== */
+/* ----------- &lt;---> Create Post &lt;---> ------ */ // *** &lt;===> Done &lt;===>  *** //
+
+/**
+ * @function
+ * @name createPost
+ * @description Creates a blog post and saves its content in the database.
+ * @param {string} req - Holds the request body: postHtml, type, state, tags.
+ * @param {string} res - Holds the res status and message.
+ *
+ * @returns {string} res status and message.
+ */
+
+const createPost = async (req, res) => {
+  try {
+    const blogId = req.params.blogId;
+    const postHtml = req.body.postHtml;
+    const type = req.body.type;
+    const state = req.body.state;
+    const tags = req.body.tags;
+    // let date = Date.now;
+
+    // const blogValidation = async(blogId) => {
+    //     let existingBlog = await schema.blogs.findOne({_id: blogId});
+    //     console.log("existing blog: ",existingBlog);
+    //     return existingBlog;
+    // };
+
+    const existingBlog = await schema.blogs.findOne({_id: blogId});
+
+    if (existingBlog) {
+      console.log('blog id: ', blogId, 'blog: ', existingBlog);
+      newPost = new schema.Posts({blogId, postHtml, type, state, tags});
+      newPost = await newPost.save();
+      res.status(StatusCodes.OK).json('Post Created Successfully (&lt;:>)');
+    } else {
+      console.log('blog not found');
+      res.status(StatusCodes.BAD_REQUEST).json('Blog Not Found (&lt;:>)');
+    };
+  } catch (error) {
+    console.log('catch errorrr');
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR)
+        .json('Error In Create Post Function (&lt;:>)');
+  };
+};
+
+/**
+ * @function
+ * @name showPost
+ * @description Shows a blog post by its id.
+ * @param {string} req - Holds the request body: post id.
+ * @param {string} res - Holds res status and the blog post content if OK.
+ *
+ * @returns {string} the blog post content in the form of html string.
+ */
+
+/* ----------- &lt;---> Show Post &lt;---> ---- */ // *** &lt;===> Done &lt;===>  *** //
+// Assumption: Edit Post Function Just Updates ( postHtml )
+const showPost = async (req, res) => {
+  try {
+    const postId = req.params.postId;
+    const existingPost = await schema.Posts.findOne({_id: postId});
+    if (existingPost) {
+      console.log('post html: ', existingPost.postHtml);
+      res.status(StatusCodes.OK).jsonp(existingPost.postHtml);
+    } else {
+      res.status(StatusCodes.BAD_REQUEST).json('Post Not Found (&lt;:>)');
+    };
+  } catch (error) {
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR)
+        .json('Error In Show Post Function (&lt;:>)');
+  };
+};
+
+/* ----------- &lt;---> Edit Post &lt;---> ---- */ // *** &lt;===> not Done &lt;===>  *** //
+// Assumption: Edit Post Function Just Updates ( postHtml )
+// const editPost = async (request, res) => {
+
+// };
+
+/* ----------- &lt;---> Delete Post &lt;--->  */ // *** &lt;===> not Done &lt;===>  *** //
+// const deletePost = async (request, res) => {
+
+// };
+
+/* =========== /// &lt;==> End &lt;==> ===========*/
+
+/* =============== /// &lt;==> Export Post Functions &lt;==> /// =============== */
+const postFunctions = module.exports = {
+  createPost,
+  showPost,
+  // editPost,
+  // deletePost,
+  // likePost,
+  // commentPost,
+  // shareWith,
+  // reblogPost,
+  // blogValidation
+};
+/* =========== /// &lt;==> End &lt;==> ===========*/
+
+/* =============== /// &lt;==> Export User Functions &lt;==> /// =============== */
+module.exports = {
+  postFunctions,
+};
+/* =========== /// &lt;==> End &lt;==> ===========*/
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-searchDashboard.html">searchDashboard</a></li></ul><h3>Global</h3><ul><li><a href="global.html#blockBlog">blockBlog</a></li><li><a href="global.html#createPost">createPost</a></li><li><a href="global.html#followBlog">followBlog</a></li><li><a href="global.html#isAuthorized">isAuthorized</a></li><li><a href="global.html#login">login</a></li><li><a href="global.html#mongoose">mongoose</a></li><li><a href="global.html#showPost">showPost</a></li><li><a href="global.html#signUp">signUp</a></li><li><a href="global.html#unblockBlog">unblockBlog</a></li><li><a href="global.html#unfollowBlog">unfollowBlog</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Sat Nov 20 2021 15:30:59 GMT+0200 (Eastern European Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

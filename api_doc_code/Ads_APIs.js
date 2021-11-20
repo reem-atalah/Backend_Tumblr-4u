@@ -17,7 +17,7 @@
 */
 
 /**
- * @api {get} /:user_id/getAds/ Retrieve Ads
+ * @api {get} getAds/ Retrieve Ads
  * @apiName getAds
  * @apiGroup Ads
  *
@@ -25,7 +25,8 @@
  * @apidescription Sponsored Ads appears in Dashboard/Explore pages at the right bottom
  * @apiVersion 0.0.0
  *
- * @apiSampleRequest api.tumblr.com/:user_id/getAds  \-H "Authorization: Bearer < YOUR_API_TOKEN>"
+ * @apiParam {String} Token User's Secret Code.
+ * @apiParam {String} id Ad id 
  *
  * @apiSuccessExample Response Data:
  *      HTTP/1.1 200 OK

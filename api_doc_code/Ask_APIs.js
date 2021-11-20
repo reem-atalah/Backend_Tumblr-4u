@@ -18,14 +18,15 @@
 */
 
 /**
- * @api {post} /:blog_id/make_ask Make Ask Posts
+ * @api {post} /blog/ask Make Ask Posts
  * @apiName makeAskPosts
  * @apiGroup Ask
  * @apiPermission User, Admin, Super_Admin
  * @apidescription ask a blog in a post
  * @apiVersion 0.0.0
- * @apiSampleRequest api.tumblr.com/:blog_id/make_ask  \-H "Authorization: Bearer < YOUR_API_TOKEN>"
  * 
+ * @apiParam {String} Token User's Secret Code.
+ * @apiParam {String} blog_id The ID of the blog has the post
  * @apiParam {String} text text of the question/ask
  * 
  * 
@@ -60,14 +61,15 @@
 */
 
 /**
- * @api {post} /:blog_id/inbox/answer_ask Answer Ask Posts
+ * @api {post} /blog/inbox/answer Answer Ask Posts
  * @apiName answerAskPosts
  * @apiGroup Ask
  * @apiPermission User, Admin, Super_Admin
  * @apidescription answer the post of ask in the blog dashboard
  * @apiVersion 0.0.0
- * @apiSampleRequest api.tumblr.com/:blog_id/inbox/answer_ask  \-H "Authorization: Bearer < YOUR_API_TOKEN>"
  * 
+ * @apiParam {String} Token User's Secret Code.
+ * @apiParam {String} blog_id The ID of the blog has the post
  * @apiParam {String} text answer of the ask
  * @apiParam {String[]} tags Tags applied to the post
  * @apiParam {String} type post type (now, queue,draft,private,schedule)
@@ -103,14 +105,16 @@
 */
 
 /**
- * @api {delete} /:blog_id/inbox/delete_ask Delete Ask Posts
+ * @api {delete} /blog/inbox/delete_ask Delete Ask Posts
  * @apiName seleteAskPosts
  * @apiGroup Ask
  * @apiPermission User, Admin, Super_Admin
  * @apidescription delete the ask post, it will never be puplished
  * @apiVersion 0.0.0
  * 
- * @apiSampleRequest api.tumblr.com/:blog_id/inbox/delete_ask  \-H "Authorization: Bearer < YOUR_API_TOKEN>"
+ * @apiParam {String} Token User's Secret Code.
+ * @apiParam {String} blog_id The ID of the blog has the ask post
+ * 
  * 
  *  @apiSuccessExample Response Data:
  *      HTTP/1.1 200 OK
