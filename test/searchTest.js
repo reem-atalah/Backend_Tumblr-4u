@@ -18,13 +18,14 @@ describe('Search APIs', () => {
 
   describe('Search Dashboard Search', () => {
     it('It Should get element of hashtags in posts', (done) => {
-      const wordName ={wordName: 'Ra'};
+      const wordName ={wordName: 'dep'};
       chai
           .request(server)
           .get('/autoCompleteSearchDash')
           .send(wordName)
           .end((err, res) => {
-            res.body[0][0].should.be.not.eq('Rachel Ritchie');
+            console.log(res.body);
+            res.body[0][0].should.be.eq('deposit');
             done();
           });
     });
@@ -33,13 +34,14 @@ describe('Search APIs', () => {
   // --------// <=====> hashtags are not sensitive case <=====> //-----------//
   describe('Search Dashboard Search', () => {
     it('It shows that it is not case sensitive', (done) => {
-      const wordName ={wordName: 'RANK'};
+      const wordName ={wordName: 'DEP'};
       chai
           .request(server)
           .get('/autoCompleteSearchDash')
           .send(wordName)
           .end((err, res) => {
-            res.body[0][0].should.be.not.eq('Franklin Kemmer');
+            console.log(res.body);
+            res.body[0][0].should.be.eq('deposit');
             done();
           });
     });
@@ -48,13 +50,14 @@ describe('Search APIs', () => {
   // --------// <=====> Search for blogs <=====> //------------//
   describe('Search Dashboard Search', () => {
     it('It Should get blog with the regex', (done) => {
-      const wordName ={wordName: 'ana'};
+      const wordName ={wordName: 'hazel'};
       chai
           .request(server)
           .get('/autoCompleteSearchDash')
           .send(wordName)
           .end((err, res) => {
-            res.body[1][0].name.should.be.not.eq('Jana Parisian');
+            console.log(res.body);
+            res.body[1][0].name.should.be.eq('Mr. Hazel Schamberger');
             done();
           });
     });
@@ -63,13 +66,14 @@ describe('Search APIs', () => {
   // --------// <=====> Search for interested tags <=====> //------------//
   describe('Search Dashboard Search', () => {
     it('It Should get followed/interested tags by a blog', (done) => {
-      const wordName ={wordName: 'com'};
+      const wordName ={wordName: 'mat'};
       chai
           .request(server)
           .get('/autoCompleteSearchDash')
           .send(wordName)
           .end((err, res) => {
-            res.body[2][0].followedTags[0].should.be.not.eq('compress');
+            console.log(res.body);
+            res.body[2][0].followedTags[0].should.be.eq('matrix');
             done();
           });
     });
@@ -84,6 +88,7 @@ describe('Search APIs', () => {
           .get('/autoCompleteSearchDash')
           .send(wordName)
           .end((err, res) => {
+            console.log(res.body);
             res.body.should.be.eq(',wordName, is not allowed to be empty');
             done();
           });

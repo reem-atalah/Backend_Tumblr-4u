@@ -77,7 +77,7 @@ const userSchema = mongoose.Schema({
 /* ------------ Hashing Password In Sign Up ------------ */
 userSchema.pre('save', async function() {
   this.password = await bcrypt.hash(this.password, 8);
-  this.cpassword = await bcrypt.hash(this.cpassword, 8);
+  // this.cpassword = await bcrypt.hash(this.cpassword, 8);
 });
 
 /* =========== <--> End <--> =========== */

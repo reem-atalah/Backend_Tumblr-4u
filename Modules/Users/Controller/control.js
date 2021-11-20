@@ -27,22 +27,22 @@ const schema = require('../../../Model/model');
  * @returns {object} - { Object }
  */
 
-const signUp = async (request, response) => {
+const signUp = async (req, res) => {
   try {
-    const {email, password, blogName, age, city, country} = request.body;
+    const {email, password, blogName, age, city, country} = req.body;
 
     const oldUserEmail = await schema.users.findOne({email, isDeleted: false});
     // eslint-disable-next-line max-len
     const oldUserBlog=await schema.users.findOne({name: blogName, isDeleted: false});
 
     if (oldUserEmail) {
-      response.status(StatusCodes.BAD_REQUEST).json({
+      res.status(StatusCodes.BAD_REQUEST).json({
         'meta': {
           'status': 400,
           'msg': 'BAD_REQUEST',
         },
 
-        'response': {
+        'res': {
           'error': 'Email is Already Exists (<:>)',
           'data': '',
         },
@@ -52,13 +52,13 @@ const signUp = async (request, response) => {
 
     // --------------- Search On Blogs Name ----------------//
     else if (oldUserBlog) {
-      response.status(StatusCodes.BAD_REQUEST).json({
+      res.status(StatusCodes.BAD_REQUEST).json({
         'meta': {
           'status': 400,
           'msg': 'BAD_REQUEST',
         },
 
-        'response': {
+        'res': {
           'error': 'Blog Name is Already Exists (<:>)',
           'data': '',
         },
@@ -73,33 +73,33 @@ const signUp = async (request, response) => {
         city,
         country,
       });
-      // const data =  await newUser.save();
+      // const data = await newUser.save();
       await newUser.save();
 
       // --------------- Create Primary Blog ----------------//
 
       const token = jwt.sign({email, role: 'user'}, process.env.KEY);
 
-      response.status(StatusCodes.CREATED).json({
+      res.status(StatusCodes.CREATED).json({
         'meta': {
           'status': 201,
           'msg': 'CREATED',
         },
 
-        'response': {
+        'res': {
           'message': 'Sign Up Successfully (<:>)',
           'data': token,
         },
       });
     }
   } catch (error) {
-    response.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
       'meta': {
         'status': 500,
         'msg': 'INTERNAL_SERVER_ERROR',
       },
 
-      'response': {
+      'res': {
         'error': 'Error In Sign Up Function (<:>)',
         'data': '',
       },
@@ -119,9 +119,9 @@ const signUp = async (request, response) => {
  * @returns {object} - { Object }
  */
 
-const login = async (request, response) => {
+const login = async (req, res) => {
   try {
-    const {email, password} = request.body;
+    const {email, password} = req.body;
     const oldUser = await schema.users.findOne({email, isDeleted: false});
     if (oldUser) {
       const match = await bcrypt.compare(password, oldUser.password);
@@ -130,51 +130,51 @@ const login = async (request, response) => {
           email: oldUser.email,
           role: oldUser.role},
         process.env.KEY);
-        response.status(StatusCodes.OK).json({
+        res.status(StatusCodes.OK).json({
           'meta': {
             'status': 200,
             'msg': 'OK',
           },
 
-          'response': {
+          'res': {
             'message': 'LogIn Successfully (<:>)',
             'data': token,
           },
         });
       } else {
-        response.status(StatusCodes.BAD_REQUEST).json({
+        res.status(StatusCodes.BAD_REQUEST).json({
           'meta': {
             'status': 400,
             'msg': 'BAD_REQUEST',
           },
 
-          'response': {
+          'res': {
             'error': 'InCorrect Password (<:>)',
             'data': '',
           },
         });
       }
     } else {
-      response.status(StatusCodes.BAD_REQUEST).json({
+      res.status(StatusCodes.BAD_REQUEST).json({
         'meta': {
           'status': 400,
           'msg': 'BAD_REQUEST',
         },
 
-        'response': {
+        'res': {
           'error': 'Email Is Not Found (<:>)',
           'data': '',
         },
       });
     }
   } catch (error) {
-    response.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
       'meta': {
         'status': 500,
         'msg': 'INTERNAL_SERVER_ERROR',
       },
 
-      'response': {
+      'res': {
         'error': 'Error In LogIn Function (<:>)',
         'data': '',
       },
@@ -191,10 +191,10 @@ const login = async (request, response) => {
  *              params follow the blog whose id in the body
  * @param {Object} req - Holds the blogId in params and the
  *                       blockedBlogId in body
- * @param {Object} res - Holds the response status and
+ * @param {Object} res - Holds the res status and
  *                      message based on the status.
  *
- * @returns response status and message or error massege in case of errors.
+ * @returns res status and message or error massege in case of errors.
  */
 
 
@@ -217,7 +217,7 @@ const followBlog = async (req, res) => {
             'msg': 'OK',
           },
 
-          'response': {
+          'res': {
             'message': 'Blog Followed Successfully',
             'data': '',
           },
@@ -230,7 +230,7 @@ const followBlog = async (req, res) => {
           'msg': 'BAD_REQUEST',
         },
 
-        'response': {
+        'res': {
           'error': 'Blog not found',
           'data': '',
         },
@@ -242,7 +242,7 @@ const followBlog = async (req, res) => {
         'status': 500,
         'msg': 'INTERNAL_SERVER_ERROR',
       },
-      'response': {
+      'res': {
         'error': 'Error In followBlog Function',
         'data': '',
       },
@@ -261,10 +261,10 @@ const followBlog = async (req, res) => {
    *               params from followers of the blog whose id in the body
    * @param {Object} req - Holds the blogId in params and
    *                       the blockedBlogId in body
-   * @param {Object} res - Holds the response status and message
+   * @param {Object} res - Holds the res status and message
    *                       based on the status.
    *
-   * @returns response status and message or error massege in case of errors.
+   * @returns res status and message or error massege in case of errors.
    */
 
 const unfollowBlog = async (req, res) => {
@@ -285,7 +285,7 @@ const unfollowBlog = async (req, res) => {
             'msg': 'OK',
           },
 
-          'response': {
+          'res': {
             'message': 'Blog Unfollowed Successfully',
             'data': '',
           },
@@ -298,7 +298,7 @@ const unfollowBlog = async (req, res) => {
           'msg': 'BAD_REQUEST',
         },
 
-        'response': {
+        'res': {
           'error': 'Blog not found',
           'data': '',
         },
@@ -310,7 +310,7 @@ const unfollowBlog = async (req, res) => {
         'status': 500,
         'msg': 'INTERNAL_SERVER_ERROR',
       },
-      'response': {
+      'res': {
         'error': 'Error In unfollowBlog Function',
         'data': '',
       },

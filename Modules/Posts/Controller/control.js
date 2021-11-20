@@ -98,7 +98,7 @@ const showPost = async (req, res) => {
 /* =========== /// <==> End <==> ===========*/
 
 /* =============== /// <==> Export Post Functions <==> /// =============== */
-const postFunctions = module.exports = {
+module.exports = {
   createPost,
   showPost,
   // editPost,
@@ -112,7 +112,7 @@ const postFunctions = module.exports = {
 /* =========== /// <==> End <==> ===========*/
 
 /* =============== /// <==> Export User Functions <==> /// =============== */
-module.exports = {
-  postFunctions,
-};
+// module.exports = {
+//   postFunctions,
+// };
 /* =========== /// <==> End <==> ===========*/

@@ -17,10 +17,10 @@ const blogs = require('../../../Model/model');
  *              sent in the body from the blog whose id in params
  * @param {Object} req - Holds the blogId in
  *                       params and the blockedBlogId in body
- * @param {Object} res - Holds the response
+ * @param {Object} res - Holds the res
  *                       status and message based on the status.
  *
- * @returns response status and message or error massege in case of errors.
+ * @returns res status and message or error massege in case of errors.
  */
 
 
@@ -33,7 +33,7 @@ const blockBlog = async (req, res) => {
 
     await blogs.blogs.findOne({'_id': blockedBlogId},
         function(err, blockedBlog) {
-          if (err) return handleError(err);
+          // if (err) return handleError(err);
           if (blockedBlog) {
             blogs.blogs.findOne({'_id': blogId},
                 'blockedBlogs',
@@ -47,7 +47,7 @@ const blockBlog = async (req, res) => {
                       'msg': 'OK',
                     },
 
-                    'response': {
+                    'res': {
                       'message': 'Blog blocked Successfully',
                       'data': '',
                     },
@@ -60,7 +60,7 @@ const blockBlog = async (req, res) => {
                 'msg': 'BAD_REQUEST',
               },
 
-              'response': {
+              'res': {
                 'error': 'Blog NOT FOUND',
                 'data': '',
               },
@@ -76,7 +76,7 @@ const blockBlog = async (req, res) => {
         'msg': 'INTERNAL_SERVER_ERROR',
       },
 
-      'response': {
+      'res': {
         'error': 'Error In blockBlog Function',
         'data': '',
       },
@@ -94,10 +94,10 @@ const blockBlog = async (req, res) => {
  *              the body from blocked blogs of the blog whose id in params
  * @param {Object} req - Holds the blogId in params
  *                       and the unblockedBlogId in body
- * @param {Object} res - Holds the response status and
+ * @param {Object} res - Holds the res status and
  *                       message based on the status.
  *
- * @returns response status and message or error massege in case of errors.
+ * @returns res status and message or error massege in case of errors.
  */
 
 
@@ -108,7 +108,7 @@ const unblockBlog = async (req, res) => {
 
     await blogs.blogs.findOne({'_id': unblockedBlogId},
         function(err, unblockedBlog) {
-          if (err) return handleError(err);
+          // if (err) return handleError(err);
           if (unblockedBlog) {
             blogs.blogs.findOne({'_id': blogId},
                 'blockedBlogs',
@@ -122,7 +122,7 @@ const unblockBlog = async (req, res) => {
                       'msg': 'OK',
                     },
 
-                    'response': {
+                    'res': {
                       'message': 'Blog unblocked Successfully',
                       'data': '',
                     },
@@ -135,7 +135,7 @@ const unblockBlog = async (req, res) => {
                 'msg': 'BAD_REQUEST',
               },
 
-              'response': {
+              'res': {
                 'error': 'Blog NOT FOUND',
                 'data': '',
               },
@@ -151,7 +151,7 @@ const unblockBlog = async (req, res) => {
         'msg': 'INTERNAL_SERVER_ERROR',
       },
 
-      'response': {
+      'res': {
         'error': 'Error In unblockBlog Function',
         'data': '',
       },

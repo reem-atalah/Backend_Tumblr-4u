@@ -19,10 +19,10 @@ describe('User Methods', () => {
     let itShouldDo='It should put the userId in followers array of blog and';
     itShouldDo+='put blogId in the following_blogs array of the user';
     it(itShouldDo, (done) => {
-      const blogId = {blogId: '61976787dacdf3325998179c'};
+      const blogId = {blogId: '619957113df6b45019c42d07'};
       chai
           .request(server)
-          .post('/user/follow/6193e580747ad05f7f98513e')
+          .post('/user/follow/619695c9bf5e722b10e141c2')
           .send(blogId)
           .end((err, res) => {
             res.should.have.status(200);
@@ -34,12 +34,13 @@ describe('User Methods', () => {
           });
     });
     itShouldDo='It doesn\'t  find the blog in the database';
-    itShouldDo+='and returns blog not found';
+    itShouldDo+=' and returns blog not found';
     it(itShouldDo, (done) => {
-      const blogId = {blogId: '61976787dacdf332598179c0'};
+      // wrong blogId
+      const blogId = {blogId: '619957113df6b45019c42d00'};
       chai
           .request(server)
-          .post('/user/follow/6193e580747ad05f7f98513e')
+          .post('/user/follow/619695c9bf5e722b10e141c2')
           .send(blogId)
           .end((err, res) => {
             res.should.have.status(404);
@@ -55,10 +56,10 @@ describe('User Methods', () => {
     let itShouldDo='It should remove the userId from followers array of';
     itShouldDo+=' blog and remove blogId from following_blogs of the user';
     it(itShouldDo, (done) => {
-      const blogId = {blogId: '61976787dacdf3325998179c'};
+      const blogId = {blogId: '619957113df6b45019c42d07'};
       chai
           .request(server)
-          .post('/user/unfollow/6193e580747ad05f7f98513e')
+          .post('/user/unfollow/619695c9bf5e722b10e141c2')
           .send(blogId)
           .end((err, res) => {
             res.should.have.status(200);
@@ -70,12 +71,12 @@ describe('User Methods', () => {
           });
     });
     itShouldDo='It doesn\'t find the blog in the database';
-    itShouldDo+='and returns blog not found';
+    itShouldDo+=' and returns blog not found';
     it(itShouldDo, (done) => {
-      const blogId = {blogId: '61976787dacdf332598179c0'};
+      const blogId = {blogId: '619957113df6b45019c42d00'};
       chai
           .request(server)
-          .post('/user/unfollow/6193e580747ad05f7f98513e')
+          .post('/user/unfollow/619695c9bf5e722b10e141c2')
           .send(blogId)
           .end((err, res) => {
             res.should.have.status(404);
@@ -94,10 +95,10 @@ describe('Blog Methods', () => {
     itShouldDo+='array of the blog';
 
     it(itShouldDo, (done) => {
-      const blockedBlogId = {blockedBlogId: '61976787dacdf3325998179c'};
+      const blockedBlogId = {blockedBlogId: '619957113df6b45019c42d05'};
       chai
           .request(server)
-          .post('/blog/block/6195847fe6c15a39f0470726')
+          .post('/blog/block/619957113df6b45019c42d07')
           .send(blockedBlogId)
           .end((err, res) => {
             res.should.have.status(200);
@@ -109,13 +110,13 @@ describe('Blog Methods', () => {
           });
     });
     itShouldDo='It doesn\'t  find the blog in the database';
-    itShouldDo+='and returns blog not found';
+    itShouldDo+=' and returns blog not found';
 
     it(itShouldDo, (done) => {
-      const blockedBlogId = {blockedBlogId: '61976787dacdf3395998179c'};
+      const blockedBlogId = {blockedBlogId: '619957113dfyb45019c42d09'};
       chai
           .request(server)
-          .post('/blog/block/6195847fe6c15a39f0470726')
+          .post('/blog/block/619957113df6b45019c42d07')
           .send(blockedBlogId)
           .end((err, res) => {
             res.should.have.status(404);
@@ -132,10 +133,10 @@ describe('Blog Methods', () => {
     itShouldDo+='array of the blog';
 
     it(itShouldDo, (done) => {
-      const unblockedBlogId = {unblockedBlogId: '61976787dacdf3325998179c'};
+      const unblockedBlogId = {unblockedBlogId: '619957113df6b45019c42d05'};
       chai
           .request(server)
-          .post('/blog/unblock/6195847fe6c15a39f0470726')
+          .post('/blog/unblock/619957113df6b45019c42d07')
           .send(unblockedBlogId)
           .end((err, res) => {
             res.should.have.status(200);
@@ -147,13 +148,13 @@ describe('Blog Methods', () => {
           });
     });
     itShouldDo='It doesn\'t find the blog in the database';
-    itShouldDo+='and returns blog not found';
+    itShouldDo+=' and returns blog not found';
 
     it(itShouldDo, (done) => {
-      const unblockedBlogId = {unblockedBlogId: '61976787dacdf3395998179c'};
+      const unblockedBlogId = {unblockedBlogId: '619957113dfyb45019c42d09'};
       chai
           .request(server)
-          .post('/blog/unblock/6195847fe6c15a39f0470726')
+          .post('/blog/unblock/619957113df6b45019c42d07')
           .send(unblockedBlogId)
           .end((err, res) => {
             res.should.have.status(404);

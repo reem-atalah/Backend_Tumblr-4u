@@ -27,7 +27,7 @@ describe('Post APIs', () => {
         state: 'published',
         tags: 'tumblr',
       };
-
+      //   console.log(blogPost);
       chai
           .request(server)
           .post('/61968c974f161173940ea9cb/posts/create_post')
@@ -61,39 +61,39 @@ describe('Post APIs', () => {
                 done();
               });
         });
+  });
+  describe('Create Post Internal Server Error', () => {
+    it('It Should Not Create New Post Due To Server Error', (done) => {
+      const blogPost = {
+        postHtml: '</>',
+        type: 'video',
+        state: 'published',
+        tags: 'engineering',
+      };
 
-    describe('Create Post Internal Server Error', () => {
-      it('It Should Not Create New Post Due To Server Error', (done) => {
-        const blogPost = {
-          postHtml: '</>',
-          type: 'video',
-          state: 'published',
-          tags: 'engineering',
-        };
-
-        chai
-            .request(server)
-            .post('/1/posts/create_post') // no blog with this id
-            .send(blogPost)
-            .end((err, res) => {
-              res.should.have.status(500);
-              res.body.should.be.eq('Error In Create Post Function (<:>)');
-              done();
-            });
-      });
+      chai
+          .request(server)
+          .post('/1/posts/create_post') // no blog with this id
+          .send(blogPost)
+          .end((err, res) => {
+            res.should.have.status(500);
+            res.body.should.be.eq('Error In Create Post Function (<:>)');
+            done();
+          });
     });
+  });
 
-    describe('Get Post and Show it', () => {
-      it('It Should Show Post', (done) => {
-        chai
-            .request(server)
-            .get('/posts/6196df230578db004e05d179/show_post')
-            .end((err, res) => {
-              res.should.have.status(200);
-              res.body.should.be.eq('</>');
-              done();
-            });
-      });
+  describe('Get Post and Show it', () => {
+    it('It Should Show Post', (done) => {
+      chai
+          .request(server)
+          .get('/posts/6196e0ed3392462ec0ae903f/show_post')
+          .end((err, res) => {
+            console.log(res);
+            res.should.have.status(200);
+            res.body.should.be.eq('</>');
+            done();
+          });
     });
   });
 });
