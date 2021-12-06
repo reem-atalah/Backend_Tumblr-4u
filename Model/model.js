@@ -5,7 +5,7 @@
 
 /* ================ /// <==> Variables Declaration <==> /// ================ */
 const mongoose = require('mongoose');
-const postSchema = require('../Schema/postSchema');
+const postSchema = require('../Schema/PostSchema');
 const userSchema = require('../Schema/userSchema');
 const blogSchema = require('../Schema/blogSchema');
 
