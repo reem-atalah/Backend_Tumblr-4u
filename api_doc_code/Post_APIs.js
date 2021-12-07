@@ -202,17 +202,17 @@
 
 /*
 ===================== ///////// <---------> ================ <---------> ///////// =====================> 
-===================== ///////// <---------> Like a Blog Post <---------> ///////// =====================> 
+===================== ///////// <---------> Press Like of a Blog Post <---------> ///////// =====================> 
 ===================== ///////// <---------> ================ <---------> ///////// =====================> 
 */
 
 /**
- * @api {post} /:blogId/:postId/like_post Like a blog post
- * @apiName likeBlogPost
+ * @api {post} /:blogId/:postId/like_press Like a blog post
+ * @apiName pressLikeBlogPost
  * @apiGroup Post
  * @apiPermission User, Admin, Super_Admin
  * 
- * @apidescription Like a blog post
+ * @apidescription Like or Unlike a blog post
  * @apiVersion 0.0.0
  *
  * @apiParam {String} blogId The ID of the blog that likes the post.
@@ -228,51 +228,6 @@
  * 
  *          "response":{
  *                      "message": "Post Successfully Liked"
- *                     }   
- *      }
- * 
- * @apiErrorExample Response Error:
- *      HTTP/1.1 400 BAD REQUEST
- *      {
- *          "error": "Error In Input Data"
- *      }
- *      HTTP/1.1 401 Unauthorized
- *      {
- *          "error": "User Is Unauthorized"
- *      }
- */
-
-/*=================== End =====================*/
-
-
-/*
-===================== ///////// <---------> ================ <---------> ///////// =====================> 
-===================== ///////// <---------> Unlike a Blog Post <---------> ///////// =====================> 
-===================== ///////// <---------> ================ <---------> ///////// =====================> 
-*/
-
-/**
- * @api {post} /:blogId/:postId/unlike_post Unlike a blog post
- * @apiName unlikeBlogPost
- * @apiGroup Post
- * @apiPermission User, Admin, Super_Admin
- * 
- * @apidescription Unlike a blog post
- * @apiVersion 0.0.0
- *
- * @apiParam {String} blogId Primary blog ID (only primary blogs can unlike posts).
- * @apiParam {String} postId The ID of the post to unlike.
- *
- * @apiSuccessExample Response Data:
- *      HTTP/1.1 200 OK
- *      {
- *          "meta": {
- *                       "status": 200,
- *                       "msg": "OK"
- *                  },
- * 
- *          "response":{
- *                      "message": "Post Successfully Unliked"
  *                     }   
  *      }
  * 
@@ -472,7 +427,7 @@
 
 /*
 ===================== ///////// <---------> ================ <---------> ///////// =====================> 
-===================== ///////// <---------> Remove a rebloged Post <---------> ///////// =====================> 
+===================== ///////// <---------> Remove a Rebloged Post <---------> ///////// =====================> 
 ===================== ///////// <---------> ================ <---------> ///////// =====================> 
 */
 
@@ -531,6 +486,8 @@
  * @apiVersion 0.0.0
  * 
  * @apiParam {String} postId The ID of the post to fetch notes for.
+ * 
+ * @apiSuccess {Array} notes Array of array, contains 4 arrays: likesArray, commentsArray, reblogsArray, countsArray(likesCount, reblogsCount, notesCount)
  *
  * @apiSuccessExample Response Data:
  *      HTTP/1.1 200 OK
@@ -587,50 +544,6 @@
  * 
  *          "response":{
  *                      "message": "Post Pinned Successfully"
- *                     }   
- *      }
- * 
- * @apiErrorExample Response Error:
- *      HTTP/1.1 400 BAD REQUEST
- *      {
- *          "error": "Error In Input Data"
- *      }
- *      HTTP/1.1 401 Unauthorized
- *      {
- *          "error": "User Is Unauthorized"
- *      } 
- */
-
-/*=================== End =====================*/
-
-
-/*
-===================== ///////// <---------> ================= <---------> ///////// =====================> 
-===================== ///////// <---------> Count Reblogs <---------> ///////// =====================> 
-===================== ///////// <---------> ================= <---------> ///////// =====================> 
-*/
-
-/**
- * @api {get} /posts/count_reblogs Count Reblogs
- * @apiName countReblogs
- * @apiGroup Post
- * @apiPermission User, Admin, Super_Admin
- * @apidescription count the number of reblogs of a certain post
- * @apiVersion 0.0.0
- * 
- * @apiParam {String} Token User's Secret Code.
- * @apiParam {String} post_id The ID of the post 
- * 
- * @apiSuccessExample Response Data:
- *      HTTP/1.1 200 OK
- *      {
- *          "meta": {
- *                       "status": 200,
- *                       "msg": "OK"
- *                  },
- * 
- *          "response":{
- *                      "data": "Number of Reblogs"
  *                     }   
  *      }
  * 

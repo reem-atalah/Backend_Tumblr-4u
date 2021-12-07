@@ -371,7 +371,12 @@ const getNotes = async (req, res) => {
         const likesArray = existingNotes.likes;
         const commentsArray = existingNotes.comments;
         const reblogsArray = existingNotes.reblogs;
-        const notes = [likesArray, commentsArray, reblogsArray]; //array of arrays
+        const likesCount = likesArray.length;
+        const reblogsCount = reblogsArray.length;
+        const commentsCount = commentsArray.length;
+        const notesCount = likesCount + commentsCount + reblogsCount;
+        const countsArray = [likesCount, reblogsCount, notesCount];
+        const notes = [likesArray, commentsArray, reblogsArray, countsArray]; //array of arrays
         console.log('notes array: ' ,notes);
         res.status(StatusCodes.OK).json(notes);
 
