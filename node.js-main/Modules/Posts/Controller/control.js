@@ -363,7 +363,30 @@ const removeReblog = async (req, res) => {
 const getNotes = async (req, res) => {
   try {
     const postId = req.params.postId;
-  } catch (error) {}
+    const existingPost = await postsModel.posts.findOne({_id: postId});
+    if (existingPost) {
+      const notesId = existingPost.notesId;
+      const existingNotes = await postsModel.notes.findOne({_id: notesId});
+      if (existingNotes) {
+        const likesArray = existingNotes.likes;
+        const commentsArray = existingNotes.comments;
+        const reblogsArray = existingNotes.reblogs;
+        const notes = [likesArray, commentsArray, reblogsArray]; //array of arrays
+        console.log('notes array: ' ,notes);
+        res.status(StatusCodes.OK).json(notes);
+
+
+      } else {
+        res.status(StatusCodes.BAD_REQUEST).json('Notes Not Found');
+      };
+    } else {
+      res.status(StatusCodes.BAD_REQUEST).json('Post Not Found');
+    };
+  } catch (error) {
+    res
+        .status(StatusCodes.INTERNAL_SERVER_ERROR)
+        .json('Error in Get Notes Function');
+  };
 };
 
 /* ----------- <---> Edit Post <---> ----------- */ // *** <===> not Done <===>  *** //

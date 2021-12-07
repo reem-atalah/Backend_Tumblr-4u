@@ -193,5 +193,17 @@ describe('Post APIs', () => {
       });
     });
 
+    describe('Function getNotes', () => {
+      it('It Should Get Notes', (done) => {
+        chai.request(server)
+            .get('/posts/61ae667d8b4d5620ce937992/notes')
+            .end((err, res) => {
+              res.should.have.status(200);
+              //res.body.should.be.eq();
+              done();
+            });
+      });
+    });
+
 });
 /* =========== /// <==> End <==> ===========*/
