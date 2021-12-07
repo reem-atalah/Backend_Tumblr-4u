@@ -1,0 +1,141 @@
+{
+  "stats": {
+    "suites": 2,
+    "tests": 2,
+    "passes": 2,
+    "pending": 0,
+    "failures": 0,
+    "start": "2021-12-07T11:50:31.411Z",
+    "end": "2021-12-07T11:50:36.168Z",
+    "duration": 4757,
+    "testsRegistered": 2,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "73c1d4bb-d7eb-43ba-ac8e-e8c4738ef26a",
+      "title": "",
+      "fullFile": "",
+      "file": "",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "e477b28c-2239-4541-aa46-a677a4fc780e",
+          "title": "User Methods",
+          "fullFile": "D:\\Backend_Tumblr-4u-main\\test\\userBlogTest.js",
+          "file": "\\test\\userBlogTest.js",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [],
+          "suites": [
+            {
+              "uuid": "58235601-2e70-4f24-91c9-d8091baa1cb1",
+              "title": "User creates a blog",
+              "fullFile": "D:\\Backend_Tumblr-4u-main\\test\\userBlogTest.js",
+              "file": "\\test\\userBlogTest.js",
+              "beforeHooks": [],
+              "afterHooks": [],
+              "tests": [
+                {
+                  "title": "It should create a new blog and put its id in the blogsId array of the user",
+                  "fullTitle": "User Methods User creates a blog It should create a new blog and put its id in the blogsId array of the user",
+                  "timedOut": false,
+                  "duration": 4514,
+                  "state": "passed",
+                  "speed": "slow",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "const blog= {\n  title: 'nour',\n  url: 'nooro.tumblr.com',\n  privacy: true,\n  password: '12345',\n};\nchai\n    .request(server)\n    .get('/user/new/blog/619695c9bf5e722b10e141c2')\n    .send(blog)\n    .end((err, res) => {\n      res.should.have.status(201);\n      res.body.should.be.a('object');\n      res.body.should.have.property('res')\n          .have.property('message')\n          .eq('Blog Created Successfully');\n      done();\n    });",
+                  "err": {},
+                  "uuid": "f1ad5c49-fa87-4c82-b482-fc099dc01289",
+                  "parentUUID": "58235601-2e70-4f24-91c9-d8091baa1cb1",
+                  "isHook": false,
+                  "skipped": false
+                },
+                {
+                  "title": "It finds another blog with the same url and returns url not available",
+                  "fullTitle": "User Methods User creates a blog It finds another blog with the same url and returns url not available",
+                  "timedOut": false,
+                  "duration": 225,
+                  "state": "passed",
+                  "speed": "slow",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "const blog= {\n  title: 'nour',\n  url: 'nour.tumblr.com',\n  privacy: true,\n  password: '12345',\n};\nchai\n    .request(server)\n    .get('/user/new/blog/619695c9bf5e722b10e141c2')\n    .send(blog)\n    .end((err, res) => {\n      res.should.have.status(400);\n      res.body.should.be.a('object');\n      res.body.should.have.property('res')\n          .have.property('message')\n          .eq('URL is not available');\n      done();\n    });",
+                  "err": {},
+                  "uuid": "a8ab80e8-ffa7-49cf-913d-854991e6bda3",
+                  "parentUUID": "58235601-2e70-4f24-91c9-d8091baa1cb1",
+                  "isHook": false,
+                  "skipped": false
+                }
+              ],
+              "suites": [],
+              "passes": [
+                "f1ad5c49-fa87-4c82-b482-fc099dc01289",
+                "a8ab80e8-ffa7-49cf-913d-854991e6bda3"
+              ],
+              "failures": [],
+              "pending": [],
+              "skipped": [],
+              "duration": 4739,
+              "root": false,
+              "rootEmpty": false,
+              "_timeout": 100000
+            }
+          ],
+          "passes": [],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 0,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 100000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 100000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "9.1.3"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "Test_Report",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.0.1"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "Report",
+        "reportFilename": "Test_Report"
+      },
+      "version": "6.0.1"
+    }
+  }
+}
