@@ -181,7 +181,17 @@ describe('Post APIs', () => {
       });
     });
 
-  //});
+    describe('Function removeReblog', () => {
+      it('It Should Remove a Reblog', (done) => {
+        chai.request(server)
+            .delete('/61ae667d8b4d5620ce937992/61af961c981bc795d5535da0/remove_reblog')
+            .end((err, res) => {
+              res.should.have.status(200);
+              res.body.should.be.eq('Reblog Removed Successfully');
+              done();
+            });
+      });
+    });
 
 });
 /* =========== /// <==> End <==> ===========*/

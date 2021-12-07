@@ -304,14 +304,14 @@ const removeComment = async (req, res) => {
           existingNotes.comments.pull(commentsArray[pos]);
         } else {
           res.status(StatusCodes.BAD_REQUEST).json('Comment Not Found');
-        }
+        };
         existingNotes.save(); //whole document in db is savedddddddd
         console.log('comments array after: ',commentsArray);
         res.status(StatusCodes.OK).json('Comment Removed Successfully');
       }
       else {
         res.status(StatusCodes.BAD_REQUEST).json('Notes Not Found');
-      }
+      };
     } else {
       res.status(StatusCodes.BAD_REQUEST).json('Post Not Found');
     };
@@ -326,7 +326,37 @@ const removeComment = async (req, res) => {
 const removeReblog = async (req, res) => {
   try {
     const postId = req.params.postId;
-  } catch (error) {}
+    const reblogId = req.params.reblogId;
+    const existingPost = await postsModel.posts.findOne({_id: postId});
+    if (existingPost) {
+      const notesId = existingPost.notesId;
+      const existingNotes = await postsModel.notes.findOne({_id: notesId});
+      if (existingNotes) {
+        const reblogsArray = existingNotes.reblogs;
+        console.log('reblogs array: ',reblogsArray);
+        let pos = 0;
+        let exist = loopObjAndCheck(reblogsArray, reblogId, pos);
+        console.log('off', exist)
+        if (exist) {
+          existingNotes.reblogs.pull(reblogsArray[pos]);
+        } else {
+          res.status(StatusCodes.BAD_REQUEST).json('Reblog Not Found');
+        };
+        existingNotes.save(); 
+        console.log('reblogs array after: ',reblogsArray);
+        res.status(StatusCodes.OK).json('Reblog Removed Successfully');
+      }
+      else {
+        res.status(StatusCodes.BAD_REQUEST).json('Notes Not Found');
+      };
+    } else {
+      res.status(StatusCodes.BAD_REQUEST).json('Post Not Found');
+    };
+  } catch (error) {
+    res
+        .status(StatusCodes.INTERNAL_SERVER_ERROR)
+        .json('Error in Remove Reblog Function');
+  };
 };
 
 /* ----------- <---> Get Post Notes <---> ----------- */ // *** <===> not Done <===>  *** //
