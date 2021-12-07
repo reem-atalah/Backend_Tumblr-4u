@@ -20,7 +20,7 @@ describe('Post APIs', () => {
 
   //----------------// <=====> Create Post <=====> //----------------//
 
-  // describe('Post Blog Post', () => {
+  // describe('Function createPost', () => {
   //   it('It Should Create New Post', (done) => {
   //     const blogPost = {
   //       postHtml: '</>',
@@ -40,7 +40,7 @@ describe('Post APIs', () => {
   //   });
   // });
 
-  describe('Don\'t Post Blog Post', () => {
+  describe('Function createPost Don\'t Post Blog Post', () => {
     it('It Should Not Create New Post Because Blog Doesn\'t Exist', (done) => {
       const blogPost = {
         postHtml: '</>',
@@ -58,8 +58,9 @@ describe('Post APIs', () => {
             done();
           });
     });
+  });
 
-    describe('Create Post Internal Server Error', () => {
+    describe('Function createPost Internal Server Error', () => {
       it('It Should Not Create New Post Due To Server Error', (done) => {
         const blogPost = {
           postHtml: '</>',
@@ -79,8 +80,8 @@ describe('Post APIs', () => {
       });
     });
 
-    describe('Get Post and Show it', () => {
-      it('It Should Show Post', (done) => {
+    describe('Function showPost', () => {
+      it('It Should Get a Post and Show it', (done) => {
         chai.request(server)
             .get('/posts/6196df230578db004e05d179/show_post') 
             .end((err, res) => {
@@ -91,25 +92,65 @@ describe('Post APIs', () => {
       });
     });
 
-    describe('Make Comment', () => {
-      it('It Should Make Comment', (done) => {
-        const comment = {
-          //commentingBlogTitle: '',
-          text: 'very good post',
-        };
+    // describe('Make Comment', () => {
+    //   it('It Should Make Comment', (done) => {
+    //     const comment = {
+    //       //commentingBlogTitle: '',
+    //       text: 'very good post',
+    //     };
 
+    //     chai.request(server)
+    //         .put('/61968c974f161173940ea9cb/61ae667d8b4d5620ce937992/comment')
+    //         .send(comment)
+    //         .end((err, res) => {
+    //           res.should.have.status(200);
+    //           res.body.should.be.eq('Comment Posted Successfully');
+    //           done();
+    //         });
+    //   });
+    // });
+
+    describe('Function loopAndCheck', () => {
+      it('It Should Loop on an Array and Check if an Element Exists', (done) => {
+        let arr = [0,1,2];
+        let element = 1;
+        //expect(postControl.loopAndCheck(arr, element)).to.be.equal(1);
+        postControl.loopAndCheck(arr, element).should.be.eq(1);
+            done();
+      });
+    });
+
+    describe('Function likePress', () => {
+      it('It Should Like or Unlike a Post', (done) => {
         chai.request(server)
-            .post('/61968c974f161173940ea9cb/61ae667d8b4d5620ce937992/comment')
-            .send(comment)
+            .put('/61968c974f161173940ea9cb/61ae667d8b4d5620ce937992/like_press')
             .end((err, res) => {
               res.should.have.status(200);
-              res.body.should.be.eq('Comment Posted Successfully');
+              res.body.should.be.eq('Post Liked Successfully');
               done();
             });
       });
     });
 
-  });
+    // describe('Function reblogPost', () => {
+    //   it('It Should Reblog a Post', (done) => {
+    //     const reblog = {
+    //       //commentingBlogTitle: '',
+    //       text: 'great post',
+    //     };
+
+    //     chai.request(server)
+    //         .put('/61968c974f161173940ea9cb/61ae667d8b4d5620ce937992/reblog_post')
+    //         .send(reblog)
+    //         .end((err, res) => {
+    //           res.should.have.status(200);
+    //           res.body.should.be.eq('Post Reblogged Successfully');
+    //           done();
+    //         });
+    //   });
+    // });
+
+  //});
 
 });
 /* =========== /// <==> End <==> ===========*/

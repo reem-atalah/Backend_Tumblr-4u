@@ -1,14 +1,14 @@
 {
   "stats": {
-    "suites": 5,
-    "tests": 4,
-    "passes": 4,
+    "suites": 6,
+    "tests": 5,
+    "passes": 5,
     "pending": 0,
     "failures": 0,
-    "start": "2021-12-06T22:02:33.312Z",
-    "end": "2021-12-06T22:02:37.198Z",
-    "duration": 3886,
-    "testsRegistered": 4,
+    "start": "2021-12-07T12:19:41.637Z",
+    "end": "2021-12-07T12:19:45.430Z",
+    "duration": 3793,
+    "testsRegistered": 5,
     "passPercent": 100,
     "pendingPercent": 0,
     "other": 0,
@@ -18,7 +18,7 @@
   },
   "results": [
     {
-      "uuid": "49255d08-be4b-426d-92ab-3d0002dd6986",
+      "uuid": "25dcf06c-0206-4407-9354-226940545fa8",
       "title": "",
       "fullFile": "",
       "file": "",
@@ -27,7 +27,7 @@
       "tests": [],
       "suites": [
         {
-          "uuid": "2b013c57-5b5a-489f-99dc-3bc94a3a07ce",
+          "uuid": "7d685dc0-8555-453c-9b7f-b91e704895a1",
           "title": "Post APIs",
           "fullFile": "D:\\AbeerD\\College\\third year\\SW Engineering\\Backend_Tumblr-4u\\node.js-main\\test\\postTest.js",
           "file": "\\test\\postTest.js",
@@ -36,8 +36,8 @@
           "tests": [],
           "suites": [
             {
-              "uuid": "f3494003-5f83-4223-b578-a4ed16703201",
-              "title": "Don't Post Blog Post",
+              "uuid": "35ed266f-61e3-4461-b7c6-2bfcb7280f90",
+              "title": "Function createPost Don't Post Blog Post",
               "fullFile": "D:\\AbeerD\\College\\third year\\SW Engineering\\Backend_Tumblr-4u\\node.js-main\\test\\postTest.js",
               "file": "\\test\\postTest.js",
               "beforeHooks": [],
@@ -45,9 +45,9 @@
               "tests": [
                 {
                   "title": "It Should Not Create New Post Because Blog Doesn't Exist",
-                  "fullTitle": "Post APIs Don't Post Blog Post It Should Not Create New Post Because Blog Doesn't Exist",
+                  "fullTitle": "Post APIs Function createPost Don't Post Blog Post It Should Not Create New Post Because Blog Doesn't Exist",
                   "timedOut": false,
-                  "duration": 3243,
+                  "duration": 3150,
                   "state": "passed",
                   "speed": "slow",
                   "pass": true,
@@ -56,138 +56,176 @@
                   "context": null,
                   "code": "const blogPost = {\n  postHtml: '</>',\n  type: 'video',\n  state: 'published',\n  tags: 'engineering'\n};\nchai.request(server)\n    .post('/61968c974f161173940ea9ca/posts/create_post')  //no blog with this id\n    .send(blogPost)\n    .end((err, res) => {\n      res.should.have.status(400);\n      res.body.should.be.eq('Blog Not Found (<:>)');\n      done();\n    });",
                   "err": {},
-                  "uuid": "1a5ec044-d121-444d-81aa-e1322b660085",
-                  "parentUUID": "f3494003-5f83-4223-b578-a4ed16703201",
+                  "uuid": "4f90ee10-d03a-4444-b8d7-64b3d77f1d68",
+                  "parentUUID": "35ed266f-61e3-4461-b7c6-2bfcb7280f90",
                   "isHook": false,
                   "skipped": false
                 }
               ],
-              "suites": [
-                {
-                  "uuid": "309a9023-9499-4be9-88e9-333aa82b1605",
-                  "title": "Create Post Internal Server Error",
-                  "fullFile": "D:\\AbeerD\\College\\third year\\SW Engineering\\Backend_Tumblr-4u\\node.js-main\\test\\postTest.js",
-                  "file": "\\test\\postTest.js",
-                  "beforeHooks": [],
-                  "afterHooks": [],
-                  "tests": [
-                    {
-                      "title": "It Should Not Create New Post Due To Server Error",
-                      "fullTitle": "Post APIs Don't Post Blog Post Create Post Internal Server Error It Should Not Create New Post Due To Server Error",
-                      "timedOut": false,
-                      "duration": 8,
-                      "state": "passed",
-                      "speed": "fast",
-                      "pass": true,
-                      "fail": false,
-                      "pending": false,
-                      "context": null,
-                      "code": "const blogPost = {\n  postHtml: '</>',\n  type: 'video',\n  state: 'published',\n  tags: 'engineering'\n};\n    \nchai.request(server)\n    .post('/1/posts/create_post')  //no blog with this id\n    .send(blogPost)\n    .end((err, res) => {\n      res.should.have.status(500);\n      res.body.should.be.eq('Error In Create Post Function (<:>)');\n      done();\n    });",
-                      "err": {},
-                      "uuid": "42a5f341-2f5d-44dc-ae3b-cb177f64aa7a",
-                      "parentUUID": "309a9023-9499-4be9-88e9-333aa82b1605",
-                      "isHook": false,
-                      "skipped": false
-                    }
-                  ],
-                  "suites": [],
-                  "passes": [
-                    "42a5f341-2f5d-44dc-ae3b-cb177f64aa7a"
-                  ],
-                  "failures": [],
-                  "pending": [],
-                  "skipped": [],
-                  "duration": 8,
-                  "root": false,
-                  "rootEmpty": false,
-                  "_timeout": 100000
-                },
-                {
-                  "uuid": "906db746-00f0-4a52-9844-5cb023d64dbe",
-                  "title": "Get Post and Show it",
-                  "fullFile": "D:\\AbeerD\\College\\third year\\SW Engineering\\Backend_Tumblr-4u\\node.js-main\\test\\postTest.js",
-                  "file": "\\test\\postTest.js",
-                  "beforeHooks": [],
-                  "afterHooks": [],
-                  "tests": [
-                    {
-                      "title": "It Should Show Post",
-                      "fullTitle": "Post APIs Don't Post Blog Post Get Post and Show it It Should Show Post",
-                      "timedOut": false,
-                      "duration": 155,
-                      "state": "passed",
-                      "speed": "slow",
-                      "pass": true,
-                      "fail": false,
-                      "pending": false,
-                      "context": null,
-                      "code": "chai.request(server)\n    .get('/posts/6196df230578db004e05d179/show_post') \n    .end((err, res) => {\n      res.should.have.status(200);\n      res.body.should.be.eq('</>');\n      done();\n    });",
-                      "err": {},
-                      "uuid": "01727fc5-c1b5-4c56-9d86-2a8c01724cea",
-                      "parentUUID": "906db746-00f0-4a52-9844-5cb023d64dbe",
-                      "isHook": false,
-                      "skipped": false
-                    }
-                  ],
-                  "suites": [],
-                  "passes": [
-                    "01727fc5-c1b5-4c56-9d86-2a8c01724cea"
-                  ],
-                  "failures": [],
-                  "pending": [],
-                  "skipped": [],
-                  "duration": 155,
-                  "root": false,
-                  "rootEmpty": false,
-                  "_timeout": 100000
-                },
-                {
-                  "uuid": "8f5db671-a255-4853-94ef-2345ac6dc77a",
-                  "title": "Make Comment",
-                  "fullFile": "D:\\AbeerD\\College\\third year\\SW Engineering\\Backend_Tumblr-4u\\node.js-main\\test\\postTest.js",
-                  "file": "\\test\\postTest.js",
-                  "beforeHooks": [],
-                  "afterHooks": [],
-                  "tests": [
-                    {
-                      "title": "It Should Make Comment",
-                      "fullTitle": "Post APIs Don't Post Blog Post Make Comment It Should Make Comment",
-                      "timedOut": false,
-                      "duration": 466,
-                      "state": "passed",
-                      "speed": "slow",
-                      "pass": true,
-                      "fail": false,
-                      "pending": false,
-                      "context": null,
-                      "code": "const comment = {\n  //commentingBlogTitle: '',\n  text: 'very good post',\n};\nchai.request(server)\n    .post('/61968c974f161173940ea9cb/61ae667d8b4d5620ce937992/comment')\n    .send(comment)\n    .end((err, res) => {\n      res.should.have.status(200);\n      res.body.should.be.eq('Comment Posted Successfully');\n      done();\n    });",
-                      "err": {},
-                      "uuid": "c05a78a0-269e-4abc-99a6-7f320386cfae",
-                      "parentUUID": "8f5db671-a255-4853-94ef-2345ac6dc77a",
-                      "isHook": false,
-                      "skipped": false
-                    }
-                  ],
-                  "suites": [],
-                  "passes": [
-                    "c05a78a0-269e-4abc-99a6-7f320386cfae"
-                  ],
-                  "failures": [],
-                  "pending": [],
-                  "skipped": [],
-                  "duration": 466,
-                  "root": false,
-                  "rootEmpty": false,
-                  "_timeout": 100000
-                }
-              ],
+              "suites": [],
               "passes": [
-                "1a5ec044-d121-444d-81aa-e1322b660085"
+                "4f90ee10-d03a-4444-b8d7-64b3d77f1d68"
               ],
               "failures": [],
               "pending": [],
               "skipped": [],
-              "duration": 3243,
+              "duration": 3150,
+              "root": false,
+              "rootEmpty": false,
+              "_timeout": 100000
+            },
+            {
+              "uuid": "beef56da-9c71-48ce-9828-2983cd5522de",
+              "title": "Function createPost Internal Server Error",
+              "fullFile": "D:\\AbeerD\\College\\third year\\SW Engineering\\Backend_Tumblr-4u\\node.js-main\\test\\postTest.js",
+              "file": "\\test\\postTest.js",
+              "beforeHooks": [],
+              "afterHooks": [],
+              "tests": [
+                {
+                  "title": "It Should Not Create New Post Due To Server Error",
+                  "fullTitle": "Post APIs Function createPost Internal Server Error It Should Not Create New Post Due To Server Error",
+                  "timedOut": false,
+                  "duration": 5,
+                  "state": "passed",
+                  "speed": "fast",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "const blogPost = {\n  postHtml: '</>',\n  type: 'video',\n  state: 'published',\n  tags: 'engineering'\n};\n    \nchai.request(server)\n    .post('/1/posts/create_post')  //no blog with this id\n    .send(blogPost)\n    .end((err, res) => {\n      res.should.have.status(500);\n      res.body.should.be.eq('Error In Create Post Function (<:>)');\n      done();\n    });",
+                  "err": {},
+                  "uuid": "9116ce15-fbb9-454e-b02e-95c6082acff0",
+                  "parentUUID": "beef56da-9c71-48ce-9828-2983cd5522de",
+                  "isHook": false,
+                  "skipped": false
+                }
+              ],
+              "suites": [],
+              "passes": [
+                "9116ce15-fbb9-454e-b02e-95c6082acff0"
+              ],
+              "failures": [],
+              "pending": [],
+              "skipped": [],
+              "duration": 5,
+              "root": false,
+              "rootEmpty": false,
+              "_timeout": 100000
+            },
+            {
+              "uuid": "ac215386-fc9c-4ab2-a805-5124770c5e5a",
+              "title": "Function showPost",
+              "fullFile": "D:\\AbeerD\\College\\third year\\SW Engineering\\Backend_Tumblr-4u\\node.js-main\\test\\postTest.js",
+              "file": "\\test\\postTest.js",
+              "beforeHooks": [],
+              "afterHooks": [],
+              "tests": [
+                {
+                  "title": "It Should Get a Post and Show it",
+                  "fullTitle": "Post APIs Function showPost It Should Get a Post and Show it",
+                  "timedOut": false,
+                  "duration": 156,
+                  "state": "passed",
+                  "speed": "slow",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "chai.request(server)\n    .get('/posts/6196df230578db004e05d179/show_post') \n    .end((err, res) => {\n      res.should.have.status(200);\n      res.body.should.be.eq('</>');\n      done();\n    });",
+                  "err": {},
+                  "uuid": "fe41ec1b-2be1-46d5-963d-51c8c4109a45",
+                  "parentUUID": "ac215386-fc9c-4ab2-a805-5124770c5e5a",
+                  "isHook": false,
+                  "skipped": false
+                }
+              ],
+              "suites": [],
+              "passes": [
+                "fe41ec1b-2be1-46d5-963d-51c8c4109a45"
+              ],
+              "failures": [],
+              "pending": [],
+              "skipped": [],
+              "duration": 156,
+              "root": false,
+              "rootEmpty": false,
+              "_timeout": 100000
+            },
+            {
+              "uuid": "c6a0b6ef-71a6-482d-84b8-d0ae340f4398",
+              "title": "Function loopAndCheck",
+              "fullFile": "D:\\AbeerD\\College\\third year\\SW Engineering\\Backend_Tumblr-4u\\node.js-main\\test\\postTest.js",
+              "file": "\\test\\postTest.js",
+              "beforeHooks": [],
+              "afterHooks": [],
+              "tests": [
+                {
+                  "title": "It Should Loop on an Array and Check if an Element Exists",
+                  "fullTitle": "Post APIs Function loopAndCheck It Should Loop on an Array and Check if an Element Exists",
+                  "timedOut": false,
+                  "duration": 0,
+                  "state": "passed",
+                  "speed": "fast",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "let arr = [0,1,2];\nlet element = 1;\n//expect(postControl.loopAndCheck(arr, element)).to.be.equal(1);\npostControl.loopAndCheck(arr, element).should.be.eq(1);\n    done();",
+                  "err": {},
+                  "uuid": "6d3378d2-5781-4385-9ead-b8f09920742e",
+                  "parentUUID": "c6a0b6ef-71a6-482d-84b8-d0ae340f4398",
+                  "isHook": false,
+                  "skipped": false
+                }
+              ],
+              "suites": [],
+              "passes": [
+                "6d3378d2-5781-4385-9ead-b8f09920742e"
+              ],
+              "failures": [],
+              "pending": [],
+              "skipped": [],
+              "duration": 0,
+              "root": false,
+              "rootEmpty": false,
+              "_timeout": 100000
+            },
+            {
+              "uuid": "52a84e3d-f1e0-4bdd-a494-b848e580aac2",
+              "title": "Function likePress",
+              "fullFile": "D:\\AbeerD\\College\\third year\\SW Engineering\\Backend_Tumblr-4u\\node.js-main\\test\\postTest.js",
+              "file": "\\test\\postTest.js",
+              "beforeHooks": [],
+              "afterHooks": [],
+              "tests": [
+                {
+                  "title": "It Should Like or Unlike a Post",
+                  "fullTitle": "Post APIs Function likePress It Should Like or Unlike a Post",
+                  "timedOut": false,
+                  "duration": 473,
+                  "state": "passed",
+                  "speed": "slow",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "chai.request(server)\n    .put('/61968c974f161173940ea9cb/61ae667d8b4d5620ce937992/like_press')\n    .end((err, res) => {\n      res.should.have.status(200);\n      res.body.should.be.eq('Post Liked Successfully');\n      done();\n    });",
+                  "err": {},
+                  "uuid": "ef43c025-93ca-4aa8-8a9c-78deac719f51",
+                  "parentUUID": "52a84e3d-f1e0-4bdd-a494-b848e580aac2",
+                  "isHook": false,
+                  "skipped": false
+                }
+              ],
+              "suites": [],
+              "passes": [
+                "ef43c025-93ca-4aa8-8a9c-78deac719f51"
+              ],
+              "failures": [],
+              "pending": [],
+              "skipped": [],
+              "duration": 473,
               "root": false,
               "rootEmpty": false,
               "_timeout": 100000

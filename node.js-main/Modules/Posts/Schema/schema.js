@@ -45,7 +45,12 @@ const notesSchema = mongoose.Schema({
       text: { type: String },
     },
   ],
-  reblogs: { type: [String] },
+  reblogs: [
+    {
+      rebloggingId: { type: String },
+      text: { type: String },
+    },
+  ],
 });
 
 // const commentSchema = mongoose.Schema({

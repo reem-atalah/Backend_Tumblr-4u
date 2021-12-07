@@ -33,10 +33,10 @@ router.put('/:blogId/:postId/comment',
     postFunctions.makeComment);
 
 /* ----------- <---> Like a Post <---> ----------- */
-router.put('/:blogId/:postId/like_post',
+router.put('/:blogId/:postId/like_press',
     //ValidateRequest(postJoi.createPostValidations),
     /** isAuthorized(postEndPoints.createPost),**/ 
-    postFunctions.likePost);
+    postFunctions.likePress);
 
 /* ----------- <---> Reblog a Post <---> ----------- */
 router.put('/:blogId/:postId/reblog_post',
@@ -45,22 +45,22 @@ router.put('/:blogId/:postId/reblog_post',
     postFunctions.reblogPost);
 
 /* ----------- <---> Remove a comment <---> ----------- */
-router.delete('/:blogId/:postId/remove_comment',
-    //ValidateRequest(postJoi.createPostValidations),
-    /** isAuthorized(postEndPoints.createPost),**/ 
-    postFunctions.removeComment);
+// router.delete('/:blogId/:postId/remove_comment',
+//     //ValidateRequest(postJoi.createPostValidations),
+//     /** isAuthorized(postEndPoints.createPost),**/ 
+//     postFunctions.removeComment);
 
 /* ----------- <---> Unlike a Post <---> ----------- */
-router.delete('/:blogId/:postId/unlike_post',
-    //ValidateRequest(postJoi.createPostValidations),
-    /** isAuthorized(postEndPoints.createPost),**/ 
-    postFunctions.unlikePost);
+// router.delete('/:blogId/:postId/unlike_post',
+//     //ValidateRequest(postJoi.createPostValidations),
+//     /** isAuthorized(postEndPoints.createPost),**/ 
+//     postFunctions.unlikePost);
 
 /* ----------- <---> Delete a reboged Post <---> ----------- */
-router.delete('/:blogId/:postId/remove_reblog',
-    //ValidateRequest(postJoi.createPostValidations),
-    /** isAuthorized(postEndPoints.createPost),**/ 
-    postFunctions.removeReblog);
+// router.delete('/:blogId/:postId/remove_reblog',
+//     //ValidateRequest(postJoi.createPostValidations),
+//     /** isAuthorized(postEndPoints.createPost),**/ 
+//     postFunctions.removeReblog);
 
 /* ----------- <---> Get Post Notes <---> ----------- */
 router.get('/posts/:postId/notes',
