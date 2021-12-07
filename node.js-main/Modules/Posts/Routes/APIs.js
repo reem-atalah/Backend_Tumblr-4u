@@ -45,10 +45,10 @@ router.put('/:blogId/:postId/reblog_post',
     postFunctions.reblogPost);
 
 /* ----------- <---> Remove a comment <---> ----------- */
-// router.delete('/:blogId/:postId/remove_comment',
-//     //ValidateRequest(postJoi.createPostValidations),
-//     /** isAuthorized(postEndPoints.createPost),**/ 
-//     postFunctions.removeComment);
+router.delete('/:postId/:commentId/remove_comment',
+    //ValidateRequest(postJoi.createPostValidations),
+    /** isAuthorized(postEndPoints.createPost),**/ 
+    postFunctions.removeComment);
 
 /* ----------- <---> Unlike a Post <---> ----------- */
 // router.delete('/:blogId/:postId/unlike_post',
@@ -57,10 +57,10 @@ router.put('/:blogId/:postId/reblog_post',
 //     postFunctions.unlikePost);
 
 /* ----------- <---> Delete a reboged Post <---> ----------- */
-// router.delete('/:blogId/:postId/remove_reblog',
-//     //ValidateRequest(postJoi.createPostValidations),
-//     /** isAuthorized(postEndPoints.createPost),**/ 
-//     postFunctions.removeReblog);
+router.delete('/:postId/:reblogId/remove_reblog',
+    //ValidateRequest(postJoi.createPostValidations),
+    /** isAuthorized(postEndPoints.createPost),**/ 
+    postFunctions.removeReblog);
 
 /* ----------- <---> Get Post Notes <---> ----------- */
 router.get('/posts/:postId/notes',

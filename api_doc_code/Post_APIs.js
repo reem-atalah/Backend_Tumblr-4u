@@ -343,7 +343,7 @@
 */
 
 /**
- * @api {post} /:blogId/:postId/remove_comment Remove Comments
+ * @api {post} /:postId/:commentId/remove_comment Remove Comments
  * @apiName commentRemover
  * @apiGroup Post
  * @apiPermission User, Admin, Super_Admin
@@ -477,7 +477,7 @@
 */
 
 /**
- * @api {post} /:blogId/:postId/remove_reblog Reblog a Post
+ * @api {post} /:postId/:reblogId/remove_reblog Reblog a Post
  * @apiName reblogBlogPost
  * @apiGroup Post
  * @apiPermission User, Admin, Super_Admin

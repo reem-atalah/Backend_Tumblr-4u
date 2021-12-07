@@ -10,6 +10,8 @@ const connect = require('../Configurations/configuration');
 const postControl = require('../Modules/Posts/Controller/control');
 var assert = require('assert');
 
+var mongoose = require('mongoose');
+
 chai.should();
 chai.use(chaiHttp);
 /* =========== /// <==> End <==> ===========*/
@@ -120,6 +122,23 @@ describe('Post APIs', () => {
       });
     });
 
+    describe('Function loopObjAndCheck', () => {
+      it('It Should Loop on an Object in an Array and Check if an Id Exists', (done) => {
+        let a = mongoose.Types.ObjectId("61af36a793d7c3194ff42269");
+        let b = mongoose.Types.ObjectId("61ae881aab9ea73f2282b03e");
+        let c = mongoose.Types.ObjectId("61ae887d2676ed5d9b5d532f");
+        let arr = [
+          {text: 'a',_id: a},
+          {text: 'shd',_id: b},
+          {text: 'akj',_id: c}
+        ];
+        let element = '61ae881aab9ea73f2282b03e';
+        let pos = 0;
+        postControl.loopObjAndCheck(arr, element, pos).should.be.eq(1);
+            done();
+      });
+    });
+
     describe('Function likePress', () => {
       it('It Should Like or Unlike a Post', (done) => {
         chai.request(server)
@@ -149,6 +168,18 @@ describe('Post APIs', () => {
     //         });
     //   });
     // });
+
+    describe('Function removeComment', () => {
+      it('It Should Remove a Comment', (done) => {
+        chai.request(server)
+            .delete('/61ae667d8b4d5620ce937992/61ae881aab9ea73f2282b03e/remove_comment')
+            .end((err, res) => {
+              res.should.have.status(200);
+              res.body.should.be.eq('Comment Removed Successfully');
+              done();
+            });
+      });
+    });
 
   //});
 

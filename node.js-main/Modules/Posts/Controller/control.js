@@ -1,16 +1,22 @@
-///////////////////////////////////////////////////////////
-/// <==> /// This File Contains Post Functions /// <==> ///
-///////////////////////////////////////////////////////////
+// /////////////////////////////////////////////////////////
+// / <==> /// This File Contains Post Functions /// <==> ///
+// /////////////////////////////////////////////////////////
 
 /* ====================== /// <==> Variables Declaration <==> /// ====================== */
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
-const { StatusCodes } = require("http-status-codes");
-const postsModel = require("../Model/model");
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+const {
+  StatusCodes,
+} = require('http-status-codes');
+const postsModel = require('../Model/model');
 
-const { populate } = require("../Model/model");
-const blogs = require("../../Blogs/Model/model");
-const { findOne } = require("../../Blogs/Model/model");
+const {
+  populate,
+} = require('../Model/model');
+const blogs = require('../../Blogs/Model/model');
+const {
+  findOne,
+} = require('../../Blogs/Model/model');
 /* =========== /// <==> End <==> ===========*/
 
 /* ====================== /// <==> Post Functions <==> /// ====================== */
@@ -34,7 +40,7 @@ const createPost = async (req, res) => {
     const type = req.body.type;
     const state = req.body.state;
     const tags = req.body.tags;
-    //let date = Date.now;
+    // let date = Date.now;
 
     // const blogValidation = async(blogId) => {
     //     let existingBlog = await blogs.findOne({_id: blogId});
@@ -42,13 +48,15 @@ const createPost = async (req, res) => {
     //     return existingBlog;
     // };
 
-    const existingBlog = await blogs.findOne({ _id: blogId });
+    const existingBlog = await blogs.findOne({
+      _id: blogId,
+    });
 
     if (existingBlog) {
-      console.log("blog id: ", blogId, "blog: ", existingBlog);
+      console.log('blog id: ', blogId, 'blog: ', existingBlog);
       const newNotes = new postsModel.notes();
       newNotes.save();
-      let notesId = newNotes._id;
+      const notesId = newNotes._id;
       newPost = new postsModel.posts({
         blogId,
         postHtml,
@@ -60,16 +68,16 @@ const createPost = async (req, res) => {
       newPost = await newPost.save();
       console.log(newPost);
 
-      res.status(StatusCodes.OK).json("Post Created Successfully (<:>)");
+      res.status(StatusCodes.OK).json('Post Created Successfully (<:>)');
     } else {
-      console.log("blog not found");
-      res.status(StatusCodes.BAD_REQUEST).json("Blog Not Found (<:>)");
+      console.log('blog not found');
+      res.status(StatusCodes.BAD_REQUEST).json('Blog Not Found (<:>)');
     }
   } catch (error) {
-    console.log("catch errorrr");
+    console.log('catch errorrr');
     res
-      .status(StatusCodes.INTERNAL_SERVER_ERROR)
-      .json("Error In Create Post Function (<:>)");
+        .status(StatusCodes.INTERNAL_SERVER_ERROR)
+        .json('Error In Create Post Function (<:>)');
   }
 };
 
@@ -89,17 +97,19 @@ const createPost = async (req, res) => {
 const showPost = async (req, res) => {
   try {
     const postId = req.params.postId;
-    const existingPost = await postsModel.posts.findOne({ _id: postId });
+    const existingPost = await postsModel.posts.findOne({
+      _id: postId,
+    });
     if (existingPost) {
-      console.log("post html: ", existingPost.postHtml);
+      console.log('post html: ', existingPost.postHtml);
       res.status(StatusCodes.OK).jsonp(existingPost.postHtml);
     } else {
-      res.status(StatusCodes.BAD_REQUEST).json("Post Not Found (<:>)");
+      res.status(StatusCodes.BAD_REQUEST).json('Post Not Found (<:>)');
     }
   } catch (error) {
     res
-      .status(StatusCodes.INTERNAL_SERVER_ERROR)
-      .json("Error In Show Post Function (<:>)");
+        .status(StatusCodes.INTERNAL_SERVER_ERROR)
+        .json('Error In Show Post Function (<:>)');
   }
 };
 
@@ -108,63 +118,68 @@ const makeComment = async (req, res) => {
   try {
     const blogId = req.params.blogId;
     const postId = req.params.postId;
-    var text = req.body.text;
-    const existingBlog = await blogs.findOne({ _id: blogId });
-    const existingPost = await postsModel.posts.findOne({ _id: postId });
+    const text = req.body.text;
+    const existingBlog = await blogs.findOne({_id: blogId});
+    const existingPost = await postsModel.posts.findOne({_id: postId});
     const notesId = existingPost.notesId;
-    //const notesId = req.params.notesId;
-    const existingNotes = await postsModel.notes.findOne({ _id: notesId });
+    // const notesId = req.params.notesId;
+    const existingNotes = await postsModel.notes.findOne({_id: notesId});
     if (existingBlog) {
       if (existingPost) {
-        var commentingBlogTitle = existingBlog.title;
-        var commentingBlogId = blogId;
-        //const newComment = new postsModel.comment({commentingBlogTitle, text}).save();
+        const commentingBlogTitle = existingBlog.title;
+        const commentingBlogId = blogId;
+        // const newComment = new postsModel.comment({commentingBlogTitle, text}).save();
         if (existingNotes) {
-          let comment = { commentingBlogId, commentingBlogTitle, text };
+          const comment = {
+            commentingBlogId,
+            commentingBlogTitle,
+            text,
+          };
           console.log(comment);
-          //postsModel.notes.updateOne({_id: notesId}, {$push: {comments: comment}}); //leeeh msh zabtaaa???
+          // postsModel.notes.updateOne({_id: notesId}, {$push: {comments: comment}}); //leeeh msh zabtaaa???
           existingNotes.comments.push(comment);
           existingNotes.save();
           console.log(existingPost);
         } else {
-          console.log("notes msh mwgoda");
+          console.log('notes msh mwgoda');
           console.log(existingPost);
-          res.status(StatusCodes.BAD_REQUEST).json("Notes Not Found");
+          res.status(StatusCodes.BAD_REQUEST).json('Notes Not Found');
 
-          //const newNotes = new postsModel.notes();
-          //newNotes.save();
-          //let notesId = newNotes._id;
-          //existingPost.notesId.aggregate(notesId);
-          //postsModel.posts.aggregate({_id: postId}, {$addFields: {notesId: notesId}});
-          //existingPost.save();
-          //console.log(existingPost);
+          // const newNotes = new postsModel.notes();
+          // newNotes.save();
+          // let notesId = newNotes._id;
+          // existingPost.notesId.aggregate(notesId);
+          // postsModel.posts.aggregate({_id: postId}, {$addFields: {notesId: notesId}});
+          // existingPost.save();
+          // console.log(existingPost);
 
-          //res.status(StatusCodes.BAD_REQUEST).json('Notes Not Found');
+          // res.status(StatusCodes.BAD_REQUEST).json('Notes Not Found');
           // let comments = [{commentingBlogId, commentingBlogTitle, text}];
           // const newNotes = new postsModel.notes({comments}).save();
           // existingPost.notesId.set(notesId);
           // existingPost.save();
+          // leh el push wl pull bynf3o m3 el arrays bs? lw 3yza tyb a set field 3ady!?
+          // wlla 3shan mt3mlsh w2t el creation?
         }
 
-        res.status(StatusCodes.OK).json("Comment Posted Successfully");
+        res.status(StatusCodes.OK).json('Comment Posted Successfully');
       } else {
-        res.status(StatusCodes.BAD_REQUEST).json("Post Not Found");
+        res.status(StatusCodes.BAD_REQUEST).json('Post Not Found');
       }
     } else {
-      res.status(StatusCodes.BAD_REQUEST).json("Blog Not Found");
+      res.status(StatusCodes.BAD_REQUEST).json('Blog Not Found');
     }
   } catch (error) {
     res
-      .status(StatusCodes.INTERNAL_SERVER_ERROR)
-      .json("Error in Make Comment Function");
+        .status(StatusCodes.INTERNAL_SERVER_ERROR)
+        .json('Error in Make Comment Function');
   }
 };
-
 
 /* ----------- <---> Loop on an array and check if an element exists <---> ----------- */ // *** <===> Done <===>  *** //
 const loopAndCheck = (arr, element) => {
   let exist = 0;
-  if(arr.length) {
+  if (arr.length) {
     for (let i = 0; i < arr.length; i++) {
       if (arr[i] === element) {
         exist = 1;
@@ -172,91 +187,146 @@ const loopAndCheck = (arr, element) => {
     }
   }
   return exist;
-}
+};
 
+/* ----------- <---> Loop on Object in Array of Objects and check if Id exists <---> ----------- */ // *** <===> Done <===>  *** //
+const loopObjAndCheck = (arr, element, pos) => {
+  let exist = 0;
+  //let pos = 0;
+  if (arr.length) {
+    for (let i = 0; i < arr.length; i++) {
+      if (arr[i]._id.toString() === element) {
+        exist = 1;
+        pos = i;
+      }
+    }
+  }
+  return exist;
+};
 
 /* ----------- <---> Press Like of a Post (Like or Unlike) <---> ----------- */ // *** <===> Done <===>  *** //
-//Like should be done only one time by one blog
+// Like should be done only one time by one blog
 const likePress = async (req, res) => {
   try {
     const blogId = req.params.blogId;
     const postId = req.params.postId;
-    const existingBlog = await blogs.findOne({ _id: blogId });
-    const existingPost = await postsModel.posts.findOne({ _id: postId });
+    const existingBlog = await blogs.findOne({_id: blogId});
+    const existingPost = await postsModel.posts.findOne({_id: postId});
     const notesId = existingPost.notesId;
-    const existingNotes = await postsModel.notes.findOne({ _id: notesId });
+    const existingNotes = await postsModel.notes.findOne({ _id: notesId});
     if (existingBlog) {
       if (existingPost) {
-        //var likingBlogTitle = existingBlog.title;
-        //var likingBlogId = blogId;
         if (existingNotes) {
-          console.log("likes array: ", existingNotes.likes);
-          let likesArray = existingNotes.likes;
+          console.log('likes array: ', existingNotes.likes);
+          const likesArray = existingNotes.likes;
           console.log(likesArray);
-          let exist = loopAndCheck(likesArray, blogId);
-          console.log('exist?= ',exist)
-          if(exist) {
+          const exist = loopAndCheck(likesArray, blogId);
+          console.log('exist?= ', exist);
+          if (exist) {
             existingNotes.likes.pull(blogId);
-          }
-          else {
+          } else {
             existingNotes.likes.push(blogId);
           }
           existingNotes.save();
           console.log(existingNotes.likes);
         } else {
-          console.log("notes msh mwgoda");
           console.log(existingPost);
-          res.status(StatusCodes.BAD_REQUEST).json("Notes Not Found");
+          res.status(StatusCodes.BAD_REQUEST).json('Notes Not Found');
         }
-        res.status(StatusCodes.OK).json("Post Liked Successfully");
+        res.status(StatusCodes.OK).json('Post Liked Successfully');
       } else {
-        res.status(StatusCodes.BAD_REQUEST).json("Post Not Found");
+        res.status(StatusCodes.BAD_REQUEST).json('Post Not Found');
       }
     } else {
-      res.status(StatusCodes.BAD_REQUEST).json("Blog Not Found");
+      res.status(StatusCodes.BAD_REQUEST).json('Blog Not Found');
     }
   } catch (error) {
     res
-      .status(StatusCodes.INTERNAL_SERVER_ERROR)
-      .json("Error in Make Comment Function");
+        .status(StatusCodes.INTERNAL_SERVER_ERROR)
+        .json('Error in Make Comment Function');
   }
 };
 
-/* ----------- <---> Reblog a Post <---> ----------- */ // *** <===> not Done <===>  *** //
+/* ----------- <---> Reblog a Post <---> ----------- */ // *** <===> Done <===>  *** //
 const reblogPost = async (req, res) => {
   try {
     const blogId = req.params.blogId;
     const postId = req.params.postId;
     const text = req.body.text;
-    const existingBlog = await blogs.findOne({ _id: blogId });
-    const existingPost = await postsModel.posts.findOne({ _id: postId });
+    const existingBlog = await blogs.findOne({_id: blogId});
+    const existingPost = await postsModel.posts.findOne({_id: postId});
     const notesId = existingPost.notesId;
-    const existingNotes = await postsModel.notes.findOne({ _id: notesId });
+    const existingNotes = await postsModel.notes.findOne({_id: notesId});
     if (existingBlog) {
       if (existingPost) {
         const rebloggingId = blogId;
         if (existingNotes) {
-          let reblog = { rebloggingId, text };
+          const reblog = {
+            rebloggingId,
+            text,
+          };
           existingNotes.reblogs.push(reblog);
           existingNotes.save();
         } else {
-          console.log("notes msh mwgoda");
           console.log(existingPost);
-          res.status(StatusCodes.BAD_REQUEST).json("Notes Not Found");
+          res.status(StatusCodes.BAD_REQUEST).json('Notes Not Found');
         }
 
-        res.status(StatusCodes.OK).json("Post Reblogged Successfully");
+        res.status(StatusCodes.OK).json('Post Reblogged Successfully');
       } else {
-        res.status(StatusCodes.BAD_REQUEST).json("Post Not Found");
+        res.status(StatusCodes.BAD_REQUEST).json('Post Not Found');
       }
     } else {
-      res.status(StatusCodes.BAD_REQUEST).json("Blog Not Found");
+      res.status(StatusCodes.BAD_REQUEST).json('Blog Not Found');
     }
   } catch (error) {
     res
-      .status(StatusCodes.INTERNAL_SERVER_ERROR)
-      .json("Error in Make Comment Function");
+        .status(StatusCodes.INTERNAL_SERVER_ERROR)
+        .json('Error in Make Comment Function');
   }
+};
+
+/* ----------- <---> Remove Comment <---> ----------- */ // *** <===> not Done <===>  *** //
+const removeComment = async (req, res) => {
+  try {
+    const postId = req.params.postId;
+    const commentId = req.params.commentId;
+    const existingPost = await postsModel.posts.findOne({_id: postId});
+    if (existingPost) {
+      const notesId = existingPost.notesId;
+      const existingNotes = await postsModel.notes.findOne({_id: notesId});
+      if (existingNotes) {
+        const commentsArray = existingNotes.comments;
+        console.log('comments array: ',commentsArray);
+        let pos = 0;
+        let exist = loopObjAndCheck(commentsArray, commentId, pos);
+        if (exist) {
+          existingNotes.comments.pull(commentsArray[pos]);
+        } else {
+          res.status(StatusCodes.BAD_REQUEST).json('Comment Not Found');
+        }
+        existingNotes.save(); //whole document in db is savedddddddd
+        console.log('comments array after: ',commentsArray);
+        res.status(StatusCodes.OK).json('Comment Removed Successfully');
+      }
+      else {
+        res.status(StatusCodes.BAD_REQUEST).json('Notes Not Found');
+      }
+    } else {
+      res.status(StatusCodes.BAD_REQUEST).json('Post Not Found');
+    };
+  } catch (error) {
+    res
+        .status(StatusCodes.INTERNAL_SERVER_ERROR)
+        .json('Error in Remove Comment Function');
+  };
+};
+
+/* ----------- <---> Remove Reblog <---> ----------- */ // *** <===> not Done <===>  *** //
+const removeReblog = async (req, res) => {
+  try {
+    const postId = req.params.postId;
+  } catch (error) {}
 };
 
 /* ----------- <---> Get Post Notes <---> ----------- */ // *** <===> not Done <===>  *** //
@@ -280,15 +350,16 @@ const postFunctions = (module.exports = {
   createPost,
   showPost,
   makeComment,
-  //likePost,
+  loopAndCheck,
+  loopObjAndCheck,
   likePress,
   reblogPost,
-  //editPost,
-  //deletePost,
-  //commentPost,
-  //shareWith,
-  //blogValidation
+  removeComment,
+  removeReblog,
+  // editPost,
+  // deletePost,
+  // shareWith,
+  // blogValidation
   getNotes,
-  loopAndCheck,
 });
 /* =========== /// <==> End <==> ===========*/
