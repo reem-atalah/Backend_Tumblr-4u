@@ -20,25 +20,25 @@ describe('Post APIs', () => {
 
   //----------------// <=====> Create Post <=====> //----------------//
 
-  describe('Post Blog Post', () => {
-    it('It Should Create New Post', (done) => {
-      const blogPost = {
-        postHtml: '</>',
-        type: 'link',
-        state: 'published',
-        tags: 'tumblr'
-      };
+  // describe('Post Blog Post', () => {
+  //   it('It Should Create New Post', (done) => {
+  //     const blogPost = {
+  //       postHtml: '</>',
+  //       type: 'link',
+  //       state: 'published',
+  //       tags: 'tumblr'
+  //     };
 
-      chai.request(server)
-          .post('/61968c974f161173940ea9cb/posts/create_post')
-          .send(blogPost)
-          .end((err, res) => {
-            res.should.have.status(200);
-            res.body.should.be.eq('Post Created Successfully (<:>)');
-            done();
-          });
-    });
-  });
+  //     chai.request(server)
+  //         .post('/61968c974f161173940ea9cb/posts/create_post')
+  //         .send(blogPost)
+  //         .end((err, res) => {
+  //           res.should.have.status(200);
+  //           res.body.should.be.eq('Post Created Successfully (<:>)');
+  //           done();
+  //         });
+  //   });
+  // });
 
   describe('Don\'t Post Blog Post', () => {
     it('It Should Not Create New Post Because Blog Doesn\'t Exist', (done) => {
@@ -86,6 +86,24 @@ describe('Post APIs', () => {
             .end((err, res) => {
               res.should.have.status(200);
               res.body.should.be.eq('</>');
+              done();
+            });
+      });
+    });
+
+    describe('Make Comment', () => {
+      it('It Should Make Comment', (done) => {
+        const comment = {
+          //commentingBlogTitle: '',
+          text: 'very good post',
+        };
+
+        chai.request(server)
+            .post('/61968c974f161173940ea9cb/61ae667d8b4d5620ce937992/comment')
+            .send(comment)
+            .end((err, res) => {
+              res.should.have.status(200);
+              res.body.should.be.eq('Comment Posted Successfully');
               done();
             });
       });

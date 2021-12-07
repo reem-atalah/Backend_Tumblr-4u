@@ -207,7 +207,7 @@
 */
 
 /**
- * @api {post} /posts/:postId/like_post Like a blog post
+ * @api {post} /:blogId/:postId/like_post Like a blog post
  * @apiName likeBlogPost
  * @apiGroup Post
  * @apiPermission User, Admin, Super_Admin
@@ -215,6 +215,7 @@
  * @apidescription Like a blog post
  * @apiVersion 0.0.0
  *
+ * @apiParam {String} blogId The ID of the blog that likes the post.
  * @apiParam {String} postId The ID of the liked post.
  *
  * @apiSuccessExample Response Data:
@@ -245,20 +246,66 @@
 
 
 /*
+===================== ///////// <---------> ================ <---------> ///////// =====================> 
+===================== ///////// <---------> Unlike a Blog Post <---------> ///////// =====================> 
+===================== ///////// <---------> ================ <---------> ///////// =====================> 
+*/
+
+/**
+ * @api {post} /:blogId/:postId/unlike_post Unlike a blog post
+ * @apiName unlikeBlogPost
+ * @apiGroup Post
+ * @apiPermission User, Admin, Super_Admin
+ * 
+ * @apidescription Unlike a blog post
+ * @apiVersion 0.0.0
+ *
+ * @apiParam {String} blogId Primary blog ID (only primary blogs can unlike posts).
+ * @apiParam {String} postId The ID of the post to unlike.
+ *
+ * @apiSuccessExample Response Data:
+ *      HTTP/1.1 200 OK
+ *      {
+ *          "meta": {
+ *                       "status": 200,
+ *                       "msg": "OK"
+ *                  },
+ * 
+ *          "response":{
+ *                      "message": "Post Successfully Unliked"
+ *                     }   
+ *      }
+ * 
+ * @apiErrorExample Response Error:
+ *      HTTP/1.1 400 BAD REQUEST
+ *      {
+ *          "error": "Error In Input Data"
+ *      }
+ *      HTTP/1.1 401 Unauthorized
+ *      {
+ *          "error": "User Is Unauthorized"
+ *      }
+ */
+
+/*=================== End =====================*/
+
+
+/*
 ===================== ///////// <---------> ================= <---------> ///////// =====================> 
-===================== ///////// <---------> Make Comment <---------> ///////// =====================> 
+===================== ///////// <---------> Make a Comment <---------> ///////// =====================> 
 ===================== ///////// <---------> ================= <---------> ///////// =====================> 
 */
 
 /**
- * @api {post} /posts/:postId/comment_post Make Comment
+ * @api {post} /:blogId/:postId/comment Make Comment
  * @apiName makeComment
  * @apiGroup Post
  * @apiPermission User, Admin, Super_Admin
  * @apidescription a commenter blog can make comments on any posts
  * @apiVersion 0.0.0
  * 
- * @apiParam {String} postId The ID of the post 
+ * @apiParam {String} blogId The ID of the blog making the comment.
+ * @apiParam {String} postId The ID of the post.
  * @apiParam {String} text comment text  
  * 
  * 
@@ -272,6 +319,50 @@
  * 
  *          "response":{
  *                      "message": "Comment Created Successfully"
+ *                     }   
+ *      }
+ * 
+ * @apiErrorExample Response Error:
+ *      HTTP/1.1 400 BAD REQUEST
+ *      {
+ *          "error": "Error In Input Data"
+ *      }
+ *      HTTP/1.1 401 Unauthorized
+ *      {
+ *          "error": "User Is Unauthorized"
+ *      } 
+ */
+
+/*=================== End =====================*/
+
+
+/*
+===================== ///////// <---------> ================= <---------> ///////// =====================> 
+===================== ///////// <---------> Remove a Comment <---------> ///////// =====================> 
+===================== ///////// <---------> ================= <---------> ///////// =====================> 
+*/
+
+/**
+ * @api {post} /:blogId/:postId/remove_comment Remove Comments
+ * @apiName commentRemover
+ * @apiGroup Post
+ * @apiPermission User, Admin, Super_Admin
+ * @apidescription removes the comment on a post
+ * @apiVersion 0.0.0
+ * 
+ * @apiParam {String} blogId Id of the blog to remove its comment.
+ * @apiParam {String} postId Post Id.
+ * 
+ * @apiSuccessExample Response Data:
+ *      HTTP/1.1 200 OK
+ *      {
+ *          "meta": {
+ *                       "status": 200,
+ *                       "msg": "OK"
+ *                  },
+ * 
+ *          "response":{
+ *                      "message": "Comment Deleted Successfully"
  *                     }   
  *      }
  * 
@@ -340,7 +431,7 @@
 */
 
 /**
- * @api {post} /:blogId/posts/:postId/reblog_post Reblog a Post
+ * @api {post} /:blogId/:postId/reblog_post Reblog a Post
  * @apiName reblogBlogPost
  * @apiGroup Post
  * @apiPermission User, Admin, Super_Admin
@@ -362,6 +453,95 @@
  * 
  *          "response":{
  *                      "message": "Post Rebloged Successfully"
+ *                     }   
+ *      }
+ * 
+ * @apiErrorExample Response Error:
+ *      HTTP/1.1 400 BAD REQUEST
+ *      {
+ *          "error": "Error In Input Data"
+ *      }
+ *      HTTP/1.1 401 Unauthorized
+ *      {
+ *          "error": "User Is Unauthorized"
+ *      }
+ */
+
+/*=================== End =====================*/
+
+
+/*
+===================== ///////// <---------> ================ <---------> ///////// =====================> 
+===================== ///////// <---------> Remove a rebloged Post <---------> ///////// =====================> 
+===================== ///////// <---------> ================ <---------> ///////// =====================> 
+*/
+
+/**
+ * @api {post} /:blogId/:postId/remove_reblog Reblog a Post
+ * @apiName reblogBlogPost
+ * @apiGroup Post
+ * @apiPermission User, Admin, Super_Admin
+ * 
+ * @apidescription Reblog a Post (Legacy)
+ * @apiVersion 0.0.0
+ *
+ * @apiParam {String} blogId The ID of the reblogging blog.
+ * @apiParam {String} postId The ID of the rebloged post.
+ *
+ * @apiSuccessExample Response Data:
+ *      HTTP/1.1 200 OK
+ *      {
+ *          "meta": {
+ *                       "status": 200,
+ *                       "msg": "OK"
+ *                  },
+ * 
+ *          "response":{
+ *                      "message": "Post Rebloged Successfully"
+ *                     }   
+ *      }
+ * 
+ * @apiErrorExample Response Error:
+ *      HTTP/1.1 400 BAD REQUEST
+ *      {
+ *          "error": "Error In Input Data"
+ *      }
+ *      HTTP/1.1 401 Unauthorized
+ *      {
+ *          "error": "User Is Unauthorized"
+ *      }
+ */
+
+/*=================== End =====================*/
+
+
+/*
+===================== ///////// <---------> ================ <---------> ///////// =====================> 
+===================== ///////// <---------> Get Post notes <---------> ///////// =====================> 
+===================== ///////// <---------> ================ <---------> ///////// =====================> 
+*/
+
+/**
+ * @api {get} /posts/:postId/notes Get notes for a specific Post
+ * @apiName getBlogPostNotes
+ * @apiGroup Post
+ * @apiPermission User, Admin, Super_Admin
+ * 
+ * @apidescription Get notes for a specific Post
+ * @apiVersion 0.0.0
+ * 
+ * @apiParam {String} postId The ID of the post to fetch notes for.
+ *
+ * @apiSuccessExample Response Data:
+ *      HTTP/1.1 200 OK
+ *      {
+ *          "meta": {
+ *                       "status": 200,
+ *                       "msg": "OK"
+ *                  },
+ * 
+ *          "response":{
+ *                      "data": "[ Notes ]"
  *                     }   
  *      }
  * 
@@ -407,51 +587,6 @@
  * 
  *          "response":{
  *                      "message": "Post Pinned Successfully"
- *                     }   
- *      }
- * 
- * @apiErrorExample Response Error:
- *      HTTP/1.1 400 BAD REQUEST
- *      {
- *          "error": "Error In Input Data"
- *      }
- *      HTTP/1.1 401 Unauthorized
- *      {
- *          "error": "User Is Unauthorized"
- *      } 
- */
-
-/*=================== End =====================*/
-
-
-/*
-===================== ///////// <---------> ================= <---------> ///////// =====================> 
-===================== ///////// <---------> Remove Comments <---------> ///////// =====================> 
-===================== ///////// <---------> ================= <---------> ///////// =====================> 
-*/
-
-/**
- * @api {post} /posts/remove_comment Remove Comments
- * @apiName commentRemover
- * @apiGroup Post
- * @apiPermission User, Admin, Super_Admin
- * @apidescription removes the comment on a post
- * @apiVersion 0.0.0
- * 
- * @apiParam {String} Token User's Secret Code.
- * @apiParam {String} Comment_Id Comment Id.
- * @apiParam {String} Post_Id Post Id.
- * 
- * @apiSuccessExample Response Data:
- *      HTTP/1.1 200 OK
- *      {
- *          "meta": {
- *                       "status": 200,
- *                       "msg": "OK"
- *                  },
- * 
- *          "response":{
- *                      "message": "Comment Deleted Successfully"
  *                     }   
  *      }
  * 
@@ -691,97 +826,6 @@
 
 /*=================== End =====================*/
 
-
-/*
-===================== ///////// <---------> ================ <---------> ///////// =====================> 
-===================== ///////// <---------> Get notes <---------> ///////// =====================> 
-===================== ///////// <---------> ================ <---------> ///////// =====================> 
-*/
-
-/**
- * @api {get} /blog/notes Get notes for a specific Post
- * @apiName getBlogPostNotes
- * @apiGroup Post
- * @apiPermission User, Admin, Super_Admin
- * 
- * @apidescription Get notes for a specific Post
- * @apiVersion 0.0.0
- * 
- * @apiParam {String} Token User's Secret Code.
- * @apiParam {String} blog-id The ID of the blog that have the post to get its notes.
- * @apiParam {String} post-id The ID of the post to fetch notes for.
- *
- * @apiSuccessExample Response Data:
- *      HTTP/1.1 200 OK
- *      {
- *          "meta": {
- *                       "status": 200,
- *                       "msg": "OK"
- *                  },
- * 
- *          "response":{
- *                      "data": "[ Notes ]"
- *                     }   
- *      }
- * 
- * @apiErrorExample Response Error:
- *      HTTP/1.1 400 BAD REQUEST
- *      {
- *          "error": "Error In Input Data"
- *      }
- *      HTTP/1.1 401 Unauthorized
- *      {
- *          "error": "User Is Unauthorized"
- *      }
- */
-
-/*=================== End =====================*/
-
-
-/*
-===================== ///////// <---------> ================ <---------> ///////// =====================> 
-===================== ///////// <---------> Unlike a Blog Post <---------> ///////// =====================> 
-===================== ///////// <---------> ================ <---------> ///////// =====================> 
-*/
-
-/**
- * @api {post} /blog/unlike Unlike a blog post
- * @apiName unlikeBlogPost
- * @apiGroup Post
- * @apiPermission User, Admin, Super_Admin
- * 
- * @apidescription Unlike a blog post
- * @apiVersion 0.0.0
- *
- * @apiParam {String} Token User's Secret Code.
- * @apiParam {String} blog-id Primary blog ID (only primary blogs can unlike posts).
- * @apiParam {String} post-id The ID of the post to unlike.
- *
- * @apiSuccessExample Response Data:
- *      HTTP/1.1 200 OK
- *      {
- *          "meta": {
- *                       "status": 200,
- *                       "msg": "OK"
- *                  },
- * 
- *          "response":{
- *                      "message": "Post Successfully Unliked"
- *                     }   
- *      }
- * 
- * @apiErrorExample Response Error:
- *      HTTP/1.1 400 BAD REQUEST
- *      {
- *          "error": "Error In Input Data"
- *      }
- *      HTTP/1.1 401 Unauthorized
- *      {
- *          "error": "User Is Unauthorized"
- *      }
- */
-
-/*=================== End =====================*/
 
 /*
 ===================== ///////// <---------> ================ <---------> ///////// =====================> 

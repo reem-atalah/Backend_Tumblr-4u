@@ -12,7 +12,7 @@ const ValidateRequest = require('../../../Common/Middlewares/requestValidation')
 const postEndPoints = require('../endPoints');
 /* =========== /// <==> End <==> ===========*/
 
-/* ====================== /// <==> User APIs <==> /// ====================== */
+/* ====================== /// <==> Post APIs <==> /// ====================== */
 
 /* ----------- <---> Create Post <---> ----------- */
 router.post('/:blogId/posts/create_post',
@@ -25,6 +25,48 @@ router.get('/posts/:postId/show_post',
     /** ValidateRequest(postJoi.showPostValidations),**/
     /** isAuthorized(postEndPoints.createPost),**/
     postFunctions.showPost);
+
+/* ----------- <---> Comment on a Post <---> ----------- */
+router.put('/:blogId/:postId/comment',
+    //ValidateRequest(postJoi.createPostValidations),
+    /** isAuthorized(postEndPoints.createPost),**/ 
+    postFunctions.makeComment);
+
+/* ----------- <---> Like a Post <---> ----------- */
+router.put('/:blogId/:postId/like_post',
+    //ValidateRequest(postJoi.createPostValidations),
+    /** isAuthorized(postEndPoints.createPost),**/ 
+    postFunctions.likePost);
+
+/* ----------- <---> Reblog a Post <---> ----------- */
+router.put('/:blogId/:postId/reblog_post',
+    //ValidateRequest(postJoi.createPostValidations),
+    /** isAuthorized(postEndPoints.createPost),**/ 
+    postFunctions.reblogPost);
+
+/* ----------- <---> Remove a comment <---> ----------- */
+router.delete('/:blogId/:postId/remove_comment',
+    //ValidateRequest(postJoi.createPostValidations),
+    /** isAuthorized(postEndPoints.createPost),**/ 
+    postFunctions.removeComment);
+
+/* ----------- <---> Unlike a Post <---> ----------- */
+router.delete('/:blogId/:postId/unlike_post',
+    //ValidateRequest(postJoi.createPostValidations),
+    /** isAuthorized(postEndPoints.createPost),**/ 
+    postFunctions.unlikePost);
+
+/* ----------- <---> Delete a reboged Post <---> ----------- */
+router.delete('/:blogId/:postId/remove_reblog',
+    //ValidateRequest(postJoi.createPostValidations),
+    /** isAuthorized(postEndPoints.createPost),**/ 
+    postFunctions.removeReblog);
+
+/* ----------- <---> Get Post Notes <---> ----------- */
+router.get('/posts/:postId/notes',
+    /** ValidateRequest(postJoi.showPostValidations),**/
+    /** isAuthorized(postEndPoints.createPost),**/
+    postFunctions.getNotes);
 
 /* ----------- <---> Edit Post <---> ----------- */ // *** <===> Done <===>  *** //
 //router.patch('/:blogId/posts/:postId/edit_post', ValidateRequest(postJoi.editPostValidations), isAuthorized(postEndPoints.editPost), postFunctions.editPost);

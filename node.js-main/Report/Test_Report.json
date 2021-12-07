@@ -5,9 +5,9 @@
     "passes": 4,
     "pending": 0,
     "failures": 0,
-    "start": "2021-11-20T15:40:27.843Z",
-    "end": "2021-11-20T15:40:30.833Z",
-    "duration": 2990,
+    "start": "2021-12-06T22:02:33.312Z",
+    "end": "2021-12-06T22:02:37.198Z",
+    "duration": 3886,
     "testsRegistered": 4,
     "passPercent": 100,
     "pendingPercent": 0,
@@ -18,7 +18,7 @@
   },
   "results": [
     {
-      "uuid": "026eac38-17d3-4dbb-94b9-1aec37d45d5f",
+      "uuid": "49255d08-be4b-426d-92ab-3d0002dd6986",
       "title": "",
       "fullFile": "",
       "file": "",
@@ -27,7 +27,7 @@
       "tests": [],
       "suites": [
         {
-          "uuid": "cf88832d-2f43-4a86-9537-b8fa895cdafb",
+          "uuid": "2b013c57-5b5a-489f-99dc-3bc94a3a07ce",
           "title": "Post APIs",
           "fullFile": "D:\\AbeerD\\College\\third year\\SW Engineering\\Backend_Tumblr-4u\\node.js-main\\test\\postTest.js",
           "file": "\\test\\postTest.js",
@@ -36,46 +36,7 @@
           "tests": [],
           "suites": [
             {
-              "uuid": "5255a31a-d716-410c-b195-3b8e1975021a",
-              "title": "Post Blog Post",
-              "fullFile": "D:\\AbeerD\\College\\third year\\SW Engineering\\Backend_Tumblr-4u\\node.js-main\\test\\postTest.js",
-              "file": "\\test\\postTest.js",
-              "beforeHooks": [],
-              "afterHooks": [],
-              "tests": [
-                {
-                  "title": "It Should Create New Post",
-                  "fullTitle": "Post APIs Post Blog Post It Should Create New Post",
-                  "timedOut": false,
-                  "duration": 2687,
-                  "state": "passed",
-                  "speed": "slow",
-                  "pass": true,
-                  "fail": false,
-                  "pending": false,
-                  "context": null,
-                  "code": "const blogPost = {\n  postHtml: '</>',\n  type: 'link',\n  state: 'published',\n  tags: 'tumblr'\n};\nchai.request(server)\n    .post('/61968c974f161173940ea9cb/posts/create_post')\n    .send(blogPost)\n    .end((err, res) => {\n      res.should.have.status(200);\n      res.body.should.be.eq('Post Created Successfully (<:>)');\n      done();\n    });",
-                  "err": {},
-                  "uuid": "b08acb5d-11f9-4519-a1ee-074b2907618b",
-                  "parentUUID": "5255a31a-d716-410c-b195-3b8e1975021a",
-                  "isHook": false,
-                  "skipped": false
-                }
-              ],
-              "suites": [],
-              "passes": [
-                "b08acb5d-11f9-4519-a1ee-074b2907618b"
-              ],
-              "failures": [],
-              "pending": [],
-              "skipped": [],
-              "duration": 2687,
-              "root": false,
-              "rootEmpty": false,
-              "_timeout": 100000
-            },
-            {
-              "uuid": "b2cb2d3a-1920-42fb-8398-08ffbcf59e5a",
+              "uuid": "f3494003-5f83-4223-b578-a4ed16703201",
               "title": "Don't Post Blog Post",
               "fullFile": "D:\\AbeerD\\College\\third year\\SW Engineering\\Backend_Tumblr-4u\\node.js-main\\test\\postTest.js",
               "file": "\\test\\postTest.js",
@@ -86,7 +47,7 @@
                   "title": "It Should Not Create New Post Because Blog Doesn't Exist",
                   "fullTitle": "Post APIs Don't Post Blog Post It Should Not Create New Post Because Blog Doesn't Exist",
                   "timedOut": false,
-                  "duration": 141,
+                  "duration": 3243,
                   "state": "passed",
                   "speed": "slow",
                   "pass": true,
@@ -95,15 +56,15 @@
                   "context": null,
                   "code": "const blogPost = {\n  postHtml: '</>',\n  type: 'video',\n  state: 'published',\n  tags: 'engineering'\n};\nchai.request(server)\n    .post('/61968c974f161173940ea9ca/posts/create_post')  //no blog with this id\n    .send(blogPost)\n    .end((err, res) => {\n      res.should.have.status(400);\n      res.body.should.be.eq('Blog Not Found (<:>)');\n      done();\n    });",
                   "err": {},
-                  "uuid": "7f6f4a36-ebbd-4da8-b4f2-36aa9e4c1357",
-                  "parentUUID": "b2cb2d3a-1920-42fb-8398-08ffbcf59e5a",
+                  "uuid": "1a5ec044-d121-444d-81aa-e1322b660085",
+                  "parentUUID": "f3494003-5f83-4223-b578-a4ed16703201",
                   "isHook": false,
                   "skipped": false
                 }
               ],
               "suites": [
                 {
-                  "uuid": "394f2cab-da3d-4555-9ba7-2b6bef3dfc68",
+                  "uuid": "309a9023-9499-4be9-88e9-333aa82b1605",
                   "title": "Create Post Internal Server Error",
                   "fullFile": "D:\\AbeerD\\College\\third year\\SW Engineering\\Backend_Tumblr-4u\\node.js-main\\test\\postTest.js",
                   "file": "\\test\\postTest.js",
@@ -114,7 +75,7 @@
                       "title": "It Should Not Create New Post Due To Server Error",
                       "fullTitle": "Post APIs Don't Post Blog Post Create Post Internal Server Error It Should Not Create New Post Due To Server Error",
                       "timedOut": false,
-                      "duration": 5,
+                      "duration": 8,
                       "state": "passed",
                       "speed": "fast",
                       "pass": true,
@@ -123,26 +84,26 @@
                       "context": null,
                       "code": "const blogPost = {\n  postHtml: '</>',\n  type: 'video',\n  state: 'published',\n  tags: 'engineering'\n};\n    \nchai.request(server)\n    .post('/1/posts/create_post')  //no blog with this id\n    .send(blogPost)\n    .end((err, res) => {\n      res.should.have.status(500);\n      res.body.should.be.eq('Error In Create Post Function (<:>)');\n      done();\n    });",
                       "err": {},
-                      "uuid": "90f0da4d-0c5a-4659-bddf-99c9196d008e",
-                      "parentUUID": "394f2cab-da3d-4555-9ba7-2b6bef3dfc68",
+                      "uuid": "42a5f341-2f5d-44dc-ae3b-cb177f64aa7a",
+                      "parentUUID": "309a9023-9499-4be9-88e9-333aa82b1605",
                       "isHook": false,
                       "skipped": false
                     }
                   ],
                   "suites": [],
                   "passes": [
-                    "90f0da4d-0c5a-4659-bddf-99c9196d008e"
+                    "42a5f341-2f5d-44dc-ae3b-cb177f64aa7a"
                   ],
                   "failures": [],
                   "pending": [],
                   "skipped": [],
-                  "duration": 5,
+                  "duration": 8,
                   "root": false,
                   "rootEmpty": false,
                   "_timeout": 100000
                 },
                 {
-                  "uuid": "e3936731-8c83-4388-b068-ae9e8030cd30",
+                  "uuid": "906db746-00f0-4a52-9844-5cb023d64dbe",
                   "title": "Get Post and Show it",
                   "fullFile": "D:\\AbeerD\\College\\third year\\SW Engineering\\Backend_Tumblr-4u\\node.js-main\\test\\postTest.js",
                   "file": "\\test\\postTest.js",
@@ -153,7 +114,7 @@
                       "title": "It Should Show Post",
                       "fullTitle": "Post APIs Don't Post Blog Post Get Post and Show it It Should Show Post",
                       "timedOut": false,
-                      "duration": 142,
+                      "duration": 155,
                       "state": "passed",
                       "speed": "slow",
                       "pass": true,
@@ -162,32 +123,71 @@
                       "context": null,
                       "code": "chai.request(server)\n    .get('/posts/6196df230578db004e05d179/show_post') \n    .end((err, res) => {\n      res.should.have.status(200);\n      res.body.should.be.eq('</>');\n      done();\n    });",
                       "err": {},
-                      "uuid": "eeb3fe42-3705-4b34-8b75-52ca9aa0ae03",
-                      "parentUUID": "e3936731-8c83-4388-b068-ae9e8030cd30",
+                      "uuid": "01727fc5-c1b5-4c56-9d86-2a8c01724cea",
+                      "parentUUID": "906db746-00f0-4a52-9844-5cb023d64dbe",
                       "isHook": false,
                       "skipped": false
                     }
                   ],
                   "suites": [],
                   "passes": [
-                    "eeb3fe42-3705-4b34-8b75-52ca9aa0ae03"
+                    "01727fc5-c1b5-4c56-9d86-2a8c01724cea"
                   ],
                   "failures": [],
                   "pending": [],
                   "skipped": [],
-                  "duration": 142,
+                  "duration": 155,
+                  "root": false,
+                  "rootEmpty": false,
+                  "_timeout": 100000
+                },
+                {
+                  "uuid": "8f5db671-a255-4853-94ef-2345ac6dc77a",
+                  "title": "Make Comment",
+                  "fullFile": "D:\\AbeerD\\College\\third year\\SW Engineering\\Backend_Tumblr-4u\\node.js-main\\test\\postTest.js",
+                  "file": "\\test\\postTest.js",
+                  "beforeHooks": [],
+                  "afterHooks": [],
+                  "tests": [
+                    {
+                      "title": "It Should Make Comment",
+                      "fullTitle": "Post APIs Don't Post Blog Post Make Comment It Should Make Comment",
+                      "timedOut": false,
+                      "duration": 466,
+                      "state": "passed",
+                      "speed": "slow",
+                      "pass": true,
+                      "fail": false,
+                      "pending": false,
+                      "context": null,
+                      "code": "const comment = {\n  //commentingBlogTitle: '',\n  text: 'very good post',\n};\nchai.request(server)\n    .post('/61968c974f161173940ea9cb/61ae667d8b4d5620ce937992/comment')\n    .send(comment)\n    .end((err, res) => {\n      res.should.have.status(200);\n      res.body.should.be.eq('Comment Posted Successfully');\n      done();\n    });",
+                      "err": {},
+                      "uuid": "c05a78a0-269e-4abc-99a6-7f320386cfae",
+                      "parentUUID": "8f5db671-a255-4853-94ef-2345ac6dc77a",
+                      "isHook": false,
+                      "skipped": false
+                    }
+                  ],
+                  "suites": [],
+                  "passes": [
+                    "c05a78a0-269e-4abc-99a6-7f320386cfae"
+                  ],
+                  "failures": [],
+                  "pending": [],
+                  "skipped": [],
+                  "duration": 466,
                   "root": false,
                   "rootEmpty": false,
                   "_timeout": 100000
                 }
               ],
               "passes": [
-                "7f6f4a36-ebbd-4da8-b4f2-36aa9e4c1357"
+                "1a5ec044-d121-444d-81aa-e1322b660085"
               ],
               "failures": [],
               "pending": [],
               "skipped": [],
-              "duration": 141,
+              "duration": 3243,
               "root": false,
               "rootEmpty": false,
               "_timeout": 100000

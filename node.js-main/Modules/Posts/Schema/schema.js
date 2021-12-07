@@ -3,37 +3,61 @@
 ///////////////////////////////////////////////////////////////
 
 /* ====================== /// <==> Variables Declaration <==> /// ====================== */
-const mongoose = require('mongoose');
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
+const mongoose = require("mongoose");
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 /* =========== /// <==> End <==> ===========*/
 
 /* ====================== /// <==> Post Module Schema <==> /// ====================== */
-const postSchema = mongoose.Schema({
-  blogId: {
-    type: String,
-    required: true
+const postSchema = mongoose.Schema(
+  {
+    blogId: {
+      type: String,
+      required: true,
+    },
+    postHtml: {
+      type: String,
+      required: true,
+    },
+    type: {
+      type: String,
+      required: true,
+    },
+    state: {
+      type: String,
+      required: true,
+    },
+    tags: { type: [String] },
+    //date: { type: Date }
+    notesId: { type: String },
   },
-  postHtml: {
-    type: String,
-    required: true
-  },
-  type: {
-    type: String,
-    required: true
-  },
-  state: {
-    type: String,
-    required: true
-  },
-  tags: { type: [String] }
-  //date: { type: Date }
-    
-}, {
-  Timestamps: true
+  {
+    Timestamps: true,
+  }
+);
+
+const notesSchema = mongoose.Schema({
+  likes: { type: [String] },
+  comments: [
+    {
+      commentingBlogId: { type: String },
+      commentingBlogTitle: { type: String },
+      text: { type: String },
+    },
+  ],
+  reblogs: { type: [String] },
 });
+
+// const commentSchema = mongoose.Schema({
+//   commentingBlogTitle: { type: String },
+//   text: { type: String },
+// });
 /* =========== /// <==> End <==> ===========*/
 
 /* ====================== /// <==> Export Post Module Schema <==> /// ====================== */
-module.exports = postSchema;
+module.exports = {
+  postSchema,
+  notesSchema,
+  //commentSchema,
+};
 /* =========== /// <==> End <==> ===========*/
