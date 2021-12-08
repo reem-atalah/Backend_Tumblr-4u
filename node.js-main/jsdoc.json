@@ -1,0 +1,18 @@
+{
+    "source": {
+        "include": ["./Modules/Search/Search dashborad/Controller",
+            "./Modules/Users/Controller",
+            "./Modules/Blogs/Controller",
+            "./Modules/Users/Controller",
+            "./Modules/Posts/Controller",
+            "./Configurations",
+            "./Common/Middlewares"
+        ],
+        "includePattern": ".js$",
+        "excludePattern": "(node_modules/|docs)"
+    },
+    "opts": {
+        "recurse": true,
+        "destination": "./docs/"
+    }
+}
