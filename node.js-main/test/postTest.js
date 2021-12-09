@@ -94,23 +94,23 @@ describe('Post APIs', () => {
       });
     });
 
-    // describe('Make Comment', () => {
-    //   it('It Should Make Comment', (done) => {
-    //     const comment = {
-    //       //commentingBlogTitle: '',
-    //       text: 'very good post',
-    //     };
+    describe('Make Comment', () => {
+      it('It Should Make Comment', (done) => {
+        const comment = {
+          //commentingBlogTitle: '',
+          text: 'very good post',
+        };
 
-    //     chai.request(server)
-    //         .put('/61968c974f161173940ea9cb/61ae667d8b4d5620ce937992/comment')
-    //         .send(comment)
-    //         .end((err, res) => {
-    //           res.should.have.status(200);
-    //           res.body.should.be.eq('Comment Posted Successfully');
-    //           done();
-    //         });
-    //   });
-    // });
+        chai.request(server)
+            .put('/6199525fd2e6ce8b3e32724c/61ae667d8b4d5620ce937992/comment')
+            .send(comment)
+            .end((err, res) => {
+              res.should.have.status(200);
+              res.body.should.be.eq('Comment Posted Successfully');
+              done();
+            });
+      });
+    });
 
     describe('Function loopAndCheck', () => {
       it('It Should Loop on an Array and Check if an Element Exists', (done) => {
@@ -200,6 +200,18 @@ describe('Post APIs', () => {
             .end((err, res) => {
               res.should.have.status(200);
               //res.body.should.be.eq();
+              done();
+            });
+      });
+    });
+
+    describe('Function getDashboard', () => {
+      it('It Should Get User Dashboard', (done) => {
+        chai.request(server)
+            .get('/6196b940183995d4cc1198c2/61968c974f161173940ea9cb/dashboard')
+            .end((err, res) => {
+              res.should.have.status(200);
+              res.body.should.be.eq('Dashboard Got Successfully');
               done();
             });
       });

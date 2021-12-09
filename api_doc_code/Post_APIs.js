@@ -70,7 +70,7 @@
 */
 
 /**
- * @api {get} /posts/:postId/show_post Create a New Blog Post
+ * @api {get} /posts/:postId/show_post Show a Blog Post
  * @apiName showBlogPost
  * @apiGroup Post
  * @apiPermission User, Admin, Super_Admin
@@ -163,7 +163,7 @@
 */
 
 /**
- * @api {Delete} /posts/:postId/delete_post Delete a Post
+ * @api {Delete} /posts/:postId/delete_post Delete a Blog Post
  * @apiName deletePost
  * @apiGroup Post
  * @apiPermission User, Admin, Super_Admin
@@ -207,7 +207,7 @@
 */
 
 /**
- * @api {post} /:blogId/:postId/like_press Like a blog post
+ * @api {put} /:blogId/:postId/like_press Press Like of a Blog Post
  * @apiName pressLikeBlogPost
  * @apiGroup Post
  * @apiPermission User, Admin, Super_Admin
@@ -252,7 +252,7 @@
 */
 
 /**
- * @api {post} /:blogId/:postId/comment Make Comment
+ * @api {put} /:blogId/:postId/comment Make Comment
  * @apiName makeComment
  * @apiGroup Post
  * @apiPermission User, Admin, Super_Admin
@@ -298,7 +298,7 @@
 */
 
 /**
- * @api {post} /:postId/:commentId/remove_comment Remove Comments
+ * @api {delete} /:postId/:commentId/remove_comment Remove Comment
  * @apiName commentRemover
  * @apiGroup Post
  * @apiPermission User, Admin, Super_Admin
@@ -386,7 +386,7 @@
 */
 
 /**
- * @api {post} /:blogId/:postId/reblog_post Reblog a Post
+ * @api {put} /:blogId/:postId/reblog_post Reblog a Blog Post
  * @apiName reblogBlogPost
  * @apiGroup Post
  * @apiPermission User, Admin, Super_Admin
@@ -432,7 +432,7 @@
 */
 
 /**
- * @api {post} /:postId/:reblogId/remove_reblog Reblog a Post
+ * @api {delete} /:postId/:reblogId/remove_reblog Remove Reblog of a Blog Post
  * @apiName reblogBlogPost
  * @apiGroup Post
  * @apiPermission User, Admin, Super_Admin
@@ -523,7 +523,7 @@
 */
 
 /**
- * @api {put} /pin/post Pin Post.
+ * @api {put} /pin/post Pin a Blog Post
  * 
  * @apiName pinPost
  * @apiGroup Post

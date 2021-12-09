@@ -10,20 +10,64 @@ const jwt = require('jsonwebtoken');
 
 /* ====================== /// <==> User Module Schema <==> /// ====================== */
 const userSchema = mongoose.Schema({
-    username: { type: String },
-    email: { type: String },
-    password: { type: String },
-    cpassword: { type: String },
-    phone: { type: String },
-    location: { type: String },
-    role: { type: String },
-    isDeleted: { type: Boolean, default: false },
-    isVerified: { type: Boolean, default: false },
-    isActivated: { type: Boolean, default: true },
-    isBlocked: { type: Boolean, default: false },
-}, {
+    name: {
+      type: String,
+    },
+    email: {
+      type: String,
+    },
+    password: {
+      type: String,
+    },
+    age: {
+      type: Number,
+    },
+    city: {
+      type: String,
+    },
+    country: {
+      type: String,
+    },
+  
+    blogsId: {type: [String]},
+  
+    favoriteBlogs: [{type: String}],
+  
+    bodyColor: {
+      type: String,
+      deafult: 'trurBlue',
+    },
+  
+    following_blogs: [{type: String}],
+  
+    likes_posts_id: [{type: String}],
+  
+    role: {
+      type: String,
+      default: 'user',
+    },
+    isDeleted: {
+      type: Boolean,
+      default: false,
+    },
+    isVerified: {
+      type: Boolean,
+      default: false,
+    },
+    isActivated: {
+      type: Boolean,
+      default: true,
+    },
+    isBlocked: {
+      type: Boolean,
+      default: false,
+    },
+    themeId: {
+      type: String,
+    },
+  }, {
     Timestamps: true,
-});
+  });
 /* =========== /// <==> End <==> ===========*/
 
 /* ======================== <-- User Hooks --> ======================== */

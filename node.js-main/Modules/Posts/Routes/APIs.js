@@ -68,6 +68,10 @@ router.get('/posts/:postId/notes',
     /** isAuthorized(postEndPoints.createPost),**/
     postFunctions.getNotes);
 
+/* ----------- <---> Get User Dashboard <---> ----------- */
+router.get('/:userId/:blogId/dashboard',
+    postFunctions.getDashboard);
+
 /* ----------- <---> Edit Post <---> ----------- */ // *** <===> Done <===>  *** //
 //router.patch('/:blogId/posts/:postId/edit_post', ValidateRequest(postJoi.editPostValidations), isAuthorized(postEndPoints.editPost), postFunctions.editPost);
 

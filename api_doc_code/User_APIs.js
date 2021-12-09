@@ -54,47 +54,6 @@
 
 /*=================== End =====================*/
 
-/*
-===================== ///////// <---------> =========================== <---------> ///////// =====================> 
-===================== ///////// <---------> Retrieve a User's Dashboard <---------> ///////// =====================> 
-===================== ///////// <---------> =========================== <---------> ///////// =====================> 
-*/
-
-/**
- * @api {get} /dashboard Retrieve a User's Dashboard
- * @apiName getDashboard
- * @apiGroup  User
- * @apiPermission User, Admin, Super_Admin
- * @apidescription go to the dashboard page
- * @apiVersion 0.0.0
- * 
- * @apiParam {String} Token User's Secret Code.
- *
- * @apiSuccessExample Response Data:
- *      HTTP/1.1 200 OK
- *      {
- *          "meta": {
- *                       "status": 200,
- *                       "msg": "OK"
- *                  },
- * 
- *          "response":{
- *                       "data":"{ Object Contains Posts, ... }"
- *                     }   
- *      }
- * 
- * @apiErrorExample Response Error:
- *      HTTP/1.1 400 BAD REQUEST
- *      {
- *          "error": "Error In Input Data"
- *      }
- *      HTTP/1.1 401 Unauthorized
- *      {
- *          "error": "User Is Unauthorized"
- *      }
- */
-
-/*=================== End =====================*/
 
 /*
 ===================== ///////// <---------> ========== <---------> ///////// =====================> 

@@ -14,9 +14,12 @@ const {
   populate,
 } = require('../Model/model');
 const blogs = require('../../Blogs/Model/model');
+const users = require('../../Users/Model/model');
 const {
   findOne,
 } = require('../../Blogs/Model/model');
+
+const mongoose = require('mongoose');
 /* =========== /// <==> End <==> ===========*/
 
 /* ====================== /// <==> Post Functions <==> /// ====================== */
@@ -27,8 +30,11 @@ const {
  * @function
  * @name createPost
  * @description Creates a blog post and saves its content in the database.
- * @param {string} req - Holds the request body: postHtml, type, state, tags.
- * @param {string} res - Holds the response status and message.
+ * @param {string} blogId - Id of the blog to create the post in.
+ * @param {string} postHtml - Html content fo the post.
+ * @param {string} type - Type of the post.
+ * @param {string} state - State of the post.
+ * @param {string} tags - Tags array.
  *
  * @returns {string} response status and message.
  */
@@ -68,6 +74,9 @@ const createPost = async (req, res) => {
       newPost = await newPost.save();
       console.log(newPost);
 
+      existingBlog.postsIds.push(newPost._id); // el blog el b test 3lah kan lesa msh 3ndo el field, et3mlo create fl db
+      existingBlog.save();
+
       res.status(StatusCodes.OK).json('Post Created Successfully (<:>)');
     } else {
       console.log('blog not found');
@@ -88,8 +97,7 @@ const createPost = async (req, res) => {
  * @function
  * @name showPost
  * @description Shows a blog post by its id.
- * @param {string} req - Holds the request body: post id.
- * @param {string} res - Holds the response status and the blog post content if OK.
+ * @param {string} postId - Holds the request body: post id.
  *
  * @returns {string} the blog post content in the form of html string.
  */
@@ -114,6 +122,18 @@ const showPost = async (req, res) => {
 };
 
 /* ----------- <---> Make Comment <---> ----------- */ // *** <===> Done <===>  *** //
+
+/**
+ * @function
+ * @name makePost
+ * @description A blog makes a comment on a blog post.
+ * @param {string} blogId - Id of the blog making the comment.
+ * @param {string} postId - Id of the post to make the comment on.
+ * @param {string} text - text of the comment.
+ *
+ * @returns {string} The id of the comment.
+ */
+
 const makeComment = async (req, res) => {
   try {
     const blogId = req.params.blogId;
@@ -135,13 +155,17 @@ const makeComment = async (req, res) => {
             commentingBlogTitle,
             text,
           };
-          console.log(comment);
+          // console.log(comment);
           // postsModel.notes.updateOne({_id: notesId}, {$push: {comments: comment}}); //leeeh msh zabtaaa???
+          const lenBefore = existingNotes.comments.length;
           existingNotes.comments.push(comment);
           existingNotes.save();
-          console.log(existingPost);
+          const commentsArrayAfter = existingNotes.comments;
+          const commentObj = commentsArrayAfter[lenBefore];
+          var commentId = commentObj._id;
+          // console.log('comment id: ', commentId);
+          // console.log(existingPost);
         } else {
-          console.log('notes msh mwgoda');
           console.log(existingPost);
           res.status(StatusCodes.BAD_REQUEST).json('Notes Not Found');
 
@@ -162,7 +186,8 @@ const makeComment = async (req, res) => {
           // wlla 3shan mt3mlsh w2t el creation?
         }
 
-        res.status(StatusCodes.OK).json('Comment Posted Successfully');
+        // res.status(StatusCodes.OK).json('Comment Posted Successfully');
+        res.status(StatusCodes.OK).json(commentId);
       } else {
         res.status(StatusCodes.BAD_REQUEST).json('Post Not Found');
       }
@@ -177,6 +202,17 @@ const makeComment = async (req, res) => {
 };
 
 /* ----------- <---> Loop on an array and check if an element exists <---> ----------- */ // *** <===> Done <===>  *** //
+
+/**
+ * @function
+ * @name loopAndCheck
+ * @description Loop on an array and check if an element exists.
+ * @param {array} arr - Array to loop on.
+ * @param {string} element - Element to look for.
+ *
+ * @returns {string} Boolean indicates whether the element exists or not.
+ */
+
 const loopAndCheck = (arr, element) => {
   let exist = 0;
   if (arr.length) {
@@ -190,9 +226,21 @@ const loopAndCheck = (arr, element) => {
 };
 
 /* ----------- <---> Loop on Object in Array of Objects and check if Id exists <---> ----------- */ // *** <===> Done <===>  *** //
+
+/**
+ * @function
+ * @name loopObjAndCheck
+ * @description Loop on Object in Array of Objects and check if Id exists.
+ * @param {array} arr - Array to loop on.
+ * @param {string} element - Element to look for.
+ * @param {number} pos - Position of the found element if found.
+ *
+ * @returns {string} Boolean indicates whether the element exists or not.
+ */
+
 const loopObjAndCheck = (arr, element, pos) => {
   let exist = 0;
-  //let pos = 0;
+  // let pos = 0;
   if (arr.length) {
     for (let i = 0; i < arr.length; i++) {
       if (arr[i]._id.toString() === element) {
@@ -206,6 +254,17 @@ const loopObjAndCheck = (arr, element, pos) => {
 
 /* ----------- <---> Press Like of a Post (Like or Unlike) <---> ----------- */ // *** <===> Done <===>  *** //
 // Like should be done only one time by one blog
+
+/**
+ * @function
+ * @name likePress
+ * @description Like or Unlike a Post.
+ * @param {string} blogId - Id of the blog pressing the like button.
+ * @param {string} postId - Id of the post to like or unlike.
+ *
+ * @returns {string} .
+ */
+
 const likePress = async (req, res) => {
   try {
     const blogId = req.params.blogId;
@@ -213,7 +272,7 @@ const likePress = async (req, res) => {
     const existingBlog = await blogs.findOne({_id: blogId});
     const existingPost = await postsModel.posts.findOne({_id: postId});
     const notesId = existingPost.notesId;
-    const existingNotes = await postsModel.notes.findOne({ _id: notesId});
+    const existingNotes = await postsModel.notes.findOne({_id: notesId});
     if (existingBlog) {
       if (existingPost) {
         if (existingNotes) {
@@ -248,6 +307,18 @@ const likePress = async (req, res) => {
 };
 
 /* ----------- <---> Reblog a Post <---> ----------- */ // *** <===> Done <===>  *** //
+
+/**
+ * @function
+ * @name reblogPost
+ * @description A blog reblogs a blog post.
+ * @param {string} blogId - Id of the blog making the reblog.
+ * @param {string} postId - Id of the post to reblog.
+ * @param {string} text - text of the reblog.
+ *
+ * @returns {string} The id of the reblog.
+ */
+
 const reblogPost = async (req, res) => {
   try {
     const blogId = req.params.blogId;
@@ -265,14 +336,18 @@ const reblogPost = async (req, res) => {
             rebloggingId,
             text,
           };
+          const lenBefore = existingNotes.reblogs.length;
           existingNotes.reblogs.push(reblog);
           existingNotes.save();
+          const reblogsArrayAfter = existingNotes.reblogs;
+          const reblogObj = reblogsArrayAfter[lenBefore];
+          var reblogId = reblogObj._id;
         } else {
           console.log(existingPost);
           res.status(StatusCodes.BAD_REQUEST).json('Notes Not Found');
         }
-
-        res.status(StatusCodes.OK).json('Post Reblogged Successfully');
+        res.status(StatusCodes.OK).json(reblogId);
+        // res.status(StatusCodes.OK).json('Post Reblogged Successfully');
       } else {
         res.status(StatusCodes.BAD_REQUEST).json('Post Not Found');
       }
@@ -286,7 +361,18 @@ const reblogPost = async (req, res) => {
   }
 };
 
-/* ----------- <---> Remove Comment <---> ----------- */ // *** <===> not Done <===>  *** //
+/* ----------- <---> Remove Comment <---> ----------- */ // *** <===> Done <===>  *** //
+
+/**
+ * @function
+ * @name removeComment
+ * @description Remove a comment.
+ * @param {string} postId - Id of the post to remove comment from.
+ * @param {string} commentId - Id of the comment to remove.
+ *
+ * @returns {string} .
+ */
+
 const removeComment = async (req, res) => {
   try {
     const postId = req.params.postId;
@@ -297,19 +383,18 @@ const removeComment = async (req, res) => {
       const existingNotes = await postsModel.notes.findOne({_id: notesId});
       if (existingNotes) {
         const commentsArray = existingNotes.comments;
-        console.log('comments array: ',commentsArray);
-        let pos = 0;
-        let exist = loopObjAndCheck(commentsArray, commentId, pos);
+        console.log('comments array: ', commentsArray);
+        const pos = 0;
+        const exist = loopObjAndCheck(commentsArray, commentId, pos);
         if (exist) {
           existingNotes.comments.pull(commentsArray[pos]);
         } else {
           res.status(StatusCodes.BAD_REQUEST).json('Comment Not Found');
         };
-        existingNotes.save(); //whole document in db is savedddddddd
-        console.log('comments array after: ',commentsArray);
+        existingNotes.save(); // whole document in db is savedddddddd
+        console.log('comments array after: ', commentsArray);
         res.status(StatusCodes.OK).json('Comment Removed Successfully');
-      }
-      else {
+      } else {
         res.status(StatusCodes.BAD_REQUEST).json('Notes Not Found');
       };
     } else {
@@ -322,7 +407,18 @@ const removeComment = async (req, res) => {
   };
 };
 
-/* ----------- <---> Remove Reblog <---> ----------- */ // *** <===> not Done <===>  *** //
+/* ----------- <---> Remove Reblog <---> ----------- */ // *** <===> Done <===>  *** //
+
+/**
+ * @function
+ * @name removeReblog
+ * @description Remove a reblog.
+ * @param {string} postId - Id of the post to remove reblog from.
+ * @param {string} reblogId - Id of the reblog to remove.
+ *
+ * @returns {string} .
+ */
+
 const removeReblog = async (req, res) => {
   try {
     const postId = req.params.postId;
@@ -333,20 +429,19 @@ const removeReblog = async (req, res) => {
       const existingNotes = await postsModel.notes.findOne({_id: notesId});
       if (existingNotes) {
         const reblogsArray = existingNotes.reblogs;
-        console.log('reblogs array: ',reblogsArray);
-        let pos = 0;
-        let exist = loopObjAndCheck(reblogsArray, reblogId, pos);
-        console.log('off', exist)
+        console.log('reblogs array: ', reblogsArray);
+        const pos = 0;
+        const exist = loopObjAndCheck(reblogsArray, reblogId, pos);
+        console.log('off', exist);
         if (exist) {
           existingNotes.reblogs.pull(reblogsArray[pos]);
         } else {
           res.status(StatusCodes.BAD_REQUEST).json('Reblog Not Found');
         };
-        existingNotes.save(); 
-        console.log('reblogs array after: ',reblogsArray);
+        existingNotes.save();
+        console.log('reblogs array after: ', reblogsArray);
         res.status(StatusCodes.OK).json('Reblog Removed Successfully');
-      }
-      else {
+      } else {
         res.status(StatusCodes.BAD_REQUEST).json('Notes Not Found');
       };
     } else {
@@ -359,7 +454,17 @@ const removeReblog = async (req, res) => {
   };
 };
 
-/* ----------- <---> Get Post Notes <---> ----------- */ // *** <===> not Done <===>  *** //
+/* ----------- <---> Get Post Notes <---> ----------- */ // *** <===> Done <===>  *** //
+
+/**
+ * @function
+ * @name getNotes
+ * @description Get notes of a post.
+ * @param {string} postId - Id of the post to get its notes.
+ *
+ * @returns {string} Array of arrays, contains 4 arrays: likesArray, commentsArray, reblogsArray, countsArray(likesCount, reblogsCount, notesCount)
+ */
+
 const getNotes = async (req, res) => {
   try {
     const postId = req.params.postId;
@@ -376,11 +481,9 @@ const getNotes = async (req, res) => {
         const commentsCount = commentsArray.length;
         const notesCount = likesCount + commentsCount + reblogsCount;
         const countsArray = [likesCount, reblogsCount, notesCount];
-        const notes = [likesArray, commentsArray, reblogsArray, countsArray]; //array of arrays
-        console.log('notes array: ' ,notes);
+        const notes = [likesArray, commentsArray, reblogsArray, countsArray]; // array of arrays
+        console.log('notes array: ', notes);
         res.status(StatusCodes.OK).json(notes);
-
-
       } else {
         res.status(StatusCodes.BAD_REQUEST).json('Notes Not Found');
       };
@@ -392,6 +495,73 @@ const getNotes = async (req, res) => {
         .status(StatusCodes.INTERNAL_SERVER_ERROR)
         .json('Error in Get Notes Function');
   };
+};
+
+/* ----------- <---> Get User Dashboard <---> ----------- */ // *** <===> Done <===>  *** //
+
+/**
+ * @function
+ * @name getDashboard
+ * @description Get dashboard of a blog.
+ * @param {string} userId - Id of the user to get its blogs' posts.
+ * @param {string} blogId - Id of the blog to get its posts.
+ *
+ * @returns {string} Array of posts objects.
+ */
+
+const getDashboard = async (req, res) => {
+  try {
+    const userId = req.params.userId;
+    const blogId = req.params.blogId;
+    const data = [];
+    const existingUser = await users.findOne({_id: userId});
+    if (existingUser) {
+      const existingBlog = await blogs.findOne({_id: blogId});
+      if (existingBlog) {
+        const postsArray = existingBlog.postsIds;
+        for (let i=0; i<postsArray.length; i++) {
+          const existingPost = await postsModel.posts.findOne({_id: postsArray[i]});
+          if (existingPost) {
+            data.push(existingPost);
+          }
+        }
+      } else {
+        res
+            .status(StatusCodes.BAD_REQUEST)
+            .json('Blog Not Found');
+      }
+      // checking all follwed blogs to get their posts
+      const followingBlogsArray = existingUser.following_blogs;
+      for (let i=0; i<followingBlogsArray.length; i++) {
+        const existingFoBlog = await blogs.findOne({_id: followingBlogsArray[i]});
+        if (existingFoBlog) {
+          const foPostsArray = existingFoBlog.postsIds;
+          for (let j=0; j<foPostsArray.length; j++) {
+            const existingFoPost = await postsModel.posts.findOne({_id: foPostsArray[j]});
+            if (existingFoPost) {
+              data.push(existingFoPost);
+            }
+          }
+        } else {
+          res
+              .status(StatusCodes.BAD_REQUEST)
+              .json('Following Blog Not Found');
+        }
+      }
+      console.log('data:', data);
+      res
+          .status(StatusCodes.OK)
+          .json('Dashboard Got Successfully');
+    } else {
+      res
+          .status(StatusCodes.BAD_REQUEST)
+          .json('User Not Found');
+    }
+  } catch (error) {
+    res
+        .status(StatusCodes.INTERNAL_SERVER_ERROR)
+        .json('Error In Get Dashboard Function');
+  }
 };
 
 /* ----------- <---> Edit Post <---> ----------- */ // *** <===> not Done <===>  *** //
@@ -419,5 +589,6 @@ const postFunctions = (module.exports = {
   // shareWith,
   // blogValidation
   getNotes,
+  getDashboard,
 });
 /* =========== /// <==> End <==> ===========*/

@@ -10,6 +10,53 @@
 //=====================================================================================================
 //=====================================================================================================
 
+
+/*
+===================== ///////// <---------> =========================== <---------> ///////// =====================> 
+===================== ///////// <---------> Retrieve a Blog's Dashboard <---------> ///////// =====================> 
+===================== ///////// <---------> =========================== <---------> ///////// =====================> 
+*/
+
+/**
+ * @api {get} /:userId/:blogId/dashboard Retrieve a Blogs's Dashboard
+ * @apiName getDashboard
+ * @apiGroup  Blog
+ * @apiPermission User, Admin, Super_Admin
+ * @apidescription go to the dashboard page
+ * @apiVersion 0.0.0
+ * 
+ * @apiParam {String} userId Id of the user to retreive their blog's dashboard.
+ * @apiParam {String} blogId Id of the blog to retreive its dashboard.
+ * 
+ * @apiSuccess {Array} data Array of posts objects to show.
+ *
+ * @apiSuccessExample Response Data:
+ *      HTTP/1.1 200 OK
+ *      {
+ *          "meta": {
+ *                       "status": 200,
+ *                       "msg": "OK"
+ *                  },
+ * 
+ *          "response":{
+ *                       "data":"{ Object Contains Posts, ... }"
+ *                     }   
+ *      }
+ * 
+ * @apiErrorExample Response Error:
+ *      HTTP/1.1 400 BAD REQUEST
+ *      {
+ *          "error": "Error In Input Data"
+ *      }
+ *      HTTP/1.1 401 Unauthorized
+ *      {
+ *          "error": "User Is Unauthorized"
+ *      }
+ */
+
+/*=================== End =====================*/
+
+
 /*
 ===================== ///////// <---------> ============= <---------> ///////// =====================> 
 ===================== ///////// <---------> Remove Blog <---------> ///////// =====================> 
