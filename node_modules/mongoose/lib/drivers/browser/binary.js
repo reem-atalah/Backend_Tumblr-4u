@@ -3,9 +3,7 @@
  * Module dependencies.
  */
 
-'use strict';
-
-const Binary = require('bson').Binary;
+var Binary = require('bson').Binary;
 
 /*!
  * Module exports.

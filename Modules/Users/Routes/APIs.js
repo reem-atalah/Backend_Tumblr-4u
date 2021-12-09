@@ -10,8 +10,8 @@ const userFunctions = require('../Controller/control');
 const userJoi = require('../Joi/joi');
 const cmMidwReqValidate='../../../Common/Middlewares/requestValidation';
 const validateRequest = require(cmMidwReqValidate);
-// const isAuthorized = require('../../../Common/Middlewares/isAuthorized');
-// const userEndPoints = require('../endPoints');
+const isAuthorized = require('../../../Common/Middlewares/isAuthorized');
+const userEndPoints = require('../endPoints');
 /* =========== /// <==> End <==> ===========*/
 
 /* ====================== /// <==> User APIs <==> /// ====================== */
@@ -35,23 +35,23 @@ router.post('/login', VLDRQSI, SI);
 /* ----------- <---> Follow <---> ----------- */
 
 const VLDRQFB=validateRequest(userJoi.FollowBlogValidations);
-// const ISAFB=isAuthorized(userEndPoints.followBlog);
+const ISAFB=isAuthorized(userEndPoints.followBlog);
 const FB=userFunctions.followBlog;
 
 router.post('/user/follow/:userId',
     VLDRQFB,
-    // ISAFB,
+    ISAFB,
     FB);
 
 /* ----------- <---> UnFollow <---> ----------- */
 
 const VLDRQUB=validateRequest(userJoi.UnfollowBlogValidations);
-// const ISAUB=isAuthorized(userEndPoints.unfollowBlog);
+const ISAUB=isAuthorized(userEndPoints.unfollowBlog);
 const UB=userFunctions.unfollowBlog;
 
 router.post('/user/unfollow/:userId',
     VLDRQUB,
-    // ISAUB,
+    ISAUB,
     UB);
 
 /* =========== /// <==> End <==> ===========*/

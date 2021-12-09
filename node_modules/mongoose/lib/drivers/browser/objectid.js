@@ -5,21 +5,7 @@
  * @see ObjectId
  */
 
-'use strict';
-
-const ObjectId = require('bson').ObjectID;
-
-/*!
- * Getter for convenience with populate, see gh-6115
- */
-
-Object.defineProperty(ObjectId.prototype, '_id', {
-  enumerable: false,
-  configurable: true,
-  get: function() {
-    return this;
-  }
-});
+var ObjectId = require('bson').ObjectID;
 
 /*!
  * ignore

@@ -3,8 +3,6 @@
  * Module dependencies.
  */
 
-'use strict';
-
-const Binary = require('mongodb').Binary;
+var Binary = require('mongodb').Binary;
 
 module.exports = exports = Binary;

@@ -1,13 +1,15 @@
 /* eslint-disable linebreak-style */
+// const config_jest= require('./jest.config');
 // global.Promise = require('promise');
+// jest.useFakeTimers();
+
 
 const search=require('../Modules/Search/Search dashborad/Controller/control');
-// jest.useFakeTimers();
+
 // test for search hash tag
 test('having a substring completes the hash tag', async () => {
-  // setTimeout(() => {
-  // ex.toEqual( expect);
   const wordName ={wordName: 'dep'};
+  // await Promise.resolve();
   return search.autoCompleteSearchDash(wordName).then((data) => {
     expect(data).arrayContaining(['/deposit/i']);
   });
@@ -45,3 +47,7 @@ test('having a substring completes the hash tag', async () => {
 //     ex.toNotEqual( expect.arrayContaining(['/compress/i']));
 //   });
 // });
+
+jest.useFakeTimers('modern');
+jest.setTimeout(200000);
+

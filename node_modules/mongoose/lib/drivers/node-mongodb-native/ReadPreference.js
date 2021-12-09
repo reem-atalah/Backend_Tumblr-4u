@@ -2,10 +2,8 @@
  * Module dependencies.
  */
 
-'use strict';
-
-const mongodb = require('mongodb');
-const ReadPref = mongodb.ReadPreference;
+var mongodb = require('mongodb');
+var ReadPref = mongodb.ReadPreference;
 
 /*!
  * Converts arguments to ReadPrefs the driver

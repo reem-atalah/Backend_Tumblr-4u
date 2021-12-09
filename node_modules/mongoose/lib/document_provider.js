@@ -5,10 +5,10 @@
 /*!
  * Module dependencies.
  */
-const Document = require('./document.js');
-const BrowserDocument = require('./browserDocument.js');
+var Document = require('./document.js');
+var BrowserDocument = require('./browserDocument.js');
 
-let isBrowser = false;
+var isBrowser = false;
 
 /**
  * Returns the Document constructor for the current context

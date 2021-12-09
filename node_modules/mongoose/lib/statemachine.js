@@ -3,9 +3,7 @@
  * Module dependencies.
  */
 
-'use strict';
-
-const utils = require('./utils');
+var utils = require('./utils');
 
 /*!
  * StateMachine represents a minimal `interface` for the
@@ -14,7 +12,7 @@ const utils = require('./utils');
  * @api private
  */
 
-const StateMachine = module.exports = exports = function StateMachine() {
+var StateMachine = module.exports = exports = function StateMachine() {
 };
 
 /*!
@@ -32,15 +30,15 @@ const StateMachine = module.exports = exports = function StateMachine() {
  */
 
 StateMachine.ctor = function() {
-  const states = utils.args(arguments);
+  var states = utils.args(arguments);
 
-  const ctor = function() {
+  var ctor = function() {
     StateMachine.apply(this, arguments);
     this.paths = {};
     this.states = {};
     this.stateNames = states;
 
-    let i = states.length,
+    var i = states.length,
         state;
 
     while (i--) {
@@ -72,7 +70,7 @@ StateMachine.ctor = function() {
  */
 
 StateMachine.prototype._changeState = function _changeState(path, nextState) {
-  const prevBucket = this.states[this.paths[path]];
+  var prevBucket = this.states[this.paths[path]];
   if (prevBucket) delete prevBucket[path];
 
   this.paths[path] = nextState;
@@ -84,9 +82,9 @@ StateMachine.prototype._changeState = function _changeState(path, nextState) {
  */
 
 StateMachine.prototype.clear = function clear(state) {
-  const keys = Object.keys(this.states[state]);
-  let i = keys.length;
-  let path;
+  var keys = Object.keys(this.states[state]),
+      i = keys.length,
+      path;
 
   while (i--) {
     path = keys[i];
@@ -104,8 +102,8 @@ StateMachine.prototype.clear = function clear(state) {
  */
 
 StateMachine.prototype.some = function some() {
-  const _this = this;
-  const what = arguments.length ? arguments : this.stateNames;
+  var _this = this;
+  var what = arguments.length ? arguments : this.stateNames;
   return Array.prototype.some.call(what, function(state) {
     return Object.keys(_this.states[state]).length;
   });
@@ -122,15 +120,15 @@ StateMachine.prototype.some = function some() {
 
 StateMachine.prototype._iter = function _iter(iterMethod) {
   return function() {
-    const numArgs = arguments.length;
-    let states = utils.args(arguments, 0, numArgs - 1);
-    const callback = arguments[numArgs - 1];
+    var numArgs = arguments.length,
+        states = utils.args(arguments, 0, numArgs - 1),
+        callback = arguments[numArgs - 1];
 
     if (!states.length) states = this.stateNames;
 
-    const _this = this;
+    var _this = this;
 
-    const paths = states.reduce(function(paths, state) {
+    var paths = states.reduce(function(paths, state) {
       return paths.concat(Object.keys(_this.states[state]));
     }, []);
 

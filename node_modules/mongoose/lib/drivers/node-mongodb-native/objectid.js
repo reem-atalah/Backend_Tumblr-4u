@@ -5,9 +5,7 @@
  * @see ObjectId
  */
 
-'use strict';
-
-const ObjectId = require('mongodb').ObjectId;
+var ObjectId = require('mongodb').ObjectId;
 
 /*!
  * ignore

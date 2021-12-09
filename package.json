@@ -5,7 +5,7 @@
   "main": "script.js",
   "scripts": {
     "start": "nodemon script.js",
-    "test": "mocha --timeout 100000 --recursive --exit",
+    "test": "jest --testEnvironment=node",
     "doc": "jsdoc -c jsdoc.json"
   },
   "author": "",
@@ -13,6 +13,7 @@
   "dependencies": {
     "apidoc": "^0.50.1",
     "bcrypt": "^5.0.1",
+    "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "easy-rbac": "^3.1.1",
     "express": "^4.17.1",
@@ -22,8 +23,8 @@
     "joi": "^17.4.2",
     "jsdoc": "^3.6.7",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^6.0.7",
-    "promise": "^8.1.0"
+    "mongoose": "^5.0.0",
+    "socket.io": "^4.4.0"
   },
   "devDependencies": {
     "chai": "^4.3.4",

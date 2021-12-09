@@ -4,7 +4,9 @@
  * Module requirements.
  */
 
-const SchemaNumber = require('../number');
+var Types = {
+  Number: require('../number')
+};
 
 /*!
  * @ignore
@@ -18,7 +20,7 @@ exports.castArraysOfNumbers = castArraysOfNumbers;
  */
 
 function castToNumber(val) {
-  return SchemaNumber.cast()(val);
+  return Types.Number.prototype.cast.call(this, val);
 }
 
 function castArraysOfNumbers(arr, self) {

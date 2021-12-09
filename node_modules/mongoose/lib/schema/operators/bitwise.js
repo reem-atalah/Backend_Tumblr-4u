@@ -2,16 +2,14 @@
  * Module requirements.
  */
 
-'use strict';
-
-const CastError = require('../../error/cast');
+var CastError = require('../../error/cast');
 
 /*!
  * ignore
  */
 
 function handleBitwiseOperator(val) {
-  const _this = this;
+  var _this = this;
   if (Array.isArray(val)) {
     return val.map(function(v) {
       return _castNumber(_this.path, v);
@@ -28,7 +26,7 @@ function handleBitwiseOperator(val) {
  */
 
 function _castNumber(path, num) {
-  const v = Number(num);
+  var v = Number(num);
   if (isNaN(v)) {
     throw new CastError('number', num, path);
   }

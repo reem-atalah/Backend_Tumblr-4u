@@ -12,6 +12,7 @@ const searchDashboard=require('./Modules/Search/Search dashborad/Routes/APIs');
 const userRoutes = require('./Modules/Users/Routes/APIs');
 const blogRoutes = require('./Modules/Blogs/Routes/APIs');
 const postRoutes = require('./Modules/Posts/Routes/APIs');
+const cors =require('cors');
 // const seed= require('./Configurations/seed_db');
 
 
@@ -34,7 +35,7 @@ server.use(postRoutes);
 server.use(express.json());
 server.use(express.urlencoded({extended: false}));
 /* =========== /// <==> End <==> ===========*/
-
+server.use(cors);
 // seed.seedDB();
 
 /* ================= /// <==> Listen Server To Port <==> /// =============== */
@@ -43,3 +44,5 @@ const app = server.listen(process.env.PORT, () => {
 });
 module.exports = app;
 /* =========== /// <==> End <==> ===========*/
+
+// "test": "mocha --timeout 100000 --recursive --exit",
