@@ -244,6 +244,64 @@ const verfiyAccount = async(req,res)=>{
   };
 };
 
+/* ----------- <---> Sign Up With Google <---> --------- */ // *** <===> Done <===>  *** //
+// Assumption: Acount Must Be Not ( Deleted )
+
+/**
+ * This Function Used To LogIn To Tumblr4U.
+ *
+ * @param {string} email - username
+ * @param {string} password - email
+ *
+ * @returns {object} - { Object }
+ */
+
+const google = async(req,res)=>{
+  try {
+
+    const oldUser = await schema.users.findOne({email:req.user.email});
+    console.log(oldUser);
+    if(oldUser)
+    {
+      res.status(StatusCodes.OK).json({
+        'meta': {
+          'status': 200,
+          'msg': 'OK',
+        },
+
+        'res': {
+          'message': 'User Log In With Google Successfully (<:>)',
+          'data': req.user,
+        }
+      });
+    }else{
+      res.status(StatusCodes.OK).json({
+        'meta': {
+          'status': 200,
+          'msg': 'OK',
+        },
+
+        'res': {
+          'message': 'User Sign Up With Google Successfully (<:>)',
+          'data': req.user,
+        }
+      });
+    }
+  } catch (error) {
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+      'meta': {
+        'status': 500,
+        'msg': 'INTERNAL_SERVER_ERROR',
+      },
+
+      'res': {
+        'error': 'Error In Sign Up With Google Function (<:>)',
+        'data': '',
+      },
+  });
+};
+};
+//=================== End ===================//
 /**
  *
  * @function
@@ -387,6 +445,7 @@ module.exports = {
   login,
   followBlog,
   unfollowBlog,
-  verfiyAccount
+  verfiyAccount,
+  google
 };
 /* =========== /// <==> End <==> ===========*/

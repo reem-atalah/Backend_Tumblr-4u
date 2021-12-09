@@ -188,7 +188,7 @@
 */
 
 /**
- * @api {post} /user/signup Sign Up.
+ * @api {post} /signup Sign Up.
  * 
  * @apiName signUp
  * @apiGroup User
@@ -202,23 +202,31 @@
  * @apiParam {String} [Stuff] User's selected stuff
  * 
  * @apiSuccessExample Response Data:
- *      HTTP/1.1 200 OK
+ *      HTTP/1.1 201 CREATED
  *      {
  *          "meta": {
- *                       "status": 200,
- *                       "msg": "OK"
+ *                       "status": 201,
+ *                       "msg": "CREATED"
  *                  },
  * 
- *          "response":{
- *                       "message": "User Registered Successfully"
- *                       "data":"Token"
+ *          "res":{
+ *                       "message": "Sign Up Successfully (<:>)"
+ *                       "data":token
  *                     }   
  *      }
  * 
  * @apiErrorExample Response Error:
  *      HTTP/1.1 400 BAD REQUEST
  *      {
- *          "error": "Error In Input Data"
+ *          "meta": {
+ *                       "status": 201,
+ *                       "msg": "BAD_REQUEST"
+ *                  },
+ * 
+ *          "res":{
+ *                       "error": "....."
+ *                       "data":""
+ *                     }   
  *      }
  * 
  */
@@ -232,7 +240,7 @@
 */
 
 /**
- * @api {post} /user/login Log In.
+ * @api {post} /login Log In.
  * 
  * @apiName login
  * @apiGroup User
@@ -250,16 +258,24 @@
  *                       "msg": "OK"
  *                  },
  * 
- *          "response":{
- *                       "message": "user Logged in Successfully"
- *                       "data":"Token"
+ *          "res":{
+ *                       "message": "LogIn Successfully (<:>)"
+ *                       "data":token
  *                     }   
  *      }
  * 
  * @apiErrorExample Response Error:
  *      HTTP/1.1 400 BAD REQUEST
  *      {
- *          "error": "Error In Input Data"
+ *          "meta": {
+ *                       "status": 201,
+ *                       "msg": "BAD_REQUEST"
+ *                  },
+ * 
+ *          "res":{
+ *                       "error": "....."
+ *                       "data":""
+ *                     }   
  *      }
  * 
  */
@@ -273,7 +289,7 @@
 */
 
 /**
- * @api {post} /google/login Log In Using Google.
+ * @api {get} /google/login Log In Using Google.
  * 
  * @apiName googleLogin
  * @apiGroup User
@@ -281,6 +297,7 @@
  * @apiPermission User, Admin, Super_Admin
  * 
  * @apiParam {String} Email User's email
+ * @apiParam {String} Password User's password
  *
  * @apiSuccessExample Response Data:
  *      HTTP/1.1 200 OK
@@ -291,15 +308,23 @@
  *                  },
  * 
  *          "response":{
- *                       "message": "user Logged in Successfully"
- *                       "data":"Token"
+ *                       "message": "Sign Up With Google Successfully (<:>)"
+ *                       "data":token
  *                     }   
  *      }
  * 
  * @apiErrorExample Response Error:
  *      HTTP/1.1 400 BAD REQUEST
  *      {
- *          "error": "Error In Input Data"
+ *          "meta": {
+ *                       "status": 201,
+ *                       "msg": "BAD_REQUEST"
+ *                  },
+ * 
+ *          "res":{
+ *                       "error": "....."
+ *                       "data":""
+ *                     }   
  *      }
  */
 

@@ -10,6 +10,9 @@ const userFunctions = require('../Controller/control');
 const userJoi = require('../Joi/joi');
 const cmMidwReqValidate='../../../Common/Middlewares/requestValidation';
 const validateRequest = require(cmMidwReqValidate);
+const passport = require('passport');
+require('../../../Common/passport-setup/passport-setup');
+
 // const isAuthorized = require('../../../Common/Middlewares/isAuthorized');
 // const userEndPoints = require('../endPoints');
 /* =========== /// <==> End <==> ===========*/
@@ -35,6 +38,15 @@ router.post('/login', VLDRQSI, SI);
 /* ----------- <---> Sign In <---> ----------- */
 const VA=userFunctions.verfiyAccount;
 router.get('/user/verify/:token', VA);
+
+/* ----------- <---> Sign Up With Google <---> --------- */ // *** <===> Done <===>  *** //
+
+// router.use(passport.initialize());
+// router.use(passport.session());
+
+router.get('/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
+const GO = userFunctions.google;
+router.get('/google/callback', passport.authenticate('google'),GO);
 
 
 /* ----------- <---> Follow <---> ----------- */
