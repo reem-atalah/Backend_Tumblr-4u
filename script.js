@@ -35,7 +35,7 @@ server.use(postRoutes);
 server.use(express.json());
 server.use(express.urlencoded({extended: false}));
 /* =========== /// <==> End <==> ===========*/
-server.use(cors);
+server.use(cors());
 // seed.seedDB();
 
 /* ================= /// <==> Listen Server To Port <==> /// =============== */
