@@ -10,15 +10,15 @@ const seachDashboard = require('../Controller/control');
 const searchJoi = require('../Joi/joi');
 const cmMidwReqValidate= '../../../../Common/Middlewares/requestValidation';
 const validateRequest = require(cmMidwReqValidate);
-// const isAuthorized = require('../../../../Common/Middlewares/isAuthorized');
-// const searchEndPoints = require('../endPoints');
+const isAuthorized = require('../../../../Common/Middlewares/isAuthorized');
+const searchEndPoints = require('../endPoints');
 // /* =========== /// <==> End <==> ===========*/
 
 // /* ====================== /// <==> Search APIs <==> /// ================= */
 
 router.get('/autoCompleteSearchDash',
     validateRequest(searchJoi.searchValidations),
-    // isAuthorized(searchEndPoints.getSearchDash),
+    isAuthorized(searchEndPoints.getSearchDash),
     seachDashboard.autoCompleteSearchDash);
 
 
