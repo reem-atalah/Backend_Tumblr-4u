@@ -46,10 +46,10 @@ router.get('/user/verify/:token', VA);
 // router.use(passport.initialize());
 // router.use(passport.session());
 
-router.get('/google', 
-    passport.authenticate('google', { scope: ['profile', 'email'] }));
+router.get('/google',
+    passport.authenticate('google', {scope: ['profile', 'email']}));
 const GO = userFunctions.google;
-router.get('/google/callback', passport.authenticate('google'),GO);
+router.get('/google/callback', passport.authenticate('google'), GO);
 
 
 /* ----------- <---> Follow <---> ----------- */
@@ -73,6 +73,28 @@ router.post('/user/unfollow/:userId',
     VLDRQUB,
     ISAUB,
     UB);
+
+/* ----------- <---> Create Blog <---> ----------- */
+
+const VLDRQCB=validateRequest(userJoi.CreateBlogValidations);
+const ISACB=isAuthorized(userEndPoints.createBlog);
+const CB=userFunctions.createBlog;
+
+router.get('/user/new/blog/:userId',
+    VLDRQCB,
+    ISACB,
+    CB);
+
+/* ----------- <---> Delete Blog <---> ----------- */
+
+const VLDRQDB=validateRequest(userJoi.DeleteBlogValidations);
+const ISADB=isAuthorized(userEndPoints.deleteBlog);
+const DB=userFunctions.deleteBlog;
+
+router.post('/user/delete/blog/:userId',
+    VLDRQDB,
+    ISADB,
+    DB);
 
 /* =========== /// <==> End <==> ===========*/
 

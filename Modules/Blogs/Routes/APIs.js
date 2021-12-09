@@ -33,8 +33,24 @@ router.post('/blog/unblock/:blogId',
     ISAUB,
     blogFunctions.unblockBlog);
 
-// router.post('/blog/block/:blogId', blogFunctions.blockBlog);
-// router.post('/blog/unblock/:blogId', blogFunctions.unblockBlog);
+
+const VLDRQEB=validateRequest(blogJoi.EditBlogValidations);
+const ISAEB=isAuthorized(blogEndPoints.editBlog);
+const EB=blogFunctions.editBlog;
+
+router.post('/blog/edit/:blogId',
+    VLDRQEB,
+    ISAEB,
+    EB);
+
+const VLDRQRB=validateRequest(blogJoi.RetrieveBlogValidations);
+const ISARB=isAuthorized(blogEndPoints.retrieveBlog);
+const RB=blogFunctions.retrieveBlog;
+
+router.get('/blog/view/:blogName',
+    VLDRQRB,
+    ISARB,
+    RB);
 
 
 /* =========== /// <==> End <==> ===========*/
