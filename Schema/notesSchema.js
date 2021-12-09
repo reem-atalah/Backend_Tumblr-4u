@@ -9,37 +9,29 @@ const mongoose = require('mongoose');
 /* =========== /// <==> End <==> ===========*/
 
 
-/* ============== /// <==> Post Module Schema <==> /// ============== */
+/* ============== /// <==> Notes Schema <==> /// ============== */
 
-const postSchema = mongoose.Schema({
-  blogId: {
-    type: String,
-    required: true,
-  },
-  postHtml: {
-    type: String,
-    required: true,
-  },
-  type: {
-    type: String,
-    required: true,
-  },
-  state: {
-    type: String,
-    required: true,
-  },
-  tags: {type: [String]},
-  // date: { type: Date }
-  notesId: { type: String },
-
-}, {
-  Timestamps: true,
+const notesSchema = mongoose.Schema({
+  likes: {type: [String]},
+  comments: [
+    {
+      commentingBlogId: {type: String},
+      commentingBlogTitle: {type: String},
+      text: {type: String},
+    },
+  ],
+  reblogs: [
+    {
+      rebloggingId: {type: String},
+      text: {type: String},
+    },
+  ],
 });
 
 /* =========== /// <==> End <==> ===========*/
 
 /* ============== /// <==> Export Post Module Schema <==> /// ============== */
 module.exports = {
-  postSchema,
+  notesSchema,
 };
 /* =========== /// <==> End <==> ===========*/
