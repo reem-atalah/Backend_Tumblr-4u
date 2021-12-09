@@ -549,9 +549,12 @@ const getDashboard = async (req, res) => {
         }
       }
       console.log('data:', data);
+      // res
+      //     .status(StatusCodes.OK)
+      //     .json('Dashboard Got Successfully');
       res
-          .status(StatusCodes.OK)
-          .json('Dashboard Got Successfully');
+      .status(StatusCodes.OK)
+      .json(data);
     } else {
       res
           .status(StatusCodes.BAD_REQUEST)
