@@ -20,6 +20,19 @@ const blogJoi = {
       unblockedBlogId: joi.string().required(),
     }),
   },
+  EditBlogValidations: {
+    body: joi.object().required().keys({
+      name: joi.string(),
+      avatar: joi.string(),
+      accent: joi.string(),
+      title: joi.string(),
+      headerImage: joi.string(),
+      background: joi.string(),
+    }),
+  },
+RetrieveBlogValidations: {
+    body: joi.object().required().keys({}),
+  },
 
 };
 /* =========== /// <==> End <==> ===========*/

@@ -338,15 +338,14 @@ const createBlog = async (req, res) => {
     const title= req.body.title;
     const privacy=req.body.privacy;
     let password='password';
-    const isPrimary=false;
+    let isPrimary=false;
     let name=req.body.name;
     if (privacy) {
       password=req.body.password;
     }
     const anotherBlog= await schema.blogs.findOne({'name': name});
     if (!anotherBlog) {
-      const user= await schema.users.findOne({'_id': userId}, 'blogsId');
-      console.log(user);
+      const user= await schema.users.findOne({'_id': userId}, 'blogsId name');
 
       if (user.blogsId.length===0) {
         isPrimary=true;
@@ -375,7 +374,7 @@ const createBlog = async (req, res) => {
 
       const blog= await schema.blogs.findOne({'name': name});
 
-      console.log(blog);
+      console.log(blog._id);
       user.blogsId.push(blog._id);
       user.save();
       res.status(StatusCodes.CREATED).json({
@@ -424,14 +423,34 @@ const deleteBlog = async (req, res) => {
     const blogId = req.body.blogId;
     const blog= await schema.blogs.findOne({'_id': blogId});
     if (blog) {
+      const users= await schema.users.find();
+      const blogs= await schema.blogs.find();
+
+      for(var i=0;i<users.length;i++)
+      {
+        users[i].following_blogs.pull(blogId);
+        users[i].save();
+      }
+      for(var i=0;i<blogs.length;i++)
+      {
+        if(blogs[i]._id!=blogId)
+       {
+        blogs[i].blockedBlogs.pull(blogId);
+        blogs[i].save();
+       }
+      }
       if (blog.isPrimary===true) {
-      //  to be done
+      await schema.users.deleteOne({'_id': userId});
+      await schema.blogs.deleteOne({'_id': blogId});
+
       } else {
         await schema.blogs.deleteOne({'_id': blogId});
         const user= await schema.users.findOne({'_id': userId}, 'blogsId');
         user.blogsId.pull(blogId);
         user.save();
-        res.status(StatusCodes.OK).json({
+        console.log(user.blogsId)
+      }
+       res.status(StatusCodes.OK).json({
           'meta': {
             'status': 200,
             'msg': 'OK',
@@ -441,7 +460,6 @@ const deleteBlog = async (req, res) => {
             'data': '',
           },
         });
-      }
     } else {
       res.status(StatusCodes.NOT_FOUND).json({
         'meta': {
@@ -471,50 +489,6 @@ const deleteBlog = async (req, res) => {
   }
 };
 
-/**
- *
- * @function
- * @name retrieveBlog
- * @description    -  It retrieves a blog given its id
- * @param {String} blogId  - id of the blog
- * @return {Object} - A blog object
- */
-
-const retrieveBlog=async (req, res)=>{
-  try {
-    const blogId = req.body.blogId;
-    const blog= await schema.blogs.findOne({'_id': blogId});
-    if (blog) {
-      console.log(blog);
-      res.status(StatusCodes.OK).jsonp(blog);
-    } else {
-      res.status(StatusCodes.NOT_FOUND).json({
-        'meta': {
-          'status': 404,
-          'msg': 'NOT FOUND',
-        },
-
-        'res': {
-          'message': 'Blog Not FOUND',
-          'data': '',
-        },
-      });
-    }
-  } catch (error) {
-    console.log(error.message);
-    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
-      'meta': {
-        'status': 500,
-        'msg': 'INTERNAL_SERVER_ERROR',
-      },
-
-      'res': {
-        'error': 'Error In retrieveBlog Function',
-        'data': '',
-      },
-    });
-  }
-};
 /* =========== /// <==> End <==> ===========*/
 
 
@@ -526,6 +500,6 @@ module.exports = {
   unfollowBlog,
   createBlog,
   deleteBlog,
-  retrieveBlog,
+ 
 };
 /* =========== /// <==> End <==> ===========*/

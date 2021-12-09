@@ -18,6 +18,9 @@ const blogSchema = new mongoose.Schema({
     default: 'Untitled',
   },
   avatar: String,
+  accent:String,
+  headerImage:String,
+  background:String,
   reblog_parent_id: {
     type: 'String',
     required: false,
@@ -33,7 +36,6 @@ const blogSchema = new mongoose.Schema({
   privacy: Boolean,
   name: {
     type: 'String',
-    required: true,
   },
   updated: {
     type: 'Number',
@@ -44,7 +46,6 @@ const blogSchema = new mongoose.Schema({
   },
   password: {
     type: 'String',
-    required: true,
   },
   isBlockedFromPrimary: {
     type: 'Boolean',

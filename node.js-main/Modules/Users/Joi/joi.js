@@ -50,11 +50,7 @@ const userJoi = {
       blogId: joi.string().required(),
     }),
   },
-  RetrieveBlogValidations: {
-    body: joi.object().required().keys({
-      blogId: joi.string().required(),
-    }),
-  },
+  
 };
 /* =========== /// <==> End <==> ===========*/
 

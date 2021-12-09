@@ -11,6 +11,8 @@ const unblockBlog = 'Blog:unblockBlog';
 const blogEndPoints = {
   blockBlog,
   unblockBlog,
+  editBlog,
+  retrieveBlog,
 };
 /* =========== <--> End <--> =========== */
 

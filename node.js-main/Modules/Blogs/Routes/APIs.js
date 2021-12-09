@@ -32,51 +32,22 @@ router.post('/blog/unblock/:blogId',
     VLDRQUB,
     // ISAUB,
     blogFunctions.unblockBlog);
-const VLDRQEBA=validateRequest(blogJoi.EditBlogAvatarValidations);
+const VLDRQEB=validateRequest(blogJoi.EditBlogValidations);
 // const ISAUB=isAuthorized(userEndPoints.unfollowBlog);
-const EBA=userFunctions.editBlogAvatar;
+const EB=blogFunctions.editBlog;
 
-router.post('/blog/editBlogAvatar/:blogId',
-    VLDRQEBA,
+router.post('/blog/edit/:blogId',
+    VLDRQEB,
     // ISAUB,
-    EBA);
-const VLDRQEBT=validateRequest(blogJoi.EditBlogTitleValidations);
+    EB);
+const VLDRQRB=validateRequest(blogJoi.RetrieveBlogValidations);
 // const ISAUB=isAuthorized(userEndPoints.unfollowBlog);
-const EBT=userFunctions.editBlogTitle;
+const RB=blogFunctions.retrieveBlog;
 
-router.post('/blog/editBlogTitle/:blogId',
-    VLDRQEBT,
+router.get('/blog/view/:blogName',
+    VLDRQRB,
     // ISAUB,
-    EBT);
-const VLDRQEBN=validateRequest(blogJoi.EditBlogNameValidations);
-const EBN=userFunctions.editBlogName;
-
-router.post('/blog/editBlogName/:blogId',
-    VLDRQEBN,
-    // ISAUB,
-    EBN);
-const VLDRQEBAC=validateRequest(blogJoi.EditBlogAccentValidations);
-const EBAC=userFunctions.editBlogAccent;
-
-router.post('/blog/editBlogAccent/:blogId',
-    VLDRQEBAC,
-    // ISAUB,
-    EBAC);
-const VLDRQEBBG=validateRequest(blogJoi.EditBlogBackgroundValidations);
-const EBBG=userFunctions.editBlogBackground;
-
-router.post('/blog/editBlogBackground/:blogId',
-    VLDRQEBBG,
-    // ISAUB,
-    EBBG);
-
-const VLDRQEBHI=validateRequest(blogJoi.EditBlogHeaderImageValidations);
-const EBHI=userFunctions.editBlogHeaderImage;
-
-router.post('/blog/editBlogHeaderImage/:blogId',
-    VLDRQEBHI,
-    // ISAUB,
-    EBHI);
+    RB);
 /* =========== /// <==> End <==> ===========*/
 /* ================ /// <==> Export blog APIs <==> /// ====================== */
 module.exports = router;

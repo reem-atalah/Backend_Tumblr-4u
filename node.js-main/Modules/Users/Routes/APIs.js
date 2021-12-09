@@ -71,16 +71,6 @@ router.post('/user/delete/blog/:userId',
     // ISAUB,
     DB);
 
-const VLDRQRB=validateRequest(userJoi.RetrieveBlogValidations);
-// const ISAUB=isAuthorized(userEndPoints.unfollowBlog);
-const RB=userFunctions.retrieveBlog;
-
-router.get('/user/retrieve/blog/:userId',
-    VLDRQRB,
-    // ISAUB,
-    RB);
-
-
 /* =========== /// <==> End <==> ===========*/
 
 /* ================ /// <==> Export User APIs <==> /// ================ */

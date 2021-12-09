@@ -11,7 +11,6 @@ const userEndPoints = {
   unfollowBlog,
   createBlog,
   deleteBlog,
-  retrieveBlog,
 };
 /* =========== <--> End <--> =========== */
 

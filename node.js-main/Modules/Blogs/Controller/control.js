@@ -1,13 +1,12 @@
 
 /* ================ /// <==> Variables Declaration <==> /// ================ */
 const {StatusCodes} = require('http-status-codes');
-const {blogs} = require('../../../Model/model');
+const schema = require('../../../Model/model');
 
 /* =========== /// <==> End <==> ===========*/
 
 
 /* ==================== /// <==> Blog Functions <==> /// ==================== */
-
 
 /**
  *
@@ -31,7 +30,7 @@ const blockBlog = async (req, res) => {
     const blogId = req.params.blogId;
     const blockedBlogId = req.body.blockedBlogId;
 
-    await blogs.findOne({'_id': blockedBlogId},
+    await schema.blogs.findOne({'_id': blockedBlogId},
         function(err, blockedBlog) {
         // if (err) return handleError(err);
           if (blockedBlog) {
@@ -106,7 +105,7 @@ const unblockBlog = async (req, res) => {
     const blogId = req.params.blogId;
     const unblockedBlogId = req.body.unblockedBlogId;
 
-    await blogs.findOne({'_id': unblockedBlogId});
+    await schema.blogs.findOne({'_id': unblockedBlogId});
     if (unblockedBlog) {
       blogs.findOne({'_id': blogId},
           'blockedBlogs');
@@ -151,125 +150,84 @@ const unblockBlog = async (req, res) => {
   }
 };
 
-const editBlogAvatar = async (req, res)=>{
-  try {
-    const blogId = req.params.blogId;
-    const avatar = req.body.avatar;
+/**
+ *
+ * @function
+ * @name editBlog
+ * @description    -  It retrieves a blog given its id
+ * @param {String} blogId  - id of the blog
+ * @return {Object} - A blog object
+ */
 
-    const blog= await schema.blogs.findOne({'_id': blogId});
-    if (blog) {
-      await schema.blogs.findOneAndUpdate({'_id': blogId}, {avatar: avatar});
-    } else {
-      res.status(StatusCodes.NOT_FOUND).json({
-        'meta': {
-          'status': 404,
-          'msg': 'NOT FOUND',
-        },
 
-        'res': {
-          'message': 'Blog Not FOUND',
-          'data': '',
-        },
-      });
-    }
-  } catch (error) {
-    console.log(error.message);
-    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
-      'meta': {
-        'status': 500,
-        'msg': 'INTERNAL_SERVER_ERROR',
-      },
-
-      'res': {
-        'error': 'Error In editBlogAvatar Function',
-        'data': '',
-      },
-    });
-  }
-};
-const editBlogTitle = async (req, res)=>{
-  try {
-    const blogId = req.params.blogId;
-    const title = req.body.title;
-
-    const blog= await schema.blogs.findOne({'_id': blogId});
-    if (blog) {
-      await schema.blogs.findOneAndUpdate({'_id': blogId}, {'title': title});
-    } else {
-      res.status(StatusCodes.NOT_FOUND).json({
-        'meta': {
-          'status': 404,
-          'msg': 'NOT FOUND',
-        },
-
-        'res': {
-          'message': 'Blog Not FOUND',
-          'data': '',
-        },
-      });
-    }
-  } catch (error) {
-    console.log(error.message);
-    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
-      'meta': {
-        'status': 500,
-        'msg': 'INTERNAL_SERVER_ERROR',
-      },
-
-      'res': {
-        'error': 'Error In editBlogTitle Function',
-        'data': '',
-      },
-    });
-  }
-};
-const editBlogName = async (req, res)=>{
-  try {
-    const blogId = req.params.blogId;
-    const name = req.body.name;
-
-    const blog= await schema.blogs.findOne({'_id': blogId});
-    if (blog) {
-      if (blog.isPrimary) {
-        await users.findOneAndUpdate({'name': blog.name}, {'name': name});
-      }
-      await schema.blogs.findOneAndUpdate({'_id': blogId}, {'name': name});
-    } else {
-      res.status(StatusCodes.NOT_FOUND).json({
-        'meta': {
-          'status': 404,
-          'msg': 'NOT FOUND',
-        },
-
-        'res': {
-          'message': 'Blog Not FOUND',
-          'data': '',
-        },
-      });
-    }
-  } catch (error) {
-    console.log(error.message);
-    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
-      'meta': {
-        'status': 500,
-        'msg': 'INTERNAL_SERVER_ERROR',
-      },
-
-      'res': {
-        'error': 'Error In editBlogName Function',
-        'data': '',
-      },
-    });
-  }
-};
-const editBlogAccent = async (req, res)=>{
+const editBlog=async (req, res)=>{
   try {
     const blogId = req.params.blogId;
     const accent = req.body.accent;
+    const name = req.body.name;
+    const headerImage = req.body.headerImage;
+    const avatar = req.body.avatar;
+    const title = req.body.title;
+    const background = req.body.background;
+    let  message='OK';
 
     const blog= await schema.blogs.findOne({'_id': blogId});
     if (blog) {
-      await schema.blogs.findOneAndUpdate({'_id': blogId}, {'accent': accent});
+      if (accent) {
+        blog.accent=accent;
+      }
+
+   
+      if (headerImage) {
+        blog.headerImage= headerImage;
+      }
+      if (background) {
+        blog.background= background;
+      }
+      if (avatar) {
+        blog.avatar= avatar;
+      }
+      if (title) {
+      blog.title=title;
+      }
+      if (name) {
+
+        const anotherBlog= await schema.blogs.findOne({'name': name});
+
+      if (!anotherBlog || anotherBlog._id==blogId) {
+
+        if (blog.isPrimary) {
+         const user= await schema.users.findOneAndUpdate({'name': blog.name});
+         user.name=name;
+         user.save();
+        }
+      blog.name=name;
+         }
+    else
+    {
+      message='URL is not available';
+    }
+    }
+    blog.save();
+    if(message==='OK')
+ {  
+    console.log(blog);
+    res.status(StatusCodes.OK).jsonp(blog);
+ }
+ else
+ {
+   res.status(StatusCodes.BAD_REQUEST).json({
+        'meta': {
+          'status': 400,
+          'msg': 'BAD REQUEST',
+        },
+
+        'res': {
+          'message': message,
+          'data': '',
+        },
+      });
+ }
     } else {
       res.status(StatusCodes.NOT_FOUND).json({
         'meta': {
@@ -298,15 +256,22 @@ const editBlogAccent = async (req, res)=>{
     });
   }
 };
-const editBlogBackground = async (req, res)=>{
-  try {
-    const blogId = req.params.blogId;
-    const background = req.body.background;
 
-    const blog= await schema.blogs.findOne({'_id': blogId});
+/**
+ *
+ * @function
+ * @name retrieveBlog
+ * @description    -  It retrieves a blog given its id
+ * @param {String} blogName  - name of the blog
+ * @return {Object} - A blog object
+ */
+
+const retrieveBlog=async (req, res)=>{
+  try {
+    const blogName = req.params.blogName;
+    const blog= await schema.blogs.findOne({'name': blogName});
     if (blog) {
-      await schema.blogs.findOneAndUpdate({'_id': blogId},
-          {'background': background});
+      res.status(StatusCodes.OK).jsonp(blog);
     } else {
       res.status(StatusCodes.NOT_FOUND).json({
         'meta': {
@@ -329,44 +294,7 @@ const editBlogBackground = async (req, res)=>{
       },
 
       'res': {
-        'error': 'Error In editBlogBackground Function',
-        'data': '',
-      },
-    });
-  }
-};
-const editBlogHeaderImage = async (req, res)=>{
-  try {
-    const blogId = req.params.blogId;
-    const headerImage = req.body.headerImage;
-
-    const blog= await schema.blogs.findOne({'_id': blogId});
-    if (blog) {
-      await schema.blogs.findOneAndUpdate({'_id': blogId},
-          {'headerImage': headerImage});
-    } else {
-      res.status(StatusCodes.NOT_FOUND).json({
-        'meta': {
-          'status': 404,
-          'msg': 'NOT FOUND',
-        },
-
-        'res': {
-          'message': 'Blog Not FOUND',
-          'data': '',
-        },
-      });
-    }
-  } catch (error) {
-    console.log(error.message);
-    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
-      'meta': {
-        'status': 500,
-        'msg': 'INTERNAL_SERVER_ERROR',
-      },
-
-      'res': {
-        'error': 'Error In editBlogHeaderImage Function',
+        'error': 'Error In retrieveBlog Function',
         'data': '',
       },
     });
@@ -379,11 +307,7 @@ const editBlogHeaderImage = async (req, res)=>{
 module.exports = {
   blockBlog,
   unblockBlog,
-  editBlogAvatar,
-  editBlogTitle,
-  editBlogName,
-  editBlogAccent,
-  editBlogBackground,
-  editBlogHeaderImage,
+  editBlog,
+  retrieveBlog,
 };
 /* =========== /// <==> End <==> ===========*/
