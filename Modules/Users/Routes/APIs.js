@@ -32,6 +32,11 @@ const SI=userFunctions.login;
 
 router.post('/login', VLDRQSI, SI);
 
+/* ----------- <---> Sign In <---> ----------- */
+const VA=userFunctions.verfiyAccount;
+router.get('/user/verify/:token', VA);
+
+
 /* ----------- <---> Follow <---> ----------- */
 
 const VLDRQFB=validateRequest(userJoi.FollowBlogValidations);
