@@ -21,46 +21,59 @@ const postEndPoints = require('../endPoints');
 router.post('/:blogId/posts/create_post',
     // validateRequest(postJoi.createPostValidations),
     isAuthorized(postEndPoints.createPost),
-    postFunctions.createPost,
-);
+    (req, res) => {
+        postFunctions.createPost(res, req.params.blogId, req.body.postHtml, req.body.type, req.body.state, req.body.tags);
+});
 
 
 /* ----------- <---> Show Post <---> ----------- */
 router.get('/posts/:postId/show_post',
     // validateRequest(postJoi.showPostValidations),
     isAuthorized(postEndPoints.showPost),
-    postFunctions.showPost,
+    (req, res) => {postFunctions.showPost(res, req.params.postId);
+    }
 );
 
 /* ----------- <---> Comment on a Post <---> ----------- */
 router.put('/:blogId/:postId/comment',
     // validateRequest(postJoi.createPostValidations),
     isAuthorized(postEndPoints.makeComment),
-    postFunctions.makeComment);
+    (req, res) => {postFunctions.makeComment(res, req.params.blogId, req.params.postId, req.body.text);
+    }
+);
+    
 
 /* ----------- <---> Like a Post <---> ----------- */
 router.put('/:blogId/:postId/like_press',
     // validateRequest(postJoi.createPostValidations),
     isAuthorized(postEndPoints.likePress),
-    postFunctions.likePress);
+    (req, res) => {postFunctions.likePress(res, req.params.blogId, req.params.postId);
+    }
+    );
 
 /* ----------- <---> Reblog a Post <---> ----------- */
 router.put('/:blogId/:postId/reblog_post',
     // validateRequest(postJoi.createPostValidations),
     isAuthorized(postEndPoints.reblogPost),
-    postFunctions.reblogPost);
+    (req, res) => {postFunctions.reblogPost(res, req.params.blogId, req.params.postId, req.body.text);
+    }
+        );
 
 /* ----------- <---> Remove a comment <---> ----------- */
 router.delete('/:postId/:commentId/remove_comment',
     // validateRequest(postJoi.createPostValidations),
     isAuthorized(postEndPoints.removeComment),
-    postFunctions.removeComment);
+    (req, res) => {postFunctions.removeComment(res, req.params.postId, req.params.commentId);
+    }
+        );
 
 /* ----------- <---> Delete a reboged Post <---> ----------- */
 router.delete('/:postId/:reblogId/remove_reblog',
     // validateRequest(postJoi.createPostValidations),
     isAuthorized(postEndPoints.removeReblog),
-    postFunctions.removeReblog);
+    (req, res) => {postFunctions.removeReblog(res, req.params.postId, req.params.reblogId);
+    }
+        );
 
 /* ----------- <---> Get Post Notes <---> ----------- */
 router.get('/posts/:postId/notes',

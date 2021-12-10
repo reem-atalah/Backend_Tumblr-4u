@@ -23,13 +23,13 @@ const schema = require('../../../Model/model');
  * @returns {Object} res status and message.
  */
 
-const createPost = async (req, res) => {
+const createPost = async (res, blogId, postHtml, type, state, tags) => {
   try {
-    const blogId = req.params.blogId;
-    const postHtml = req.body.postHtml;
-    const type = req.body.type;
-    const state = req.body.state;
-    const tags = req.body.tags;
+    // const blogId = req.params.blogId;
+    // const postHtml = req.body.postHtml;
+    // const type = req.body.type;
+    // const state = req.body.state;
+    // const tags = req.body.tags;
     // let date = Date.now;
 
     // const blogValidation = async(blogId) => {
@@ -42,8 +42,13 @@ const createPost = async (req, res) => {
 
     if (existingBlog) {
       console.log('blog id: ', blogId, 'blog: ', existingBlog);
-      newPost = new schema.Posts({blogId, postHtml, type, state, tags});
+      const newNotes = new schema.notes();
+      newNotes.save();
+      const notesId = newNotes._id;
+      newPost = new schema.Posts({blogId, postHtml, type, state, tags, notesId});
       newPost = await newPost.save();
+      existingBlog.postsIds.push(newPost._id); // el blog el b test 3lah kan lesa msh 3ndo el field, et3mlo create fl db
+      existingBlog.save();
       res.status(StatusCodes.OK).json('Post Created Successfully (<:>)');
     } else {
       console.log('blog not found');
@@ -68,9 +73,9 @@ const createPost = async (req, res) => {
 
 /* ----------- <---> Show Post <---> ---- */ // *** <===> Done <===>  *** //
 // Assumption: Edit Post Function Just Updates ( postHtml )
-const showPost = async (req, res) => {
+const showPost = async (res, postId) => {
   try {
-    const postId = req.params.postId;
+    //const postId = req.params.postId;
     const existingPost = await schema.Posts.findOne({_id: postId});
     if (existingPost) {
       console.log('post html: ', existingPost.postHtml);
@@ -97,11 +102,11 @@ const showPost = async (req, res) => {
  * @returns {string} The id of the comment.
  */
 
- const makeComment = async (req, res) => {
+ const makeComment = async (res, blogId, postId, text) => {
   try {
-    const blogId = req.params.blogId;
-    const postId = req.params.postId;
-    const text = req.body.text;
+    // const blogId = req.params.blogId;
+    // const postId = req.params.postId;
+    // const text = req.body.text;
     const existingBlog = await schema.blogs.findOne({_id: blogId});
     const existingPost = await schema.Posts.findOne({_id: postId});
     if (existingBlog) {
@@ -227,10 +232,10 @@ const loopObjAndCheck = (arr, element) => {
  * @returns {string} .
  */
 
-const likePress = async (req, res) => {
+const likePress = async (res, blogId, postId) => {
   try {
-    const blogId = req.params.blogId;
-    const postId = req.params.postId;
+    // const blogId = req.params.blogId;
+    // const postId = req.params.postId;
     const existingBlog = await schema.blogs.findOne({_id: blogId});
     const existingPost = await schema.Posts.findOne({_id: postId});
     if (existingBlog) {
@@ -283,11 +288,11 @@ const likePress = async (req, res) => {
  * @returns {string} The id of the reblog.
  */
 
-const reblogPost = async (req, res) => {
+const reblogPost = async (res, blogId, postId, text) => {
   try {
-    const blogId = req.params.blogId;
-    const postId = req.params.postId;
-    const text = req.body.text;
+    // const blogId = req.params.blogId;
+    // const postId = req.params.postId;
+    // const text = req.body.text;
     const existingBlog = await schema.blogs.findOne({_id: blogId});
     const existingPost = await schema.Posts.findOne({_id: postId});
     if (existingBlog) {
@@ -337,10 +342,10 @@ const reblogPost = async (req, res) => {
  * @returns {string} .
  */
 
-const removeComment = async (req, res) => {
+const removeComment = async (res, postId, commentId) => {
   try {
-    const postId = req.params.postId;
-    const commentId = req.params.commentId;
+    // const postId = req.params.postId;
+    // const commentId = req.params.commentId;
     const existingPost = await schema.Posts.findOne({_id: postId});
     if (existingPost) {
       const notesId = existingPost.notesId;
@@ -383,10 +388,10 @@ const removeComment = async (req, res) => {
  * @returns {string} .
  */
 
-const removeReblog = async (req, res) => {
+const removeReblog = async (res, postId, reblogId) => {
   try {
-    const postId = req.params.postId;
-    const reblogId = req.params.reblogId;
+    // const postId = req.params.postId;
+    // const reblogId = req.params.reblogId;
     const existingPost = await schema.Posts.findOne({_id: postId});
     if (existingPost) {
       const notesId = existingPost.notesId;
