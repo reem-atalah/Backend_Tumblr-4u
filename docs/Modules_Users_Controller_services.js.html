@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: Modules/Users/Controller/services.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: Modules/Users/Controller/services.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>// //////////////////////////////////////////////////////////////////
+// / &lt;==> /// This File Contains User Functions Services /// &lt;==> ///
+// //////////////////////////////////////////////////////////////////
+
+/* =============== /// &lt;==> Variables Declaration &lt;==> /// ================== */
+const nodemailer = require('nodemailer');
+const {StatusCodes} = require('http-status-codes');
+const schema = require('../../../Model/model');
+/* =========== /// &lt;==> End &lt;==> ===========*/
+
+/* ----------- &lt;---> verify Email &lt;---> --------- */ // *** &lt;===> Done &lt;===>  *** //
+// Assumption: Acount Must Be Not ( Deleted )
+/**
+ * This Function Used To Send Verification Mail To User.
+ *
+ * @param {string} email - username
+ *
+ * @returns Send Email To User.
+ */
+
+const verifyMail = async (name,email,token)=>{
+  try {
+
+    let transporter = nodemailer.createTransport({
+        service:'gmail',
+        auth: {
+          user: process.env.TRANSUSER, // generated ethereal user
+          pass: process.env.TRANSPASS, // generated ethereal password
+        },
+    });
+
+    let info = await transporter.sendMail({
+        from: '" 👻" &lt;Tumblr4YouCMP2023@gmail.com>', // sender address
+        to: email, // list of receivers
+        subject: "Hello ✔", // Subject line
+        html: `
+        &lt;h3> Hi ${name}&lt;/h3>
+        &lt;p>To verify your mail click &lt;a href=http://localhost:3000/user/verify/${token}>here&lt;/a>&lt;/p>
+        `, // html body
+      });    
+    }catch(error){
+        res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+            'meta': {
+              'status': 500,
+              'msg': 'INTERNAL_SERVER_ERROR',
+            },
+      
+            'res': {
+              'error': 'Error In LogIn Function Services (&lt;:>)',
+              'data': '',
+            },
+          });
+    };    
+};
+
+/* ----------- &lt;---> Check If Mail Found &lt;---> --------- */ // *** &lt;===> Done &lt;===>  *** //
+const checkMail = async(email)=>{
+  
+    const oldUserEmail = await schema.users.findOne({email, isDeleted: false});
+    if (oldUserEmail)    
+      return true;
+    else
+      return false;
+};
+
+/* ----------- &lt;---> Check If Blog Name Found &lt;---> --------- */ // *** &lt;===> Done &lt;===>  *** //
+const checkBlogName = async(name)=>{
+    const oldUserBlog = await schema.blogs.findOne({name: name});
+    if (oldUserBlog) 
+      return true;
+    else
+     return false; 
+};
+
+/* ----------- &lt;---> Create New User &lt;---> --------- */ // *** &lt;===> Done &lt;===>  *** //
+const createUser = async(email, password, blogName, age)=>{
+try {
+  const newUser = new schema.users({
+    email,
+    password,
+    name: blogName,
+    age,
+  });
+  // const data = await newUser.save();
+  await newUser.save();
+  
+} catch (error) {
+  res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+    'meta': {
+      'status': 500,
+      'msg': 'INTERNAL_SERVER_ERROR',
+    },
+
+    'res': {
+      'error': 'Error In Sign Up Function (&lt;:>)',
+      'data': '',
+    },
+  });
+};
+};
+
+/* =============== /// &lt;==> Export User Functions Services &lt;==> /// =============== */
+module.exports = {
+    verifyMail,
+    checkMail,
+    checkBlogName,
+    createUser
+};
+/* =========== /// &lt;==> End &lt;==> ===========*/</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#autoCompleteSearchDash">autoCompleteSearchDash</a></li><li><a href="global.html#blockBlog">blockBlog</a></li><li><a href="global.html#createBlog">createBlog</a></li><li><a href="global.html#createPost">createPost</a></li><li><a href="global.html#editBlog">editBlog</a></li><li><a href="global.html#followBlog">followBlog</a></li><li><a href="global.html#getDashboard">getDashboard</a></li><li><a href="global.html#getNotes">getNotes</a></li><li><a href="global.html#google">google</a></li><li><a href="global.html#isAuthorized">isAuthorized</a></li><li><a href="global.html#likePress">likePress</a></li><li><a href="global.html#login">login</a></li><li><a href="global.html#loopAndCheck">loopAndCheck</a></li><li><a href="global.html#loopObjAndCheck">loopObjAndCheck</a></li><li><a href="global.html#makePost">makePost</a></li><li><a href="global.html#mongoose">mongoose</a></li><li><a href="global.html#reblogPost">reblogPost</a></li><li><a href="global.html#removeComment">removeComment</a></li><li><a href="global.html#removeReblog">removeReblog</a></li><li><a href="global.html#retrieveBlog">retrieveBlog</a></li><li><a href="global.html#search">search</a></li><li><a href="global.html#showPost">showPost</a></li><li><a href="global.html#signUp">signUp</a></li><li><a href="global.html#unblockBlog">unblockBlog</a></li><li><a href="global.html#unfollowBlog">unfollowBlog</a></li><li><a href="global.html#verfiyAccount">verfiyAccount</a></li><li><a href="global.html#verifyMail">verifyMail</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Fri Dec 10 2021 00:42:33 GMT-0800 (Pacific Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
