@@ -75,7 +75,7 @@ const createPost = async (res, blogId, postHtml, type, state, tags) => {
 // Assumption: Edit Post Function Just Updates ( postHtml )
 const showPost = async (res, postId) => {
   try {
-    //const postId = req.params.postId;
+    // const postId = req.params.postId;
     const existingPost = await schema.Posts.findOne({_id: postId});
     if (existingPost) {
       console.log('post html: ', existingPost.postHtml);
@@ -102,7 +102,7 @@ const showPost = async (res, postId) => {
  * @returns {string} The id of the comment.
  */
 
- const makeComment = async (res, blogId, postId, text) => {
+const makeComment = async (res, blogId, postId, text) => {
   try {
     // const blogId = req.params.blogId;
     // const postId = req.params.postId;
@@ -257,7 +257,7 @@ const likePress = async (res, blogId, postId) => {
             existingNotes.save();
             res.status(StatusCodes.OK).json('Post Liked Successfully');
           }
-          //console.log(existingNotes.likes);
+          // console.log(existingNotes.likes);
         } else {
           console.log(existingPost);
           res.status(StatusCodes.BAD_REQUEST).json('Notes Not Found');
@@ -434,9 +434,9 @@ const removeReblog = async (res, postId, reblogId) => {
  * @returns {string} Array of arrays, contains 4 arrays: likesArray, commentsArray, reblogsArray, countsArray(likesCount, reblogsCount, notesCount)
  */
 
-const getNotes = async (req, res) => {
+const getNotes = async (res, postId) => {
   try {
-    const postId = req.params.postId;
+    // const postId = req.params.postId;
     const existingPost = await schema.Posts.findOne({_id: postId});
     if (existingPost) {
       const notesId = existingPost.notesId;
@@ -478,10 +478,10 @@ const getNotes = async (req, res) => {
  * @returns {string} Array of posts objects.
  */
 
-const getDashboard = async (req, res) => {
+const getDashboard = async (res, userId, blogId) => {
   try {
-    const userId = req.params.userId;
-    const blogId = req.params.blogId;
+    // const userId = req.params.userId;
+    // const blogId = req.params.blogId;
     const data = [];
     const existingUser = await schema.users.findOne({_id: userId});
     if (existingUser) {
@@ -522,8 +522,8 @@ const getDashboard = async (req, res) => {
       //     .status(StatusCodes.OK)
       //     .json('Dashboard Got Successfully');
       res
-      .status(StatusCodes.OK)
-      .json(data);
+          .status(StatusCodes.OK)
+          .json(data);
     } else {
       res
           .status(StatusCodes.BAD_REQUEST)
