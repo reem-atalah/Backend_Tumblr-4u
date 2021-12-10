@@ -49,7 +49,11 @@ router.get('/user/verify/:token', VA);
 router.get('/google',
     passport.authenticate('google', {scope: ['profile', 'email']}));
 const GO = userFunctions.google;
+const GI = userFunctions.googleInfo;
+const VGI = validateRequest(userJoi.GoogleInfoValidations);
+const IA = isAuthorized(userEndPoints.googleInfo);
 router.get('/google/callback', passport.authenticate('google'), GO);
+router.put('/google/info',VGI,IA, GI);
 
 
 /* ----------- <---> Follow <---> ----------- */

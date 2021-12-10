@@ -5,6 +5,7 @@
 /* =============== /// <==> Variables Declaration <==> /// ================== */
 const nodemailer = require('nodemailer');
 const {StatusCodes} = require('http-status-codes');
+const bcrypt = require('bcrypt');
 const schema = require('../../../Model/model');
 /* =========== /// <==> End <==> ===========*/
 
@@ -37,7 +38,9 @@ const verifyMail = async (name,email,token)=>{
         <h3> Hi ${name}</h3>
         <p>To verify your mail click <a href=http://localhost:3000/user/verify/${token}>here</a></p>
         `, // html body
-      });    
+      });
+    
+    return 'verification mail sent'
     }catch(error){
         res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
             'meta': {
@@ -83,7 +86,8 @@ try {
   });
   // const data = await newUser.save();
   await newUser.save();
-  
+  return 'Created';
+
 } catch (error) {
   res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
     'meta': {
@@ -99,11 +103,53 @@ try {
 };
 };
 
+/* ----------- <---> Create New Google User <---> --------- */ // *** <===> Done <===>  *** //
+const createGoogleUser = async(email, password)=>{
+  try {
+    let blogName = '';
+    let age = -1;
+
+    const newUser = new schema.users({
+      email,
+      password,
+      name: blogName,
+      age,
+      isDeleted:true,
+      isVerified:true
+    });
+    // const data = await newUser.save();
+    await newUser.save();
+    return 'Created';
+  
+  } catch (error) {
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+      'meta': {
+        'status': 500,
+        'msg': 'INTERNAL_SERVER_ERROR',
+      },
+  
+      'res': {
+        'error': 'Error In Sign Up Function (<:>)',
+        'data': '',
+      },
+    });
+  };
+  };
+  
+
+/* ----------- <---> Check Password <---> --------- */ // *** <===> Done <===>  *** //
+const checkPassword = async(password,oldPassword)=>{
+  const match = await bcrypt.compare(password, oldPassword);
+  return match;
+};
+
 /* =============== /// <==> Export User Functions Services <==> /// =============== */
 module.exports = {
     verifyMail,
     checkMail,
     checkBlogName,
-    createUser
+    createUser,
+    checkPassword,
+    createGoogleUser
 };
 /* =========== /// <==> End <==> ===========*/

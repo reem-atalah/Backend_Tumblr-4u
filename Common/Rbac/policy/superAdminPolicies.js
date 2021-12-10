@@ -14,6 +14,7 @@ const postEndPoints = require('../../../Modules/Posts/endPoints');
 const superAdminPolicies = [
   searchEndPt.getSearchDash,
   userEndPoints.followBlog,
+  userEndPoints.googleInfo,
   userEndPoints.unfollowBlog,
   blogEndPoints.blockBlog,
   blogEndPoints.unblockBlog,
