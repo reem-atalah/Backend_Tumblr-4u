@@ -12,6 +12,8 @@ const searchDashboard=require('./Modules/Search/Search dashborad/Routes/APIs');
 const userRoutes = require('./Modules/Users/Routes/APIs');
 const blogRoutes = require('./Modules/Blogs/Routes/APIs');
 const postRoutes = require('./Modules/Posts/Routes/APIs');
+const cors =require('cors');
+
 const passport = require('passport');
 require('./Common/passport-setup/passport-setup');
 
@@ -41,6 +43,7 @@ server.use(express.json());
 server.use(express.urlencoded({extended: false}));
 
 /* =========== /// <==> End <==> ===========*/
+server.use(cors());
 
 // seed.seedDB();
 

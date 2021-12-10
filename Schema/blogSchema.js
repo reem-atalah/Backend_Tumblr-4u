@@ -17,6 +17,10 @@ const blogSchema = new mongoose.Schema({
     required: false,
     default: 'Untitled',
   },
+  avatar: String,
+  accent: String,
+  headerImage: String,
+  background: String,
   reblog_parent_id: {
     type: 'String',
     required: false,
@@ -29,6 +33,7 @@ const blogSchema = new mongoose.Schema({
     required: false,
 
   },
+  privacy: Boolean,
   name: {
     type: 'String',
     required: true,
