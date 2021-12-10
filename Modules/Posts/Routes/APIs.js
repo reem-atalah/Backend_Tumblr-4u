@@ -1,4 +1,3 @@
-/* eslint-disable linebreak-style */
 // ////////////////////////////////////////////////////
 // / <==> /// This File Contains Post APIs /// <==> ///
 // ////////////////////////////////////////////////////
@@ -19,7 +18,7 @@ const postEndPoints = require('../endPoints');
 
 /* ----------- <---> Create Post <---> ----------- */
 router.post('/:blogId/posts/create_post',
-    // validateRequest(postJoi.createPostValidations),
+    validateRequest(postJoi.createPostValidations),
     isAuthorized(postEndPoints.createPost),
     postFunctions.createPost,
 );
@@ -27,50 +26,49 @@ router.post('/:blogId/posts/create_post',
 
 /* ----------- <---> Show Post <---> ----------- */
 router.get('/posts/:postId/show_post',
-    // validateRequest(postJoi.showPostValidations),
-    isAuthorized(postEndPoints.showPost),
+    validateRequest(postJoi.showPostValidations),
+    isAuthorized(postEndPoints.createPost),
     postFunctions.showPost,
 );
 
 /* ----------- <---> Comment on a Post <---> ----------- */
 router.put('/:blogId/:postId/comment',
-    // validateRequest(postJoi.createPostValidations),
-    isAuthorized(postEndPoints.makeComment),
+    validateRequest(postJoi.createPostValidations),
+    isAuthorized(postEndPoints.createPost),
     postFunctions.makeComment);
 
 /* ----------- <---> Like a Post <---> ----------- */
 router.put('/:blogId/:postId/like_press',
-    // validateRequest(postJoi.createPostValidations),
-    isAuthorized(postEndPoints.likePress),
+    validateRequest(postJoi.createPostValidations),
+    isAuthorized(postEndPoints.createPost),
     postFunctions.likePress);
 
 /* ----------- <---> Reblog a Post <---> ----------- */
 router.put('/:blogId/:postId/reblog_post',
-    // validateRequest(postJoi.createPostValidations),
-    isAuthorized(postEndPoints.reblogPost),
+    validateRequest(postJoi.createPostValidations),
+    isAuthorized(postEndPoints.createPost),
     postFunctions.reblogPost);
 
 /* ----------- <---> Remove a comment <---> ----------- */
 router.delete('/:postId/:commentId/remove_comment',
-    // validateRequest(postJoi.createPostValidations),
-    isAuthorized(postEndPoints.removeComment),
+    validateRequest(postJoi.createPostValidations),
+    isAuthorized(postEndPoints.createPost),
     postFunctions.removeComment);
 
 /* ----------- <---> Delete a reboged Post <---> ----------- */
 router.delete('/:postId/:reblogId/remove_reblog',
-    // validateRequest(postJoi.createPostValidations),
-    isAuthorized(postEndPoints.removeReblog),
+    validateRequest(postJoi.createPostValidations),
+    isAuthorized(postEndPoints.createPost),
     postFunctions.removeReblog);
 
 /* ----------- <---> Get Post Notes <---> ----------- */
 router.get('/posts/:postId/notes',
-    // validateRequest(postJoi.showPostValidations),
-    isAuthorized(postEndPoints.getNotes),
+    validateRequest(postJoi.showPostValidations),
+    isAuthorized(postEndPoints.createPost),
     postFunctions.getNotes);
 
 /* ----------- <---> Get User Dashboard <---> ----------- */
 router.get('/:userId/:blogId/dashboard',
-    isAuthorized(postEndPoints.getDashboard),
     postFunctions.getDashboard);
 
 /* =========== /// <==> End <==> ===========*/

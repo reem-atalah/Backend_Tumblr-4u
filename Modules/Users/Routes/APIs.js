@@ -14,6 +14,8 @@ const isAuthorized = require('../../../Common/Middlewares/isAuthorized');
 const userEndPoints = require('../endPoints');
 const passport = require('passport');
 require('../../../Common/passport-setup/passport-setup');
+const {StatusCodes} = require('http-status-codes');
+
 
 // const isAuthorized = require('../../../Common/Middlewares/isAuthorized');
 // const userEndPoints = require('../endPoints');
@@ -83,20 +85,76 @@ const ISACB=isAuthorized(userEndPoints.createBlog);
 router.get('/user/new/blog/:userId',
     VLDRQCB,
     ISACB,
-    (req, res) =>{
-      userFunctions.createBlog(req.params.userId, req.body.title);
+    (req, res)=>{
+      userFunctions.createBlog(
+          req.params.userId, req.body.title, req.body.name,
+          req.body.privacy, req.body.password).then((blog)=> {
+        if (blog) {
+          res.status(StatusCodes.CREATED).json({
+            'meta': {
+              'status': 201,
+              'msg': 'CREATED',
+            },
+            'res': {
+              'message': 'Blog Created Successfully',
+              'data': blog,
+            },
+          });
+        } else {
+          res.status(StatusCodes.BAD_REQUEST).json({
+            'meta': {
+              'status': 400,
+              'msg': 'BAD REQUEST',
+            },
+
+            'res': {
+              'message': 'URL is not available',
+              'data': '',
+            },
+          });
+        }
+      });
     });
 
 /* ----------- <---> Delete Blog <---> ----------- */
 
 const VLDRQDB=validateRequest(userJoi.DeleteBlogValidations);
 const ISADB=isAuthorized(userEndPoints.deleteBlog);
-const DB=userFunctions.deleteBlog;
+// const DB=userFunctions.deleteBlog;
 
 router.post('/user/delete/blog/:userId',
     VLDRQDB,
     ISADB,
-    DB);
+    (req, res)=>{
+      userFunctions.deleteBlog(
+          req.params.userId, req.body.title, req.body.name,
+          req.body.privacy, req.body.password).then((blog)=> {
+        if (blog) {
+          res.status(StatusCodes.CREATED).json({
+            'meta': {
+              'status': 201,
+              'msg': 'CREATED',
+            },
+            'res': {
+              'message': 'Blog Created Successfully',
+              'data': blog,
+            },
+          });
+        } else {
+          res.status(StatusCodes.BAD_REQUEST).json({
+            'meta': {
+              'status': 400,
+              'msg': 'BAD REQUEST',
+            },
+
+            'res': {
+              'message': 'URL is not available',
+              'data': '',
+            },
+          });
+        }
+      });
+    });
 
 /* =========== /// <==> End <==> ===========*/
 

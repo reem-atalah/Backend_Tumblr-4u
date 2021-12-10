@@ -1,3 +1,4 @@
+/* eslint-disable no-var */
 // /////////////////////////////////////////////////////////
 // / <==> /// This File Contains User Functions /// <==> ///
 // /////////////////////////////////////////////////////////
@@ -14,7 +15,103 @@ const schema = require('../../../Model/model');
 
 /* ----------- <---> Sign Up <---> ------- */ // *** <===> Done <===>  *** //
 // Assumption: Account Must Be Not Deleted
-const signUp = require('./signup');
+
+/**
+ * This Function Used To Register New User.
+ *
+ * @param {string} email - email
+ * @param {string} password - password
+ * @param {string} blogName - blogName
+ * @param {string} age - age
+ * @param {number} city - city
+ * @param {string} country - country
+ *
+ * @returns {object} - { Object }
+ */
+
+const signUp = async (req, res) => {
+  try {
+    const {email, password, blogName, age, city, country} = req.body;
+
+    const oldUserEmail = await schema.users.findOne({email, isDeleted: false});
+    // eslint-disable-next-line max-len
+    const oldUserBlog=await schema.users.findOne({name: blogName, isDeleted: false});
+
+    if (oldUserEmail) {
+      res.status(StatusCodes.BAD_REQUEST).json({
+        'meta': {
+          'status': 400,
+          'msg': 'BAD_REQUEST',
+        },
+
+        'res': {
+          'error': 'Email is Already Exists (<:>)',
+          'data': '',
+        },
+      });
+    // eslint-disable-next-line brace-style
+    }
+
+    // --------------- Search On Blogs Name ----------------//
+    else if (oldUserBlog) {
+      res.status(StatusCodes.BAD_REQUEST).json({
+        'meta': {
+          'status': 400,
+          'msg': 'BAD_REQUEST',
+        },
+
+        'res': {
+          'error': 'Blog Name is Already Exists (<:>)',
+          'data': '',
+        },
+      });
+    } else {
+      // eslint-disable-next-line new-cap
+      const newUser = new schema.users({
+        email,
+        password,
+        name: blogName,
+        age,
+        city,
+        country,
+      });
+      // const data = await new
+      await new
+
+      // --------------- Create Primary Blog ----------------//
+
+      // createBlog();
+
+      const token = jwt.sign({email, role: 'user'}, process.env.KEY);
+
+      userServices.verifyMail(blogName, email, token);
+
+      res.status(StatusCodes.CREATED).json({
+        'meta': {
+          'status': 201,
+          'msg': 'CREATED',
+        },
+
+        'res': {
+          'message': 'Sign Up Successfully (<:>)',
+          'data': token,
+        },
+      });
+    }
+  } catch (error) {
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+      'meta': {
+        'status': 500,
+        'msg': 'INTERNAL_SERVER_ERROR',
+      },
+
+      'res': {
+        'error': 'Error In Sign Up Function (<:>)',
+        'data': '',
+      },
+    });
+  };
+};
 
 /* ----------- <---> Sign In <---> --------- */ // *** <===> Done <===>  *** //
 // Assumption: Acount Must Be Not ( Deleted )
@@ -235,7 +332,7 @@ const followBlog = async (req, res) => {
         blog.followers.push(userId);
         blog.save();
         user.following_blogs.push(blogId);
-        user.save();
+        
         res.status(StatusCodes.OK).json({
           'meta': {
             'status': 200,
@@ -303,7 +400,7 @@ const unfollowBlog = async (req, res) => {
         blog.followers.pull(userId);
         blog.save();
         user.following_blogs.pull(blogId);
-        user.save();
+        
         res.status(StatusCodes.OK).json({
           'meta': {
             'status': 200,
@@ -358,26 +455,22 @@ const unfollowBlog = async (req, res) => {
  * @returns res status and message or error massege in case of errors.
  */
 
-const createBlog = async (req, res, userId, title, privacy, name, password) => {
+const createBlog = async (userId, title, name, privacy,
+    password='password') => {
   try {
-    // const userId=req.params.userId;
-    // const title= req.body.title;
-    // const privacy=req.body.privacy;
-    // let password='password';
-    // let isPrimary=false;
-    // let name=req.body.name;
-    // if (privacy) {
-    //   password=req.body.password;
-    // }
-    const anotherBlog= await schema.blogs.findOne({'name': name});
-    if (!anotherBlog) {
-      const user= await schema.users.findOne({'_id': userId}, 'blogsId name');
+    const created=true;
+    let isPrimary=false;
 
+    const anotherBlog= await schema.blogs.findOne({'name': name});
+    console.log(anotherBlog);
+    if (anotherBlog===null) {
+      console.log(anotherBlog);
+      const user= await schema.users.findOne({'_id': userId}, 'blogsId name');
       if (user.blogsId.length===0) {
         isPrimary=true;
         name=user.name;
       }
-      await schema.blogs.create(
+      const blog=await schema.blogs.create(
           {
             title: title,
             name: name,
@@ -395,51 +488,25 @@ const createBlog = async (req, res, userId, title, privacy, name, password) => {
             Timestamps: true,
             blockedBlogs: [],
             followers: [],
+            accent: 'default',
+            background: 'default',
+            headerImage: 'default',
+            avatar: 'default',
           },
       );
 
-      const blog= await schema.blogs.findOne({'name': name});
 
       console.log(blog._id);
       user.blogsId.push(blog._id);
-      user.save();
-      res.status(StatusCodes.CREATED).json({
-        'meta': {
-          'status': 201,
-          'msg': 'CREATED',
-        },
-
-        'res': {
-          'message': 'Blog Created Successfully',
-          'data': '',
-        },
-      });
+    //  
+       console.log(user);
+      return blog;
     } else {
-      res.status(StatusCodes.BAD_REQUEST).json({
-        'meta': {
-          'status': 400,
-          'msg': 'BAD REQUEST',
-        },
-
-        'res': {
-          'message': 'URL is not available',
-          'data': '',
-        },
-      });
+      return null;
     }
   } catch (error) {
     console.log(error.message);
-    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
-      'meta': {
-        'status': 500,
-        'msg': 'INTERNAL_SERVER_ERROR',
-      },
-
-      'res': {
-        'error': 'Error In createBlog Function',
-        'data': '',
-      },
-    });
+    // return false;
   }
 };
 
@@ -472,7 +539,7 @@ const deleteBlog = async (req, res) => {
         await schema.blogs.deleteOne({'_id': blogId});
         const user= await schema.users.findOne({'_id': userId}, 'blogsId');
         user.blogsId.pull(blogId);
-        user.save();
+        
         console.log(user.blogsId);
       }
       res.status(StatusCodes.OK).json({
