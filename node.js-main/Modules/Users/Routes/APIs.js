@@ -10,6 +10,13 @@ const userFunctions = require('../Controller/control');
 const userJoi = require('../Joi/joi');
 const cmMidwReqValidate='../../../Common/Middlewares/requestValidation';
 const validateRequest = require(cmMidwReqValidate);
+const isAuthorized = require('../../../Common/Middlewares/isAuthorized');
+const userEndPoints = require('../endPoints');
+const passport = require('passport');
+require('../../../Common/passport-setup/passport-setup');
+const {StatusCodes} = require('http-status-codes');
+
+
 // const isAuthorized = require('../../../Common/Middlewares/isAuthorized');
 // const userEndPoints = require('../endPoints');
 /* =========== /// <==> End <==> ===========*/
@@ -32,44 +39,121 @@ const SI=userFunctions.login;
 
 router.post('/login', VLDRQSI, SI);
 
+/* ----------- <---> Sign In <---> ----------- */
+const VA=userFunctions.verfiyAccount;
+router.get('/user/verify/:token', VA);
+
+/* --------- <---> Sign Up With Google <---> */ // *** <===> Done <===>  *** //
+
+// router.use(passport.initialize());
+// router.use(passport.session());
+
+router.get('/google',
+    passport.authenticate('google', {scope: ['profile', 'email']}));
+const GO = userFunctions.google;
+router.get('/google/callback', passport.authenticate('google'), GO);
+
+
 /* ----------- <---> Follow <---> ----------- */
 
 const VLDRQFB=validateRequest(userJoi.FollowBlogValidations);
-// const ISAFB=isAuthorized(userEndPoints.followBlog);
+const ISAFB=isAuthorized(userEndPoints.followBlog);
 const FB=userFunctions.followBlog;
 
 router.post('/user/follow/:userId',
     VLDRQFB,
-    // ISAFB,
+    ISAFB,
     FB);
 
 /* ----------- <---> UnFollow <---> ----------- */
 
 const VLDRQUB=validateRequest(userJoi.UnfollowBlogValidations);
-// const ISAUB=isAuthorized(userEndPoints.unfollowBlog);
+const ISAUB=isAuthorized(userEndPoints.unfollowBlog);
 const UB=userFunctions.unfollowBlog;
 
 router.post('/user/unfollow/:userId',
     VLDRQUB,
-    // ISAUB,
+    ISAUB,
     UB);
 
+/* ----------- <---> Create Blog <---> ----------- */
+
 const VLDRQCB=validateRequest(userJoi.CreateBlogValidations);
-// const ISAUB=isAuthorized(userEndPoints.unfollowBlog);
-const CB=userFunctions.createBlog;
+const ISACB=isAuthorized(userEndPoints.createBlog);
+// const CB=userFunctions.createBlog();
 
 router.get('/user/new/blog/:userId',
     VLDRQCB,
-    // ISAUB,
-    CB);
+    ISACB,
+    (req, res)=>{
+      userFunctions.createBlog(
+          req.params.userId, req.body.title, req.body.name,
+          req.body.privacy, req.body.password).then((blog)=> {
+        if (blog) {
+          res.status(StatusCodes.CREATED).json({
+            'meta': {
+              'status': 201,
+              'msg': 'CREATED',
+            },
+            'res': {
+              'message': 'Blog Created Successfully',
+              'data': blog,
+            },
+          });
+        } else {
+          res.status(StatusCodes.BAD_REQUEST).json({
+            'meta': {
+              'status': 400,
+              'msg': 'BAD REQUEST',
+            },
+
+            'res': {
+              'message': 'URL is not available',
+              'data': '',
+            },
+          });
+        }
+      });
+    });
+
+/* ----------- <---> Delete Blog <---> ----------- */
+
 const VLDRQDB=validateRequest(userJoi.DeleteBlogValidations);
-// const ISAUB=isAuthorized(userEndPoints.unfollowBlog);
-const DB=userFunctions.deleteBlog;
+const ISADB=isAuthorized(userEndPoints.deleteBlog);
+// const DB=userFunctions.deleteBlog;
 
 router.post('/user/delete/blog/:userId',
     VLDRQDB,
-    // ISAUB,
-    DB);
+    ISADB,
+    (req, res)=>{
+      userFunctions.deleteBlog(
+          req.params.userId, req.body.blogId).then((blog)=> {
+        if (blog) {
+          res.status(StatusCodes.OK).json({
+            'meta': {
+              'status': 200,
+              'msg': 'OK',
+            },
+            'res': {
+              'message': 'Blog Deleted Successfully',
+              'data': blog,
+            },
+          });
+        } else {
+          res.status(StatusCodes.NOT_FOUND).json({
+            'meta': {
+              'status': 404,
+              'msg': 'NOT FOUND',
+            },
+
+            'res': {
+              'message': 'Blog Not FOUND',
+              'data': '',
+            },
+          });
+        }
+      });
+    });
 
 /* =========== /// <==> End <==> ===========*/
 

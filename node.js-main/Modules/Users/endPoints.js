@@ -5,6 +5,8 @@
 /* ================== <-- User Modul EndPoints --> ================== */
 const followBlog = 'User:folloBlog';
 const unfollowBlog = 'User:unfollowBlog';
+const createBlog = 'User:createBlog';
+const deleteBlog = 'User:deleteBlog';
 
 const userEndPoints = {
   followBlog,

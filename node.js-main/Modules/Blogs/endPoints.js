@@ -6,6 +6,8 @@
 
 const blockBlog = 'Blog:blockBlog';
 const unblockBlog = 'Blog:unblockBlog';
+const editBlog = 'Blog:editBlog';
+const retrieveBlog = 'Blog:retrieveBlog';
 
 
 const blogEndPoints = {

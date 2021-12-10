@@ -28,11 +28,15 @@ const blogJoi = {
       title: joi.string(),
       headerImage: joi.string(),
       background: joi.string(),
+      theme: joi.string(),
+      password: joi.string(),
+      description: joi.string(),
     }),
   },
-RetrieveBlogValidations: {
+  RetrieveBlogValidations: {
     body: joi.object().required().keys({}),
   },
+
 
 };
 /* =========== /// <==> End <==> ===========*/

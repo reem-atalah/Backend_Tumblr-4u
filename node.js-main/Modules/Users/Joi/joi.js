@@ -50,7 +50,6 @@ const userJoi = {
       blogId: joi.string().required(),
     }),
   },
-  
 };
 /* =========== /// <==> End <==> ===========*/
 
