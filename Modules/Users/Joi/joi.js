@@ -14,9 +14,7 @@ const userJoi = {
       email: joi.string().required().email(),
       password: joi.string().required(),
       blogName: joi.string().required(),
-      age: joi.number().required(),
-      city: joi.string().required(),
-      country: joi.string().required(),
+      age: joi.number(),
     }),
   },
   SignInValidations: {

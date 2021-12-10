@@ -4,6 +4,8 @@
 
 /* =============== /// <==> Variables Declaration <==> /// ================== */
 const nodemailer = require('nodemailer');
+const {StatusCodes} = require('http-status-codes');
+const schema = require('../../../Model/model');
 /* =========== /// <==> End <==> ===========*/
 
 /* ----------- <---> verify Email <---> --------- */ // *** <===> Done <===>  *** //
@@ -51,10 +53,57 @@ const verifyMail = async (name,email,token)=>{
     };    
 };
 
+/* ----------- <---> Check If Mail Found <---> --------- */ // *** <===> Done <===>  *** //
+const checkMail = async(email)=>{
+  
+    const oldUserEmail = await schema.users.findOne({email, isDeleted: false});
+    if (oldUserEmail)    
+      return true;
+    else
+      return false;
+};
+
+/* ----------- <---> Check If Blog Name Found <---> --------- */ // *** <===> Done <===>  *** //
+const checkBlogName = async(name)=>{
+    const oldUserBlog = await schema.blogs.findOne({name: name});
+    if (oldUserBlog) 
+      return true;
+    else
+     return false; 
+};
+
+/* ----------- <---> Create New User <---> --------- */ // *** <===> Done <===>  *** //
+const createUser = async(email, password, blogName, age)=>{
+try {
+  const newUser = new schema.users({
+    email,
+    password,
+    name: blogName,
+    age,
+  });
+  // const data = await newUser.save();
+  await newUser.save();
+  
+} catch (error) {
+  res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+    'meta': {
+      'status': 500,
+      'msg': 'INTERNAL_SERVER_ERROR',
+    },
+
+    'res': {
+      'error': 'Error In Sign Up Function (<:>)',
+      'data': '',
+    },
+  });
+};
+};
 
 /* =============== /// <==> Export User Functions Services <==> /// =============== */
 module.exports = {
-    verifyMail
-  };
-  /* =========== /// <==> End <==> ===========*/
-  
+    verifyMail,
+    checkMail,
+    checkBlogName,
+    createUser
+};
+/* =========== /// <==> End <==> ===========*/

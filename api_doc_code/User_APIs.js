@@ -195,11 +195,10 @@
  * @apiVersion 0.0.0 
  * @apiPermission User, Admin, Super_Admin
  * 
- * @apiParam {String} Email User's email
- * @apiParam {String} Password User's password
- * @apiParam {String} Blog_Name User's blog name
- * @apiParam {String} Age User's age
- * @apiParam {String} [Stuff] User's selected stuff
+ * @apiParam {String} email User's email
+ * @apiParam {String} password User's password
+ * @apiParam {String} blogName User's blog name
+ * @apiParam {String} age User's age
  * 
  * @apiSuccessExample Response Data:
  *      HTTP/1.1 201 CREATED
@@ -224,7 +223,7 @@
  *                  },
  * 
  *          "res":{
- *                       "error": "....."
+ *                       "error": "Email is Already Exists (<:>)"
  *                       "data":""
  *                     }   
  *      }
