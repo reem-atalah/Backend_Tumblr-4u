@@ -14,7 +14,9 @@ const userJoi = {
       email: joi.string().required().email(),
       password: joi.string().required(),
       blogName: joi.string().required(),
-      age: joi.number(),
+      age: joi.number().required(),
+      city: joi.string().required(),
+      country: joi.string().required(),
     }),
   },
   SignInValidations: {
@@ -40,6 +42,20 @@ const userJoi = {
   },
 
   UnfollowBlogValidations: {
+    body: joi.object().required().keys({
+      blogId: joi.string().required(),
+    }),
+  },
+  CreateBlogValidations: {
+    body: joi.object().required().keys({
+      title: joi.string().required(),
+      name: joi.string().required(),
+      privacy: joi.boolean().required(),
+      password: joi.string(),
+
+    }),
+  },
+  DeleteBlogValidations: {
     body: joi.object().required().keys({
       blogId: joi.string().required(),
     }),

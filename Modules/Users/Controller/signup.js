@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 // /////////////////////////////////////////////////////////
 // / <==> /// This File Contains User Sign Up /// <==> ///
 // /////////////////////////////////////////////////////////
@@ -24,79 +25,77 @@ const schema = require('../../../Model/model');
  * @returns {object} - { Object }
  */
 
- const signUp = async (req, res) => {
-    try {
-      const {email, password, blogName, age} = req.body;
-      
-        const isMailFound = await userServices.checkMail(email);
-        const isBlogFound = await userServices.checkBlogName(blogName);
-        
-        if(isMailFound){
-        res.status(StatusCodes.BAD_REQUEST).json({
-          'meta': {
-            'status': 400,
-            'msg': 'BAD_REQUEST',
-          },
-  
-          'res': {
-            'error': 'Email is Already Exists (<:>)',
-            'data': '',
-          },
-        });
-      }else if(isBlogFound)
-      {
-        res.status(StatusCodes.BAD_REQUEST).json({
-          'meta': {
-            'status': 400,
-            'msg': 'BAD_REQUEST',
-          },
-  
-          'res': {
-            'error': 'Blog Name is Already Exists (<:>)',
-            'data': '',
-          },
-        });
-      }else{
-        
-        userServices.createUser(email,password,blogName,age);
+const signUp = async (req, res) => {
+  try {
+    const {email, password, blogName, age} = req.body;
 
-        //=========================================================================
-        //=========================================================================
-        //========================== --------------- Create Primary Blog -----------------========================//
-        //=========================================================================
-        //=========================================================================
+    const isMailFound = await userServices.checkMail(email);
+    const isBlogFound = await userServices.checkBlogName(blogName);
 
-        const token = jwt.sign({email, role: 'user'}, process.env.KEY);
-        userServices.verifyMail(blogName,email,token);
-  
-        res.status(StatusCodes.CREATED).json({
-          'meta': {
-            'status': 201,
-            'msg': 'CREATED',
-          },
-  
-          'res': {
-            'message': 'Sign Up Successfully (<:>)',
-            'data': token,
-          },
-        });
-      }
-    } catch (error) {
-      res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+    if (isMailFound) {
+      res.status(StatusCodes.BAD_REQUEST).json({
         'meta': {
-          'status': 500,
-          'msg': 'INTERNAL_SERVER_ERROR',
+          'status': 400,
+          'msg': 'BAD_REQUEST',
         },
-  
+
         'res': {
-          'error': 'Error In Sign Up Function (<:>)',
+          'error': 'Email is Already Exists (<:>)',
           'data': '',
         },
       });
-    };
-  };
+    } else if (isBlogFound) {
+      res.status(StatusCodes.BAD_REQUEST).json({
+        'meta': {
+          'status': 400,
+          'msg': 'BAD_REQUEST',
+        },
 
-  /* =============== /// <==> Export User signUp <==> /// =============== */
+        'res': {
+          'error': 'Blog Name is Already Exists (<:>)',
+          'data': '',
+        },
+      });
+    } else {
+      userServices.createUser(email, password, blogName, age);
+
+      // =================================================================
+      // =================================================================
+      // ==========================Create Primary Blog========================//
+      // =================================================================
+      // =================================================================
+
+      const token = jwt.sign({email, role: 'user'}, process.env.KEY);
+      userServices.verifyMail(blogName, email, token);
+
+      res.status(StatusCodes.CREATED).json({
+        'meta': {
+          'status': 201,
+          'msg': 'CREATED',
+        },
+
+        'res': {
+          'message': 'Sign Up Successfully (<:>)',
+          'data': token,
+        },
+      });
+    }
+  } catch (error) {
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+      'meta': {
+        'status': 500,
+        'msg': 'INTERNAL_SERVER_ERROR',
+      },
+
+      'res': {
+        'error': 'Error In Sign Up Function (<:>)',
+        'data': '',
+      },
+    });
+  };
+};
+
+/* =============== /// <==> Export User signUp <==> /// =============== */
 module.exports = signUp;
-  /* =========== /// <==> End <==> ===========*/
-  
+/* =========== /// <==> End <==> ===========*/
+

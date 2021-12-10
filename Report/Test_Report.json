@@ -1,5 +1,6 @@
 {
   "stats": {
+<<<<<<< HEAD
     "suites": 24,
     "tests": 26,
     "passes": 10,
@@ -10,6 +11,18 @@
     "duration": 16850,
     "testsRegistered": 26,
     "passPercent": 38.46153846153847,
+=======
+    "suites": 2,
+    "tests": 2,
+    "passes": 2,
+    "pending": 0,
+    "failures": 0,
+    "start": "2021-12-10T18:23:33.140Z",
+    "end": "2021-12-10T18:23:37.091Z",
+    "duration": 3951,
+    "testsRegistered": 2,
+    "passPercent": 100,
+>>>>>>> cc274d447895ba213135ab7df0676959e3f87be9
     "pendingPercent": 0,
     "other": 0,
     "hasOther": false,
@@ -18,7 +31,11 @@
   },
   "results": [
     {
+<<<<<<< HEAD
       "uuid": "498a1bd5-cc55-4e6c-a186-9c367f33e096",
+=======
+      "uuid": "58dee186-28eb-4832-8c90-588f8eae6b61",
+>>>>>>> cc274d447895ba213135ab7df0676959e3f87be9
       "title": "",
       "fullFile": "",
       "file": "",
@@ -27,26 +44,41 @@
       "tests": [],
       "suites": [
         {
+<<<<<<< HEAD
           "uuid": "b2c1d9fa-4a1d-4467-949a-3da29a4de6cf",
           "title": "Post APIs",
           "fullFile": "C:\\Users\\HP\\Documents\\GitHub\\Backend_Tumblr-4u\\test\\postTest.js",
           "file": "\\test\\postTest.js",
+=======
+          "uuid": "18a8dff3-7cd6-4790-bcaa-80684d7b7736",
+          "title": "UserBlog Methodes testing",
+          "fullFile": "D:\\project\\Backend_Tumblr-4u-main\\test\\test.js",
+          "file": "\\test\\test.js",
+>>>>>>> cc274d447895ba213135ab7df0676959e3f87be9
           "beforeHooks": [],
           "afterHooks": [],
           "tests": [],
           "suites": [
             {
+<<<<<<< HEAD
               "uuid": "5d07b09c-ed6e-4a04-943d-2fd486536cac",
               "title": "Post Blog Post",
               "fullFile": "C:\\Users\\HP\\Documents\\GitHub\\Backend_Tumblr-4u\\test\\postTest.js",
               "file": "\\test\\postTest.js",
+=======
+              "uuid": "951779fe-5e23-4ef4-9764-0f668d609820",
+              "title": "Create Blog Testing",
+              "fullFile": "D:\\project\\Backend_Tumblr-4u-main\\test\\test.js",
+              "file": "\\test\\test.js",
+>>>>>>> cc274d447895ba213135ab7df0676959e3f87be9
               "beforeHooks": [],
               "afterHooks": [],
               "tests": [
                 {
-                  "title": "It Should Create New Post",
-                  "fullTitle": "Post APIs Post Blog Post It Should Create New Post",
+                  "title": "should create a new blog",
+                  "fullTitle": "UserBlog Methodes testing Create Blog Testing should create a new blog",
                   "timedOut": false,
+<<<<<<< HEAD
                   "duration": 47,
                   "state": "failed",
                   "speed": null,
@@ -771,46 +803,69 @@
                   "fullTitle": "User APIs Check Mail Function It Should Return True",
                   "timedOut": false,
                   "duration": 12033,
+=======
+                  "duration": 3752,
+>>>>>>> cc274d447895ba213135ab7df0676959e3f87be9
                   "state": "passed",
                   "speed": "slow",
                   "pass": true,
                   "fail": false,
                   "pending": false,
                   "context": null,
-                  "code": "const email = 'ahmed0@gmail.com';\nuserServices.checkMail(email).then(result=>{\n expect(result).to.be.eq(true);\n done();\n}).catch(done);",
+                  "code": "const req={\n  params: {\n    userId: '61b25f1b33c23d832e6f5ba9',\n  },\n  body:\n {\n   title: 'Engineering',\n   name: 'nour99',\n   privacy: false,\n },\n};\ncreateBlog(req.params.userId, req.body.title, req.body.name,\n    req.body.privacy, 'password').then((res)=>{\n  expect(res).to.be.a('object');\n  expect(res.name).to.be.eq(req.body.name);\n  done();\n}).catch(done);",
                   "err": {},
+<<<<<<< HEAD
                   "uuid": "7588169b-1248-4316-af06-e2819b0b6ee7",
                   "parentUUID": "19b005a3-77fc-4701-bd3c-3dc322c1475f",
+=======
+                  "uuid": "b32658c7-438e-42eb-aa05-6b36b591c19a",
+                  "parentUUID": "951779fe-5e23-4ef4-9764-0f668d609820",
+>>>>>>> cc274d447895ba213135ab7df0676959e3f87be9
                   "isHook": false,
                   "skipped": false
                 },
                 {
-                  "title": "It Should Return False",
-                  "fullTitle": "User APIs Check Mail Function It Should Return False",
+                  "title": "should return false because there is already a blog with the same name",
+                  "fullTitle": "UserBlog Methodes testing Create Blog Testing should return false because there is already a blog with the same name",
                   "timedOut": false,
+<<<<<<< HEAD
                   "duration": 170,
+=======
+                  "duration": 164,
+>>>>>>> cc274d447895ba213135ab7df0676959e3f87be9
                   "state": "passed",
                   "speed": "slow",
                   "pass": true,
                   "fail": false,
                   "pending": false,
                   "context": null,
-                  "code": "const email = 'Afnan@gmail.com';\nuserServices.checkMail(email).then(result=>{\n expect(result).to.be.eq(false);\n done();\n}).catch(done);",
+                  "code": "const req={\n  params: {\n    userId: '61b25f1b33c23d832e6f5ba9',\n  },\n  body:\n       {\n         title: 'Engineering',\n         name: 'nour256',\n         privacy: false,\n       },\n};\ncreateBlog(req.params.userId, req.body.title, req.body.name,\n    req.body.privacy, 'password').then((res)=>{\n  expect(res).to.be.eq(null);\n  done();\n}).catch(done);",
                   "err": {},
+<<<<<<< HEAD
                   "uuid": "7d07ee0e-c02f-4dde-b337-82abdfc00843",
                   "parentUUID": "19b005a3-77fc-4701-bd3c-3dc322c1475f",
+=======
+                  "uuid": "0516f37b-b166-4f81-aaeb-2e256b7fa087",
+                  "parentUUID": "951779fe-5e23-4ef4-9764-0f668d609820",
+>>>>>>> cc274d447895ba213135ab7df0676959e3f87be9
                   "isHook": false,
                   "skipped": false
                 }
               ],
               "suites": [],
               "passes": [
+<<<<<<< HEAD
                 "7588169b-1248-4316-af06-e2819b0b6ee7",
                 "7d07ee0e-c02f-4dde-b337-82abdfc00843"
+=======
+                "b32658c7-438e-42eb-aa05-6b36b591c19a",
+                "0516f37b-b166-4f81-aaeb-2e256b7fa087"
+>>>>>>> cc274d447895ba213135ab7df0676959e3f87be9
               ],
               "failures": [],
               "pending": [],
               "skipped": [],
+<<<<<<< HEAD
               "duration": 12203,
               "root": false,
               "rootEmpty": false,
@@ -1045,6 +1100,9 @@
               "pending": [],
               "skipped": [],
               "duration": 295,
+=======
+              "duration": 3916,
+>>>>>>> cc274d447895ba213135ab7df0676959e3f87be9
               "root": false,
               "rootEmpty": false,
               "_timeout": 100000

@@ -356,6 +356,6 @@ module.exports = {
   deleteBlog,
   verfiyAccount,
   google,
-  googleInfo,
+  googleInfo
 };
 /* =========== /// <==> End <==> ===========*/

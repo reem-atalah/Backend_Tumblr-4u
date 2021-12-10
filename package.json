@@ -13,6 +13,7 @@
   "license": "ISC",
   "dependencies": {
     "apidoc": "^0.50.2",
+    "axios": "^0.24.0",
     "bcrypt": "^5.0.1",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
@@ -37,6 +38,8 @@
     "eslint-config-google": "^0.14.0",
     "mocha": "^9.1.3",
     "mochawesome": "^7.0.1",
-    "nodemon": "^2.0.13"
+    "nodemon": "^2.0.13",
+    "sinon": "^12.0.1",
+    "sinon-chai": "^3.7.0"
   }
 }

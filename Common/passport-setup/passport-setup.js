@@ -8,7 +8,7 @@ const GoogleStrategy = require('passport-google-oauth2').Strategy;
 
 const clientId = '633147263244-84kumvs7scjqm6ps8im6b5lvhili7hur.apps.googleusercontent.com';
 const clientSecret = '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';
-const callbackApi = 'http://localhost:3000/google/callback'
+const callbackApi= 'http://localhost:3000/google/callback'
 /*----------- End ------------*/
 
 /*--------------------------- // <=====> Passport FUnctions  <=====> // ---------------------------*/
