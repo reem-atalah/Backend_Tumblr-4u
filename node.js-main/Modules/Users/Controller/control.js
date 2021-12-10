@@ -448,6 +448,7 @@ const unfollowBlog = async (req, res) => {
  * @name createBlog
  * @description This function allows the user whose id sent in
  *              params create a new blog
+ * @param {String} userId  -id of the user
  * @param {String} title  - Title of the blog
  * @param {String} name  - URL of the blog and it should be unique
  * @param {Boolean} privacy  - Indicates wether the blog has a password or not
@@ -509,14 +510,26 @@ const createBlog = async (userId, title, name, privacy, // to be revised
 
 /* ----------- <---> Delete Blog <--->  */ // *** <===> Done <===>  *** //
 
-// not finished yet
+/**
+ *
+ * @function
+ * @name deleteBlog
+ * @description This function allows the user whose id sent in
+ *              params delete his blog
+ * @param {String} userId  - id of the user
+ * @param {String} blogId  - id of the blog to be deleted
+ * @returns {Object}  - the created deleted blog
+ */
+
 const deleteBlog = async (userId, blogId) => {
   console.log('Delete Blog');
 
   try {
     const blog= await schema.blogs.findOne({'_id': blogId});
     console.log(blog);
-    if (blog!=null) {
+    if (blog===null) {
+      return null;
+    } else {
       const users= await schema.users.find();
       const blogs= await schema.blogs.find();
 
@@ -541,11 +554,10 @@ const deleteBlog = async (userId, blogId) => {
         console.log(user.blogsId);
       }
       return blog;
-    } else {
-      return null;
     }
   } catch (error) {
     console.log(error.message);
+    return null;
   }
 };
 

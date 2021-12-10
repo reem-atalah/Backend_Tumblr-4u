@@ -128,6 +128,7 @@ router.post('/user/delete/blog/:userId',
     (req, res)=>{
       userFunctions.deleteBlog(
           req.params.userId, req.body.blogId).then((blog)=> {
+        console.log(blog);
         if (blog) {
           res.status(StatusCodes.OK).json({
             'meta': {

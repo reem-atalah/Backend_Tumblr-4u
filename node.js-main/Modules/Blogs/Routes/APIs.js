@@ -13,6 +13,8 @@ const cmMidwReqValidate='../../../Common/Middlewares/requestValidation';
 const validateRequest = require(cmMidwReqValidate);
 const isAuthorized = require('../../../Common/Middlewares/isAuthorized');
 const blogEndPoints = require('../endPoints');
+const {StatusCodes} = require('http-status-codes');
+
 /* =========== /// <==> End <==> ===========*/
 
 /* ------- <---> Block Account <---> ------- */ // *** <===> Done <===>  *** //
@@ -36,21 +38,88 @@ router.post('/blog/unblock/:blogId',
 
 const VLDRQEB=validateRequest(blogJoi.EditBlogValidations);
 const ISAEB=isAuthorized(blogEndPoints.editBlog);
-const EB=blogFunctions.editBlog;
+// const EB=blogFunctions.editBlog;
 
 router.post('/blog/edit/:blogId',
     VLDRQEB,
     ISAEB,
-    EB);
+    (req, res)=>{
+      blogFunctions.editBlog(req).then((blog)=>{
+        if (blog==='URL is not available') {
+          res.status(StatusCodes.BAD_REQUEST).json({
+            'meta': {
+              'status': 400,
+              'msg': 'BAD REQUEST',
+            },
+
+            'res': {
+              'message': 'URL is not available',
+              'data': '',
+            },
+          });
+        } else if (blog) {
+          res.status(StatusCodes.OK).json({
+            'meta': {
+              'status': 200,
+              'msg': 'OK',
+            },
+
+            'res': {
+              'message': 'OK',
+              'data': blog,
+            },
+          });
+        } else {
+          res.status(StatusCodes.NOT_FOUND).json({
+            'meta': {
+              'status': 404,
+              'msg': 'NOT FOUND',
+            },
+
+            'res': {
+              'message': 'Blog Not FOUND',
+              'data': '',
+            },
+          });
+        }
+      });
+    });
 
 const VLDRQRB=validateRequest(blogJoi.RetrieveBlogValidations);
 const ISARB=isAuthorized(blogEndPoints.retrieveBlog);
-const RB=blogFunctions.retrieveBlog;
 
 router.get('/blog/view/:blogName',
     VLDRQRB,
     ISARB,
-    RB);
+    (req, res)=>{
+      blogFunctions.retrieveBlog(req.params.blogName).then((blog)=>{
+        if (blog) {
+          res.status(StatusCodes.OK).json({
+            'meta': {
+              'status': 200,
+              'msg': 'OK',
+            },
+
+            'res': {
+              'message': 'Blog Retrieved Successfuly',
+              'data': blog,
+            },
+          });
+        } else {
+          res.status(StatusCodes.NOT_FOUND).json({
+            'meta': {
+              'status': 404,
+              'msg': 'NOT FOUND',
+            },
+
+            'res': {
+              'message': 'Blog Not FOUND',
+              'data': '',
+            },
+          });
+        }
+      });
+    });
 
 
 /* =========== /// <==> End <==> ===========*/
