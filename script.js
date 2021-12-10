@@ -33,10 +33,9 @@ dotenv.config();
 connection();
 /* =========== /// <==> End <==> ===========*/
 
-/* =========== /// <==> End <==> ===========*/
-server.use(cors());
 /* ====================== /// <==> MiddleWares <==> /// ============= */
 server.use(express.json());
+server.use(cors());
 server.use(searchDashboard);
 server.use(userRoutes);
 server.use(blogRoutes);
@@ -44,6 +43,7 @@ server.use(postRoutes);
 server.use(express.json());
 server.use(express.urlencoded({extended: false}));
 
+/* =========== /// <==> End <==> ===========*/
 
 // seed.seedDB();
 

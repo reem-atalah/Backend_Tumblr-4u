@@ -1,6 +1,6 @@
 /* eslint-disable linebreak-style */
 // /////////////////////////////////////////////////////////
-// / <==> /// This File Contains User Functions /// <==> ///
+// / <==> /// This File Contains User Sign Up /// <==> ///
 // /////////////////////////////////////////////////////////
 
 /* =============== /// <==> Variables Declaration <==> /// ================== */
