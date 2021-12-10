@@ -96,7 +96,7 @@ const nanoid = require('nanoid').nanoid;
  * @returns {object} - { Object }
  */
 const googleInfo = async(req,res)=>{
-    // try {
+    try {
         const { blogName , age } = req.body;
         const email = req.decoded.email;
 
@@ -120,19 +120,19 @@ const googleInfo = async(req,res)=>{
               'data': token,
             },
           });
-    // } catch (error) {
-    //     res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
-    //         'meta': {
-    //           'status': 500,
-    //           'msg': 'INTERNAL_SERVER_ERROR',
-    //         },
+    } catch (error) {
+        res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+            'meta': {
+              'status': 500,
+              'msg': 'INTERNAL_SERVER_ERROR',
+            },
       
-    //         'res': {
-    //           'error': 'Error In Google Info Function (<:>)',
-    //           'data': '',
-    //         },
-    //       });
-    //     }; 
+            'res': {
+              'error': 'Error In Google Info Function (<:>)',
+              'data': '',
+            },
+          });
+        }; 
 };
 
 /* =============== /// <==> Export User verfiyAccount <==> /// =============== */
