@@ -358,17 +358,17 @@ const unfollowBlog = async (req, res) => {
  * @returns res status and message or error massege in case of errors.
  */
 
- const createBlog = async (req, res) => {
+const createBlog = async (req, res, userId, title, privacy, name, password) => {
   try {
-    const userId=req.params.userId;
-    const title= req.body.title;
-    const privacy=req.body.privacy;
-    let password='password';
-    let isPrimary=false;
-    let name=req.body.name;
-    if (privacy) {
-      password=req.body.password;
-    }
+    // const userId=req.params.userId;
+    // const title= req.body.title;
+    // const privacy=req.body.privacy;
+    // let password='password';
+    // let isPrimary=false;
+    // let name=req.body.name;
+    // if (privacy) {
+    //   password=req.body.password;
+    // }
     const anotherBlog= await schema.blogs.findOne({'name': name});
     if (!anotherBlog) {
       const user= await schema.users.findOne({'_id': userId}, 'blogsId name');
@@ -455,40 +455,36 @@ const deleteBlog = async (req, res) => {
       const users= await schema.users.find();
       const blogs= await schema.blogs.find();
 
-      for(var i=0;i<users.length;i++)
-      {
+      for (var i=0; i<users.length; i++) {
         users[i].following_blogs.pull(blogId);
         users[i].save();
       }
-      for(var i=0;i<blogs.length;i++)
-      {
-        if(blogs[i]._id!=blogId)
-       {
-        blogs[i].blockedBlogs.pull(blogId);
-        blogs[i].save();
-       }
+      for (var i=0; i<blogs.length; i++) {
+        if (blogs[i]._id!=blogId) {
+          blogs[i].blockedBlogs.pull(blogId);
+          blogs[i].save();
+        }
       }
       if (blog.isPrimary===true) {
-      await schema.users.deleteOne({'_id': userId});
-      await schema.blogs.deleteOne({'_id': blogId});
-
+        await schema.users.deleteOne({'_id': userId});
+        await schema.blogs.deleteOne({'_id': blogId});
       } else {
         await schema.blogs.deleteOne({'_id': blogId});
         const user= await schema.users.findOne({'_id': userId}, 'blogsId');
         user.blogsId.pull(blogId);
         user.save();
-        console.log(user.blogsId)
+        console.log(user.blogsId);
       }
-       res.status(StatusCodes.OK).json({
-          'meta': {
-            'status': 200,
-            'msg': 'OK',
-          },
-          'res': {
-            'message': 'Blog Deleted Successfully',
-            'data': '',
-          },
-        });
+      res.status(StatusCodes.OK).json({
+        'meta': {
+          'status': 200,
+          'msg': 'OK',
+        },
+        'res': {
+          'message': 'Blog Deleted Successfully',
+          'data': '',
+        },
+      });
     } else {
       res.status(StatusCodes.NOT_FOUND).json({
         'meta': {

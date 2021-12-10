@@ -78,12 +78,14 @@ router.post('/user/unfollow/:userId',
 
 const VLDRQCB=validateRequest(userJoi.CreateBlogValidations);
 const ISACB=isAuthorized(userEndPoints.createBlog);
-const CB=userFunctions.createBlog;
+// const CB=userFunctions.createBlog();
 
 router.get('/user/new/blog/:userId',
     VLDRQCB,
     ISACB,
-    CB);
+    (req, res) =>{
+      userFunctions.createBlog(req.params.userId, req.body.title);
+    });
 
 /* ----------- <---> Delete Blog <---> ----------- */
 

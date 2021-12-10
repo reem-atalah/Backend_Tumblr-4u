@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 // ///////////////////////////////////////////////////////////
 // /// <==> /// This File Contains Search Functions /// <==> ///
 // ///////////////////////////////////////////////////////////
@@ -6,11 +7,27 @@
 //  * @module searchDashboard
 //  */
 // /* =============== /// <==> Variables Declaration <==> /// =============== */
-const schema = require('../../../../Model/model');
+// const schema = require('../../../../Model/model');
 const http = require('http');
 const express = require('express');
 const app = express();
 const server = http.createServer(app);
+const socketio = require('socket.io');
+const io = socketio(server);
+
+io.on('connection', (socket)=> {
+  console.log('new connetion ..');
+  socket.emit('message', 'welcome to chat!');
+});
+// front need to:
+// <script src="/socket.io/socket.io.js"> </script>
+{/* <script>
+    const socket =io();
+    socket.on('message', (message) => {
+      console.log(message);
+    }
+</script> */}
+
 
 /* ======= /// <==> Calling Connection Function OF Database <==> /// ======== */
 // const mongoose = require('mongoose');
