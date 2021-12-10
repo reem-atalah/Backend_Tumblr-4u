@@ -30,7 +30,7 @@ const postSchema = mongoose.Schema({
   },
   tags: {type: [String]},
   // date: { type: Date }
-  notesId: { type: String },
+  notesId: {type: String},
 
 }, {
   Timestamps: true,

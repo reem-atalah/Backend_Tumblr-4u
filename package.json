@@ -6,13 +6,15 @@
   "scripts": {
     "start": "nodemon script.js",
     "test": "mocha --reporter mochawesome --reporter-options reportDir=Report,reportFilename=Test_Report --timeout 100000 --recursive --exit",
-    "doc": "jsdoc -c jsdoc.json"
+    "doc": "jsdoc -c jsdoc.json",
+    "apiDoc": "apidoc -i api_doc_code/ -o doc/"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "apidoc": "^0.50.1",
+    "apidoc": "^0.50.2",
     "bcrypt": "^5.0.1",
+    "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "easy-rbac": "^3.1.1",
     "express": "^4.17.1",
@@ -23,7 +25,9 @@
     "jsdoc": "^3.6.7",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.0.7",
-    "nodemailer": "^6.7.2"
+    "nodemailer": "^6.7.2",
+    "passport": "^0.4.1",
+    "passport-google-oauth2": "^0.2.0"
   },
   "devDependencies": {
     "chai": "^4.3.4",
