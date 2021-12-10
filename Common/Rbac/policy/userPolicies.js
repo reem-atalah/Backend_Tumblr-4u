@@ -20,6 +20,15 @@ const userAdminPolicies = [
   postEndPoints.createPost,
   postEndPoints.editPost,
   postEndPoints.deletePost,
+  postEndPoints.getDashboard,
+  postEndPoints.getNotes,
+  postEndPoints.likePress,
+  postEndPoints.makeComment,
+  postEndPoints.reblogPost,
+  postEndPoints.removeComment,
+  postEndPoints.removeReblog,
+  postEndPoints.shareWith,
+  postEndPoints.showPost
 ];
 /* =========== <--> End <--> =========== */
 
