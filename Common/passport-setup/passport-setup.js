@@ -1,46 +1,51 @@
-/*==========================================================================================================*/
-/*======================== // <=====> This File Contains Passport Setup  <=====> // ========================*/
-/*==========================================================================================================*/
+/* eslint-disable linebreak-style */
+/* ========================================================================*/
+/* =================== // <=====> This File Contains Passport Setup  <=====>=*/
+/* ========================================================================*/
 
-/*--------------------------- // <=====> Variables Declaration  <=====> // ---------------------------*/
+/* --------------------------- // <=====> Variables Declaration  <=====> // --*/
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth2').Strategy;
 
-const clientId = '633147263244-84kumvs7scjqm6ps8im6b5lvhili7hur.apps.googleusercontent.com';
+const clientId =
+'633147263244-84kumvs7scjqm6ps8im6b5lvhili7hur.apps.googleusercontent.com';
 const clientSecret = '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';
-const callbackApi = 'http://localhost:3000/google/callback'
-/*----------- End ------------*/
+const callbackApi = 'http://localhost:3000/google/callback';
+/* ----------- End ------------*/
 
-/*--------------------------- // <=====> Passport FUnctions  <=====> // ---------------------------*/
+/* --------------------------- // <=====> Passport FUnctions  <=====> /--*/
 passport.serializeUser(function(user, done) {
-    /*
-    From the user take just the id (to minimize the cookie size) and just pass the id of the user
+  /*
+    From the user take just the id (to minimize the cookie size)
+    and just pass the id of the user
     to the done callback
     PS: You dont have to do it like this its just usually done like this
     */
-    done(null, user);
-  });
-  
+  done(null, user);
+});
+
 passport.deserializeUser(function(user, done) {
-    /*
-    Instead of user this function usually recives the id 
-    then you use the id to select the user from the db and pass the user obj to the done callback
+  /*
+    Instead of user this function usually recives the id
+    then you use the id to select the user from the db
+    and pass the user obj to the done callback
     PS: You can later access this data in any routes in: req.user
     */
-    done(null, user);
+  done(null, user);
 });
 
 
-//The Google strategy allows users to sign in to a web application using their Google account.
+// The Google strategy allows users to sign in to a web application
+// using their Google account.
 passport.use(new GoogleStrategy({
-    clientID:clientId,
-    clientSecret:clientSecret,
-    callbackURL:callbackApi,
-    passReqToCallback:true
-  },
-  function(request, accessToken, refreshToken, profile, done) {
-    // console.log(profile)
-    return done(null, profile);
-  }
+  clientID: clientId,
+  clientSecret: clientSecret,
+  callbackURL: callbackApi,
+  passReqToCallback: true,
+},
+function(request, accessToken, refreshToken, profile, done) {
+  // console.log(profile)
+  return done(null, profile);
+},
 ));
-/*----------- End ------------*/
+/* ----------- End ------------*/

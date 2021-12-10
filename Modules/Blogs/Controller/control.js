@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 
 /* ================ /// <==> Variables Declaration <==> /// ================ */
 const {StatusCodes} = require('http-status-codes');
@@ -170,7 +171,7 @@ const unblockBlog = async (req, res) => {
  */
 
 
- const editBlog=async (req, res)=>{
+const editBlog=async (req, res)=>{
   try {
     const blogId = req.params.blogId;
     const accent = req.body.accent;
@@ -179,7 +180,7 @@ const unblockBlog = async (req, res) => {
     const avatar = req.body.avatar;
     const title = req.body.title;
     const background = req.body.background;
-    let  message='OK';
+    let message='OK';
 
     const blog= await schema.blogs.findOne({'_id': blogId});
     if (blog) {
@@ -187,7 +188,7 @@ const unblockBlog = async (req, res) => {
         blog.accent=accent;
       }
 
-   
+
       if (headerImage) {
         blog.headerImage= headerImage;
       }
@@ -198,46 +199,39 @@ const unblockBlog = async (req, res) => {
         blog.avatar= avatar;
       }
       if (title) {
-      blog.title=title;
+        blog.title=title;
       }
       if (name) {
-
         const anotherBlog= await schema.blogs.findOne({'name': name});
 
-      if (!anotherBlog || anotherBlog._id==blogId) {
-
-        if (blog.isPrimary) {
-         const user= await schema.users.findOneAndUpdate({'name': blog.name});
-         user.name=name;
-         user.save();
+        if (!anotherBlog || anotherBlog._id==blogId) {
+          if (blog.isPrimary) {
+            const user=await schema.users.findOneAndUpdate({'name': blog.name});
+            user.name=name;
+            user.save();
+          }
+          blog.name=name;
+        } else {
+          message='URL is not available';
         }
-      blog.name=name;
-         }
-    else
-    {
-      message='URL is not available';
-    }
-    }
-    blog.save();
-    if(message==='OK')
- {  
-    console.log(blog);
-    res.status(StatusCodes.OK).jsonp(blog);
- }
- else
- {
-   res.status(StatusCodes.BAD_REQUEST).json({
-        'meta': {
-          'status': 400,
-          'msg': 'BAD REQUEST',
-        },
+      }
+      blog.save();
+      if (message==='OK') {
+        console.log(blog);
+        res.status(StatusCodes.OK).jsonp(blog);
+      } else {
+        res.status(StatusCodes.BAD_REQUEST).json({
+          'meta': {
+            'status': 400,
+            'msg': 'BAD REQUEST',
+          },
 
-        'res': {
-          'message': message,
-          'data': '',
-        },
-      });
- }
+          'res': {
+            'message': message,
+            'data': '',
+          },
+        });
+      }
     } else {
       res.status(StatusCodes.NOT_FOUND).json({
         'meta': {

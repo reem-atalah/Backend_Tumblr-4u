@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 // /////////////////////////////////////////////////////////
 // / <==> /// This File Contains Post Functions /// <==> ///
 // /////////////////////////////////////////////////////////
@@ -84,7 +85,7 @@ const showPost = async (req, res) => {
   };
 };
 
-/* ----------- <---> Make Comment <---> ----------- */ // *** <===> Done <===>  *** //
+/* ----------- <---> Make Comment <---> -- */ // *** <===> Done <===>  *** //
 
 /**
  * @function
@@ -97,7 +98,7 @@ const showPost = async (req, res) => {
  * @returns {string} The id of the comment.
  */
 
- const makeComment = async (req, res) => {
+const makeComment = async (req, res) => {
   try {
     const blogId = req.params.blogId;
     const postId = req.params.postId;
@@ -111,7 +112,8 @@ const showPost = async (req, res) => {
         const existingNotes = await schema.notes.findOne({_id: notesId});
         const commentingBlogTitle = existingBlog.title;
         const commentingBlogId = blogId;
-        // const newComment = new postsModel.comment({commentingBlogTitle, text}).save();
+        // const newComment = new postsModel.
+        // comment({commentingBlogTitle, text}).save();
         if (existingNotes) {
           const comment = {
             commentingBlogId,
@@ -119,13 +121,14 @@ const showPost = async (req, res) => {
             text,
           };
           // console.log(comment);
-          // postsModel.notes.updateOne({_id: notesId}, {$push: {comments: comment}}); //leeeh msh zabtaaa???
+          // postsModel.notes.updateOne({_id: notesId},
+          // {$push: {comments: comment}}); //leeeh msh zabtaaa???
           const lenBefore = existingNotes.comments.length;
           existingNotes.comments.push(comment);
           existingNotes.save();
           const commentsArrayAfter = existingNotes.comments;
           const commentObj = commentsArrayAfter[lenBefore];
-          var commentId = commentObj._id;
+          const commentId = commentObj._id;
           // console.log('comment id: ', commentId);
           // console.log(existingPost);
         } else {
@@ -136,7 +139,8 @@ const showPost = async (req, res) => {
           // newNotes.save();
           // let notesId = newNotes._id;
           // existingPost.notesId.aggregate(notesId);
-          // postsModel.posts.aggregate({_id: postId}, {$addFields: {notesId: notesId}});
+          // postsModel.posts.aggregate({_id: postId},
+          // {$addFields: {notesId: notesId}});
           // existingPost.save();
           // console.log(existingPost);
 
@@ -145,7 +149,8 @@ const showPost = async (req, res) => {
           // const newNotes = new postsModel.notes({comments}).save();
           // existingPost.notesId.set(notesId);
           // existingPost.save();
-          // leh el push wl pull bynf3o m3 el arrays bs? lw 3yza tyb a set field 3ady!?
+          // leh el push wl pull bynf3o m3 el arrays bs?
+          // lw 3yza tyb a set field 3ady!?
           // wlla 3shan mt3mlsh w2t el creation?
         }
 
@@ -164,7 +169,7 @@ const showPost = async (req, res) => {
   }
 };
 
-/* ----------- <---> Loop on an array and check if an element exists <---> ----------- */ // *** <===> Done <===>  *** //
+/* Loop on an array and check if an element exists*/ // <===> Done <===>  *** //
 
 /**
  * @function
@@ -188,7 +193,7 @@ const loopAndCheck = (arr, element) => {
   return exist;
 };
 
-/* ----------- <---> Loop on Object in Array of Objects and check if Id exists <---> ----------- */ // *** <===> Done <===>  *** //
+// Loop on Object in Array of Objects and check if Id exists*/ <===> Done <===>
 
 /**
  * @function
@@ -214,7 +219,7 @@ const loopObjAndCheck = (arr, element) => {
   return [exist, pos];
 };
 
-/* ----------- <---> Press Like of a Post (Like or Unlike) <---> ----------- */ // *** <===> Done <===>  *** //
+// <---> Press Like of a Post (Like or Unlike) <--->*** <===> Done <===>  *** //
 // Like should be done only one time by one blog
 
 /**
@@ -252,7 +257,7 @@ const likePress = async (req, res) => {
             existingNotes.save();
             res.status(StatusCodes.OK).json('Post Liked Successfully');
           }
-          //console.log(existingNotes.likes);
+          // console.log(existingNotes.likes);
         } else {
           console.log(existingPost);
           res.status(StatusCodes.BAD_REQUEST).json('Notes Not Found');
@@ -270,7 +275,7 @@ const likePress = async (req, res) => {
   }
 };
 
-/* ----------- <---> Reblog a Post <---> ----------- */ // *** <===> Done <===>  *** //
+/* ----------- <---> Reblog a Post <---> */ // *** <===> Done <===>  *** //
 
 /**
  * @function
@@ -305,7 +310,7 @@ const reblogPost = async (req, res) => {
           existingNotes.save();
           const reblogsArrayAfter = existingNotes.reblogs;
           const reblogObj = reblogsArrayAfter[lenBefore];
-          var reblogId = reblogObj._id;
+          const reblogId = reblogObj._id;
         } else {
           console.log(existingPost);
           res.status(StatusCodes.BAD_REQUEST).json('Notes Not Found');
@@ -325,7 +330,7 @@ const reblogPost = async (req, res) => {
   }
 };
 
-/* ----------- <---> Remove Comment <---> ----------- */ // *** <===> Done <===>  *** //
+/* ----------- <---> Remove Comment <---> */ // *** <===> Done <===>  *** //
 
 /**
  * @function
@@ -371,7 +376,7 @@ const removeComment = async (req, res) => {
   };
 };
 
-/* ----------- <---> Remove Reblog <---> ----------- */ // *** <===> Done <===>  *** //
+/* ----------- <---> Remove Reblog <---> */ // *** <===> Done <===>  *** //
 
 /**
  * @function
@@ -418,7 +423,7 @@ const removeReblog = async (req, res) => {
   };
 };
 
-/* ----------- <---> Get Post Notes <---> ----------- */ // *** <===> Done <===>  *** //
+/* ----------- <---> Get Post Notes <---> */ // *** <===> Done <===>  *** //
 
 /**
  * @function
@@ -445,7 +450,8 @@ const getNotes = async (req, res) => {
         const commentsCount = commentsArray.length;
         const notesCount = likesCount + commentsCount + reblogsCount;
         const countsArray = [likesCount, reblogsCount, notesCount];
-        const notes = [likesArray, commentsArray, reblogsArray, countsArray]; // array of arrays
+        const notes = [likesArray,
+          commentsArray, reblogsArray, countsArray]; // array of arrays
         console.log('notes array: ', notes);
         res.status(StatusCodes.OK).json(notes);
       } else {
@@ -461,7 +467,7 @@ const getNotes = async (req, res) => {
   };
 };
 
-/* ----------- <---> Get User Dashboard <---> ----------- */ // *** <===> Done <===>  *** //
+/* ----------- <---> Get User Dashboard <---> */ // *** <===> Done <===>  *** //
 
 /**
  * @function
@@ -497,11 +503,13 @@ const getDashboard = async (req, res) => {
       // checking all follwed blogs to get their posts
       const followingBlogsArray = existingUser.following_blogs;
       for (let i=0; i<followingBlogsArray.length; i++) {
-        const existingFoBlog = await schema.blogs.findOne({_id: followingBlogsArray[i]});
+        const existingFoBlog = await schema.blogs
+            .findOne({_id: followingBlogsArray[i]});
         if (existingFoBlog) {
           const foPostsArray = existingFoBlog.postsIds;
           for (let j=0; j<foPostsArray.length; j++) {
-            const existingFoPost = await schema.Posts.findOne({_id: foPostsArray[j]});
+            const existingFoPost = await schema.Posts
+                .findOne({_id: foPostsArray[j]});
             if (existingFoPost) {
               data.push(existingFoPost);
             }
@@ -517,8 +525,8 @@ const getDashboard = async (req, res) => {
       //     .status(StatusCodes.OK)
       //     .json('Dashboard Got Successfully');
       res
-      .status(StatusCodes.OK)
-      .json(data);
+          .status(StatusCodes.OK)
+          .json(data);
     } else {
       res
           .status(StatusCodes.BAD_REQUEST)

@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 // ///////////////////////////////////////////////////////////
 // // <==> This File Contains All User Admin Role Policies <==> ////
 // ///////////////////////////////////////////////////////////
@@ -28,7 +29,7 @@ const userAdminPolicies = [
   postEndPoints.removeComment,
   postEndPoints.removeReblog,
   postEndPoints.shareWith,
-  postEndPoints.showPost
+  postEndPoints.showPost,
 ];
 /* =========== <--> End <--> =========== */
 
