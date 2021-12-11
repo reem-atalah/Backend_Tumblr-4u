@@ -109,11 +109,11 @@ const makeComment = async (res, blogId, postId, text) => {
     // const text = req.body.text;
     const existingBlog = await schema.blogs.findOne({_id: blogId});
     const existingPost = await schema.Posts.findOne({_id: postId});
-    const notesId = existingPost.notesId;
-    // const notesId = req.params.notesId;
-    const existingNotes = await schema.notes.findOne({_id: notesId});
     if (existingBlog) {
       if (existingPost) {
+        const notesId = existingPost.notesId;
+        // const notesId = req.params.notesId;
+        const existingNotes = await schema.notes.findOne({_id: notesId});
         const commentingBlogTitle = existingBlog.title;
         const commentingBlogId = blogId;
         // const newComment = new postsModel.comment({commentingBlogTitle, text}).save();
@@ -206,9 +206,9 @@ const loopAndCheck = (arr, element) => {
  * @returns {string} Boolean indicates whether the element exists or not.
  */
 
-const loopObjAndCheck = (arr, element, pos) => {
+const loopObjAndCheck = (arr, element) => {
   let exist = 0;
-  // let pos = 0;
+  let pos = 0;
   if (arr.length) {
     for (let i = 0; i < arr.length; i++) {
       if (arr[i]._id.toString() === element) {
@@ -217,7 +217,7 @@ const loopObjAndCheck = (arr, element, pos) => {
       }
     }
   }
-  return exist;
+  return [exist, pos];
 };
 
 /* ----------- <---> Press Like of a Post (Like or Unlike) <---> ----------- */ // *** <===> Done <===>  *** //
@@ -239,10 +239,10 @@ const likePress = async (res, blogId, postId) => {
     // const postId = req.params.postId;
     const existingBlog = await schema.blogs.findOne({_id: blogId});
     const existingPost = await schema.Posts.findOne({_id: postId});
-    const notesId = existingPost.notesId;
-    const existingNotes = await schema.notes.findOne({_id: notesId});
     if (existingBlog) {
       if (existingPost) {
+        const notesId = existingPost.notesId;
+        const existingNotes = await schema.notes.findOne({_id: notesId});
         if (existingNotes) {
           console.log('likes array: ', existingNotes.likes);
           const likesArray = existingNotes.likes;
@@ -251,20 +251,18 @@ const likePress = async (res, blogId, postId) => {
           console.log('exist?= ', exist);
           if (exist) {
             existingNotes.likes.pull(blogId);
+            existingNotes.save();
+            res.status(StatusCodes.OK).json('Post Liked Successfully');
           } else {
             existingNotes.likes.push(blogId);
+            existingNotes.save();
+            res.status(StatusCodes.OK).json('Post Unliked Successfully');
           }
-<<<<<<< HEAD
-          // console.log(existingNotes.likes);
-=======
-          existingNotes.save();
-          console.log(existingNotes.likes);
->>>>>>> 44aa4ff482178364b277995a39e06b1dec334aa8
+          //console.log(existingNotes.likes);
         } else {
           console.log(existingPost);
           res.status(StatusCodes.BAD_REQUEST).json('Notes Not Found');
         }
-        res.status(StatusCodes.OK).json('Post Liked Successfully');
       } else {
         res.status(StatusCodes.BAD_REQUEST).json('Post Not Found');
       }
@@ -274,7 +272,7 @@ const likePress = async (res, blogId, postId) => {
   } catch (error) {
     res
         .status(StatusCodes.INTERNAL_SERVER_ERROR)
-        .json('Error in Make Comment Function');
+        .json('Error in Press Like Function');
   }
 };
 
@@ -298,10 +296,10 @@ const reblogPost = async (res, blogId, postId, text) => {
     // const text = req.body.text;
     const existingBlog = await schema.blogs.findOne({_id: blogId});
     const existingPost = await schema.Posts.findOne({_id: postId});
-    const notesId = existingPost.notesId;
-    const existingNotes = await schema.notes.findOne({_id: notesId});
     if (existingBlog) {
       if (existingPost) {
+        const notesId = existingPost.notesId;
+        const existingNotes = await schema.notes.findOne({_id: notesId});
         const rebloggingId = blogId;
         if (existingNotes) {
           const reblog = {
@@ -329,7 +327,7 @@ const reblogPost = async (res, blogId, postId, text) => {
   } catch (error) {
     res
         .status(StatusCodes.INTERNAL_SERVER_ERROR)
-        .json('Error in Make Comment Function');
+        .json('Error in Reblog Post Function');
   }
 };
 
@@ -356,8 +354,8 @@ const removeComment = async (res, postId, commentId) => {
       if (existingNotes) {
         const commentsArray = existingNotes.comments;
         console.log('comments array: ', commentsArray);
-        const pos = 0;
-        const exist = loopObjAndCheck(commentsArray, commentId, pos);
+        const exist = loopObjAndCheck(commentsArray, commentId)[0];
+        const pos = loopObjAndCheck(commentsArray, commentId)[1];
         if (exist) {
           existingNotes.comments.pull(commentsArray[pos]);
         } else {
@@ -402,8 +400,8 @@ const removeReblog = async (res, postId, reblogId) => {
       if (existingNotes) {
         const reblogsArray = existingNotes.reblogs;
         console.log('reblogs array: ', reblogsArray);
-        const pos = 0;
-        const exist = loopObjAndCheck(reblogsArray, reblogId, pos);
+        const exist = loopObjAndCheck(reblogsArray, reblogId)[0];
+        const pos = loopObjAndCheck(reblogsArray, reblogId)[1];
         console.log('off', exist);
         if (exist) {
           existingNotes.reblogs.pull(reblogsArray[pos]);
