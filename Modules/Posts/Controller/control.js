@@ -95,7 +95,7 @@ const showPost = async (res, postId) => {
 
 /**
  * @function
- * @name makePost
+ * @name makeComment
  * @description A blog makes a comment on a blog post.
  * @param {string} blogId - Id of the blog making the comment.
  * @param {string} postId - Id of the post to make the comment on.
