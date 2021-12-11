@@ -1,20 +1,30 @@
-// /* eslint-disable linebreak-style */
-// // ///////////////////////////////////////////////////////////////////
-// // / <==> /// This File Is The Unit Testing OF Search APIS  /// <==> ///
-// // ///////////////////////////////////////////////////////////////////
+/* eslint-disable linebreak-style */
+// ///////////////////////////////////////////////////////////////////
+// / <==> /// This File Is The Unit Testing OF Search APIS  /// <==> ///
+// ///////////////////////////////////////////////////////////////////
 
-// // ================ /// <==> Variables Declaration <==> /// ================
-// const chai = require('chai');
-// const chaiHttp = require('chai-http');
+// ================ /// <==> Variables Declaration <==> /// ================
+const chai = require('chai');
+const chaiHttp = require('chai-http');
 // const server = require('../script');
+const search=require('../Modules/Search/Search dashborad/Controller/control');
 
-// chai.should();
-// chai.use(chaiHttp);
-// // =========== /// <==> End <==> ===========*/
+const expect=chai.expect;
 
-// // ================ /// <==> Unit Testing for Search <==> /// ===============
+chai.should();
+chai.use(chaiHttp);
+
+// =========== /// <==> Database Connection <==> ===========*/
+
+const dotenv = require('dotenv');
+const connection = require('../Configurations/configuration');
+dotenv.config();
+connection();
+// =========== /// <==> End <==> ===========*/
+
+// ================ /// <==> Unit Testing for Search <==> /// ===============
 describe('Search APIs', () => {
-// // ----------------// <=====> Search for hashtags <=====> //--------------//
+// ----------------// <=====> Search for hashtags <=====> //--------------//
 
   describe('Search Dashboard Testing', () => {
     it('It Should get element of hashtags in posts', (done) => {

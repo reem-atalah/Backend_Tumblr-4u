@@ -23,7 +23,7 @@ describe('UserBlog Methodes testing', () => {
         body:
          {
            title: 'Engineering',
-           name: 'reham11',
+           name: 'reema2',
            privacy: false,
          },
       };
@@ -62,7 +62,7 @@ describe('UserBlog Methodes testing', () => {
         },
         body:
            {
-             blogId: '61b3b9cdae29eb940a03a345',
+             blogId: '61b51633be867ae625b47fc1',
            },
       };
       userFunctions.deleteBlog(req.params.userId, req.body.blogId).then((res)=>{

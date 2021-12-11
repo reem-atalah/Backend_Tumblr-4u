@@ -179,9 +179,9 @@ const loopAndCheck = (arr, element) => {
  * @returns {string} Boolean indicates whether the element exists or not.
  */
 
-const loopObjAndCheck = (arr, element, pos) => {
+const loopObjAndCheck = (arr, element) => {
   let exist = 0;
-  // let pos = 0;
+  let pos = 0;
   if (arr.length) {
     for (let i = 0; i < arr.length; i++) {
       if (arr[i]._id.toString() === element) {
@@ -190,7 +190,7 @@ const loopObjAndCheck = (arr, element, pos) => {
       }
     }
   }
-  return exist;
+  return [exist,pos];
 };
 
 /* ----------- <---> Press Like of a Post (Like or Unlike) <---> ----------- */ // *** <===> Done <===>  *** //
