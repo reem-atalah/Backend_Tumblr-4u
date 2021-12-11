@@ -135,7 +135,7 @@ const makeComment = async (res, blogId, postId, text) => {
           existingNotes.save();
           const commentsArrayAfter = existingNotes.comments;
           const commentObj = commentsArrayAfter[lenBefore];
-          const commentId = commentObj._id;
+          var commentId = commentObj._id;
           // console.log('comment id: ', commentId);
           // console.log(existingPost);
         } else {
@@ -259,11 +259,11 @@ const likePress = async (res, blogId, postId) => {
           if (exist) {
             existingNotes.likes.pull(blogId);
             existingNotes.save();
-            res.status(StatusCodes.OK).json('Post Liked Successfully');
+            res.status(StatusCodes.OK).json('Post Unliked Successfully');
           } else {
             existingNotes.likes.push(blogId);
             existingNotes.save();
-            res.status(StatusCodes.OK).json('Post Unliked Successfully');
+            res.status(StatusCodes.OK).json('Post Liked Successfully');
           }
           //console.log(existingNotes.likes);
         } else {
@@ -318,7 +318,7 @@ const reblogPost = async (res, blogId, postId, text) => {
           existingNotes.save();
           const reblogsArrayAfter = existingNotes.reblogs;
           const reblogObj = reblogsArrayAfter[lenBefore];
-          const reblogId = reblogObj._id;
+          var reblogId = reblogObj._id;
         } else {
           console.log(existingPost);
           res.status(StatusCodes.BAD_REQUEST).json('Notes Not Found');
