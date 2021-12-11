@@ -39,9 +39,10 @@ const SI=userFunctions.login;
 
 router.post('/login', VLDRQSI, SI);
 
-/* ----------- <---> Sign In <---> ----------- */
+/* ----------- <---> verfiy Account <---> ----------- */
 const VA=userFunctions.verfiyAccount;
 router.get('/user/verify/:token', VA);
+
 
 /* --------- <---> Sign Up With Google <---> */ // *** <===> Done <===>  *** //
 
@@ -52,6 +53,10 @@ router.get('/google',
     passport.authenticate('google', {scope: ['profile', 'email']}));
 const GO = userFunctions.google;
 router.get('/google/callback', passport.authenticate('google'), GO);
+
+/* ----------- <---> android Sign Up With Google <---> ----------- */
+const GSA=userFunctions.androidSignUpWithGoogle;
+router.get('/androidSignUpWithGoogle', GSA);
 
 /* ----------- <---> Follow <---> ----------- */
 
