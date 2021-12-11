@@ -2,13 +2,12 @@
 
 /* ================ /// <==> Variables Declaration <==> /// ================ */
 const {StatusCodes} = require('http-status-codes');
-const blogs = require('../../../Model/model');
+const schema = require('../../../Model/model');
 
 /* =========== /// <==> End <==> ===========*/
 
 
 /* ==================== /// <==> Blog Functions <==> /// ==================== */
-
 
 /**
  *
@@ -32,11 +31,11 @@ const blockBlog = async (req, res) => {
     const blogId = req.params.blogId;
     const blockedBlogId = req.body.blockedBlogId;
 
-    await blogs.blogs.findOne({'_id': blockedBlogId},
+    await schema.blogs.findOne({'_id': blockedBlogId},
         function(err, blockedBlog) {
           // if (err) return handleError(err);
           if (blockedBlog) {
-            blogs.blogs.findOne({'_id': blogId},
+            schema.blogs.findOne({'_id': blogId},
                 'blockedBlogs',
                 function(err, blog) {
                   if (err) return handleError(err);
@@ -107,11 +106,11 @@ const unblockBlog = async (req, res) => {
     const blogId = req.params.blogId;
     const unblockedBlogId = req.body.unblockedBlogId;
 
-    await blogs.blogs.findOne({'_id': unblockedBlogId},
+    await schema.blogs.findOne({'_id': unblockedBlogId},
         function(err, unblockedBlog) {
           // if (err) return handleError(err);
           if (unblockedBlog) {
-            blogs.blogs.findOne({'_id': blogId},
+            schema.blogs.findOne({'_id': blogId},
                 'blockedBlogs',
                 function(err, blog) {
                   if (err) return handleError(err);
@@ -180,10 +179,24 @@ const editBlog=async (req, res)=>{
     const avatar = req.body.avatar;
     const title = req.body.title;
     const background = req.body.background;
+
+    const password=req.body.password;
+    const theme=req.body.theme;
+    const description=req.body.description;
+
     let message='OK';
 
     const blog= await schema.blogs.findOne({'_id': blogId});
     if (blog) {
+      if (password) {
+        blog.password=password;
+      }
+      if (theme) {
+        blog.theme=theme;
+      }
+      if (theme) {
+        blog.description=description;
+      }
       if (accent) {
         blog.accent=accent;
       }
@@ -206,10 +219,17 @@ const editBlog=async (req, res)=>{
 
         if (!anotherBlog || anotherBlog._id==blogId) {
           if (blog.isPrimary) {
+<<<<<<< HEAD
             const user=await schema.users.findOneAndUpdate({'name': blog.name});
             user.name=name;
             user.save();
           }
+=======
+            const user= await schema.users
+                .findOneAndUpdate({'name': blog.name});
+            user.name=name;
+                      }
+>>>>>>> 90e9feb83386f7302313990c3b2b08267b71dce9
           blog.name=name;
         } else {
           message='URL is not available';
@@ -218,7 +238,21 @@ const editBlog=async (req, res)=>{
       blog.save();
       if (message==='OK') {
         console.log(blog);
+<<<<<<< HEAD
         res.status(StatusCodes.OK).jsonp(blog);
+=======
+        res.status(StatusCodes.OK).json({
+          'meta': {
+            'status': 200,
+            'msg': 'OK',
+          },
+
+          'res': {
+            'message': message,
+            'data': blog,
+          },
+        });
+>>>>>>> 90e9feb83386f7302313990c3b2b08267b71dce9
       } else {
         res.status(StatusCodes.BAD_REQUEST).json({
           'meta': {
@@ -275,7 +309,17 @@ const retrieveBlog=async (req, res)=>{
     const blogName = req.params.blogName;
     const blog= await schema.blogs.findOne({'name': blogName});
     if (blog) {
-      res.status(StatusCodes.OK).jsonp(blog);
+      res.status(StatusCodes.OK).json({
+        'meta': {
+          'status': 200,
+          'msg': 'OK',
+        },
+
+        'res': {
+          'message': 'Blog Retrieved Successfuly',
+          'data': blog,
+        },
+      });
     } else {
       res.status(StatusCodes.NOT_FOUND).json({
         'meta': {

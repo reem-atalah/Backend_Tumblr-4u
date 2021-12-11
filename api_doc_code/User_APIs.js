@@ -246,8 +246,8 @@
  * @apiVersion 0.0.0 
  * @apiPermission User, Admin, Super_Admin
  * 
- * @apiParam {String} Email User's email
- * @apiParam {String} Password User's password
+ * @apiParam {String} email User's email
+ * @apiParam {String} password User's password
  *
  * @apiSuccessExample Response Data:
  *      HTTP/1.1 200 OK
@@ -272,7 +272,7 @@
  *                  },
  * 
  *          "res":{
- *                       "error": "....."
+ *                       "error": InCorrect Password (<:>)
  *                       "data":""
  *                     }   
  *      }
@@ -288,15 +288,13 @@
 */
 
 /**
- * @api {get} /google/login Log In Using Google.
+ * @api {get} /google Log In Using Google.
  * 
  * @apiName googleLogin
  * @apiGroup User
  * @apiVersion 0.0.0 
  * @apiPermission User, Admin, Super_Admin
  * 
- * @apiParam {String} Email User's email
- * @apiParam {String} Password User's password
  *
  * @apiSuccessExample Response Data:
  *      HTTP/1.1 200 OK
@@ -313,21 +311,72 @@
  *      }
  * 
  * @apiErrorExample Response Error:
- *      HTTP/1.1 400 BAD REQUEST
+ *      HTTP/1.1 500 INTERNAL_SERVER_ERROR
  *      {
  *          "meta": {
- *                       "status": 201,
- *                       "msg": "BAD_REQUEST"
+ *                       "status": 500,
+ *                       "msg": "INTERNAL_SERVER_ERROR"
  *                  },
  * 
  *          "res":{
- *                       "error": "....."
+ *                       "error": "Error In Sign Up With Google Function (<:>)"
  *                       "data":""
  *                     }   
  *      }
  */
 
 /*=================== End =====================*/
+
+
+/*
+===================== ///////// <---------> =========== <---------> ///////// =====================> 
+===================== ///////// <---------> Google Info <---------> ///////// =====================> 
+===================== ///////// <---------> =========== <---------> ///////// =====================> 
+*/
+
+/**
+ * @api {put} /google/info Log In Using Google.
+ * 
+ * @apiName googleLogin
+ * @apiGroup User
+ * @apiVersion 0.0.0 
+ * @apiPermission User, Admin, Super_Admin
+ * 
+ * @apiParam {String} blogName User's blogName.
+ * @apiParam {String} age User's age.
+ * @apiParam {String} Token User's Secret Code.
+ *
+ * @apiSuccessExample Response Data:
+ *      HTTP/1.1 200 OK
+ *      {
+ *          "meta": {
+ *                       "status": 200,
+ *                       "msg": "OK"
+ *                  },
+ * 
+ *          "response":{
+ *                       "message": "User Log In With Google Successfully (<:>)"
+ *                       "data":token
+ *                     }   
+ *      }
+ * 
+ * @apiErrorExample Response Error:
+ *      HTTP/1.1 500 INTERNAL_SERVER_ERROR
+ *      {
+ *          "meta": {
+ *                       "status": 500,
+ *                       "msg": "INTERNAL_SERVER_ERROR"
+ *                  },
+ * 
+ *          "res":{
+ *                       "error": "Error In Google Info Function (<:>)"
+ *                       "data":""
+ *                     }   
+ *      }
+ */
+
+/*=================== End =====================*/
+
 
 /*
 ===================== ///////// <---------> =========================== <---------> ///////// =====================> 
@@ -512,9 +561,9 @@
 */
 
 /**
- * @api {put} /user/emailVerification/:Token Email Verification.
+ * @api {put} /user/verify/:token Email Verification.
  * 
- * @apiName emailVerification
+ * @apiName accountVerification
  * @apiGroup User
  * @apiVersion 0.0.0 
  * @apiPermission User, Admin, Super_Admin
@@ -527,19 +576,24 @@
  *                       "msg": "OK"
  *                  },
  * 
- *          "response":{
- *                       "message": "Email Verifid Successfully"
+ *          "res":{
+ *                       "message": "Account Verified Successfully (<:>)",
+ *                       "data": ""
  *                     }   
  *      }
  * 
  * @apiErrorExample Response Error:
  *      HTTP/1.1 400 BAD REQUEST
  *      {
- *          "error": "Error In Input Data"
- *      }
- *      HTTP/1.1 401 Unauthorized
- *      {
- *          "error": "User Is Unauthorized"
+ *          "meta": {
+ *                       "status": 201,
+ *                       "msg": "BAD_REQUEST"
+ *                  },
+ * 
+ *          "res":{
+ *                       "error": Account Is Not Found or Already Verified (<:>)
+ *                       "data":""
+ *                     }   
  *      }
  */
 

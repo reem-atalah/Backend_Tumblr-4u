@@ -24,13 +24,13 @@ const schema = require('../../../Model/model');
  * @returns {Object} res status and message.
  */
 
-const createPost = async (req, res) => {
+const createPost = async (res, blogId, postHtml, type, state, tags) => {
   try {
-    const blogId = req.params.blogId;
-    const postHtml = req.body.postHtml;
-    const type = req.body.type;
-    const state = req.body.state;
-    const tags = req.body.tags;
+    // const blogId = req.params.blogId;
+    // const postHtml = req.body.postHtml;
+    // const type = req.body.type;
+    // const state = req.body.state;
+    // const tags = req.body.tags;
     // let date = Date.now;
 
     // const blogValidation = async(blogId) => {
@@ -43,8 +43,14 @@ const createPost = async (req, res) => {
 
     if (existingBlog) {
       console.log('blog id: ', blogId, 'blog: ', existingBlog);
-      newPost = new schema.Posts({blogId, postHtml, type, state, tags});
+      const newNotes = new schema.notes();
+      newNotes.save();
+      const notesId = newNotes._id;
+      newPost= new schema.Posts({blogId, postHtml, type, state, tags, notesId});
       newPost = await newPost.save();
+      existingBlog.postsIds.push(newPost._id);
+      // el blog el b test 3lah kan lesa msh 3ndo el field, et3mlo create fl db
+      existingBlog.save();
       res.status(StatusCodes.OK).json('Post Created Successfully (<:>)');
     } else {
       console.log('blog not found');
@@ -69,9 +75,9 @@ const createPost = async (req, res) => {
 
 /* ----------- <---> Show Post <---> ---- */ // *** <===> Done <===>  *** //
 // Assumption: Edit Post Function Just Updates ( postHtml )
-const showPost = async (req, res) => {
+const showPost = async (res, postId) => {
   try {
-    const postId = req.params.postId;
+    // const postId = req.params.postId;
     const existingPost = await schema.Posts.findOne({_id: postId});
     if (existingPost) {
       console.log('post html: ', existingPost.postHtml);
@@ -98,18 +104,19 @@ const showPost = async (req, res) => {
  * @returns {string} The id of the comment.
  */
 
-const makeComment = async (req, res) => {
+// const makeComment = async (req, res) => {
+const makeComment = async (res, blogId, postId, text) => {
   try {
-    const blogId = req.params.blogId;
-    const postId = req.params.postId;
-    const text = req.body.text;
+    // const blogId = req.params.blogId;
+    // const postId = req.params.postId;
+    // const text = req.body.text;
     const existingBlog = await schema.blogs.findOne({_id: blogId});
     const existingPost = await schema.Posts.findOne({_id: postId});
+    const notesId = existingPost.notesId;
+    // const notesId = req.params.notesId;
+    const existingNotes = await schema.notes.findOne({_id: notesId});
     if (existingBlog) {
       if (existingPost) {
-        const notesId = existingPost.notesId;
-        // const notesId = req.params.notesId;
-        const existingNotes = await schema.notes.findOne({_id: notesId});
         const commentingBlogTitle = existingBlog.title;
         const commentingBlogId = blogId;
         // const newComment = new postsModel.
@@ -201,13 +208,14 @@ const loopAndCheck = (arr, element) => {
  * @description Loop on Object in Array of Objects and check if Id exists.
  * @param {array} arr - Array to loop on.
  * @param {string} element - Element to look for.
+ * @param {number} pos - Position of the found element if found.
  *
- * @returns {string} Array of Boolean exist indicates whether the element exists or not and pos: posistion of the element.
+ * @returns {string} Boolean indicates whether the element exists or not.
  */
 
-const loopObjAndCheck = (arr, element) => {
+const loopObjAndCheck = (arr, element, pos) => {
   let exist = 0;
-  let pos = -1;
+  // let pos = 0;
   if (arr.length) {
     for (let i = 0; i < arr.length; i++) {
       if (arr[i]._id.toString() === element) {
@@ -216,7 +224,7 @@ const loopObjAndCheck = (arr, element) => {
       }
     }
   }
-  return [exist, pos];
+  return exist;
 };
 
 // <---> Press Like of a Post (Like or Unlike) <--->*** <===> Done <===>  *** //
@@ -232,16 +240,16 @@ const loopObjAndCheck = (arr, element) => {
  * @returns {string} .
  */
 
-const likePress = async (req, res) => {
+const likePress = async (res, blogId, postId) => {
   try {
-    const blogId = req.params.blogId;
-    const postId = req.params.postId;
+    // const blogId = req.params.blogId;
+    // const postId = req.params.postId;
     const existingBlog = await schema.blogs.findOne({_id: blogId});
     const existingPost = await schema.Posts.findOne({_id: postId});
+    const notesId = existingPost.notesId;
+    const existingNotes = await schema.notes.findOne({_id: notesId});
     if (existingBlog) {
       if (existingPost) {
-        const notesId = existingPost.notesId;
-        const existingNotes = await schema.notes.findOne({_id: notesId});
         if (existingNotes) {
           console.log('likes array: ', existingNotes.likes);
           const likesArray = existingNotes.likes;
@@ -250,18 +258,16 @@ const likePress = async (req, res) => {
           console.log('exist?= ', exist);
           if (exist) {
             existingNotes.likes.pull(blogId);
-            existingNotes.save();
-            res.status(StatusCodes.OK).json('Post Unliked Successfully');
           } else {
             existingNotes.likes.push(blogId);
-            existingNotes.save();
-            res.status(StatusCodes.OK).json('Post Liked Successfully');
           }
-          // console.log(existingNotes.likes);
+          existingNotes.save();
+          console.log(existingNotes.likes);
         } else {
           console.log(existingPost);
           res.status(StatusCodes.BAD_REQUEST).json('Notes Not Found');
         }
+        res.status(StatusCodes.OK).json('Post Liked Successfully');
       } else {
         res.status(StatusCodes.BAD_REQUEST).json('Post Not Found');
       }
@@ -271,7 +277,7 @@ const likePress = async (req, res) => {
   } catch (error) {
     res
         .status(StatusCodes.INTERNAL_SERVER_ERROR)
-        .json('Error in Press Like Function');
+        .json('Error in Make Comment Function');
   }
 };
 
@@ -288,17 +294,17 @@ const likePress = async (req, res) => {
  * @returns {string} The id of the reblog.
  */
 
-const reblogPost = async (req, res) => {
+const reblogPost = async (res, blogId, postId, text) => {
   try {
-    const blogId = req.params.blogId;
-    const postId = req.params.postId;
-    const text = req.body.text;
+    // const blogId = req.params.blogId;
+    // const postId = req.params.postId;
+    // const text = req.body.text;
     const existingBlog = await schema.blogs.findOne({_id: blogId});
     const existingPost = await schema.Posts.findOne({_id: postId});
+    const notesId = existingPost.notesId;
+    const existingNotes = await schema.notes.findOne({_id: notesId});
     if (existingBlog) {
       if (existingPost) {
-        const notesId = existingPost.notesId;
-        const existingNotes = await schema.notes.findOne({_id: notesId});
         const rebloggingId = blogId;
         if (existingNotes) {
           const reblog = {
@@ -326,7 +332,7 @@ const reblogPost = async (req, res) => {
   } catch (error) {
     res
         .status(StatusCodes.INTERNAL_SERVER_ERROR)
-        .json('Error in Reblog Post Function');
+        .json('Error in Make Comment Function');
   }
 };
 
@@ -342,10 +348,10 @@ const reblogPost = async (req, res) => {
  * @returns {string} .
  */
 
-const removeComment = async (req, res) => {
+const removeComment = async (res, postId, commentId) => {
   try {
-    const postId = req.params.postId;
-    const commentId = req.params.commentId;
+    // const postId = req.params.postId;
+    // const commentId = req.params.commentId;
     const existingPost = await schema.Posts.findOne({_id: postId});
     if (existingPost) {
       const notesId = existingPost.notesId;
@@ -353,8 +359,8 @@ const removeComment = async (req, res) => {
       if (existingNotes) {
         const commentsArray = existingNotes.comments;
         console.log('comments array: ', commentsArray);
-        const exist = loopObjAndCheck(commentsArray, commentId)[0];
-        const pos = loopObjAndCheck(commentsArray, commentId)[1];
+        const pos = 0;
+        const exist = loopObjAndCheck(commentsArray, commentId, pos);
         if (exist) {
           existingNotes.comments.pull(commentsArray[pos]);
         } else {
@@ -388,10 +394,10 @@ const removeComment = async (req, res) => {
  * @returns {string} .
  */
 
-const removeReblog = async (req, res) => {
+const removeReblog = async (res, postId, reblogId) => {
   try {
-    const postId = req.params.postId;
-    const reblogId = req.params.reblogId;
+    // const postId = req.params.postId;
+    // const reblogId = req.params.reblogId;
     const existingPost = await schema.Posts.findOne({_id: postId});
     if (existingPost) {
       const notesId = existingPost.notesId;
@@ -399,8 +405,8 @@ const removeReblog = async (req, res) => {
       if (existingNotes) {
         const reblogsArray = existingNotes.reblogs;
         console.log('reblogs array: ', reblogsArray);
-        const exist = loopObjAndCheck(reblogsArray, reblogId)[0];
-        const pos = loopObjAndCheck(reblogsArray, reblogId)[1];
+        const pos = 0;
+        const exist = loopObjAndCheck(reblogsArray, reblogId, pos);
         console.log('off', exist);
         if (exist) {
           existingNotes.reblogs.pull(reblogsArray[pos]);
@@ -434,9 +440,9 @@ const removeReblog = async (req, res) => {
  * @returns {string} Array of arrays, contains 4 arrays: likesArray, commentsArray, reblogsArray, countsArray(likesCount, reblogsCount, notesCount)
  */
 
-const getNotes = async (req, res) => {
+const getNotes = async (res, postId) => {
   try {
-    const postId = req.params.postId;
+    // const postId = req.params.postId;
     const existingPost = await schema.Posts.findOne({_id: postId});
     if (existingPost) {
       const notesId = existingPost.notesId;
@@ -479,10 +485,10 @@ const getNotes = async (req, res) => {
  * @returns {string} Array of posts objects.
  */
 
-const getDashboard = async (req, res) => {
+const getDashboard = async (res, userId, blogId) => {
   try {
-    const userId = req.params.userId;
-    const blogId = req.params.blogId;
+    // const userId = req.params.userId;
+    // const blogId = req.params.blogId;
     const data = [];
     const existingUser = await schema.users.findOne({_id: userId});
     if (existingUser) {
