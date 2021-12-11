@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 // ///////////////////////////////////////////////////////////
 // /// <==> /// This File Contains Search Functions /// <==> ///
 // ///////////////////////////////////////////////////////////
@@ -33,19 +34,22 @@ async () => {
  * @function
  * @name  autoCompleteSearchDash
  * @description Applies search on posts/tags
- * @param {Object} req - Holds the request body: wordName.
- * @param {Object} res - Holds the response array having 3 arrays.
- *                     - array 1: has the tags in posts with this regex
- *                     - array 2: has the blogs this regex
- *                     - array 3: has the posts with interested tags this regex
+ * @param {Object} wordName - Holds the request body: wordName.
  *
- * @returns {Array} the array having 3 arrays.
+ *
+ * @returns {Array} Result array have 4 arrays.
+ *                     - array 1: has the tags in posts with this regex
+ *                     - array 2: posts with the tags with this regex
+ *                     - array 3: has the blogs this regex
+ *                     - array 4: has the posts with interested tags this regex
+
  */
 
-const autoCompleteSearchDash = async (req, res) => {
-  // req.query["term"]
-  const regex= new RegExp(req.body.wordName, 'i');
-
+const autoCompleteSearchDash = async (wordName) => {
+  const regex= new RegExp(wordName, 'i');
+  if (!wordName) {
+    return [];
+  }
   // gets all posts with the needed tag
   const searchTags= await schema.Posts.find(tagSpecified={tags: {$in: regex}});
   // gets all mention blogs with the regex
@@ -56,12 +60,15 @@ const autoCompleteSearchDash = async (req, res) => {
   const resultHashTag=[];
   const resultBlogs=[];
   const resultFollowedTag=[];
+  const resultPostHashTag=[];
 
   // store in result, the hash tags
+  // store in result, the posts with hash tags
   searchTags.forEach((data) => {
     data.tags.forEach((semiData) => {
       if (semiData.match(regex)) {
         resultHashTag.push(semiData);
+        resultPostHashTag.push(data);
       }
     });
   });
@@ -77,9 +84,14 @@ const autoCompleteSearchDash = async (req, res) => {
   });
 
   // store all results in array and send it to front
-  const result=[resultHashTag, resultBlogs, resultFollowedTag];
-  console.log('result: ', result);
-  res.json(result);
+  const result={
+    resultHashTag: resultHashTag,
+    resultPostHashTag: resultPostHashTag,
+    resultBlogs: resultBlogs,
+    resultFollowedTag: resultFollowedTag,
+  };
+  // console.log('resultPostHashTag: ', result.resultHashTag);
+  // res.json(result);
   return result;
 };
 

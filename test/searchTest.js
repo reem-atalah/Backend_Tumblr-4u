@@ -6,92 +6,91 @@
 // ================ /// <==> Variables Declaration <==> /// ================
 const chai = require('chai');
 const chaiHttp = require('chai-http');
-const server = require('../script');
+// const server = require('../script');
+const search=require('../Modules/Search/Search dashborad/Controller/control');
+
+const expect=chai.expect;
 
 chai.should();
 chai.use(chaiHttp);
+
+// =========== /// <==> Database Connection <==> ===========*/
+
+const dotenv = require('dotenv');
+const connection = require('../Configurations/configuration');
+dotenv.config();
+connection();
 // =========== /// <==> End <==> ===========*/
 
 // ================ /// <==> Unit Testing for Search <==> /// ===============
 describe('Search APIs', () => {
 // ----------------// <=====> Search for hashtags <=====> //--------------//
 
-  describe('Search Dashboard Search', () => {
+  describe('Search Dashboard Testing', () => {
     it('It Should get element of hashtags in posts', (done) => {
       const wordName ={wordName: 'dep'};
-      chai
-          .request(server)
-          .get('/autoCompleteSearchDash')
-          .send(wordName)
-          .end((err, res) => {
-            console.log(res.body);
-            res.body[0][0].should.be.eq('deposit');
-            done();
-          });
+      search.autoCompleteSearchDash(wordName.wordName).then((res)=>{
+        expect(res.resultHashTag[0]).to.be.equal('deposit');
+        done();
+      }).catch(done);
     });
-  });
 
-  // --------// <=====> hashtags are not sensitive case <=====> //-----------//
-  describe('Search Dashboard Search', () => {
+
+    // --------// <=====> hashtags are not sensitive case <=====> //----------//
     it('It shows that it is not case sensitive', (done) => {
       const wordName ={wordName: 'DEP'};
-      chai
-          .request(server)
-          .get('/autoCompleteSearchDash')
-          .send(wordName)
-          .end((err, res) => {
-            console.log(res.body);
-            res.body[0][0].should.be.eq('deposit');
-            done();
-          });
+      search.autoCompleteSearchDash(wordName.wordName).then((res)=>{
+        expect(res.resultHashTag[0]).to.be.equal('deposit');
+        done();
+      }).catch(done);
     });
-  });
 
-  // --------// <=====> Search for blogs <=====> //------------//
-  describe('Search Dashboard Search', () => {
+    // // --------// <=====> get posts has the hashtags <=====> //------------//
+    it('It Should get posts has the hashtags with the regex', (done) => {
+      const wordName ={wordName: 'dep'};
+      search.autoCompleteSearchDash(wordName.wordName).then((res)=>{
+        post=[
+          {
+            _id: '6199531b94c23324c69ea65d',
+            blogId: 'Metal',
+            postHtml: '</>',
+            type: 'text',
+            state: 'published',
+            tags: ['deposit', 'hacking', 'morph'],
+            __v: 0,
+          },
+        ];
+        expect(res.resultPostHashTag[0].blogId).to.be.equal(post[0].blogId);
+        done();
+      }).catch(done);
+    });
+
+    // // --------// <=====> Search for blogs <=====> //------------//
     it('It Should get blog with the regex', (done) => {
       const wordName ={wordName: 'hazel'};
-      chai
-          .request(server)
-          .get('/autoCompleteSearchDash')
-          .send(wordName)
-          .end((err, res) => {
-            console.log(res.body);
-            res.body[1][0].name.should.be.eq('Mr. Hazel Schamberger');
-            done();
-          });
+      search.autoCompleteSearchDash(wordName.wordName).then((res)=>{
+        expect(res.resultBlogs[0].name).to.be.equal('Mr. Hazel Schamberger');
+        done();
+      }).catch(done);
     });
-  });
 
-  // --------// <=====> Search for interested tags <=====> //------------//
-  describe('Search Dashboard Search', () => {
+    // // --------// <=====> Search for interested tags <=====> //------------//
     it('It Should get followed/interested tags by a blog', (done) => {
       const wordName ={wordName: 'mat'};
-      chai
-          .request(server)
-          .get('/autoCompleteSearchDash')
-          .send(wordName)
-          .end((err, res) => {
-            console.log(res.body);
-            res.body[2][0].followedTags[0].should.be.eq('matrix');
-            done();
-          });
+      search.autoCompleteSearchDash(wordName.wordName).then((res)=>{
+        expect(res.resultFollowedTag[0].followedTags[0]).to.be.equal('matrix');
+        done();
+      }).catch(done);
     });
-  });
 
-  // --------// <=====> Search for nothing <=====> //------------//
-  describe('Search Dashboard Search', () => {
+    // // --------// <=====> Search for nothing <=====> //------------//
     it('It Should get nothing when nothing is entered', (done) => {
       const wordName ={wordName: ''};
-      chai
-          .request(server)
-          .get('/autoCompleteSearchDash')
-          .send(wordName)
-          .end((err, res) => {
-            console.log(res.body);
-            res.body.should.be.eq(',wordName, is not allowed to be empty');
-            done();
-          });
+      search.autoCompleteSearchDash(wordName.wordName).then((res)=>{
+        console.log('res, nothing: ', res);
+        expect(res).to.be.empty;
+        done();
+      }).catch(done);
     });
   });
 });
