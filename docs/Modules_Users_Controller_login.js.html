@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: Common/Middlewares/isAuthorized.js</title>
+    <title>JSDoc: Source: Modules/Users/Controller/login.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: Common/Middlewares/isAuthorized.js</h1>
+    <h1 class="page-title">Source: Modules/Users/Controller/login.js</h1>
 
     
 
@@ -26,97 +26,100 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>// /////////////////////////////////////////////////////////////////////////////
-//  &lt;==> This File Contains Function That Check On User Authorization &lt;==> ////
-// /////////////////////////////////////////////////////////////////////////////
+            <pre class="prettyprint source linenums"><code>// /////////////////////////////////////////////////////////
+// / &lt;==> /// This File Contains User login /// &lt;==> ///
+// /////////////////////////////////////////////////////////
 
-/* ===================== &lt;-- Variables Declarations --> ==================== */
-const {StatusCodes} = require('http-status-codes');
+/* =============== /// &lt;==> Variables Declaration &lt;==> /// ================== */
+const userServices = require('./services');
+const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const userRbac = require('../Rbac/rbac');
-/* =========== &lt;--> End &lt;--> =========== */
+const {StatusCodes} = require('http-status-codes');
+const schema = require('../../../Model/model');
+/* =========== /// &lt;==> End &lt;==> ===========*/
 
-/* ===================== &lt;-- Authorization Function --> ==================== */
-
+/* ----------- &lt;---> Sign In &lt;---> --------- */ // *** &lt;===> Done &lt;===>  *** //
+// Assumption: Acount Must Be Not ( Deleted )
 /**
- * This Function Checks ( Authorization &amp; Authentication) OF User.
+ * This Function Used To LogIn To Tumblr4U.
  *
- * @param {string} endpoint - endpoint
+ * @param {string} email - username
+ * @param {string} password - email
  *
  * @returns {object} - { Object }
  */
 
-const isAuthorized = (endPoint) => {
-  return async (request, response, next) => {
-    try {
-      if (request.headers.authorization) {
-        const token = request.headers.authorization.split(' ')[1];
-        if (token) {
-          const decoded = jwt.verify(token, process.env.KEY);
-          const isAllowed=await userRbac.can(decoded.role.toString(), endPoint);
-          if (isAllowed) {
-            request.decoded = decoded;
-            next();
-          } else {
-            response.status(StatusCodes.UNAUTHORIZED).json({
-              'meta': {
-                'status': 401,
-                'msg': 'UNAUTHORIZED',
-              },
+ const login = async (req, res) => {
+    // try {
+      const {email, password} = req.body;
 
-              'response': {
-                'error': 'Not Authorized',
-                'data': '',
-              },
-            });
-          }
-        } else {
-          response.status(StatusCodes.BAD_REQUEST).json({
+      const oldUser = await schema.users.findOne({email, isDeleted: false});
+      const isMailFound = await userServices.checkMail(email);
+
+      if (isMailFound) {
+        console.log(password,oldUser.password);
+        const match = await userServices.checkPassword(password,oldUser.password);
+        if (match) {
+          const token = jwt.sign({
+            email: oldUser.email,
+            role: oldUser.role},
+          process.env.KEY);
+          res.status(StatusCodes.OK).json({
             'meta': {
-              'status': 401,
-              'msg': 'UNAUTHORIZED',
+              'status': 200,
+              'msg': 'OK',
             },
-
-            'response': {
-              'error': 'Token is Required',
+  
+            'res': {
+              'message': 'LogIn Successfully (&lt;:>)',
+              'data': token,
+            },
+          });
+        } else {
+          res.status(StatusCodes.BAD_REQUEST).json({
+            'meta': {
+              'status': 400,
+              'msg': 'BAD_REQUEST',
+            },
+  
+            'res': {
+              'error': 'InCorrect Password (&lt;:>)',
               'data': '',
             },
           });
         }
       } else {
-        response.status(StatusCodes.BAD_REQUEST).json({
+        res.status(StatusCodes.BAD_REQUEST).json({
           'meta': {
-            'status': 401,
-            'msg': 'UNAUTHORIZED',
+            'status': 400,
+            'msg': 'BAD_REQUEST',
           },
-
-          'response': {
-            'error': 'Token is Required',
+  
+          'res': {
+            'error': 'Email Is Not Found (&lt;:>)',
             'data': '',
           },
         });
       }
-    } catch (error) {
-      response.status(StatusCodes.BAD_REQUEST).json({
-        'meta': {
-          'status': 401,
-          'msg': 'UNAUTHORIZED',
-        },
-
-        'response': {
-          'error': 'Error In Is Autorized Function',
-          'data': '',
-        },
-      });
-    }
+    // } catch (error) {
+    //   res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+    //     'meta': {
+    //       'status': 500,
+    //       'msg': 'INTERNAL_SERVER_ERROR',
+    //     },
+  
+    //     'res': {
+    //       'error': 'Error In LogIn Function (&lt;:>)',
+    //       'data': '',
+    //     },
+    //   });
+    // };
   };
-};
-/* =========== &lt;--> End &lt;--> =========== */
 
-/* ================= &lt;-- Export Is Authorized Function --> ================= */
-module.exports = isAuthorized;
-/* =========== &lt;--> End &lt;--> =========== */
-</code></pre>
+  /* =============== /// &lt;==> Export User login &lt;==> /// =============== */
+module.exports = login;
+  /* =========== /// &lt;==> End &lt;==> ===========*/
+  </code></pre>
         </article>
     </section>
 

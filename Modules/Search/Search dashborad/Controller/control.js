@@ -34,6 +34,7 @@ async () => {
  * @function
  * @name  autoCompleteSearchDash
  * @description Applies search on posts/tags
+ * @param {Object} userId -get id of the user
  * @param {Object} wordName - Holds the request body: wordName.
  *
  *
@@ -44,6 +45,7 @@ async () => {
  *                     - array 4: has the posts with interested tags this regex
 
  */
+// use "npm run doc" to make function documentation
 
 const autoCompleteSearchDash = async (userId, wordName) => {
   let result = [];

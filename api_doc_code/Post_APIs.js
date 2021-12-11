@@ -812,7 +812,7 @@
  * @apiErrorExample Response Error:
  *      HTTP/1.1 400 BAD REQUEST
  *      {
- *          "error": ",wordName, is not allowed to be empty"
+ *          "error": ",userId, is required"
  *      }
  *      HTTP/1.1 401 Unauthorized
  *      {

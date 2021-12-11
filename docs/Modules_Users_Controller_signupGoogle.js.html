@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: Modules/Users/Controller/signupGoogle.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: Modules/Users/Controller/signupGoogle.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>// ////////////////////////////////////////////////////////////////////////////////
+// / &lt;==> /// This File Contains User Signup with Google &amp; Google Info /// &lt;==> ///
+// ///////////////////////////////////////////////////////////////////////////////
+
+/* =============== /// &lt;==> Variables Declaration &lt;==> /// ================== */
+const userServices = require('./services');
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+const {StatusCodes} = require('http-status-codes');
+const schema = require('../../../Model/model');
+const nanoid = require('nanoid').nanoid;
+/* =========== /// &lt;==> End &lt;==> ===========*/
+
+
+/* ------ &lt;---> Sign Up With Google &lt;---> */ // *** &lt;===> Done &lt;===>  *** //
+// Assumption: Acount Must Be Not ( Deleted )
+
+/**
+ * This Function Used To LogIn To Tumblr4U.
+ *
+ *
+ * @returns {object} - { Object }
+ */
+
+ const google = async (req, res)=>{
+    try {
+      let email = req.user.email;
+      const isMailFound = await userServices.checkMail(email);
+      
+      if (isMailFound) {
+      const oldUser = await schema.users.findOne({email, isDeleted: false});
+      const token = jwt.sign({
+        email: oldUser.email,
+        role: oldUser.role},
+        process.env.KEY);
+
+        res.status(StatusCodes.OK).json({
+          'meta': {
+            'status': 200,
+            'msg': 'OK',
+          },
+          'res': {
+            'message': 'User Log In With Google Successfully (&lt;:>)',
+            'data': token,
+          },
+        });
+      } else {
+        
+        let email = req.user.email;
+        let password = nanoid();
+        
+
+        userServices.createGoogleUser(email,password);
+
+        const token = jwt.sign({
+            email: email,
+            role: 'user'},
+            process.env.KEY);
+
+        res.status(StatusCodes.OK).json({
+          'meta': {
+            'status': 200,
+            'msg': 'OK',
+          },
+  
+          'res': {
+            'message': 'User Sign Up With Google Successfully (&lt;:>)',
+            'data': token,
+          },
+        });
+      }
+    } catch (error) {
+      res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+        'meta': {
+          'status': 500,
+          'msg': 'INTERNAL_SERVER_ERROR',
+        },
+  
+        'res': {
+          'error': 'Error In Sign Up With Google Function (&lt;:>)',
+          'data': '',
+        },
+      });
+    };
+  };
+  
+/* ------ &lt;---> Google Info &lt;---> */ // *** &lt;===> Done &lt;===>  *** //
+// Assumption: Acount Must Be ( Deleted )
+
+/**
+ * This Function Used To LogIn To Tumblr4U.
+ *
+ * @param {string} blogName - username
+ * @param {string} age - email
+ *
+ * @returns {object} - { Object }
+ */
+const googleInfo = async(req,res)=>{
+    try {
+        const { blogName , age } = req.body;
+        const email = req.decoded.email;
+
+        const oldUser = await schema.users.updateOne({email, isDeleted: true},{name:blogName,age,isDeleted:false});
+        
+        //===========================================================================
+        //=================================== Create Blog  ========================================
+        //===========================================================================
+
+        const token = jwt.sign({
+            email: email,
+            role: 'user'},
+            process.env.KEY);
+        res.status(StatusCodes.OK).json({
+            'meta': {
+              'status': 200,
+              'msg': 'OK',
+            },
+            'res': {
+              'message': 'User Log In With Google Successfully (&lt;:>)',
+              'data': token,
+            },
+          });
+    } catch (error) {
+        res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+            'meta': {
+              'status': 500,
+              'msg': 'INTERNAL_SERVER_ERROR',
+            },
+      
+            'res': {
+              'error': 'Error In Google Info Function (&lt;:>)',
+              'data': '',
+            },
+          });
+        }; 
+};
+
+/* =============== /// &lt;==> Export User verfiyAccount &lt;==> /// =============== */
+module.exports = {google,googleInfo};
+/* =========== /// &lt;==> End &lt;==> ===========*/
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#androidSignUpWithGoogle">androidSignUpWithGoogle</a></li><li><a href="global.html#autoCompleteSearchDash">autoCompleteSearchDash</a></li><li><a href="global.html#blockBlog">blockBlog</a></li><li><a href="global.html#createBlog">createBlog</a></li><li><a href="global.html#createPost">createPost</a></li><li><a href="global.html#deleteBlog">deleteBlog</a></li><li><a href="global.html#editBlog">editBlog</a></li><li><a href="global.html#followBlog">followBlog</a></li><li><a href="global.html#getDashboard">getDashboard</a></li><li><a href="global.html#getNotes">getNotes</a></li><li><a href="global.html#google">google</a></li><li><a href="global.html#googleInfo">googleInfo</a></li><li><a href="global.html#isAuthorized">isAuthorized</a></li><li><a href="global.html#likePress">likePress</a></li><li><a href="global.html#login">login</a></li><li><a href="global.html#loopAndCheck">loopAndCheck</a></li><li><a href="global.html#loopObjAndCheck">loopObjAndCheck</a></li><li><a href="global.html#makePost">makePost</a></li><li><a href="global.html#mongoose">mongoose</a></li><li><a href="global.html#reblogPost">reblogPost</a></li><li><a href="global.html#removeComment">removeComment</a></li><li><a href="global.html#removeReblog">removeReblog</a></li><li><a href="global.html#retrieveBlog">retrieveBlog</a></li><li><a href="global.html#search">search</a></li><li><a href="global.html#showPost">showPost</a></li><li><a href="global.html#signUp">signUp</a></li><li><a href="global.html#unblockBlog">unblockBlog</a></li><li><a href="global.html#unfollowBlog">unfollowBlog</a></li><li><a href="global.html#verfiyAccount">verfiyAccount</a></li><li><a href="global.html#verifyMail">verifyMail</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Sat Dec 11 2021 20:23:40 GMT+0200 (Eastern European Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

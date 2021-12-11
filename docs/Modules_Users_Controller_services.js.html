@@ -32,8 +32,6 @@
 
 /* =============== /// &lt;==> Variables Declaration &lt;==> /// ================== */
 const nodemailer = require('nodemailer');
-const {StatusCodes} = require('http-status-codes');
-const schema = require('../../../Model/model');
 /* =========== /// &lt;==> End &lt;==> ===========*/
 
 /* ----------- &lt;---> verify Email &lt;---> --------- */ // *** &lt;===> Done &lt;===>  *** //
@@ -81,60 +79,13 @@ const verifyMail = async (name,email,token)=>{
     };    
 };
 
-/* ----------- &lt;---> Check If Mail Found &lt;---> --------- */ // *** &lt;===> Done &lt;===>  *** //
-const checkMail = async(email)=>{
-  
-    const oldUserEmail = await schema.users.findOne({email, isDeleted: false});
-    if (oldUserEmail)    
-      return true;
-    else
-      return false;
-};
-
-/* ----------- &lt;---> Check If Blog Name Found &lt;---> --------- */ // *** &lt;===> Done &lt;===>  *** //
-const checkBlogName = async(name)=>{
-    const oldUserBlog = await schema.blogs.findOne({name: name});
-    if (oldUserBlog) 
-      return true;
-    else
-     return false; 
-};
-
-/* ----------- &lt;---> Create New User &lt;---> --------- */ // *** &lt;===> Done &lt;===>  *** //
-const createUser = async(email, password, blogName, age)=>{
-try {
-  const newUser = new schema.users({
-    email,
-    password,
-    name: blogName,
-    age,
-  });
-  // const data = await newUser.save();
-  await newUser.save();
-  
-} catch (error) {
-  res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
-    'meta': {
-      'status': 500,
-      'msg': 'INTERNAL_SERVER_ERROR',
-    },
-
-    'res': {
-      'error': 'Error In Sign Up Function (&lt;:>)',
-      'data': '',
-    },
-  });
-};
-};
 
 /* =============== /// &lt;==> Export User Functions Services &lt;==> /// =============== */
 module.exports = {
-    verifyMail,
-    checkMail,
-    checkBlogName,
-    createUser
-};
-/* =========== /// &lt;==> End &lt;==> ===========*/</code></pre>
+    verifyMail
+  };
+  /* =========== /// &lt;==> End &lt;==> ===========*/
+  </code></pre>
         </article>
     </section>
 
@@ -144,13 +95,13 @@ module.exports = {
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#autoCompleteSearchDash">autoCompleteSearchDash</a></li><li><a href="global.html#blockBlog">blockBlog</a></li><li><a href="global.html#createBlog">createBlog</a></li><li><a href="global.html#createPost">createPost</a></li><li><a href="global.html#editBlog">editBlog</a></li><li><a href="global.html#followBlog">followBlog</a></li><li><a href="global.html#getDashboard">getDashboard</a></li><li><a href="global.html#getNotes">getNotes</a></li><li><a href="global.html#google">google</a></li><li><a href="global.html#isAuthorized">isAuthorized</a></li><li><a href="global.html#likePress">likePress</a></li><li><a href="global.html#login">login</a></li><li><a href="global.html#loopAndCheck">loopAndCheck</a></li><li><a href="global.html#loopObjAndCheck">loopObjAndCheck</a></li><li><a href="global.html#makePost">makePost</a></li><li><a href="global.html#mongoose">mongoose</a></li><li><a href="global.html#reblogPost">reblogPost</a></li><li><a href="global.html#removeComment">removeComment</a></li><li><a href="global.html#removeReblog">removeReblog</a></li><li><a href="global.html#retrieveBlog">retrieveBlog</a></li><li><a href="global.html#search">search</a></li><li><a href="global.html#showPost">showPost</a></li><li><a href="global.html#signUp">signUp</a></li><li><a href="global.html#unblockBlog">unblockBlog</a></li><li><a href="global.html#unfollowBlog">unfollowBlog</a></li><li><a href="global.html#verfiyAccount">verfiyAccount</a></li><li><a href="global.html#verifyMail">verifyMail</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#androidSignUpWithGoogle">androidSignUpWithGoogle</a></li><li><a href="global.html#autoCompleteSearchDash">autoCompleteSearchDash</a></li><li><a href="global.html#blockBlog">blockBlog</a></li><li><a href="global.html#createBlog">createBlog</a></li><li><a href="global.html#createPost">createPost</a></li><li><a href="global.html#deleteBlog">deleteBlog</a></li><li><a href="global.html#editBlog">editBlog</a></li><li><a href="global.html#followBlog">followBlog</a></li><li><a href="global.html#getDashboard">getDashboard</a></li><li><a href="global.html#getNotes">getNotes</a></li><li><a href="global.html#google">google</a></li><li><a href="global.html#googleInfo">googleInfo</a></li><li><a href="global.html#isAuthorized">isAuthorized</a></li><li><a href="global.html#likePress">likePress</a></li><li><a href="global.html#login">login</a></li><li><a href="global.html#loopAndCheck">loopAndCheck</a></li><li><a href="global.html#loopObjAndCheck">loopObjAndCheck</a></li><li><a href="global.html#makePost">makePost</a></li><li><a href="global.html#mongoose">mongoose</a></li><li><a href="global.html#reblogPost">reblogPost</a></li><li><a href="global.html#removeComment">removeComment</a></li><li><a href="global.html#removeReblog">removeReblog</a></li><li><a href="global.html#retrieveBlog">retrieveBlog</a></li><li><a href="global.html#search">search</a></li><li><a href="global.html#showPost">showPost</a></li><li><a href="global.html#signUp">signUp</a></li><li><a href="global.html#unblockBlog">unblockBlog</a></li><li><a href="global.html#unfollowBlog">unfollowBlog</a></li><li><a href="global.html#verfiyAccount">verfiyAccount</a></li><li><a href="global.html#verifyMail">verifyMail</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Fri Dec 10 2021 00:42:33 GMT-0800 (Pacific Standard Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Sat Dec 11 2021 20:23:40 GMT+0200 (Eastern European Standard Time)
 </footer>
 
 <script> prettyPrint(); </script>
