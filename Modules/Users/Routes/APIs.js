@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 // ////////////////////////////////////////////////////
 // / <==> /// This File Contains User APIs /// <==> ///
 // ////////////////////////////////////////////////////
@@ -55,7 +56,7 @@ const GI = userFunctions.googleInfo;
 const VGI = validateRequest(userJoi.GoogleInfoValidations);
 const IA = isAuthorized(userEndPoints.googleInfo);
 router.get('/google/callback', passport.authenticate('google'), GO);
-router.put('/google/info',VGI,IA, GI);
+router.put('/google/info', VGI, IA, GI);
 
 
 /* ----------- <---> Follow <---> ----------- */
