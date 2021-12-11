@@ -219,17 +219,14 @@ const editBlog=async (req, res)=>{
 
         if (!anotherBlog || anotherBlog._id==blogId) {
           if (blog.isPrimary) {
-<<<<<<< HEAD
             const user=await schema.users.findOneAndUpdate({'name': blog.name});
             user.name=name;
             user.save();
           }
-=======
-            const user= await schema.users
-                .findOneAndUpdate({'name': blog.name});
-            user.name=name;
-                      }
->>>>>>> 90e9feb83386f7302313990c3b2b08267b71dce9
+          // const user= await schema.users
+          //     .findOneAndUpdate({'name': blog.name});
+          // user.name=name;
+          //           }
           blog.name=name;
         } else {
           message='URL is not available';
@@ -238,9 +235,7 @@ const editBlog=async (req, res)=>{
       blog.save();
       if (message==='OK') {
         console.log(blog);
-<<<<<<< HEAD
-        res.status(StatusCodes.OK).jsonp(blog);
-=======
+        // res.status(StatusCodes.OK).jsonp(blog);
         res.status(StatusCodes.OK).json({
           'meta': {
             'status': 200,
@@ -252,7 +247,6 @@ const editBlog=async (req, res)=>{
             'data': blog,
           },
         });
->>>>>>> 90e9feb83386f7302313990c3b2b08267b71dce9
       } else {
         res.status(StatusCodes.BAD_REQUEST).json({
           'meta': {
