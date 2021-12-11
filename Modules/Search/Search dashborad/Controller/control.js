@@ -45,21 +45,38 @@ async () => {
 
  */
 
-const autoCompleteSearchDash = async (wordName) => {
-  const regex= new RegExp(wordName, 'i');
+const autoCompleteSearchDash = async (userId, wordName) => {
+  let result = [];
+
   if (!wordName) {
-    return [];
+    // if there's no word then retrieve interested tags
+    const resultFollowedTag=[];
+
+    // gets all posts with the followed tags
+    const searchFollowedTag= await schema.users.find({_id: userId});
+
+    // store in result, the blogs
+    searchFollowedTag.forEach((data) => {
+    // he gets me the user, now get the followedTags
+      data.followedTags.forEach((folloedTag) => {
+        resultFollowedTag.push(folloedTag);
+      });
+    });
+
+    result={
+      resultFollowedTag: resultFollowedTag,
+    };
+    return result;
   }
+
+  const regex= new RegExp(wordName, 'i');
   // gets all posts with the needed tag
   const searchTags= await schema.Posts.find(tagSpecified={tags: {$in: regex}});
   // gets all mention blogs with the regex
   const searchMentionBlogs= await schema.blogs.find({name: regex});
-  // gets all posts with the followed tags
-  const searchFollowedTag= await schema.blogs.find({followedTags: regex});
 
   const resultHashTag=[];
   const resultBlogs=[];
-  const resultFollowedTag=[];
   const resultPostHashTag=[];
 
   // store in result, the hash tags
@@ -78,17 +95,12 @@ const autoCompleteSearchDash = async (wordName) => {
     resultBlogs.push(data);
   });
 
-  // store in result, the blogs
-  searchFollowedTag.forEach((data) => {
-    resultFollowedTag.push(data);
-  });
-
   // store all results in array and send it to front
-  const result={
+  result={
     resultHashTag: resultHashTag,
     resultPostHashTag: resultPostHashTag,
     resultBlogs: resultBlogs,
-    resultFollowedTag: resultFollowedTag,
+    // resultFollowedTag: resultFollowedTag,
   };
   // console.log('resultPostHashTag: ', result.resultHashTag);
   // res.json(result);

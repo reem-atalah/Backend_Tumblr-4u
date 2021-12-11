@@ -35,7 +35,6 @@ connection();
 
 /* ====================== /// <==> MiddleWares <==> /// ============= */
 server.use(express.json());
-server.use(cors());
 server.use(searchDashboard);
 server.use(userRoutes);
 server.use(blogRoutes);
@@ -44,6 +43,7 @@ server.use(express.json());
 server.use(express.urlencoded({extended: false}));
 
 /* =========== /// <==> End <==> ===========*/
+server.use(cors());
 
 // seed.seedDB();
 

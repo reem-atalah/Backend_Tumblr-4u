@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 // ///////////////////////////////////////////////////////////////
 // / <==> /// This File Contains Search Joi Validations /// <==> ///
 // ///////////////////////////////////////////////////////////////
@@ -10,7 +11,8 @@ const joi = require('joi');
 const searchJoi = {
   searchValidations: {
     body: joi.object().required().keys({
-      wordName: joi.string().required(),
+      userId: joi.string().required(),
+      wordName: joi.string().optional(),
     }),
   },
 };
