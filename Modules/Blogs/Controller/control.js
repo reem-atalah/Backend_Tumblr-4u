@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 
 /* ================ /// <==> Variables Declaration <==> /// ================ */
 const {StatusCodes} = require('http-status-codes');
@@ -178,6 +179,7 @@ const editBlog=async (req, res)=>{
     const avatar = req.body.avatar;
     const title = req.body.title;
     const background = req.body.background;
+
     const password=req.body.password;
     const theme=req.body.theme;
     const description=req.body.description;
@@ -217,10 +219,14 @@ const editBlog=async (req, res)=>{
 
         if (!anotherBlog || anotherBlog._id==blogId) {
           if (blog.isPrimary) {
-            const user= await schema.users
-                .findOneAndUpdate({'name': blog.name});
+            const user=await schema.users.findOneAndUpdate({'name': blog.name});
             user.name=name;
-                      }
+            user.save();
+          }
+          // const user= await schema.users
+          //     .findOneAndUpdate({'name': blog.name});
+          // user.name=name;
+          //           }
           blog.name=name;
         } else {
           message='URL is not available';
@@ -229,6 +235,7 @@ const editBlog=async (req, res)=>{
       blog.save();
       if (message==='OK') {
         console.log(blog);
+        // res.status(StatusCodes.OK).jsonp(blog);
         res.status(StatusCodes.OK).json({
           'meta': {
             'status': 200,

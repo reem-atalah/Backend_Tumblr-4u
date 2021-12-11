@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 
 // ////////////////////////////////////////////////////
 // / <==> /// This File Contains blog APIs /// <==> ///

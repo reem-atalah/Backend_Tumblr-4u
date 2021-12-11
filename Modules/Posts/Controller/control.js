@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 // /////////////////////////////////////////////////////////
 // / <==> /// This File Contains Post Functions /// <==> ///
 // /////////////////////////////////////////////////////////
@@ -45,9 +46,10 @@ const createPost = async (res, blogId, postHtml, type, state, tags) => {
       const newNotes = new schema.notes();
       newNotes.save();
       const notesId = newNotes._id;
-      newPost = new schema.Posts({blogId, postHtml, type, state, tags, notesId});
+      newPost= new schema.Posts({blogId, postHtml, type, state, tags, notesId});
       newPost = await newPost.save();
-      existingBlog.postsIds.push(newPost._id); // el blog el b test 3lah kan lesa msh 3ndo el field, et3mlo create fl db
+      existingBlog.postsIds.push(newPost._id);
+      // el blog el b test 3lah kan lesa msh 3ndo el field, et3mlo create fl db
       existingBlog.save();
       res.status(StatusCodes.OK).json('Post Created Successfully (<:>)');
     } else {
@@ -89,7 +91,7 @@ const showPost = async (res, postId) => {
   };
 };
 
-/* ----------- <---> Make Comment <---> ----------- */ // *** <===> Done <===>  *** //
+/* ----------- <---> Make Comment <---> -- */ // *** <===> Done <===>  *** //
 
 /**
  * @function
@@ -102,6 +104,7 @@ const showPost = async (res, postId) => {
  * @returns {string} The id of the comment.
  */
 
+// const makeComment = async (req, res) => {
 const makeComment = async (res, blogId, postId, text) => {
   try {
     // const blogId = req.params.blogId;
@@ -116,7 +119,8 @@ const makeComment = async (res, blogId, postId, text) => {
         const existingNotes = await schema.notes.findOne({_id: notesId});
         const commentingBlogTitle = existingBlog.title;
         const commentingBlogId = blogId;
-        // const newComment = new postsModel.comment({commentingBlogTitle, text}).save();
+        // const newComment = new postsModel.
+        // comment({commentingBlogTitle, text}).save();
         if (existingNotes) {
           const comment = {
             commentingBlogId,
@@ -124,13 +128,14 @@ const makeComment = async (res, blogId, postId, text) => {
             text,
           };
           // console.log(comment);
-          // postsModel.notes.updateOne({_id: notesId}, {$push: {comments: comment}}); //leeeh msh zabtaaa???
+          // postsModel.notes.updateOne({_id: notesId},
+          // {$push: {comments: comment}}); //leeeh msh zabtaaa???
           const lenBefore = existingNotes.comments.length;
           existingNotes.comments.push(comment);
           existingNotes.save();
           const commentsArrayAfter = existingNotes.comments;
           const commentObj = commentsArrayAfter[lenBefore];
-          var commentId = commentObj._id;
+          const commentId = commentObj._id;
           // console.log('comment id: ', commentId);
           // console.log(existingPost);
         } else {
@@ -141,7 +146,8 @@ const makeComment = async (res, blogId, postId, text) => {
           // newNotes.save();
           // let notesId = newNotes._id;
           // existingPost.notesId.aggregate(notesId);
-          // postsModel.posts.aggregate({_id: postId}, {$addFields: {notesId: notesId}});
+          // postsModel.posts.aggregate({_id: postId},
+          // {$addFields: {notesId: notesId}});
           // existingPost.save();
           // console.log(existingPost);
 
@@ -150,7 +156,8 @@ const makeComment = async (res, blogId, postId, text) => {
           // const newNotes = new postsModel.notes({comments}).save();
           // existingPost.notesId.set(notesId);
           // existingPost.save();
-          // leh el push wl pull bynf3o m3 el arrays bs? lw 3yza tyb a set field 3ady!?
+          // leh el push wl pull bynf3o m3 el arrays bs?
+          // lw 3yza tyb a set field 3ady!?
           // wlla 3shan mt3mlsh w2t el creation?
         }
 
@@ -169,7 +176,7 @@ const makeComment = async (res, blogId, postId, text) => {
   }
 };
 
-/* ----------- <---> Loop on an array and check if an element exists <---> ----------- */ // *** <===> Done <===>  *** //
+/* Loop on an array and check if an element exists*/ // <===> Done <===>  *** //
 
 /**
  * @function
@@ -193,7 +200,7 @@ const loopAndCheck = (arr, element) => {
   return exist;
 };
 
-/* ----------- <---> Loop on Object in Array of Objects and check if Id exists <---> ----------- */ // *** <===> Done <===>  *** //
+// Loop on Object in Array of Objects and check if Id exists*/ <===> Done <===>
 
 /**
  * @function
@@ -220,7 +227,7 @@ const loopObjAndCheck = (arr, element) => {
   return [exist, pos];
 };
 
-/* ----------- <---> Press Like of a Post (Like or Unlike) <---> ----------- */ // *** <===> Done <===>  *** //
+// <---> Press Like of a Post (Like or Unlike) <--->*** <===> Done <===>  *** //
 // Like should be done only one time by one blog
 
 /**
@@ -276,7 +283,7 @@ const likePress = async (res, blogId, postId) => {
   }
 };
 
-/* ----------- <---> Reblog a Post <---> ----------- */ // *** <===> Done <===>  *** //
+/* ----------- <---> Reblog a Post <---> */ // *** <===> Done <===>  *** //
 
 /**
  * @function
@@ -311,7 +318,7 @@ const reblogPost = async (res, blogId, postId, text) => {
           existingNotes.save();
           const reblogsArrayAfter = existingNotes.reblogs;
           const reblogObj = reblogsArrayAfter[lenBefore];
-          var reblogId = reblogObj._id;
+          const reblogId = reblogObj._id;
         } else {
           console.log(existingPost);
           res.status(StatusCodes.BAD_REQUEST).json('Notes Not Found');
@@ -331,7 +338,7 @@ const reblogPost = async (res, blogId, postId, text) => {
   }
 };
 
-/* ----------- <---> Remove Comment <---> ----------- */ // *** <===> Done <===>  *** //
+/* ----------- <---> Remove Comment <---> */ // *** <===> Done <===>  *** //
 
 /**
  * @function
@@ -377,7 +384,7 @@ const removeComment = async (res, postId, commentId) => {
   };
 };
 
-/* ----------- <---> Remove Reblog <---> ----------- */ // *** <===> Done <===>  *** //
+/* ----------- <---> Remove Reblog <---> */ // *** <===> Done <===>  *** //
 
 /**
  * @function
@@ -424,7 +431,7 @@ const removeReblog = async (res, postId, reblogId) => {
   };
 };
 
-/* ----------- <---> Get Post Notes <---> ----------- */ // *** <===> Done <===>  *** //
+/* ----------- <---> Get Post Notes <---> */ // *** <===> Done <===>  *** //
 
 /**
  * @function
@@ -451,7 +458,8 @@ const getNotes = async (res, postId) => {
         const commentsCount = commentsArray.length;
         const notesCount = likesCount + commentsCount + reblogsCount;
         const countsArray = [likesCount, reblogsCount, notesCount];
-        const notes = [likesArray, commentsArray, reblogsArray, countsArray]; // array of arrays
+        const notes = [likesArray,
+          commentsArray, reblogsArray, countsArray]; // array of arrays
         console.log('notes array: ', notes);
         res.status(StatusCodes.OK).json(notes);
       } else {
@@ -467,7 +475,7 @@ const getNotes = async (res, postId) => {
   };
 };
 
-/* ----------- <---> Get User Dashboard <---> ----------- */ // *** <===> Done <===>  *** //
+/* ----------- <---> Get User Dashboard <---> */ // *** <===> Done <===>  *** //
 
 /**
  * @function
@@ -503,11 +511,13 @@ const getDashboard = async (res, userId, blogId) => {
       // checking all follwed blogs to get their posts
       const followingBlogsArray = existingUser.following_blogs;
       for (let i=0; i<followingBlogsArray.length; i++) {
-        const existingFoBlog = await schema.blogs.findOne({_id: followingBlogsArray[i]});
+        const existingFoBlog = await schema.blogs
+            .findOne({_id: followingBlogsArray[i]});
         if (existingFoBlog) {
           const foPostsArray = existingFoBlog.postsIds;
           for (let j=0; j<foPostsArray.length; j++) {
-            const existingFoPost = await schema.Posts.findOne({_id: foPostsArray[j]});
+            const existingFoPost = await schema.Posts
+                .findOne({_id: foPostsArray[j]});
             if (existingFoPost) {
               data.push(existingFoPost);
             }
