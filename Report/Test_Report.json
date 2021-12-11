@@ -1,28 +1,15 @@
 {
   "stats": {
-<<<<<<< HEAD
-    "suites": 24,
-    "tests": 26,
-    "passes": 10,
-    "pending": 0,
-    "failures": 16,
-    "start": "2021-12-10T18:41:46.776Z",
-    "end": "2021-12-10T18:42:03.626Z",
-    "duration": 16850,
-    "testsRegistered": 26,
-    "passPercent": 38.46153846153847,
-=======
-    "suites": 2,
-    "tests": 2,
-    "passes": 2,
+    "suites": 12,
+    "tests": 11,
+    "passes": 11,
     "pending": 0,
     "failures": 0,
-    "start": "2021-12-10T18:23:33.140Z",
-    "end": "2021-12-10T18:23:37.091Z",
-    "duration": 3951,
-    "testsRegistered": 2,
+    "start": "2021-12-11T19:46:51.193Z",
+    "end": "2021-12-11T19:46:59.281Z",
+    "duration": 8088,
+    "testsRegistered": 11,
     "passPercent": 100,
->>>>>>> cc274d447895ba213135ab7df0676959e3f87be9
     "pendingPercent": 0,
     "other": 0,
     "hasOther": false,
@@ -31,11 +18,7 @@
   },
   "results": [
     {
-<<<<<<< HEAD
-      "uuid": "498a1bd5-cc55-4e6c-a186-9c367f33e096",
-=======
-      "uuid": "58dee186-28eb-4832-8c90-588f8eae6b61",
->>>>>>> cc274d447895ba213135ab7df0676959e3f87be9
+      "uuid": "62bb0307-d2d9-4fbe-a7fc-3bc965397d6c",
       "title": "",
       "fullFile": "",
       "file": "",
@@ -44,1065 +27,439 @@
       "tests": [],
       "suites": [
         {
-<<<<<<< HEAD
-          "uuid": "b2c1d9fa-4a1d-4467-949a-3da29a4de6cf",
+          "uuid": "d14a745a-2d6d-4259-b4a6-a2eae6c10aa5",
           "title": "Post APIs",
-          "fullFile": "C:\\Users\\HP\\Documents\\GitHub\\Backend_Tumblr-4u\\test\\postTest.js",
+          "fullFile": "D:\\AbeerD\\College\\third year\\SW Engineering\\Phase2_Integrated\\Backend_Tumblr-4u\\test\\postTest.js",
           "file": "\\test\\postTest.js",
-=======
-          "uuid": "18a8dff3-7cd6-4790-bcaa-80684d7b7736",
-          "title": "UserBlog Methodes testing",
-          "fullFile": "D:\\project\\Backend_Tumblr-4u-main\\test\\test.js",
-          "file": "\\test\\test.js",
->>>>>>> cc274d447895ba213135ab7df0676959e3f87be9
           "beforeHooks": [],
           "afterHooks": [],
           "tests": [],
           "suites": [
             {
-<<<<<<< HEAD
-              "uuid": "5d07b09c-ed6e-4a04-943d-2fd486536cac",
-              "title": "Post Blog Post",
-              "fullFile": "C:\\Users\\HP\\Documents\\GitHub\\Backend_Tumblr-4u\\test\\postTest.js",
-              "file": "\\test\\postTest.js",
-=======
-              "uuid": "951779fe-5e23-4ef4-9764-0f668d609820",
-              "title": "Create Blog Testing",
-              "fullFile": "D:\\project\\Backend_Tumblr-4u-main\\test\\test.js",
-              "file": "\\test\\test.js",
->>>>>>> cc274d447895ba213135ab7df0676959e3f87be9
-              "beforeHooks": [],
-              "afterHooks": [],
-              "tests": [
-                {
-                  "title": "should create a new blog",
-                  "fullTitle": "UserBlog Methodes testing Create Blog Testing should create a new blog",
-                  "timedOut": false,
-<<<<<<< HEAD
-                  "duration": 47,
-                  "state": "failed",
-                  "speed": null,
-                  "pass": false,
-                  "fail": true,
-                  "pending": false,
-                  "context": null,
-                  "code": "const blogPost = {\n  postHtml: '</>',\n  type: 'link',\n  state: 'published',\n  tags: 'tumblr',\n};\n//   console.log(blogPost);\nchai\n    .request(server)\n    .post('/61968c974f161173940ea9cb/posts/create_post')\n    .send(blogPost)\n    .end((err, res) => {\n      res.should.have.status(200);\n      res.body.should.be.eq('Post Created Successfully (<:>)');\n      done();\n    });",
-                  "err": {
-                    "message": "AssertionError: expected { Object (_events, _eventsCount, ...) } to have status code 200 but got 400",
-                    "estack": "AssertionError: expected { Object (_events, _eventsCount, ...) } to have status code 200 but got 400\n    at C:\\Users\\HP\\Documents\\GitHub\\Backend_Tumblr-4u\\test\\postTest.js:36:29\n    at Test.Request.callback (node_modules\\superagent\\lib\\node\\index.js:716:12)\n    at C:\\Users\\HP\\Documents\\GitHub\\Backend_Tumblr-4u\\node_modules\\superagent\\lib\\node\\index.js:916:18\n    at IncomingMessage.<anonymous> (node_modules\\superagent\\lib\\node\\parsers\\json.js:19:7)\n    at IncomingMessage.emit (node:events:402:35)\n    at endReadableNT (node:internal/streams/readable:1343:12)\n    at processTicksAndRejections (node:internal/process/task_queues:83:21)",
-                    "diff": "- 400\n+ 200\n"
-                  },
-                  "uuid": "105293e9-1b32-481d-b169-6dddacc8d2bd",
-                  "parentUUID": "5d07b09c-ed6e-4a04-943d-2fd486536cac",
-                  "isHook": false,
-                  "skipped": false
-                }
-              ],
-              "suites": [],
-              "passes": [],
-              "failures": [
-                "105293e9-1b32-481d-b169-6dddacc8d2bd"
-              ],
-              "pending": [],
-              "skipped": [],
-              "duration": 47,
-              "root": false,
-              "rootEmpty": false,
-              "_timeout": 100000
-            },
-            {
-              "uuid": "533ff0e5-1d02-4a64-86d0-c397201e14db",
-              "title": "Don't Post Blog Post",
-              "fullFile": "C:\\Users\\HP\\Documents\\GitHub\\Backend_Tumblr-4u\\test\\postTest.js",
+              "uuid": "8e628162-6093-4479-8bcc-3f54364fb480",
+              "title": "Function createPost",
+              "fullFile": "D:\\AbeerD\\College\\third year\\SW Engineering\\Phase2_Integrated\\Backend_Tumblr-4u\\test\\postTest.js",
               "file": "\\test\\postTest.js",
               "beforeHooks": [],
               "afterHooks": [],
               "tests": [
                 {
-                  "title": "It Should Not Create New Post Because Blog Doesn't Exist",
-                  "fullTitle": "Post APIs Don't Post Blog Post It Should Not Create New Post Because Blog Doesn't Exist",
+                  "title": "It Should Create New Post",
+                  "fullTitle": "Post APIs Function createPost It Should Create New Post",
                   "timedOut": false,
-                  "duration": 9,
-                  "state": "failed",
-                  "speed": null,
-                  "pass": false,
-                  "fail": true,
+                  "duration": 3421,
+                  "state": "passed",
+                  "speed": "slow",
+                  "pass": true,
+                  "fail": false,
                   "pending": false,
                   "context": null,
-                  "code": "const blogPost = {\n  postHtml: '</>',\n  type: 'video',\n  state: 'published',\n  tags: 'engineering',\n};\nchai\n    .request(server)\n    .post('/61968c974f161173940ea9ca/posts/create_post')\n// no blog with this id\n    .send(blogPost)\n    .end((err, res) => {\n      res.should.have.status(400);\n      res.body.should.be.eq('Blog Not Found (<:>)');\n      done();\n    });",
-                  "err": {
-                    "message": "AssertionError: expected { Object (meta, response) } to equal 'Blog Not Found (<:>)'",
-                    "estack": "AssertionError: expected { Object (meta, response) } to equal 'Blog Not Found (<:>)'\n    at C:\\Users\\HP\\Documents\\GitHub\\Backend_Tumblr-4u\\test\\postTest.js:60:36\n    at Test.Request.callback (node_modules\\superagent\\lib\\node\\index.js:716:12)\n    at C:\\Users\\HP\\Documents\\GitHub\\Backend_Tumblr-4u\\node_modules\\superagent\\lib\\node\\index.js:916:18\n    at IncomingMessage.<anonymous> (node_modules\\superagent\\lib\\node\\parsers\\json.js:19:7)\n    at IncomingMessage.emit (node:events:402:35)\n    at endReadableNT (node:internal/streams/readable:1343:12)\n    at processTicksAndRejections (node:internal/process/task_queues:83:21)",
-                    "diff": null
-                  },
-                  "uuid": "53d3547f-a597-4a92-aa28-7b315e4a7d58",
-                  "parentUUID": "533ff0e5-1d02-4a64-86d0-c397201e14db",
+                  "code": "const req = {\n  params: {\n    blogId: '619957113df6b45019c42d06'\n  },\n  body: {\n    postHtml: '</>',\n    type: 'link',\n    state: 'published',\n    tags: 'tumblr',\n  }\n};\n\npostFunctions.createPost(req.params.blogId, req.body.postHtml, req.body.type, req.body.state, req.body.tags).then((ret) => {\n  expect(ret).to.be.a('array');\n  expect(ret[0]).to.be.eq('Post Created Successfully');\n  done();\n}).catch(done);",
+                  "err": {},
+                  "uuid": "d5bc0086-0552-4d00-8852-7e853f590125",
+                  "parentUUID": "8e628162-6093-4479-8bcc-3f54364fb480",
                   "isHook": false,
                   "skipped": false
                 }
               ],
               "suites": [],
-              "passes": [],
-              "failures": [
-                "53d3547f-a597-4a92-aa28-7b315e4a7d58"
+              "passes": [
+                "d5bc0086-0552-4d00-8852-7e853f590125"
               ],
+              "failures": [],
               "pending": [],
               "skipped": [],
-              "duration": 9,
+              "duration": 3421,
               "root": false,
               "rootEmpty": false,
               "_timeout": 100000
             },
             {
-              "uuid": "107903ee-160e-4be8-b6d9-e7b1ad860351",
-              "title": "Create Post Internal Server Error",
-              "fullFile": "C:\\Users\\HP\\Documents\\GitHub\\Backend_Tumblr-4u\\test\\postTest.js",
-              "file": "\\test\\postTest.js",
-              "beforeHooks": [],
-              "afterHooks": [],
-              "tests": [
-                {
-                  "title": "It Should Not Create New Post Due To Server Error",
-                  "fullTitle": "Post APIs Create Post Internal Server Error It Should Not Create New Post Due To Server Error",
-                  "timedOut": false,
-                  "duration": 22,
-                  "state": "failed",
-                  "speed": null,
-                  "pass": false,
-                  "fail": true,
-                  "pending": false,
-                  "context": null,
-                  "code": "const blogPost = {\n  postHtml: '</>',\n  type: 'video',\n  state: 'published',\n  tags: 'engineering',\n};\nchai\n    .request(server)\n    .post('/1/posts/create_post') // no blog with this id\n    .send(blogPost)\n    .end((err, res) => {\n      res.should.have.status(500);\n      res.body.should.be.eq('Error In Create Post Function (<:>)');\n      done();\n    });",
-                  "err": {
-                    "message": "AssertionError: expected { Object (_events, _eventsCount, ...) } to have status code 500 but got 400",
-                    "estack": "AssertionError: expected { Object (_events, _eventsCount, ...) } to have status code 500 but got 400\n    at C:\\Users\\HP\\Documents\\GitHub\\Backend_Tumblr-4u\\test\\postTest.js:79:29\n    at Test.Request.callback (node_modules\\superagent\\lib\\node\\index.js:716:12)\n    at C:\\Users\\HP\\Documents\\GitHub\\Backend_Tumblr-4u\\node_modules\\superagent\\lib\\node\\index.js:916:18\n    at IncomingMessage.<anonymous> (node_modules\\superagent\\lib\\node\\parsers\\json.js:19:7)\n    at IncomingMessage.emit (node:events:402:35)\n    at endReadableNT (node:internal/streams/readable:1343:12)\n    at processTicksAndRejections (node:internal/process/task_queues:83:21)",
-                    "diff": "- 400\n+ 500\n"
-                  },
-                  "uuid": "1e1092f6-354e-4ceb-8db6-7afb56b482ba",
-                  "parentUUID": "107903ee-160e-4be8-b6d9-e7b1ad860351",
-                  "isHook": false,
-                  "skipped": false
-                }
-              ],
-              "suites": [],
-              "passes": [],
-              "failures": [
-                "1e1092f6-354e-4ceb-8db6-7afb56b482ba"
-              ],
-              "pending": [],
-              "skipped": [],
-              "duration": 22,
-              "root": false,
-              "rootEmpty": false,
-              "_timeout": 100000
-            },
-            {
-              "uuid": "f9c0fba7-d793-43bf-8db2-f4d6c123e936",
-              "title": "Get Post and Show it",
-              "fullFile": "C:\\Users\\HP\\Documents\\GitHub\\Backend_Tumblr-4u\\test\\postTest.js",
+              "uuid": "d686dda3-2873-4df0-804d-7fdc4cea9311",
+              "title": "Function showPost",
+              "fullFile": "D:\\AbeerD\\College\\third year\\SW Engineering\\Phase2_Integrated\\Backend_Tumblr-4u\\test\\postTest.js",
               "file": "\\test\\postTest.js",
               "beforeHooks": [],
               "afterHooks": [],
               "tests": [
                 {
                   "title": "It Should Show Post",
-                  "fullTitle": "Post APIs Get Post and Show it It Should Show Post",
+                  "fullTitle": "Post APIs Function showPost It Should Show Post",
                   "timedOut": false,
-                  "duration": 157,
-                  "state": "failed",
-                  "speed": null,
-                  "pass": false,
-                  "fail": true,
+                  "duration": 154,
+                  "state": "passed",
+                  "speed": "slow",
+                  "pass": true,
+                  "fail": false,
                   "pending": false,
                   "context": null,
-                  "code": "chai\n    .request(server)\n    .get('/posts/6196e0ed3392462ec0ae903f/show_post')\n    .end((err, res) => {\n      console.log(res);\n      res.should.have.status(200);\n      res.body.should.be.eq('</>');\n      done();\n    });",
-                  "err": {
-                    "message": "AssertionError: expected { Object (_events, _eventsCount, ...) } to have status code 200 but got 500",
-                    "estack": "AssertionError: expected { Object (_events, _eventsCount, ...) } to have status code 200 but got 500\n    at C:\\Users\\HP\\Documents\\GitHub\\Backend_Tumblr-4u\\test\\postTest.js:93:29\n    at Test.Request.callback (node_modules\\superagent\\lib\\node\\index.js:716:12)\n    at C:\\Users\\HP\\Documents\\GitHub\\Backend_Tumblr-4u\\node_modules\\superagent\\lib\\node\\index.js:916:18\n    at IncomingMessage.<anonymous> (node_modules\\superagent\\lib\\node\\parsers\\json.js:19:7)\n    at IncomingMessage.emit (node:events:402:35)\n    at endReadableNT (node:internal/streams/readable:1343:12)\n    at processTicksAndRejections (node:internal/process/task_queues:83:21)",
-                    "diff": "- 500\n+ 200\n"
-                  },
-                  "uuid": "d9d1b49e-4bbf-46a7-9a87-458a9f18ae64",
-                  "parentUUID": "f9c0fba7-d793-43bf-8db2-f4d6c123e936",
+                  "code": "const req = {\n  params: {\n    postId: '61ae667d8b4d5620ce937992',\n  }, \n};\npostFunctions.showPost(req.params.postId).then((ret) => {\n  expect(ret).to.be.a('array');\n  expect(ret[0]).to.be.eq('Post Returned Successfully');\n  done();\n}).catch(done);",
+                  "err": {},
+                  "uuid": "48b5f955-f321-4a90-a7b4-e31479eb97cf",
+                  "parentUUID": "d686dda3-2873-4df0-804d-7fdc4cea9311",
                   "isHook": false,
                   "skipped": false
                 }
               ],
               "suites": [],
-              "passes": [],
-              "failures": [
-                "d9d1b49e-4bbf-46a7-9a87-458a9f18ae64"
+              "passes": [
+                "48b5f955-f321-4a90-a7b4-e31479eb97cf"
               ],
+              "failures": [],
               "pending": [],
               "skipped": [],
-              "duration": 157,
-              "root": false,
-              "rootEmpty": false,
-              "_timeout": 100000
-            }
-          ],
-          "passes": [],
-          "failures": [],
-          "pending": [],
-          "skipped": [],
-          "duration": 0,
-          "root": false,
-          "rootEmpty": false,
-          "_timeout": 100000
-        },
-        {
-          "uuid": "37befe06-d649-4843-87eb-0ab6f9696027",
-          "title": "Search APIs",
-          "fullFile": "C:\\Users\\HP\\Documents\\GitHub\\Backend_Tumblr-4u\\test\\searchTest.js",
-          "file": "\\test\\searchTest.js",
-          "beforeHooks": [],
-          "afterHooks": [],
-          "tests": [],
-          "suites": [
-            {
-              "uuid": "fbe73ed9-5148-483d-854f-0748a09c5c7f",
-              "title": "Search Dashboard Search",
-              "fullFile": "C:\\Users\\HP\\Documents\\GitHub\\Backend_Tumblr-4u\\test\\searchTest.js",
-              "file": "\\test\\searchTest.js",
-              "beforeHooks": [],
-              "afterHooks": [],
-              "tests": [
-                {
-                  "title": "It Should get element of hashtags in posts",
-                  "fullTitle": "Search APIs Search Dashboard Search It Should get element of hashtags in posts",
-                  "timedOut": false,
-                  "duration": 7,
-                  "state": "failed",
-                  "speed": null,
-                  "pass": false,
-                  "fail": true,
-                  "pending": false,
-                  "context": null,
-                  "code": "const wordName ={wordName: 'dep'};\nchai\n    .request(server)\n    .get('/autoCompleteSearchDash')\n    .send(wordName)\n    .end((err, res) => {\n      console.log(res.body);\n      res.body[0][0].should.be.eq('deposit');\n      done();\n    });",
-                  "err": {
-                    "message": "TypeError: Cannot read properties of undefined (reading '0')",
-                    "estack": "TypeError: Cannot read properties of undefined (reading '0')\n    at C:\\Users\\HP\\Documents\\GitHub\\Backend_Tumblr-4u\\test\\searchTest.js:28:24\n    at Test.Request.callback (node_modules\\superagent\\lib\\node\\index.js:716:12)\n    at C:\\Users\\HP\\Documents\\GitHub\\Backend_Tumblr-4u\\node_modules\\superagent\\lib\\node\\index.js:916:18\n    at IncomingMessage.<anonymous> (node_modules\\superagent\\lib\\node\\parsers\\json.js:19:7)\n    at IncomingMessage.emit (node:events:402:35)\n    at endReadableNT (node:internal/streams/readable:1343:12)\n    at processTicksAndRejections (node:internal/process/task_queues:83:21)",
-                    "diff": null
-                  },
-                  "uuid": "282596de-7dd6-4910-916d-54e7ec73be23",
-                  "parentUUID": "fbe73ed9-5148-483d-854f-0748a09c5c7f",
-                  "isHook": false,
-                  "skipped": false
-                }
-              ],
-              "suites": [],
-              "passes": [],
-              "failures": [
-                "282596de-7dd6-4910-916d-54e7ec73be23"
-              ],
-              "pending": [],
-              "skipped": [],
-              "duration": 7,
+              "duration": 154,
               "root": false,
               "rootEmpty": false,
               "_timeout": 100000
             },
             {
-              "uuid": "94330a67-ee18-4c40-82c6-aad7182b5e53",
-              "title": "Search Dashboard Search",
-              "fullFile": "C:\\Users\\HP\\Documents\\GitHub\\Backend_Tumblr-4u\\test\\searchTest.js",
-              "file": "\\test\\searchTest.js",
+              "uuid": "bf853282-c571-4565-9fcc-ea37610823f6",
+              "title": "Function makeComment",
+              "fullFile": "D:\\AbeerD\\College\\third year\\SW Engineering\\Phase2_Integrated\\Backend_Tumblr-4u\\test\\postTest.js",
+              "file": "\\test\\postTest.js",
               "beforeHooks": [],
               "afterHooks": [],
               "tests": [
                 {
-                  "title": "It shows that it is not case sensitive",
-                  "fullTitle": "Search APIs Search Dashboard Search It shows that it is not case sensitive",
+                  "title": "It Should Make Comment",
+                  "fullTitle": "Post APIs Function makeComment It Should Make Comment",
                   "timedOut": false,
-                  "duration": 7,
-                  "state": "failed",
-                  "speed": null,
-                  "pass": false,
-                  "fail": true,
+                  "duration": 483,
+                  "state": "passed",
+                  "speed": "slow",
+                  "pass": true,
+                  "fail": false,
                   "pending": false,
                   "context": null,
-                  "code": "const wordName ={wordName: 'DEP'};\nchai\n    .request(server)\n    .get('/autoCompleteSearchDash')\n    .send(wordName)\n    .end((err, res) => {\n      console.log(res.body);\n      res.body[0][0].should.be.eq('deposit');\n      done();\n    });",
-                  "err": {
-                    "message": "TypeError: Cannot read properties of undefined (reading '0')",
-                    "estack": "TypeError: Cannot read properties of undefined (reading '0')\n    at C:\\Users\\HP\\Documents\\GitHub\\Backend_Tumblr-4u\\test\\searchTest.js:44:24\n    at Test.Request.callback (node_modules\\superagent\\lib\\node\\index.js:716:12)\n    at C:\\Users\\HP\\Documents\\GitHub\\Backend_Tumblr-4u\\node_modules\\superagent\\lib\\node\\index.js:916:18\n    at IncomingMessage.<anonymous> (node_modules\\superagent\\lib\\node\\parsers\\json.js:19:7)\n    at IncomingMessage.emit (node:events:402:35)\n    at endReadableNT (node:internal/streams/readable:1343:12)\n    at processTicksAndRejections (node:internal/process/task_queues:83:21)",
-                    "diff": null
-                  },
-                  "uuid": "2cc74f9c-eae1-4c15-b2ba-7796dc748db5",
-                  "parentUUID": "94330a67-ee18-4c40-82c6-aad7182b5e53",
+                  "code": "const req = {\n  params: {\n    blogId: '619957113df6b45019c42d06',\n    postId: '61ae667d8b4d5620ce937992',\n  }, \n  body: {\n    text: 'Very Good Post',\n  },\n};\npostFunctions.makeComment(req.params.blogId, req.params.postId, req.body.text).then((ret) => {\n  expect(ret).to.be.a('array');\n  expect(ret[0]).to.be.eq('Comment Posted Successfully');\n  done();\n}).catch(done);",
+                  "err": {},
+                  "uuid": "4c55bb47-14d1-49ce-aab4-2ccdd26a0ccc",
+                  "parentUUID": "bf853282-c571-4565-9fcc-ea37610823f6",
                   "isHook": false,
                   "skipped": false
                 }
               ],
               "suites": [],
-              "passes": [],
-              "failures": [
-                "2cc74f9c-eae1-4c15-b2ba-7796dc748db5"
+              "passes": [
+                "4c55bb47-14d1-49ce-aab4-2ccdd26a0ccc"
               ],
+              "failures": [],
               "pending": [],
               "skipped": [],
-              "duration": 7,
+              "duration": 483,
               "root": false,
               "rootEmpty": false,
               "_timeout": 100000
             },
             {
-              "uuid": "e0fb1744-c32e-4851-8322-fdef39bf9b9e",
-              "title": "Search Dashboard Search",
-              "fullFile": "C:\\Users\\HP\\Documents\\GitHub\\Backend_Tumblr-4u\\test\\searchTest.js",
-              "file": "\\test\\searchTest.js",
+              "uuid": "7831c605-77c2-4fcb-9750-ae0b9cea30c6",
+              "title": "Function removeComment",
+              "fullFile": "D:\\AbeerD\\College\\third year\\SW Engineering\\Phase2_Integrated\\Backend_Tumblr-4u\\test\\postTest.js",
+              "file": "\\test\\postTest.js",
               "beforeHooks": [],
               "afterHooks": [],
               "tests": [
                 {
-                  "title": "It Should get blog with the regex",
-                  "fullTitle": "Search APIs Search Dashboard Search It Should get blog with the regex",
+                  "title": "It Should Remove a Comment",
+                  "fullTitle": "Post APIs Function removeComment It Should Remove a Comment",
                   "timedOut": false,
-                  "duration": 7,
-                  "state": "failed",
-                  "speed": null,
-                  "pass": false,
-                  "fail": true,
+                  "duration": 318,
+                  "state": "passed",
+                  "speed": "slow",
+                  "pass": true,
+                  "fail": false,
                   "pending": false,
                   "context": null,
-                  "code": "const wordName ={wordName: 'hazel'};\nchai\n    .request(server)\n    .get('/autoCompleteSearchDash')\n    .send(wordName)\n    .end((err, res) => {\n      console.log(res.body);\n      res.body[1][0].name.should.be.eq('Mr. Hazel Schamberger');\n      done();\n    });",
-                  "err": {
-                    "message": "TypeError: Cannot read properties of undefined (reading '0')",
-                    "estack": "TypeError: Cannot read properties of undefined (reading '0')\n    at C:\\Users\\HP\\Documents\\GitHub\\Backend_Tumblr-4u\\test\\searchTest.js:60:24\n    at Test.Request.callback (node_modules\\superagent\\lib\\node\\index.js:716:12)\n    at C:\\Users\\HP\\Documents\\GitHub\\Backend_Tumblr-4u\\node_modules\\superagent\\lib\\node\\index.js:916:18\n    at IncomingMessage.<anonymous> (node_modules\\superagent\\lib\\node\\parsers\\json.js:19:7)\n    at IncomingMessage.emit (node:events:402:35)\n    at endReadableNT (node:internal/streams/readable:1343:12)\n    at processTicksAndRejections (node:internal/process/task_queues:83:21)",
-                    "diff": null
-                  },
-                  "uuid": "1fd3e210-8f01-4b2f-b1be-4d501b450bba",
-                  "parentUUID": "e0fb1744-c32e-4851-8322-fdef39bf9b9e",
+                  "code": "const req = {\n  params: {\n    postId: '61ae667d8b4d5620ce937992',\n    commentId: '61b3afacf45da667eb828620',\n  }, \n}\n    \npostFunctions.removeComment(req.params.postId, req.params.commentId).then((ret) => {\n  expect(ret).to.be.a('string');\n  expect(ret).to.be.eq('Comment Removed Successfully');\n  done();\n}).catch(done);",
+                  "err": {},
+                  "uuid": "f92e2bd1-575a-46cc-a5cd-c0aaa028fc5b",
+                  "parentUUID": "7831c605-77c2-4fcb-9750-ae0b9cea30c6",
                   "isHook": false,
                   "skipped": false
                 }
               ],
               "suites": [],
-              "passes": [],
-              "failures": [
-                "1fd3e210-8f01-4b2f-b1be-4d501b450bba"
+              "passes": [
+                "f92e2bd1-575a-46cc-a5cd-c0aaa028fc5b"
               ],
+              "failures": [],
               "pending": [],
               "skipped": [],
-              "duration": 7,
+              "duration": 318,
               "root": false,
               "rootEmpty": false,
               "_timeout": 100000
             },
             {
-              "uuid": "7e0f4b1d-91a4-4749-9909-0d03ff02ec4a",
-              "title": "Search Dashboard Search",
-              "fullFile": "C:\\Users\\HP\\Documents\\GitHub\\Backend_Tumblr-4u\\test\\searchTest.js",
-              "file": "\\test\\searchTest.js",
+              "uuid": "388d7b9e-da98-446e-8d85-d617ecee6b05",
+              "title": "Function reblogPost",
+              "fullFile": "D:\\AbeerD\\College\\third year\\SW Engineering\\Phase2_Integrated\\Backend_Tumblr-4u\\test\\postTest.js",
+              "file": "\\test\\postTest.js",
               "beforeHooks": [],
               "afterHooks": [],
               "tests": [
                 {
-                  "title": "It Should get followed/interested tags by a blog",
-                  "fullTitle": "Search APIs Search Dashboard Search It Should get followed/interested tags by a blog",
+                  "title": "It Should Reblog a Post",
+                  "fullTitle": "Post APIs Function reblogPost It Should Reblog a Post",
                   "timedOut": false,
-                  "duration": 6,
-                  "state": "failed",
-                  "speed": null,
-                  "pass": false,
-                  "fail": true,
+                  "duration": 490,
+                  "state": "passed",
+                  "speed": "slow",
+                  "pass": true,
+                  "fail": false,
                   "pending": false,
                   "context": null,
-                  "code": "const wordName ={wordName: 'mat'};\nchai\n    .request(server)\n    .get('/autoCompleteSearchDash')\n    .send(wordName)\n    .end((err, res) => {\n      console.log(res.body);\n      res.body[2][0].followedTags[0].should.be.eq('matrix');\n      done();\n    });",
-                  "err": {
-                    "message": "TypeError: Cannot read properties of undefined (reading '0')",
-                    "estack": "TypeError: Cannot read properties of undefined (reading '0')\n    at C:\\Users\\HP\\Documents\\GitHub\\Backend_Tumblr-4u\\test\\searchTest.js:76:24\n    at Test.Request.callback (node_modules\\superagent\\lib\\node\\index.js:716:12)\n    at C:\\Users\\HP\\Documents\\GitHub\\Backend_Tumblr-4u\\node_modules\\superagent\\lib\\node\\index.js:916:18\n    at IncomingMessage.<anonymous> (node_modules\\superagent\\lib\\node\\parsers\\json.js:19:7)\n    at IncomingMessage.emit (node:events:402:35)\n    at endReadableNT (node:internal/streams/readable:1343:12)\n    at processTicksAndRejections (node:internal/process/task_queues:83:21)",
-                    "diff": null
-                  },
-                  "uuid": "86cdc0aa-b009-4fa9-b928-8c3c2d9409b9",
-                  "parentUUID": "7e0f4b1d-91a4-4749-9909-0d03ff02ec4a",
+                  "code": "const req = {\n  params: {\n    blogId: '619957113df6b45019c42d06',\n    postId: '61ae667d8b4d5620ce937992',\n  }, \n  body: {\n    text: 'Very Good Post',\n  },\n};\npostFunctions.reblogPost(req.params.blogId, req.params.postId, req.body.text).then((ret) => {\n  expect(ret).to.be.a('array');\n  expect(ret[0]).to.be.eq('Post Reblogged Successfully');\n  done();\n}).catch(done);",
+                  "err": {},
+                  "uuid": "7c430745-c90b-4428-99a4-a89c4c246758",
+                  "parentUUID": "388d7b9e-da98-446e-8d85-d617ecee6b05",
                   "isHook": false,
                   "skipped": false
                 }
               ],
               "suites": [],
-              "passes": [],
-              "failures": [
-                "86cdc0aa-b009-4fa9-b928-8c3c2d9409b9"
+              "passes": [
+                "7c430745-c90b-4428-99a4-a89c4c246758"
               ],
+              "failures": [],
               "pending": [],
               "skipped": [],
-              "duration": 6,
+              "duration": 490,
               "root": false,
               "rootEmpty": false,
               "_timeout": 100000
             },
             {
-              "uuid": "c748b80d-544b-4c1a-bc6f-7e19e5016207",
-              "title": "Search Dashboard Search",
-              "fullFile": "C:\\Users\\HP\\Documents\\GitHub\\Backend_Tumblr-4u\\test\\searchTest.js",
-              "file": "\\test\\searchTest.js",
+              "uuid": "52962199-abf2-413c-9975-64850068efff",
+              "title": "Function removeReblog",
+              "fullFile": "D:\\AbeerD\\College\\third year\\SW Engineering\\Phase2_Integrated\\Backend_Tumblr-4u\\test\\postTest.js",
+              "file": "\\test\\postTest.js",
               "beforeHooks": [],
               "afterHooks": [],
               "tests": [
                 {
-                  "title": "It Should get nothing when nothing is entered",
-                  "fullTitle": "Search APIs Search Dashboard Search It Should get nothing when nothing is entered",
+                  "title": "It Should Remove a Reblog",
+                  "fullTitle": "Post APIs Function removeReblog It Should Remove a Reblog",
                   "timedOut": false,
-                  "duration": 9,
+                  "duration": 319,
+                  "state": "passed",
+                  "speed": "slow",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "const req = {\n  params: {\n    postId: '61ae667d8b4d5620ce937992',\n    reblogId: '61b4f6002b2f15fd81c25529' ,\n  }, \n};\npostFunctions.removeReblog(req.params.postId, req.params.reblogId).then((ret) => {\n  expect(ret).to.be.a('string');\n  expect(ret).to.be.eq('Reblog Removed Successfully');\n  done();\n}).catch(done);",
+                  "err": {},
+                  "uuid": "ddee52c9-cfb0-4ac0-827d-1fe2914bd678",
+                  "parentUUID": "52962199-abf2-413c-9975-64850068efff",
+                  "isHook": false,
+                  "skipped": false
+                }
+              ],
+              "suites": [],
+              "passes": [
+                "ddee52c9-cfb0-4ac0-827d-1fe2914bd678"
+              ],
+              "failures": [],
+              "pending": [],
+              "skipped": [],
+              "duration": 319,
+              "root": false,
+              "rootEmpty": false,
+              "_timeout": 100000
+            },
+            {
+              "uuid": "f0229392-e95e-45b3-b8a7-af0d79aeb978",
+              "title": "Function loopAndCheck",
+              "fullFile": "D:\\AbeerD\\College\\third year\\SW Engineering\\Phase2_Integrated\\Backend_Tumblr-4u\\test\\postTest.js",
+              "file": "\\test\\postTest.js",
+              "beforeHooks": [],
+              "afterHooks": [],
+              "tests": [
+                {
+                  "title": "It Should Loop on an Array and Check if an Element Exists",
+                  "fullTitle": "Post APIs Function loopAndCheck It Should Loop on an Array and Check if an Element Exists",
+                  "timedOut": false,
+                  "duration": 0,
                   "state": "passed",
                   "speed": "fast",
                   "pass": true,
                   "fail": false,
                   "pending": false,
                   "context": null,
-                  "code": "const wordName ={wordName: ''};\nchai\n    .request(server)\n    .get('/autoCompleteSearchDash')\n    .send(wordName)\n    .end((err, res) => {\n      console.log(res.body);\n      res.body.should.be.eq(',wordName, is not allowed to be empty');\n      done();\n    });",
+                  "code": "let arr = [0,1,2];\nlet element = 1;\n//expect(postControl.loopAndCheck(arr, element)).to.be.equal(1);\npostFunctions.loopAndCheck(arr, element).should.be.eq(1);\n    done();",
                   "err": {},
-                  "uuid": "1806da7f-ab57-4f4b-ada5-00063e03d472",
-                  "parentUUID": "c748b80d-544b-4c1a-bc6f-7e19e5016207",
+                  "uuid": "2f91b726-bcc8-4e6b-8c0e-d83068d8e921",
+                  "parentUUID": "f0229392-e95e-45b3-b8a7-af0d79aeb978",
                   "isHook": false,
                   "skipped": false
                 }
               ],
               "suites": [],
               "passes": [
-                "1806da7f-ab57-4f4b-ada5-00063e03d472"
+                "2f91b726-bcc8-4e6b-8c0e-d83068d8e921"
               ],
               "failures": [],
               "pending": [],
               "skipped": [],
-              "duration": 9,
-              "root": false,
-              "rootEmpty": false,
-              "_timeout": 100000
-            }
-          ],
-          "passes": [],
-          "failures": [],
-          "pending": [],
-          "skipped": [],
-          "duration": 0,
-          "root": false,
-          "rootEmpty": false,
-          "_timeout": 100000
-        },
-        {
-          "uuid": "df1d8fea-245f-4a3b-bb2b-683d15b0548e",
-          "title": "User Methods",
-          "fullFile": "C:\\Users\\HP\\Documents\\GitHub\\Backend_Tumblr-4u\\test\\userBlogTest.js",
-          "file": "\\test\\userBlogTest.js",
-          "beforeHooks": [],
-          "afterHooks": [],
-          "tests": [],
-          "suites": [
-            {
-              "uuid": "67e82a34-0700-4c03-9467-e7c4eaec3208",
-              "title": "User follows a blog",
-              "fullFile": "C:\\Users\\HP\\Documents\\GitHub\\Backend_Tumblr-4u\\test\\userBlogTest.js",
-              "file": "\\test\\userBlogTest.js",
-              "beforeHooks": [],
-              "afterHooks": [],
-              "tests": [
-                {
-                  "title": "It should put the userId in followers array of blog andput blogId in the following_blogs array of the user",
-                  "fullTitle": "User Methods User follows a blog It should put the userId in followers array of blog andput blogId in the following_blogs array of the user",
-                  "timedOut": false,
-                  "duration": 12,
-                  "state": "failed",
-                  "speed": null,
-                  "pass": false,
-                  "fail": true,
-                  "pending": false,
-                  "context": null,
-                  "code": "const blogId = {blogId: '619957113df6b45019c42d07'};\nchai\n    .request(server)\n    .post('/user/follow/619695c9bf5e722b10e141c2')\n    .send(blogId)\n    .end((err, res) => {\n      res.should.have.status(200);\n      res.body.should.be.a('object');\n      res.body.should.have.property('res')\n          .have.property('message')\n          .eq('Blog Followed Successfully');\n      done();\n    });",
-                  "err": {
-                    "message": "AssertionError: expected { Object (_events, _eventsCount, ...) } to have status code 200 but got 400",
-                    "estack": "AssertionError: expected { Object (_events, _eventsCount, ...) } to have status code 200 but got 400\n    at C:\\Users\\HP\\Documents\\GitHub\\Backend_Tumblr-4u\\test\\userBlogTest.js:28:29\n    at Test.Request.callback (node_modules\\superagent\\lib\\node\\index.js:716:12)\n    at C:\\Users\\HP\\Documents\\GitHub\\Backend_Tumblr-4u\\node_modules\\superagent\\lib\\node\\index.js:916:18\n    at IncomingMessage.<anonymous> (node_modules\\superagent\\lib\\node\\parsers\\json.js:19:7)\n    at IncomingMessage.emit (node:events:402:35)\n    at endReadableNT (node:internal/streams/readable:1343:12)\n    at processTicksAndRejections (node:internal/process/task_queues:83:21)",
-                    "diff": "- 400\n+ 200\n"
-                  },
-                  "uuid": "b044358e-400c-4532-82e6-03842fcc7a42",
-                  "parentUUID": "67e82a34-0700-4c03-9467-e7c4eaec3208",
-                  "isHook": false,
-                  "skipped": false
-                },
-                {
-                  "title": "It doesn't  find the blog in the database and returns blog not found",
-                  "fullTitle": "User Methods User follows a blog It doesn't  find the blog in the database and returns blog not found",
-                  "timedOut": false,
-                  "duration": 14,
-                  "state": "failed",
-                  "speed": null,
-                  "pass": false,
-                  "fail": true,
-                  "pending": false,
-                  "context": null,
-                  "code": "// wrong blogId\nconst blogId = {blogId: '619957113df6b45019c42d00'};\nchai\n    .request(server)\n    .post('/user/follow/619695c9bf5e722b10e141c2')\n    .send(blogId)\n    .end((err, res) => {\n      res.should.have.status(404);\n      res.body.should.be.a('object');\n      res.body.should.have.property('res')\n          .have.property('error')\n          .eq('Blog not found');\n      done();\n    });",
-                  "err": {
-                    "message": "AssertionError: expected { Object (_events, _eventsCount, ...) } to have status code 404 but got 400",
-                    "estack": "AssertionError: expected { Object (_events, _eventsCount, ...) } to have status code 404 but got 400\n    at C:\\Users\\HP\\Documents\\GitHub\\Backend_Tumblr-4u\\test\\userBlogTest.js:46:29\n    at Test.Request.callback (node_modules\\superagent\\lib\\node\\index.js:716:12)\n    at C:\\Users\\HP\\Documents\\GitHub\\Backend_Tumblr-4u\\node_modules\\superagent\\lib\\node\\index.js:916:18\n    at IncomingMessage.<anonymous> (node_modules\\superagent\\lib\\node\\parsers\\json.js:19:7)\n    at IncomingMessage.emit (node:events:402:35)\n    at endReadableNT (node:internal/streams/readable:1343:12)\n    at processTicksAndRejections (node:internal/process/task_queues:83:21)",
-                    "diff": "- 400\n+ 404\n"
-                  },
-                  "uuid": "a21af306-58a5-4ca7-984a-fb94497d41e3",
-                  "parentUUID": "67e82a34-0700-4c03-9467-e7c4eaec3208",
-                  "isHook": false,
-                  "skipped": false
-                }
-              ],
-              "suites": [],
-              "passes": [],
-              "failures": [
-                "b044358e-400c-4532-82e6-03842fcc7a42",
-                "a21af306-58a5-4ca7-984a-fb94497d41e3"
-              ],
-              "pending": [],
-              "skipped": [],
-              "duration": 26,
+              "duration": 0,
               "root": false,
               "rootEmpty": false,
               "_timeout": 100000
             },
             {
-              "uuid": "82ef953f-7123-4897-acdc-2ea44753c0a4",
-              "title": "User unfollows a blog",
-              "fullFile": "C:\\Users\\HP\\Documents\\GitHub\\Backend_Tumblr-4u\\test\\userBlogTest.js",
-              "file": "\\test\\userBlogTest.js",
+              "uuid": "3cd911b9-fce9-46c2-8387-229e129b9145",
+              "title": "Function loopObjAndCheck",
+              "fullFile": "D:\\AbeerD\\College\\third year\\SW Engineering\\Phase2_Integrated\\Backend_Tumblr-4u\\test\\postTest.js",
+              "file": "\\test\\postTest.js",
               "beforeHooks": [],
               "afterHooks": [],
               "tests": [
                 {
-                  "title": "It should remove the userId from followers array of blog and remove blogId from following_blogs of the user",
-                  "fullTitle": "User Methods User unfollows a blog It should remove the userId from followers array of blog and remove blogId from following_blogs of the user",
+                  "title": "It Should Loop on an Object in an Array and Check if an Id Exists",
+                  "fullTitle": "Post APIs Function loopObjAndCheck It Should Loop on an Object in an Array and Check if an Id Exists",
                   "timedOut": false,
-                  "duration": 9,
-                  "state": "failed",
-                  "speed": null,
-                  "pass": false,
-                  "fail": true,
-                  "pending": false,
-                  "context": null,
-                  "code": "const blogId = {blogId: '619957113df6b45019c42d07'};\nchai\n    .request(server)\n    .post('/user/unfollow/619695c9bf5e722b10e141c2')\n    .send(blogId)\n    .end((err, res) => {\n      res.should.have.status(200);\n      res.body.should.be.a('object');\n      res.body.should.have.property('res')\n          .have.property('message')\n          .eq('Blog Unfollowed Successfully');\n      done();\n    });",
-                  "err": {
-                    "message": "AssertionError: expected { Object (_events, _eventsCount, ...) } to have status code 200 but got 400",
-                    "estack": "AssertionError: expected { Object (_events, _eventsCount, ...) } to have status code 200 but got 400\n    at C:\\Users\\HP\\Documents\\GitHub\\Backend_Tumblr-4u\\test\\userBlogTest.js:65:29\n    at Test.Request.callback (node_modules\\superagent\\lib\\node\\index.js:716:12)\n    at C:\\Users\\HP\\Documents\\GitHub\\Backend_Tumblr-4u\\node_modules\\superagent\\lib\\node\\index.js:916:18\n    at IncomingMessage.<anonymous> (node_modules\\superagent\\lib\\node\\parsers\\json.js:19:7)\n    at IncomingMessage.emit (node:events:402:35)\n    at endReadableNT (node:internal/streams/readable:1343:12)\n    at processTicksAndRejections (node:internal/process/task_queues:83:21)",
-                    "diff": "- 400\n+ 200\n"
-                  },
-                  "uuid": "e110ac5b-9ac3-47c6-9f64-9da809238e83",
-                  "parentUUID": "82ef953f-7123-4897-acdc-2ea44753c0a4",
-                  "isHook": false,
-                  "skipped": false
-                },
-                {
-                  "title": "It doesn't find the blog in the database and returns blog not found",
-                  "fullTitle": "User Methods User unfollows a blog It doesn't find the blog in the database and returns blog not found",
-                  "timedOut": false,
-                  "duration": 9,
-                  "state": "failed",
-                  "speed": null,
-                  "pass": false,
-                  "fail": true,
-                  "pending": false,
-                  "context": null,
-                  "code": "const blogId = {blogId: '619957113df6b45019c42d00'};\nchai\n    .request(server)\n    .post('/user/unfollow/619695c9bf5e722b10e141c2')\n    .send(blogId)\n    .end((err, res) => {\n      res.should.have.status(404);\n      res.body.should.be.a('object');\n      res.body.should.have.property('res')\n          .have.property('error')\n          .eq('Blog not found');\n      done();\n    });",
-                  "err": {
-                    "message": "AssertionError: expected { Object (_events, _eventsCount, ...) } to have status code 404 but got 400",
-                    "estack": "AssertionError: expected { Object (_events, _eventsCount, ...) } to have status code 404 but got 400\n    at C:\\Users\\HP\\Documents\\GitHub\\Backend_Tumblr-4u\\test\\userBlogTest.js:82:29\n    at Test.Request.callback (node_modules\\superagent\\lib\\node\\index.js:716:12)\n    at C:\\Users\\HP\\Documents\\GitHub\\Backend_Tumblr-4u\\node_modules\\superagent\\lib\\node\\index.js:916:18\n    at IncomingMessage.<anonymous> (node_modules\\superagent\\lib\\node\\parsers\\json.js:19:7)\n    at IncomingMessage.emit (node:events:402:35)\n    at endReadableNT (node:internal/streams/readable:1343:12)\n    at processTicksAndRejections (node:internal/process/task_queues:83:21)",
-                    "diff": "- 400\n+ 404\n"
-                  },
-                  "uuid": "7ca66f5f-f0a2-4319-b9f2-89abc9a64d69",
-                  "parentUUID": "82ef953f-7123-4897-acdc-2ea44753c0a4",
-                  "isHook": false,
-                  "skipped": false
-                }
-              ],
-              "suites": [],
-              "passes": [],
-              "failures": [
-                "e110ac5b-9ac3-47c6-9f64-9da809238e83",
-                "7ca66f5f-f0a2-4319-b9f2-89abc9a64d69"
-              ],
-              "pending": [],
-              "skipped": [],
-              "duration": 18,
-              "root": false,
-              "rootEmpty": false,
-              "_timeout": 100000
-            }
-          ],
-          "passes": [],
-          "failures": [],
-          "pending": [],
-          "skipped": [],
-          "duration": 0,
-          "root": false,
-          "rootEmpty": false,
-          "_timeout": 100000
-        },
-        {
-          "uuid": "aff24bba-1b3d-4c81-bb37-56cb1421c42a",
-          "title": "Blog Methods",
-          "fullFile": "C:\\Users\\HP\\Documents\\GitHub\\Backend_Tumblr-4u\\test\\userBlogTest.js",
-          "file": "\\test\\userBlogTest.js",
-          "beforeHooks": [],
-          "afterHooks": [],
-          "tests": [],
-          "suites": [
-            {
-              "uuid": "62908dd8-483b-408b-8834-5081d7ac1f49",
-              "title": "Blog blocks a blog",
-              "fullFile": "C:\\Users\\HP\\Documents\\GitHub\\Backend_Tumblr-4u\\test\\userBlogTest.js",
-              "file": "\\test\\userBlogTest.js",
-              "beforeHooks": [],
-              "afterHooks": [],
-              "tests": [
-                {
-                  "title": "It should put the blockedBlogId in blockedBlogsarray of the blog",
-                  "fullTitle": "Blog Methods Blog blocks a blog It should put the blockedBlogId in blockedBlogsarray of the blog",
-                  "timedOut": false,
-                  "duration": 8,
-                  "state": "failed",
-                  "speed": null,
-                  "pass": false,
-                  "fail": true,
-                  "pending": false,
-                  "context": null,
-                  "code": "const blockedBlogId = {blockedBlogId: '619957113df6b45019c42d05'};\nchai\n    .request(server)\n    .post('/blog/block/619957113df6b45019c42d07')\n    .send(blockedBlogId)\n    .end((err, res) => {\n      res.should.have.status(200);\n      res.body.should.be.a('object');\n      res.body.should.have.property('res')\n          .have.property('message')\n          .eq('Blog blocked Successfully');\n      done();\n    });",
-                  "err": {
-                    "message": "AssertionError: expected { Object (_events, _eventsCount, ...) } to have status code 200 but got 400",
-                    "estack": "AssertionError: expected { Object (_events, _eventsCount, ...) } to have status code 200 but got 400\n    at C:\\Users\\HP\\Documents\\GitHub\\Backend_Tumblr-4u\\test\\userBlogTest.js:104:29\n    at Test.Request.callback (node_modules\\superagent\\lib\\node\\index.js:716:12)\n    at C:\\Users\\HP\\Documents\\GitHub\\Backend_Tumblr-4u\\node_modules\\superagent\\lib\\node\\index.js:916:18\n    at IncomingMessage.<anonymous> (node_modules\\superagent\\lib\\node\\parsers\\json.js:19:7)\n    at IncomingMessage.emit (node:events:402:35)\n    at endReadableNT (node:internal/streams/readable:1343:12)\n    at processTicksAndRejections (node:internal/process/task_queues:83:21)",
-                    "diff": "- 400\n+ 200\n"
-                  },
-                  "uuid": "14cd35af-5cda-4ec9-93ad-2aebf21297b7",
-                  "parentUUID": "62908dd8-483b-408b-8834-5081d7ac1f49",
-                  "isHook": false,
-                  "skipped": false
-                },
-                {
-                  "title": "It doesn't  find the blog in the database and returns blog not found",
-                  "fullTitle": "Blog Methods Blog blocks a blog It doesn't  find the blog in the database and returns blog not found",
-                  "timedOut": false,
-                  "duration": 7,
-                  "state": "failed",
-                  "speed": null,
-                  "pass": false,
-                  "fail": true,
-                  "pending": false,
-                  "context": null,
-                  "code": "const blockedBlogId = {blockedBlogId: '619957113dfyb45019c42d09'};\nchai\n    .request(server)\n    .post('/blog/block/619957113df6b45019c42d07')\n    .send(blockedBlogId)\n    .end((err, res) => {\n      res.should.have.status(404);\n      res.body.should.be.a('object');\n      res.body.should.have.property('res')\n          .have.property('error')\n          .eq('Blog NOT FOUND');\n      done();\n    });",
-                  "err": {
-                    "message": "AssertionError: expected { Object (_events, _eventsCount, ...) } to have status code 404 but got 400",
-                    "estack": "AssertionError: expected { Object (_events, _eventsCount, ...) } to have status code 404 but got 400\n    at C:\\Users\\HP\\Documents\\GitHub\\Backend_Tumblr-4u\\test\\userBlogTest.js:122:29\n    at Test.Request.callback (node_modules\\superagent\\lib\\node\\index.js:716:12)\n    at C:\\Users\\HP\\Documents\\GitHub\\Backend_Tumblr-4u\\node_modules\\superagent\\lib\\node\\index.js:916:18\n    at IncomingMessage.<anonymous> (node_modules\\superagent\\lib\\node\\parsers\\json.js:19:7)\n    at IncomingMessage.emit (node:events:402:35)\n    at endReadableNT (node:internal/streams/readable:1343:12)\n    at processTicksAndRejections (node:internal/process/task_queues:83:21)",
-                    "diff": "- 400\n+ 404\n"
-                  },
-                  "uuid": "b574696c-2c81-41a3-9079-61c5f9d32ebc",
-                  "parentUUID": "62908dd8-483b-408b-8834-5081d7ac1f49",
-                  "isHook": false,
-                  "skipped": false
-                }
-              ],
-              "suites": [],
-              "passes": [],
-              "failures": [
-                "14cd35af-5cda-4ec9-93ad-2aebf21297b7",
-                "b574696c-2c81-41a3-9079-61c5f9d32ebc"
-              ],
-              "pending": [],
-              "skipped": [],
-              "duration": 15,
-              "root": false,
-              "rootEmpty": false,
-              "_timeout": 100000
-            },
-            {
-              "uuid": "313e9bce-d861-47c9-964e-c9489ac08e39",
-              "title": "Blog unblocks a blog",
-              "fullFile": "C:\\Users\\HP\\Documents\\GitHub\\Backend_Tumblr-4u\\test\\userBlogTest.js",
-              "file": "\\test\\userBlogTest.js",
-              "beforeHooks": [],
-              "afterHooks": [],
-              "tests": [
-                {
-                  "title": "It should remove the blockedBlogId from blockedBlogsarray of the blog",
-                  "fullTitle": "Blog Methods Blog unblocks a blog It should remove the blockedBlogId from blockedBlogsarray of the blog",
-                  "timedOut": false,
-                  "duration": 7,
-                  "state": "failed",
-                  "speed": null,
-                  "pass": false,
-                  "fail": true,
-                  "pending": false,
-                  "context": null,
-                  "code": "const unblockedBlogId = {unblockedBlogId: '619957113df6b45019c42d05'};\nchai\n    .request(server)\n    .post('/blog/unblock/619957113df6b45019c42d07')\n    .send(unblockedBlogId)\n    .end((err, res) => {\n      res.should.have.status(200);\n      res.body.should.be.a('object');\n      res.body.should.have.property('res')\n          .have.property('message')\n          .eq('Blog unblocked Successfully');\n      done();\n    });",
-                  "err": {
-                    "message": "AssertionError: expected { Object (_events, _eventsCount, ...) } to have status code 200 but got 400",
-                    "estack": "AssertionError: expected { Object (_events, _eventsCount, ...) } to have status code 200 but got 400\n    at C:\\Users\\HP\\Documents\\GitHub\\Backend_Tumblr-4u\\test\\userBlogTest.js:142:29\n    at Test.Request.callback (node_modules\\superagent\\lib\\node\\index.js:716:12)\n    at C:\\Users\\HP\\Documents\\GitHub\\Backend_Tumblr-4u\\node_modules\\superagent\\lib\\node\\index.js:916:18\n    at IncomingMessage.<anonymous> (node_modules\\superagent\\lib\\node\\parsers\\json.js:19:7)\n    at IncomingMessage.emit (node:events:402:35)\n    at endReadableNT (node:internal/streams/readable:1343:12)\n    at processTicksAndRejections (node:internal/process/task_queues:83:21)",
-                    "diff": "- 400\n+ 200\n"
-                  },
-                  "uuid": "f161af0a-81ba-4343-af7d-ee97e95948ef",
-                  "parentUUID": "313e9bce-d861-47c9-964e-c9489ac08e39",
-                  "isHook": false,
-                  "skipped": false
-                },
-                {
-                  "title": "It doesn't find the blog in the database and returns blog not found",
-                  "fullTitle": "Blog Methods Blog unblocks a blog It doesn't find the blog in the database and returns blog not found",
-                  "timedOut": false,
-                  "duration": 7,
-                  "state": "failed",
-                  "speed": null,
-                  "pass": false,
-                  "fail": true,
-                  "pending": false,
-                  "context": null,
-                  "code": "const unblockedBlogId = {unblockedBlogId: '619957113dfyb45019c42d09'};\nchai\n    .request(server)\n    .post('/blog/unblock/619957113df6b45019c42d07')\n    .send(unblockedBlogId)\n    .end((err, res) => {\n      res.should.have.status(404);\n      res.body.should.be.a('object');\n      res.body.should.have.property('res')\n          .have.property('error')\n          .eq('Blog NOT FOUND');\n      done();\n    });",
-                  "err": {
-                    "message": "AssertionError: expected { Object (_events, _eventsCount, ...) } to have status code 404 but got 400",
-                    "estack": "AssertionError: expected { Object (_events, _eventsCount, ...) } to have status code 404 but got 400\n    at C:\\Users\\HP\\Documents\\GitHub\\Backend_Tumblr-4u\\test\\userBlogTest.js:160:29\n    at Test.Request.callback (node_modules\\superagent\\lib\\node\\index.js:716:12)\n    at C:\\Users\\HP\\Documents\\GitHub\\Backend_Tumblr-4u\\node_modules\\superagent\\lib\\node\\index.js:916:18\n    at IncomingMessage.<anonymous> (node_modules\\superagent\\lib\\node\\parsers\\json.js:19:7)\n    at IncomingMessage.emit (node:events:402:35)\n    at endReadableNT (node:internal/streams/readable:1343:12)\n    at processTicksAndRejections (node:internal/process/task_queues:83:21)",
-                    "diff": "- 400\n+ 404\n"
-                  },
-                  "uuid": "542abee4-5b71-4c8b-865c-4355e462553c",
-                  "parentUUID": "313e9bce-d861-47c9-964e-c9489ac08e39",
-                  "isHook": false,
-                  "skipped": false
-                }
-              ],
-              "suites": [],
-              "passes": [],
-              "failures": [
-                "f161af0a-81ba-4343-af7d-ee97e95948ef",
-                "542abee4-5b71-4c8b-865c-4355e462553c"
-              ],
-              "pending": [],
-              "skipped": [],
-              "duration": 14,
-              "root": false,
-              "rootEmpty": false,
-              "_timeout": 100000
-            }
-          ],
-          "passes": [],
-          "failures": [],
-          "pending": [],
-          "skipped": [],
-          "duration": 0,
-          "root": false,
-          "rootEmpty": false,
-          "_timeout": 100000
-        },
-        {
-          "uuid": "daf8ef6f-d7db-4320-b3a5-945caeed3e6b",
-          "title": "User APIs",
-          "fullFile": "C:\\Users\\HP\\Documents\\GitHub\\Backend_Tumblr-4u\\test\\userTest.js",
-          "file": "\\test\\userTest.js",
-          "beforeHooks": [],
-          "afterHooks": [],
-          "tests": [],
-          "suites": [
-            {
-              "uuid": "19b005a3-77fc-4701-bd3c-3dc322c1475f",
-              "title": "Check Mail Function",
-              "fullFile": "C:\\Users\\HP\\Documents\\GitHub\\Backend_Tumblr-4u\\test\\userTest.js",
-              "file": "\\test\\userTest.js",
-              "beforeHooks": [],
-              "afterHooks": [],
-              "tests": [
-                {
-                  "title": "It Should Return True",
-                  "fullTitle": "User APIs Check Mail Function It Should Return True",
-                  "timedOut": false,
-                  "duration": 12033,
-=======
-                  "duration": 3752,
->>>>>>> cc274d447895ba213135ab7df0676959e3f87be9
-                  "state": "passed",
-                  "speed": "slow",
-                  "pass": true,
-                  "fail": false,
-                  "pending": false,
-                  "context": null,
-                  "code": "const req={\n  params: {\n    userId: '61b25f1b33c23d832e6f5ba9',\n  },\n  body:\n {\n   title: 'Engineering',\n   name: 'nour99',\n   privacy: false,\n },\n};\ncreateBlog(req.params.userId, req.body.title, req.body.name,\n    req.body.privacy, 'password').then((res)=>{\n  expect(res).to.be.a('object');\n  expect(res.name).to.be.eq(req.body.name);\n  done();\n}).catch(done);",
-                  "err": {},
-<<<<<<< HEAD
-                  "uuid": "7588169b-1248-4316-af06-e2819b0b6ee7",
-                  "parentUUID": "19b005a3-77fc-4701-bd3c-3dc322c1475f",
-=======
-                  "uuid": "b32658c7-438e-42eb-aa05-6b36b591c19a",
-                  "parentUUID": "951779fe-5e23-4ef4-9764-0f668d609820",
->>>>>>> cc274d447895ba213135ab7df0676959e3f87be9
-                  "isHook": false,
-                  "skipped": false
-                },
-                {
-                  "title": "should return false because there is already a blog with the same name",
-                  "fullTitle": "UserBlog Methodes testing Create Blog Testing should return false because there is already a blog with the same name",
-                  "timedOut": false,
-<<<<<<< HEAD
-                  "duration": 170,
-=======
-                  "duration": 164,
->>>>>>> cc274d447895ba213135ab7df0676959e3f87be9
-                  "state": "passed",
-                  "speed": "slow",
-                  "pass": true,
-                  "fail": false,
-                  "pending": false,
-                  "context": null,
-                  "code": "const req={\n  params: {\n    userId: '61b25f1b33c23d832e6f5ba9',\n  },\n  body:\n       {\n         title: 'Engineering',\n         name: 'nour256',\n         privacy: false,\n       },\n};\ncreateBlog(req.params.userId, req.body.title, req.body.name,\n    req.body.privacy, 'password').then((res)=>{\n  expect(res).to.be.eq(null);\n  done();\n}).catch(done);",
-                  "err": {},
-<<<<<<< HEAD
-                  "uuid": "7d07ee0e-c02f-4dde-b337-82abdfc00843",
-                  "parentUUID": "19b005a3-77fc-4701-bd3c-3dc322c1475f",
-=======
-                  "uuid": "0516f37b-b166-4f81-aaeb-2e256b7fa087",
-                  "parentUUID": "951779fe-5e23-4ef4-9764-0f668d609820",
->>>>>>> cc274d447895ba213135ab7df0676959e3f87be9
-                  "isHook": false,
-                  "skipped": false
-                }
-              ],
-              "suites": [],
-              "passes": [
-<<<<<<< HEAD
-                "7588169b-1248-4316-af06-e2819b0b6ee7",
-                "7d07ee0e-c02f-4dde-b337-82abdfc00843"
-=======
-                "b32658c7-438e-42eb-aa05-6b36b591c19a",
-                "0516f37b-b166-4f81-aaeb-2e256b7fa087"
->>>>>>> cc274d447895ba213135ab7df0676959e3f87be9
-              ],
-              "failures": [],
-              "pending": [],
-              "skipped": [],
-<<<<<<< HEAD
-              "duration": 12203,
-              "root": false,
-              "rootEmpty": false,
-              "_timeout": 100000
-            },
-            {
-              "uuid": "3ef981b3-6bec-4923-9020-0cfa3241b887",
-              "title": "Check blogName Function",
-              "fullFile": "C:\\Users\\HP\\Documents\\GitHub\\Backend_Tumblr-4u\\test\\userTest.js",
-              "file": "\\test\\userTest.js",
-              "beforeHooks": [],
-              "afterHooks": [],
-              "tests": [
-                {
-                  "title": "It Should Return True",
-                  "fullTitle": "User APIs Check blogName Function It Should Return True",
-                  "timedOut": false,
-                  "duration": 289,
-                  "state": "passed",
-                  "speed": "slow",
-                  "pass": true,
-                  "fail": false,
-                  "pending": false,
-                  "context": null,
-                  "code": "const blogName = 'Gail Marks';\nuserServices.checkBlogName(blogName).then(result=>{\n expect(result).to.be.eq(true);\n done();\n}).catch(done);",
-                  "err": {},
-                  "uuid": "852b187c-7331-4d38-b6a4-b52e97a17d8b",
-                  "parentUUID": "3ef981b3-6bec-4923-9020-0cfa3241b887",
-                  "isHook": false,
-                  "skipped": false
-                },
-                {
-                  "title": "It Should Return False",
-                  "fullTitle": "User APIs Check blogName Function It Should Return False",
-                  "timedOut": false,
-                  "duration": 179,
-                  "state": "passed",
-                  "speed": "slow",
-                  "pass": true,
-                  "fail": false,
-                  "pending": false,
-                  "context": null,
-                  "code": "const blogName = 'CMP2023';\nuserServices.checkBlogName(blogName).then(result=>{\n expect(result).to.be.eq(false);\n done();\n}).catch(done);",
-                  "err": {},
-                  "uuid": "168ed9f7-3886-440f-a24a-e89b2b8425b6",
-                  "parentUUID": "3ef981b3-6bec-4923-9020-0cfa3241b887",
-                  "isHook": false,
-                  "skipped": false
-                }
-              ],
-              "suites": [],
-              "passes": [
-                "852b187c-7331-4d38-b6a4-b52e97a17d8b",
-                "168ed9f7-3886-440f-a24a-e89b2b8425b6"
-              ],
-              "failures": [],
-              "pending": [],
-              "skipped": [],
-              "duration": 468,
-              "root": false,
-              "rootEmpty": false,
-              "_timeout": 100000
-            },
-            {
-              "uuid": "7cc12554-3733-48e8-914d-315a81edecec",
-              "title": "Create User Function",
-              "fullFile": "C:\\Users\\HP\\Documents\\GitHub\\Backend_Tumblr-4u\\test\\userTest.js",
-              "file": "\\test\\userTest.js",
-              "beforeHooks": [],
-              "afterHooks": [],
-              "tests": [
-                {
-                  "title": "It Should Create New User",
-                  "fullTitle": "User APIs Create User Function It Should Create New User",
-                  "timedOut": false,
-                  "duration": 253,
-                  "state": "passed",
-                  "speed": "slow",
-                  "pass": true,
-                  "fail": false,
-                  "pending": false,
-                  "context": null,
-                  "code": "const email = 'ahmed.ayman.cmp@gmail.com';\nconst blogName = 'CMP';\nconst password = '12345';\nconst age = '21';\nuserServices.createUser(email,password,blogName,age).then(result=>{\n expect(result).to.be.eq('Created');\n done();\n}).catch(done);",
-                  "err": {},
-                  "uuid": "e9382210-1f25-4b48-a126-63a3e3bc58a1",
-                  "parentUUID": "7cc12554-3733-48e8-914d-315a81edecec",
-                  "isHook": false,
-                  "skipped": false
-                }
-              ],
-              "suites": [],
-              "passes": [
-                "e9382210-1f25-4b48-a126-63a3e3bc58a1"
-              ],
-              "failures": [],
-              "pending": [],
-              "skipped": [],
-              "duration": 253,
-              "root": false,
-              "rootEmpty": false,
-              "_timeout": 100000
-            },
-            {
-              "uuid": "36906ad3-2321-4bf8-8c19-5854b495f67c",
-              "title": "Send Verification Mail To User",
-              "fullFile": "C:\\Users\\HP\\Documents\\GitHub\\Backend_Tumblr-4u\\test\\userTest.js",
-              "file": "\\test\\userTest.js",
-              "beforeHooks": [],
-              "afterHooks": [],
-              "tests": [
-                {
-                  "title": "It Should Send Verification Mail To User",
-                  "fullTitle": "User APIs Send Verification Mail To User It Should Send Verification Mail To User",
-                  "timedOut": false,
-                  "duration": 3110,
-                  "state": "passed",
-                  "speed": "slow",
-                  "pass": true,
-                  "fail": false,
-                  "pending": false,
-                  "context": null,
-                  "code": "const name = 'Ahmed'; \nconst email = 'ahmed.ayman.1420@gmail.com';\nconst token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFobWVkLmF5bWFuLmFhMTQyMDBAZ21haWwuY29tIiwicm9sZSI6InVzZXIiLCJpYXQiOjE2MzkxMjE0ODR9.J6XWRY5oXIEgJmMfikrcJlUwXLIk3D-VlZNOehHb4vc';\n userServices.verifyMail(name,email,token).then(result=>{\n  expect(result).to.be.eq('verification mail sent');\n  done();\n }).catch(done);",
-                  "err": {},
-                  "uuid": "c8af6f5c-715c-415d-b33c-e2a792446f2f",
-                  "parentUUID": "36906ad3-2321-4bf8-8c19-5854b495f67c",
-                  "isHook": false,
-                  "skipped": false
-                }
-              ],
-              "suites": [],
-              "passes": [
-                "c8af6f5c-715c-415d-b33c-e2a792446f2f"
-              ],
-              "failures": [],
-              "pending": [],
-              "skipped": [],
-              "duration": 3110,
-              "root": false,
-              "rootEmpty": false,
-              "_timeout": 100000
-            },
-            {
-              "uuid": "93f5b5ef-4e60-41f2-8226-92127f795958",
-              "title": "Checks Input Password",
-              "fullFile": "C:\\Users\\HP\\Documents\\GitHub\\Backend_Tumblr-4u\\test\\userTest.js",
-              "file": "\\test\\userTest.js",
-              "beforeHooks": [],
-              "afterHooks": [],
-              "tests": [
-                {
-                  "title": "It Should Return True",
-                  "fullTitle": "User APIs Checks Input Password It Should Return True",
-                  "timedOut": false,
-                  "duration": 47,
-                  "state": "passed",
-                  "speed": "medium",
-                  "pass": true,
-                  "fail": false,
-                  "pending": false,
-                  "context": null,
-                  "code": "const password = '123'; \nconst oldPassword = '$2b$08$0eaSh6V.pAvCyX8LFE12Ve52cSHUUPVrV0h7DDx0SwA5eCSIGsKsq'; \n userServices.checkPassword(password,oldPassword).then(result=>{\n  expect(result).to.be.eq(true);\n  done();\n }).catch(done);",
-                  "err": {},
-                  "uuid": "a1ce08ba-6396-4f66-a1a1-f383a7d77ea3",
-                  "parentUUID": "93f5b5ef-4e60-41f2-8226-92127f795958",
-                  "isHook": false,
-                  "skipped": false
-                },
-                {
-                  "title": "It Should Return False",
-                  "fullTitle": "User APIs Checks Input Password It Should Return False",
-                  "timedOut": false,
-                  "duration": 30,
+                  "duration": 0,
                   "state": "passed",
                   "speed": "fast",
                   "pass": true,
                   "fail": false,
                   "pending": false,
                   "context": null,
-                  "code": "const password = '12345'; \nconst oldPassword = '$2b$08$0eaSh6V.pAvCyX8LFE12Ve52cSHUUPVrV0h7DDx0SwA5eCSIGsKsq'; \n userServices.checkPassword(password,oldPassword).then(result=>{\n  expect(result).to.be.eq(false);\n  done();\n }).catch(done);",
+                  "code": "let a = mongoose.Types.ObjectId(\"61af36a793d7c3194ff42269\");\nlet b = mongoose.Types.ObjectId(\"61ae881aab9ea73f2282b03e\");\nlet c = mongoose.Types.ObjectId(\"61ae887d2676ed5d9b5d532f\");\nlet arr = [\n  {text: 'a',_id: a},\n  {text: 'shd',_id: b},\n  {text: 'akj',_id: c}\n];\nlet element = '61ae881aab9ea73f2282b03e';\npostFunctions.loopObjAndCheck(arr, element)[0].should.be.eq(1);\npostFunctions.loopObjAndCheck(arr, element)[1].should.be.eq(1);\n    done();",
                   "err": {},
-                  "uuid": "33085401-d985-411f-8182-22055c7997f0",
-                  "parentUUID": "93f5b5ef-4e60-41f2-8226-92127f795958",
+                  "uuid": "611a6cc6-ff8a-417a-8a4c-79fea5aa2a59",
+                  "parentUUID": "3cd911b9-fce9-46c2-8387-229e129b9145",
                   "isHook": false,
                   "skipped": false
                 }
               ],
               "suites": [],
               "passes": [
-                "a1ce08ba-6396-4f66-a1a1-f383a7d77ea3",
-                "33085401-d985-411f-8182-22055c7997f0"
+                "611a6cc6-ff8a-417a-8a4c-79fea5aa2a59"
               ],
               "failures": [],
               "pending": [],
               "skipped": [],
-              "duration": 77,
+              "duration": 0,
               "root": false,
               "rootEmpty": false,
               "_timeout": 100000
             },
             {
-              "uuid": "ea8af61d-bb61-4637-ba09-5edc328192b9",
-              "title": "Create User Google Function",
-              "fullFile": "C:\\Users\\HP\\Documents\\GitHub\\Backend_Tumblr-4u\\test\\userTest.js",
-              "file": "\\test\\userTest.js",
+              "uuid": "064e2cd4-15f6-4bad-91e3-d25322a47071",
+              "title": "Function likePress",
+              "fullFile": "D:\\AbeerD\\College\\third year\\SW Engineering\\Phase2_Integrated\\Backend_Tumblr-4u\\test\\postTest.js",
+              "file": "\\test\\postTest.js",
               "beforeHooks": [],
               "afterHooks": [],
               "tests": [
                 {
-                  "title": "It Should Create New Google User",
-                  "fullTitle": "User APIs Create User Google Function It Should Create New Google User",
+                  "title": "It Should Like or Unlike a Post",
+                  "fullTitle": "Post APIs Function likePress It Should Like or Unlike a Post",
                   "timedOut": false,
-                  "duration": 295,
+                  "duration": 479,
                   "state": "passed",
                   "speed": "slow",
                   "pass": true,
                   "fail": false,
                   "pending": false,
                   "context": null,
-                  "code": "const email = 'ahmed.ayman.cmp@gmail.com';\nconst password = '12345';\nuserServices.createUser(email,password).then(result=>{\n expect(result).to.be.eq('Created');\n done();\n}).catch(done);",
+                  "code": "const req = {\n  params: {\n    blogId: '619957113df6b45019c42d06',\n    postId: '61ae667d8b4d5620ce937992',\n  }, \n};\npostFunctions.likePress(req.params.blogId, req.params.postId).then((ret) => {\n  expect(ret).to.be.a('string');\n  //expect(ret).to.be.eq('Post Liked Successfully');\n  done();\n}).catch(done);",
                   "err": {},
-                  "uuid": "d2dcf334-f81f-44e6-a69c-addad057286b",
-                  "parentUUID": "ea8af61d-bb61-4637-ba09-5edc328192b9",
+                  "uuid": "6e86597a-b8fb-46b1-8857-abc387757e30",
+                  "parentUUID": "064e2cd4-15f6-4bad-91e3-d25322a47071",
                   "isHook": false,
                   "skipped": false
                 }
               ],
               "suites": [],
               "passes": [
-                "d2dcf334-f81f-44e6-a69c-addad057286b"
+                "6e86597a-b8fb-46b1-8857-abc387757e30"
               ],
               "failures": [],
               "pending": [],
               "skipped": [],
-              "duration": 295,
-=======
-              "duration": 3916,
->>>>>>> cc274d447895ba213135ab7df0676959e3f87be9
+              "duration": 479,
+              "root": false,
+              "rootEmpty": false,
+              "_timeout": 100000
+            },
+            {
+              "uuid": "95f0fe90-d376-4964-9430-fb8d7d2471ac",
+              "title": "Function getNotes",
+              "fullFile": "D:\\AbeerD\\College\\third year\\SW Engineering\\Phase2_Integrated\\Backend_Tumblr-4u\\test\\postTest.js",
+              "file": "\\test\\postTest.js",
+              "beforeHooks": [],
+              "afterHooks": [],
+              "tests": [
+                {
+                  "title": "It Should Get Post Notes",
+                  "fullTitle": "Post APIs Function getNotes It Should Get Post Notes",
+                  "timedOut": false,
+                  "duration": 320,
+                  "state": "passed",
+                  "speed": "slow",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "const req = {\n  params: {\n    postId: '61ae667d8b4d5620ce937992',\n  }, \n};\npostFunctions.getNotes(req.params.postId).then((ret) => {\n  expect(ret).to.be.a('array');\n  expect(ret[0]).to.be.eq('Notes Got Successfully');\n  done();\n}).catch(done);",
+                  "err": {},
+                  "uuid": "41b0bb49-8692-4069-9b8e-69a6cffd7db6",
+                  "parentUUID": "95f0fe90-d376-4964-9430-fb8d7d2471ac",
+                  "isHook": false,
+                  "skipped": false
+                }
+              ],
+              "suites": [],
+              "passes": [
+                "41b0bb49-8692-4069-9b8e-69a6cffd7db6"
+              ],
+              "failures": [],
+              "pending": [],
+              "skipped": [],
+              "duration": 320,
+              "root": false,
+              "rootEmpty": false,
+              "_timeout": 100000
+            },
+            {
+              "uuid": "3cf5b5bf-2cdf-41c5-89fe-b02bdaef6ab4",
+              "title": "Function getDashboard",
+              "fullFile": "D:\\AbeerD\\College\\third year\\SW Engineering\\Phase2_Integrated\\Backend_Tumblr-4u\\test\\postTest.js",
+              "file": "\\test\\postTest.js",
+              "beforeHooks": [],
+              "afterHooks": [],
+              "tests": [
+                {
+                  "title": "It Should Get Dashboard",
+                  "fullTitle": "Post APIs Function getDashboard It Should Get Dashboard",
+                  "timedOut": false,
+                  "duration": 2033,
+                  "state": "passed",
+                  "speed": "slow",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "const req = {\n  params: {\n    userId: '6196d197a31552477d437404',\n    blogId: '619957113df6b45019c42d06',\n  }, \n};\npostFunctions.getDashboard(req.params.userId, req.params.blogId).then((ret) => {\n  expect(ret).to.be.a('array');\n  expect(ret[0]).to.be.eq('Dashboard Got Successfully');\n  done();\n}).catch(done);",
+                  "err": {},
+                  "uuid": "2b6422a7-4acf-4189-832d-3e2afc686f68",
+                  "parentUUID": "3cf5b5bf-2cdf-41c5-89fe-b02bdaef6ab4",
+                  "isHook": false,
+                  "skipped": false
+                }
+              ],
+              "suites": [],
+              "passes": [
+                "2b6422a7-4acf-4189-832d-3e2afc686f68"
+              ],
+              "failures": [],
+              "pending": [],
+              "skipped": [],
+              "duration": 2033,
               "root": false,
               "rootEmpty": false,
               "_timeout": 100000
