@@ -14,72 +14,31 @@ const schema = require('../../../Model/model');
  * @name blockBlog
  * @description this function blocks the blog whose id
  *              sent in the body from the blog whose id in params
- * @param {Object} req - Holds the blogId in
- *                       params and the blockedBlogId in body
- * @param {Object} res - Holds the res
- *                       status and message based on the status.
+ * @param {String} blogId - The id of the blog who blocks the other blog
+ * @param {String} blockedBlogId - The id of the blog to be blocked
  *
- * @returns res status and message or error massege in case of errors.
+ * @returns {Object} - The blocked blog and null if not found
  */
 
 
-const blockBlog = async (req, res) => {
+const blockBlog = async (req) => {
   console.log(req.params);
-
   try {
     const blogId = req.params.blogId;
     const blockedBlogId = req.body.blockedBlogId;
 
-    await schema.blogs.findOne({'_id': blockedBlogId},
-        function(err, blockedBlog) {
-          // if (err) return handleError(err);
-          if (blockedBlog) {
-            schema.blogs.findOne({'_id': blogId},
-                'blockedBlogs',
-                function(err, blog) {
-                  if (err) return handleError(err);
-                  blog.blockedBlogs.push(blockedBlogId);
-                  blog.save();
-                  res.status(StatusCodes.OK).json({
-                    'meta': {
-                      'status': 200,
-                      'msg': 'OK',
-                    },
-
-                    'res': {
-                      'message': 'Blog blocked Successfully',
-                      'data': '',
-                    },
-                  });
-                });
-          } else {
-            res.status(StatusCodes.NOT_FOUND).json({
-              'meta': {
-                'status': 404,
-                'msg': 'BAD_REQUEST',
-              },
-
-              'res': {
-                'error': 'Blog NOT FOUND',
-                'data': '',
-              },
-            });
-          }
-        }).clone().catch(function(err) {
-      console.log(err);
-    });
+    const blockedBlog = await schema.blogs.findOne({'_id': blockedBlogId});
+    if (blockedBlog) {
+      const blog = await schema.blogs.findOne({'_id': blogId});
+      console.log(blog._id);
+      blog.blockedBlogs.push(blockedBlogId);
+      blog.save();
+      return blockedBlog;
+    } else {
+      return null;
+    }
   } catch (error) {
-    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
-      'meta': {
-        'status': 500,
-        'msg': 'INTERNAL_SERVER_ERROR',
-      },
-
-      'res': {
-        'error': 'Error In blockBlog Function',
-        'data': '',
-      },
-    });
+    console.log(error.message);
   }
 };
 /* -------- <---> Unfollow Blog <---> ------- */ // *** <===> Done <===>  *** //
@@ -91,70 +50,30 @@ const blockBlog = async (req, res) => {
  * @name unblockBlog
  * @description this function remove the blog whose id sent in
  *              the body from blocked blogs of the blog whose id in params
- * @param {Object} req - Holds the blogId in params
- *                       and the unblockedBlogId in body
- * @param {Object} res - Holds the res status and
- *                       message based on the status.
+ * @param {String} blogId - The id of the blog who unblocks the other blog
+ * @param {String} unblockedBlogId - The id of the blog to be unblocked
  *
- * @returns res status and message or error massege in case of errors.
+ * @returns {Object} - The unblocked blog and null if not found
  */
 
 
-const unblockBlog = async (req, res) => {
+const unblockBlog = async (req) => {
+  console.log(req.params);
   try {
     const blogId = req.params.blogId;
-    const unblockedBlogId = req.body.unblockedBlogId;
+    const unblockedBlogId= req.body.unblockedBlogId;
 
-    await schema.blogs.findOne({'_id': unblockedBlogId},
-        function(err, unblockedBlog) {
-          // if (err) return handleError(err);
-          if (unblockedBlog) {
-            schema.blogs.findOne({'_id': blogId},
-                'blockedBlogs',
-                function(err, blog) {
-                  if (err) return handleError(err);
-                  blog.blockedBlogs.pull(unblockedBlogId);
-                  blog.save();
-                  res.status(StatusCodes.OK).json({
-                    'meta': {
-                      'status': 200,
-                      'msg': 'OK',
-                    },
-
-                    'res': {
-                      'message': 'Blog unblocked Successfully',
-                      'data': '',
-                    },
-                  });
-                });
-          } else {
-            res.status(StatusCodes.NOT_FOUND).json({
-              'meta': {
-                'status': 404,
-                'msg': 'BAD_REQUEST',
-              },
-
-              'res': {
-                'error': 'Blog NOT FOUND',
-                'data': '',
-              },
-            });
-          }
-        }).clone().catch(function(err) {
-      console.log(err);
-    });
+    const unblockedBlog = await schema.blogs.findOne({'_id': unblockedBlogId});
+    if (unblockedBlog) {
+      const blog = await schema.blogs.findOne({'_id': blogId});
+      blog.blockedBlogs.pull(unblockedBlogId);
+      blog.save();
+      return unblockedBlog;
+    } else {
+      return null;
+    }
   } catch (error) {
-    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
-      'meta': {
-        'status': 500,
-        'msg': 'INTERNAL_SERVER_ERROR',
-      },
-
-      'res': {
-        'error': 'Error In unblockBlog Function',
-        'data': '',
-      },
-    });
+    console.log(error.message);
   }
 };
 
@@ -165,11 +84,20 @@ const unblockBlog = async (req, res) => {
  * @name editBlog
  * @description    -  It retrieves a blog given its id
  * @param {String} blogId  - id of the blog
+ * @param {String} title
+ * @param {String} accent
+ * @param {String} name
+ * @param {String} password
+ * @param {String} headerImage
+ * @param {String} background
+ * @param {String} avatar
+ * @param {String} theme
+ * @param {String} description
  * @return {Object} - A blog object
  */
 
 
-const editBlog=async (req, res)=>{
+const editBlog = async (req) => {
   try {
     const blogId = req.params.blogId;
     const accent = req.body.accent;
@@ -178,107 +106,65 @@ const editBlog=async (req, res)=>{
     const avatar = req.body.avatar;
     const title = req.body.title;
     const background = req.body.background;
-    const password=req.body.password;
-    const theme=req.body.theme;
-    const description=req.body.description;
+    const password = req.body.password;
+    const theme = req.body.theme;
+    const description = req.body.description;
 
-    let message='OK';
+    let message = 'OK';
 
-    const blog= await schema.blogs.findOne({'_id': blogId});
+    const blog = await schema.blogs.findOne({'_id': blogId});
     if (blog) {
       if (password) {
-        blog.password=password;
+        blog.password = password;
       }
       if (theme) {
-        blog.theme=theme;
+        blog.theme = theme;
       }
-      if (theme) {
-        blog.description=description;
+      if (description) {
+        blog.description = description;
       }
       if (accent) {
-        blog.accent=accent;
+        blog.accent = accent;
       }
-
-
       if (headerImage) {
-        blog.headerImage= headerImage;
+        blog.headerImage = headerImage;
       }
       if (background) {
-        blog.background= background;
+        blog.background = background;
       }
       if (avatar) {
-        blog.avatar= avatar;
+        blog.avatar = avatar;
       }
       if (title) {
-        blog.title=title;
+        blog.title = title;
       }
       if (name) {
-        const anotherBlog= await schema.blogs.findOne({'name': name});
+        const anotherBlog = await schema.blogs.findOne({'name': name});
 
-        if (!anotherBlog || anotherBlog._id==blogId) {
+        if (!anotherBlog || anotherBlog._id == blogId) {
           if (blog.isPrimary) {
-            const user= await schema.users
+            const user = await schema.users
                 .findOneAndUpdate({'name': blog.name});
-            user.name=name;
-                      }
-          blog.name=name;
+            user.name = name;
+          }
+          blog.name = name;
         } else {
-          message='URL is not available';
+          message = 'URL is not available';
         }
       }
       blog.save();
-      if (message==='OK') {
+      if (message === 'OK') {
         console.log(blog);
-        res.status(StatusCodes.OK).json({
-          'meta': {
-            'status': 200,
-            'msg': 'OK',
-          },
 
-          'res': {
-            'message': message,
-            'data': blog,
-          },
-        });
+        return blog;
       } else {
-        res.status(StatusCodes.BAD_REQUEST).json({
-          'meta': {
-            'status': 400,
-            'msg': 'BAD REQUEST',
-          },
-
-          'res': {
-            'message': message,
-            'data': '',
-          },
-        });
+        return message;
       }
     } else {
-      res.status(StatusCodes.NOT_FOUND).json({
-        'meta': {
-          'status': 404,
-          'msg': 'NOT FOUND',
-        },
-
-        'res': {
-          'message': 'Blog Not FOUND',
-          'data': '',
-        },
-      });
+      return null;
     }
   } catch (error) {
     console.log(error.message);
-    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
-      'meta': {
-        'status': 500,
-        'msg': 'INTERNAL_SERVER_ERROR',
-      },
-
-      'res': {
-        'error': 'Error In editBlogAccent Function',
-        'data': '',
-      },
-    });
   }
 };
 
@@ -291,48 +177,16 @@ const editBlog=async (req, res)=>{
  * @return {Object} - A blog object
  */
 
-const retrieveBlog=async (req, res)=>{
+const retrieveBlog = async (blogName) => {
   try {
-    const blogName = req.params.blogName;
-    const blog= await schema.blogs.findOne({'name': blogName});
+    const blog = await schema.blogs.findOne({'name': blogName});
     if (blog) {
-      res.status(StatusCodes.OK).json({
-        'meta': {
-          'status': 200,
-          'msg': 'OK',
-        },
-
-        'res': {
-          'message': 'Blog Retrieved Successfuly',
-          'data': blog,
-        },
-      });
+      return blog;
     } else {
-      res.status(StatusCodes.NOT_FOUND).json({
-        'meta': {
-          'status': 404,
-          'msg': 'NOT FOUND',
-        },
-
-        'res': {
-          'message': 'Blog Not FOUND',
-          'data': '',
-        },
-      });
+      return null;
     }
   } catch (error) {
     console.log(error.message);
-    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
-      'meta': {
-        'status': 500,
-        'msg': 'INTERNAL_SERVER_ERROR',
-      },
-
-      'res': {
-        'error': 'Error In retrieveBlog Function',
-        'data': '',
-      },
-    });
   }
 };
 

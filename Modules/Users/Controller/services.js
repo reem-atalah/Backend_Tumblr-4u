@@ -4,9 +4,6 @@
 
 /* =============== /// <==> Variables Declaration <==> /// ================== */
 const nodemailer = require('nodemailer');
-const {StatusCodes} = require('http-status-codes');
-const bcrypt = require('bcrypt');
-const schema = require('../../../Model/model');
 /* =========== /// <==> End <==> ===========*/
 
 /* ----------- <---> verify Email <---> --------- */ // *** <===> Done <===>  *** //
@@ -38,9 +35,7 @@ const verifyMail = async (name,email,token)=>{
         <h3> Hi ${name}</h3>
         <p>To verify your mail click <a href=http://localhost:3000/user/verify/${token}>here</a></p>
         `, // html body
-      });
-    
-    return 'verification mail sent'
+      });    
     }catch(error){
         res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
             'meta': {
@@ -56,100 +51,10 @@ const verifyMail = async (name,email,token)=>{
     };    
 };
 
-/* ----------- <---> Check If Mail Found <---> --------- */ // *** <===> Done <===>  *** //
-const checkMail = async(email)=>{
-  
-    const oldUserEmail = await schema.users.findOne({email, isDeleted: false});
-    if (oldUserEmail)    
-      return true;
-    else
-      return false;
-};
-
-/* ----------- <---> Check If Blog Name Found <---> --------- */ // *** <===> Done <===>  *** //
-const checkBlogName = async(name)=>{
-    const oldUserBlog = await schema.blogs.findOne({name: name});
-    if (oldUserBlog) 
-      return true;
-    else
-     return false; 
-};
-
-/* ----------- <---> Create New User <---> --------- */ // *** <===> Done <===>  *** //
-const createUser = async(email, password, blogName, age)=>{
-try {
-  const newUser = new schema.users({
-    email,
-    password,
-    name: blogName,
-    age,
-  });
-  // const data = await newUser.save();
-  await newUser.save();
-  return 'Created';
-
-} catch (error) {
-  res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
-    'meta': {
-      'status': 500,
-      'msg': 'INTERNAL_SERVER_ERROR',
-    },
-
-    'res': {
-      'error': 'Error In Sign Up Function (<:>)',
-      'data': '',
-    },
-  });
-};
-};
-
-/* ----------- <---> Create New Google User <---> --------- */ // *** <===> Done <===>  *** //
-const createGoogleUser = async(email, password)=>{
-  try {
-    let blogName = '';
-    let age = -1;
-
-    const newUser = new schema.users({
-      email,
-      password,
-      name: blogName,
-      age,
-      isDeleted:true,
-      isVerified:true
-    });
-    // const data = await newUser.save();
-    await newUser.save();
-    return 'Created';
-  
-  } catch (error) {
-    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
-      'meta': {
-        'status': 500,
-        'msg': 'INTERNAL_SERVER_ERROR',
-      },
-  
-      'res': {
-        'error': 'Error In Sign Up Function (<:>)',
-        'data': '',
-      },
-    });
-  };
-  };
-  
-
-/* ----------- <---> Check Password <---> --------- */ // *** <===> Done <===>  *** //
-const checkPassword = async(password,oldPassword)=>{
-  const match = await bcrypt.compare(password, oldPassword);
-  return match;
-};
 
 /* =============== /// <==> Export User Functions Services <==> /// =============== */
 module.exports = {
-    verifyMail,
-    checkMail,
-    checkBlogName,
-    createUser,
-    checkPassword,
-    createGoogleUser
-};
-/* =========== /// <==> End <==> ===========*/
+    verifyMail
+  };
+  /* =========== /// <==> End <==> ===========*/
+  

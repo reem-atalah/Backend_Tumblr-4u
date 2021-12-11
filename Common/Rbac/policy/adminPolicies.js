@@ -13,7 +13,6 @@ const postEndPoints = require('../../../Modules/Posts/endPoints');
 /* ==================== <-- Admin Role Policies --> ==================== */
 const adminPolicies = [
   searchEndPt.getSearchDash,
-  userEndPoints.googleInfo,
   userEndPoints.followBlog,
   userEndPoints.unfollowBlog,
   userEndPoints.createBlog,

@@ -5,10 +5,10 @@
 
 /* =============== /// <==> Variables Declaration <==> /// ================== */
 const userServices = require('./services');
-const bcrypt = require('bcrypt');
+// const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const {StatusCodes} = require('http-status-codes');
-const schema = require('../../../Model/model');
+// const schema = require('../../../Model/model');
 /* =========== /// <==> End <==> ===========*/
 
 /* ----------- <---> Sign Up <---> ------- */ // *** <===> Done <===>  *** //
