@@ -10,7 +10,7 @@ const postEndPoints = require('../../../Modules/Posts/endPoints');
 
 /* =========== <--> End <--> =========== */
 
-/* =================== <-- User Admin Role Policies --> =================== */
+/* =================== <-- User Role Policies --> =================== */
 const userAdminPolicies = [
   searchEndPt.getSearchDash,
   userEndPoints.googleInfo,
