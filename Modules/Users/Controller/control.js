@@ -497,6 +497,8 @@ const deleteBlog = async (userId, blogId) => {
   }
 };
 
+const androidSignUpWithGoogle = require('./androidSignWithGoogle');
+
 /* =========== /// <==> End <==> ===========*/
 
 /* =============== /// <==> Export User Functions <==> /// =============== */
@@ -509,5 +511,6 @@ module.exports = {
   deleteBlog,
   verfiyAccount,
   google,
+  androidSignUpWithGoogle
 };
 /* =========== /// <==> End <==> ===========*/
