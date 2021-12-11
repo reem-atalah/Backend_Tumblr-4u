@@ -14,9 +14,12 @@ const blogRoutes = require('./Modules/Blogs/Routes/APIs');
 const postRoutes = require('./Modules/Posts/Routes/APIs');
 const cors =require('cors');
 
+/* ========== /// <==> Calling Config Function OF dotenv <==> /// =========== */
+dotenv.config();
+/* =========== /// <==> End <==> ===========*/
+
 const passport = require('passport');
 require('./Common/passport-setup/passport-setup');
-
 server.use(passport.initialize());
 server.use(passport.session());
 
@@ -25,9 +28,6 @@ server.use(passport.session());
 
 /* =========== /// <==> End <==> ===========*/
 
-/* ========== /// <==> Calling Config Function OF dotenv <==> /// =========== */
-dotenv.config();
-/* =========== /// <==> End <==> ===========*/
 
 /* ========= /// <==> Calling Connection Function OF Database <==> /// ====== */
 connection();
@@ -35,7 +35,6 @@ connection();
 
 /* ====================== /// <==> MiddleWares <==> /// ============= */
 server.use(express.json());
-server.use(cors());
 server.use(searchDashboard);
 server.use(userRoutes);
 server.use(blogRoutes);
@@ -44,6 +43,7 @@ server.use(express.json());
 server.use(express.urlencoded({extended: false}));
 
 /* =========== /// <==> End <==> ===========*/
+server.use(cors());
 
 // seed.seedDB();
 

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: Modules/Users/Controller/signup.js</title>
+    <title>JSDoc: Source: Modules/Users/Controller/androidSignWithGoogle.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: Modules/Users/Controller/signup.js</h1>
+    <h1 class="page-title">Source: Modules/Users/Controller/androidSignWithGoogle.js</h1>
 
     
 
@@ -26,36 +26,34 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>/* eslint-disable linebreak-style */
-// /////////////////////////////////////////////////////////
-// / &lt;==> /// This File Contains User Sign Up /// &lt;==> ///
-// /////////////////////////////////////////////////////////
+            <pre class="prettyprint source linenums"><code>// ////////////////////////////////////////////////////////////////////////////////
+// / &lt;==> /// This File Contains User Sign Up With Google  For android /// &lt;==> ///
+// ////////////////////////////////////////////////////////////////////////////////
 
 /* =============== /// &lt;==> Variables Declaration &lt;==> /// ================== */
 const userServices = require('./services');
-// const bcrypt = require('bcrypt');
+const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const {StatusCodes} = require('http-status-codes');
-// const schema = require('../../../Model/model');
+const schema = require('../../../Model/model');
 /* =========== /// &lt;==> End &lt;==> ===========*/
 
-/* ----------- &lt;---> Sign Up &lt;---> ------- */ // *** &lt;===> Done &lt;===>  *** //
+/* ----------- &lt;---> Sign Up With Google For Android &lt;---> ------- */ // *** &lt;===> Done &lt;===>  *** //
 // Assumption: Account Must Be Not Deleted
 
 /**
  * This Function Used To Register New User.
  *
- * @param {string} email - email
- * @param {string} password - password
+ * @param {string} googleToken - Google Token
  * @param {string} blogName - blogName
  * @param {string} age - age
  *
  * @returns {object} - { Object }
  */
 
-const signUp = async (req, res) => {
+const androidSignUpWithGoogle = async (req, res) => {
   try {
-    const {email, password, blogName, age} = req.body;
+    const {googleToken, blogName, age} = req.body;
 
     const isMailFound = await userServices.checkMail(email);
     const isBlogFound = await userServices.checkBlogName(blogName);

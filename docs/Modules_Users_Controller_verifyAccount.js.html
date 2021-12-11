@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: Modules/Users/Controller/verifyAccount.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,32 +17,90 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: Modules/Users/Controller/verifyAccount.js</h1>
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>// /////////////////////////////////////////////////////////
+// / &lt;==> /// This File Contains User Verify Account /// &lt;==> ///
+// /////////////////////////////////////////////////////////
 
+/* =============== /// &lt;==> Variables Declaration &lt;==> /// ================== */
+const userServices = require('./services');
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+const {StatusCodes} = require('http-status-codes');
+const schema = require('../../../Model/model');
+/* =========== /// &lt;==> End &lt;==> ===========*/
 
-    <h3> </h3>
+/* ----------- &lt;---> Verify Account &lt;---> --- */ // *** &lt;===> Done &lt;===>  *** //
+// Assumption: Acount Must Be Not ( Deleted )
 
+/**
+ * This Function Used To LogIn To Tumblr4U.
+ *
+ * @param {string} token - user secret token
+ *
+ * @returns {object} - { Object }
+ */
 
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
+ const verfiyAccount = async (req, res)=>{
+    try {
+      const token = req.params.token;
+      const decoded = jwt.verify(token, process.env.KEY);
+  
+      const data = await schema.users
+          .updateOne({email: decoded.email}, {isVerified: true});
+      if (data.modifiedCount != 0) {
+        res.status(StatusCodes.OK).json({
+          'meta': {
+            'status': 200,
+            'msg': 'OK',
+          },
+  
+          'res': {
+            'message': 'Account Verified Successfully (&lt;:>)',
+            'data': '',
+          },
+        });
+      } else {
+        res.status(StatusCodes.BAD_REQUEST).json({
+          'meta': {
+            'status': 400,
+            'msg': 'BAD_REQUEST',
+          },
+  
+          'res': {
+            'error': 'Account Is Not Found or Already Verified (&lt;:>)',
+            'data': '',
+          },
+        });
+      }
+    } catch (error) {
+      res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+        'meta': {
+          'status': 500,
+          'msg': 'INTERNAL_SERVER_ERROR',
+        },
+  
+        'res': {
+          'error': 'Error In Verfiy Account Function (&lt;:>)',
+          'data': '',
+        },
+      });
+    };
+  };
+/* =============== /// &lt;==> Export User verfiyAccount &lt;==> /// =============== */
+module.exports = verfiyAccount;
+  /* =========== /// &lt;==> End &lt;==> ===========*/
+    </code></pre>
+        </article>
+    </section>
 
 
 

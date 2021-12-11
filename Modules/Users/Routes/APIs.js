@@ -1,4 +1,3 @@
-/* eslint-disable linebreak-style */
 // ////////////////////////////////////////////////////
 // / <==> /// This File Contains User APIs /// <==> ///
 // ////////////////////////////////////////////////////
@@ -52,34 +51,83 @@ router.get('/user/verify/:token', VA);
 router.get('/google',
     passport.authenticate('google', {scope: ['profile', 'email']}));
 const GO = userFunctions.google;
-const GI = userFunctions.googleInfo;
-const VGI = validateRequest(userJoi.GoogleInfoValidations);
-const IA = isAuthorized(userEndPoints.googleInfo);
 router.get('/google/callback', passport.authenticate('google'), GO);
-router.put('/google/info', VGI, IA, GI);
-
 
 /* ----------- <---> Follow <---> ----------- */
 
 const VLDRQFB=validateRequest(userJoi.FollowBlogValidations);
 const ISAFB=isAuthorized(userEndPoints.followBlog);
-const FB=userFunctions.followBlog;
 
 router.post('/user/follow/:userId',
     VLDRQFB,
     ISAFB,
-    FB);
+    (req, res)=>{
+      userFunctions.followBlog(req).then((blog)=>{
+        if (blog) {
+          res.status(StatusCodes.OK).json({
+            'meta': {
+              'status': 200,
+              'msg': 'OK',
+            },
+
+            'res': {
+              'message': 'Blog Followed Successfully',
+              'data': blog,
+            },
+          });
+        } else {
+          res.status(StatusCodes.NOT_FOUND).json({
+            'meta': {
+              'status': 404,
+              'msg': 'BAD_REQUEST',
+            },
+
+            'res': {
+              'error': 'Blog not found',
+              'data': '',
+            },
+          });
+        }
+      });
+    });
 
 /* ----------- <---> UnFollow <---> ----------- */
 
 const VLDRQUB=validateRequest(userJoi.UnfollowBlogValidations);
 const ISAUB=isAuthorized(userEndPoints.unfollowBlog);
-const UB=userFunctions.unfollowBlog;
 
 router.post('/user/unfollow/:userId',
     VLDRQUB,
     ISAUB,
-    UB);
+    (req, res)=>{
+      userFunctions.unfollowBlog(req).then((blog)=>{
+        if (blog) {
+          res.status(StatusCodes.OK).json({
+            'meta': {
+              'status': 200,
+              'msg': 'OK',
+            },
+
+            'res': {
+              'message': 'Blog Unfollowed Successfully',
+              'data': blog,
+            },
+          });
+        } else {
+          res.status(StatusCodes.NOT_FOUND).json({
+            'meta': {
+              'status': 404,
+              'msg': 'NOT FOUND',
+            },
+
+            'res': {
+              'error': 'Blog not found',
+              'data': '',
+            },
+          });
+        }
+      });
+    });
 
 /* ----------- <---> Create Blog <---> ----------- */
 
@@ -109,7 +157,7 @@ router.get('/user/new/blog/:userId',
           res.status(StatusCodes.BAD_REQUEST).json({
             'meta': {
               'status': 400,
-              'msg': 'BAD REQUEST',
+              'msg': 'NOT FOUND',
             },
 
             'res': {
@@ -132,28 +180,28 @@ router.post('/user/delete/blog/:userId',
     ISADB,
     (req, res)=>{
       userFunctions.deleteBlog(
-          req.params.userId, req.body.title, req.body.name,
-          req.body.privacy, req.body.password).then((blog)=> {
+          req.params.userId, req.body.blogId).then((blog)=> {
+        console.log(blog);
         if (blog) {
-          res.status(StatusCodes.CREATED).json({
+          res.status(StatusCodes.OK).json({
             'meta': {
-              'status': 201,
-              'msg': 'CREATED',
+              'status': 200,
+              'msg': 'OK',
             },
             'res': {
-              'message': 'Blog Created Successfully',
+              'message': 'Blog Deleted Successfully',
               'data': blog,
             },
           });
         } else {
-          res.status(StatusCodes.BAD_REQUEST).json({
+          res.status(StatusCodes.NOT_FOUND).json({
             'meta': {
-              'status': 400,
-              'msg': 'BAD REQUEST',
+              'status': 404,
+              'msg': 'NOT FOUND',
             },
 
             'res': {
-              'message': 'URL is not available',
+              'message': 'Blog Not FOUND',
               'data': '',
             },
           });

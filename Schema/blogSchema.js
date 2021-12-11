@@ -60,9 +60,6 @@ const blogSchema = new mongoose.Schema({
   blogVisitor: {
     type: 'Number',
   },
-  followedTags: {
-    type: [String],
-  },
   postsIds: {
     type: [String],
   },

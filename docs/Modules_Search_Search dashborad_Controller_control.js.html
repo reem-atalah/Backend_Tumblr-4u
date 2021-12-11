@@ -26,7 +26,8 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>// ///////////////////////////////////////////////////////////
+            <pre class="prettyprint source linenums"><code>/* eslint-disable linebreak-style */
+// ///////////////////////////////////////////////////////////
 // /// &lt;==> /// This File Contains Search Functions /// &lt;==> ///
 // ///////////////////////////////////////////////////////////
 // /**
@@ -61,35 +62,60 @@ async () => {
  * @function
  * @name  autoCompleteSearchDash
  * @description Applies search on posts/tags
- * @param {Object} req - Holds the request body: wordName.
- * @param {Object} res - Holds the response array having 3 arrays.
- *                     - array 1: has the tags in posts with this regex
- *                     - array 2: has the blogs this regex
- *                     - array 3: has the posts with interested tags this regex
+ * @param {Object} userId -get id of the user
+ * @param {Object} wordName - Holds the request body: wordName.
  *
- * @returns {Array} the array having 3 arrays.
+ *
+ * @returns {Array} Result array have 4 arrays.
+ *                     - array 1: has the tags in posts with this regex
+ *                     - array 2: posts with the tags with this regex
+ *                     - array 3: has the blogs this regex
+ *                     - array 4: has the posts with interested tags this regex
+
  */
+// use "npm run doc" to make function documentation
 
-const autoCompleteSearchDash = async (req, res) => {
-  // req.query["term"]
-  const regex= new RegExp(req.body.wordName, 'i');
+const autoCompleteSearchDash = async (userId, wordName) => {
+  let result = [];
 
+  if (!wordName) {
+    // if there's no word then retrieve interested tags
+    const resultFollowedTag=[];
+
+    // gets all posts with the followed tags
+    const searchFollowedTag= await schema.users.find({_id: userId});
+
+    // store in result, the blogs
+    searchFollowedTag.forEach((data) => {
+    // he gets me the user, now get the followedTags
+      data.followedTags.forEach((folloedTag) => {
+        resultFollowedTag.push(folloedTag);
+      });
+    });
+
+    result={
+      resultFollowedTag: resultFollowedTag,
+    };
+    return result;
+  }
+
+  const regex= new RegExp(wordName, 'i');
   // gets all posts with the needed tag
   const searchTags= await schema.Posts.find(tagSpecified={tags: {$in: regex}});
   // gets all mention blogs with the regex
   const searchMentionBlogs= await schema.blogs.find({name: regex});
-  // gets all posts with the followed tags
-  const searchFollowedTag= await schema.blogs.find({followedTags: regex});
 
   const resultHashTag=[];
   const resultBlogs=[];
-  const resultFollowedTag=[];
+  const resultPostHashTag=[];
 
   // store in result, the hash tags
+  // store in result, the posts with hash tags
   searchTags.forEach((data) => {
     data.tags.forEach((semiData) => {
       if (semiData.match(regex)) {
         resultHashTag.push(semiData);
+        resultPostHashTag.push(data);
       }
     });
   });
@@ -99,15 +125,15 @@ const autoCompleteSearchDash = async (req, res) => {
     resultBlogs.push(data);
   });
 
-  // store in result, the blogs
-  searchFollowedTag.forEach((data) => {
-    resultFollowedTag.push(data);
-  });
-
   // store all results in array and send it to front
-  const result=[resultHashTag, resultBlogs, resultFollowedTag];
-  console.log('result: ', result);
-  res.json(result);
+  result={
+    resultHashTag: resultHashTag,
+    resultPostHashTag: resultPostHashTag,
+    resultBlogs: resultBlogs,
+    // resultFollowedTag: resultFollowedTag,
+  };
+  // console.log('resultPostHashTag: ', result.resultHashTag);
+  // res.json(result);
   return result;
 };
 
@@ -167,13 +193,13 @@ module.exports = {
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#autoCompleteSearchDash">autoCompleteSearchDash</a></li><li><a href="global.html#blockBlog">blockBlog</a></li><li><a href="global.html#createBlog">createBlog</a></li><li><a href="global.html#createPost">createPost</a></li><li><a href="global.html#editBlog">editBlog</a></li><li><a href="global.html#followBlog">followBlog</a></li><li><a href="global.html#getDashboard">getDashboard</a></li><li><a href="global.html#getNotes">getNotes</a></li><li><a href="global.html#google">google</a></li><li><a href="global.html#isAuthorized">isAuthorized</a></li><li><a href="global.html#likePress">likePress</a></li><li><a href="global.html#login">login</a></li><li><a href="global.html#loopAndCheck">loopAndCheck</a></li><li><a href="global.html#loopObjAndCheck">loopObjAndCheck</a></li><li><a href="global.html#makePost">makePost</a></li><li><a href="global.html#mongoose">mongoose</a></li><li><a href="global.html#reblogPost">reblogPost</a></li><li><a href="global.html#removeComment">removeComment</a></li><li><a href="global.html#removeReblog">removeReblog</a></li><li><a href="global.html#retrieveBlog">retrieveBlog</a></li><li><a href="global.html#search">search</a></li><li><a href="global.html#showPost">showPost</a></li><li><a href="global.html#signUp">signUp</a></li><li><a href="global.html#unblockBlog">unblockBlog</a></li><li><a href="global.html#unfollowBlog">unfollowBlog</a></li><li><a href="global.html#verfiyAccount">verfiyAccount</a></li><li><a href="global.html#verifyMail">verifyMail</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#androidSignUpWithGoogle">androidSignUpWithGoogle</a></li><li><a href="global.html#autoCompleteSearchDash">autoCompleteSearchDash</a></li><li><a href="global.html#blockBlog">blockBlog</a></li><li><a href="global.html#createBlog">createBlog</a></li><li><a href="global.html#createPost">createPost</a></li><li><a href="global.html#deleteBlog">deleteBlog</a></li><li><a href="global.html#editBlog">editBlog</a></li><li><a href="global.html#followBlog">followBlog</a></li><li><a href="global.html#getDashboard">getDashboard</a></li><li><a href="global.html#getNotes">getNotes</a></li><li><a href="global.html#google">google</a></li><li><a href="global.html#googleInfo">googleInfo</a></li><li><a href="global.html#isAuthorized">isAuthorized</a></li><li><a href="global.html#likePress">likePress</a></li><li><a href="global.html#login">login</a></li><li><a href="global.html#loopAndCheck">loopAndCheck</a></li><li><a href="global.html#loopObjAndCheck">loopObjAndCheck</a></li><li><a href="global.html#makePost">makePost</a></li><li><a href="global.html#mongoose">mongoose</a></li><li><a href="global.html#reblogPost">reblogPost</a></li><li><a href="global.html#removeComment">removeComment</a></li><li><a href="global.html#removeReblog">removeReblog</a></li><li><a href="global.html#retrieveBlog">retrieveBlog</a></li><li><a href="global.html#search">search</a></li><li><a href="global.html#showPost">showPost</a></li><li><a href="global.html#signUp">signUp</a></li><li><a href="global.html#unblockBlog">unblockBlog</a></li><li><a href="global.html#unfollowBlog">unfollowBlog</a></li><li><a href="global.html#verfiyAccount">verfiyAccount</a></li><li><a href="global.html#verifyMail">verifyMail</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Fri Dec 10 2021 00:42:33 GMT-0800 (Pacific Standard Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Sat Dec 11 2021 20:23:40 GMT+0200 (Eastern European Standard Time)
 </footer>
 
 <script> prettyPrint(); </script>

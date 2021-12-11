@@ -1,4 +1,3 @@
-/* eslint-disable linebreak-style */
 // ///////////////////////////////////////////////////////////
 // // <==> This File Contains All User Admin Role Policies <==> ////
 // ///////////////////////////////////////////////////////////
@@ -11,10 +10,9 @@ const postEndPoints = require('../../../Modules/Posts/endPoints');
 
 /* =========== <--> End <--> =========== */
 
-/* =================== <-- User Admin Role Policies --> =================== */
+/* =================== <-- User Role Policies --> =================== */
 const userAdminPolicies = [
   searchEndPt.getSearchDash,
-  userEndPoints.googleInfo,
   userEndPoints.followBlog,
   userEndPoints.unfollowBlog,
   userEndPoints.createBlog,
@@ -26,15 +24,6 @@ const userAdminPolicies = [
   postEndPoints.createPost,
   postEndPoints.editPost,
   postEndPoints.deletePost,
-  postEndPoints.getDashboard,
-  postEndPoints.getNotes,
-  postEndPoints.likePress,
-  postEndPoints.makeComment,
-  postEndPoints.reblogPost,
-  postEndPoints.removeComment,
-  postEndPoints.removeReblog,
-  postEndPoints.shareWith,
-  postEndPoints.showPost,
 ];
 /* =========== <--> End <--> =========== */
 
