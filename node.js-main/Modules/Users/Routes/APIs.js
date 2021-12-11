@@ -53,28 +53,81 @@ router.get('/google',
 const GO = userFunctions.google;
 router.get('/google/callback', passport.authenticate('google'), GO);
 
-
 /* ----------- <---> Follow <---> ----------- */
 
 const VLDRQFB=validateRequest(userJoi.FollowBlogValidations);
 const ISAFB=isAuthorized(userEndPoints.followBlog);
-const FB=userFunctions.followBlog;
 
 router.post('/user/follow/:userId',
     VLDRQFB,
     ISAFB,
-    FB);
+    (req, res)=>{
+      userFunctions.followBlog(req).then((blog)=>{
+        if (blog) {
+          res.status(StatusCodes.OK).json({
+            'meta': {
+              'status': 200,
+              'msg': 'OK',
+            },
+
+            'res': {
+              'message': 'Blog Followed Successfully',
+              'data': blog,
+            },
+          });
+        } else {
+          res.status(StatusCodes.NOT_FOUND).json({
+            'meta': {
+              'status': 404,
+              'msg': 'BAD_REQUEST',
+            },
+
+            'res': {
+              'error': 'Blog not found',
+              'data': '',
+            },
+          });
+        }
+      });
+    });
 
 /* ----------- <---> UnFollow <---> ----------- */
 
 const VLDRQUB=validateRequest(userJoi.UnfollowBlogValidations);
 const ISAUB=isAuthorized(userEndPoints.unfollowBlog);
-const UB=userFunctions.unfollowBlog;
 
 router.post('/user/unfollow/:userId',
     VLDRQUB,
     ISAUB,
-    UB);
+    (req, res)=>{
+      userFunctions.unfollowBlog(req).then((blog)=>{
+        if (blog) {
+          res.status(StatusCodes.OK).json({
+            'meta': {
+              'status': 200,
+              'msg': 'OK',
+            },
+
+            'res': {
+              'message': 'Blog Unfollowed Successfully',
+              'data': blog,
+            },
+          });
+        } else {
+          res.status(StatusCodes.NOT_FOUND).json({
+            'meta': {
+              'status': 404,
+              'msg': 'NOT FOUND',
+            },
+
+            'res': {
+              'error': 'Blog not found',
+              'data': '',
+            },
+          });
+        }
+      });
+    });
 
 /* ----------- <---> Create Blog <---> ----------- */
 
@@ -104,7 +157,7 @@ router.get('/user/new/blog/:userId',
           res.status(StatusCodes.BAD_REQUEST).json({
             'meta': {
               'status': 400,
-              'msg': 'BAD REQUEST',
+              'msg': 'NOT FOUND',
             },
 
             'res': {

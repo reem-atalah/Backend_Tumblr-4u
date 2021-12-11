@@ -1,5 +1,5 @@
 /* eslint-disable linebreak-style */
-const {createBlog, deleteBlog} = require('../Modules/Users/Controller/control');
+const userFunctions = require('../Modules/Users/Controller/control');
 // const axios=require('axios');
 const chai = require('chai');
 // const sinon = require('sinon');
@@ -10,7 +10,7 @@ chai.should();
 chai.use(chaiHttp);
 const dotenv = require('dotenv');
 const connection = require('../Configurations/configuration');
-const {retrieveBlog, editBlog} = require('../Modules/Blogs/Controller/control');
+const blogFunctions = require('../Modules/Blogs/Controller/control');
 dotenv.config();
 connection();
 describe('UserBlog Methodes testing', () => {
@@ -23,13 +23,14 @@ describe('UserBlog Methodes testing', () => {
         body:
          {
            title: 'Engineering',
-           name: 'rawaa88',
+           name: 'reham11',
            privacy: false,
          },
       };
-      createBlog(req.params.userId, req.body.title, req.body.name,
+      userFunctions.createBlog(req.params.userId, req.body.title, req.body.name,
           req.body.privacy, 'password').then((res)=>{
         expect(res).to.be.a('object');
+        expect(res.name).to.be.eq( req.body.name);
         done();
       }).catch(done);
     });
@@ -46,8 +47,8 @@ describe('UserBlog Methodes testing', () => {
                privacy: false,
              },
           };
-          createBlog(req.params.userId, req.body.title, req.body.name,
-              req.body.privacy, 'password').then((res)=>{
+          userFunctions.createBlog(req.params.userId, req.body.title,
+              req.body.name, req.body.privacy, 'password').then((res)=>{
             expect(res).to.be.eq(null);
             done();
           }).catch(done);
@@ -61,10 +62,10 @@ describe('UserBlog Methodes testing', () => {
         },
         body:
            {
-             blogId: '61b3c50e77921393a8bebb84',
+             blogId: '61b3b9cdae29eb940a03a345',
            },
       };
-      deleteBlog(req.params.userId, req.body.blogId).then((res)=>{
+      userFunctions.deleteBlog(req.params.userId, req.body.blogId).then((res)=>{
         expect(res).to.be.a('object');
         done();
       }).catch(done);
@@ -81,10 +82,11 @@ describe('UserBlog Methodes testing', () => {
                  blogId: '61b3b9e9ae2911b440a03a35c',
                },
             };
-            deleteBlog(req.params.userId, req.body.blogId).then((res)=>{
-              expect(res).to.be.eq(null);
-              done();
-            }).catch(done);
+            userFunctions.deleteBlog(req.params.userId, req.body.blogId)
+                .then((res)=>{
+                  expect(res).to.be.eq(null);
+                  done();
+                }).catch(done);
           });
         });
   });
@@ -95,8 +97,9 @@ describe('UserBlog Methodes testing', () => {
           blogName: 'nour',
         },
       };
-      retrieveBlog(req.params.blogName).then((res) => {
+      blogFunctions.retrieveBlog(req.params.blogName).then((res) => {
         expect(res).to.be.a('object');
+        expect(res.title).to.be.eq('nour');
         done();
       }).catch(done);
     });
@@ -106,7 +109,7 @@ describe('UserBlog Methodes testing', () => {
           blogName: 'nour123',
         },
       };
-      retrieveBlog(req.params.blogName).then((res) => {
+      blogFunctions.retrieveBlog(req.params.blogName).then((res) => {
         expect(res).to.be.eq(null);
         done();
       }).catch(done);
@@ -125,8 +128,12 @@ describe('UserBlog Methodes testing', () => {
           description: 'This is my Blog',
         },
       };
-      editBlog(req).then((res) => {
+      blogFunctions.editBlog(req).then((res) => {
         expect(res).to.be.a('object');
+        expect(res.title).to.be.eq( 'noor');
+        expect(res.avatar).to.be.eq('avatar.jpg');
+        expect(res.accent).to.be.eq('red');
+        expect(res.description).to.be.eq('This is my Blog');
         done();
       }).catch(done);
     });
@@ -140,7 +147,7 @@ describe('UserBlog Methodes testing', () => {
               name: 'nour',
             },
           };
-          editBlog(req).then((res) => {
+          blogFunctions.editBlog(req).then((res) => {
             expect(res).to.be.eq('URL is not available');
             done();
           }).catch(done);
@@ -154,7 +161,171 @@ describe('UserBlog Methodes testing', () => {
           name: 'nour',
         },
       };
-      editBlog(req).then((res) => {
+      blogFunctions.editBlog(req).then((res) => {
+        expect(res).to.be.eq(null);
+        done();
+      }).catch(done);
+    });
+  });
+  describe('Follow Blog Testing', () => {
+    it('should return object of the followed blog', (done) => {
+      const req={
+        params: {
+          userId: '6196d197a31552477d437404',
+        },
+        body: {
+
+          blogId: '619957113df6b45019c42d06',
+        },
+      };
+      userFunctions.followBlog(req).then((res) => {
+        expect(res).to.be.a('object');
+        done();
+      }).catch(done);
+    });
+    it('should return null as there is no a blog with the given id', (done) => {
+      const req={
+        params: {
+          userId: '6196d197a31552477d437404',
+        },
+        body: {
+
+          blogId: '619957913df6b45019c42d06',
+        },
+      };
+      userFunctions.followBlog(req).then((res) => {
+        expect(res).to.be.eq(null);
+        done();
+      }).catch(done);
+    });
+  });
+  describe('Follow Blog Testing', () => {
+    it('should return object of the unfollowed blog', (done) => {
+      const req={
+        params: {
+          userId: '6196d197a31552477d437404',
+        },
+        body: {
+
+          blogId: '619957113df6b45019c42d06',
+        },
+      };
+      userFunctions.unfollowBlog(req).then((res) => {
+        expect(res).to.be.a('object');
+        done();
+      }).catch(done);
+    });
+    it('should return null as there is no a blog with the given id', (done) => {
+      const req={
+        params: {
+          userId: '6196d197a31552477d437404',
+        },
+        body: {
+
+          blogId: '619957913df6b45019c42d06',
+        },
+      };
+      userFunctions.unfollowBlog(req).then((res) => {
+        expect(res).to.be.eq(null);
+        done();
+      }).catch(done);
+    });
+  });
+  describe('Unfollow Blog Testing', () => {
+    it('should return object of the unfollowed blog', (done) => {
+      const req={
+        params: {
+          userId: '6196d197a31552477d437404',
+        },
+        body: {
+
+          blogId: '619957113df6b45019c42d06',
+        },
+      };
+      userFunctions.unfollowBlog(req).then((res) => {
+        expect(res).to.be.a('object');
+        done();
+      }).catch(done);
+    });
+    it('should return null as there is no a blog with the given id', (done) => {
+      const req={
+        params: {
+          userId: '6196d197a31552477d437404',
+        },
+        body: {
+
+          blogId: '619957913df6b45019c42d06',
+        },
+      };
+      userFunctions.unfollowBlog(req).then((res) => {
+        expect(res).to.be.eq(null);
+        done();
+      }).catch(done);
+    });
+  });
+  describe('Block Blog Testing', () => {
+    it('should return object of the blocked blog', (done) => {
+      const req={
+        params: {
+          blogId: '61b3724efad9ac6d6c719f58',
+        },
+        body: {
+
+          blockedBlogId: '619957113df6b45019c42d06',
+
+        },
+      };
+      blogFunctions.blockBlog(req).then((res) => {
+        expect(res).to.be.a('object');
+        done();
+      }).catch(done);
+    });
+    it('should return null as there is no a blog with the given id', (done) => {
+      const req={
+        params: {
+          blogId: '61b3724efad9ac6d6c719f58',
+        },
+        body: {
+
+          blockedBlogId: '619938113df6b45019c42d06',
+
+        },
+      };
+      blogFunctions.blockBlog(req).then((res) => {
+        expect(res).to.be.eq(null);
+        done();
+      }).catch(done);
+    });
+  });
+  describe('Unblock Blog Testing', () => {
+    it('should return object of the unblocked blog', (done) => {
+      const req={
+        params: {
+          blogId: '61b3724efad9ac6d6c719f58',
+        },
+        body: {
+
+          unblockedBlogId: '619957113df6b45019c42d06',
+
+        },
+      };
+      blogFunctions.unblockBlog(req).then((res) => {
+        expect(res).to.be.a('object');
+        done();
+      }).catch(done);
+    });
+    it('should return null as there is no a blog with the given id', (done) => {
+      const req={
+        params: {
+          blogId: '61b3724efad9ac6d6c719f58',
+        },
+        body: {
+
+          unblockedBlogId: '619938113df6b45019c42d06',
+
+        },
+      };
+      blogFunctions.unblockBlog(req).then((res) => {
         expect(res).to.be.eq(null);
         done();
       }).catch(done);

@@ -311,12 +311,9 @@ const google = async (req, res)=>{
  * @name followBlog
  * @description this function makes the user whose id sent in
  *              params follow the blog whose id in the body
- * @param {Object} req - Holds the blogId in params and the
- *                       blockedBlogId in body
- * @param {Object} res - Holds the res status and
- *                      message based on the status.
- *
- * @returns res status and message or error massege in case of errors.
+ * @param {String} userId - The id of the user who follows the blog
+ * @param {String} blogId - The id of the blog to be followed
+ * @returns {Object}  - The followed blog and null if not found
  */
 
 
@@ -324,51 +321,21 @@ const followBlog = async (req, res) => {
   try {
     const userId = req.params.userId;
     const blogId = req.body.blogId;
-    const blog = await schema.blogs.findOne({'_id': blogId}, 'followers');
+    const blog = await schema.blogs.findOne({'_id': blogId});
     const user= await schema.users.findOne({'_id': userId}, 'following_blogs');
-    console.log(blogId);
     if (blog) {
       if (user) {
         blog.followers.push(userId);
         blog.save();
         user.following_blogs.push(blogId);
         user.save();
-        res.status(StatusCodes.OK).json({
-          'meta': {
-            'status': 200,
-            'msg': 'OK',
-          },
-
-          'res': {
-            'message': 'Blog Followed Successfully',
-            'data': '',
-          },
-        });
+        return blog;
       }
     } else {
-      res.status(StatusCodes.NOT_FOUND).json({
-        'meta': {
-          'status': 404,
-          'msg': 'BAD_REQUEST',
-        },
-
-        'res': {
-          'error': 'Blog not found',
-          'data': '',
-        },
-      });
+      return null;
     }
   } catch (error) {
-    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
-      'meta': {
-        'status': 500,
-        'msg': 'INTERNAL_SERVER_ERROR',
-      },
-      'res': {
-        'error': 'Error In followBlog Function',
-        'data': '',
-      },
-    });
+    console.log(error.message);
   }
 };
 
@@ -376,24 +343,22 @@ const followBlog = async (req, res) => {
 
 
 /**
-   *
-   * @function
-   * @name unfollowBlog
-   * @description this function removes the user whose id sent in
-   *               params from followers of the blog whose id in the body
-   * @param {Object} req - Holds the blogId in params and
-   *                       the blockedBlogId in body
-   * @param {Object} res - Holds the res status and message
-   *                       based on the status.
-   *
-   * @returns res status and message or error massege in case of errors.
-   */
+ *
+ * @function
+ * @name unfollowBlog
+ * @description this function removes the user whose id sent in
+ *               params from followers of the blog whose id in the body
+ * @param {String} userId - The id of the user who unfollows the blog
+ * @param {String} blogId - The id of the blog to be unfollowed
+ * @returns {Object}  - The unfollowed blog
+ */
 
-const unfollowBlog = async (req, res) => {
+
+const unfollowBlog = async (req) => {
   try {
     const userId = req.params.userId;
     const blogId = req.body.blogId;
-    const blog = await schema.blogs.findOne({'_id': blogId}, 'followers');
+    const blog = await schema.blogs.findOne({'_id': blogId});
     const user= await schema.users.findOne({'_id': userId}, 'following_blogs');
     if (blog) {
       if (user) {
@@ -401,42 +366,13 @@ const unfollowBlog = async (req, res) => {
         blog.save();
         user.following_blogs.pull(blogId);
         user.save();
-        res.status(StatusCodes.OK).json({
-          'meta': {
-            'status': 200,
-            'msg': 'OK',
-          },
-
-          'res': {
-            'message': 'Blog Unfollowed Successfully',
-            'data': '',
-          },
-        });
+        return blog;
       }
     } else {
-      res.status(StatusCodes.NOT_FOUND).json({
-        'meta': {
-          'status': 404,
-          'msg': 'BAD_REQUEST',
-        },
-
-        'res': {
-          'error': 'Blog not found',
-          'data': '',
-        },
-      });
+      return null;
     }
   } catch (error) {
-    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
-      'meta': {
-        'status': 500,
-        'msg': 'INTERNAL_SERVER_ERROR',
-      },
-      'res': {
-        'error': 'Error In unfollowBlog Function',
-        'data': '',
-      },
-    });
+    console.log(error.message);
   }
 };
 

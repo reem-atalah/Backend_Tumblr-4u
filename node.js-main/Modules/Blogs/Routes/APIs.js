@@ -24,7 +24,35 @@ const ISABB=isAuthorized(blogEndPoints.blockBlog);
 router.post('/blog/block/:blogId',
     VLDRQBB,
     ISABB,
-    blogFunctions.blockBlog);
+    (req, res)=>{
+      blogFunctions.blockBlog(req).then((blog)=>{
+        if (blog) {
+          res.status(StatusCodes.OK).json({
+            'meta': {
+              'status': 200,
+              'msg': 'OK',
+            },
+
+            'res': {
+              'message': 'Blog Blocked Successfully',
+              'data': blog,
+            },
+          });
+        } else {
+          res.status(StatusCodes.NOT_FOUND).json({
+            'meta': {
+              'status': 404,
+              'msg': 'NOT FOUND',
+            },
+
+            'res': {
+              'message': 'Blog Not FOUND',
+              'data': '',
+            },
+          });
+        }
+      });
+    });
 
 /* ------- <---> Un Block Account <---> ----- */ // *** <===> Done <===>  *** //
 const VLDRQUB=validateRequest(blogJoi.UnblockBlogValidations);
@@ -33,7 +61,35 @@ const ISAUB=isAuthorized(blogEndPoints.unblockBlog);
 router.post('/blog/unblock/:blogId',
     VLDRQUB,
     ISAUB,
-    blogFunctions.unblockBlog);
+    (req, res)=>{
+      blogFunctions.unblockBlog(req).then((blog)=>{
+        if (blog) {
+          res.status(StatusCodes.OK).json({
+            'meta': {
+              'status': 200,
+              'msg': 'OK',
+            },
+
+            'res': {
+              'message': 'Blog Unblocked Successfully',
+              'data': blog,
+            },
+          });
+        } else {
+          res.status(StatusCodes.NOT_FOUND).json({
+            'meta': {
+              'status': 404,
+              'msg': 'NOT FOUND',
+            },
+
+            'res': {
+              'message': 'Blog Not FOUND',
+              'data': '',
+            },
+          });
+        }
+      });
+    });
 
 
 const VLDRQEB=validateRequest(blogJoi.EditBlogValidations);
@@ -65,7 +121,7 @@ router.post('/blog/edit/:blogId',
             },
 
             'res': {
-              'message': 'OK',
+              'message': 'Blog Editted Successfully',
               'data': blog,
             },
           });
@@ -101,7 +157,7 @@ router.get('/blog/view/:blogName',
             },
 
             'res': {
-              'message': 'Blog Retrieved Successfuly',
+              'message': 'Blog Retrieved Successfully',
               'data': blog,
             },
           });
