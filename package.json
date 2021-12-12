@@ -38,7 +38,7 @@
     "eslint-config-google": "^0.14.0",
     "mocha": "^9.1.3",
     "mochawesome": "^7.0.1",
-    "nodemon": "^2.0.13",
+    "nodemon": "^2.0.15",
     "sinon": "^12.0.1",
     "sinon-chai": "^3.7.0"
   }

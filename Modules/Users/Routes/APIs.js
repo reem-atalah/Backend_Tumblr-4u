@@ -41,22 +41,27 @@ router.post('/login', VLDRQSI, SI);
 
 /* ----------- <---> verfiy Account <---> ----------- */
 const VA=userFunctions.verfiyAccount;
-router.get('/user/verify/:token', VA);
-
+const VVA = validateRequest(userJoi.VerifiyAccountValidations);
+router.get('/user/verify/:token', VVA, VA);
 
 /* --------- <---> Sign Up With Google <---> */ // *** <===> Done <===>  *** //
 
-// router.use(passport.initialize());
-// router.use(passport.session());
+router.use(passport.initialize());
+router.use(passport.session());
 
 router.get('/google',
     passport.authenticate('google', {scope: ['profile', 'email']}));
 const GO = userFunctions.google;
+const GI = userFunctions.googleInfo;
+const VGI = validateRequest(userJoi.GoogleInfoValidations);
+const IA = isAuthorized(userEndPoints.googleInfo);
 router.get('/google/callback', passport.authenticate('google'), GO);
+router.put('/google/info',VGI,IA, GI);
 
 /* ----------- <---> android Sign Up With Google <---> ----------- */
 const GSA=userFunctions.androidSignUpWithGoogle;
-router.get('/androidSignUpWithGoogle', GSA);
+const GAV = validateRequest(userJoi.GoogleAndroidValidations);
+router.post('/androidSignUpWithGoogle', GAV, GSA);
 
 /* ----------- <---> Follow <---> ----------- */
 

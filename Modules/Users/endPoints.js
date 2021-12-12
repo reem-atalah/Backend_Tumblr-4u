@@ -7,12 +7,14 @@ const followBlog = 'User:folloBlog';
 const unfollowBlog = 'User:unfollowBlog';
 const createBlog = 'User:createBlog';
 const deleteBlog = 'User:deleteBlog';
+const googleInfo = 'User:googleInfo';
 
 const userEndPoints = {
   followBlog,
   unfollowBlog,
   createBlog,
   deleteBlog,
+  googleInfo,
 };
 /* =========== <--> End <--> =========== */
 

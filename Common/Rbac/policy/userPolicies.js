@@ -12,6 +12,7 @@ const postEndPoints = require('../../../Modules/Posts/endPoints');
 
 /* =================== <-- User Role Policies --> =================== */
 const userAdminPolicies = [
+  userEndPoints.googleInfo,
   searchEndPt.getSearchDash,
   userEndPoints.followBlog,
   userEndPoints.unfollowBlog,

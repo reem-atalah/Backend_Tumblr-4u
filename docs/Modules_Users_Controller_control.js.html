@@ -43,292 +43,22 @@ const schema = require('../../../Model/model');
 
 /* ----------- &lt;---> Sign Up &lt;---> ------- */ // *** &lt;===> Done &lt;===>  *** //
 // Assumption: Account Must Be Not Deleted
-
-/**
- * This Function Used To Register New User.
- *
- * @param {string} email - email
- * @param {string} password - password
- * @param {string} blogName - blogName
- * @param {string} age - age
- * @param {number} city - city
- * @param {string} country - country
- *
- * @returns {object} - { Object }
- */
-
-const signUp = async (req, res) => {
-  try {
-    const {email, password, blogName, age, city, country} = req.body;
-
-    const oldUserEmail = await schema.users.findOne({email, isDeleted: false});
-    // eslint-disable-next-line max-len
-    const oldUserBlog=await schema.users.findOne({name: blogName, isDeleted: false});
-
-    if (oldUserEmail) {
-      res.status(StatusCodes.BAD_REQUEST).json({
-        'meta': {
-          'status': 400,
-          'msg': 'BAD_REQUEST',
-        },
-
-        'res': {
-          'error': 'Email is Already Exists (&lt;:>)',
-          'data': '',
-        },
-      });
-    // eslint-disable-next-line brace-style
-    }
-
-    // --------------- Search On Blogs Name ----------------//
-    else if (oldUserBlog) {
-      res.status(StatusCodes.BAD_REQUEST).json({
-        'meta': {
-          'status': 400,
-          'msg': 'BAD_REQUEST',
-        },
-
-        'res': {
-          'error': 'Blog Name is Already Exists (&lt;:>)',
-          'data': '',
-        },
-      });
-    } else {
-      // eslint-disable-next-line new-cap
-      const newUser = new schema.users({
-        email,
-        password,
-        name: blogName,
-        age,
-        city,
-        country,
-      });
-      // const data = await newUser.save();
-      await newUser.save();
-
-      // --------------- Create Primary Blog ----------------//
-
-      // createBlog();
-
-      const token = jwt.sign({email, role: 'user'}, process.env.KEY);
-
-      userServices.verifyMail(blogName, email, token);
-
-      res.status(StatusCodes.CREATED).json({
-        'meta': {
-          'status': 201,
-          'msg': 'CREATED',
-        },
-
-        'res': {
-          'message': 'Sign Up Successfully (&lt;:>)',
-          'data': token,
-        },
-      });
-    }
-  } catch (error) {
-    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
-      'meta': {
-        'status': 500,
-        'msg': 'INTERNAL_SERVER_ERROR',
-      },
-
-      'res': {
-        'error': 'Error In Sign Up Function (&lt;:>)',
-        'data': '',
-      },
-    });
-  };
-};
+const signUp = require('./signup');
 
 /* ----------- &lt;---> Sign In &lt;---> --------- */ // *** &lt;===> Done &lt;===>  *** //
 // Assumption: Acount Must Be Not ( Deleted )
-
-/**
- * This Function Used To LogIn To Tumblr4U.
- *
- * @param {string} email - username
- * @param {string} password - email
- *
- * @returns {object} - { Object }
- */
-
-const login = async (req, res) => {
-  try {
-    const {email, password} = req.body;
-    const oldUser = await schema.users.findOne({email, isDeleted: false});
-    if (oldUser) {
-      const match = await bcrypt.compare(password, oldUser.password);
-      if (match) {
-        const token = jwt.sign({
-          email: oldUser.email,
-          role: oldUser.role},
-        process.env.KEY);
-        res.status(StatusCodes.OK).json({
-          'meta': {
-            'status': 200,
-            'msg': 'OK',
-          },
-
-          'res': {
-            'message': 'LogIn Successfully (&lt;:>)',
-            'data': token,
-          },
-        });
-      } else {
-        res.status(StatusCodes.BAD_REQUEST).json({
-          'meta': {
-            'status': 400,
-            'msg': 'BAD_REQUEST',
-          },
-
-          'res': {
-            'error': 'InCorrect Password (&lt;:>)',
-            'data': '',
-          },
-        });
-      }
-    } else {
-      res.status(StatusCodes.BAD_REQUEST).json({
-        'meta': {
-          'status': 400,
-          'msg': 'BAD_REQUEST',
-        },
-
-        'res': {
-          'error': 'Email Is Not Found (&lt;:>)',
-          'data': '',
-        },
-      });
-    }
-  } catch (error) {
-    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
-      'meta': {
-        'status': 500,
-        'msg': 'INTERNAL_SERVER_ERROR',
-      },
-
-      'res': {
-        'error': 'Error In LogIn Function (&lt;:>)',
-        'data': '',
-      },
-    });
-  };
-};
+const login = require('./login');
 
 /* ----------- &lt;---> Verify Account &lt;---> --- */ // *** &lt;===> Done &lt;===>  *** //
 // Assumption: Acount Must Be Not ( Deleted )
 
-/**
- * This Function Used To LogIn To Tumblr4U.
- *
- * @param {string} token - user secret token
- *
- * @returns {object} - { Object }
- */
-
-const verfiyAccount = async (req, res)=>{
-  try {
-    const token = req.params.token;
-    const decoded = jwt.verify(token, process.env.KEY);
-
-    const data = await schema.users
-        .updateOne({email: decoded.email}, {isVerified: true});
-    if (data.modifiedCount != 0) {
-      res.status(StatusCodes.OK).json({
-        'meta': {
-          'status': 200,
-          'msg': 'OK',
-        },
-
-        'res': {
-          'message': 'Account Verified Successfully (&lt;:>)',
-          'data': '',
-        },
-      });
-    } else {
-      res.status(StatusCodes.BAD_REQUEST).json({
-        'meta': {
-          'status': 400,
-          'msg': 'BAD_REQUEST',
-        },
-
-        'res': {
-          'error': 'Account Is Not Found or Already Verified (&lt;:>)',
-          'data': '',
-        },
-      });
-    }
-  } catch (error) {
-    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
-      'meta': {
-        'status': 500,
-        'msg': 'INTERNAL_SERVER_ERROR',
-      },
-
-      'res': {
-        'error': 'Error In Verfiy Account Function (&lt;:>)',
-        'data': '',
-      },
-    });
-  };
-};
+const verfiyAccount = require('./verifyAccount');
 
 /* ------ &lt;---> Sign Up With Google &lt;---> */ // *** &lt;===> Done &lt;===>  *** //
 // Assumption: Acount Must Be Not ( Deleted )
+const google = require('./signupGoogle').google;
+const googleInfo = require('./signupGoogle').googleInfo;
 
-/**
- * This Function Used To LogIn To Tumblr4U.
- *
- * @param {string} email - username
- * @param {string} password - email
- *
- * @returns {object} - { Object }
- */
-
-const google = async (req, res)=>{
-  try {
-    const oldUser = await schema.users.findOne({email: req.user.email});
-    console.log(oldUser);
-    if (oldUser) {
-      res.status(StatusCodes.OK).json({
-        'meta': {
-          'status': 200,
-          'msg': 'OK',
-        },
-
-        'res': {
-          'message': 'User Log In With Google Successfully (&lt;:>)',
-          'data': req.user,
-        },
-      });
-    } else {
-      res.status(StatusCodes.OK).json({
-        'meta': {
-          'status': 200,
-          'msg': 'OK',
-        },
-
-        'res': {
-          'message': 'User Sign Up With Google Successfully (&lt;:>)',
-          'data': req.user,
-        },
-      });
-    }
-  } catch (error) {
-    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
-      'meta': {
-        'status': 500,
-        'msg': 'INTERNAL_SERVER_ERROR',
-      },
-
-      'res': {
-        'error': 'Error In Sign Up With Google Function (&lt;:>)',
-        'data': '',
-      },
-    });
-  };
-};
 // =================== End ===================//
 
 /* ------ &lt;---> Follow Blog &lt;---> */ // *** &lt;===> Done &lt;===>  *** //
@@ -525,6 +255,8 @@ const deleteBlog = async (userId, blogId) => {
   }
 };
 
+const androidSignUpWithGoogle = require('./androidSignWithGoogle');
+
 /* =========== /// &lt;==> End &lt;==> ===========*/
 
 /* =============== /// &lt;==> Export User Functions &lt;==> /// =============== */
@@ -537,6 +269,8 @@ module.exports = {
   deleteBlog,
   verfiyAccount,
   google,
+  googleInfo,
+  androidSignUpWithGoogle
 };
 /* =========== /// &lt;==> End &lt;==> ===========*/
 </code></pre>
@@ -549,13 +283,13 @@ module.exports = {
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#androidSignUpWithGoogle">androidSignUpWithGoogle</a></li><li><a href="global.html#autoCompleteSearchDash">autoCompleteSearchDash</a></li><li><a href="global.html#blockBlog">blockBlog</a></li><li><a href="global.html#createBlog">createBlog</a></li><li><a href="global.html#createPost">createPost</a></li><li><a href="global.html#deleteBlog">deleteBlog</a></li><li><a href="global.html#editBlog">editBlog</a></li><li><a href="global.html#followBlog">followBlog</a></li><li><a href="global.html#getDashboard">getDashboard</a></li><li><a href="global.html#getNotes">getNotes</a></li><li><a href="global.html#google">google</a></li><li><a href="global.html#googleInfo">googleInfo</a></li><li><a href="global.html#isAuthorized">isAuthorized</a></li><li><a href="global.html#likePress">likePress</a></li><li><a href="global.html#login">login</a></li><li><a href="global.html#loopAndCheck">loopAndCheck</a></li><li><a href="global.html#loopObjAndCheck">loopObjAndCheck</a></li><li><a href="global.html#makePost">makePost</a></li><li><a href="global.html#mongoose">mongoose</a></li><li><a href="global.html#reblogPost">reblogPost</a></li><li><a href="global.html#removeComment">removeComment</a></li><li><a href="global.html#removeReblog">removeReblog</a></li><li><a href="global.html#retrieveBlog">retrieveBlog</a></li><li><a href="global.html#search">search</a></li><li><a href="global.html#showPost">showPost</a></li><li><a href="global.html#signUp">signUp</a></li><li><a href="global.html#unblockBlog">unblockBlog</a></li><li><a href="global.html#unfollowBlog">unfollowBlog</a></li><li><a href="global.html#verfiyAccount">verfiyAccount</a></li><li><a href="global.html#verifyMail">verifyMail</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#androidSignUpWithGoogle">androidSignUpWithGoogle</a></li><li><a href="global.html#autoCompleteSearchDash">autoCompleteSearchDash</a></li><li><a href="global.html#blockBlog">blockBlog</a></li><li><a href="global.html#checkBlogName">checkBlogName</a></li><li><a href="global.html#checkMail">checkMail</a></li><li><a href="global.html#checkPassword">checkPassword</a></li><li><a href="global.html#createBlog">createBlog</a></li><li><a href="global.html#createGoogleUser">createGoogleUser</a></li><li><a href="global.html#createPost">createPost</a></li><li><a href="global.html#createUser">createUser</a></li><li><a href="global.html#deleteBlog">deleteBlog</a></li><li><a href="global.html#editBlog">editBlog</a></li><li><a href="global.html#followBlog">followBlog</a></li><li><a href="global.html#getDashboard">getDashboard</a></li><li><a href="global.html#getNotes">getNotes</a></li><li><a href="global.html#google">google</a></li><li><a href="global.html#googleInfo">googleInfo</a></li><li><a href="global.html#isAuthorized">isAuthorized</a></li><li><a href="global.html#likePress">likePress</a></li><li><a href="global.html#login">login</a></li><li><a href="global.html#loopAndCheck">loopAndCheck</a></li><li><a href="global.html#loopObjAndCheck">loopObjAndCheck</a></li><li><a href="global.html#makePost">makePost</a></li><li><a href="global.html#mongoose">mongoose</a></li><li><a href="global.html#reblogPost">reblogPost</a></li><li><a href="global.html#removeComment">removeComment</a></li><li><a href="global.html#removeReblog">removeReblog</a></li><li><a href="global.html#retrieveBlog">retrieveBlog</a></li><li><a href="global.html#search">search</a></li><li><a href="global.html#showPost">showPost</a></li><li><a href="global.html#signUp">signUp</a></li><li><a href="global.html#unblockBlog">unblockBlog</a></li><li><a href="global.html#unfollowBlog">unfollowBlog</a></li><li><a href="global.html#verfiyAccount">verfiyAccount</a></li><li><a href="global.html#verifyMail">verifyMail</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Sat Dec 11 2021 20:23:40 GMT+0200 (Eastern European Standard Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Sun Dec 12 2021 01:48:15 GMT+0200 (Eastern European Standard Time)
 </footer>
 
 <script> prettyPrint(); </script>

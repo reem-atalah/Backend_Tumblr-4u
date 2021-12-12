@@ -32,6 +32,9 @@
 
 /* =============== /// &lt;==> Variables Declaration &lt;==> /// ================== */
 const nodemailer = require('nodemailer');
+const {StatusCodes} = require('http-status-codes');
+const bcrypt = require('bcrypt');
+const schema = require('../../../Model/model');
 /* =========== /// &lt;==> End &lt;==> ===========*/
 
 /* ----------- &lt;---> verify Email &lt;---> --------- */ // *** &lt;===> Done &lt;===>  *** //
@@ -45,7 +48,6 @@ const nodemailer = require('nodemailer');
  */
 
 const verifyMail = async (name,email,token)=>{
-  try {
 
     let transporter = nodemailer.createTransport({
         service:'gmail',
@@ -63,29 +65,122 @@ const verifyMail = async (name,email,token)=>{
         &lt;h3> Hi ${name}&lt;/h3>
         &lt;p>To verify your mail click &lt;a href=http://localhost:3000/user/verify/${token}>here&lt;/a>&lt;/p>
         `, // html body
-      });    
-    }catch(error){
-        res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
-            'meta': {
-              'status': 500,
-              'msg': 'INTERNAL_SERVER_ERROR',
-            },
-      
-            'res': {
-              'error': 'Error In LogIn Function Services (&lt;:>)',
-              'data': '',
-            },
-          });
-    };    
+      });
+    
+    return 'verification mail sent'
 };
 
+/* ----------- &lt;---> Check If Mail Found &lt;---> --------- */ // *** &lt;===> Done &lt;===>  *** //
+/**
+ * This Function Used To Check If Given Mail Is Found or Not.
+ *
+ * @param {string} email - username
+ * @returns {boolean} [Ture , False].
+ */
+
+
+const checkMail = async(email)=>{
+  
+    const oldUserEmail = await schema.users.findOne({email, isDeleted: false});
+    if (oldUserEmail)    
+      return true;
+    else
+      return false;
+};
+
+/* ----------- &lt;---> Check If Blog Name Found &lt;---> --------- */ // *** &lt;===> Done &lt;===>  *** //
+/**
+ * This Function Used To Check If Given Blog Name Is Found or Not.
+ *
+ * @param {string} blogName - username
+ * @returns {boolean} [Ture , False].
+ */
+const checkBlogName = async(name)=>{
+    const oldUserBlog = await schema.blogs.findOne({name: name});
+    if (oldUserBlog) 
+      return true;
+    else
+     return false; 
+};
+
+/* ----------- &lt;---> Create New User &lt;---> --------- */ // *** &lt;===> Done &lt;===>  *** //
+/**
+ * This Function Used To Create New User.
+ *
+ * @param {string} email - username
+ * @param {string} password - username
+ * @param {string} blogName - username
+ * @param {string} age - username
+ * 
+ * @returns {String} Created.
+ */
+
+const createUser = async(email, password, blogName, age)=>{
+
+  const newUser = new schema.users({
+    email,
+    password,
+    name: blogName,
+    age,
+  });
+  // const data = await newUser.save();
+  await newUser.save();
+  return 'Created';
+};
+
+/* ----------- &lt;---> Create New Google User &lt;---> --------- */ // *** &lt;===> Done &lt;===>  *** //
+/**
+ * This Function Used To Create New Google User.
+ *
+ * @param {string} email - username
+ * @param {string} password - username
+ * 
+ * @returns {String} Created.
+ */
+const createGoogleUser = async(email, password)=>{
+
+  let blogName = '';
+    let age = -1;
+
+    const newUser = new schema.users({
+      email,
+      password,
+      name: blogName,
+      age,
+      isDeleted:true,
+      isVerified:true
+    });
+    // const data = await newUser.save();
+    await newUser.save();
+    return 'Created';
+  
+};
+  
+
+/* ----------- &lt;---> Check Password &lt;---> --------- */ // *** &lt;===> Done &lt;===>  *** //
+/**
+ * This Function Compare Between Two Passwords.
+ *
+ * @param {string} password - username
+ * @param {string} oldPassword - username
+ * 
+ * @returns {boolean} [Ture , False].
+ */
+const checkPassword = async(password,oldPassword)=>{
+  const match = await bcrypt.compare(password, oldPassword);
+  return match;
+};
 
 /* =============== /// &lt;==> Export User Functions Services &lt;==> /// =============== */
 module.exports = {
-    verifyMail
-  };
-  /* =========== /// &lt;==> End &lt;==> ===========*/
-  </code></pre>
+    verifyMail,
+    checkMail,
+    checkBlogName,
+    createUser,
+    checkPassword,
+    createGoogleUser
+};
+/* =========== /// &lt;==> End &lt;==> ===========*/</code></pre>
         </article>
     </section>
 
@@ -95,13 +190,13 @@ module.exports = {
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#androidSignUpWithGoogle">androidSignUpWithGoogle</a></li><li><a href="global.html#autoCompleteSearchDash">autoCompleteSearchDash</a></li><li><a href="global.html#blockBlog">blockBlog</a></li><li><a href="global.html#createBlog">createBlog</a></li><li><a href="global.html#createPost">createPost</a></li><li><a href="global.html#deleteBlog">deleteBlog</a></li><li><a href="global.html#editBlog">editBlog</a></li><li><a href="global.html#followBlog">followBlog</a></li><li><a href="global.html#getDashboard">getDashboard</a></li><li><a href="global.html#getNotes">getNotes</a></li><li><a href="global.html#google">google</a></li><li><a href="global.html#googleInfo">googleInfo</a></li><li><a href="global.html#isAuthorized">isAuthorized</a></li><li><a href="global.html#likePress">likePress</a></li><li><a href="global.html#login">login</a></li><li><a href="global.html#loopAndCheck">loopAndCheck</a></li><li><a href="global.html#loopObjAndCheck">loopObjAndCheck</a></li><li><a href="global.html#makePost">makePost</a></li><li><a href="global.html#mongoose">mongoose</a></li><li><a href="global.html#reblogPost">reblogPost</a></li><li><a href="global.html#removeComment">removeComment</a></li><li><a href="global.html#removeReblog">removeReblog</a></li><li><a href="global.html#retrieveBlog">retrieveBlog</a></li><li><a href="global.html#search">search</a></li><li><a href="global.html#showPost">showPost</a></li><li><a href="global.html#signUp">signUp</a></li><li><a href="global.html#unblockBlog">unblockBlog</a></li><li><a href="global.html#unfollowBlog">unfollowBlog</a></li><li><a href="global.html#verfiyAccount">verfiyAccount</a></li><li><a href="global.html#verifyMail">verifyMail</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#androidSignUpWithGoogle">androidSignUpWithGoogle</a></li><li><a href="global.html#autoCompleteSearchDash">autoCompleteSearchDash</a></li><li><a href="global.html#blockBlog">blockBlog</a></li><li><a href="global.html#checkBlogName">checkBlogName</a></li><li><a href="global.html#checkMail">checkMail</a></li><li><a href="global.html#checkPassword">checkPassword</a></li><li><a href="global.html#createBlog">createBlog</a></li><li><a href="global.html#createGoogleUser">createGoogleUser</a></li><li><a href="global.html#createPost">createPost</a></li><li><a href="global.html#createUser">createUser</a></li><li><a href="global.html#deleteBlog">deleteBlog</a></li><li><a href="global.html#editBlog">editBlog</a></li><li><a href="global.html#followBlog">followBlog</a></li><li><a href="global.html#getDashboard">getDashboard</a></li><li><a href="global.html#getNotes">getNotes</a></li><li><a href="global.html#google">google</a></li><li><a href="global.html#googleInfo">googleInfo</a></li><li><a href="global.html#isAuthorized">isAuthorized</a></li><li><a href="global.html#likePress">likePress</a></li><li><a href="global.html#login">login</a></li><li><a href="global.html#loopAndCheck">loopAndCheck</a></li><li><a href="global.html#loopObjAndCheck">loopObjAndCheck</a></li><li><a href="global.html#makePost">makePost</a></li><li><a href="global.html#mongoose">mongoose</a></li><li><a href="global.html#reblogPost">reblogPost</a></li><li><a href="global.html#removeComment">removeComment</a></li><li><a href="global.html#removeReblog">removeReblog</a></li><li><a href="global.html#retrieveBlog">retrieveBlog</a></li><li><a href="global.html#search">search</a></li><li><a href="global.html#showPost">showPost</a></li><li><a href="global.html#signUp">signUp</a></li><li><a href="global.html#unblockBlog">unblockBlog</a></li><li><a href="global.html#unfollowBlog">unfollowBlog</a></li><li><a href="global.html#verfiyAccount">verfiyAccount</a></li><li><a href="global.html#verifyMail">verifyMail</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Sat Dec 11 2021 20:23:40 GMT+0200 (Eastern European Standard Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Sun Dec 12 2021 01:48:15 GMT+0200 (Eastern European Standard Time)
 </footer>
 
 <script> prettyPrint(); </script>

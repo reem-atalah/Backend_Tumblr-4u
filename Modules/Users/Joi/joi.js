@@ -15,15 +15,17 @@ const userJoi = {
       email: joi.string().required().email(),
       password: joi.string().required(),
       blogName: joi.string().required(),
-      age: joi.number().required(),
-      city: joi.string().required(),
-      country: joi.string().required(),
+      age: joi.number(),
     }),
   },
   SignInValidations: {
     body: joi.object().required().keys({
       email: joi.string().required().email(),
       password: joi.string().required(),
+    }),
+  },
+  VerifiyAccountValidations: {
+    body: joi.object().required().keys({
     }),
   },
   GoogleInfoValidations: {
@@ -34,6 +36,11 @@ const userJoi = {
 
     headers: joi.object().required().keys({
       token: joi.string().required(),
+    }),
+  },
+  GoogleAndroidValidations: {
+    body: joi.object().required().keys({
+      googleToken:joi.string().required(),
     }),
   },
   FollowBlogValidations: {

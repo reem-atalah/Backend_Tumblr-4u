@@ -8,24 +8,22 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const {StatusCodes} = require('http-status-codes');
 const schema = require('../../../Model/model');
+const nanoid = require('nanoid').nanoid;
 /* =========== /// <==> End <==> ===========*/
 
 /* ----------- <---> Sign Up With Google For Android <---> ------- */ // *** <===> Done <===>  *** //
 // Assumption: Account Must Be Not Deleted
 
 /**
- * This Function Used To Register New User.
- *
+ * This Function Used To Register New User For Android.
  * @param {string} googleToken - Google Token
- * @param {string} blogName - blogName
- * @param {string} age - age
  *
  * @returns {object} - { Object }
  */
 
 const androidSignUpWithGoogle = async (req, res) => {
-  try {
-    const {googleToken, blogName, age} = req.body;
+  // try {
+    const {googleToken} = req.body;
     let email='';
     const CLIENT_ID = '633147263244-84kumvs7scjqm6ps8im6b5lvhili7hur.apps.googleusercontent.com';
 
@@ -48,70 +46,63 @@ const androidSignUpWithGoogle = async (req, res) => {
     }
     verify().catch(console.error);
     
-    // const isMailFound = await userServices.checkMail(email);
-    // const isBlogFound = await userServices.checkBlogName(blogName);
+    //=============================================================================
+    const isMailFound = await userServices.checkMail(email);
+      
+    if (isMailFound) {
+    const oldUser = await schema.users.findOne({email, isDeleted: false});
+    const token = jwt.sign({
+      email: oldUser.email,
+      role: oldUser.role},
+      process.env.KEY);
 
-    // if (isMailFound) {
-    //   res.status(StatusCodes.BAD_REQUEST).json({
-    //     'meta': {
-    //       'status': 400,
-    //       'msg': 'BAD_REQUEST',
-    //     },
+      res.status(StatusCodes.OK).json({
+        'meta': {
+          'status': 200,
+          'msg': 'OK',
+        },
+        'res': {
+          'message': 'User Log In With Google For Android Successfully (<:>)',
+          'data': token,
+        },
+      });
+    } else {
+      
+      let password = nanoid();
 
-    //     'res': {
-    //       'error': 'Email is Already Exists (<:>)',
-    //       'data': '',
-    //     },
-    //   });
-    // } else if (isBlogFound) {
-    //   res.status(StatusCodes.BAD_REQUEST).json({
-    //     'meta': {
-    //       'status': 400,
-    //       'msg': 'BAD_REQUEST',
-    //     },
+      userServices.createGoogleUser(email,password);
 
-    //     'res': {
-    //       'error': 'Blog Name is Already Exists (<:>)',
-    //       'data': '',
-    //     },
-    //   });
-    // } else {
-    //   userServices.createUser(email, password, blogName, age);
+      const token = jwt.sign({
+          email: email,
+          role: 'user'},
+          process.env.KEY);
 
-    //   // =================================================================
-    //   // =================================================================
-    //   // ==========================Create Primary Blog========================//
-    //   // =================================================================
-    //   // =================================================================
+      res.status(StatusCodes.OK).json({
+        'meta': {
+          'status': 200,
+          'msg': 'OK',
+        },
 
-    //   const token = jwt.sign({email, role: 'user'}, process.env.KEY);
-    //   userServices.verifyMail(blogName, email, token);
+        'res': {
+          'message': 'User Sign Up With Google For Android Successfully (<:>)',
+          'data': token,
+        },
+      });
+    }
+    //=============================================================================
+  //     } catch (error) {
+  //   res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+  //     'meta': {
+  //       'status': 500,
+  //       'msg': 'INTERNAL_SERVER_ERROR',
+  //     },
 
-    //   res.status(StatusCodes.CREATED).json({
-    //     'meta': {
-    //       'status': 201,
-    //       'msg': 'CREATED',
-    //     },
-
-    //     'res': {
-    //       'message': 'Sign Up Successfully (<:>)',
-    //       'data': token,
-    //     },
-    //   });
-    // }
-  } catch (error) {
-    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
-      'meta': {
-        'status': 500,
-        'msg': 'INTERNAL_SERVER_ERROR',
-      },
-
-      'res': {
-        'error': 'Error In Sign Up Function (<:>)',
-        'data': '',
-      },
-    });
-  };
+  //     'res': {
+  //       'error': 'Error In Sign Up With Google For Android Function (<:>)',
+  //       'data': '',
+  //     },
+  //   });
+  // };
 };
 
 /* =============== /// <==> Export User signUp <==> /// =============== */

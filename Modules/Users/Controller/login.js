@@ -15,22 +15,22 @@ const schema = require('../../../Model/model');
 /**
  * This Function Used To LogIn To Tumblr4U.
  *
- * @param {string} email - username
- * @param {string} password - email
+ * @param {string} email - email
+ * @param {string} password - password
  *
  * @returns {object} - { Object }
  */
 
  const login = async (req, res) => {
-    // try {
+    try {
       const {email, password} = req.body;
 
       const oldUser = await schema.users.findOne({email, isDeleted: false});
       const isMailFound = await userServices.checkMail(email);
 
       if (isMailFound) {
-        console.log(password,oldUser.password);
         const match = await userServices.checkPassword(password,oldUser.password);
+
         if (match) {
           const token = jwt.sign({
             email: oldUser.email,
@@ -73,19 +73,19 @@ const schema = require('../../../Model/model');
           },
         });
       }
-    // } catch (error) {
-    //   res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
-    //     'meta': {
-    //       'status': 500,
-    //       'msg': 'INTERNAL_SERVER_ERROR',
-    //     },
+    } catch (error) {
+      res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+        'meta': {
+          'status': 500,
+          'msg': 'INTERNAL_SERVER_ERROR',
+        },
   
-    //     'res': {
-    //       'error': 'Error In LogIn Function (<:>)',
-    //       'data': '',
-    //     },
-    //   });
-    // };
+        'res': {
+          'error': 'Error In LogIn Function (<:>)',
+          'data': '',
+        },
+      });
+    };
   };
 
   /* =============== /// <==> Export User login <==> /// =============== */

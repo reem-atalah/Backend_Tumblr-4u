@@ -18,7 +18,6 @@ const nanoid = require('nanoid').nanoid;
 /**
  * This Function Used To LogIn To Tumblr4U.
  *
- *
  * @returns {object} - { Object }
  */
 
@@ -90,8 +89,8 @@ const nanoid = require('nanoid').nanoid;
 /**
  * This Function Used To LogIn To Tumblr4U.
  *
- * @param {string} blogName - username
- * @param {string} age - email
+ * @param {string} blogName - blogName
+ * @param {string} age - age
  *
  * @returns {object} - { Object }
  */
@@ -101,15 +100,16 @@ const googleInfo = async(req,res)=>{
         const email = req.decoded.email;
 
         const oldUser = await schema.users.updateOne({email, isDeleted: true},{name:blogName,age,isDeleted:false});
-        
-        //===========================================================================
-        //=================================== Create Blog  ========================================
-        //===========================================================================
-
-        const token = jwt.sign({
+        if(oldUser.matchedCount){
+          const token = jwt.sign({
             email: email,
             role: 'user'},
             process.env.KEY);
+
+            //===========================================================================
+        //=================================== Create Primary Blog  ========================================
+        //===========================================================================
+
         res.status(StatusCodes.OK).json({
             'meta': {
               'status': 200,
@@ -120,6 +120,18 @@ const googleInfo = async(req,res)=>{
               'data': token,
             },
           });
+        }else
+          res.status(StatusCodes.BAD_REQUEST).json({
+            'meta': {
+              'status': 400,
+              'msg': 'BAD_REQUEST',
+            },
+            'res': {
+              'message': 'This API Not Usable (<:>)',
+              'data': '',
+            },
+          });
+      
     } catch (error) {
         res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
             'meta': {

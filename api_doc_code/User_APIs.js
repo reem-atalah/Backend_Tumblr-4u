@@ -218,7 +218,7 @@
  *      HTTP/1.1 400 BAD REQUEST
  *      {
  *          "meta": {
- *                       "status": 201,
+ *                       "status": 400,
  *                       "msg": "BAD_REQUEST"
  *                  },
  * 
@@ -267,7 +267,7 @@
  *      HTTP/1.1 400 BAD REQUEST
  *      {
  *          "meta": {
- *                       "status": 201,
+ *                       "status": 400,
  *                       "msg": "BAD_REQUEST"
  *                  },
  * 
@@ -335,9 +335,9 @@
 */
 
 /**
- * @api {put} /google/info Log In Using Google.
+ * @api {put} /google/info Update Google Account Info.
  * 
- * @apiName googleLogin
+ * @apiName googleInfo
  * @apiGroup User
  * @apiVersion 0.0.0 
  * @apiPermission User, Admin, Super_Admin
@@ -377,6 +377,52 @@
 
 /*=================== End =====================*/
 
+/*
+===================== ///////// <---------> =============================== <---------> ///////// =====================> 
+===================== ///////// <---------> Log in Using Google For Android <---------> ///////// =====================> 
+===================== ///////// <---------> =============================== <---------> ///////// =====================> 
+*/
+
+/**
+ * @api {post} /androidSignUpWithGoogle Log In Using Google For Android.
+ * 
+ * @apiName googleLoginAndroid
+ * @apiGroup User
+ * @apiVersion 0.0.0 
+ * @apiPermission User, Admin, Super_Admin
+ * 
+ * @apiParam {String} googleToken Google Token
+ * 
+ * @apiSuccessExample Response Data:
+ *      HTTP/1.1 200 OK
+ *      {
+ *          "meta": {
+ *                       "status": 200,
+ *                       "msg": "OK"
+ *                  },
+ * 
+ *          "response":{
+ *                       "message": "Sign Up With Google For Android Successfully (<:>)"
+ *                       "data":token
+ *                     }   
+ *      }
+ * 
+ * @apiErrorExample Response Error:
+ *      HTTP/1.1 500 INTERNAL_SERVER_ERROR
+ *      {
+ *          "meta": {
+ *                       "status": 500,
+ *                       "msg": "INTERNAL_SERVER_ERROR"
+ *                  },
+ * 
+ *          "res":{
+ *                       "error": "Error In Sign Up With Google Function (<:>)"
+ *                       "data":""
+ *                     }   
+ *      }
+ */
+
+/*=================== End =====================*/
 
 /*
 ===================== ///////// <---------> =========================== <---------> ///////// =====================> 
@@ -586,12 +632,12 @@
  *      HTTP/1.1 400 BAD REQUEST
  *      {
  *          "meta": {
- *                       "status": 201,
+ *                       "status": 400,
  *                       "msg": "BAD_REQUEST"
  *                  },
  * 
  *          "res":{
- *                       "error": Account Is Not Found or Already Verified (<:>)
+ *                       "error": "Account Is Not Found or Already Verified (<:>)"
  *                       "data":""
  *                     }   
  *      }
