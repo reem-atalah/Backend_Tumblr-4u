@@ -34,6 +34,7 @@
  * @apiParam {String} [tags] Comma-separated tags for this post.
  * @apiParam {String} [date=The date and time of the POST request] Date of creation.
  *
+ * @apiSuccess {String} postId Id of the created post
  * 
  * @apiSuccessExample Response Data:
  *      HTTP/1.1 200 OK
@@ -43,19 +44,24 @@
  *                       "msg": "OK"
  *                  },
  * 
- *          "response":{
+ *          "res":{
  *                      "message": "Post Created Successfully"
+ *                      "postId": postId
  *                     }   
  *      }
  * 
  * @apiErrorExample Response Error:
  *      HTTP/1.1 400 BAD REQUEST
  *      {
- *          "error": "Error In Input Data"
+ *          "error": "Blog Not Found"
  *      }
  *      HTTP/1.1 401 Unauthorized
  *      {
  *          "error": "User Is Unauthorized"
+ *      }
+ *      HTTP/1.1 500 Internal Server Error
+ *      {
+ *          "error": "Error In Create Post Function"
  *      }
  */
 
@@ -79,8 +85,9 @@
  * @apidescription Shows a Blog Post.
  * @apiVersion 0.0.0
  *
- * @apiParam {String} posrId ID of the post.
+ * @apiParam {String} postId ID of the post.
  *
+ * @apiSuccess {String} postContent Content of the post.
  * 
  * @apiSuccessExample Response Data:
  *      HTTP/1.1 200 OK
@@ -90,19 +97,24 @@
  *                       "msg": "OK"
  *                  },
  * 
- *          "response":{
- *                      "message": "Post Created Successfully"
+ *          "res":{
+ *                      "message": "Post Returned Successfully"
+ *                      "postContent": postContent
  *                     }   
  *      }
  * 
  * @apiErrorExample Response Error:
  *      HTTP/1.1 400 BAD REQUEST
  *      {
- *          "error": "Error In Input Data"
+ *          "error": "Post Not Found"
  *      }
  *      HTTP/1.1 401 Unauthorized
  *      {
  *          "error": "User Is Unauthorized"
+ *      }
+ *      HTTP/1.1 500 Internal Server Error
+ *      {
+ *          "error": "Error In Show Post Function"
  *      }
  */
 
@@ -127,7 +139,7 @@
  * @apiVersion 0.0.0
  *
  * @apiParam {String} postId The ID of the post to edit.
- * @apiParam {String} postHtml Post content after editing.
+ * @apiParam {String} postContent Post content after editing.
  *
  * @apiSuccessExample Response Data:
  *      HTTP/1.1 200 OK
@@ -137,15 +149,20 @@
  *                       "msg": "OK"
  *                  },
  * 
- *          "response":{
- *                      "message": "Post Edit Successfully"
+ *          "res":{
+ *                      "message": "Post Edited Successfully"
+ *                      "postContent": postContent
  *                     }   
  *      }
  * 
  * @apiErrorExample Response Error:
  *      HTTP/1.1 400 BAD REQUEST
  *      {
- *          "error": "Error In Input Data"
+ *          "error": "Post Not Found"
+ *      }
+ *      HTTP/1.1 500 Internal Server Error
+ *      {
+ *          "error": "Error In Edit Post Function"
  *      }
  *      HTTP/1.1 401 Unauthorized
  *      {
@@ -181,7 +198,7 @@
  *                       "msg": "OK"
  *                  },
  * 
- *          "response":{
+ *          "res":{
  *                      "message": "Post Deleted Successfully"
  *                     }   
  *      }
@@ -189,7 +206,11 @@
  * @apiErrorExample Response Error:
  *      HTTP/1.1 400 BAD REQUEST
  *      {
- *          "error": "Error In Input Data"
+ *          "error": "Post Not Found"
+ *      }
+ *      HTTP/1.1 500 Internal Server Error
+ *      {
+ *          "error": "Error In Delete Post Function"
  *      }
  *      HTTP/1.1 401 Unauthorized
  *      {
@@ -226,15 +247,34 @@
  *                       "msg": "OK"
  *                  },
  * 
- *          "response":{
- *                      "message": "Post Successfully Liked"
+ *          "res":{
+ *                      "message": "Post Liked Successfully"
+ *                     }   
+ *      }
+ *      HTTP/1.1 200 OK
+ *      {
+ *          "meta": {
+ *                       "status": 200,
+ *                       "msg": "OK"
+ *                  },
+ * 
+ *          "res":{
+ *                      "message": "Post Unliked Successfully"
  *                     }   
  *      }
  * 
  * @apiErrorExample Response Error:
  *      HTTP/1.1 400 BAD REQUEST
  *      {
- *          "error": "Error In Input Data"
+ *          "error": "Blog Not Found"
+ *      }
+ *      HTTP/1.1 400 BAD REQUEST
+ *      {
+ *          "error": "Post Not Found"
+ *      }
+ *      HTTP/1.1 500 Internal Server Error
+ *      {
+ *          "error": "Error In Press Like Funcion"
  *      }
  *      HTTP/1.1 401 Unauthorized
  *      {
@@ -261,8 +301,9 @@
  * 
  * @apiParam {String} blogId The ID of the blog making the comment.
  * @apiParam {String} postId The ID of the post.
- * @apiParam {String} text comment text  
+ * @apiParam {String} text comment text.  
  * 
+ * @apiSuccess {String} commentId Id of the created comment.
  * 
  * @apiSuccessExample Response Data:
  *      HTTP/1.1 200 OK
@@ -272,20 +313,29 @@
  *                       "msg": "OK"
  *                  },
  * 
- *          "response":{
- *                      "message": "Comment Created Successfully"
+ *          "res":{
+ *                      "message": "Comment Posted Successfully"
+ *                      "commentId": commentId
  *                     }   
  *      }
  * 
  * @apiErrorExample Response Error:
  *      HTTP/1.1 400 BAD REQUEST
  *      {
- *          "error": "Error In Input Data"
+ *          "error": "Blog Not Found"
+ *      }
+ *      HTTP/1.1 400 BAD REQUEST
+ *      {
+ *          "error": "Post Not Found"
+ *      }
+ *      HTTP/1.1 500 Internal Server Error
+ *      {
+ *          "error": "Error In Make Comment Funcion"
  *      }
  *      HTTP/1.1 401 Unauthorized
  *      {
  *          "error": "User Is Unauthorized"
- *      } 
+ *      }
  */
 
 /*=================== End =====================*/
@@ -305,8 +355,8 @@
  * @apidescription removes the comment on a post
  * @apiVersion 0.0.0
  * 
- * @apiParam {String} blogId Id of the blog to remove its comment.
- * @apiParam {String} postId Post Id.
+ * @apiParam {String} postId Id of the post to remove comment from.
+ * @apiParam {String} commentId Id of the comment to remove.
  * 
  * @apiSuccessExample Response Data:
  *      HTTP/1.1 200 OK
@@ -316,20 +366,28 @@
  *                       "msg": "OK"
  *                  },
  * 
- *          "response":{
- *                      "message": "Comment Deleted Successfully"
+ *          "res":{
+ *                      "message": "Comment Removed Successfully"
  *                     }   
  *      }
  * 
  * @apiErrorExample Response Error:
  *      HTTP/1.1 400 BAD REQUEST
  *      {
- *          "error": "Error In Input Data"
+ *          "error": "Post Not Found"
+ *      }
+ *      HTTP/1.1 400 BAD REQUEST
+ *      {
+ *          "error": "Comment Not Found"
+ *      }
+ *      HTTP/1.1 500 Internal Server Error
+ *      {
+ *          "error": "Error In Remove Comment Funcion"
  *      }
  *      HTTP/1.1 401 Unauthorized
  *      {
  *          "error": "User Is Unauthorized"
- *      } 
+ *      }
  */
 
 /*=================== End =====================*/
@@ -350,7 +408,9 @@
  * @apiVersion 0.0.0
  * 
  * 
- * @apiParam {String} postId The ID of the post
+ * @apiParam {String} postId The ID of the post to share.
+ * 
+ * @apiSuccess {String} postUrl Url of the post to share.
  * 
  * @apiSuccessExample Response Data:
  *      HTTP/1.1 200 OK
@@ -360,15 +420,20 @@
  *                       "msg": "OK"
  *                  },
  * 
- *          "response":{
+ *          "res":{
  *                      "message": "Post Shared Successfully"
+ *                      "postUrl": postUrl
  *                     }   
  *      }
  * 
  * @apiErrorExample Response Error:
  *      HTTP/1.1 400 BAD REQUEST
  *      {
- *          "error": "Error In Input Data"
+ *          "error": "Post Not Found"
+ *      }
+ *      HTTP/1.1 500 Internal Server Error
+ *      {
+ *          "error": "Error In Share With Funcion"
  *      }
  *      HTTP/1.1 401 Unauthorized
  *      {
@@ -396,7 +461,9 @@
  *
  * @apiParam {String} blogId The ID of the reblogging blog.
  * @apiParam {String} postId The ID of the rebloged post.
- * @apiParam {String} [description] Optional description on the rebloged post.
+ * @apiParam {String} [text] Optional description on the rebloged post.
+ * 
+ * @apiSuccess {String} reblogId Id of the reblog.
  *
  * @apiSuccessExample Response Data:
  *      HTTP/1.1 200 OK
@@ -406,15 +473,24 @@
  *                       "msg": "OK"
  *                  },
  * 
- *          "response":{
- *                      "message": "Post Rebloged Successfully"
+ *          "res":{
+ *                      "message": "Post Reblogged Successfully"
+ *                      "reblogId": reblogId
  *                     }   
  *      }
  * 
  * @apiErrorExample Response Error:
  *      HTTP/1.1 400 BAD REQUEST
  *      {
- *          "error": "Error In Input Data"
+ *          "error": "Blog Not Found"
+ *      }
+ *      HTTP/1.1 400 BAD REQUEST
+ *      {
+ *          "error": "Post Not Found"
+ *      }
+ *      HTTP/1.1 500 Internal Server Error
+ *      {
+ *          "error": "Error In Reblog Post Funcion"
  *      }
  *      HTTP/1.1 401 Unauthorized
  *      {
@@ -440,8 +516,8 @@
  * @apidescription Reblog a Post (Legacy)
  * @apiVersion 0.0.0
  *
- * @apiParam {String} blogId The ID of the reblogging blog.
- * @apiParam {String} postId The ID of the rebloged post.
+ * @apiParam {String} postId The ID of the post to remove reblog from.
+ * @apiParam {String} reblogId The ID of the reblog to remove.
  *
  * @apiSuccessExample Response Data:
  *      HTTP/1.1 200 OK
@@ -451,15 +527,23 @@
  *                       "msg": "OK"
  *                  },
  * 
- *          "response":{
- *                      "message": "Post Rebloged Successfully"
+ *          "res":{
+ *                      "message": "Reblog Removed Successfully"
  *                     }   
  *      }
  * 
  * @apiErrorExample Response Error:
  *      HTTP/1.1 400 BAD REQUEST
  *      {
- *          "error": "Error In Input Data"
+ *          "error": "Post Not Found"
+ *      }
+ *      HTTP/1.1 400 BAD REQUEST
+ *      {
+ *          "error": "Reblog Not Found"
+ *      }
+ *      HTTP/1.1 500 Internal Server Error
+ *      {
+ *          "error": "Error In Remove Reblog Funcion"
  *      }
  *      HTTP/1.1 401 Unauthorized
  *      {
@@ -498,14 +582,71 @@
  *                  },
  * 
  *          "response":{
- *                      "data": "[ Notes ]"
+ *                      "message": 'Notes Got Successfully'
+ *                      "notes": notes
  *                     }   
  *      }
  * 
  * @apiErrorExample Response Error:
  *      HTTP/1.1 400 BAD REQUEST
  *      {
- *          "error": "Error In Input Data"
+ *          "error": "Post Not Found"
+ *      }
+ *      HTTP/1.1 500 Internal Server Error
+ *      {
+ *          "error": "Error In Get Notes Funcion"
+ *      }
+ *      HTTP/1.1 401 Unauthorized
+ *      {
+ *          "error": "User Is Unauthorized"
+ *      }
+ */
+
+/*=================== End =====================*/
+
+
+/*
+===================== ///////// <---------> ================ <---------> ///////// =====================> 
+===================== ///////// <---------> Get Dashboard <---------> ///////// =====================> 
+===================== ///////// <---------> ================ <---------> ///////// =====================> 
+*/
+
+/**
+ * @api {get} /userId/:blogId/notes Get notes for a specific Post
+ * @apiName getBlogPostNotes
+ * @apiGroup Post
+ * @apiPermission User, Admin, Super_Admin
+ * 
+ * @apidescription Get notes for a specific Post
+ * @apiVersion 0.0.0
+ * 
+ * @apiParam {String} userId The ID of the user.
+ * @apiParam {String} blogId The ID of the blog to get its dashboard.
+ * 
+ * @apiSuccess {Array} data Array of posts.
+ *
+ * @apiSuccessExample Response Data:
+ *      HTTP/1.1 200 OK
+ *      {
+ *          "meta": {
+ *                       "status": 200,
+ *                       "msg": "OK"
+ *                  },
+ * 
+ *          "response":{
+ *                      "message": 'Notes Got Successfully'
+ *                      "data": data
+ *                     }   
+ *      }
+ * 
+ * @apiErrorExample Response Error:
+ *      HTTP/1.1 400 BAD REQUEST
+ *      {
+ *          "error": "Blog Not Found"
+ *      }
+ *      HTTP/1.1 500 Internal Server Error
+ *      {
+ *          "error": "Error In Get Dashboard Funcion"
  *      }
  *      HTTP/1.1 401 Unauthorized
  *      {
@@ -757,6 +898,7 @@
  *
  * @apiParam {String} Token User's Secret Code.
  * @apiParam {String} search_content The content in the posts you'd like to retrieve.
+ * 
  *
  * @apiSuccessExample Response Data:
  *      HTTP/1.1 200 OK
