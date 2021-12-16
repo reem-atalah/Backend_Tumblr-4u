@@ -1,123 +1,83 @@
-//=====================================================================================================
-//=====================================================================================================
-//=====================================================================================================
+// =====================================================================================================
+// =====================================================================================================
+// =====================================================================================================
 /*
-===================== ///////// <---------> ============== <---------> ///////// =====================> 
-===================== ///////// <---------> Blog's Methods <---------> ///////// =====================> 
-===================== ///////// <---------> ============== <---------> ///////// =====================> 
+===================== ///////// <---------> ============== <---------> ///////// =====================>
+===================== ///////// <---------> Blog's Methods <---------> ///////// =====================>
+===================== ///////// <---------> ============== <---------> ///////// =====================>
 */
-//=====================================================================================================
-//=====================================================================================================
-//=====================================================================================================
-
+// =====================================================================================================
+// =====================================================================================================
+// =====================================================================================================
 
 /*
-===================== ///////// <---------> =========================== <---------> ///////// =====================> 
-===================== ///////// <---------> Retrieve a Blog's Dashboard <---------> ///////// =====================> 
-===================== ///////// <---------> =========================== <---------> ///////// =====================> 
+===================== ///////// <---------> ============= <---------> ///////// =====================>
+===================== ///////// <---------> Remove Blog <---------> ///////// =====================>
+===================== ///////// <---------> ============= <---------> ///////// =====================>
 */
 
 /**
- * @api {get} /:userId/:blogId/dashboard Retrieve a Blogs's Dashboard
- * @apiName getDashboard
- * @apiGroup  Blog
+ * @api {post} user/delete/blog/:userId       deletes a blog
+ * @apiName  deleteBlog
+ * @apiGroup Blog
+ *
  * @apiPermission User, Admin, Super_Admin
- * @apidescription go to the dashboard page
+ * @apidescription delete a blog
  * @apiVersion 0.0.0
- * 
- * @apiParam {String} userId Id of the user to retreive their blog's dashboard.
- * @apiParam {String} blogId Id of the blog to retreive its dashboard.
- * 
- * @apiSuccess {Array} data Array of posts objects to show.
+ *
+ * @apiParam {String} Token User's Secret Code.
+ * @apiParam {String} userId  The id of the user who deletes his/her blog
+ * @apiParam {String} blogId The ID of the blog wanted to be deleted
  *
  * @apiSuccessExample Response Data:
  *      HTTP/1.1 200 OK
  *      {
- *          "meta": {
- *                       "status": 200,
- *                       "msg": "OK"
- *                  },
- * 
- *          "response":{
- *                       "data":"{ Object Contains Posts, ... }"
- *                     }   
- *      }
- * 
+ *   "meta": {
+ *       "status": 200,
+ *       "msg": "OK"
+ *  },
+ *   "res": {
+ *       "message": "Blog Deleted Successfully",
+ *       "data": blog Objcet
+ *  }
+ *}
  * @apiErrorExample Response Error:
  *      HTTP/1.1 400 BAD REQUEST
- *      {
- *          "error": "Error In Input Data"
- *      }
+ *     {
+ *   "meta": {
+ *       "status": 404,
+ *       "msg": "NOT FOUND"
+ *   },
+ *   "res": {
+ *      "message": "Blog Not FOUND",
+ *       "data": ""
+ *   }
+ *}
  *      HTTP/1.1 401 Unauthorized
  *      {
  *          "error": "User Is Unauthorized"
  *      }
  */
 
-/*=================== End =====================*/
-
-
-/*
-===================== ///////// <---------> ============= <---------> ///////// =====================> 
-===================== ///////// <---------> Remove Blog <---------> ///////// =====================> 
-===================== ///////// <---------> ============= <---------> ///////// =====================> 
-*/
-
-/**
- * @api {delete} /blog/:blog_id/remove_blog Remove Blog
- * @apiName blogRemover
- * @apiGroup Blog
- * 
- * @apiPermission User, Admin, Super_Admin
- * @apidescription removes a post
- * @apiVersion 0.0.0
- * 
- * @apiParam {String} Token User's Secret Code.
- * @apiParam {String} blog_id The ID of the blog wanted to be removed
- * 
- * @apiSuccessExample Response Data:
- *      HTTP/1.1 200 OK
- *      {
- *          "meta": {
- *                       "status": 200,
- *                       "msg": "OK"
- *                  },
- * 
- *          "response":{
- *                       "message":"Blog removed successfully"
- *                     }   
- *      }
- * 
- * @apiErrorExample Response Error:
- *      HTTP/1.1 400 BAD REQUEST
- *      {
- *          "error": "Error In Input Data"
- *      }
- *      HTTP/1.1 401 Unauthorized
- *      {
- *          "error": "User Is Unauthorized"
- *      }
- */
-
-/*=================== End =====================*/
+/* =================== End =====================*/
 
 /*
-===================== ///////// <---------> ============= <---------> ///////// =====================> 
-===================== ///////// <---------> Retrieve Blog information <---------> ///////// =====================> 
-===================== ///////// <---------> ============= <---------> ///////// =====================> 
+===================== ///////// <---------> ============= <---------> ///////// =====================>
+===================== ///////// <---------> Retrieve Blog information <---------> ///////// =====================>
+===================== ///////// <---------> ============= <---------> ///////// =====================>
 */
 
 
 /**
- * @api {get} /blog/info Retrieve Blog information
- * @apiName getBlog
+ * @api {get} /blog/:blogName Retrieve Blog information
+ * @apiName retrieveBlog
  * @apiGroup Blog
  * @apiPermission User, Admin, Super_Admin
- * @apidescription retrieve all that can be needed by front end to represent the blog
+ * @apidescription retrieve all information about the blog
  * @apiVersion 0.0.0
- * 
+ *
  * @apiParam {String} Token User's Secret Code.
- * @apiParam {String} blog_id Blog's unique ID.
+ * @apiParam {String} blogName Blog's Unique Name.
  *
  *@apiSuccessExample Response Data:
  *      HTTP/1.1 200 OK
@@ -126,12 +86,13 @@
  *                       "status": 200,
  *                       "msg": "OK"
  *                  },
- * 
- *          "response":{
- *                       "data":"{Object Contains Blog Info}}"
- *                     }   
+ *
+ *        "res": {
+ *                        "message": "Blog Retrieved Successfuly",
+ *                       "data":"{Object Contains Blog Info}"
+ *                     }
  *      }
- * 
+ *
  * @apiErrorExample Response Error:
  *      HTTP/1.1 400 BAD REQUEST
  *      {
@@ -143,12 +104,12 @@
  *      }
  */
 
-/*=================== End =====================*/
+/* =================== End =====================*/
 
 /*
-===================== ///////// <---------> ============= <---------> ///////// =====================> 
-===================== ///////// <---------> Retrieve Blog's Activity Feed <---------> ///////// =====================> 
-===================== ///////// <---------> ============= <---------> ///////// =====================> 
+===================== ///////// <---------> ============= <---------> ///////// =====================>
+===================== ///////// <---------> Retrieve Blog's Activity Feed <---------> ///////// =====================>
+===================== ///////// <---------> ============= <---------> ///////// =====================>
 */
 
 /**
@@ -158,10 +119,10 @@
  * @apiPermission User, Admin, Super_Admin
  * @apidescription gets the blog's activity page
  * @apiVersion 0.0.0
- * 
+ *
  * @apiParam {String} Token User's Secret Code.
  * @apiParam {String} blog_id The ID of the blog's activity'
- * 
+ *
  * @apiSuccessExample Response Data:
  *      HTTP/1.1 200 OK
  *      {
@@ -169,10 +130,10 @@
  *                       "status": 200,
  *                       "msg": "OK"
  *                  },
- * 
+ *
  *          "response":{
  *                       "data":"{Object Contains Blog's Activity Info}"
- *                     }   
+ *                     }
  *      }
  * @apiErrorExample Response Error:
  *      HTTP/1.1 400 BAD REQUEST
@@ -185,13 +146,13 @@
  *      }
  */
 
-/*=================== End =====================*/
+/* =================== End =====================*/
 
 
 /*
-===================== ///////// <---------> ============= <---------> ///////// =====================> 
-===================== ///////// <---------> Retrieve Blog's Blocks <---------> ///////// =====================> 
-===================== ///////// <---------> ============= <---------> ///////// =====================> 
+===================== ///////// <---------> ============= <---------> ///////// =====================>
+===================== ///////// <---------> Retrieve Blog's Blocks <---------> ///////// =====================>
+===================== ///////// <---------> ============= <---------> ///////// =====================>
 */
 
 
@@ -200,9 +161,9 @@
  * @apiName getBlogBlocks
  * @apiGroup Blog
  * @apiPermission User, Admin, Super_Admin
- * @apidescription gets the blogs I blocked  
+ * @apidescription gets the blogs I blocked
  * @apiVersion 0.0.0
- * 
+ *
  * @apiParam {String} Token User's Secret Code.
  * @apiParam {String} blog_id Blog's unique ID.
  *
@@ -213,10 +174,10 @@
  *                       "status": 200,
  *                       "msg": "OK"
  *                  },
- * 
+ *
  *          "response":{
  *                       "data":"[Bloked Blogs]"
- *                     }   
+ *                     }
  *      }
  * @apiErrorExample Response Error:
  *      HTTP/1.1 400 BAD REQUEST
@@ -230,29 +191,27 @@
 
  */
 
-/*=================== End =====================*/
+/* =================== End =====================*/
 
 
 /*
-===================== ///////// <---------> ============= <---------> ///////// =====================> 
-===================== ///////// <---------> Block a Blog <---------> ///////// =====================> 
-===================== ///////// <---------> ============= <---------> ///////// =====================> 
+===================== ///////// <---------> ============= <---------> ///////// =====================>
+===================== ///////// <---------> Block a Blog <---------> ///////// =====================>
+===================== ///////// <---------> ============= <---------> ///////// =====================>
 */
 
 /**
- * @api {post} /blog/block Block a Blog  
- * @apiName postBlogBlock
+ * @api {post} /blog/block/:blogId Block a Blog
+ * @apiName blockBlog
  * @apiGroup Blog
  * @apiPermission User, Admin, Super_Admin
  * @apidescription blocks a blog so you can't see the blog or its posts
  * @apiVersion 0.0.0
- * 
+ *
  * @apiParam {String} Token User's Secret Code.
- * @apiParam {String} blocking_blog_id Blocking blog id.
- * @apiParam {String} blocked_blog_id Blocked blog id.(if the blog isn't blocked via a post)
- * @apiParam {String} [post-id] Post id of blocked blog.(if the blog is blocked via a post)
- * @apiParam {Boolean} [Is_primary] flag indicates that the blocking is primary.
- * 
+ * @apiParam {String} blogId  Id of the blocking blog
+ * @apiParam {String} blockedBlogId Id if the blog to be blocked
+ *
  * @apiSuccessExample Response Data:
  *      HTTP/1.1 200 OK
  *      {
@@ -260,10 +219,14 @@
  *                       "status": 200,
  *                       "msg": "OK"
  *                  },
- * 
- *          "response":{
+ *
+ *          "res":{
  *                       "message":"Blog Blocked Successfully"
- *                     }   
+ *
+ *                       "data":"{Object Contains Blog Info}"
+ *
+ *                     }
+ *
  *      }
  * @apiErrorExample Response Error:
  *      HTTP/1.1 400 BAD REQUEST
@@ -277,30 +240,28 @@
  */
 
 
-/*=================== End =====================*/
-
+/* =================== End =====================*/
 
 
 /*
-===================== ///////// <---------> ============= <---------> ///////// =====================> 
-===================== ///////// <---------> Remove a Block <---------> ///////// =====================> 
-===================== ///////// <---------> ============= <---------> ///////// =====================> 
+===================== ///////// <---------> ============= <---------> ///////// =====================>
+===================== ///////// <---------> Remove a Block <---------> ///////// =====================>
+===================== ///////// <---------> ============= <---------> ///////// =====================>
 */
 
 /**
- * @api {post} /blog/remove_blocks Remove a Block
- * @apiName removeBlogBlock
+ * @api {post} /blog/unblock/:blogId  Unblocks a blog
+ * @apiName unblockBlog
  * @apiGroup Blog
  * @apiPermission User, Admin, Super_Admin
  * @apidescription removes a block from a blog
  * @apiVersion 0.0.0
 
  * @apiParam {String} Token User's Secret Code.
- * @apiParam {String} blocking_blog_id Blocking blog id.
- * @apiParam {String} blocked_blog_id Blocked blog id.(if the blog isn't blocked via a post)
- * @apiParam {String} [post-id] Post id of blocked blog.(if the blog is blocked via a post)
- * 
- * 
+ * @apiParam {String} blogId Id of the requesting Blog
+ * @apiParam {String} unblockedBlogId Id of the blog to be unblocked
+ *
+ *
  * @apiSuccessExample Response Data:
  *      HTTP/1.1 200 OK
  *      {
@@ -308,10 +269,12 @@
  *                       "status": 200,
  *                       "msg": "OK"
  *                  },
- * 
+ *
  *          "response":{
  *                       "message":"Blog Unblocked Successfully"
- *                     }   
+ *                    "data":"{Object Contains Blog Info}"
+ *
+ *                     }
  *      }
  * @apiErrorExample Response Error:
  *      HTTP/1.1 400 BAD REQUEST
@@ -324,12 +287,12 @@
  *      }
  */
 
-/*=================== End =====================*/
+/* =================== End =====================*/
 
 /*
-===================== ///////// <---------> ============= <---------> ///////// =====================> 
-===================== ///////// <---------> Retrieve Blog's Archive <---------> ///////// =====================> 
-===================== ///////// <---------> ============= <---------> ///////// =====================> 
+===================== ///////// <---------> ============= <---------> ///////// =====================>
+===================== ///////// <---------> Retrieve Blog's Archive <---------> ///////// =====================>
+===================== ///////// <---------> ============= <---------> ///////// =====================>
 */
 
 /**
@@ -339,11 +302,11 @@
  * @apiPermission User, Admin, Super_Admin
  * @apidescription gets the page of blog's archive page
  * @apiVersion 0.0.0
- * 
+ *
  * @apiParam {String} Token User's Secret Code.
  * @apiParam {String} blog_id Blog's unique ID.
  *
- * 
+ *
  * @apiSuccessExample Response Data:
  *      HTTP/1.1 200 OK
  *      {
@@ -351,10 +314,10 @@
  *                       "status": 200,
  *                       "msg": "OK"
  *                  },
- * 
+ *
  *          "response":{
  *                       "data":"[Posts]"
- *                     }   
+ *                     }
  *      }
  * @apiErrorExample Response Error:
  *      HTTP/1.1 400 BAD REQUEST
@@ -367,24 +330,24 @@
  *      }
  */
 
-/*=================== End =====================*/
+/* =================== End =====================*/
 
 
 /*
-===================== ///////// <---------> ============= <---------> ///////// =====================> 
-===================== ///////// <---------> Retrieve Blog's Likes <---------> ///////// =====================> 
-===================== ///////// <---------> ============= <---------> ///////// =====================> 
+===================== ///////// <---------> ============= <---------> ///////// =====================>
+===================== ///////// <---------> Retrieve Blog's Likes <---------> ///////// =====================>
+===================== ///////// <---------> ============= <---------> ///////// =====================>
 */
 
 /**
  * @api {get} /blog/likes Retrieve Blog's Likes
  * @apiName getBlogLikes
  * @apiGroup Blog
- * 
+ *
  * @apiPermission User, Admin, Super_Admin
  * @apidescription gets the page of user's likes
  * @apiVersion 0.0.0
- * 
+ *
  * @apiParam {String} Token User's Secret Code.
  * @apiParam {Number} blog_id Blog's unique ID.
  * @apiSuccessExample Response Data:
@@ -394,10 +357,10 @@
  *                       "status": 200,
  *                       "msg": "OK"
  *                  },
- * 
+ *
  *          "response":{
  *                       "data":"[Liked Posts]"
- *                     }   
+ *                     }
  *      }
  * @apiErrorExample Response Error:
  *      HTTP/1.1 400 BAD REQUEST
@@ -411,12 +374,12 @@
  */
 
 
-/*=================== End =====================*/
+/* =================== End =====================*/
 
 /*
-===================== ///////// <---------> ============= <---------> ///////// =====================> 
-===================== ///////// <---------> Retrieve Blog's Following <---------> ///////// =====================> 
-===================== ///////// <---------> ============= <---------> ///////// =====================> 
+===================== ///////// <---------> ============= <---------> ///////// =====================>
+===================== ///////// <---------> Retrieve Blog's Following <---------> ///////// =====================>
+===================== ///////// <---------> ============= <---------> ///////// =====================>
 */
 
 /**
@@ -426,7 +389,7 @@
  * @apiPermission User, Admin, Super_Admin
  * @apidescription gets a pgae with all blogs who I'm following a blog
  * @apiVersion 0.0.0
- * 
+ *
  * @apiParam {String} Token User's Secret Code.
  * @apiParam {String} blog_id Blog's unique ID.
  * @apiSuccessExample Response Data:
@@ -436,10 +399,10 @@
  *                       "status": 200,
  *                       "msg": "OK"
  *                  },
- * 
+ *
  *          "response":{
  *                       "data":"[Following Blogs]"
- *                     }   
+ *                     }
  *      }
  * @apiErrorExample Response Error:
  *      HTTP/1.1 400 BAD REQUEST
@@ -452,13 +415,13 @@
  *      }
  */
 
-/*=================== End =====================*/
+/* =================== End =====================*/
 
 
 /*
-===================== ///////// <---------> ============= <---------> ///////// =====================> 
-===================== ///////// <---------> Retrieve Blog's Followers <---------> ///////// =====================> 
-===================== ///////// <---------> ============= <---------> ///////// =====================> 
+===================== ///////// <---------> ============= <---------> ///////// =====================>
+===================== ///////// <---------> Retrieve Blog's Followers <---------> ///////// =====================>
+===================== ///////// <---------> ============= <---------> ///////// =====================>
 */
 
 /**
@@ -468,7 +431,7 @@
  * @apiPermission User, Admin, Super_Admin
  * @apidescription gets a pgae with all blogs following a blog
  * @apiVersion 0.0.0
- * 
+ *
  * @apiParam {String} Token User's Secret Code.
  * @apiParam {String} blog_id Blog's unique ID.
  * @apiSuccessExample Response Data:
@@ -478,10 +441,10 @@
  *                       "status": 200,
  *                       "msg": "OK"
  *                  },
- * 
+ *
  *          "response":{
  *                       "data":"[Blog Followers]"
- *                     }   
+ *                     }
  *      }
  * @apiErrorExample Response Error:
  *      HTTP/1.1 400 BAD REQUEST
@@ -494,13 +457,13 @@
  *      }
  */
 
-/*=================== End =====================*/
+/* =================== End =====================*/
 
 
 /*
-===================== ///////// <---------> ============= <---------> ///////// =====================> 
-===================== ///////// <---------> Retrieve Published Posts <---------> ///////// =====================> 
-===================== ///////// <---------> ============= <---------> ///////// =====================> 
+===================== ///////// <---------> ============= <---------> ///////// =====================>
+===================== ///////// <---------> Retrieve Published Posts <---------> ///////// =====================>
+===================== ///////// <---------> ============= <---------> ///////// =====================>
 */
 
 /**
@@ -510,7 +473,7 @@
  * @apiPermission User, Admin, Super_Admin
  * @apidescription gets the puplished posts page of a blog
  * @apiVersion 0.0.0
- * 
+ *
  * @apiParam {String} Token User's Secret Code.
  * @apiParam {String} blog_id Blog's unique ID.
  *
@@ -587,26 +550,26 @@
  *      }
  */
 
-/*=================== End =====================*/
+/* =================== End =====================*/
 
 /*
-===================== ///////// <---------> ============= <---------> ///////// =====================> 
-===================== ///////// <---------> Follow a blog <---------> ///////// =====================> 
-===================== ///////// <---------> ============= <---------> ///////// =====================> 
+===================== ///////// <---------> ============= <---------> ///////// =====================>
+===================== ///////// <---------> Follow a blog <---------> ///////// =====================>
+===================== ///////// <---------> ============= <---------> ///////// =====================>
 */
 
 /**
- * @api {post} /blog/follow Follow a blog
- * @apiName followBlogPost
+ * @api {post} /user/follow/:userId User follows a blog
+ * @apiName followBlog
  * @apiGroup Blog
  * @apiPermission User, Admin, Super_Admin
- * 
+ *
  * @apidescription Follow a blog
  * @apiVersion 0.0.0
  *
  * @apiParam {String} Token User's Secret Code.
- * @apiParam {String} following-blog-id Primary blog ID.
- * @apiParam {String} followed-blog-id ID of the followed blog.
+ * @apiParam {String} userId Id of user who follows the blog
+ * @apiParam {String} blogId Id of the followed blog.
  *
  * @apiSuccessExample Response Data:
  *      HTTP/1.1 200 OK
@@ -615,10 +578,12 @@
  *                       "status": 200,
  *                       "msg": "OK"
  *                  },
- * 
+ *
  *          "response":{
  *                       "message":"Following Blog Success"
- *                     }   
+ *                     "data":"{Object Contains Blog Info}"
+ *
+ *                     }
  *      }
  * @apiErrorExample Response Error:
  *      HTTP/1.1 400 BAD REQUEST
@@ -632,29 +597,28 @@
  */
 
 
-/*=================== End =====================*/
-
+/* =================== End =====================*/
 
 
 /*
-===================== ///////// <---------> ============= <---------> ///////// =====================> 
-===================== ///////// <---------> Unfollow a blog <---------> ///////// =====================> 
-===================== ///////// <---------> ============= <---------> ///////// =====================> 
+===================== ///////// <---------> ============= <---------> ///////// =====================>
+===================== ///////// <---------> Unfollow a blog <---------> ///////// =====================>
+===================== ///////// <---------> ============= <---------> ///////// =====================>
 */
 
 /**
- * @api {post} /blog/unfollow Unfollow a blog
+ * @api {post} /user/unfollow/:userId Unfollow a blog
  * @apiName unfollowBlogPost
  * @apiGroup Blog
  * @apiPermission User, Admin, Super_Admin
- * 
+ *
  * @apidescription Unfollow a blog
  * @apiVersion 0.0.0
  *
  * @apiParam {String} Token User's Secret Code.
- * @apiParam {String} following-blog-id Primary blog ID.
- * @apiParam {String} unfollowed-blog-id ID of the followed blog.
- *
+ * @apiParam {String} userId Id of user who unfollows the blog
+ * @apiParam {String} blogId Id of the unfollowed blog.
+ * 
  * @apiSuccessExample Response Data:
  *      HTTP/1.1 200 OK
  *      {
@@ -662,10 +626,12 @@
  *                       "status": 200,
  *                       "msg": "OK"
  *                  },
- * 
+ *
  *          "response":{
  *                       "message":"Unfollowing Blog Success"
- *                     }   
+ *                     "data":"{Object Contains Blog Info}"
+ *
+ *                     }
  *      }
  * @apiErrorExample Response Error:
  *      HTTP/1.1 400 BAD REQUEST
@@ -679,13 +645,13 @@
  */
 
 
-/*=================== End =====================*/
+/* =================== End =====================*/
 
 
 /*
-===================== ///////// <---------> ============= <---------> ///////// =====================> 
-===================== ///////// <---------> Post tag filters <---------> ///////// =====================> 
-===================== ///////// <---------> ============= <---------> ///////// =====================> 
+===================== ///////// <---------> ============= <---------> ///////// =====================>
+===================== ///////// <---------> Post tag filters <---------> ///////// =====================>
+===================== ///////// <---------> ============= <---------> ///////// =====================>
 */
 
 /**
@@ -693,7 +659,7 @@
  * @apiName postTagFilters
  * @apiGroup Blog
  * @apiPermission User, Admin, Super_Admin
- * 
+ *
  * @apidescription Post tag filters
  * @apiVersion 0.0.0
  *
@@ -708,10 +674,10 @@
  *                       "status": 200,
  *                       "msg": "OK"
  *                  },
- * 
+ *
  *          "response":{
  *                       "message":"Filtering Success"
- *                     }   
+ *                     }
  *      }
  * @apiErrorExample Response Error:
  *      HTTP/1.1 400 BAD REQUEST
@@ -724,12 +690,12 @@
  *      }
  */
 
-/*=================== End =====================*/
+/* =================== End =====================*/
 
 /*
-===================== ///////// <---------> ============= <---------> ///////// =====================> 
-===================== ///////// <---------> Get tag filters <---------> ///////// =====================> 
-===================== ///////// <---------> ============= <---------> ///////// =====================> 
+===================== ///////// <---------> ============= <---------> ///////// =====================>
+===================== ///////// <---------> Get tag filters <---------> ///////// =====================>
+===================== ///////// <---------> ============= <---------> ///////// =====================>
 */
 
 /**
@@ -737,7 +703,7 @@
  * @apiName getTagFilters
  * @apiGroup Blog
  * @apiPermission User, Admin, Super_Admin
- * 
+ *
  * @apidescription Get tag filters
  * @apiVersion 0.0.0
  *
@@ -750,10 +716,10 @@
  *                       "status": 200,
  *                       "msg": "OK"
  *                  },
- * 
+ *
  *          "response":{
  *                       "data":"[Filtered Tags]"
- *                     }   
+ *                     }
  *      }
  * @apiErrorExample Response Error:
  *      HTTP/1.1 400 BAD REQUEST
@@ -767,12 +733,12 @@
  */
 
 
-/*=================== End =====================*/
+/* =================== End =====================*/
 
 /*
-===================== ///////// <---------> ============= <---------> ///////// =====================> 
-===================== ///////// <---------> Delete tag filters <---------> ///////// =====================> 
-===================== ///////// <---------> ============= <---------> ///////// =====================> 
+===================== ///////// <---------> ============= <---------> ///////// =====================>
+===================== ///////// <---------> Delete tag filters <---------> ///////// =====================>
+===================== ///////// <---------> ============= <---------> ///////// =====================>
 */
 
 /**
@@ -780,7 +746,7 @@
  * @apiName deleteTagFilters
  * @apiGroup Blog
  * @apiPermission User, Admin, Super_Admin
- * 
+ *
  * @apidescription Delete tag filters
  * @apiVersion 0.0.0
  *
@@ -795,10 +761,10 @@
  *                       "status": 200,
  *                       "msg": "OK"
  *                  },
- * 
+ *
  *          "response":{
  *                       "message":"Success"
- *                     }   
+ *                     }
  *      }
  * @apiErrorExample Response Error:
  *      HTTP/1.1 400 BAD REQUEST
@@ -811,12 +777,12 @@
  *      }
  */
 
-/*=================== End =====================*/
+/* =================== End =====================*/
 
 /*
-===================== ///////// <---------> ============= <---------> ///////// =====================> 
-===================== ///////// <---------> Post content filters <---------> ///////// =====================> 
-===================== ///////// <---------> ============= <---------> ///////// =====================> 
+===================== ///////// <---------> ============= <---------> ///////// =====================>
+===================== ///////// <---------> Post content filters <---------> ///////// =====================>
+===================== ///////// <---------> ============= <---------> ///////// =====================>
 */
 
 /**
@@ -824,7 +790,7 @@
  * @apiName postContentFilters
  * @apiGroup Blog
  * @apiPermission User, Admin, Super_Admin
- * 
+ *
  * @apidescription Post content filters
  * @apiVersion 0.0.0
  *
@@ -839,10 +805,10 @@
  *                       "status": 200,
  *                       "msg": "OK"
  *                  },
- * 
+ *
  *          "response":{
  *                       "message":"Success"
- *                     }   
+ *                     }
  *      }
  * @apiErrorExample Response Error:
  *      HTTP/1.1 400 BAD REQUEST
@@ -855,13 +821,13 @@
  *      }
  */
 
-/*=================== End =====================*/
+/* =================== End =====================*/
 
 
 /*
-===================== ///////// <---------> ============= <---------> ///////// =====================> 
-===================== ///////// <---------> Get content filters <---------> ///////// =====================> 
-===================== ///////// <---------> ============= <---------> ///////// =====================> 
+===================== ///////// <---------> ============= <---------> ///////// =====================>
+===================== ///////// <---------> Get content filters <---------> ///////// =====================>
+===================== ///////// <---------> ============= <---------> ///////// =====================>
 */
 
 /**
@@ -869,8 +835,8 @@
  * @apiName getContentFilters
  * @apiGroup Blog
  * @apiPermission User, Admin, Super_Admin
- * 
- * 
+ *
+ *
  * @apidescription Get content filters
  * @apiVersion 0.0.0
  *
@@ -884,10 +850,10 @@
  *                       "status": 200,
  *                       "msg": "OK"
  *                  },
- * 
+ *
  *          "response":{
  *                       "data":"[Filtered Tags]"
- *                     }   
+ *                     }
  *      }
  * @apiErrorExample Response Error:
  *      HTTP/1.1 400 BAD REQUEST
@@ -903,9 +869,9 @@
 
 
 /*
-===================== ///////// <---------> ============= <---------> ///////// =====================> 
-===================== ///////// <---------> Delete content filters <---------> ///////// =====================> 
-===================== ///////// <---------> ============= <---------> ///////// =====================> 
+===================== ///////// <---------> ============= <---------> ///////// =====================>
+===================== ///////// <---------> Delete content filters <---------> ///////// =====================>
+===================== ///////// <---------> ============= <---------> ///////// =====================>
 */
 
 /**
@@ -913,7 +879,7 @@
  * @apiName deleteContentFilters
  * @apiGroup Blog
  * @apiPermission User, Admin, Super_Admin
- * 
+ *
  * @apidescription Delete tag filters
  * @apiVersion 0.0.0
  *
@@ -928,10 +894,10 @@
  *                       "status": 200,
  *                       "msg": "OK"
  *                  },
- * 
+ *
  *          "response":{
  *                       "message":"Success"
- *                     }   
+ *                     }
  *      }
  * @apiErrorExample Response Error:
  *      HTTP/1.1 400 BAD REQUEST
@@ -944,28 +910,28 @@
  *      }
  */
 
-/*=================== End =====================*/
-
+/* =================== End =====================*/
 
 
 /*
-===================== ///////// <---------> ============= <---------> ///////// =====================> 
-===================== ///////// <---------> Create a new blog <---------> ///////// =====================> 
-===================== ///////// <---------> ============= <---------> ///////// =====================> 
+===================== ///////// <---------> ============= <---------> ///////// =====================>
+===================== ///////// <---------> Create a new blog <---------> ///////// =====================>
+===================== ///////// <---------> ============= <---------> ///////// =====================>
 */
 
 /**
- * @api {post} /new/blog/ Create a new blog.
- * 
+ * @api {post} user/new/blog/:userId Create a new blog.
+ *
  * @apiName newBlog
  * @apiGroup Blog
- * @apiVersion 0.0.0 
+ * @apiVersion 0.0.0
  * @apiPermission User, Admin, Super_Admin
- * 
+ *
  * @apiParam {String} Token User's Secret Code.
  * @apiParam {String} Title Blog's Title
- * @apiParam {String} Url Blog's Url
- * @apiParam {String} [Password] Blog's password
+ * @apiParam {String} name Name of the Blog and must be unique
+ * @apiparam {Boolean} privacy  Wether the blog is private or not
+ * @apiParam {String} [Password] Blog's password if it's private
  *
  * @apiSuccessExample Response Data:
  *      HTTP/1.1 200 OK
@@ -974,10 +940,12 @@
  *                       "status": 200,
  *                       "msg": "OK"
  *                  },
- * 
+ *
  *          "response":{
  *                       "message": "Blog Created Successfully"
- *                     }   
+ *                     "data":"{Object Contains Blog Info}"
+ *
+ *                     }
  *      }
  * @apiErrorExample Response Error:
  *      HTTP/1.1 400 BAD REQUEST
@@ -990,22 +958,22 @@
  *      }
  */
 
-/*=================== End =====================*/
+/* =================== End =====================*/
 
 
 /*
-===================== ///////// <---------> ============= <---------> ///////// =====================> 
-===================== ///////// <---------> Adding Members  <---------> ///////// =====================> 
-===================== ///////// <---------> ============= <---------> ///////// =====================> 
+===================== ///////// <---------> ============= <---------> ///////// =====================>
+===================== ///////// <---------> Adding Members  <---------> ///////// =====================>
+===================== ///////// <---------> ============= <---------> ///////// =====================>
 */
 /**
  * @api {post} /members/ Adding members.
- * 
+ *
  * @apiName addMember
  * @apiGroup Blog
- * @apiVersion 0.0.0 
+ * @apiVersion 0.0.0
  * @apiPermission User, Admin, Super_Admin
- * 
+ *
  * @apiParam {String} Token User's Secret Code.
  * @apiParam {String} Member Member's email
  *
@@ -1016,10 +984,10 @@
  *                       "status": 200,
  *                       "msg": "OK"
  *                  },
- * 
+ *
  *          "response":{
  *                        "message": "Invitation Sent Via Email"
- *                     }   
+ *                     }
  *      }
  * @apiErrorExample Response Error:
  *      HTTP/1.1 400 BAD REQUEST
@@ -1032,22 +1000,22 @@
  *      }
  */
 
-/*=================== End =====================*/
+/* =================== End =====================*/
 
 /*
-===================== ///////// <---------> ============= <---------> ///////// =====================> 
-===================== ///////// <---------> Join Group  <---------> ///////// =====================> 
-===================== ///////// <---------> ============= <---------> ///////// =====================> 
+===================== ///////// <---------> ============= <---------> ///////// =====================>
+===================== ///////// <---------> Join Group  <---------> ///////// =====================>
+===================== ///////// <---------> ============= <---------> ///////// =====================>
 */
 
 /**
  * @api {post} /join/:Token Join Group.
- * 
+ *
  * @apiName joinGroup
  * @apiGroup Blog
- * @apiVersion 0.0.0 
+ * @apiVersion 0.0.0
  * @apiPermission User, Admin, Super_Admin
- * 
+ *
  * @apiSuccessExample Response Data:
  *      HTTP/1.1 200 OK
  *      {
@@ -1055,10 +1023,10 @@
  *                       "status": 200,
  *                       "msg": "OK"
  *                  },
- * 
+ *
  *          "response":{
  *                        "message": "Member Added Successfully"
- *                     }   
+ *                     }
  *      }
  * @apiErrorExample Response Error:
  *      HTTP/1.1 400 BAD REQUEST
@@ -1071,23 +1039,23 @@
  *      }
  */
 
-/*=================== End =====================*/
+/* =================== End =====================*/
 
 
 /*
-===================== ///////// <---------> ============= <---------> ///////// =====================> 
-===================== ///////// <--------->  Remove Member  <---------> ///////// =====================> 
-===================== ///////// <---------> ============= <---------> ///////// =====================> 
+===================== ///////// <---------> ============= <---------> ///////// =====================>
+===================== ///////// <--------->  Remove Member  <---------> ///////// =====================>
+===================== ///////// <---------> ============= <---------> ///////// =====================>
 */
 
 /**
  * @api {delete} /members/ Remove member.
- * 
+ *
  * @apiName removeMember
  * @apiGroup Blog
- * @apiVersion 0.0.0 
+ * @apiVersion 0.0.0
  * @apiPermission User, Admin, Super_Admin
- * 
+ *
  * @apiParam {String} Token User's Secret Code.
  * @apiParam {String} Member Blog's Id
  *
@@ -1098,10 +1066,10 @@
  *                       "status": 200,
  *                       "msg": "OK"
  *                  },
- * 
+ *
  *          "response":{
  *                        "message": "Blog Removed Successfully"
- *                     }   
+ *                     }
  *      }
  * @apiErrorExample Response Error:
  *      HTTP/1.1 400 BAD REQUEST
@@ -1114,22 +1082,22 @@
  *      }
  */
 
-/*=================== End =====================*/
+/* =================== End =====================*/
 
 /*
-===================== ///////// <---------> ============= <---------> ///////// =====================> 
-===================== ///////// <--------->  Promote To Admin  <---------> ///////// =====================> 
-===================== ///////// <---------> ============= <---------> ///////// =====================> 
+===================== ///////// <---------> ============= <---------> ///////// =====================>
+===================== ///////// <--------->  Promote To Admin  <---------> ///////// =====================>
+===================== ///////// <---------> ============= <---------> ///////// =====================>
 */
 
 /**
  * @api {put} /members/ Promote to Admin.
- * 
+ *
  * @apiName promoteBlog
  * @apiGroup Blog
- * @apiVersion 0.0.0 
+ * @apiVersion 0.0.0
  * @apiPermission User, Admin, Super_Admin
- * 
+ *
  * @apiParam {String} Token User's Secret Code.
  * @apiParam {String} Member Blog's Id
  *
@@ -1140,10 +1108,10 @@
  *                       "status": 200,
  *                       "msg": "OK"
  *                  },
- * 
+ *
  *          "response":{
  *                        "message": "Blog Promoted To Admin Successfully"
- *                     }   
+ *                     }
  *      }
  * @apiErrorExample Response Error:
  *      HTTP/1.1 400 BAD REQUEST
@@ -1156,23 +1124,22 @@
  *      }
  */
 
-/*=================== End =====================*/
-
+/* =================== End =====================*/
 
 
 /*
-===================== ///////// <---------> ============= <---------> ///////// =====================> 
-===================== ///////// <--------->   Leave This Blog <---------> ///////// =====================> 
-===================== ///////// <---------> ============= <---------> ///////// =====================> 
+===================== ///////// <---------> ============= <---------> ///////// =====================>
+===================== ///////// <--------->   Leave This Blog <---------> ///////// =====================>
+===================== ///////// <---------> ============= <---------> ///////// =====================>
 */
 /**
  * @api {delete} /members/leave/ Leave this blog.
- * 
+ *
  * @apiName leaveBlog
  * @apiGroup Blog
- * @apiVersion 0.0.0 
+ * @apiVersion 0.0.0
  * @apiPermission User, Admin, Super_Admin
- * 
+ *
  * @apiParam {String} Token User's Secret Code.
  * @apiParam {String} Blog's group Id
  *
@@ -1183,10 +1150,10 @@
  *                       "status": 200,
  *                       "msg": "OK"
  *                  },
- * 
+ *
  *          "response":{
  *                        "message": "Blog Leave Group Successfully"
- *                     }   
+ *                     }
  *      }
  * @apiErrorExample Response Error:
  *      HTTP/1.1 400 BAD REQUEST
@@ -1199,22 +1166,22 @@
  *      }
  */
 
-/*=================== End =====================*/
+/* =================== End =====================*/
 
 /*
-===================== ///////// <---------> ============= <---------> ///////// =====================> 
-===================== ///////// <--------->   Get Blog Settings <---------> ///////// =====================> 
-===================== ///////// <---------> ============= <---------> ///////// =====================> 
+===================== ///////// <---------> ============= <---------> ///////// =====================>
+===================== ///////// <--------->   Get Blog Settings <---------> ///////// =====================>
+===================== ///////// <---------> ============= <---------> ///////// =====================>
 */
 
 /**
  * @api {get} /blog/appearance/ Get Blog Settings.
- * 
+ *
  * @apiName blogSettings
  * @apiGroup Blog
- * @apiVersion 0.0.0 
+ * @apiVersion 0.0.0
  * @apiPermission User, Admin, Super_Admin
- * 
+ *
  * @apiParam {String} Token User's Secret Code.
  * @apiParam {String} Id Blog's Id
  *
@@ -1225,10 +1192,10 @@
  *                       "status": 200,
  *                       "msg": "OK"
  *                  },
- * 
+ *
  *          "response":{
  *                       "message": "{ Object Contains Blog Settings }"
- *                     }   
+ *                     }
  *      }
  * @apiErrorExample Response Error:
  *      HTTP/1.1 400 BAD REQUEST
@@ -1241,26 +1208,33 @@
  *      }
  */
 
-/*=================== End =====================*/
+/* =================== End =====================*/
 
 /*
-===================== ///////// <---------> ============= <---------> ///////// =====================> 
-===================== ///////// <--------->   Edit Blog Settings  <---------> ///////// =====================> 
-===================== ///////// <---------> ============= <---------> ///////// =====================> 
+===================== ///////// <---------> ============= <---------> ///////// =====================>
+===================== ///////// <--------->   Edit Blog Settings  <---------> ///////// =====================>
+===================== ///////// <---------> ============= <---------> ///////// =====================>
 */
 
 /**
- * @api {put} /blog/appearance/ Edit Blog Settings.
- * 
- * @apiName eidtBlogSettings
- * @apiGroup Blog
- * @apiVersion 0.0.0 
- * @apiPermission User, Admin, Super_Admin
- * 
- * @apiParam {String} Token User's Secret Code.
- * @apiParam {String} Id Blog's Id
- * @apiParam {String} New_Settings Blog's new settings
+ * @api {post} /blog/edit/:blogId Edit Blog Settings.
  *
+ * @apiName eidtBlog
+ * @apiGroup Blog
+ * @apiVersion 0.0.0
+ * @apiPermission User, Admin, Super_Admin
+ *
+ * @apiparam {String} blogId  - id of the blog
+ * @apiparam {String} [title]
+ * @apiparam {String} [accent]
+ * @apiparam {String} [name]
+ * @apiparam {String} [password]
+ * @apiparam {String} [headerImage]
+ * @apiparam {String} [background]
+ * @apiparam {String} [avatar]
+ * @apiparam {String} [theme]
+ * @apiparam {String} [description]
+ * 
  * @apiSuccessExample Response Data:
  *      HTTP/1.1 200 OK
  *      {
@@ -1268,10 +1242,12 @@
  *                       "status": 200,
  *                       "msg": "OK"
  *                  },
- * 
+ *
  *          "response":{
  *                       "message": "Settings updated successfully"
- *                     }   
+ *                       "data":"{Object Contains Blog Info}"
+ *
+ *                     }
  *      }
  * @apiErrorExample Response Error:
  *      HTTP/1.1 400 BAD REQUEST
@@ -1284,22 +1260,22 @@
  *      }
  */
 
-/*=================== End =====================*/
+/* =================== End =====================*/
 
 /*
-===================== ///////// <---------> ============= <---------> ///////// =====================> 
-===================== ///////// <--------->   Get Blog Theme  <---------> ///////// =====================> 
-===================== ///////// <---------> ============= <---------> ///////// =====================> 
+===================== ///////// <---------> ============= <---------> ///////// =====================>
+===================== ///////// <--------->   Get Blog Theme  <---------> ///////// =====================>
+===================== ///////// <---------> ============= <---------> ///////// =====================>
 */
 
 /**
  * @api {get} /blog/theme/ Get Blog's Theme.
- * 
+ *
  * @apiName blogTheme
  * @apiGroup Blog
- * @apiVersion 0.0.0 
+ * @apiVersion 0.0.0
  * @apiPermission User, Admin, Super_Admin
- * 
+ *
  * @apiParam {String} Token User's Secret Code.
  * @apiParam {String} Id Blog's Id
  *
@@ -1310,10 +1286,10 @@
  *                       "status": 200,
  *                       "msg": "OK"
  *                  },
- * 
+ *
  *          "response":{
  *                       "message": "Object Contains Blog Theme"
- *                     }   
+ *                     }
  *      }
  * @apiErrorExample Response Error:
  *      HTTP/1.1 400 BAD REQUEST
@@ -1326,23 +1302,23 @@
  *      }
  */
 
-/*=================== End =====================*/
+/* =================== End =====================*/
 
 
 /*
-===================== ///////// <---------> ============= <---------> ///////// =====================> 
-===================== ///////// <--------->  Edit Blog Theme   <---------> ///////// =====================> 
-===================== ///////// <---------> ============= <---------> ///////// =====================> 
+===================== ///////// <---------> ============= <---------> ///////// =====================>
+===================== ///////// <--------->  Edit Blog Theme   <---------> ///////// =====================>
+===================== ///////// <---------> ============= <---------> ///////// =====================>
 */
 
 /**
  * @api {put} /blog/theme/ Edit Blog Theme.
- * 
+ *
  * @apiName eidtBlogTheme
  * @apiGroup Blog
- * @apiVersion 0.0.0 
+ * @apiVersion 0.0.0
  * @apiPermission User, Admin, Super_Admin
- * 
+ *
  * @apiParam {String} Token User's Secret Code.
  * @apiParam {String} Id Blog's Id
  * @apiParam {String} New_Theme Blog's new theme
@@ -1354,10 +1330,10 @@
  *                       "status": 200,
  *                       "msg": "OK"
  *                  },
- * 
+ *
  *          "response":{
  *                       "message": "Theme updated successfully"
- *                     }   
+ *                     }
  *      }
  * @apiErrorExample Response Error:
  *      HTTP/1.1 400 BAD REQUEST
@@ -1370,13 +1346,13 @@
  *      }
  */
 
-/*=================== End =====================*/
+/* =================== End =====================*/
 
 
 /*
-===================== ///////// <---------> ============= <---------> ///////// =====================> 
-===================== ///////// <--------->  Check out these blogs   <---------> ///////// =====================> 
-===================== ///////// <---------> ============= <---------> ///////// =====================> 
+===================== ///////// <---------> ============= <---------> ///////// =====================>
+===================== ///////// <--------->  Check out these blogs   <---------> ///////// =====================>
+===================== ///////// <---------> ============= <---------> ///////// =====================>
 */
 
 /**
@@ -1386,7 +1362,7 @@
  * @apiPermission  User, admin, super admin
  * @apidescription retrieve unfollowed blogs as recommendations to be followed
  * @apiVersion 0.0.0
- * 
+ *
  * @apiParam {String} Token User's Secret Code.
  * @apiParam {String} user_id  user's ID to know who he/she follows
  *
@@ -1397,10 +1373,10 @@
  *                       "status": 200,
  *                       "msg": "OK"
  *                  },
- * 
+ *
  *          "response":{
  *                       "data": "[gets some of the blogs not followed by the user]"
- *                     }   
+ *                     }
  *      }
  * @apiErrorExample Response Error:
  *      HTTP/1.1 400 BAD REQUEST
@@ -1411,7 +1387,7 @@
  *      {
  *          "error": "User Is Unauthorized"
  *      }
- * 
+ *
  */
 
-/*=================== End =====================*/
+/* =================== End =====================*/

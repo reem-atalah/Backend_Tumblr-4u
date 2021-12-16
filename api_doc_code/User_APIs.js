@@ -54,6 +54,47 @@
 
 /*=================== End =====================*/
 
+/*
+===================== ///////// <---------> =========================== <---------> ///////// =====================> 
+===================== ///////// <---------> Retrieve a User's Dashboard <---------> ///////// =====================> 
+===================== ///////// <---------> =========================== <---------> ///////// =====================> 
+*/
+
+/**
+ * @api {get} /dashboard Retrieve a User's Dashboard
+ * @apiName getDashboard
+ * @apiGroup  User
+ * @apiPermission User, Admin, Super_Admin
+ * @apidescription go to the dashboard page
+ * @apiVersion 0.0.0
+ * 
+ * @apiParam {String} Token User's Secret Code.
+ *
+ * @apiSuccessExample Response Data:
+ *      HTTP/1.1 200 OK
+ *      {
+ *          "meta": {
+ *                       "status": 200,
+ *                       "msg": "OK"
+ *                  },
+ * 
+ *          "response":{
+ *                       "data":"{ Object Contains Posts, ... }"
+ *                     }   
+ *      }
+ * 
+ * @apiErrorExample Response Error:
+ *      HTTP/1.1 400 BAD REQUEST
+ *      {
+ *          "error": "Error In Input Data"
+ *      }
+ *      HTTP/1.1 401 Unauthorized
+ *      {
+ *          "error": "User Is Unauthorized"
+ *      }
+ */
+
+/*=================== End =====================*/
 
 /*
 ===================== ///////// <---------> ========== <---------> ///////// =====================> 
@@ -147,37 +188,44 @@
 */
 
 /**
- * @api {post} /user/signup Sign Up.
+ * @api {post} /signup Sign Up.
  * 
  * @apiName signUp
  * @apiGroup User
  * @apiVersion 0.0.0 
  * @apiPermission User, Admin, Super_Admin
  * 
- * @apiParam {String} Email User's email
- * @apiParam {String} Password User's password
- * @apiParam {String} Blog_Name User's blog name
- * @apiParam {String} Age User's age
- * @apiParam {String} [Stuff] User's selected stuff
+ * @apiParam {String} email User's email
+ * @apiParam {String} password User's password
+ * @apiParam {String} blogName User's blog name
+ * @apiParam {String} age User's age
  * 
  * @apiSuccessExample Response Data:
- *      HTTP/1.1 200 OK
+ *      HTTP/1.1 201 CREATED
  *      {
  *          "meta": {
- *                       "status": 200,
- *                       "msg": "OK"
+ *                       "status": 201,
+ *                       "msg": "CREATED"
  *                  },
  * 
- *          "response":{
- *                       "message": "User Registered Successfully"
- *                       "data":"Token"
+ *          "res":{
+ *                       "message": "Sign Up Successfully (<:>)"
+ *                       "data":token
  *                     }   
  *      }
  * 
  * @apiErrorExample Response Error:
  *      HTTP/1.1 400 BAD REQUEST
  *      {
- *          "error": "Error In Input Data"
+ *          "meta": {
+ *                       "status": 400,
+ *                       "msg": "BAD_REQUEST"
+ *                  },
+ * 
+ *          "res":{
+ *                       "error": "Email is Already Exists (<:>)"
+ *                       "data":""
+ *                     }   
  *      }
  * 
  */
@@ -191,15 +239,15 @@
 */
 
 /**
- * @api {post} /user/login Log In.
+ * @api {post} /login Log In.
  * 
  * @apiName login
  * @apiGroup User
  * @apiVersion 0.0.0 
  * @apiPermission User, Admin, Super_Admin
  * 
- * @apiParam {String} Email User's email
- * @apiParam {String} Password User's password
+ * @apiParam {String} email User's email
+ * @apiParam {String} password User's password
  *
  * @apiSuccessExample Response Data:
  *      HTTP/1.1 200 OK
@@ -209,16 +257,24 @@
  *                       "msg": "OK"
  *                  },
  * 
- *          "response":{
- *                       "message": "user Logged in Successfully"
- *                       "data":"Token"
+ *          "res":{
+ *                       "message": "LogIn Successfully (<:>)"
+ *                       "data":token
  *                     }   
  *      }
  * 
  * @apiErrorExample Response Error:
  *      HTTP/1.1 400 BAD REQUEST
  *      {
- *          "error": "Error In Input Data"
+ *          "meta": {
+ *                       "status": 400,
+ *                       "msg": "BAD_REQUEST"
+ *                  },
+ * 
+ *          "res":{
+ *                       "error": InCorrect Password (<:>)
+ *                       "data":""
+ *                     }   
  *      }
  * 
  */
@@ -232,14 +288,13 @@
 */
 
 /**
- * @api {post} /google/login Log In Using Google.
+ * @api {get} /google Log In Using Google.
  * 
  * @apiName googleLogin
  * @apiGroup User
  * @apiVersion 0.0.0 
  * @apiPermission User, Admin, Super_Admin
  * 
- * @apiParam {String} Email User's email
  *
  * @apiSuccessExample Response Data:
  *      HTTP/1.1 200 OK
@@ -250,15 +305,120 @@
  *                  },
  * 
  *          "response":{
- *                       "message": "user Logged in Successfully"
- *                       "data":"Token"
+ *                       "message": "Sign Up With Google Successfully (<:>)"
+ *                       "data":token
  *                     }   
  *      }
  * 
  * @apiErrorExample Response Error:
- *      HTTP/1.1 400 BAD REQUEST
+ *      HTTP/1.1 500 INTERNAL_SERVER_ERROR
  *      {
- *          "error": "Error In Input Data"
+ *          "meta": {
+ *                       "status": 500,
+ *                       "msg": "INTERNAL_SERVER_ERROR"
+ *                  },
+ * 
+ *          "res":{
+ *                       "error": "Error In Sign Up With Google Function (<:>)"
+ *                       "data":""
+ *                     }   
+ *      }
+ */
+
+/*=================== End =====================*/
+
+
+/*
+===================== ///////// <---------> =========== <---------> ///////// =====================> 
+===================== ///////// <---------> Google Info <---------> ///////// =====================> 
+===================== ///////// <---------> =========== <---------> ///////// =====================> 
+*/
+
+/**
+ * @api {put} /google/info Update Google Account Info.
+ * 
+ * @apiName googleInfo
+ * @apiGroup User
+ * @apiVersion 0.0.0 
+ * @apiPermission User, Admin, Super_Admin
+ * 
+ * @apiParam {String} blogName User's blogName.
+ * @apiParam {String} age User's age.
+ * @apiParam {String} Token User's Secret Code.
+ *
+ * @apiSuccessExample Response Data:
+ *      HTTP/1.1 200 OK
+ *      {
+ *          "meta": {
+ *                       "status": 200,
+ *                       "msg": "OK"
+ *                  },
+ * 
+ *          "response":{
+ *                       "message": "User Log In With Google Successfully (<:>)"
+ *                       "data":token
+ *                     }   
+ *      }
+ * 
+ * @apiErrorExample Response Error:
+ *      HTTP/1.1 500 INTERNAL_SERVER_ERROR
+ *      {
+ *          "meta": {
+ *                       "status": 500,
+ *                       "msg": "INTERNAL_SERVER_ERROR"
+ *                  },
+ * 
+ *          "res":{
+ *                       "error": "Error In Google Info Function (<:>)"
+ *                       "data":""
+ *                     }   
+ *      }
+ */
+
+/*=================== End =====================*/
+
+/*
+===================== ///////// <---------> =============================== <---------> ///////// =====================> 
+===================== ///////// <---------> Log in Using Google For Android <---------> ///////// =====================> 
+===================== ///////// <---------> =============================== <---------> ///////// =====================> 
+*/
+
+/**
+ * @api {post} /androidSignUpWithGoogle Log In Using Google For Android.
+ * 
+ * @apiName googleLoginAndroid
+ * @apiGroup User
+ * @apiVersion 0.0.0 
+ * @apiPermission User, Admin, Super_Admin
+ * 
+ * @apiParam {String} googleToken Google Token
+ * 
+ * @apiSuccessExample Response Data:
+ *      HTTP/1.1 200 OK
+ *      {
+ *          "meta": {
+ *                       "status": 200,
+ *                       "msg": "OK"
+ *                  },
+ * 
+ *          "response":{
+ *                       "message": "Sign Up With Google For Android Successfully (<:>)"
+ *                       "data":token
+ *                     }   
+ *      }
+ * 
+ * @apiErrorExample Response Error:
+ *      HTTP/1.1 500 INTERNAL_SERVER_ERROR
+ *      {
+ *          "meta": {
+ *                       "status": 500,
+ *                       "msg": "INTERNAL_SERVER_ERROR"
+ *                  },
+ * 
+ *          "res":{
+ *                       "error": "Error In Sign Up With Google Function (<:>)"
+ *                       "data":""
+ *                     }   
  *      }
  */
 
@@ -447,9 +607,9 @@
 */
 
 /**
- * @api {put} /user/emailVerification/:Token Email Verification.
+ * @api {put} /user/verify/:token Email Verification.
  * 
- * @apiName emailVerification
+ * @apiName accountVerification
  * @apiGroup User
  * @apiVersion 0.0.0 
  * @apiPermission User, Admin, Super_Admin
@@ -462,19 +622,24 @@
  *                       "msg": "OK"
  *                  },
  * 
- *          "response":{
- *                       "message": "Email Verifid Successfully"
+ *          "res":{
+ *                       "message": "Account Verified Successfully (<:>)",
+ *                       "data": ""
  *                     }   
  *      }
  * 
  * @apiErrorExample Response Error:
  *      HTTP/1.1 400 BAD REQUEST
  *      {
- *          "error": "Error In Input Data"
- *      }
- *      HTTP/1.1 401 Unauthorized
- *      {
- *          "error": "User Is Unauthorized"
+ *          "meta": {
+ *                       "status": 400,
+ *                       "msg": "BAD_REQUEST"
+ *                  },
+ * 
+ *          "res":{
+ *                       "error": "Account Is Not Found or Already Verified (<:>)"
+ *                       "data":""
+ *                     }   
  *      }
  */
 

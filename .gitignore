@@ -1,2 +1,10 @@
+<<<<<<< HEAD
 node_modules
 .vscode
+=======
+.vscode
+.env
+
+
+node_modules/*
+>>>>>>> origin/main

@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: Modules/Posts/Controller/control.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: Modules/Posts/Controller/control.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>// /////////////////////////////////////////////////////////
+// / &lt;==> /// This File Contains Post Functions /// &lt;==> ///
+// /////////////////////////////////////////////////////////
+
+/* =============== /// &lt;==> Variables Declaration &lt;==> /// =============== */
+// const bcrypt = require('bcrypt');
+// const jwt = require('jsonwebtoken');
+const {StatusCodes} = require('http-status-codes');
+const schema = require('../../../Model/model');
+
+/* =========== /// &lt;==> End &lt;==> ===========*/
+
+/* =============== /// &lt;==> Post Functions &lt;==> /// =============== */
+/* ----------- &lt;---> Create Post &lt;---> ------ */ // *** &lt;===> Done &lt;===>  *** //
+
+/**
+ * @function
+ * @name createPost
+ * @description Creates a blog post and saves its content in the database.
+ * @param {String} blogId - Id of the blog to create the post.
+ * @param {String} postHtml - Post Content.
+ * @param {String} type - Post Type.
+ * @param {String} state - Post State.
+ * @param {Array} tags - Post Tags.
+ *
+ * @returns {String} Created Post Id.
+ */
+
+const createPost = async (blogId, postHtml, type, state, tags) => {
+  try {
+    var ret = ['',''];
+    const existingBlog = await schema.blogs.findOne({_id: blogId});
+    if (existingBlog) {
+      const newNotes = new schema.notes();
+      newNotes.save();
+      const notesId = newNotes._id;
+      newPost= new schema.Posts({blogId, postHtml, type, state, tags, notesId});
+      newPost = await newPost.save();
+      existingBlog.postsIds.push(newPost._id);
+      // if the field is not in the database it will be created
+      existingBlog.save();
+      ret[0] = 'Post Created Successfully';
+      ret[1] = newPost._id;
+      return ret;
+    } else {
+      ret[0] = 'Blog Not Found';
+      return ret;
+    };
+  } catch (error) {
+    ret[0] = 'Error In Create Post Function';
+    return ret;
+  };
+};
+
+/**
+ * @function
+ * @name showPost
+ * @description Shows a blog post by its id.
+ * @param {string} postId - Id of the post to show.
+ *
+ * @returns {Object} the blog post content in the form of html string.
+ */
+
+/* ----------- &lt;---> Show Post &lt;---> ---- */ // *** &lt;===> Done &lt;===>  *** //
+// Assumption: Edit Post Function Just Updates ( postHtml )
+const showPost = async (postId) => {
+  try {
+    ret = ['',''];
+    const existingPost = await schema.Posts.findOne({_id: postId});
+    if (existingPost) {
+      ret[0] = 'Post Returned Successfully';
+      ret[1] = existingPost.postHtml;
+      return ret;
+    } else {
+      ret[0] = 'Post Not Found';
+      return ret;
+    };
+  } catch (error) {
+    ret[0] = 'Error In Show Post Function';
+    return ret;
+  };
+};
+
+/* ----------- &lt;---> Make Comment &lt;---> ----------- */ // *** &lt;===> Done &lt;===>  *** //
+
+/**
+ * @function
+ * @name makePost
+ * @description A blog makes a comment on a blog post.
+ * @param {string} blogId - Id of the blog making the comment.
+ * @param {string} postId - Id of the post to make the comment on.
+ * @param {string} text - text of the comment.
+ *
+ * @returns {string} The id of the comment.
+ */
+
+// const makeComment = async (req, res) => {
+const makeComment = async (blogId, postId, text) => {
+  try {
+    var ret = ['',''];
+    const existingBlog = await schema.blogs.findOne({_id: blogId});
+    const existingPost = await schema.Posts.findOne({_id: postId});
+    const notesId = existingPost.notesId;
+    // const notesId = req.params.notesId;
+    const existingNotes = await schema.notes.findOne({_id: notesId});
+    if (existingBlog) {
+      if (existingPost) {
+        const notesId = existingPost.notesId;
+        const existingNotes = await schema.notes.findOne({_id: notesId});
+        const commentingBlogTitle = existingBlog.title;
+        const commentingBlogId = blogId;
+        if (existingNotes) {
+          const comment = {
+            commentingBlogId,
+            commentingBlogTitle,
+            text,
+          };
+          const lenBefore = existingNotes.comments.length;
+          existingNotes.comments.push(comment);
+          existingNotes.save();
+          const commentsArrayAfter = existingNotes.comments;
+          const commentObj = commentsArrayAfter[lenBefore];
+          var commentId = commentObj._id;
+        } else {
+          ret[0] = 'Notes Not Found';
+          return ret;
+        }
+        ret[0] = 'Comment Posted Successfully';
+        ret[1] = commentId;
+        return ret;
+      } else {
+        ret[0] = 'Post Not Found';
+        return ret;
+      }
+    } else {
+      ret[0] = 'Blog Not Found';
+      return ret;
+    }
+  } catch (error) {
+    ret[0] = 'Error in Make Comment Function';
+    return ret;
+  }
+};
+
+/* ----------- &lt;---> Loop on an array and check if an element exists &lt;---> ----------- */ // *** &lt;===> Done &lt;===>  *** //
+
+/**
+ * @function
+ * @name loopAndCheck
+ * @description Loop on an array and check if an element exists.
+ * @param {array} arr - Array to loop on.
+ * @param {string} element - Element to look for.
+ *
+ * @returns {string} Boolean indicates whether the element exists or not.
+ */
+
+const loopAndCheck = (arr, element) => {
+  let exist = 0;
+  if (arr.length) {
+    for (let i = 0; i &lt; arr.length; i++) {
+      if (arr[i] === element) {
+        exist = 1;
+      }
+    }
+  }
+  return exist;
+};
+
+/* ----------- &lt;---> Loop on Object in Array of Objects and check if Id exists &lt;---> ----------- */ // *** &lt;===> Done &lt;===>  *** //
+
+/**
+ * @function
+ * @name loopObjAndCheck
+ * @description Loop on Object in Array of Objects and check if Id exists.
+ * @param {array} arr - Array to loop on.
+ * @param {string} element - Element to look for.
+ * @param {number} pos - Position of the found element if found.
+ *
+ * @returns {string} Boolean indicates whether the element exists or not.
+ */
+
+const loopObjAndCheck = (arr, element) => {
+  let exist = 0;
+  let pos = 0;
+  if (arr.length) {
+    for (let i = 0; i &lt; arr.length; i++) {
+      if (arr[i]._id.toString() === element) {
+        exist = 1;
+        pos = i;
+      }
+    }
+  }
+  return [exist,pos];
+};
+
+/* ----------- &lt;---> Press Like of a Post (Like or Unlike) &lt;---> ----------- */ // *** &lt;===> Done &lt;===>  *** //
+// Like should be done only one time by one blog
+
+/**
+ * @function
+ * @name likePress
+ * @description Like or Unlike a Post.
+ * @param {string} blogId - Id of the blog pressing the like button.
+ * @param {string} postId - Id of the post to like or unlike.
+ *
+ * @returns {string} .
+ */
+
+const likePress = async (blogId, postId) => {
+  try {
+    var ret = '';
+    const existingBlog = await schema.blogs.findOne({_id: blogId});
+    const existingPost = await schema.Posts.findOne({_id: postId});
+    const notesId = existingPost.notesId;
+    const existingNotes = await schema.notes.findOne({_id: notesId});
+    if (existingBlog) {
+      if (existingPost) {
+        if (existingNotes) {
+          const likesArray = existingNotes.likes;
+          const exist = loopAndCheck(likesArray, blogId);
+          if (exist) {
+            existingNotes.likes.pull(blogId);
+            existingNotes.save();
+            ret = 'Post Unliked Successfully';
+            return ret;
+          } else {
+            existingNotes.likes.push(blogId);
+            existingNotes.save();
+            ret = 'Post Liked Successfully';
+            return ret;
+          }
+        } else {
+          ret = 'Notes Not Found';
+          return ret;
+        }
+        res.status(StatusCodes.OK).json('Post Liked Successfully');
+      } else {
+        ret = 'Post Not Found';
+        return ret;
+      }
+    } else {
+      ret = 'Blog Not Found';
+      return ret;
+    }
+  } catch (error) {
+    ret = 'Error in Press Like Function';
+    return ret;
+  }
+};
+
+/* ----------- &lt;---> Reblog a Post &lt;---> ----------- */ // *** &lt;===> Done &lt;===>  *** //
+
+/**
+ * @function
+ * @name reblogPost
+ * @description A blog reblogs a blog post.
+ * @param {string} blogId - Id of the blog making the reblog.
+ * @param {string} postId - Id of the post to reblog.
+ * @param {string} text - text of the reblog.
+ *
+ * @returns {string} The id of the reblog.
+ */
+
+const reblogPost = async (blogId, postId, text) => {
+  try {
+    var ret = ['',''];
+    const existingBlog = await schema.blogs.findOne({_id: blogId});
+    const existingPost = await schema.Posts.findOne({_id: postId});
+    const notesId = existingPost.notesId;
+    const existingNotes = await schema.notes.findOne({_id: notesId});
+    if (existingBlog) {
+      if (existingPost) {
+        const rebloggingId = blogId;
+        if (existingNotes) {
+          const reblog = {
+            rebloggingId,
+            text,
+          };
+          const lenBefore = existingNotes.reblogs.length;
+          existingNotes.reblogs.push(reblog);
+          existingNotes.save();
+          const reblogsArrayAfter = existingNotes.reblogs;
+          const reblogObj = reblogsArrayAfter[lenBefore];
+          var reblogId = reblogObj._id;
+        } else {
+          ret[0] = 'Notes Not Found';
+          return ret;
+        }
+        ret[0] = 'Post Reblogged Successfully';
+        ret[1] = reblogId;
+        return ret;
+      } else {
+        ret[0] = 'Post Not Found';
+        return ret;
+      }
+    } else {
+      ret[0] = 'Blog Not Found';
+      return ret;
+    }
+  } catch (error) {
+        ret[0] = 'Error in Reblog Post Function';
+        return ret;
+  }
+};
+
+/* ----------- &lt;---> Remove Comment &lt;---> ----------- */ // *** &lt;===> Done &lt;===>  *** //
+
+/**
+ * @function
+ * @name removeComment
+ * @description Remove a comment.
+ * @param {string} postId - Id of the post to remove comment from.
+ * @param {string} commentId - Id of the comment to remove.
+ *
+ * @returns {string} .
+ */
+
+const removeComment = async (postId, commentId) => {
+  try {
+    var ret = '';
+    const existingPost = await schema.Posts.findOne({_id: postId});
+    if (existingPost) {
+      const notesId = existingPost.notesId;
+      const existingNotes = await schema.notes.findOne({_id: notesId});
+      if (existingNotes) {
+        const commentsArray = existingNotes.comments;
+        const exist = loopObjAndCheck(commentsArray, commentId)[0];
+        const pos = loopObjAndCheck(commentsArray, commentId)[1];
+        if (exist) {
+          existingNotes.comments.pull(commentsArray[pos]);
+        } else {
+          ret = 'Comment Not Found';
+          return ret;
+        };
+        existingNotes.save(); // whole document in db is saved
+        ret = 'Comment Removed Successfully';
+        return ret;
+      } else {
+        ret = 'Notes Not Found';
+        return ret;
+      };
+    } else {
+      ret = 'Post Not Found';
+      return ret;
+    };
+  } catch (error) {
+    ret = 'Error In Remove Comment Function';
+    return ret;
+  };
+};
+
+/* ----------- &lt;---> Remove Reblog &lt;---> ----------- */ // *** &lt;===> Done &lt;===>  *** //
+
+/**
+ * @function
+ * @name removeReblog
+ * @description Remove a reblog.
+ * @param {string} postId - Id of the post to remove reblog from.
+ * @param {string} reblogId - Id of the reblog to remove.
+ *
+ * @returns {string} .
+ */
+
+const removeReblog = async (postId, reblogId) => {
+  try {
+    const existingPost = await schema.Posts.findOne({_id: postId});
+    if (existingPost) {
+      const notesId = existingPost.notesId;
+      const existingNotes = await schema.notes.findOne({_id: notesId});
+      if (existingNotes) {
+        const reblogsArray = existingNotes.reblogs;
+        const exist = loopObjAndCheck(reblogsArray, reblogId)[0];
+        const pos = loopObjAndCheck(reblogsArray, reblogId)[1];
+        if (exist) {
+          existingNotes.reblogs.pull(reblogsArray[pos]);
+        } else {
+          ret = 'Reblog Not Found';
+          return ret;
+        };
+        existingNotes.save();
+        ret = 'Reblog Removed Successfully';
+        return ret;
+      } else {
+        ret = 'Notes Not Found';
+        return ret;
+      };
+    } else {
+      ret = 'Post Not Found';
+      return ret;
+    };
+  } catch (error) {
+    ret = 'Error In Remove Reblog Function';
+    return ret;
+  };
+};
+
+/* ----------- &lt;---> Get Post Notes &lt;---> ----------- */ // *** &lt;===> Done &lt;===>  *** //
+
+/**
+ * @function
+ * @name getNotes
+ * @description Get notes of a post.
+ * @param {string} postId - Id of the post to get its notes.
+ *
+ * @returns {string} Array of arrays, contains 4 arrays: likesArray, commentsArray, reblogsArray, countsArray(likesCount, reblogsCount, notesCount)
+ */
+
+const getNotes = async (postId) => {
+  try {
+    var ret = ['',[]];
+    const existingPost = await schema.Posts.findOne({_id: postId});
+    if (existingPost) {
+      const notesId = existingPost.notesId;
+      const existingNotes = await schema.notes.findOne({_id: notesId});
+      if (existingNotes) {
+        const likesArray = existingNotes.likes;
+        const commentsArray = existingNotes.comments;
+        const reblogsArray = existingNotes.reblogs;
+        const likesCount = likesArray.length;
+        const reblogsCount = reblogsArray.length;
+        const commentsCount = commentsArray.length;
+        const notesCount = likesCount + commentsCount + reblogsCount;
+        const countsArray = [likesCount, reblogsCount, notesCount];
+        const notes = [likesArray,
+          commentsArray, reblogsArray, countsArray]; // array of arrays
+        ret[0] = 'Notes Got Successfully';
+        ret[1] = notes;
+        return ret;
+      } else {
+        ret[0] = 'Notes Not Found';
+        return ret;
+      };
+    } else {
+      ret[0] = 'Post Not Found';
+      return ret;
+    };
+  } catch (error) {
+    ret[0] ='Error in Get Notes Function';
+    return ret;
+  };
+};
+
+/* ----------- &lt;---> Get User Dashboard &lt;---> ----------- */ // *** &lt;===> Done &lt;===>  *** //
+
+/**
+ * @function
+ * @name getDashboard
+ * @description Get dashboard of a blog.
+ * @param {string} userId - Id of the user to get its blogs' posts.
+ * @param {string} blogId - Id of the blog to get its posts.
+ *
+ * @returns {string} Array of posts objects.
+ */
+
+const getDashboard = async (userId, blogId) => {
+  try {
+    var ret = ['', []];
+    const data = [];
+    const existingUser = await schema.users.findOne({_id: userId});
+    if (existingUser) {
+      const existingBlog = await schema.blogs.findOne({_id: blogId});
+      if (existingBlog) {
+        const postsArray = existingBlog.postsIds;
+        for (let i=0; i&lt;postsArray.length; i++) {
+          const existingPost = await schema.Posts.findOne({_id: postsArray[i]});
+          if (existingPost) {
+            data.push(existingPost);
+          }
+        }
+      } else {
+          ret[0] = 'Blog Not Found';
+          return ret;
+      }
+      // checking all follwed blogs to get their posts
+      const followingBlogsArray = existingUser.following_blogs;
+      for (let i=0; i&lt;followingBlogsArray.length; i++) {
+        const existingFoBlog = await schema.blogs.findOne({_id: followingBlogsArray[i]});
+        if (existingFoBlog) {
+          const foPostsArray = existingFoBlog.postsIds;
+          for (let j=0; j&lt;foPostsArray.length; j++) {
+            const existingFoPost = await schema.Posts.findOne({_id: foPostsArray[j]});
+            if (existingFoPost) {
+              data.push(existingFoPost);
+            }
+          }
+        } else {
+          ret[0] = 'Following Blog Not Found';
+          return ret;
+        }
+      }
+      ret[0] = 'Dashboard Got Successfully';
+      ret[1] = data;
+      return ret;
+    } else {
+      ret[0] = 'User Not Found';
+      return ret;
+    }
+  } catch (error) {
+    ret[0] = 'Error In Get Dashboard Function';
+    return ret;
+  }
+};
+
+/* =========== /// &lt;==> End &lt;==> ===========*/
+
+/* =============== /// &lt;==> Export Post Functions &lt;==> /// =============== */
+module.exports = {
+  createPost,
+  showPost,
+  makeComment,
+  loopAndCheck,
+  loopObjAndCheck,
+  likePress,
+  reblogPost,
+  removeComment,
+  removeReblog,
+  // editPost,
+  // deletePost,
+  // shareWith,
+  // blogValidation
+  getNotes,
+  getDashboard,
+};
+/* =========== /// &lt;==> End &lt;==> ===========*/
+
+/* =============== /// &lt;==> Export User Functions &lt;==> /// =============== */
+// module.exports = {
+//   postFunctions,
+// };
+/* =========== /// &lt;==> End &lt;==> ===========*/
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#androidSignUpWithGoogle">androidSignUpWithGoogle</a></li><li><a href="global.html#autoCompleteSearchDash">autoCompleteSearchDash</a></li><li><a href="global.html#blockBlog">blockBlog</a></li><li><a href="global.html#checkBlogName">checkBlogName</a></li><li><a href="global.html#checkMail">checkMail</a></li><li><a href="global.html#checkPassword">checkPassword</a></li><li><a href="global.html#createBlog">createBlog</a></li><li><a href="global.html#createGoogleUser">createGoogleUser</a></li><li><a href="global.html#createPost">createPost</a></li><li><a href="global.html#createUser">createUser</a></li><li><a href="global.html#deleteBlog">deleteBlog</a></li><li><a href="global.html#editBlog">editBlog</a></li><li><a href="global.html#followBlog">followBlog</a></li><li><a href="global.html#getDashboard">getDashboard</a></li><li><a href="global.html#getNotes">getNotes</a></li><li><a href="global.html#google">google</a></li><li><a href="global.html#googleInfo">googleInfo</a></li><li><a href="global.html#isAuthorized">isAuthorized</a></li><li><a href="global.html#likePress">likePress</a></li><li><a href="global.html#login">login</a></li><li><a href="global.html#loopAndCheck">loopAndCheck</a></li><li><a href="global.html#loopObjAndCheck">loopObjAndCheck</a></li><li><a href="global.html#makePost">makePost</a></li><li><a href="global.html#mongoose">mongoose</a></li><li><a href="global.html#reblogPost">reblogPost</a></li><li><a href="global.html#removeComment">removeComment</a></li><li><a href="global.html#removeReblog">removeReblog</a></li><li><a href="global.html#retrieveBlog">retrieveBlog</a></li><li><a href="global.html#search">search</a></li><li><a href="global.html#showPost">showPost</a></li><li><a href="global.html#signUp">signUp</a></li><li><a href="global.html#unblockBlog">unblockBlog</a></li><li><a href="global.html#unfollowBlog">unfollowBlog</a></li><li><a href="global.html#verfiyAccount">verfiyAccount</a></li><li><a href="global.html#verifyMail">verifyMail</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Sun Dec 12 2021 01:48:15 GMT+0200 (Eastern European Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
