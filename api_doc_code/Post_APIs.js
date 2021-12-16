@@ -884,49 +884,42 @@
 
 
 /*
-===================== ///////// <---------> ================ <---------> ///////// =====================> 
-===================== ///////// <---------> Get Posts with search content <---------> ///////// =====================> 
-===================== ///////// <---------> ================ <---------> ///////// =====================> 
+===================== ///////// <---------> ================ <---------> ///////// =====================>
+===================== ///////// <---------> Get Posts with search content in dashboard <---------> ///////// =====================>
+===================== ///////// <---------> ================ <---------> ///////// =====================>
 */
 
 /**
- * @api {get} /blog/post/ Get Posts with search content
- * @apiName getPostsWithSearchContent
+ * @api {get} /dashboard/autoCompleteSearchDash Get Posts with search content
+ * @apiName autoCompleteSearchDash
  * @apiGroup Post
  * @apiPermission User, Admin, Super_Admin
- * 
+ *
  * @apidescription Get Posts with search content
  * @apiVersion 0.0.0
  *
  * @apiParam {String} Token User's Secret Code.
- * @apiParam {String} search_content The content in the posts you'd like to retrieve.
- * 
+ * @apiParam {String} userId the user id to get the interested tags he/she follows
+ * @apiParam {String} wordName The content in the posts you'd like to retrieve.
  *
  * @apiSuccessExample Response Data:
- *      HTTP/1.1 200 OK
- *      {
- *          "meta": {
- *                       "status": 200,
- *                       "msg": "OK"
- *                  },
- * 
- *          "response":{
- *                      "data": "[ Posts ]"
- *                     }   
+ *      result={
+ *          resultHashTag: resultHashTag,//if I have word //gets all hashtags with the needed regex
+ *          resultPostHashTag: resultPostHashTag, //if I have word //gets all posts with the needed tag with the needed regex
+ *          resultBlogs: resultBlogs, //if I have word // gets all mention blogs with the regex
+ *          resultFollowedTag: resultFollowedTag //if I don't have word // gets all posts with the followed/interested tags
  *      }
- * 
+ *
  * @apiErrorExample Response Error:
  *      HTTP/1.1 400 BAD REQUEST
  *      {
- *          "error": "Error In Input Data"
+ *          "error": ",userId, is required"
  *      }
  *      HTTP/1.1 401 Unauthorized
  *      {
  *          "error": "User Is Unauthorized"
  *      }
- */
-
-/*=================== End =====================*/
+ */ 
 
 
 /*
