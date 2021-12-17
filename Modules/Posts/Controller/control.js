@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 // /////////////////////////////////////////////////////////
 // / <==> /// This File Contains Post Functions /// <==> ///
 // /////////////////////////////////////////////////////////
@@ -7,10 +8,31 @@
 // const jwt = require('jsonwebtoken');
 const {StatusCodes} = require('http-status-codes');
 const schema = require('../../../Model/model');
+const azure = require('@azure/storage-blob');
+const fileUpload = require('express-fileupload');
+const express = require('express');
+const server = express();
+server.use(fileUpload());
 
 /* =========== /// <==> End <==> ===========*/
 
 /* =============== /// <==> Post Functions <==> /// =============== */
+const uploadImg = async (files) =>{
+  const file= files.files;
+  const uploadDate = new Date().toISOString().replace(/:/g, '-');
+  const blobName = files.files.name + uploadDate + files.file;
+  const contentType = file.type;
+  const filePath = file.path;
+  const blobServiceClient = await azure
+      .fromConnectionString(process.env.AZURE_STORAGE_CONNECTION_STRING);
+  const containerName = blobServiceClient.getContainerClient('mycontainer');
+  const containerClient = await blobServiceClient
+      .getContainerClient(containerName.containerName);
+  const blockBlobClient = containerClient.getBlockBlobClient(blobName);
+  const uploadBlobResponse = await blockBlobClient.uploadFile(filePath);
+  console.log('uploaded successfully.requestId:', uploadBlobResponse.requestId);
+};
+
 /* ----------- <---> Create Post <---> ------ */ // *** <===> Done <===>  *** //
 
 /**
@@ -28,7 +50,7 @@ const schema = require('../../../Model/model');
 
 const createPost = async (blogId, postHtml, type, state, tags) => {
   try {
-    var ret = ['',''];
+    var ret = ['', ''];
     const existingBlog = await schema.blogs.findOne({_id: blogId});
     if (existingBlog) {
       const newNotes = new schema.notes();
@@ -65,7 +87,7 @@ const createPost = async (blogId, postHtml, type, state, tags) => {
 // Assumption: Edit Post Function Just Updates ( postHtml )
 const showPost = async (postId) => {
   try {
-    ret = ['',''];
+    ret = ['', ''];
     const existingPost = await schema.Posts.findOne({_id: postId});
     if (existingPost) {
       ret[0] = 'Post Returned Successfully';
@@ -97,7 +119,7 @@ const showPost = async (postId) => {
 // const makeComment = async (req, res) => {
 const makeComment = async (blogId, postId, text) => {
   try {
-    var ret = ['',''];
+    var ret = ['', ''];
     const existingBlog = await schema.blogs.findOne({_id: blogId});
     const existingPost = await schema.Posts.findOne({_id: postId});
     const notesId = existingPost.notesId;
@@ -190,7 +212,7 @@ const loopObjAndCheck = (arr, element) => {
       }
     }
   }
-  return [exist,pos];
+  return [exist, pos];
 };
 
 /* ----------- <---> Press Like of a Post (Like or Unlike) <---> ----------- */ // *** <===> Done <===>  *** //
@@ -263,7 +285,7 @@ const likePress = async (blogId, postId) => {
 
 const reblogPost = async (blogId, postId, text) => {
   try {
-    var ret = ['',''];
+    var ret = ['', ''];
     const existingBlog = await schema.blogs.findOne({_id: blogId});
     const existingPost = await schema.Posts.findOne({_id: postId});
     const notesId = existingPost.notesId;
@@ -298,8 +320,8 @@ const reblogPost = async (blogId, postId, text) => {
       return ret;
     }
   } catch (error) {
-        ret[0] = 'Error in Reblog Post Function';
-        return ret;
+    ret[0] = 'Error in Reblog Post Function';
+    return ret;
   }
 };
 
@@ -407,7 +429,7 @@ const removeReblog = async (postId, reblogId) => {
 
 const getNotes = async (postId) => {
   try {
-    var ret = ['',[]];
+    var ret = ['', []];
     const existingPost = await schema.Posts.findOne({_id: postId});
     if (existingPost) {
       const notesId = existingPost.notesId;
@@ -468,8 +490,8 @@ const getDashboard = async (userId, blogId) => {
           }
         }
       } else {
-          ret[0] = 'Blog Not Found';
-          return ret;
+        ret[0] = 'Blog Not Found';
+        return ret;
       }
       // checking all follwed blogs to get their posts
       const followingBlogsArray = existingUser.following_blogs;
@@ -520,6 +542,7 @@ module.exports = {
   // blogValidation
   getNotes,
   getDashboard,
+  uploadImg,
 };
 /* =========== /// <==> End <==> ===========*/
 
