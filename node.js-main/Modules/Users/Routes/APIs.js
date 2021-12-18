@@ -39,19 +39,29 @@ const SI=userFunctions.login;
 
 router.post('/login', VLDRQSI, SI);
 
-/* ----------- <---> Sign In <---> ----------- */
+/* ----------- <---> verfiy Account <---> ----------- */
 const VA=userFunctions.verfiyAccount;
-router.get('/user/verify/:token', VA);
+const VVA = validateRequest(userJoi.VerifiyAccountValidations);
+router.get('/user/verify/:token', VVA, VA);
 
 /* --------- <---> Sign Up With Google <---> */ // *** <===> Done <===>  *** //
 
-// router.use(passport.initialize());
-// router.use(passport.session());
+router.use(passport.initialize());
+router.use(passport.session());
 
 router.get('/google',
     passport.authenticate('google', {scope: ['profile', 'email']}));
 const GO = userFunctions.google;
+const GI = userFunctions.googleInfo;
+const VGI = validateRequest(userJoi.GoogleInfoValidations);
+const IA = isAuthorized(userEndPoints.googleInfo);
 router.get('/google/callback', passport.authenticate('google'), GO);
+router.put('/google/info',VGI,IA, GI);
+
+/* ----------- <---> android Sign Up With Google <---> ----------- */
+const GSA=userFunctions.androidSignUpWithGoogle;
+const GAV = validateRequest(userJoi.GoogleAndroidValidations);
+router.post('/androidSignUpWithGoogle', GAV, GSA);
 
 /* ----------- <---> Follow <---> ----------- */
 
@@ -139,9 +149,7 @@ router.get('/user/new/blog/:userId',
     VLDRQCB,
     ISACB,
     (req, res)=>{
-      userFunctions.createBlog(
-          req.params.userId, req.body.title, req.body.name,
-          req.body.privacy, req.body.password).then((blog)=> {
+      userFunctions.createBlog(req).then((blog)=> {
         if (blog) {
           res.status(StatusCodes.CREATED).json({
             'meta': {
