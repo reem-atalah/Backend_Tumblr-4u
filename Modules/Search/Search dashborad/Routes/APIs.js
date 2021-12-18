@@ -17,14 +17,12 @@ const searchEndPoints = require('../endPoints');
 
 // /* ====================== /// <==> Search APIs <==> /// ================= */
 
-router.get('/autoCompleteSearchDash',
+router.post('/autoCompleteSearchDash',
     validateRequest(searchJoi.searchValidations),
     isAuthorized(searchEndPoints.getSearchDash),
     async (req, res)=>{
       result=await seachDashboard
-          .autoCompleteSearchDash(req.body.userId, req.body.wordName);
-      //   console.log('req.body.wordName: ', req.body.wordName);
-      //   console.log('result: api: ', result);
+          .autoCompleteSearchDash(req.decoded.email, req.body.wordName);
       res.json(result);
     },
 );

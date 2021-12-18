@@ -8,29 +8,123 @@
 // const jwt = require('jsonwebtoken');
 const {StatusCodes} = require('http-status-codes');
 const schema = require('../../../Model/model');
-const azure = require('@azure/storage-blob');
+const {BlobServiceClient} = require('@azure/storage-blob');
 const fileUpload = require('express-fileupload');
 const express = require('express');
 const server = express();
 server.use(fileUpload());
-
+const mime = require('mime');
+const fs = require('fs');
+const formidable = require('formidable');
+const multipart = require('parse-multipart');
 /* =========== /// <==> End <==> ===========*/
 
 /* =============== /// <==> Post Functions <==> /// =============== */
+// change from base64 to img
+// const decodeFileBase64 = (base64String) => {
+//   // From Bytestream to Percent-encoding to Original string
+//   return decodeURIComponent(
+//     atob(base64String)
+//       .split("")
+//       .map(function (c) {
+//         return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
+//       })
+//       .join("")
+//   );
+// };
+
+// const decodeBase64 = decodeFileBase64(
+//   fileBase64String.substring(fileBase64String.indexOf(",") + 1)
+// );
+
+// another code
+// var match=req.body.base64image.match(/^data:([A-Za-z-+\/]+);base64,(.+)$/),
+// response = {};
+
+// if (match.length !== 3) {
+//   return new Error('Invalid input string');
+// }
+
+// response.type = match[1];
+// response.data = new Buffer(match[2], 'base64');
+// let decodedImg = response;
+// let imageBuffer = decodedImg.data;
+// let type = decodedImg.type;
+// let extension = mime.extension(type);
+// let fileName =  "image." + extension;
+// try {
+//   fs.writeFileSync("./images/" + fileName, imageBuffer, 'utf8');
+//   return res.send({"status":"success"});
+// } catch (e) {
+//   next(e);
+// }
+
 const uploadImg = async (files) =>{
-  const file= files.files;
+  console.log(files);
+  // files.forEach(async (file) => { // multiple images
+  // const file= files.file; // one image
+
+  // convert image from base64 to original image
+  const match=files.match(/^data:([A-Za-z-+\/]+);base64,(.+)$/);
+  const response = {};
+
+  if (match.length !== 3) {
+    return new Error('Invalid input string');
+  }
+
+  response.type = match[1];
+  response.data= Buffer.from(match[2], 'base64');
+  const decodedImg = response;
+  const imageBuffer = decodedImg.data;
+  const type = decodedImg.type;
+  const extension = mime.extension(type);
+  const fileName = 'image.' + extension;
+
+  const file= imageBuffer;
   const uploadDate = new Date().toISOString().replace(/:/g, '-');
-  const blobName = files.files.name + uploadDate + files.file;
-  const contentType = file.type;
-  const filePath = file.path;
-  const blobServiceClient = await azure
+  const blobName = fileName + uploadDate + extension;
+  console.log('file: ', file);
+
+  // const boundary= multipart.getBoundary(type);
+  // const parts = multipart.Parse(response.data, boundary);
+
+  // connect to azure
+  const blobServiceClient = await BlobServiceClient
       .fromConnectionString(process.env.AZURE_STORAGE_CONNECTION_STRING);
-  const containerName = blobServiceClient.getContainerClient('mycontainer');
+
+  // give our container a name
+  const containerName = blobServiceClient
+      .getContainerClient('Tumber4uImgContainer');
+
+  console.log('containerName', containerName.containerName);
+
   const containerClient = await blobServiceClient
       .getContainerClient(containerName.containerName);
-  const blockBlobClient = containerClient.getBlockBlobClient(blobName);
-  const uploadBlobResponse = await blockBlobClient.uploadFile(filePath);
-  console.log('uploaded successfully.requestId:', uploadBlobResponse.requestId);
+
+  // create container
+  // const createContainerResponse = await containerClient.create();
+  // console.log('Container was created successfully. requestId: ',
+  //     createContainerResponse.requestId);
+
+  const form = new formidable.IncomingForm();
+  new Promise(function(resolve, reject) {
+    form.parse(files, async function(files) {
+      const file = files.file;
+      const filePath = file.path;
+      const blockBlobClient = containerClient.getBlockBlobClient(blobName);
+      const uploadBlobResponse = await blockBlobClient
+          .uploadFile(filePath);
+      // .upload(parts[0].data, parts[0].data.length);
+      console.log('uploaded successfully, Id:', uploadBlobResponse.requestId);
+      if (err) reject(err);
+      else resolve([fields, files]);
+    });
+  });
+  return containerName.containerName;
+
+  // });
+
+  // check this link: https://www.py4u.net/discuss/1293154
 };
 
 /* ----------- <---> Create Post <---> ------ */ // *** <===> Done <===>  *** //

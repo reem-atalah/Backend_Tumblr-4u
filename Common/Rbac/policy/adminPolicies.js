@@ -25,6 +25,7 @@ const adminPolicies = [
   postEndPoints.createPost,
   postEndPoints.editPost,
   postEndPoints.deletePost,
+  postEndPoints.uploadeImg,
 ];
 /* =========== <--> End <--> =========== */
 

@@ -47,7 +47,14 @@ async () => {
  */
 // use "npm run doc" to make function documentation
 
-const autoCompleteSearchDash = async (userId, wordName) => {
+const autoCompleteSearchDash = async (userEmail, wordName) => {
+  // get userId
+  const user = await schema.users.find({email: userEmail});
+
+  console.log(user);
+  user.isDeleted = false;
+  const userId = user._id;
+
   let result = [];
 
   if (!wordName) {
