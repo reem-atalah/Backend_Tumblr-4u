@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 // //////////////////////////////////////////////////////
 // /// <==> /// This File Contains Search APIs /// <==> ///
 // //////////////////////////////////////////////////////
@@ -19,7 +20,14 @@ const searchEndPoints = require('../endPoints');
 router.get('/autoCompleteSearchDash',
     validateRequest(searchJoi.searchValidations),
     isAuthorized(searchEndPoints.getSearchDash),
-    seachDashboard.autoCompleteSearchDash);
+    async (req, res)=>{
+      result=await seachDashboard
+          .autoCompleteSearchDash(req.body.userId, req.body.wordName);
+      //   console.log('req.body.wordName: ', req.body.wordName);
+      //   console.log('result: api: ', result);
+      res.json(result);
+    },
+);
 
 
 // /* =========== /// <==> End <==> ===========*/

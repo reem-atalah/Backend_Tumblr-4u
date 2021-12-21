@@ -1,6 +1,5 @@
 
 /* ================ /// <==> Variables Declaration <==> /// ================ */
-const {StatusCodes} = require('http-status-codes');
 const schema = require('../../../Model/model');
 
 /* =========== /// <==> End <==> ===========*/
@@ -26,17 +25,18 @@ const blockBlog = async (req) => {
   try {
     const blogId = req.params.blogId;
     const blockedBlogId = req.body.blockedBlogId;
-
-    const blockedBlog = await schema.blogs.findOne({'_id': blockedBlogId});
+    const blockedBlog = await schema.blogs.findOne(
+        {$and: [{_id: blockedBlogId}, {isDeleted: false}]});
     if (blockedBlog) {
-      const blog = await schema.blogs.findOne({'_id': blogId});
-      console.log(blog._id);
-      blog.blockedBlogs.push(blockedBlogId);
-      blog.save();
-      return blockedBlog;
-    } else {
-      return null;
+      const blog = await schema.blogs.findOne(
+          {$and: [{_id: blogId}, {isDeleted: false}]});
+      if (blog) {
+        blog.blockedBlogs.push(blockedBlogId);
+        blog.save();
+        return blockedBlog;
+      }
     }
+    return null;
   } catch (error) {
     console.log(error.message);
   }
@@ -63,15 +63,18 @@ const unblockBlog = async (req) => {
     const blogId = req.params.blogId;
     const unblockedBlogId= req.body.unblockedBlogId;
 
-    const unblockedBlog = await schema.blogs.findOne({'_id': unblockedBlogId});
+    const unblockedBlog = await schema.blogs.findOne(
+        {$and: [{_id: unblockedBlogId}, {isDeleted: false}]});
     if (unblockedBlog) {
-      const blog = await schema.blogs.findOne({'_id': blogId});
-      blog.blockedBlogs.pull(unblockedBlogId);
-      blog.save();
-      return unblockedBlog;
-    } else {
-      return null;
+      const blog = await schema.blogs.findOne(
+          {$and: [{_id: blogId}, {isDeleted: false}]});
+      if (blog) {
+        blog.blockedBlogs.pull(unblockedBlogId);
+        blog.save();
+        return unblockedBlog;
+      }
     }
+    return null;
   } catch (error) {
     console.log(error.message);
   }
@@ -112,7 +115,8 @@ const editBlog = async (req) => {
 
     let message = 'OK';
 
-    const blog = await schema.blogs.findOne({'_id': blogId});
+    const blog = await schema.blogs.findOne({$and: [{_id: blogId},
+      {isDeleted: false}]});
     if (blog) {
       if (password) {
         blog.password = password;
@@ -173,13 +177,14 @@ const editBlog = async (req) => {
  * @function
  * @name retrieveBlog
  * @description    -  It retrieves a blog given its id
- * @param {String} blogName  - name of the blog
+ * @param {String} blogId - name of the blog
  * @return {Object} - A blog object
  */
 
-const retrieveBlog = async (blogName) => {
+const retrieveBlog = async (blogId) => {
   try {
-    const blog = await schema.blogs.findOne({'name': blogName});
+    const blog= await schema.blogs.findOne({$and: [{_id: blogId},
+      {isDeleted: false}]});
     if (blog) {
       return blog;
     } else {

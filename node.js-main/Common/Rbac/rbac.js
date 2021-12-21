@@ -4,7 +4,7 @@
 
 /* =================== <-- Variables Declarations --> =================== */
 const Rbac = require('easy-rbac');
-const opts = require('./Policy/index');
+const opts = require('./policy/index');
 /* =========== <--> End <--> =========== */
 
 /* =================== <-- Create Rbac OF User Module --> =================== */

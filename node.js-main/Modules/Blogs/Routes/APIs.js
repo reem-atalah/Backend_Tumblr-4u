@@ -144,11 +144,11 @@ router.post('/blog/edit/:blogId',
 const VLDRQRB=validateRequest(blogJoi.RetrieveBlogValidations);
 const ISARB=isAuthorized(blogEndPoints.retrieveBlog);
 
-router.get('/blog/view/:blogName',
+router.get('/blog/view/:blogId',
     VLDRQRB,
     ISARB,
     (req, res)=>{
-      blogFunctions.retrieveBlog(req.params.blogName).then((blog)=>{
+      blogFunctions.retrieveBlog(req.params.blogId).then((blog)=>{
         if (blog) {
           res.status(StatusCodes.OK).json({
             'meta': {
