@@ -37,7 +37,7 @@ const postSchema = mongoose.Schema(
 );
 
 const notesSchema = mongoose.Schema({
-  likes: { type: [String] },
+  likes: [{ type: String }],
   comments: [
     {
       commentingBlogId: { type: String },
