@@ -61,31 +61,54 @@ const {Mongoose} = require('mongoose');
 //   next(e);
 // }
 
+const uploadImgg = async () =>{
+  const blobServiceClient = await BlobServiceClient
+      .fromConnectionString(process.env.AZURE_STORAGE_CONNECTION_STRING);
+
+  // give our container a name
+  const containerName = blobServiceClient
+      .getContainerClient('Tumber4uImgContainer');
+
+  console.log('containerName', containerName.containerName);
+
+  const containerClient = await blobServiceClient
+      .getContainerClient(containerName.containerName);
+
+  console.log('containerClient', containerClient);
+
+  const content = 'Hello world!';
+  const blobName = 'newblob' + new Date().getTime();
+  const blockBlobClient = containerClient.getBlockBlobClient(blobName);
+  console.log('blockBlobClient: ', blockBlobClient);
+  const uploadBlobResponse = await blockBlobClient.upload(content, content.length);
+  // console.log(`Upload block blob ${blobName} successfully`, uploadBlobResponse.requestId);
+};
+
 const uploadImg = async (files) =>{
-  console.log(files);
+  // console.log(files);
   // files.forEach(async (file) => { // multiple images
   // const file= files.file; // one image
 
   // convert image from base64 to original image
-  const match=files.match(/^data:([A-Za-z-+\/]+);base64,(.+)$/);
-  const response = {};
+  // const match=files.match(/^data:([A-Za-z-+\/]+);base64,(.+)$/);
+  // const response = {};
 
-  if (match.length !== 3) {
-    return new Error('Invalid input string');
-  }
+  // if (match.length !== 3) {
+  //   return new Error('Invalid input string');
+  // }
 
-  response.type = match[1];
-  response.data= Buffer.from(match[2], 'base64');
-  const decodedImg = response;
-  const imageBuffer = decodedImg.data;
-  const type = decodedImg.type;
-  const extension = mime.extension(type);
-  const fileName = 'image.' + extension;
+  // response.type = match[1];
+  // response.data= Buffer.from(match[2], 'base64');
+  // const decodedImg = response;
+  // const imageBuffer = decodedImg.data;
+  // const type = decodedImg.type;
+  // const extension = mime.extension(type);
+  // const fileName = 'image.' + extension;
 
-  const file= imageBuffer;
-  const uploadDate = new Date().toISOString().replace(/:/g, '-');
-  const blobName = fileName + uploadDate + extension;
-  console.log('file: ', file);
+  // const file= imageBuffer;
+  // const uploadDate = new Date().toISOString().replace(/:/g, '-');
+  // const blobName = fileName + uploadDate + extension;
+  // console.log('file: ', file);
 
   // const boundary= multipart.getBoundary(type);
   // const parts = multipart.Parse(response.data, boundary);
@@ -113,11 +136,12 @@ const uploadImg = async (files) =>{
   //   form.parse(files, async function(files) {
   //     const file = files.file;
   //     const filePath = file.path;
+  data ='Hello World!';
   const blockBlobClient = containerClient.getBlockBlobClient(blobName);
   const uploadBlobResponse = await blockBlobClient
-      .upload(file, file.length);
+      .upload(data, data.length);
   // .upload(parts[0].data, parts[0].data.length);
-  // console.log('uploaded successfully, Id:', uploadBlobResponse.requestId);
+  console.log('uploaded successfully', blobName, ' Id:', uploadBlobResponse.requestId);
   console.log('uploaded successfully');
   //     if (err) reject(err);
   //     else resolve([fields, files]);
@@ -163,15 +187,75 @@ const retrieveTrendingPosts = async () => {
   //     .find(); // {isDeleted: false} {_id: '61ae667d8b4d5620ce937992'}
 
   // postId:  new ObjectId("61975a0d6181e2ed7c11aa3e")
-  const maxLikes = await schema.notes.aggregate([
-    {$unwind: '$likes'},
-    {$project: {likesize: {$size: '$likes'}}},
-    {$sort: {likesize: -1}},
-    {$limit: 5},
-  ]);
-  console.log('maxLikes: ', maxLikes);
+  const maxLikes= await schema.notes.find();
+  const postss= await schema.Posts.find();
   maxNotes=[0, 0, 0, 0, 0, 0, 0, 0, 0, 0]; // 10
   trendingPostsLim =[];
+  BreakException = {};
+  let i=0;
+
+  maxLikes.forEach(async (data) => {
+    if (data.reblogs != null){
+      countReblogs=data.reblogs.length;
+    } else {
+      countReblogs=0;
+    }
+
+    if (data.comments != null){
+      countComm=data.comments.length;
+    } else {
+      countComm=0;
+    }
+
+    if (data.likes != null){
+      countLike=data.likes.length;
+    } else {
+      countLike=0;
+    }
+    const notesCount = countLike + countComm + countReblogs;
+    console.log('notesCount1: ', notesCount);
+
+    if (notesCount > maxNotes[i]){
+      console.log('notesCount2: ', notesCount);
+      maxNotes[i]=notesCount;
+      try {
+        postss.forEach((dataPosts) => {
+          if (dataPosts.notesId == data._id){
+            console.log('dataPosts.notesId: ', dataPosts.notesId);
+            trendingPostsLim[i] =dataPosts;
+            throw BreakException;
+          }
+        });
+      } catch (e) {
+        console.log('error..');
+        if (e !== BreakException) throw e;
+      }
+
+      i=i+1;
+      console.log('trendingPostsLim: ', trendingPostsLim, 'i: ', i);
+    }
+  });
+  console.log('maxNotes: ', maxNotes);
+  let result = [];
+  result={
+    countNotesEachPost: maxNotes,
+    trendingPostsLim: trendingPostsLim,
+  };
+  return result;
+  // const maxLikes = await schema.notes.aggregate([
+  //   {$project: {reblog:
+  //   {
+  //     $objectToArray: '$reblogs',
+  //     $size: {$ifNull: ['reblogs', []]},
+  //   },
+  //   },
+  //   },
+  //   {$unwind: '$reblog'},
+  //   {$sort: {'$reblog': -1}},
+  //   {$limit: 5},
+  // ]);
+  // console.log('$maxLikes: ', maxLikes);
+
   // for (let i=0; i<maxNotes.length; i++) {
   // trendingPosts.forEach((posts) =>{
   //   postId=posts._id;
@@ -198,7 +282,6 @@ const retrieveTrendingPosts = async () => {
   //   randomNumb= Math.floor(Math.random() * trendingPosts.length);
   //   trendingPostsLim.push(trendingPosts[randomNumb]);
   // }
-  return trendingPostsLim;
 };
 
 /* ----------- <---> Create Post <---> ------ */ // *** <===> Done <===>  *** //
@@ -271,7 +354,7 @@ const showPost = async (postId) => {
   };
 };
 
-/* ----------- <---> Make Comment <---> ----------- */ // *** <===> Done <===>  *** //
+/* ----------- <---> Make Comment <---> ------*/ // *** <===> Done <===>  *** //
 
 /**
  * @function
@@ -332,7 +415,7 @@ const makeComment = async (blogId, postId, text) => {
   }
 };
 
-/* ----------- <---> Loop on an array and check if an element exists <---> ----------- */ // *** <===> Done <===>  *** //
+/* -------- Loop on an array and check if an element exists  ------- */
 
 /**
  * @function
@@ -356,7 +439,7 @@ const loopAndCheck = (arr, element) => {
   return exist;
 };
 
-/* ----------- <---> Loop on Object in Array of Objects and check if Id exists <---> ----------- */ // *** <===> Done <===>  *** //
+/* ---------- Loop on Object in Array of Objects and check if Id exists ----- */
 
 /**
  * @function
@@ -383,7 +466,7 @@ const loopObjAndCheck = (arr, element) => {
   return [exist, pos];
 };
 
-/* ----------- <---> Press Like of a Post (Like or Unlike) <---> ----------- */ // *** <===> Done <===>  *** //
+/* ----------- <---> Press Like of a Post (Like or Unlike) <---> ----------- */
 // Like should be done only one time by one blog
 
 /**
@@ -438,7 +521,7 @@ const likePress = async (blogId, postId) => {
   }
 };
 
-/* ----------- <---> Reblog a Post <---> ----------- */ // *** <===> Done <===>  *** //
+/* ----------- <---> Reblog a Post <---> ----------- */
 
 /**
  * @function
@@ -493,7 +576,7 @@ const reblogPost = async (blogId, postId, text) => {
   }
 };
 
-/* ----------- <---> Remove Comment <---> ----------- */ // *** <===> Done <===>  *** //
+/* ----------- <---> Remove Comment <---> ----------- */
 
 /**
  * @function
@@ -539,7 +622,7 @@ const removeComment = async (postId, commentId) => {
   };
 };
 
-/* ----------- <---> Remove Reblog <---> ----------- */ // *** <===> Done <===>  *** //
+/* ----------- <---> Remove Reblog <---> ----------- */
 
 /**
  * @function
@@ -584,7 +667,7 @@ const removeReblog = async (postId, reblogId) => {
   };
 };
 
-/* ----------- <---> Get Post Notes <---> ----------- */ // *** <===> Done <===>  *** //
+/* ----------- <---> Get Post Notes <---> ----------- */
 
 /**
  * @function
@@ -592,7 +675,9 @@ const removeReblog = async (postId, reblogId) => {
  * @description Get notes of a post.
  * @param {string} postId - Id of the post to get its notes.
  *
- * @returns {string} Array of arrays, contains 4 arrays: likesArray, commentsArray, reblogsArray, countsArray(likesCount, reblogsCount, notesCount)
+ * @returns {string} Array of arrays, contains 4 arrays:
+ * likesArray, commentsArray, reblogsArray,
+ * countsArray(likesCount, reblogsCount, notesCount)
  */
 
 const getNotes = async (postId) => {
@@ -664,11 +749,13 @@ const getDashboard = async (userId, blogId) => {
       // checking all follwed blogs to get their posts
       const followingBlogsArray = existingUser.following_blogs;
       for (let i=0; i<followingBlogsArray.length; i++) {
-        const existingFoBlog = await schema.blogs.findOne({_id: followingBlogsArray[i]});
+        const existingFoBlog = await schema.blogs
+            .findOne({_id: followingBlogsArray[i]});
         if (existingFoBlog) {
           const foPostsArray = existingFoBlog.postsIds;
           for (let j=0; j<foPostsArray.length; j++) {
-            const existingFoPost = await schema.Posts.findOne({_id: foPostsArray[j]});
+            const existingFoPost = await schema.Posts
+                .findOne({_id: foPostsArray[j]});
             if (existingFoPost) {
               data.push(existingFoPost);
             }
@@ -711,6 +798,7 @@ module.exports = {
   getNotes,
   getDashboard,
   uploadImg,
+  uploadImgg,
   retrieveRandomPosts,
   retrieveTrendingPosts,
 };

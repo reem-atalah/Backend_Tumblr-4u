@@ -19,12 +19,12 @@ const postEndPoints = require('../endPoints');
 /* ====================== /// <==> User APIs <==> /// ====================== */
 
 /* ----------- <---> Upload Img <---> ----------- */
-router.post('/:blogId/posts/uploadImg',
+router.post('/:blogId/posts/uploadImgg',
     // validateRequest(postJoi.uploadImgValidations),
-    isAuthorized(postEndPoints.uploadeImg),
+    // isAuthorized(postEndPoints.uploadeImg),
     async (req, res) => {
       // console.log(req.files);
-      result= await postFunctions.uploadImg(req.body.files);
+      result= await postFunctions.uploadImgg();
       console.log('result: ', result);
       res.json(result);
     });
@@ -43,7 +43,7 @@ router.get('/ranPosts',
 router.get('/trendPosts',
     async (req, res) => {
       result= await postFunctions.retrieveTrendingPosts();
-      console.log('result: ', result.length);
+      console.log('result: ', result);
       res.json(result);
     });
 
