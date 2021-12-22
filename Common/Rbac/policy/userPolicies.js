@@ -23,8 +23,17 @@ const userAdminPolicies = [
   blogEndPoints.editBlog,
   blogEndPoints.retrieveBlog,
   postEndPoints.createPost,
+  postEndPoints.showPost,
   postEndPoints.editPost,
   postEndPoints.deletePost,
+  postEndPoints.likePress,
+  postEndPoints.makeComment,
+  postEndPoints.reblogPost,
+  postEndPoints.removeComment,
+  postEndPoints.removeReblog,
+  postEndPoints.getNotes,
+  postEndPoints.getDashboard,
+  
 ];
 /* =========== <--> End <--> =========== */
 

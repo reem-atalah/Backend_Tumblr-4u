@@ -168,38 +168,74 @@ router.get('/posts/:postId/notes',
     isAuthorized(postEndPoints.getNotes),
     (req, res) => {
       postFunctions.getNotes(req.params.postId).then((ret) => {
-        if (ret[0] === 'Notes Got Successfully') {
+        if (ret.msg === 'Notes Got Successfully') {
           res.status(StatusCodes.OK).json({
             'res': {
-              'messege': ret[0],
-              'Notes': ret[1],
+              'messege': ret.msg,
+              'notes': ret.notes,
             }
           });
-        } else if (ret === 'Error In Get Notes Function') {
-          res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(ret[0]); 
+        } else if (ret.msg === 'Error In Get Notes Function') {
+          res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(ret.msg); 
         } else {
-          res.status(StatusCodes.BAD_REQUEST).json(ret[0]);
+          res.status(StatusCodes.BAD_REQUEST).json(ret.msg);
         };
       });
     },
 );
 
 /* ----------- <---> Get User Dashboard <---> ----------- */
-router.get('/:userId/:blogId/dashboard',
+router.get('/dashboard',
     isAuthorized(postEndPoints.getDashboard),
     (req, res) => {
-      postFunctions.getDashboard(req.params.userId, req.params.blogId).then((ret) => {
-        if (ret[0] === 'Dashboard Got Successfully') {
+      postFunctions.getDashboard(req.decoded.email).then((ret) => {
+        if (ret.msg === 'Dashboard Got Successfully') {
           res.status(StatusCodes.OK).json({
             'res': {
-              'messege': ret[0],
-              'Data': ret[1],
+              'messege': ret.msg,
+              'user': ret.user,
+              'blog': ret.blog,
+              'postsToShow': ret.postsToShow,
             }
           });
-        } else if (ret === 'Error In Get Dashboard Function') {
-          res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(ret[0]); 
+        } else if (ret.msg === 'Error In Get Dashboard Function') {
+          res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(ret.msg); 
         } else {
-          res.status(StatusCodes.BAD_REQUEST).json(ret[0]);
+          res.status(StatusCodes.BAD_REQUEST).json(ret.msg);
+        };
+      });
+    },
+);
+
+/* ----------- <---> Delete a Post <---> ----------- */
+router.delete('/posts/:postId/delete_post',
+    // validateRequest(postJoi.createPostValidations),
+    isAuthorized(postEndPoints.deletePost),
+    (req, res) => {
+      postFunctions.deletePost(req.params.postId, req.params.reblogId).then((ret) => {
+        if (ret === 'Post Deleted Successfully') {
+          res.status(StatusCodes.OK).json(ret);
+        } else if (ret === 'Error In Delete Post Function') {
+          res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(ret); 
+        } else {
+          res.status(StatusCodes.BAD_REQUEST).json(ret);
+        };
+      });
+    },
+);
+
+/* ----------- <---> Edit a Post <---> ----------- */
+router.put('/:postId/:reblogId/remove_reblog',
+    // validateRequest(postJoi.createPostValidations),
+    isAuthorized(postEndPoints.removeReblog),
+    (req, res) => {
+      postFunctions.removeReblog(req.params.postId, req.params.reblogId).then((ret) => {
+        if (ret === 'Reblog Removed Successfully') {
+          res.status(StatusCodes.OK).json(ret);
+        } else if (ret === 'Error In Remove Reblog Function') {
+          res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(ret); 
+        } else {
+          res.status(StatusCodes.BAD_REQUEST).json(ret);
         };
       });
     },
