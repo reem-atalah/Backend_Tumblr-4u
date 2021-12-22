@@ -9,6 +9,7 @@ const jwt = require('jsonwebtoken');
 const {StatusCodes} = require('http-status-codes');
 const schema = require('../../../Model/model');
 const nanoid = require('nanoid').nanoid;
+// const createBlog = require('./control').createBlog;
 /* =========== /// <==> End <==> ===========*/
 
 
@@ -106,7 +107,8 @@ const googleInfo = async(req,res)=>{
             role: 'user'},
             process.env.KEY);
 
-            //===========================================================================
+        //===========================================================================
+        userServices.createPrimaryBlog(email, blogName);
         //=================================== Create Primary Blog  ========================================
         //===========================================================================
 

@@ -23,11 +23,29 @@ router.post('/:blogId/posts/uploadImg',
     // validateRequest(postJoi.uploadImgValidations),
     isAuthorized(postEndPoints.uploadeImg),
     async (req, res) => {
+      // console.log(req.files);
       result= await postFunctions.uploadImg(req.body.files);
       console.log('result: ', result);
       res.json(result);
     });
 
+/* ----------- <---> Random Posts <---> ----------- */
+// no validation, no authentication
+router.get('/ranPosts',
+    async (req, res) => {
+      result= await postFunctions.retrieveRandomPosts();
+      console.log('result: ', result.length);
+      res.json(result);
+    });
+
+/* ----------- <---> Trending Posts <---> ----------- */
+// no validation, no authentication
+router.get('/trendPosts',
+    async (req, res) => {
+      result= await postFunctions.retrieveTrendingPosts();
+      console.log('result: ', result.length);
+      res.json(result);
+    });
 
 /* ----------- <---> Create Post <---> ----------- */
 router.post('/:blogId/posts/create_post',

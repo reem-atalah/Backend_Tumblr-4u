@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 // ////////////////////////////////////////////////////
 // / <==> /// This File Contains User APIs /// <==> ///
 // ////////////////////////////////////////////////////
@@ -56,19 +57,20 @@ const GI = userFunctions.googleInfo;
 const VGI = validateRequest(userJoi.GoogleInfoValidations);
 const IA = isAuthorized(userEndPoints.googleInfo);
 router.get('/google/callback', passport.authenticate('google'), GO);
-router.put('/google/info',VGI,IA, GI);
+router.put('/google/info', VGI, IA, GI);
 
 /* ----------- <---> android Sign Up With Google <---> ----------- */
 const GSA=userFunctions.androidSignUpWithGoogle;
 const GAV = validateRequest(userJoi.GoogleAndroidValidations);
 router.post('/androidSignUpWithGoogle', GAV, GSA);
 
+
 /* ----------- <---> Follow <---> ----------- */
 
 const VLDRQFB=validateRequest(userJoi.FollowBlogValidations);
 const ISAFB=isAuthorized(userEndPoints.followBlog);
 
-router.post('/user/follow/:userId',
+router.post('/user/follow',
     VLDRQFB,
     ISAFB,
     (req, res)=>{
@@ -89,7 +91,7 @@ router.post('/user/follow/:userId',
           res.status(StatusCodes.NOT_FOUND).json({
             'meta': {
               'status': 404,
-              'msg': 'BAD_REQUEST',
+              'msg': 'NOT FOUND',
             },
 
             'res': {
@@ -106,7 +108,7 @@ router.post('/user/follow/:userId',
 const VLDRQUB=validateRequest(userJoi.UnfollowBlogValidations);
 const ISAUB=isAuthorized(userEndPoints.unfollowBlog);
 
-router.post('/user/unfollow/:userId',
+router.post('/user/unfollow',
     VLDRQUB,
     ISAUB,
     (req, res)=>{
@@ -145,13 +147,11 @@ const VLDRQCB=validateRequest(userJoi.CreateBlogValidations);
 const ISACB=isAuthorized(userEndPoints.createBlog);
 // const CB=userFunctions.createBlog();
 
-router.get('/user/new/blog/:userId',
+router.get('/user/new/blog',
     VLDRQCB,
     ISACB,
     (req, res)=>{
-      userFunctions.createBlog(
-          req.params.userId, req.body.title, req.body.name,
-          req.body.privacy, req.body.password).then((blog)=> {
+      userFunctions.createBlog(req).then((blog)=> {
         if (blog) {
           res.status(StatusCodes.CREATED).json({
             'meta': {
@@ -185,12 +185,12 @@ const VLDRQDB=validateRequest(userJoi.DeleteBlogValidations);
 const ISADB=isAuthorized(userEndPoints.deleteBlog);
 // const DB=userFunctions.deleteBlog;
 
-router.post('/user/delete/blog/:userId',
+router.post('/user/delete/blog',
     VLDRQDB,
     ISADB,
     (req, res)=>{
       userFunctions.deleteBlog(
-          req.params.userId, req.body.blogId).then((blog)=> {
+          req.decoded.email, req.body.blogId).then((blog)=> {
         console.log(blog);
         if (blog) {
           res.status(StatusCodes.OK).json({
@@ -218,6 +218,26 @@ router.post('/user/delete/blog/:userId',
         }
       });
     });
+
+/* ----------- <---> Get Interests <---> ----------------- */
+router.post('/getInterestsFromUser',
+    validateRequest(userJoi.getInterestsFromUserValidations),
+    isAuthorized(userEndPoints.interests),
+    async (req, res)=>{
+      await userFunctions.
+          getInterests(req.decoded.email, req.body.interests);
+
+      res.status(StatusCodes.OK).json({
+        'meta': {
+          'status': 200,
+          'msg': 'OK',
+        },
+        'res': {
+          'message': 'Interested saved Successfully',
+        },
+      });
+    },
+);
 
 /* =========== /// <==> End <==> ===========*/
 

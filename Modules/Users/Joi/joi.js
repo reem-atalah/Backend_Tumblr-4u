@@ -40,7 +40,7 @@ const userJoi = {
   },
   GoogleAndroidValidations: {
     body: joi.object().required().keys({
-      googleToken:joi.string().required(),
+      googleToken: joi.string().required(),
     }),
   },
   FollowBlogValidations: {
@@ -66,6 +66,11 @@ const userJoi = {
   DeleteBlogValidations: {
     body: joi.object().required().keys({
       blogId: joi.string().required(),
+    }),
+  },
+  getInterestsFromUserValidations: {
+    body: joi.object().required().keys({
+      interests: joi.array().required(),
     }),
   },
 };

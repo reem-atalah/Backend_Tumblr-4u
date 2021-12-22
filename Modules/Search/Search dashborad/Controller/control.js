@@ -50,10 +50,14 @@ async () => {
 const autoCompleteSearchDash = async (userEmail, wordName) => {
   // get userId
   const user = await schema.users.find({email: userEmail});
+  if (user.isDeleted == true) {
+    return null;
+  }
 
-  console.log(user);
-  user.isDeleted = false;
+  // console.log(user);
   const userId = user._id;
+  await schema.users.findOneAndUpdate({$and: [{email: userEmail},
+    {isVerified: true}]}, {isDeleted: false});
 
   let result = [];
 

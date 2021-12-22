@@ -23,6 +23,19 @@ router.post('/autoCompleteSearchDash',
     async (req, res)=>{
       result=await seachDashboard
           .autoCompleteSearchDash(req.decoded.email, req.body.wordName);
+      if (result == null) {
+        res.status(StatusCodes.NOT_FOUND).json({
+          'meta': {
+            'status': 404,
+            'msg': 'NOT FOUND',
+          },
+
+          'res': {
+            'message': 'User Is Deleted',
+            'data': '',
+          },
+        });
+      }
       res.json(result);
     },
 );

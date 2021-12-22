@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 // ///////////////////////////////////////////////////////////
 // // <==> This File Contains All User Admin Role Policies <==> ////
 // ///////////////////////////////////////////////////////////
@@ -18,6 +19,7 @@ const userAdminPolicies = [
   userEndPoints.unfollowBlog,
   userEndPoints.createBlog,
   userEndPoints.deleteBlog,
+  userEndPoints.interests,
   blogEndPoints.blockBlog,
   blogEndPoints.unblockBlog,
   blogEndPoints.editBlog,

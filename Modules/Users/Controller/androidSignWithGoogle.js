@@ -6,7 +6,7 @@
 const userServices = require('./services');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const {StatusCodes} = require('http-status-codes');
+const { StatusCodes } = require('http-status-codes');
 const schema = require('../../../Model/model');
 const nanoid = require('nanoid').nanoid;
 /* =========== /// <==> End <==> ===========*/
@@ -22,20 +22,20 @@ const nanoid = require('nanoid').nanoid;
  */
 
 const androidSignUpWithGoogle = async (req, res) => {
-  // try {
-    const {googleToken} = req.body;
-    let email='';
+  try {
+    const { googleToken } = req.body;
+    let email = '';
     const CLIENT_ID = '633147263244-84kumvs7scjqm6ps8im6b5lvhili7hur.apps.googleusercontent.com';
 
-    const {OAuth2Client} = require('google-auth-library');
+    const { OAuth2Client } = require('google-auth-library');
     const client = new OAuth2Client(CLIENT_ID);
 
     async function verify() {
       const ticket = await client.verifyIdToken({
-          idToken: googleToken,
-          audience: CLIENT_ID,  // Specify the CLIENT_ID of the app that accesses the backend
-          // Or, if multiple clients access the backend:
-          //[CLIENT_ID_1, CLIENT_ID_2, CLIENT_ID_3]
+        idToken: googleToken,
+        audience: CLIENT_ID,  // Specify the CLIENT_ID of the app that accesses the backend
+        // Or, if multiple clients access the backend:
+        //[CLIENT_ID_1, CLIENT_ID_2, CLIENT_ID_3]
       });
       console.log(ticket);
       email = ticket.email;
@@ -45,16 +45,16 @@ const androidSignUpWithGoogle = async (req, res) => {
       // const domain = payload['hd'];
     }
     verify().catch(console.error);
-    
-    //=============================================================================
+
     const isMailFound = await userServices.checkMail(email);
-      
+
     if (isMailFound) {
-    const oldUser = await schema.users.findOne({email, isDeleted: false});
-    const token = jwt.sign({
-      email: oldUser.email,
-      role: oldUser.role},
-      process.env.KEY);
+      const oldUser = await schema.users.findOne({ email, isDeleted: false });
+      const token = jwt.sign({
+        email: oldUser.email,
+        role: oldUser.role
+      },
+        process.env.KEY);
 
       res.status(StatusCodes.OK).json({
         'meta': {
@@ -67,15 +67,16 @@ const androidSignUpWithGoogle = async (req, res) => {
         },
       });
     } else {
-      
+
       let password = nanoid();
 
-      userServices.createGoogleUser(email,password);
+      userServices.createGoogleUser(email, password);
 
       const token = jwt.sign({
-          email: email,
-          role: 'user'},
-          process.env.KEY);
+        email: email,
+        role: 'user'
+      },
+        process.env.KEY);
 
       res.status(StatusCodes.OK).json({
         'meta': {
@@ -89,20 +90,20 @@ const androidSignUpWithGoogle = async (req, res) => {
         },
       });
     }
-    //=============================================================================
-  //     } catch (error) {
-  //   res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
-  //     'meta': {
-  //       'status': 500,
-  //       'msg': 'INTERNAL_SERVER_ERROR',
-  //     },
 
-  //     'res': {
-  //       'error': 'Error In Sign Up With Google For Android Function (<:>)',
-  //       'data': '',
-  //     },
-  //   });
-  // };
+  } catch (error) {
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+      'meta': {
+        'status': 500,
+        'msg': 'INTERNAL_SERVER_ERROR',
+      },
+
+      'res': {
+        'error': 'Error In Sign Up With Google For Android Function (<:>)',
+        'data': '',
+      },
+    });
+  };
 };
 
 /* =============== /// <==> Export User signUp <==> /// =============== */

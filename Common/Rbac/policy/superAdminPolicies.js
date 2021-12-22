@@ -18,6 +18,7 @@ const superAdminPolicies = [
   userEndPoints.unfollowBlog,
   userEndPoints.createBlog,
   userEndPoints.deleteBlog,
+  userEndPoints.interests,
   blogEndPoints.blockBlog,
   blogEndPoints.unblockBlog,
   blogEndPoints.editBlog,

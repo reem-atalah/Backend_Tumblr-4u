@@ -1,3 +1,4 @@
+/* eslint-disable space-before-blocks */
 /* eslint-disable linebreak-style */
 // /////////////////////////////////////////////////////////
 // / <==> /// This File Contains Post Functions /// <==> ///
@@ -17,6 +18,7 @@ const mime = require('mime');
 const fs = require('fs');
 const formidable = require('formidable');
 const multipart = require('parse-multipart');
+const {Mongoose} = require('mongoose');
 /* =========== /// <==> End <==> ===========*/
 
 /* =============== /// <==> Post Functions <==> /// =============== */
@@ -106,25 +108,97 @@ const uploadImg = async (files) =>{
   // console.log('Container was created successfully. requestId: ',
   //     createContainerResponse.requestId);
 
-  const form = new formidable.IncomingForm();
-  new Promise(function(resolve, reject) {
-    form.parse(files, async function(files) {
-      const file = files.file;
-      const filePath = file.path;
-      const blockBlobClient = containerClient.getBlockBlobClient(blobName);
-      const uploadBlobResponse = await blockBlobClient
-          .uploadFile(filePath);
-      // .upload(parts[0].data, parts[0].data.length);
-      console.log('uploaded successfully, Id:', uploadBlobResponse.requestId);
-      if (err) reject(err);
-      else resolve([fields, files]);
-    });
-  });
-  return containerName.containerName;
+  // const form = new formidable.IncomingForm();
+  // new Promise(function(resolve, reject) {
+  //   form.parse(files, async function(files) {
+  //     const file = files.file;
+  //     const filePath = file.path;
+  const blockBlobClient = containerClient.getBlockBlobClient(blobName);
+  const uploadBlobResponse = await blockBlobClient
+      .upload(file, file.length);
+  // .upload(parts[0].data, parts[0].data.length);
+  // console.log('uploaded successfully, Id:', uploadBlobResponse.requestId);
+  console.log('uploaded successfully');
+  //     if (err) reject(err);
+  //     else resolve([fields, files]);
+  //   });
+  // });
+  return 'https://tumblr4u.blob.core.windows.net/images/'+blobName;
 
   // });
 
   // check this link: https://www.py4u.net/discuss/1293154
+};
+
+/* ----------- <---> Random Post <---> ------ */ // *** <===> Done <===>  *** //
+
+/**
+ *
+ * @function
+ * @name retrieveRandomPosts
+ * @description This function gets random posts for explore
+ */
+
+const retrieveRandomPosts = async () => {
+  const randomPosts = await schema.Posts.find({isDeleted: false});
+  randomPostsLim =[];
+  randomNumb= Math.floor(Math.random() * randomPosts.length-10);
+  for (let i=randomNumb; i<randomNumb+10; i++) {
+    randomPostsLim.push(randomPosts[i]);
+  }
+  return randomPostsLim;
+};
+
+/* --------- <---> Trending Post <---> ------ */ // *** <===> Done <===>  *** //
+
+/**
+ *
+ * @function
+ * @name retrieveTrendingPosts
+ * @description This function gets random posts for explore
+ */
+
+const retrieveTrendingPosts = async () => {
+  // const trendingPosts = await schema.Posts
+  //     .find(); // {isDeleted: false} {_id: '61ae667d8b4d5620ce937992'}
+
+  // postId:  new ObjectId("61975a0d6181e2ed7c11aa3e")
+  const maxLikes = await schema.notes.aggregate([
+    {$unwind: '$likes'},
+    {$project: {likesize: {$size: '$likes'}}},
+    {$sort: {likesize: -1}},
+    {$limit: 5},
+  ]);
+  console.log('maxLikes: ', maxLikes);
+  maxNotes=[0, 0, 0, 0, 0, 0, 0, 0, 0, 0]; // 10
+  trendingPostsLim =[];
+  // for (let i=0; i<maxNotes.length; i++) {
+  // trendingPosts.forEach((posts) =>{
+  //   postId=posts._id;
+  //   console.log('postId: ', postId);
+  //   notesId=posts.notesId;
+  // console.log('notesId: ', notesId);
+  // getNotes(postId).then((ret) =>{
+  //   console.log(ret);
+  // });
+  // if (notesCount > maxNotes[i]){
+  //   if (i != 0 &&
+  //       notesCount < maxNotes[i-1] &&
+  //     trendingPostsLim[i-1] != trendingPostsLim[i] ) {
+  //     maxNotes[i]=notesCount;
+  //     trendingPostsLim[i]=posts;
+  //   }
+  // }
+
+  // }
+  // });
+  // };
+
+  // for (let i=0; i<10; i++) {
+  //   randomNumb= Math.floor(Math.random() * trendingPosts.length);
+  //   trendingPostsLim.push(trendingPosts[randomNumb]);
+  // }
+  return trendingPostsLim;
 };
 
 /* ----------- <---> Create Post <---> ------ */ // *** <===> Done <===>  *** //
@@ -556,7 +630,7 @@ const getNotes = async (postId) => {
   };
 };
 
-/* ----------- <---> Get User Dashboard <---> ----------- */ // *** <===> Done <===>  *** //
+/* ------ <---> Get User Dashboard <---> ---- */ // *** <===> Done <===>  *** //
 
 /**
  * @function
@@ -637,11 +711,8 @@ module.exports = {
   getNotes,
   getDashboard,
   uploadImg,
+  retrieveRandomPosts,
+  retrieveTrendingPosts,
 };
-/* =========== /// <==> End <==> ===========*/
 
-/* =============== /// <==> Export User Functions <==> /// =============== */
-// module.exports = {
-//   postFunctions,
-// };
 /* =========== /// <==> End <==> ===========*/
