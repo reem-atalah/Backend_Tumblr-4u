@@ -510,8 +510,8 @@ const getDashboard = async (userEmail) => {
     postsToShow = [];
     // postsToShow = [
     //   {
-    //     post,
-    //     notes
+    //     post: {},
+    //     notes: []
     //   }
     // ];
     //const existingUser = await schema.users.findOne({_id: userId});
@@ -527,12 +527,12 @@ const getDashboard = async (userEmail) => {
         for (let i=0; i<postsArray.length; i++) {
           const existingPost = await schema.Posts.findOne({_id: postsArray[i]});
           if (existingPost) {
-            // const obj = {
-            //   post: existingPost,
-            //   //notes: getNotes(existingPost)
-            // }
-            postsToShow.push(existingPost);
-            //postsToShow.push(obj);
+            const obj = {
+              post: existingPost,
+              notes: getNotes(existingPost._id)
+            }
+            //postsToShow.push(existingPost);
+            postsToShow.push(obj);
           }
         }
       } else {
@@ -548,12 +548,12 @@ const getDashboard = async (userEmail) => {
           for (let j=0; j<foPostsArray.length; j++) {
             const existingFoPost = await schema.Posts.findOne({_id: foPostsArray[j]});
             if (existingFoPost) {
-              postsToShow.push(existingFoPost);
-              // const obj = {
-              //   post: existingFoPost,
-              //   //notes: getNotes(existingPost)
-              // }
-              //postsToShow.push(obj);
+              //postsToShow.push(existingFoPost);
+              const obj = {
+                post: existingFoPost,
+                notes: getNotes(existingFoPost._id)
+              }
+              postsToShow.push(obj);
             }
           }
         } else {
@@ -562,7 +562,7 @@ const getDashboard = async (userEmail) => {
         }
       }
       postsToShow.sort(function(x, y){
-        return y._id.getTimestamp() - x._id.getTimestamp();
+        return y.post._id.getTimestamp() - x.post._id.getTimestamp();
       })
       ret.msg = 'Dashboard Got Successfully';
       ret.postsToShow = postsToShow;
