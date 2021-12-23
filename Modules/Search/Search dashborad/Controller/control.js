@@ -47,7 +47,18 @@ async () => {
  */
 // use "npm run doc" to make function documentation
 
-const autoCompleteSearchDash = async (userId, wordName) => {
+const autoCompleteSearchDash = async (userEmail, wordName) => {
+  // get userId
+  const user = await schema.users.find({email: userEmail});
+  if (user.isDeleted == true) {
+    return null;
+  }
+
+  // console.log(user);
+  const userId = user._id;
+  await schema.users.findOneAndUpdate({$and: [{email: userEmail},
+    {isVerified: true}]}, {isDeleted: false});
+
   let result = [];
 
   if (!wordName) {

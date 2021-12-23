@@ -8,6 +8,11 @@ const joi = require('joi');
 
 /* ================ /// <==> Post Joi Validations <==> /// ================ */
 const postJoi = {
+  uploadImgValidations: {
+    body: joi.object().required().keys({
+      files: joi.string().required(),
+    }), 
+  },
   createPostValidations: {
     body: joi.object().required().keys({
       postHtml: joi.string().required(),

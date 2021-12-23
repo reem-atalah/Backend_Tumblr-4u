@@ -13,6 +13,8 @@ const userRoutes = require('./Modules/Users/Routes/APIs');
 const blogRoutes = require('./Modules/Blogs/Routes/APIs');
 const postRoutes = require('./Modules/Posts/Routes/APIs');
 const cors =require('cors');
+const fileUpload = require('express-fileupload');
+server.use(fileUpload());
 
 /* ========== /// <==> Calling Config Function OF dotenv <==> /// =========== */
 dotenv.config();
@@ -42,6 +44,8 @@ server.use(blogRoutes);
 server.use(postRoutes);
 server.use(express.json());
 server.use(express.urlencoded({extended: false}));
+
+
 
 /* =========== /// <==> End <==> ===========*/
 

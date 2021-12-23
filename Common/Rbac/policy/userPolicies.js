@@ -13,6 +13,7 @@ const postEndPoints = require('../../../Modules/Posts/endPoints');
 /* =================== <-- User Role Policies --> =================== */
 const userAdminPolicies = [
   userEndPoints.googleInfo,
+  userEndPoints.changeEmail,
   searchEndPt.getSearchDash,
   userEndPoints.followBlog,
   userEndPoints.unfollowBlog,
@@ -23,8 +24,18 @@ const userAdminPolicies = [
   blogEndPoints.editBlog,
   blogEndPoints.retrieveBlog,
   postEndPoints.createPost,
+  postEndPoints.showPost,
   postEndPoints.editPost,
   postEndPoints.deletePost,
+  postEndPoints.likePress,
+  postEndPoints.makeComment,
+  postEndPoints.reblogPost,
+  postEndPoints.removeComment,
+  postEndPoints.removeReblog,
+  postEndPoints.getNotes,
+  postEndPoints.getDashboard,
+  postEndPoints.uploadeImg,
+
 ];
 /* =========== <--> End <--> =========== */
 

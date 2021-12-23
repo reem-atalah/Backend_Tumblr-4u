@@ -1,3 +1,5 @@
+/* eslint-disable space-before-blocks */
+/* eslint-disable linebreak-style */
 // /////////////////////////////////////////////////////////
 // / <==> /// This File Contains Post Functions /// <==> ///
 // /////////////////////////////////////////////////////////
@@ -7,10 +9,281 @@
 // const jwt = require('jsonwebtoken');
 const {StatusCodes} = require('http-status-codes');
 const schema = require('../../../Model/model');
-
+const {BlobServiceClient} = require('@azure/storage-blob');
+const fileUpload = require('express-fileupload');
+const express = require('express');
+const server = express();
+server.use(fileUpload());
+const mime = require('mime');
+const fs = require('fs');
+const formidable = require('formidable');
+const multipart = require('parse-multipart');
+const {Mongoose} = require('mongoose');
 /* =========== /// <==> End <==> ===========*/
 
 /* =============== /// <==> Post Functions <==> /// =============== */
+// change from base64 to img
+// const decodeFileBase64 = (base64String) => {
+//   // From Bytestream to Percent-encoding to Original string
+//   return decodeURIComponent(
+//     atob(base64String)
+//       .split("")
+//       .map(function (c) {
+//         return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
+//       })
+//       .join("")
+//   );
+// };
+
+// const decodeBase64 = decodeFileBase64(
+//   fileBase64String.substring(fileBase64String.indexOf(",") + 1)
+// );
+
+// another code
+// var match=req.body.base64image.match(/^data:([A-Za-z-+\/]+);base64,(.+)$/),
+// response = {};
+
+// if (match.length !== 3) {
+//   return new Error('Invalid input string');
+// }
+
+// response.type = match[1];
+// response.data = new Buffer(match[2], 'base64');
+// let decodedImg = response;
+// let imageBuffer = decodedImg.data;
+// let type = decodedImg.type;
+// let extension = mime.extension(type);
+// let fileName =  "image." + extension;
+// try {
+//   fs.writeFileSync("./images/" + fileName, imageBuffer, 'utf8');
+//   return res.send({"status":"success"});
+// } catch (e) {
+//   next(e);
+// }
+
+const uploadImgg = async () =>{
+  const blobServiceClient = await BlobServiceClient
+      .fromConnectionString(process.env.AZURE_STORAGE_CONNECTION_STRING);
+
+  // give our container a name
+  const containerName = blobServiceClient
+      .getContainerClient('Tumber4uImgContainer');
+
+  console.log('containerName', containerName.containerName);
+
+  const containerClient = await blobServiceClient
+      .getContainerClient(containerName.containerName);
+
+  console.log('containerClient', containerClient);
+
+  const content = 'Hello world!';
+  const blobName = 'newblob' + new Date().getTime();
+  const blockBlobClient = containerClient.getBlockBlobClient(blobName);
+  console.log('blockBlobClient: ', blockBlobClient);
+  const uploadBlobResponse = await blockBlobClient.upload(content, content.length);
+  // console.log(`Upload block blob ${blobName} successfully`, uploadBlobResponse.requestId);
+};
+
+const uploadImg = async (files) =>{
+  // console.log(files);
+  // files.forEach(async (file) => { // multiple images
+  // const file= files.file; // one image
+
+  // convert image from base64 to original image
+  // const match=files.match(/^data:([A-Za-z-+\/]+);base64,(.+)$/);
+  // const response = {};
+
+  // if (match.length !== 3) {
+  //   return new Error('Invalid input string');
+  // }
+
+  // response.type = match[1];
+  // response.data= Buffer.from(match[2], 'base64');
+  // const decodedImg = response;
+  // const imageBuffer = decodedImg.data;
+  // const type = decodedImg.type;
+  // const extension = mime.extension(type);
+  // const fileName = 'image.' + extension;
+
+  // const file= imageBuffer;
+  // const uploadDate = new Date().toISOString().replace(/:/g, '-');
+  // const blobName = fileName + uploadDate + extension;
+  // console.log('file: ', file);
+
+  // const boundary= multipart.getBoundary(type);
+  // const parts = multipart.Parse(response.data, boundary);
+
+  // connect to azure
+  const blobServiceClient = await BlobServiceClient
+      .fromConnectionString(process.env.AZURE_STORAGE_CONNECTION_STRING);
+
+  // give our container a name
+  const containerName = blobServiceClient
+      .getContainerClient('Tumber4uImgContainer');
+
+  console.log('containerName', containerName.containerName);
+
+  const containerClient = await blobServiceClient
+      .getContainerClient(containerName.containerName);
+
+  // create container
+  // const createContainerResponse = await containerClient.create();
+  // console.log('Container was created successfully. requestId: ',
+  //     createContainerResponse.requestId);
+
+  // const form = new formidable.IncomingForm();
+  // new Promise(function(resolve, reject) {
+  //   form.parse(files, async function(files) {
+  //     const file = files.file;
+  //     const filePath = file.path;
+  data ='Hello World!';
+  const blockBlobClient = containerClient.getBlockBlobClient(blobName);
+  const uploadBlobResponse = await blockBlobClient
+      .upload(data, data.length);
+  // .upload(parts[0].data, parts[0].data.length);
+  console.log('uploaded successfully', blobName, ' Id:', uploadBlobResponse.requestId);
+  console.log('uploaded successfully');
+  //     if (err) reject(err);
+  //     else resolve([fields, files]);
+  //   });
+  // });
+  return 'https://tumblr4u.blob.core.windows.net/images/'+blobName;
+
+  // });
+
+  // check this link: https://www.py4u.net/discuss/1293154
+};
+
+/* ----------- <---> Random Post <---> ------ */ // *** <===> Done <===>  *** //
+
+/**
+ *
+ * @function
+ * @name retrieveRandomPosts
+ * @description This function gets random posts for explore
+ */
+
+const retrieveRandomPosts = async () => {
+  const randomPosts = await schema.Posts.find({isDeleted: false});
+  randomPostsLim =[];
+  randomNumb= Math.floor(Math.random() * randomPosts.length-10);
+  for (let i=randomNumb; i<randomNumb+10; i++) {
+    randomPostsLim.push(randomPosts[i]);
+  }
+  return randomPostsLim;
+};
+
+/* --------- <---> Trending Post <---> ------ */ // *** <===> Done <===>  *** //
+
+/**
+ *
+ * @function
+ * @name retrieveTrendingPosts
+ * @description This function gets random posts for explore
+ */
+
+const retrieveTrendingPosts = async () => {
+  // const trendingPosts = await schema.Posts
+  //     .find(); // {isDeleted: false} {_id: '61ae667d8b4d5620ce937992'}
+
+  // postId:  new ObjectId("61975a0d6181e2ed7c11aa3e")
+  const maxLikes= await schema.notes.find();
+  const postss= await schema.Posts.find();
+  maxNotes=[0, 0, 0, 0, 0, 0, 0, 0, 0, 0]; // 10
+  trendingPostsLim =[];
+  BreakException = {};
+  let i=0;
+
+  maxLikes.forEach(async (data) => {
+    if (data.reblogs != null){
+      countReblogs=data.reblogs.length;
+    } else {
+      countReblogs=0;
+    }
+
+    if (data.comments != null){
+      countComm=data.comments.length;
+    } else {
+      countComm=0;
+    }
+
+    if (data.likes != null){
+      countLike=data.likes.length;
+    } else {
+      countLike=0;
+    }
+    const notesCount = countLike + countComm + countReblogs;
+    console.log('notesCount1: ', notesCount);
+
+    if (notesCount > maxNotes[i]){
+      console.log('notesCount2: ', notesCount);
+      maxNotes[i]=notesCount;
+      try {
+        postss.forEach((dataPosts) => {
+          if (dataPosts.notesId == data._id){
+            console.log('dataPosts.notesId: ', dataPosts.notesId);
+            trendingPostsLim[i] =dataPosts;
+            throw BreakException;
+          }
+        });
+      } catch (e) {
+        console.log('error..');
+        if (e !== BreakException) throw e;
+      }
+
+      i=i+1;
+      console.log('trendingPostsLim: ', trendingPostsLim, 'i: ', i);
+    }
+  });
+  console.log('maxNotes: ', maxNotes);
+  let result = [];
+  result={
+    countNotesEachPost: maxNotes,
+    trendingPostsLim: trendingPostsLim,
+  };
+  return result;
+  // const maxLikes = await schema.notes.aggregate([
+  //   {$project: {reblog:
+  //   {
+  //     $objectToArray: '$reblogs',
+  //     $size: {$ifNull: ['reblogs', []]},
+  //   },
+  //   },
+  //   },
+  //   {$unwind: '$reblog'},
+  //   {$sort: {'$reblog': -1}},
+  //   {$limit: 5},
+  // ]);
+  // console.log('$maxLikes: ', maxLikes);
+
+  // for (let i=0; i<maxNotes.length; i++) {
+  // trendingPosts.forEach((posts) =>{
+  //   postId=posts._id;
+  //   console.log('postId: ', postId);
+  //   notesId=posts.notesId;
+  // console.log('notesId: ', notesId);
+  // getNotes(postId).then((ret) =>{
+  //   console.log(ret);
+  // });
+  // if (notesCount > maxNotes[i]){
+  //   if (i != 0 &&
+  //       notesCount < maxNotes[i-1] &&
+  //     trendingPostsLim[i-1] != trendingPostsLim[i] ) {
+  //     maxNotes[i]=notesCount;
+  //     trendingPostsLim[i]=posts;
+  //   }
+  // }
+
+  // }
+  // });
+  // };
+
+  // for (let i=0; i<10; i++) {
+  //   randomNumb= Math.floor(Math.random() * trendingPosts.length);
+  //   trendingPostsLim.push(trendingPosts[randomNumb]);
+  // }
+};
+
 /* ----------- <---> Create Post <---> ------ */ // *** <===> Done <===>  *** //
 
 /**
@@ -26,7 +299,7 @@ const schema = require('../../../Model/model');
  * @returns {String} Created Post Id.
  */
 
-const createPost = async (blogId, postHtml, type, state, tags) => {
+ const createPost = async (blogId, postHtml, type, state, tags) => {
   try {
     var ret = ['',''];
     const existingBlog = await schema.blogs.findOne({_id: blogId});
@@ -111,8 +384,7 @@ const makeComment = async (blogId, postId, text) => {
         const commentingBlogId = blogId;
         if (existingNotes) {
           const comment = {
-            commentingBlogId,
-            commentingBlogTitle,
+            blogId,
             text,
           };
           const lenBefore = existingNotes.comments.length;
@@ -154,16 +426,24 @@ const makeComment = async (blogId, postId, text) => {
  * @returns {string} Boolean indicates whether the element exists or not.
  */
 
-const loopAndCheck = (arr, element) => {
-  let exist = 0;
+const loopLikeAndCheck = (arr, element) => {
+  let existAndNotDeletd = 0;
+  let existAndDeletd = 0;
+  let pos = 0;
   if (arr.length) {
     for (let i = 0; i < arr.length; i++) {
-      if (arr[i] === element) {
-        exist = 1;
+      if (arr[i].blogId === element) {
+        if (arr[i].isDeleted === false) {
+          existAndNotDeletd = 1;
+          pos = i;
+        } else {
+          existAndDeletd = 1;
+          pos = i;
+        }
       }
     }
   }
-  return exist;
+  return [existAndNotDeletd, existAndDeletd, pos];
 };
 
 /* ----------- <---> Loop on Object in Array of Objects and check if Id exists <---> ----------- */ // *** <===> Done <===>  *** //
@@ -184,7 +464,7 @@ const loopObjAndCheck = (arr, element) => {
   let pos = 0;
   if (arr.length) {
     for (let i = 0; i < arr.length; i++) {
-      if (arr[i]._id.toString() === element) {
+      if (arr[i]._id.toString() === element && arr[i].isDeleted === false) {
         exist = 1;
         pos = i;
       }
@@ -216,15 +496,25 @@ const likePress = async (blogId, postId) => {
     if (existingBlog) {
       if (existingPost) {
         if (existingNotes) {
+          //likingBlogId = blogId;
+          const like = {blogId}
           const likesArray = existingNotes.likes;
-          const exist = loopAndCheck(likesArray, blogId);
-          if (exist) {
-            existingNotes.likes.pull(blogId);
+          const existAndNotDeleted = loopLikeAndCheck(likesArray, blogId)[0];
+          const existAndDeleted = loopLikeAndCheck(likesArray, blogId)[1];
+          const pos = loopLikeAndCheck(likesArray, blogId)[2];
+          if (existAndNotDeleted) {
+            //existingNotes.likes.pull(likesArray[pos]);
+            likesArray[pos].isDeleted = true;
             existingNotes.save();
             ret = 'Post Unliked Successfully';
             return ret;
+          } else if (existAndDeleted) {
+            likesArray[pos].isDeleted = false;
+            existingNotes.save();
+            ret = 'Post Liked Successfully';
+            return ret;
           } else {
-            existingNotes.likes.push(blogId);
+            existingNotes.likes.push(like);
             existingNotes.save();
             ret = 'Post Liked Successfully';
             return ret;
@@ -273,7 +563,7 @@ const reblogPost = async (blogId, postId, text) => {
         const rebloggingId = blogId;
         if (existingNotes) {
           const reblog = {
-            rebloggingId,
+            blogId,
             text,
           };
           const lenBefore = existingNotes.reblogs.length;
@@ -327,7 +617,8 @@ const removeComment = async (postId, commentId) => {
         const exist = loopObjAndCheck(commentsArray, commentId)[0];
         const pos = loopObjAndCheck(commentsArray, commentId)[1];
         if (exist) {
-          existingNotes.comments.pull(commentsArray[pos]);
+          //existingNotes.comments.pull(commentsArray[pos]);
+          commentsArray[pos].isDeleted = true;
         } else {
           ret = 'Comment Not Found';
           return ret;
@@ -372,7 +663,8 @@ const removeReblog = async (postId, reblogId) => {
         const exist = loopObjAndCheck(reblogsArray, reblogId)[0];
         const pos = loopObjAndCheck(reblogsArray, reblogId)[1];
         if (exist) {
-          existingNotes.reblogs.pull(reblogsArray[pos]);
+          //existingNotes.reblogs.pull(reblogsArray[pos]);
+          reblogsArray[pos].isDeleted = true;
         } else {
           ret = 'Reblog Not Found';
           return ret;
@@ -407,7 +699,14 @@ const removeReblog = async (postId, reblogId) => {
 
 const getNotes = async (postId) => {
   try {
-    var ret = ['',[]];
+    //var ret = ['',[]];
+    ret = {
+      msg: '',
+      notes: [{
+        note: {},
+        blogThatMadeNote: {}
+      }]
+    }
     const existingPost = await schema.Posts.findOne({_id: postId});
     if (existingPost) {
       const notesId = existingPost.notesId;
@@ -421,21 +720,40 @@ const getNotes = async (postId) => {
         const commentsCount = commentsArray.length;
         const notesCount = likesCount + commentsCount + reblogsCount;
         const countsArray = [likesCount, reblogsCount, notesCount];
-        const notes = [likesArray,
-          commentsArray, reblogsArray, countsArray]; // array of arrays
-        ret[0] = 'Notes Got Successfully';
-        ret[1] = notes;
+        // const notes = [likesArray,
+        //   commentsArray, reblogsArray, countsArray]; // array of arrays
+        const notesArray =[];
+        for(let i=0; i<notesCount; i++) {
+          notesArray.push(likesArray[i]);
+          notesArray.push(commentsArray[i]);
+          notesArray.push(reblogsArray[i]);
+        }
+        notesArray.sort(function(x, y){
+          return y._id.getTimestamp() - x._id.getTimestamp();
+        })
+        const notes = [];
+        for(let i=0; i<notesCount; i++) {
+          //blog = await schema.blogs.findOne({_id: blogId});
+          obj = {
+            note: notesArray[i],
+            //blogThatMadeNote: blog
+          }
+          notes.push(obj);
+        }
+        
+        ret.msg = 'Notes Got Successfully';
+        ret.notes = notes;
         return ret;
       } else {
-        ret[0] = 'Notes Not Found';
+        ret.msg = 'Notes Not Found';
         return ret;
       };
     } else {
-      ret[0] = 'Post Not Found';
+      ret.msg = 'Post Not Found';
       return ret;
     };
   } catch (error) {
-    ret[0] ='Error in Get Notes Function';
+    ret.msg ='Error in Get Notes Function';
     return ret;
   };
 };
@@ -452,23 +770,45 @@ const getNotes = async (postId) => {
  * @returns {string} Array of posts objects.
  */
 
-const getDashboard = async (userId, blogId) => {
+const getDashboard = async (userEmail) => {
   try {
-    var ret = ['', []];
-    const data = [];
-    const existingUser = await schema.users.findOne({_id: userId});
+    //var ret = ['', []];
+    ret = {
+      msg: '',
+      user: {},
+      blog: {},
+      postsToShow: []
+    }
+    postsToShow = [];
+    // postsToShow = [
+    //   {
+    //     post: {},
+    //     notes: []
+    //   }
+    // ];
+    //const existingUser = await schema.users.findOne({_id: userId});
+    const existingUser = await schema.users.findOne({email: userEmail});
     if (existingUser) {
+      ret.user = existingUser;
+      const userId = existingUser._id;
+      const blogId = existingUser.blogsId[0];
       const existingBlog = await schema.blogs.findOne({_id: blogId});
       if (existingBlog) {
+        ret.blog = existingBlog;
         const postsArray = existingBlog.postsIds;
         for (let i=0; i<postsArray.length; i++) {
           const existingPost = await schema.Posts.findOne({_id: postsArray[i]});
           if (existingPost) {
-            data.push(existingPost);
+            const obj = {
+              post: existingPost,
+              notes: getNotes(existingPost._id)
+            }
+            //postsToShow.push(existingPost);
+            postsToShow.push(obj);
           }
         }
       } else {
-          ret[0] = 'Blog Not Found';
+          ret.msg = 'Blog Not Found';
           return ret;
       }
       // checking all follwed blogs to get their posts
@@ -480,27 +820,34 @@ const getDashboard = async (userId, blogId) => {
           for (let j=0; j<foPostsArray.length; j++) {
             const existingFoPost = await schema.Posts.findOne({_id: foPostsArray[j]});
             if (existingFoPost) {
-              data.push(existingFoPost);
+              //postsToShow.push(existingFoPost);
+              const obj = {
+                post: existingFoPost,
+                notes: getNotes(existingFoPost._id)
+              }
+              postsToShow.push(obj);
             }
           }
         } else {
-          ret[0] = 'Following Blog Not Found';
+          ret.msg = 'Following Blog Not Found';
           return ret;
         }
       }
-      ret[0] = 'Dashboard Got Successfully';
-      ret[1] = data;
+      postsToShow.sort(function(x, y){
+        return y.post._id.getTimestamp() - x.post._id.getTimestamp();
+      })
+      ret.msg = 'Dashboard Got Successfully';
+      ret.postsToShow = postsToShow;
       return ret;
     } else {
-      ret[0] = 'User Not Found';
+      ret.msg = 'User Not Found';
       return ret;
     }
   } catch (error) {
-    ret[0] = 'Error In Get Dashboard Function';
+    ret.msg = 'Error In Get Dashboard Function';
     return ret;
   }
 };
-
 /* =========== /// <==> End <==> ===========*/
 
 /* =============== /// <==> Export Post Functions <==> /// =============== */
@@ -508,7 +855,7 @@ module.exports = {
   createPost,
   showPost,
   makeComment,
-  loopAndCheck,
+  loopLikeAndCheck,
   loopObjAndCheck,
   likePress,
   reblogPost,
@@ -520,11 +867,10 @@ module.exports = {
   // blogValidation
   getNotes,
   getDashboard,
+  uploadImg,
+  uploadImgg,
+  retrieveRandomPosts,
+  retrieveTrendingPosts,
 };
-/* =========== /// <==> End <==> ===========*/
 
-/* =============== /// <==> Export User Functions <==> /// =============== */
-// module.exports = {
-//   postFunctions,
-// };
 /* =========== /// <==> End <==> ===========*/

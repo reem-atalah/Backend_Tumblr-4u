@@ -170,7 +170,7 @@
     
 
     
-    <h4 class="name" id="androidSignUpWithGoogle"><span class="type-signature">(async) </span>androidSignUpWithGoogle<span class="signature">(googleToken, blogName, age)</span><span class="type-signature"> &rarr; {object}</span></h4>
+    <h4 class="name" id="androidSignUpWithGoogle"><span class="type-signature">(async) </span>androidSignUpWithGoogle<span class="signature">(googleToken)</span><span class="type-signature"> &rarr; {object}</span></h4>
     
 
     
@@ -178,7 +178,7 @@
 
 
 <div class="description">
-    This Function Used To Register New User.
+    This Function Used To Register New User For Android.
 </div>
 
 
@@ -234,52 +234,6 @@
         </tr>
 
     
-
-        <tr>
-            
-                <td class="name"><code>blogName</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">blogName</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>age</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">age</td>
-        </tr>
-
-    
     </tbody>
 </table>
 
@@ -317,7 +271,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Modules_Users_Controller_androidSignWithGoogle.js.html">Modules/Users/Controller/androidSignWithGoogle.js</a>, <a href="Modules_Users_Controller_androidSignWithGoogle.js.html#line26">line 26</a>
+        <a href="Modules_Users_Controller_androidSignWithGoogle.js.html">Modules/Users/Controller/androidSignWithGoogle.js</a>, <a href="Modules_Users_Controller_androidSignWithGoogle.js.html#line24">line 24</a>
     </li></ul></dd>
     
 
@@ -375,7 +329,7 @@
     
 
     
-    <h4 class="name" id="androidSignUpWithGoogle"><span class="type-signature">(async) </span>androidSignUpWithGoogle<span class="signature">(googleToken, blogName, age)</span><span class="type-signature"> &rarr; {object}</span></h4>
+    <h4 class="name" id="androidSignUpWithGoogle"><span class="type-signature">(async) </span>androidSignUpWithGoogle<span class="signature">(googleToken)</span><span class="type-signature"> &rarr; {object}</span></h4>
     
 
     
@@ -383,7 +337,7 @@
 
 
 <div class="description">
-    This Function Used To Register New User.
+    This Function Used To Register New User For Android.
 </div>
 
 
@@ -439,52 +393,6 @@
         </tr>
 
     
-
-        <tr>
-            
-                <td class="name"><code>blogName</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">blogName</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>age</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">age</td>
-        </tr>
-
-    
     </tbody>
 </table>
 
@@ -522,7 +430,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Modules_Users_Controller_androidSignWithGoogle.js.html">Modules/Users/Controller/androidSignWithGoogle.js</a>, <a href="Modules_Users_Controller_androidSignWithGoogle.js.html#line26">line 26</a>
+        <a href="Modules_Users_Controller_androidSignWithGoogle.js.html">Modules/Users/Controller/androidSignWithGoogle.js</a>, <a href="Modules_Users_Controller_androidSignWithGoogle.js.html#line24">line 24</a>
     </li></ul></dd>
     
 
@@ -733,7 +641,11 @@
 
         
 <div class="param-desc">
-    Result array have 4 arrays.                    - array 1: has the tags in posts with this regex                    - array 2: posts with the tags with this regex                    - array 3: has the blogs this regex                    - array 4: has the posts with interested tags this regex
+    Result array have 4 arrays.
+                    - array 1: has the tags in posts with this regex
+                    - array 2: posts with the tags with this regex
+                    - array 3: has the blogs this regex
+                    - array 4: has the posts with interested tags this regex
 </div>
 
 
@@ -770,7 +682,8 @@
 
 
 <div class="description">
-    this function blocks the blog whose id             sent in the body from the blog whose id in params
+    this function blocks the blog whose id
+             sent in the body from the blog whose id in params
 </div>
 
 
@@ -944,6 +857,416 @@
     
 
     
+    <h4 class="name" id="changeEmail"><span class="type-signature">(async) </span>changeEmail<span class="signature">(token, email, password)</span><span class="type-signature"> &rarr; {object}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    This Function Used To Change User Email.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>token</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">user token</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>email</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">new email</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>password</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">password</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Modules_Users_Controller_changeEmail.js.html">Modules/Users/Controller/changeEmail.js</a>, <a href="Modules_Users_Controller_changeEmail.js.html#line25">line 25</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    - { Object }
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">object</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="changeEmail"><span class="type-signature">(async) </span>changeEmail<span class="signature">(token, email, password)</span><span class="type-signature"> &rarr; {object}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    This Function Used To Change User Email.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>token</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">user token</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>email</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">new email</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>password</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">password</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Modules_Users_Controller_changeEmail.js.html">Modules/Users/Controller/changeEmail.js</a>, <a href="Modules_Users_Controller_changeEmail.js.html#line25">line 25</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    - { Object }
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">object</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
     <h4 class="name" id="checkBlogName"><span class="type-signature">(async) </span>checkBlogName<span class="signature">(blogName)</span><span class="type-signature"> &rarr; {boolean}</span></h4>
     
 
@@ -1004,7 +1327,7 @@
 
             
 
-            <td class="description last">username</td>
+            <td class="description last">blogName</td>
         </tr>
 
     
@@ -1163,7 +1486,7 @@
 
             
 
-            <td class="description last">username</td>
+            <td class="description last">blogName</td>
         </tr>
 
     
@@ -1322,7 +1645,7 @@
 
             
 
-            <td class="description last">username</td>
+            <td class="description last">email</td>
         </tr>
 
     
@@ -1481,7 +1804,7 @@
 
             
 
-            <td class="description last">username</td>
+            <td class="description last">email</td>
         </tr>
 
     
@@ -1640,7 +1963,7 @@
 
             
 
-            <td class="description last">username</td>
+            <td class="description last">password</td>
         </tr>
 
     
@@ -1663,7 +1986,7 @@
 
             
 
-            <td class="description last">username</td>
+            <td class="description last">oldPassword</td>
         </tr>
 
     
@@ -1822,7 +2145,7 @@
 
             
 
-            <td class="description last">username</td>
+            <td class="description last">password</td>
         </tr>
 
     
@@ -1845,7 +2168,7 @@
 
             
 
-            <td class="description last">username</td>
+            <td class="description last">oldPassword</td>
         </tr>
 
     
@@ -1944,7 +2267,7 @@
     
 
     
-    <h4 class="name" id="createBlog"><span class="type-signature"></span>createBlog<span class="signature">(userId, title, name, privacy, password)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="createBlog"><span class="type-signature"></span>createBlog<span class="signature">(userEmail, title, name, privacy, password)</span><span class="type-signature"></span></h4>
     
 
     
@@ -1952,7 +2275,8 @@
 
 
 <div class="description">
-    This function allows the user whose id sent in             params create a new blog
+    This function allows the user whose id sent in
+             params create a new blog
 </div>
 
 
@@ -1988,7 +2312,7 @@
 
         <tr>
             
-                <td class="name"><code>userId</code></td>
+                <td class="name"><code>userEmail</code></td>
             
 
             <td class="type">
@@ -2004,7 +2328,7 @@
 
             
 
-            <td class="description last">id of the user</td>
+            <td class="description last">email of the user</td>
         </tr>
 
     
@@ -2137,7 +2461,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Modules_Users_Controller_control.js.html">Modules/Users/Controller/control.js</a>, <a href="Modules_Users_Controller_control.js.html#line111">line 111</a>
+        <a href="Modules_Users_Controller_control.js.html">Modules/Users/Controller/control.js</a>, <a href="Modules_Users_Controller_control.js.html#line144">line 144</a>
     </li></ul></dd>
     
 
@@ -2183,7 +2507,7 @@
     
 
     
-    <h4 class="name" id="createBlog"><span class="type-signature"></span>createBlog<span class="signature">(userId, title, name, privacy, password)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="createBlog"><span class="type-signature"></span>createBlog<span class="signature">(userEmail, title, name, privacy, password)</span><span class="type-signature"></span></h4>
     
 
     
@@ -2191,7 +2515,8 @@
 
 
 <div class="description">
-    This function allows the user whose id sent in             params create a new blog
+    This function allows the user whose id sent in
+             params create a new blog
 </div>
 
 
@@ -2227,7 +2552,7 @@
 
         <tr>
             
-                <td class="name"><code>userId</code></td>
+                <td class="name"><code>userEmail</code></td>
             
 
             <td class="type">
@@ -2243,7 +2568,7 @@
 
             
 
-            <td class="description last">id of the user</td>
+            <td class="description last">email of the user</td>
         </tr>
 
     
@@ -2376,7 +2701,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Modules_Users_Controller_control.js.html">Modules/Users/Controller/control.js</a>, <a href="Modules_Users_Controller_control.js.html#line111">line 111</a>
+        <a href="Modules_Users_Controller_control.js.html">Modules/Users/Controller/control.js</a>, <a href="Modules_Users_Controller_control.js.html#line144">line 144</a>
     </li></ul></dd>
     
 
@@ -2482,7 +2807,7 @@
 
             
 
-            <td class="description last">username</td>
+            <td class="description last">email</td>
         </tr>
 
     
@@ -2505,7 +2830,7 @@
 
             
 
-            <td class="description last">username</td>
+            <td class="description last">password</td>
         </tr>
 
     
@@ -2664,7 +2989,7 @@
 
             
 
-            <td class="description last">username</td>
+            <td class="description last">email</td>
         </tr>
 
     
@@ -2687,7 +3012,7 @@
 
             
 
-            <td class="description last">username</td>
+            <td class="description last">password</td>
         </tr>
 
     
@@ -2979,7 +3304,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Modules_Posts_Controller_control.js.html">Modules/Posts/Controller/control.js</a>, <a href="Modules_Posts_Controller_control.js.html#line16">line 16</a>
+        <a href="Modules_Posts_Controller_control.js.html">Modules/Posts/Controller/control.js</a>, <a href="Modules_Posts_Controller_control.js.html#line206">line 206</a>
     </li></ul></dd>
     
 
@@ -3037,6 +3362,370 @@
     
 
     
+    <h4 class="name" id="createPrimaryBlog"><span class="type-signature">(async) </span>createPrimaryBlog<span class="signature">(email, blogName)</span><span class="type-signature"> &rarr; {string}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    This Function Creates Primary Blog.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>email</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">user's email</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>blogName</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">blog name</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Modules_Users_Controller_services.js.html">Modules/Users/Controller/services.js</a>, <a href="Modules_Users_Controller_services.js.html#line156">line 156</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    .
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">string</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="createPrimaryBlog"><span class="type-signature">(async) </span>createPrimaryBlog<span class="signature">(email, blogName)</span><span class="type-signature"> &rarr; {string}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    This Function Creates Primary Blog.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>email</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">user's email</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>blogName</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">blog name</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Modules_Users_Controller_services.js.html">Modules/Users/Controller/services.js</a>, <a href="Modules_Users_Controller_services.js.html#line156">line 156</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    .
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">string</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
     <h4 class="name" id="createUser"><span class="type-signature">(async) </span>createUser<span class="signature">(email, password, blogName, age)</span><span class="type-signature"> &rarr; {String}</span></h4>
     
 
@@ -3097,7 +3786,7 @@
 
             
 
-            <td class="description last">username</td>
+            <td class="description last">email</td>
         </tr>
 
     
@@ -3120,7 +3809,7 @@
 
             
 
-            <td class="description last">username</td>
+            <td class="description last">password</td>
         </tr>
 
     
@@ -3143,7 +3832,7 @@
 
             
 
-            <td class="description last">username</td>
+            <td class="description last">blogName</td>
         </tr>
 
     
@@ -3166,7 +3855,7 @@
 
             
 
-            <td class="description last">username</td>
+            <td class="description last">age</td>
         </tr>
 
     
@@ -3325,7 +4014,7 @@
 
             
 
-            <td class="description last">username</td>
+            <td class="description last">email</td>
         </tr>
 
     
@@ -3348,7 +4037,7 @@
 
             
 
-            <td class="description last">username</td>
+            <td class="description last">password</td>
         </tr>
 
     
@@ -3371,7 +4060,7 @@
 
             
 
-            <td class="description last">username</td>
+            <td class="description last">blogName</td>
         </tr>
 
     
@@ -3394,7 +4083,7 @@
 
             
 
-            <td class="description last">username</td>
+            <td class="description last">age</td>
         </tr>
 
     
@@ -3493,7 +4182,7 @@
     
 
     
-    <h4 class="name" id="deleteBlog"><span class="type-signature"></span>deleteBlog<span class="signature">(userId, blogId)</span><span class="type-signature"> &rarr; {Object}</span></h4>
+    <h4 class="name" id="deleteBlog"><span class="type-signature"></span>deleteBlog<span class="signature">(userEmail, blogId)</span><span class="type-signature"> &rarr; {Object}</span></h4>
     
 
     
@@ -3501,7 +4190,8 @@
 
 
 <div class="description">
-    This function allows the user whose id sent in             params delete his blog
+    This function allows the user whose id sent in
+             params delete his blog
 </div>
 
 
@@ -3537,7 +4227,7 @@
 
         <tr>
             
-                <td class="name"><code>userId</code></td>
+                <td class="name"><code>userEmail</code></td>
             
 
             <td class="type">
@@ -3617,7 +4307,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Modules_Users_Controller_control.js.html">Modules/Users/Controller/control.js</a>, <a href="Modules_Users_Controller_control.js.html#line179">line 179</a>
+        <a href="Modules_Users_Controller_control.js.html">Modules/Users/Controller/control.js</a>, <a href="Modules_Users_Controller_control.js.html#line225">line 225</a>
     </li></ul></dd>
     
 
@@ -3675,7 +4365,7 @@
     
 
     
-    <h4 class="name" id="deleteBlog"><span class="type-signature"></span>deleteBlog<span class="signature">(userId, blogId)</span><span class="type-signature"> &rarr; {Object}</span></h4>
+    <h4 class="name" id="deleteBlog"><span class="type-signature"></span>deleteBlog<span class="signature">(userEmail, blogId)</span><span class="type-signature"> &rarr; {Object}</span></h4>
     
 
     
@@ -3683,7 +4373,8 @@
 
 
 <div class="description">
-    This function allows the user whose id sent in             params delete his blog
+    This function allows the user whose id sent in
+             params delete his blog
 </div>
 
 
@@ -3719,7 +4410,7 @@
 
         <tr>
             
-                <td class="name"><code>userId</code></td>
+                <td class="name"><code>userEmail</code></td>
             
 
             <td class="type">
@@ -3799,7 +4490,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Modules_Users_Controller_control.js.html">Modules/Users/Controller/control.js</a>, <a href="Modules_Users_Controller_control.js.html#line179">line 179</a>
+        <a href="Modules_Users_Controller_control.js.html">Modules/Users/Controller/control.js</a>, <a href="Modules_Users_Controller_control.js.html#line225">line 225</a>
     </li></ul></dd>
     
 
@@ -4165,7 +4856,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Modules_Blogs_Controller_control.js.html">Modules/Blogs/Controller/control.js</a>, <a href="Modules_Blogs_Controller_control.js.html#line81">line 81</a>
+        <a href="Modules_Blogs_Controller_control.js.html">Modules/Blogs/Controller/control.js</a>, <a href="Modules_Blogs_Controller_control.js.html#line85">line 85</a>
     </li></ul></dd>
     
 
@@ -4231,7 +4922,8 @@
 
 
 <div class="description">
-    this function makes the user whose id sent in             params follow the blog whose id in the body
+    this function makes the user whose id sent in
+             params follow the blog whose id in the body
 </div>
 
 
@@ -4347,7 +5039,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Modules_Users_Controller_control.js.html">Modules/Users/Controller/control.js</a>, <a href="Modules_Users_Controller_control.js.html#line38">line 38</a>
+        <a href="Modules_Users_Controller_control.js.html">Modules/Users/Controller/control.js</a>, <a href="Modules_Users_Controller_control.js.html#line58">line 58</a>
     </li></ul></dd>
     
 
@@ -4413,7 +5105,8 @@
 
 
 <div class="description">
-    this function makes the user whose id sent in             params follow the blog whose id in the body
+    this function makes the user whose id sent in
+             params follow the blog whose id in the body
 </div>
 
 
@@ -4529,7 +5222,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Modules_Users_Controller_control.js.html">Modules/Users/Controller/control.js</a>, <a href="Modules_Users_Controller_control.js.html#line38">line 38</a>
+        <a href="Modules_Users_Controller_control.js.html">Modules/Users/Controller/control.js</a>, <a href="Modules_Users_Controller_control.js.html#line58">line 58</a>
     </li></ul></dd>
     
 
@@ -4574,6 +5267,664 @@
 
     </dd>
 </dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="forgetPassword"><span class="type-signature">(async) </span>forgetPassword<span class="signature">(email)</span><span class="type-signature"> &rarr; {Message}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    This Function Used To Send Email To User.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>email</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">email</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Modules_Users_Controller_forgetPassword.js.html">Modules/Users/Controller/forgetPassword.js</a>, <a href="Modules_Users_Controller_forgetPassword.js.html#line23">line 23</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    - { Send Email To User }
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Message</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="forgetPassword"><span class="type-signature">(async) </span>forgetPassword<span class="signature">(email)</span><span class="type-signature"> &rarr; {Message}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    This Function Used To Send Email To User.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>email</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">email</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Modules_Users_Controller_forgetPassword.js.html">Modules/Users/Controller/forgetPassword.js</a>, <a href="Modules_Users_Controller_forgetPassword.js.html#line23">line 23</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    - { Send Email To User }
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Message</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="forgetPasswordMail"><span class="type-signature">(async) </span>forgetPasswordMail<span class="signature">(email, name)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    This Function Used To Send Verification Mail To User.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>email</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">email</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>name</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">user name</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Modules_Users_Controller_services.js.html">Modules/Users/Controller/services.js</a>, <a href="Modules_Users_Controller_services.js.html#line211">line 211</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    Send Email To User.
+</div>
+
+
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="forgetPasswordMail"><span class="type-signature">(async) </span>forgetPasswordMail<span class="signature">(email, name)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    This Function Used To Send Verification Mail To User.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>email</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">email</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>name</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">user name</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Modules_Users_Controller_services.js.html">Modules/Users/Controller/services.js</a>, <a href="Modules_Users_Controller_services.js.html#line211">line 211</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    Send Email To User.
+</div>
+
+
 
     
 
@@ -4711,7 +6062,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Modules_Posts_Controller_control.js.html">Modules/Posts/Controller/control.js</a>, <a href="Modules_Posts_Controller_control.js.html#line445">line 445</a>
+        <a href="Modules_Posts_Controller_control.js.html">Modules/Posts/Controller/control.js</a>, <a href="Modules_Posts_Controller_control.js.html#line635">line 635</a>
     </li></ul></dd>
     
 
@@ -4758,6 +6109,282 @@
 </dl>
 
     
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="getInterestsFromUser"><span class="type-signature"></span>getInterestsFromUser<span class="signature">(userEmail)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    This function get from the user his interest tags(followedTags)
+               choosen while signing up
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>userEmail</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">id of the user</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Modules_Users_Controller_control.js.html">Modules/Users/Controller/control.js</a>, <a href="Modules_Users_Controller_control.js.html#line285">line 285</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="getInterestsFromUser"><span class="type-signature"></span>getInterestsFromUser<span class="signature">(userEmail)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    This function get from the user his interest tags(followedTags)
+               choosen while signing up
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>userEmail</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">id of the user</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Modules_Users_Controller_control.js.html">Modules/Users/Controller/control.js</a>, <a href="Modules_Users_Controller_control.js.html#line285">line 285</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -4870,7 +6497,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Modules_Posts_Controller_control.js.html">Modules/Posts/Controller/control.js</a>, <a href="Modules_Posts_Controller_control.js.html#line399">line 399</a>
+        <a href="Modules_Posts_Controller_control.js.html">Modules/Posts/Controller/control.js</a>, <a href="Modules_Posts_Controller_control.js.html#line589">line 589</a>
     </li></ul></dd>
     
 
@@ -5208,7 +6835,7 @@
 
             
 
-            <td class="description last">username</td>
+            <td class="description last">blogName</td>
         </tr>
 
     
@@ -5231,7 +6858,7 @@
 
             
 
-            <td class="description last">email</td>
+            <td class="description last">age</td>
         </tr>
 
     
@@ -5390,7 +7017,7 @@
 
             
 
-            <td class="description last">username</td>
+            <td class="description last">blogName</td>
         </tr>
 
     
@@ -5413,7 +7040,7 @@
 
             
 
-            <td class="description last">email</td>
+            <td class="description last">age</td>
         </tr>
 
     
@@ -5795,7 +7422,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Modules_Posts_Controller_control.js.html">Modules/Posts/Controller/control.js</a>, <a href="Modules_Posts_Controller_control.js.html#line199">line 199</a>
+        <a href="Modules_Posts_Controller_control.js.html">Modules/Posts/Controller/control.js</a>, <a href="Modules_Posts_Controller_control.js.html#line389">line 389</a>
     </li></ul></dd>
     
 
@@ -6341,7 +7968,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Modules_Posts_Controller_control.js.html">Modules/Posts/Controller/control.js</a>, <a href="Modules_Posts_Controller_control.js.html#line147">line 147</a>
+        <a href="Modules_Posts_Controller_control.js.html">Modules/Posts/Controller/control.js</a>, <a href="Modules_Posts_Controller_control.js.html#line337">line 337</a>
     </li></ul></dd>
     
 
@@ -6546,7 +8173,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Modules_Posts_Controller_control.js.html">Modules/Posts/Controller/control.js</a>, <a href="Modules_Posts_Controller_control.js.html#line171">line 171</a>
+        <a href="Modules_Posts_Controller_control.js.html">Modules/Posts/Controller/control.js</a>, <a href="Modules_Posts_Controller_control.js.html#line361">line 361</a>
     </li></ul></dd>
     
 
@@ -6751,7 +8378,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Modules_Posts_Controller_control.js.html">Modules/Posts/Controller/control.js</a>, <a href="Modules_Posts_Controller_control.js.html#line86">line 86</a>
+        <a href="Modules_Posts_Controller_control.js.html">Modules/Posts/Controller/control.js</a>, <a href="Modules_Posts_Controller_control.js.html#line276">line 276</a>
     </li></ul></dd>
     
 
@@ -6956,7 +8583,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Modules_Posts_Controller_control.js.html">Modules/Posts/Controller/control.js</a>, <a href="Modules_Posts_Controller_control.js.html#line253">line 253</a>
+        <a href="Modules_Posts_Controller_control.js.html">Modules/Posts/Controller/control.js</a>, <a href="Modules_Posts_Controller_control.js.html#line443">line 443</a>
     </li></ul></dd>
     
 
@@ -7138,7 +8765,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Modules_Posts_Controller_control.js.html">Modules/Posts/Controller/control.js</a>, <a href="Modules_Posts_Controller_control.js.html#line308">line 308</a>
+        <a href="Modules_Posts_Controller_control.js.html">Modules/Posts/Controller/control.js</a>, <a href="Modules_Posts_Controller_control.js.html#line498">line 498</a>
     </li></ul></dd>
     
 
@@ -7320,7 +8947,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Modules_Posts_Controller_control.js.html">Modules/Posts/Controller/control.js</a>, <a href="Modules_Posts_Controller_control.js.html#line354">line 354</a>
+        <a href="Modules_Posts_Controller_control.js.html">Modules/Posts/Controller/control.js</a>, <a href="Modules_Posts_Controller_control.js.html#line544">line 544</a>
     </li></ul></dd>
     
 
@@ -7378,7 +9005,417 @@
     
 
     
-    <h4 class="name" id="retrieveBlog"><span class="type-signature"></span>retrieveBlog<span class="signature">(blogName)</span><span class="type-signature"> &rarr; {Object}</span></h4>
+    <h4 class="name" id="resetPassword"><span class="type-signature">(async) </span>resetPassword<span class="signature">(email, password, cpassword)</span><span class="type-signature"> &rarr; {string}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    This Function Used To Reset Password.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>email</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">email</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>password</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">new password</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>cpassword</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">confirm new password</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Modules_Users_Controller_resetPassword.js.html">Modules/Users/Controller/resetPassword.js</a>, <a href="Modules_Users_Controller_resetPassword.js.html#line25">line 25</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    - { Password Updated }
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">string</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="resetPassword"><span class="type-signature">(async) </span>resetPassword<span class="signature">(email, password, cpassword)</span><span class="type-signature"> &rarr; {string}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    This Function Used To Reset Password.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>email</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">email</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>password</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">new password</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>cpassword</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">confirm new password</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Modules_Users_Controller_resetPassword.js.html">Modules/Users/Controller/resetPassword.js</a>, <a href="Modules_Users_Controller_resetPassword.js.html#line25">line 25</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    - { Password Updated }
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">string</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="retrieveBlog"><span class="type-signature"></span>retrieveBlog<span class="signature">(blogId)</span><span class="type-signature"> &rarr; {Object}</span></h4>
     
 
     
@@ -7422,7 +9459,7 @@
 
         <tr>
             
-                <td class="name"><code>blogName</code></td>
+                <td class="name"><code>blogId</code></td>
             
 
             <td class="type">
@@ -7479,7 +9516,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Modules_Blogs_Controller_control.js.html">Modules/Blogs/Controller/control.js</a>, <a href="Modules_Blogs_Controller_control.js.html#line171">line 171</a>
+        <a href="Modules_Blogs_Controller_control.js.html">Modules/Blogs/Controller/control.js</a>, <a href="Modules_Blogs_Controller_control.js.html#line176">line 176</a>
     </li></ul></dd>
     
 
@@ -7526,6 +9563,270 @@
 </dl>
 
     
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="retrieveRandomBlogs"><span class="type-signature"></span>retrieveRandomBlogs<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    This function gets random blogs for explore
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Modules_Blogs_Controller_control.js.html">Modules/Blogs/Controller/control.js</a>, <a href="Modules_Blogs_Controller_control.js.html#line201">line 201</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="retrieveRandomPosts"><span class="type-signature"></span>retrieveRandomPosts<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    This function gets random posts for explore
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Modules_Posts_Controller_control.js.html">Modules/Posts/Controller/control.js</a>, <a href="Modules_Posts_Controller_control.js.html#line135">line 135</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="retrieveTrendingPosts"><span class="type-signature"></span>retrieveTrendingPosts<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    This function gets random posts for explore
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Modules_Posts_Controller_control.js.html">Modules/Posts/Controller/control.js</a>, <a href="Modules_Posts_Controller_control.js.html#line154">line 154</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -7589,7 +9890,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Modules_Search_Search%20dashborad_Controller_control.js.html">Modules/Search/Search dashborad/Controller/control.js</a>, <a href="Modules_Search_Search%20dashborad_Controller_control.js.html#line112">line 112</a>
+        <a href="Modules_Search_Search%20dashborad_Controller_control.js.html">Modules/Search/Search dashborad/Controller/control.js</a>, <a href="Modules_Search_Search%20dashborad_Controller_control.js.html#line123">line 123</a>
     </li></ul></dd>
     
 
@@ -7726,7 +10027,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Modules_Posts_Controller_control.js.html">Modules/Posts/Controller/control.js</a>, <a href="Modules_Posts_Controller_control.js.html#line55">line 55</a>
+        <a href="Modules_Posts_Controller_control.js.html">Modules/Posts/Controller/control.js</a>, <a href="Modules_Posts_Controller_control.js.html#line245">line 245</a>
     </li></ul></dd>
     
 
@@ -8248,7 +10549,8 @@
 
 
 <div class="description">
-    this function remove the blog whose id sent in             the body from blocked blogs of the blog whose id in params
+    this function remove the blog whose id sent in
+             the body from blocked blogs of the blog whose id in params
 </div>
 
 
@@ -8364,7 +10666,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Modules_Blogs_Controller_control.js.html">Modules/Blogs/Controller/control.js</a>, <a href="Modules_Blogs_Controller_control.js.html#line47">line 47</a>
+        <a href="Modules_Blogs_Controller_control.js.html">Modules/Blogs/Controller/control.js</a>, <a href="Modules_Blogs_Controller_control.js.html#line48">line 48</a>
     </li></ul></dd>
     
 
@@ -8430,7 +10732,8 @@
 
 
 <div class="description">
-    this function removes the user whose id sent in              params from followers of the blog whose id in the body
+    this function removes the user whose id sent in
+              params from followers of the blog whose id in the body
 </div>
 
 
@@ -8546,7 +10849,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Modules_Users_Controller_control.js.html">Modules/Users/Controller/control.js</a>, <a href="Modules_Users_Controller_control.js.html#line75">line 75</a>
+        <a href="Modules_Users_Controller_control.js.html">Modules/Users/Controller/control.js</a>, <a href="Modules_Users_Controller_control.js.html#line101">line 101</a>
     </li></ul></dd>
     
 
@@ -8612,7 +10915,8 @@
 
 
 <div class="description">
-    this function removes the user whose id sent in              params from followers of the blog whose id in the body
+    this function removes the user whose id sent in
+              params from followers of the blog whose id in the body
 </div>
 
 
@@ -8728,7 +11032,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Modules_Users_Controller_control.js.html">Modules/Users/Controller/control.js</a>, <a href="Modules_Users_Controller_control.js.html#line75">line 75</a>
+        <a href="Modules_Users_Controller_control.js.html">Modules/Users/Controller/control.js</a>, <a href="Modules_Users_Controller_control.js.html#line101">line 101</a>
     </li></ul></dd>
     
 
@@ -9164,7 +11468,7 @@
 
             
 
-            <td class="description last">username</td>
+            <td class="description last">email</td>
         </tr>
 
     
@@ -9205,7 +11509,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Modules_Users_Controller_services.js.html">Modules/Users/Controller/services.js</a>, <a href="Modules_Users_Controller_services.js.html#line22">line 22</a>
+        <a href="Modules_Users_Controller_services.js.html">Modules/Users/Controller/services.js</a>, <a href="Modules_Users_Controller_services.js.html#line23">line 23</a>
     </li></ul></dd>
     
 
@@ -9311,7 +11615,7 @@
 
             
 
-            <td class="description last">username</td>
+            <td class="description last">email</td>
         </tr>
 
     
@@ -9352,7 +11656,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Modules_Users_Controller_services.js.html">Modules/Users/Controller/services.js</a>, <a href="Modules_Users_Controller_services.js.html#line22">line 22</a>
+        <a href="Modules_Users_Controller_services.js.html">Modules/Users/Controller/services.js</a>, <a href="Modules_Users_Controller_services.js.html#line23">line 23</a>
     </li></ul></dd>
     
 
@@ -9408,13 +11712,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#androidSignUpWithGoogle">androidSignUpWithGoogle</a></li><li><a href="global.html#autoCompleteSearchDash">autoCompleteSearchDash</a></li><li><a href="global.html#blockBlog">blockBlog</a></li><li><a href="global.html#checkBlogName">checkBlogName</a></li><li><a href="global.html#checkMail">checkMail</a></li><li><a href="global.html#checkPassword">checkPassword</a></li><li><a href="global.html#createBlog">createBlog</a></li><li><a href="global.html#createGoogleUser">createGoogleUser</a></li><li><a href="global.html#createPost">createPost</a></li><li><a href="global.html#createUser">createUser</a></li><li><a href="global.html#deleteBlog">deleteBlog</a></li><li><a href="global.html#editBlog">editBlog</a></li><li><a href="global.html#followBlog">followBlog</a></li><li><a href="global.html#getDashboard">getDashboard</a></li><li><a href="global.html#getNotes">getNotes</a></li><li><a href="global.html#google">google</a></li><li><a href="global.html#googleInfo">googleInfo</a></li><li><a href="global.html#isAuthorized">isAuthorized</a></li><li><a href="global.html#likePress">likePress</a></li><li><a href="global.html#login">login</a></li><li><a href="global.html#loopAndCheck">loopAndCheck</a></li><li><a href="global.html#loopObjAndCheck">loopObjAndCheck</a></li><li><a href="global.html#makePost">makePost</a></li><li><a href="global.html#mongoose">mongoose</a></li><li><a href="global.html#reblogPost">reblogPost</a></li><li><a href="global.html#removeComment">removeComment</a></li><li><a href="global.html#removeReblog">removeReblog</a></li><li><a href="global.html#retrieveBlog">retrieveBlog</a></li><li><a href="global.html#search">search</a></li><li><a href="global.html#showPost">showPost</a></li><li><a href="global.html#signUp">signUp</a></li><li><a href="global.html#unblockBlog">unblockBlog</a></li><li><a href="global.html#unfollowBlog">unfollowBlog</a></li><li><a href="global.html#verfiyAccount">verfiyAccount</a></li><li><a href="global.html#verifyMail">verifyMail</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#androidSignUpWithGoogle">androidSignUpWithGoogle</a></li><li><a href="global.html#autoCompleteSearchDash">autoCompleteSearchDash</a></li><li><a href="global.html#blockBlog">blockBlog</a></li><li><a href="global.html#changeEmail">changeEmail</a></li><li><a href="global.html#checkBlogName">checkBlogName</a></li><li><a href="global.html#checkMail">checkMail</a></li><li><a href="global.html#checkPassword">checkPassword</a></li><li><a href="global.html#createBlog">createBlog</a></li><li><a href="global.html#createGoogleUser">createGoogleUser</a></li><li><a href="global.html#createPost">createPost</a></li><li><a href="global.html#createPrimaryBlog">createPrimaryBlog</a></li><li><a href="global.html#createUser">createUser</a></li><li><a href="global.html#deleteBlog">deleteBlog</a></li><li><a href="global.html#editBlog">editBlog</a></li><li><a href="global.html#followBlog">followBlog</a></li><li><a href="global.html#forgetPassword">forgetPassword</a></li><li><a href="global.html#forgetPasswordMail">forgetPasswordMail</a></li><li><a href="global.html#getDashboard">getDashboard</a></li><li><a href="global.html#getInterestsFromUser">getInterestsFromUser</a></li><li><a href="global.html#getNotes">getNotes</a></li><li><a href="global.html#google">google</a></li><li><a href="global.html#googleInfo">googleInfo</a></li><li><a href="global.html#isAuthorized">isAuthorized</a></li><li><a href="global.html#likePress">likePress</a></li><li><a href="global.html#login">login</a></li><li><a href="global.html#loopAndCheck">loopAndCheck</a></li><li><a href="global.html#loopObjAndCheck">loopObjAndCheck</a></li><li><a href="global.html#makePost">makePost</a></li><li><a href="global.html#mongoose">mongoose</a></li><li><a href="global.html#reblogPost">reblogPost</a></li><li><a href="global.html#removeComment">removeComment</a></li><li><a href="global.html#removeReblog">removeReblog</a></li><li><a href="global.html#resetPassword">resetPassword</a></li><li><a href="global.html#retrieveBlog">retrieveBlog</a></li><li><a href="global.html#retrieveRandomBlogs">retrieveRandomBlogs</a></li><li><a href="global.html#retrieveRandomPosts">retrieveRandomPosts</a></li><li><a href="global.html#retrieveTrendingPosts">retrieveTrendingPosts</a></li><li><a href="global.html#search">search</a></li><li><a href="global.html#showPost">showPost</a></li><li><a href="global.html#signUp">signUp</a></li><li><a href="global.html#unblockBlog">unblockBlog</a></li><li><a href="global.html#unfollowBlog">unfollowBlog</a></li><li><a href="global.html#verfiyAccount">verfiyAccount</a></li><li><a href="global.html#verifyMail">verifyMail</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Sun Dec 12 2021 01:48:15 GMT+0200 (Eastern European Standard Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Wed Dec 22 2021 21:55:02 GMT+0200 (Eastern European Standard Time)
 </footer>
 
 <script> prettyPrint(); </script>

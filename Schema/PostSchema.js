@@ -5,6 +5,7 @@
 // /////////////////////////////////////////////////////////////
 
 /* ============== /// <==> Variables Declaration <==> /// ============== */
+const { boolean } = require('joi');
 const mongoose = require('mongoose');
 /* =========== /// <==> End <==> ===========*/
 
@@ -31,6 +32,7 @@ const postSchema = mongoose.Schema({
   tags: {type: [String]},
   // date: { type: Date }
   notesId: {type: String},
+  isDeleted: {type: Boolean},
 
 }, {
   Timestamps: true,

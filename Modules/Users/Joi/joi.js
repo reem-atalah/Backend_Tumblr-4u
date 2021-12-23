@@ -40,7 +40,28 @@ const userJoi = {
   },
   GoogleAndroidValidations: {
     body: joi.object().required().keys({
-      googleToken:joi.string().required(),
+      googleToken: joi.string().required(),
+    }),
+  },
+  ChangeEmailValidations: {
+    body: joi.object().required().keys({
+      email: joi.string().required().email(),
+      password: joi.string().required(),
+    }),
+    headers: joi.object().required().keys({
+      token: joi.string().required(),
+    }),
+  },
+  ForgetPasswordValidations: {
+    body: joi.object().required().keys({
+      email: joi.string().required(),
+    }),
+  },
+  ResetPasswordValidations: {
+    body: joi.object().required().keys({
+      email: joi.string().required(),
+      password: joi.string().required(),
+      cpassword: joi.string().required(),
     }),
   },
   FollowBlogValidations: {

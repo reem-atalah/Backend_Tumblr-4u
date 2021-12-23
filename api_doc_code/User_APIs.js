@@ -438,9 +438,9 @@
  * @apiVersion 0.0.0 
  * @apiPermission User, Admin, Super_Admin
  * 
- * @apiParam {String} Token User's Secret Code.
- * @apiParam {String} Email User's new email
- * @apiParam {String} Password User's password
+ * @apiParam {String} token User's Secret Code.
+ * @apiParam {String} email User's new email
+ * @apiParam {String} password User's password
  *
  * @apiSuccessExample Response Data:
  *      HTTP/1.1 200 OK
@@ -451,7 +451,7 @@
  *                  },
  * 
  *          "response":{
- *                       "message": "Email Changed Successfully"
+ *                       "message": "Email Updated Successfully (<:>)"
  *                     }   
  *      }
  * 
@@ -695,15 +695,14 @@
 */
 
 /**
- * @api {get} /user/forgot_password Forgot Password.
+ * @api {get} /user/forget_password Forget Password.
  * 
- * @apiName forgotPassword
+ * @apiName forgetPassword
  * @apiGroup User
  * @apiVersion 0.0.0 
  * @apiPermission User, Admin, Super_Admin
  * 
- * @apiParam {String} Token User's Secret Code.
- * @apiParam {String} Email User's email.
+ * @apiParam {String} email User's email.
  *
  * @apiSuccessExample Response Data:
  *      HTTP/1.1 200 OK
@@ -713,8 +712,9 @@
  *                       "msg": "OK"
  *                  },
  * 
- *          "response":{
- *                       "message": "{ Send Email To Reset Password }"
+ *          "res":{
+ *                       "message": "{ Send Email To Reset Password }",
+ *                       "data": ""
  *                     }   
  *      }
  * 
@@ -738,16 +738,16 @@
 */
 
 /**
- * @api {put} /user/reset_password/:Token Reset Password.
+ * @api {put} /user/reset_password/ Reset Password.
  * 
  * @apiName resetPassword
  * @apiGroup User
  * @apiVersion 0.0.0 
  * @apiPermission User, Admin, Super_Admin
  * 
- * @apiParam {String} Email User's email.
- * @apiParam {String} Password User's New Password.
- * @apiParam {String} Confirm User's Password.
+ * @apiParam {String} email User's email.
+ * @apiParam {String} password User's New Password.
+ * @apiParam {String} cpassword confirm Password.
  * 
  * @apiSuccessExample Response Data:
  *      HTTP/1.1 200 OK
@@ -757,8 +757,9 @@
  *                       "msg": "OK"
  *                  },
  * 
- *          "response":{
- *                      "message": "{ Password Updated Successfully }"
+ *          "res":{
+ *                       "message": "Password Udpated Successfully (<:>)",
+ *                       "data": ""
  *                     }   
  *      }
  * 
