@@ -64,23 +64,25 @@ const autoCompleteSearchDash = async (userEmail, wordName) => {
   if (!wordName) {
     // if there's no word then retrieve interested tags
     const resultFollowedTag=[];
+    const resultPostHashTag=[];
 
     // gets all posts with the followed tags
     const searchFollowedTag= await schema.users.find({_id: userId});
-    const searchPostFollowedTag= await schema.Posts.find();
 
     // store in result, the blogs
     searchFollowedTag.forEach(async (data) => {
     // he gets me the user, now get the followedTags
-      data.followedTags.forEach((folloedTag) => {
-        resultFollowedTag.push(folloedTag);
-        // const searchPostFollowedTag= await schema.Posts.find();
+      data.followedTags.forEach(async (followedTag) => {
+        resultFollowedTag.push(followedTag);
+        const searchPostFollowedTag= await schema.Posts
+            .find({tags: {$in: followedTag}});
+        resultPostHashTag.push(searchPostFollowedTag);
       });
     });
 
     result={
       resultFollowedTag: resultFollowedTag,
-      resultPostFollowedTag: resultPostFollowedTag,
+      resultPostHashTag: resultPostHashTag,
     };
     return result;
   }

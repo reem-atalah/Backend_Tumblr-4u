@@ -72,7 +72,7 @@ router.post('/:blogId/posts/create_post',
 
 /* ----------- <---> Show Post <---> ----------- */
 router.get('/posts/:postId/show_post',
-    // validateRequest(postJoi.showPostValidations),
+    validateRequest(postJoi.showPostValidations),
     isAuthorized(postEndPoints.showPost),
     (req, res) => {
       postFunctions.showPost(req.params.postId).then((ret) => {
