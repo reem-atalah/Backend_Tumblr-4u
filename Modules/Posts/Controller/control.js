@@ -801,7 +801,7 @@ const getDashboard = async (userEmail) => {
           if (existingPost) {
             const obj = {
               post: existingPost,
-              notes: getNotes(existingPost._id),
+              // notes: getNotes(existingPost._id),
             };
             // postsToShow.push(existingPost);
             postsToShow.push(obj);
@@ -823,7 +823,7 @@ const getDashboard = async (userEmail) => {
               // postsToShow.push(existingFoPost);
               const obj = {
                 post: existingFoPost,
-                notes: getNotes(existingFoPost._id),
+                // notes: getNotes(existingFoPost._id),
               };
               postsToShow.push(obj);
             }

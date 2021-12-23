@@ -40,6 +40,28 @@ router.get('/autoCompleteSearchDash/:wordName',
     },
 );
 
+router.get('/autoCompleteSearchDash',
+    validateRequest(searchJoi.searchValidations),
+    isAuthorized(searchEndPoints.getSearchDash),
+    async (req, res)=>{
+      result=await seachDashboard
+          .autoCompleteSearchDash(req.decoded.email, '');
+      if (result == null) {
+        res.status(StatusCodes.NOT_FOUND).json({
+          'meta': {
+            'status': 404,
+            'msg': 'NOT FOUND',
+          },
+
+          'res': {
+            'message': 'User Is Deleted',
+            'data': '',
+          },
+        });
+      }
+      res.json(result);
+    },
+);
 
 // /* =========== /// <==> End <==> ===========*/
 

@@ -7,6 +7,7 @@
 /* ============== /// <==> Variables Declaration <==> /// ============== */
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
+const { number } = require('joi');
 /* =========== /// <==> End <==> ===========*/
 
 /* ============== /// <==> User Module Schema <==> /// ============== */
@@ -29,8 +30,8 @@ const userSchema = mongoose.Schema({
   favoriteBlogs: [{type: String}],
 
   bodyColor: {
-    type: String,
-    deafult: 'trurBlue',
+    type: Number,
+    deafult: 0,
   },
 
   followedTags: {
