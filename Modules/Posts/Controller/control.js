@@ -770,15 +770,15 @@ const getNotes = async (postId) => {
  * @returns {string} Array of posts objects.
  */
 
-const getDashboard = async (userEmail) => {
+ const getDashboard = async (userEmail) => {
   try {
-    // var ret = ['', []];
+    //var ret = ['', []];
     ret = {
       msg: '',
       user: {},
       blog: {},
-      postsToShow: [],
-    };
+      postsToShow: []
+    }
     postsToShow = [];
     // postsToShow = [
     //   {
@@ -786,30 +786,30 @@ const getDashboard = async (userEmail) => {
     //     notes: []
     //   }
     // ];
-    // const existingUser = await schema.users.findOne({_id: userId});
+    //const existingUser = await schema.users.findOne({_id: userId});
     const existingUser = await schema.users.findOne({email: userEmail});
     if (existingUser) {
-      // ret.user = existingUser;
+      //ret.user = existingUser;
       const userId = existingUser._id;
       const blogId = existingUser.blogsId[0];
       const existingBlog = await schema.blogs.findOne({_id: blogId});
       if (existingBlog) {
-        // ret.blog = existingBlog;
+        //ret.blog = existingBlog;
         const postsArray = existingBlog.postsIds;
         for (let i=0; i<postsArray.length; i++) {
           const existingPost = await schema.Posts.findOne({_id: postsArray[i]});
           if (existingPost) {
-            const obj = {
-              post: existingPost,
-              // notes: getNotes(existingPost._id),
-            };
-            // postsToShow.push(existingPost);
-            postsToShow.push(obj);
+            // const obj = {
+            //   post: existingPost,
+            //   notes: getNotes(existingPost._id)
+            // }
+            postsToShow.push(existingPost);
+            //postsToShow.push(obj);
           }
         }
       } else {
-        ret.msg = 'Blog Not Found';
-        return ret;
+          ret.msg = 'Blog Not Found';
+          return ret;
       }
       // checking all follwed blogs to get their posts
       const followingBlogsArray = existingUser.following_blogs;
@@ -820,12 +820,12 @@ const getDashboard = async (userEmail) => {
           for (let j=0; j<foPostsArray.length; j++) {
             const existingFoPost = await schema.Posts.findOne({_id: foPostsArray[j]});
             if (existingFoPost) {
-              // postsToShow.push(existingFoPost);
-              const obj = {
-                post: existingFoPost,
-                // notes: getNotes(existingFoPost._id),
-              };
-              postsToShow.push(obj);
+              postsToShow.push(existingFoPost);
+              // const obj = {
+              //   post: existingFoPost,
+              //   notes: getNotes(existingFoPost._id)
+              // }
+              // postsToShow.push(obj);
             }
           }
         } else {
@@ -834,8 +834,8 @@ const getDashboard = async (userEmail) => {
         }
       }
       postsToShow.sort(function(x, y){
-        return y.post._id.getTimestamp() - x.post._id.getTimestamp();
-      });
+        return y._id.getTimestamp() - x._id.getTimestamp();
+      })
       ret.msg = 'Dashboard Got Successfully';
       ret.user = existingUser;
       ret.blog = existingBlog;
