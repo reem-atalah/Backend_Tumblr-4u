@@ -256,7 +256,7 @@ router.post('/getInterestsFromUser',
 );
 
 /* ----------- <---> Update Color <---> ----------------- */
-router.put('/UpdateColor',
+router.put('/updateColor',
     validateRequest(userJoi.updateColorValidations),
     isAuthorized(userEndPoints.updateColor),
     async (req, res)=>{
