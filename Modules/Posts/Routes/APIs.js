@@ -219,7 +219,9 @@ router.get('/dashboard',
     isAuthorized(postEndPoints.getDashboard),
     (req, res) => {
       postFunctions.getDashboard(req.decoded.email).then((ret) => {
+        // console.log('req.decoded.email: ', req.decoded.email);
         if (ret.msg === 'Dashboard Got Successfully') {
+          console.log('ret.user: ', ret.user);
           res.status(StatusCodes.OK).json({
             'res': {
               'messege': ret.msg,

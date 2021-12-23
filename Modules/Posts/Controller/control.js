@@ -790,6 +790,7 @@ const getDashboard = async (userEmail) => {
     const existingUser = await schema.users.findOne({email: userEmail});
     if (existingUser) {
       ret.user = existingUser;
+      console.log('existingUser: ', ret.user);
       const userId = existingUser._id;
       const blogId = existingUser.blogsId[0];
       const existingBlog = await schema.blogs.findOne({_id: blogId});
@@ -847,6 +848,7 @@ const getDashboard = async (userEmail) => {
     ret.msg = 'Error In Get Dashboard Function';
     return ret;
   }
+  console.log('ret: ', ret);
 };
 /* =========== /// <==> End <==> ===========*/
 
