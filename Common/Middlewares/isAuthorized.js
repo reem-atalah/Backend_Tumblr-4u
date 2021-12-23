@@ -21,6 +21,7 @@ const userRbac = require('../Rbac/rbac');
 const isAuthorized = (endPoint) => {
   return async (request, response, next) => {
     try {
+      response.json({auth:request.headers.authorization,header:request.headers})
       if (request.headers.authorization) {
         const token = request.headers.authorization.split(' ')[1];
         if (token) {
