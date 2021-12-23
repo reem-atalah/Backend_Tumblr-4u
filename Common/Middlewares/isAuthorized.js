@@ -21,6 +21,11 @@ const userRbac = require('../Rbac/rbac');
 const isAuthorized = (endPoint) => {
   return async (request, response, next) => {
     try {
+      data = {
+        Auth:request.headers.authorization,
+        header:request.headers,
+        req:request
+      }
       if (request.headers.authorization) {
         const token = request.headers.authorization.split(' ')[1];
         if (token) {
@@ -38,7 +43,7 @@ const isAuthorized = (endPoint) => {
 
               'response': {
                 'error': 'Not Authorized',
-                'data': '',
+                'data': data,
               },
             });
           }
@@ -51,7 +56,7 @@ const isAuthorized = (endPoint) => {
 
             'response': {
               'error': 'Token is Required',
-              'data': '',
+              'data': data,
             },
           });
         }
@@ -64,7 +69,7 @@ const isAuthorized = (endPoint) => {
 
           'response': {
             'error': 'Token is Required',
-            'data': '',
+            'data': data,
           },
         });
       }
@@ -77,7 +82,7 @@ const isAuthorized = (endPoint) => {
 
         'response': {
           'error': 'Error In Is Autorized Function',
-          'data': '',
+          'data': data,
         },
       });
     }
