@@ -4,12 +4,18 @@
 
 /* =================== <-- Posts Module EndPoints --> =================== */
 const createPost = 'Posts: createPost';
+const showPost = 'Posts: showPost';
 const editPost = 'Posts: editPost';
 const deletePost = 'Posts: deletePost';
-const likePost = 'Posts: likePost';
-const commentPost = 'Posts: commentPost';
-const shareWith = 'Posts: shareWith';
+const likePress = 'Posts: likePress';
+const makeComment = 'Posts: makeComment';
 const reblogPost = 'Posts: reblogPost';
+const removeComment = 'Posts: removeComment';
+const removeReblog = 'Posts: removeReblog';
+const getNotes = 'Posts: getNotes';
+const getDashboard = 'Posts: getDashboard';
+const shareWith = 'Posts: shareWith';
+
 const uploadeImg = 'Posts: uploadeImg';
 
 // const Get_Posts = 'Post:Get_Posts';
@@ -18,12 +24,17 @@ const uploadeImg = 'Posts: uploadeImg';
 
 const postEndPoints = {
   createPost,
+  showPost,
   editPost,
   deletePost,
-  likePost,
-  commentPost,
-  shareWith,
+  likePress,
+  makeComment,
   reblogPost,
+  removeComment,
+  removeReblog,
+  getNotes,
+  getDashboard,
+  shareWith,
   uploadeImg,
 };
 /* =========== <--> End <--> =========== */

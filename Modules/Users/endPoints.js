@@ -8,15 +8,15 @@ const unfollowBlog = 'User:unfollowBlog';
 const createBlog = 'User:createBlog';
 const deleteBlog = 'User:deleteBlog';
 const googleInfo = 'User:googleInfo';
-const interests = 'User:interests';
+const changeEmail = 'User:changeEmail';
 
 const userEndPoints = {
   followBlog,
   unfollowBlog,
   createBlog,
   deleteBlog,
-  googleInfo,
-  interests,
+  googleInfo, 
+  changeEmail
 };
 /* =========== <--> End <--> =========== */
 

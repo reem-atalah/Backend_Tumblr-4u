@@ -43,6 +43,27 @@ const userJoi = {
       googleToken: joi.string().required(),
     }),
   },
+  ChangeEmailValidations: {
+    body: joi.object().required().keys({
+      email: joi.string().required().email(),
+      password: joi.string().required(),
+    }),
+    headers: joi.object().required().keys({
+      token: joi.string().required(),
+    }),
+  },
+  ForgetPasswordValidations: {
+    body: joi.object().required().keys({
+      email: joi.string().required(),
+    }),
+  },
+  ResetPasswordValidations: {
+    body: joi.object().required().keys({
+      email: joi.string().required(),
+      password: joi.string().required(),
+      cpassword: joi.string().required(),
+    }),
+  },
   FollowBlogValidations: {
     body: joi.object().required().keys({
       blogId: joi.string().required(),
@@ -66,11 +87,6 @@ const userJoi = {
   DeleteBlogValidations: {
     body: joi.object().required().keys({
       blogId: joi.string().required(),
-    }),
-  },
-  getInterestsFromUserValidations: {
-    body: joi.object().required().keys({
-      interests: joi.array().required(),
     }),
   },
 };

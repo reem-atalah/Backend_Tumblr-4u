@@ -35,6 +35,21 @@ const googleInfo = require('./signupGoogle').googleInfo;
 // Assumption: Acount Must Be Not ( Deleted )
 const androidSignUpWithGoogle = require('./androidSignWithGoogle');
 
+/* ----------- <---> Change Email <---> ----------- */
+// Assumption: Acount Must Be Not ( Deleted )
+const changeEmail = require('./changeEmail');
+
+
+/* ----------- <---> Forget Password <---> ----------- */
+// Assumption: Acount Must Be Not ( Deleted )
+const forgetPassword = require('./forgetPassword');
+
+
+/* ----------- <---> Reset Password <---> ----------- */
+// Assumption: Acount Must Be Not ( Deleted )
+const resetPassword = require('./resetPassword');
+
+
 // =================== End ===================//
 
 
@@ -295,6 +310,8 @@ module.exports = {
   google,
   googleInfo,
   androidSignUpWithGoogle,
-  getInterests,
+  changeEmail,
+  forgetPassword,
+  resetPassword
 };
 /* =========== /// <==> End <==> ===========*/

@@ -6,9 +6,9 @@
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth2').Strategy;
 
-const clientId = '633147263244-84kumvs7scjqm6ps8im6b5lvhili7hur.apps.googleusercontent.com';
-const clientSecret = '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';
-const callbackApi= 'http://localhost:3000/google/callback'
+const clientId = '633147263244-qjs8lmqb79ohr4ahtulevhh8qpbn0bu3.apps.googleusercontent.com';
+const clientSecret = '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';
+const callbackApi= 'http://localhost:5000/google/callback'
 /*----------- End ------------*/
 
 /*--------------------------- // <=====> Passport FUnctions  <=====> // ---------------------------*/

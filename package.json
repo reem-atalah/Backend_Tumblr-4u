@@ -32,7 +32,6 @@
     "jsonwebtoken": "^8.5.1",
     "mime": "^1.6.0",
     "mongoose": "^6.0.7",
-    "mongoose-data-seed": "^2.1.6",
     "nodemailer": "^6.7.2",
     "parse-multipart": "^1.0.4",
     "passport": "^0.4.1",
