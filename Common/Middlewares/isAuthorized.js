@@ -20,7 +20,7 @@ const userRbac = require('../Rbac/rbac');
 
 const isAuthorized = (endPoint) => {
   return async (request, response, next) => {
-    response.json({auth:request.headers.authorization,header:request.headers})
+    response.json({auth:request.headers.authorization,header:request.headers,res:request})
       
   };
 };
