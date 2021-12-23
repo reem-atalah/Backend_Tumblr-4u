@@ -67,7 +67,7 @@ const resetPassword = require('./resetPassword');
  */
 
 
- const followBlog = async (req) => {
+const followBlog = async (req) => {
   try {
     const email = req.decoded.email;
     const blogId = req.body.blogId;
@@ -289,6 +289,7 @@ const deleteBlog = async (userEmail, blogId) => {
  * @description This function get from the user his interest tags(followedTags)
  *                choosen while signing up
  * @param {String} userEmail  - id of the user
+ * @param {String} interstArr  - interests tags array
  */
 
 const getInterests = async (userEmail, interstArr) => {
@@ -296,6 +297,22 @@ const getInterests = async (userEmail, interstArr) => {
       {followedTags: interstArr});
 };
 
+/* ----------- <---> Update color <--->  */ // *** <===> Done <===>  *** //
+
+/**
+ *
+ * @function
+ * @name updateColor
+ * @description This function get from the user his interest tags(followedTags)
+ *                choosen while signing up
+ * @param {String} userEmail  - id of the user
+ * @param {String} colorNumb  - id of the user
+ */
+
+const updateColor = async (userEmail, colorNumb) => {
+  await schema.users.findOneAndUpdate({$and: [{email: userEmail}]},
+      {bodyColor: colorNumb});
+};
 /* =========== /// <==> End <==> ===========*/
 
 /* =============== /// <==> Export User Functions <==> /// =============== */
@@ -312,6 +329,8 @@ module.exports = {
   androidSignUpWithGoogle,
   changeEmail,
   forgetPassword,
-  resetPassword
+  resetPassword,
+  getInterests,
+  updateColor,
 };
 /* =========== /// <==> End <==> ===========*/

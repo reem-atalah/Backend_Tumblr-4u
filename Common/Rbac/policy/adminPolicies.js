@@ -19,6 +19,8 @@ const adminPolicies = [
   userEndPoints.unfollowBlog,
   userEndPoints.createBlog,
   userEndPoints.deleteBlog,
+  userEndPoints.getInterests,
+  userEndPoints.updateColor,
   blogEndPoints.blockBlog,
   blogEndPoints.unblockBlog,
   blogEndPoints.editBlog,

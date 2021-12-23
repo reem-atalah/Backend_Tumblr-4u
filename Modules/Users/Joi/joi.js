@@ -89,6 +89,16 @@ const userJoi = {
       blogId: joi.string().required(),
     }),
   },
+  getInterestsFromUserValidations: {
+    body: joi.object().required().keys({
+      interests: joi.array().required(),
+    }),
+  },
+  updateColorValidations: {
+    body: joi.object().required().keys({
+      bodyColor: joi.number().required(),
+    }),
+  },
 };
 /* =========== /// <==> End <==> ===========*/
 
