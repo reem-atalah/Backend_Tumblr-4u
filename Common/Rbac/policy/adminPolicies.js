@@ -14,6 +14,7 @@ const postEndPoints = require('../../../Modules/Posts/endPoints');
 const adminPolicies = [
   searchEndPt.getSearchDash,
   userEndPoints.googleInfo,
+  userEndPoints.changeEmail,
   userEndPoints.followBlog,
   userEndPoints.unfollowBlog,
   userEndPoints.createBlog,
@@ -23,8 +24,17 @@ const adminPolicies = [
   blogEndPoints.editBlog,
   blogEndPoints.retrieveBlog,
   postEndPoints.createPost,
+  postEndPoints.showPost,
   postEndPoints.editPost,
   postEndPoints.deletePost,
+  postEndPoints.likePress,
+  postEndPoints.makeComment,
+  postEndPoints.reblogPost,
+  postEndPoints.removeComment,
+  postEndPoints.removeReblog,
+  postEndPoints.getNotes,
+  postEndPoints.getDashboard,
+  postEndPoints.uploadeImg,
 ];
 /* =========== <--> End <--> =========== */
 

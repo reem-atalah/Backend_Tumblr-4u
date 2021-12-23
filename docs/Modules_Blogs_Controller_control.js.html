@@ -26,9 +26,9 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>
+            <pre class="prettyprint source linenums"><code>/* eslint-disable linebreak-style */
+
 /* ================ /// &lt;==> Variables Declaration &lt;==> /// ================ */
-const {StatusCodes} = require('http-status-codes');
 const schema = require('../../../Model/model');
 
 /* =========== /// &lt;==> End &lt;==> ===========*/
@@ -54,17 +54,18 @@ const blockBlog = async (req) => {
   try {
     const blogId = req.params.blogId;
     const blockedBlogId = req.body.blockedBlogId;
-
-    const blockedBlog = await schema.blogs.findOne({'_id': blockedBlogId});
+    const blockedBlog = await schema.blogs.findOne(
+        {$and: [{_id: blockedBlogId}, {isDeleted: false}]});
     if (blockedBlog) {
-      const blog = await schema.blogs.findOne({'_id': blogId});
-      console.log(blog._id);
-      blog.blockedBlogs.push(blockedBlogId);
-      blog.save();
-      return blockedBlog;
-    } else {
-      return null;
+      const blog = await schema.blogs.findOne(
+          {$and: [{_id: blogId}, {isDeleted: false}]});
+      if (blog) {
+        blog.blockedBlogs.push(blockedBlogId);
+        blog.save();
+        return blockedBlog;
+      }
     }
+    return null;
   } catch (error) {
     console.log(error.message);
   }
@@ -91,15 +92,18 @@ const unblockBlog = async (req) => {
     const blogId = req.params.blogId;
     const unblockedBlogId= req.body.unblockedBlogId;
 
-    const unblockedBlog = await schema.blogs.findOne({'_id': unblockedBlogId});
+    const unblockedBlog = await schema.blogs.findOne(
+        {$and: [{_id: unblockedBlogId}, {isDeleted: false}]});
     if (unblockedBlog) {
-      const blog = await schema.blogs.findOne({'_id': blogId});
-      blog.blockedBlogs.pull(unblockedBlogId);
-      blog.save();
-      return unblockedBlog;
-    } else {
-      return null;
+      const blog = await schema.blogs.findOne(
+          {$and: [{_id: blogId}, {isDeleted: false}]});
+      if (blog) {
+        blog.blockedBlogs.pull(unblockedBlogId);
+        blog.save();
+        return unblockedBlog;
+      }
     }
+    return null;
   } catch (error) {
     console.log(error.message);
   }
@@ -140,7 +144,8 @@ const editBlog = async (req) => {
 
     let message = 'OK';
 
-    const blog = await schema.blogs.findOne({'_id': blogId});
+    const blog = await schema.blogs.findOne({$and: [{_id: blogId},
+      {isDeleted: false}]});
     if (blog) {
       if (password) {
         blog.password = password;
@@ -201,13 +206,14 @@ const editBlog = async (req) => {
  * @function
  * @name retrieveBlog
  * @description    -  It retrieves a blog given its id
- * @param {String} blogName  - name of the blog
+ * @param {String} blogId - name of the blog
  * @return {Object} - A blog object
  */
 
-const retrieveBlog = async (blogName) => {
+const retrieveBlog = async (blogId) => {
   try {
-    const blog = await schema.blogs.findOne({'name': blogName});
+    const blog= await schema.blogs.findOne({$and: [{_id: blogId},
+      {isDeleted: false}]});
     if (blog) {
       return blog;
     } else {
@@ -218,6 +224,24 @@ const retrieveBlog = async (blogName) => {
   }
 };
 
+/* --------- &lt;---> Random Blogs &lt;---> ------ */ // *** &lt;===> Done &lt;===>  *** //
+
+/**
+ *
+ * @function
+ * @name retrieveRandomBlogs
+ * @description This function gets random blogs for explore
+ */
+
+const retrieveRandomBlogs = async () => {
+  const randomBlogs = await schema.blogs.find({isDeleted: false});
+  randomBlogsLim =[];
+  randomNumb= Math.floor(Math.random() * randomBlogs.length-10);
+  for (let i=randomNumb; i&lt;randomNumb+10; i++) {
+    randomBlogsLim.push(randomBlogs[i]);
+  }
+  return randomBlogsLim;
+};
 /* =========== /// &lt;==> End &lt;==> ===========*/
 
 /* ================= /// &lt;==> Export User Functions &lt;==> /// ================ */
@@ -227,6 +251,7 @@ module.exports = {
   unblockBlog,
   editBlog,
   retrieveBlog,
+  retrieveRandomBlogs,
 };
 /* =========== /// &lt;==> End &lt;==> ===========*/
 </code></pre>
@@ -239,13 +264,13 @@ module.exports = {
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#androidSignUpWithGoogle">androidSignUpWithGoogle</a></li><li><a href="global.html#autoCompleteSearchDash">autoCompleteSearchDash</a></li><li><a href="global.html#blockBlog">blockBlog</a></li><li><a href="global.html#checkBlogName">checkBlogName</a></li><li><a href="global.html#checkMail">checkMail</a></li><li><a href="global.html#checkPassword">checkPassword</a></li><li><a href="global.html#createBlog">createBlog</a></li><li><a href="global.html#createGoogleUser">createGoogleUser</a></li><li><a href="global.html#createPost">createPost</a></li><li><a href="global.html#createUser">createUser</a></li><li><a href="global.html#deleteBlog">deleteBlog</a></li><li><a href="global.html#editBlog">editBlog</a></li><li><a href="global.html#followBlog">followBlog</a></li><li><a href="global.html#getDashboard">getDashboard</a></li><li><a href="global.html#getNotes">getNotes</a></li><li><a href="global.html#google">google</a></li><li><a href="global.html#googleInfo">googleInfo</a></li><li><a href="global.html#isAuthorized">isAuthorized</a></li><li><a href="global.html#likePress">likePress</a></li><li><a href="global.html#login">login</a></li><li><a href="global.html#loopAndCheck">loopAndCheck</a></li><li><a href="global.html#loopObjAndCheck">loopObjAndCheck</a></li><li><a href="global.html#makePost">makePost</a></li><li><a href="global.html#mongoose">mongoose</a></li><li><a href="global.html#reblogPost">reblogPost</a></li><li><a href="global.html#removeComment">removeComment</a></li><li><a href="global.html#removeReblog">removeReblog</a></li><li><a href="global.html#retrieveBlog">retrieveBlog</a></li><li><a href="global.html#search">search</a></li><li><a href="global.html#showPost">showPost</a></li><li><a href="global.html#signUp">signUp</a></li><li><a href="global.html#unblockBlog">unblockBlog</a></li><li><a href="global.html#unfollowBlog">unfollowBlog</a></li><li><a href="global.html#verfiyAccount">verfiyAccount</a></li><li><a href="global.html#verifyMail">verifyMail</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#androidSignUpWithGoogle">androidSignUpWithGoogle</a></li><li><a href="global.html#autoCompleteSearchDash">autoCompleteSearchDash</a></li><li><a href="global.html#blockBlog">blockBlog</a></li><li><a href="global.html#changeEmail">changeEmail</a></li><li><a href="global.html#checkBlogName">checkBlogName</a></li><li><a href="global.html#checkMail">checkMail</a></li><li><a href="global.html#checkPassword">checkPassword</a></li><li><a href="global.html#createBlog">createBlog</a></li><li><a href="global.html#createGoogleUser">createGoogleUser</a></li><li><a href="global.html#createPost">createPost</a></li><li><a href="global.html#createPrimaryBlog">createPrimaryBlog</a></li><li><a href="global.html#createUser">createUser</a></li><li><a href="global.html#deleteBlog">deleteBlog</a></li><li><a href="global.html#editBlog">editBlog</a></li><li><a href="global.html#followBlog">followBlog</a></li><li><a href="global.html#forgetPassword">forgetPassword</a></li><li><a href="global.html#forgetPasswordMail">forgetPasswordMail</a></li><li><a href="global.html#getDashboard">getDashboard</a></li><li><a href="global.html#getInterestsFromUser">getInterestsFromUser</a></li><li><a href="global.html#getNotes">getNotes</a></li><li><a href="global.html#google">google</a></li><li><a href="global.html#googleInfo">googleInfo</a></li><li><a href="global.html#isAuthorized">isAuthorized</a></li><li><a href="global.html#likePress">likePress</a></li><li><a href="global.html#login">login</a></li><li><a href="global.html#loopAndCheck">loopAndCheck</a></li><li><a href="global.html#loopObjAndCheck">loopObjAndCheck</a></li><li><a href="global.html#makePost">makePost</a></li><li><a href="global.html#mongoose">mongoose</a></li><li><a href="global.html#reblogPost">reblogPost</a></li><li><a href="global.html#removeComment">removeComment</a></li><li><a href="global.html#removeReblog">removeReblog</a></li><li><a href="global.html#resetPassword">resetPassword</a></li><li><a href="global.html#retrieveBlog">retrieveBlog</a></li><li><a href="global.html#retrieveRandomBlogs">retrieveRandomBlogs</a></li><li><a href="global.html#retrieveRandomPosts">retrieveRandomPosts</a></li><li><a href="global.html#retrieveTrendingPosts">retrieveTrendingPosts</a></li><li><a href="global.html#search">search</a></li><li><a href="global.html#showPost">showPost</a></li><li><a href="global.html#signUp">signUp</a></li><li><a href="global.html#unblockBlog">unblockBlog</a></li><li><a href="global.html#unfollowBlog">unfollowBlog</a></li><li><a href="global.html#verfiyAccount">verfiyAccount</a></li><li><a href="global.html#verifyMail">verifyMail</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Sun Dec 12 2021 01:48:15 GMT+0200 (Eastern European Standard Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Wed Dec 22 2021 21:55:02 GMT+0200 (Eastern European Standard Time)
 </footer>
 
 <script> prettyPrint(); </script>

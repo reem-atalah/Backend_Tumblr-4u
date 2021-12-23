@@ -23,12 +23,6 @@ const userSchema = mongoose.Schema({
   age: {
     type: Number,
   },
-  city: {
-    type: String,
-  },
-  country: {
-    type: String,
-  },
 
   blogsId: [{type: String}],
 

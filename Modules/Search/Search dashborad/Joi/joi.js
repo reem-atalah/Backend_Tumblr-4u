@@ -11,7 +11,6 @@ const joi = require('joi');
 const searchJoi = {
   searchValidations: {
     body: joi.object().required().keys({
-      userId: joi.string().required(),
       wordName: joi.string().optional(),
     }),
   },

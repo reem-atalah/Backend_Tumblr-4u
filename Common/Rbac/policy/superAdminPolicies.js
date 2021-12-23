@@ -13,6 +13,7 @@ const postEndPoints = require('../../../Modules/Posts/endPoints');
 /* =================== <-- Super Admin Role Policies --> =================== */
 const superAdminPolicies = [
   userEndPoints.googleInfo,
+  userEndPoints.changeEmail,
   searchEndPt.getSearchDash,
   userEndPoints.followBlog,
   userEndPoints.unfollowBlog,
@@ -23,8 +24,18 @@ const superAdminPolicies = [
   blogEndPoints.editBlog,
   blogEndPoints.retrieveBlog,
   postEndPoints.createPost,
+  postEndPoints.showPost,
   postEndPoints.editPost,
   postEndPoints.deletePost,
+  postEndPoints.likePress,
+  postEndPoints.makeComment,
+  postEndPoints.reblogPost,
+  postEndPoints.removeComment,
+  postEndPoints.removeReblog,
+  postEndPoints.getNotes,
+  postEndPoints.getDashboard,
+  postEndPoints.uploadeImg,
+
 ];
 /* =========== <--> End <--> =========== */
 

@@ -12,18 +12,27 @@ const mongoose = require('mongoose');
 /* ============== /// <==> Notes Schema <==> /// ============== */
 
 const notesSchema = mongoose.Schema({
-  likes: {type: [String]},
+  likes: [
+    {
+    noteType: {type: String, default: 'like'},
+    blogId: {type: String},
+    isDeleted: {type: Boolean, default: false},
+    }
+  ],
   comments: [
     {
-      commentingBlogId: {type: String},
-      commentingBlogTitle: {type: String},
+      noteType: {type: String, default: 'comment'},
+      blogId: {type: String},
       text: {type: String},
+      isDeleted: {type: Boolean, default: false},
     },
   ],
   reblogs: [
     {
-      rebloggingId: {type: String},
+      noteType: {type: String, default: 'reblog'},
+      blogId: {type: String},
       text: {type: String},
+      isDeleted: {type: Boolean, default: false},
     },
   ],
 });
