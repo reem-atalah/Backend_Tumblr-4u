@@ -34,7 +34,7 @@ async () => {
  * @function
  * @name  autoCompleteSearchDash
  * @description Applies search on posts/tags
- * @param {Object} userId -get id of the user
+ * @param {Object} userEmail -get id of the user
  * @param {Object} wordName - Holds the request body: wordName.
  *
  *
@@ -54,32 +54,41 @@ const autoCompleteSearchDash = async (userEmail, wordName) => {
     return null;
   }
 
-  // console.log(user);
-  const userId = user._id;
+  const userId = user[0]._id;
   await schema.users.findOneAndUpdate({$and: [{email: userEmail},
     {isVerified: true}]}, {isDeleted: false});
 
   let result = [];
 
-  if (!wordName) {
+  if (!wordName || wordName==null ) {
     // if there's no word then retrieve interested tags
     const resultFollowedTag=[];
     const resultPostHashTag=[];
 
     // gets all posts with the followed tags
     const searchFollowedTag= await schema.users.find({_id: userId});
-
+    const searchPostFollowedTag= await schema.Posts.find();
     // store in result, the blogs
     searchFollowedTag.forEach(async (data) => {
     // he gets me the user, now get the followedTags
-      data.followedTags.forEach(async (followedTag) => {
+      await data.followedTags.forEach(async (followedTag) => {
         resultFollowedTag.push(followedTag);
-        const searchPostFollowedTag= await schema.Posts
-            .find({tags: {$in: followedTag}});
-        resultPostHashTag.push(searchPostFollowedTag);
+        try {
+          searchPostFollowedTag.forEach((dataPosts) => {
+            dataPosts.tags.forEach((tag)=>{
+              if (tag == followedTag) {
+                resultPostHashTag.push(dataPosts);
+                throw BreakException;
+              }
+            });
+          });
+        } catch (e) {
+          console.log('error..');
+          if (e !== BreakException) throw e;
+        }
       });
     });
-
+    console.log('resultPostHashTag: ', resultPostHashTag);
     result={
       resultFollowedTag: resultFollowedTag,
       resultPostHashTag: resultPostHashTag,

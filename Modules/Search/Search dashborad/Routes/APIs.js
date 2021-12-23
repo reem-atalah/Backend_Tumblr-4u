@@ -45,7 +45,7 @@ router.get('/autoCompleteSearchDash',
     isAuthorized(searchEndPoints.getSearchDash),
     async (req, res)=>{
       result=await seachDashboard
-          .autoCompleteSearchDash(req.decoded.email, '');
+          .autoCompleteSearchDash(req.decoded.email, null);
       if (result == null) {
         res.status(StatusCodes.NOT_FOUND).json({
           'meta': {

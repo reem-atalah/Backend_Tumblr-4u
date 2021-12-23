@@ -43,7 +43,7 @@ const isAuthorized = (endPoint) => {
             });
           }
         } else {
-          response.status(StatusCodes.BAD_REQUEST).json({
+          response.status(StatusCodes.UNAUTHORIZED).json({
             'meta': {
               'status': 401,
               'msg': 'UNAUTHORIZED',
@@ -56,7 +56,7 @@ const isAuthorized = (endPoint) => {
           });
         }
       } else {
-        response.status(StatusCodes.BAD_REQUEST).json({
+        response.status(StatusCodes.UNAUTHORIZED).json({
           'meta': {
             'status': 401,
             'msg': 'UNAUTHORIZED',
