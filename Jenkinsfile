@@ -12,7 +12,7 @@ pipeline
         stage('clean'){
             steps{
                 script{
-                    sh'docker rmi minalabib07/backimage'
+                    sh'docker rmi minalabib07/back_image'
                     }
                 }
             }
