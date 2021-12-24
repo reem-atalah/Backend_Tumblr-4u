@@ -33,6 +33,7 @@ const userAdminPolicies = [
   postEndPoints.removeReblog,
   postEndPoints.getNotes,
   postEndPoints.getDashboard,
+  postEndPoints.getBlogPosts,
   
 ];
 /* =========== <--> End <--> =========== */
