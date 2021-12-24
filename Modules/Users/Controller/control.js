@@ -310,8 +310,10 @@ const getInterests = async (userEmail, interstArr) => {
  */
 
 const updateColor = async (userEmail, colorNumb) => {
-  await schema.users.findOneAndUpdate({$and: [{email: userEmail}]},
+  console.log('colorNumb: ', colorNumb);
+  const result=await schema.users.findOneAndUpdate({$and: [{email: userEmail}]},
       {bodyColor: colorNumb});
+  return result;
 };
 /* =========== /// <==> End <==> ===========*/
 

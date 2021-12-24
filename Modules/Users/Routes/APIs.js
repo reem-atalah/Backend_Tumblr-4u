@@ -260,18 +260,18 @@ router.put('/updateColor',
     validateRequest(userJoi.updateColorValidations),
     isAuthorized(userEndPoints.updateColor),
     async (req, res)=>{
-      await userFunctions.
-          getInterests(req.decoded.email, req.body.bodyColor);
-
-      res.status(StatusCodes.OK).json({
-        'meta': {
-          'status': 200,
-          'msg': 'OK',
-        },
-        'res': {
-          'message': 'Color Updated Successfully',
-        },
-      });
+      result = await userFunctions.
+          updateColor(req.decoded.email, req.body.bodyColor);
+      res.json(result);
+      // res.status(StatusCodes.OK).json({
+      //   'meta': {
+      //     'status': 200,
+      //     'msg': 'OK',
+      //   },
+      //   'res': {
+      //     'message': 'Color Updated Successfully',
+      //   },
+      // });
     },
 );
 /* =========== /// <==> End <==> ===========*/
