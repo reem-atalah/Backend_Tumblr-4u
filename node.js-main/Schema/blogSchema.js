@@ -21,6 +21,7 @@ const blogSchema = new mongoose.Schema({
   accent: String,
   headerImage: String,
   background: String,
+  titleColor: String,
   reblog_parent_id: {
     type: 'String',
     required: false,
@@ -33,6 +34,7 @@ const blogSchema = new mongoose.Schema({
     required: false,
 
   },
+  userEmail: String,
   privacy: Boolean,
   name: {
     type: 'String',
@@ -59,9 +61,6 @@ const blogSchema = new mongoose.Schema({
   },
   blogVisitor: {
     type: 'Number',
-  },
-  followedTags: {
-    type: [String],
   },
   postsIds: {
     type: [String],

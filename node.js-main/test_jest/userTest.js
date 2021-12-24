@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 // ====================================================================
 // ====================================================================
 // ====================================================================
@@ -17,7 +18,9 @@
 ========= */
 const chai = require('chai');
 const chaiHttp = require('chai-http');
-const server = require('../script');
+// const server = require('../script');
+const userServices = require('../Modules/Users/Controller/services');
+const {expect} = require('chai');
 
 // const connect = require('../Configurations/configuration');
 
@@ -36,170 +39,140 @@ chai.use(chaiHttp);
 /* =======================================*/
 
 describe('User APIs', () => {
-  /*
+/*
  ///////// <---------> ======== <---------> ///////// =====================>
- ///////// <---------> Sign Up <---------> ///////// =====================>
+ ///////// <---------> Check Mail <---------> ///////// =====================>
  ///////// <---------> ======== <---------> ///////// =====================>
-    */
+*/
 
-  describe('User /signup', () => {
+  describe('Check Mail Function', () => {
     // ----------------// <=====> 1-Case <=====> //----------------//
-    it('It Should Create New User', (done) => {
-      const user = {
-        email: 'Ayman023@gmail.com',
-        password: '123',
-        blogName: 'CMP-023',
-        age: '21',
-        city: 'Giza',
-        country: 'Egypt',
-      };
-
-      chai
-          .request(server)
-          .post('/signup')
-          .send(user)
-          .end((err, res) => {
-            res.should.have.status(201);
-            res.body.should.be.a('object');
-            res.body.should.have
-                .property('res')
-                .have.property('message')
-                .eq('Sign Up Successfully (<:>)');
-
-            done();
-          });
+    it('It Should Return True', (done) => {
+      const email = 'Ayman@gmail.com';
+      userServices.checkMail(email).then((result)=>{
+        expect(result).to.be.eq(true);
+        done();
+      }).catch(done);
     });
-
     // ----------------// <=====> 2-Case <=====> //----------------//
-    it('It Should Return Email is Already Exists', (done) => {
-      const user = {
-        email: 'ahmed@gmail.com',
-        password: '123',
-        blogName: 'CMP-100',
-        age: '21',
-        city: 'Giza',
-        country: 'Egypt',
-      };
-
-      chai
-          .request(server)
-          .post('/SignUp')
-          .send(user)
-          .end((err, res) => {
-            res.should.have.status(400);
-            res.body.should.be.a('object');
-            res.body.should.have
-                .property('res')
-                .have.property('error')
-                .eq('Email is Already Exists (<:>)');
-            done();
-          });
-    });
-
-    // ----------------// <=====> 3-Case <=====> //----------------//
-    it('It Should Return Blog Name is Already Exists (<:>)', (done) => {
-      const user = {
-        email: 'Omr@gmail.com',
-        password: '123',
-        blogName: 'CMP-013',
-        age: '21',
-        city: 'Giza',
-        country: 'Egypt',
-      };
-
-      chai
-          .request(server)
-          .post('/SignUp')
-          .send(user)
-          .end((err, res) => {
-            res.should.have.status(400);
-            res.body.should.be.a('object');
-            res.body.should.have
-                .property('res')
-                .have.property('error')
-                .eq('Blog Name is Already Exists (<:>)');
-            done();
-          });
+    it('It Should Return False', (done) => {
+      const email = 'Afnan@gmail.com';
+      userServices.checkMail(email).then((result)=>{
+        expect(result).to.be.eq(false);
+        done();
+      }).catch(done);
     });
   });
 
   /*
-    ================ ///////// <---------> ======== <---------> /////////
-    =====>
-    ================ ///////// <---------> Log In <---------> ///////// ==
-    ==>
-    =============== ///////// <---------> ======== <---------> /////////
-    ====>
-    */
+ ///////// <---------> ======== <---------> ///////// =====================>
+ ///////// <---------> Check BlogName <---------> ///////// ===============>
+ ///////// <---------> ======== <---------> ///////// =====================>
+*/
+  describe('Check blogName Function', () => {
+  // ----------------// <=====> 1-Case <=====> //----------------//
+    it('It Should Return True', (done) => {
+      const blogName = 'Gail Marks';
+      userServices.checkBlogName(blogName).then((result)=>{
+        expect(result).to.be.eq(true);
+        done();
+      }).catch(done);
+    });
+    // ----------------// <=====> 2-Case <=====> //----------------//
+    it('It Should Return False', (done) => {
+      const blogName = 'CMP2023';
+      userServices.checkBlogName(blogName).then((result)=>{
+        expect(result).to.be.eq(false);
+        done();
+      }).catch(done);
+    });
+  });
 
-  describe('User /login', () => {
-    // ----------------// <=====> 1-Case <=====> //----------------//
-    it('It Should Login User', (done) => {
-      const user = {
-        email: 'ahmed@gmail.com',
-        password: '123',
-      };
+  /*
+ ///////// <---------> ======== <---------> ///////// =====================>
+ ///////// <---------> Create New User <---------> ///////// =================>
+ ///////// <---------> ======== <---------> ///////// =====================>
+*/
+  describe('Create User Function', () => {
+  // ----------------// <=====> 1-Case <=====> //----------------//
+    it('It Should Create New User', (done) => {
+      const email = 'ahmed.ayman.cmp@gmail.com';
+      const blogName = 'CMP';
+      const password = '12345';
+      const age = '21';
 
-      chai
-          .request(server)
-          .post('/login')
-          .send(user)
-          .end((err, res) => {
-            res.should.have.status(200);
-            res.body.should.be.a('object');
-            res.body.should.have
-                .property('res')
-                .have.property('message')
-                .eq('LogIn Successfully (<:>)');
+      userServices.createUser(email, password, blogName, age).then((result)=>{
+        expect(result).to.be.eq('Created');
+        done();
+      }).catch(done);
+    });
+  });
 
-            done();
-          });
+  /*
+ ///////// <---------> ======== <---------> ///////// =====================>
+ ///////// <---------> verify Mail <---------> ///////// =====================>
+ ///////// <---------> ======== <---------> ///////// =====================>
+*/
+  describe('Send Verification Mail To User', () => {
+  // ----------------// <=====> 1-Case <=====> //----------------//
+    it('It Should Send Verification Mail To User', (done) => {
+      const name = 'Rema';
+      const email = 'reem.atala555@gmail.com';
+      const token ='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJlZW0uYXRhbGE1NTVAZ21haWwuY29tIiwicm9sZSI6InVzZXIiLCJpYXQiOjE2MzkwNzk3MDd9.V3NXoggu_z7xWDQC8XksfFLsfkjuJsIaWqFwH10nBlE';
+
+      userServices.verifyMail(name, email, token).then((result)=>{
+        expect(result).to.be.eq('verification mail sent');
+        done();
+      }).catch(done);
+    });
+  });
+
+  /*
+ ///////// <---------> ======== <---------> ///////// =====================>
+ ///////// <---------> Check password <---------> ///////// ================>
+ ///////// <---------> ======== <---------> ///////// =====================>
+*/
+  describe('Checks Input Password', () => {
+  // ----------------// <=====> 1-Case <=====> //----------------//
+    it('It Should Return True', (done) => {
+      const password = '123';
+      const oldPassword =
+      '$2b$08$0eaSh6V.pAvCyX8LFE12Ve52cSHUUPVrV0h7DDx0SwA5eCSIGsKsq';
+
+      userServices.checkPassword(password, oldPassword).then((result)=>{
+        expect(result).to.be.eq(true);
+        done();
+      }).catch(done);
     });
 
     // ----------------// <=====> 2-Case <=====> //----------------//
-    it('It Should Incorrect Password', (done) => {
-      const user = {
-        email: 'ahmed@gmail.com',
-        password: '1234',
-      };
+    it('It Should Return False', (done) => {
+      const password = '12345';
+      const oldPassword =
+      '$2b$08$0eaSh6V.pAvCyX8LFE12Ve52cSHUUPVrV0h7DDx0SwA5eCSIGsKsq';
 
-      chai
-          .request(server)
-          .post('/login')
-          .send(user)
-          .end((err, res) => {
-            res.should.have.status(400);
-            res.body.should.be.a('object');
-            res.body.should.have
-                .property('res')
-                .have.property('error')
-                .eq('InCorrect Password (<:>)');
-
-            done();
-          });
+      userServices.checkPassword(password, oldPassword).then((result)=>{
+        expect(result).to.be.eq(false);
+        done();
+      }).catch(done);
     });
+  });
 
-    // ----------------// <=====> 3-Case <=====> //----------------//
-    it('It Should get Email Is Not Found', (done) => {
-      const user = {
-        email: 'Omr@gmail.com',
-        password: '123',
-      };
+  /*
+ ///////// <---------> ======== <---------> ///////// =====================>
+ ///////// <---------> Create New Google User <---------> ///////// ===========>
+ ///////// <---------> ======== <---------> ///////// =====================>
+*/
+  describe('Create User Google Function', () => {
+  // ----------------// <=====> 1-Case <=====> //----------------//
+    it('It Should Create New Google User', (done) => {
+      const email = 'ahmed.ayman.cmp@gmail.com';
+      const password = '12345';
 
-      chai
-          .request(server)
-          .post('/login')
-          .send(user)
-          .end((err, res) => {
-            res.should.have.status(400);
-            res.body.should.be.a('object');
-            res.body.should.have
-                .property('res')
-                .have.property('error')
-                .eq('Email Is Not Found (<:>)');
-
-            done();
-          });
+      userServices.createUser(email, password).then((result)=>{
+        expect(result).to.be.eq('Created');
+        done();
+      }).catch(done);
     });
   });
 });

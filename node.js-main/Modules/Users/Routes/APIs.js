@@ -72,33 +72,34 @@ router.post('/user/follow',
     VLDRQFB,
     ISAFB,
     (req, res)=>{
-      userFunctions.followBlog(req).then((blog)=>{
-        if (blog) {
-          res.status(StatusCodes.OK).json({
-            'meta': {
-              'status': 200,
-              'msg': 'OK',
-            },
+      userFunctions.followBlog(req.decoded.email, req.body.blogId)
+          .then((blog)=>{
+            if (blog) {
+              res.status(StatusCodes.OK).json({
+                'meta': {
+                  'status': 200,
+                  'msg': 'OK',
+                },
 
-            'res': {
-              'message': 'Blog Followed Successfully',
-              'data': blog,
-            },
-          });
-        } else {
-          res.status(StatusCodes.NOT_FOUND).json({
-            'meta': {
-              'status': 404,
-              'msg': 'NOT FOUND',
-            },
+                'res': {
+                  'message': 'Blog Followed Successfully',
+                  'data': blog,
+                },
+              });
+            } else {
+              res.status(StatusCodes.NOT_FOUND).json({
+                'meta': {
+                  'status': 404,
+                  'msg': 'NOT FOUND',
+                },
 
-            'res': {
-              'error': 'Blog not found',
-              'data': '',
-            },
+                'res': {
+                  'error': 'Blog not found',
+                  'data': '',
+                },
+              });
+            }
           });
-        }
-      });
     });
 
 /* ----------- <---> UnFollow <---> ----------- */
@@ -110,33 +111,34 @@ router.post('/user/unfollow',
     VLDRQUB,
     ISAUB,
     (req, res)=>{
-      userFunctions.unfollowBlog(req).then((blog)=>{
-        if (blog) {
-          res.status(StatusCodes.OK).json({
-            'meta': {
-              'status': 200,
-              'msg': 'OK',
-            },
+      userFunctions.unfollowBlog(req.decoded.email, req.body.blogId)
+          .then((blog)=>{
+            if (blog) {
+              res.status(StatusCodes.OK).json({
+                'meta': {
+                  'status': 200,
+                  'msg': 'OK',
+                },
 
-            'res': {
-              'message': 'Blog Unfollowed Successfully',
-              'data': blog,
-            },
-          });
-        } else {
-          res.status(StatusCodes.NOT_FOUND).json({
-            'meta': {
-              'status': 404,
-              'msg': 'NOT FOUND',
-            },
+                'res': {
+                  'message': 'Blog Unfollowed Successfully',
+                  'data': blog,
+                },
+              });
+            } else {
+              res.status(StatusCodes.NOT_FOUND).json({
+                'meta': {
+                  'status': 404,
+                  'msg': 'NOT FOUND',
+                },
 
-            'res': {
-              'error': 'Blog not found',
-              'data': '',
-            },
+                'res': {
+                  'error': 'Blog not found',
+                  'data': '',
+                },
+              });
+            }
           });
-        }
-      });
     });
 
 /* ----------- <---> Create Blog <---> ----------- */

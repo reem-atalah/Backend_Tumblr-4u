@@ -9,13 +9,16 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const {StatusCodes} = require('http-status-codes');
 const schema = require('../../../Model/model');
+const {unblockBlog} = require('../../Blogs/Controller/control');
+const {unfollowBlog}=require('./unfollowBlog');
+
 /* =========== /// <==> End <==> ===========*/
 
 /* ====================== /// <==> User Functions <==> /// ================== */
 
 /* ----------- <---> Sign Up <---> ------- */ // *** <===> Done <===>  *** //
 // Assumption: Account Must Be Not Deleted
-const signUp = require('./signup');
+// const signUp = require('./signup');
 
 /* ----------- <---> Sign In <---> --------- */ // *** <===> Done <===>  *** //
 // Assumption: Acount Must Be Not ( Deleted )
@@ -35,7 +38,125 @@ const googleInfo = require('./signupGoogle').googleInfo;
 const androidSignUpWithGoogle = require('./androidSignWithGoogle');
 
 // =================== End ===================//
+// const bcrypt = require('bcrypt');
 
+// const schema = require('../../../Model/model');
+/* =========== /// <==> End <==> ===========*/
+
+/* ----------- <---> Sign Up <---> ------- */ // *** <===> Done <===>  *** //
+// Assumption: Account Must Be Not Deleted
+const isBlocked = async (userEmail, blogId) => {
+  const blogs = schema.blogs.find({
+    $and: [{userEmail: userEmail},
+      {isDeleted: false}, {blockedBlogs: blogId}],
+  });
+  if ((await blogs).length>0) {
+    return true;
+  }
+};
+const userUnblockBlog = async (userEmail, blogId) => {
+  const blogs = schema.blogs.find({
+    $and: [{userEmail: userEmail},
+      {isDeleted: false}, {blockedBlogs: blogId}],
+  });
+  (await blogs).forEach((blog)=>{
+    if (blog) {
+      console.log(blog);
+      unblockBlog(blog._id, blogId);
+      console.log(blog);
+    }
+  });
+};
+/**
+ * This Function Used To Register New User.
+ *
+ * @param {string} email - email
+ * @param {string} password - password
+ * @param {string} blogName - blogName
+ * @param {string} age - age
+ *
+ * @returns {object} - { Object }
+ */
+
+const signUp = async (req, res) => {
+  try {
+    const {email, password, blogName, age} = req.body;
+
+    const isMailFound = await userServices.checkMail(email);
+    const isBlogFound = await userServices.checkBlogName(blogName);
+
+    if (isMailFound) {
+      res.status(StatusCodes.BAD_REQUEST).json({
+        'meta': {
+          'status': 400,
+          'msg': 'BAD_REQUEST',
+        },
+
+        'res': {
+          'error': 'Email is Already Exists (<:>)',
+          'data': '',
+        },
+      });
+    } else if (isBlogFound) {
+      res.status(StatusCodes.BAD_REQUEST).json({
+        'meta': {
+          'status': 400,
+          'msg': 'BAD_REQUEST',
+        },
+
+        'res': {
+          'error': 'Blog Name is Already Exists (<:>)',
+          'data': '',
+        },
+      });
+    } else {
+      userServices.createUser(email, password, blogName, age);
+
+      // =================================================================
+      // =================================================================
+      // ==========================Create Primary Blog========================//
+      // =================================================================
+      // =================================================================
+      const userBlog = {
+        decoded: {
+          email: email,
+        },
+        body:
+        {
+          name: blogName,
+
+        },
+      };
+      createBlog(userBlog);
+      const token = jwt.sign({email, role: 'user'}, process.env.KEY);
+      userServices.verifyMail(blogName, email, token);
+
+      res.status(StatusCodes.CREATED).json({
+        'meta': {
+          'status': 201,
+          'msg': 'CREATED',
+        },
+
+        'res': {
+          'message': 'Sign Up Successfully (<:>)',
+          'data': token,
+        },
+      });
+    }
+  } catch (error) {
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+      'meta': {
+        'status': 500,
+        'msg': 'INTERNAL_SERVER_ERROR',
+      },
+
+      'res': {
+        'error': 'Error In Sign Up Function (<:>)',
+        'data': '',
+      },
+    });
+  };
+};
 /* ------ <---> Follow Blog <---> */ // *** <===> Done <===>  *** //
 
 /**
@@ -44,72 +165,30 @@ const androidSignUpWithGoogle = require('./androidSignWithGoogle');
  * @name followBlog
  * @description this function makes the user whose id sent in
  *              params follow the blog whose id in the body
- * @param {String} userId - The id of the user who follows the blog
+ * @param {String} email - The email of the user who follows the blog
  * @param {String} blogId - The id of the blog to be followed
  * @returns {Object}  - The followed blog and null if not found
  */
 
 
-const followBlog = async (req) => {
+const followBlog = async (email, blogId) => {
   try {
-    const email = req.decoded.email;
-    const blogId = req.body.blogId;
     const blog = await schema.blogs.findOne({
       $and: [{_id: blogId},
-        {isDeleted: false}]});
+        {isDeleted: false}],
+    });
     const user = await schema.users.findOne({
       $and: [{email: email},
-        {isDeleted: false}, {isVerified: true}]}, 'following_blogs');
-    console.log(user);
+        {isDeleted: false}, {isVerified: true}],
+    },
+    'following_blogs blogsId');
     if (user) {
+      userUnblockBlog(email, blogId);
       if (blog) {
         blog.followers.push(user._id);
         blog.save();
         ids = user.following_blogs;
         ids.push(blogId);
-        await schema.users.findOneAndUpdate({email: email},
-            {following_blogs: ids});
-        return blog;
-      }
-      return null;
-    }
-  } catch (error) {
-    console.log(error.message);
-  }
-};
-
-/* ----------- <---> Unfollow Blog <--->  */ // *** <===> Done <===>  *** //
-
-
-/**
- *
- * @function
- * @name unfollowBlog
- * @description this function removes the user whose id sent in
- *               params from followers of the blog whose id in the body
- * @param {String} userId - The id of the user who unfollows the blog
- * @param {String} blogId - The id of the blog to be unfollowed
- * @returns {Object}  - The unfollowed blog
- */
-
-
-const unfollowBlog = async (req) => {
-  try {
-    const email = req.decoded.email;
-    const blogId = req.body.blogId;
-    const blog = await schema.blogs.findOne({
-      $and: [{_id: blogId},
-        {isDeleted: false}]});
-    const user = await schema.users.findOne({
-      $and: [{email: email},
-        {isDeleted: false}, {isVerified: true}]}, 'following_blogs');
-    console.log(user);
-    if (user) {
-      if (blog) {
-        blog.followers.pull(user._id);
-        blog.save();
-        ids = user.following_blogs;
-        ids.pull(blogId);
         await schema.users.findOneAndUpdate({email: email},
             {following_blogs: ids});
         return blog;
@@ -130,7 +209,7 @@ const unfollowBlog = async (req) => {
  * @name createBlog
  * @description This function allows the user whose id sent in
  *              params create a new blog
- * @param {String} userId  -id of the user
+ * @param {String} email  - email of the user
  * @param {String} title  - Title of the blog
  * @param {String} name  - URL of the blog and it should be unique
  * @param {Boolean} privacy  - Indicates wether the blog has a password or not
@@ -151,7 +230,8 @@ const createBlog = async (req) => {
     if (anotherBlog === null) {
       const user = await schema.users.findOne({
         $and: [{email: email},
-          {isDeleted: false}, {isVerified: true}]});
+          {isDeleted: false}, {isVerified: true}],
+      });
       if (user) {
         if (user.blogsId.length === 0) {
           isPrimary = true;
@@ -165,6 +245,8 @@ const createBlog = async (req) => {
             {
               title: title,
               name: name,
+              userEmail: email,
+              titleColor: 'default',
               privacy: privacy,
               password: password,
               updated: 0,
@@ -188,8 +270,10 @@ const createBlog = async (req) => {
         console.log(blog._id);
         ids = user.blogsId;
         ids.push(blog._id);
-        await schema.users.findOneAndUpdate({$and: [{email: email},
-          {isDeleted: false}, {isVerified: true}]}, {blogsId: ids});
+        await schema.users.findOneAndUpdate({
+          $and: [{email: email},
+            {isDeleted: false}, {isVerified: true}],
+        }, {blogsId: ids});
         console.log(user);
         return blog;
       } else {
@@ -211,7 +295,7 @@ const createBlog = async (req) => {
  * @name deleteBlog
  * @description This function allows the user whose id sent in
  *              params delete his blog
- * @param {String} userEmail  - id of the user
+ * @param {String} userEmail  - email of the user
  * @param {String} blogId  - id of the blog to be deleted
  * @returns {Object}  - the created deleted blog
  */
@@ -226,8 +310,10 @@ const deleteBlog = async (userEmail, blogId) => {
     });
     console.log(userEmail);
 
-    const user = await schema.users.findOne({$and: [{email: userEmail},
-      {isDeleted: true}, {isVerified: true}]});
+    const user = await schema.users.findOne({
+      $and: [{email: userEmail},
+        {isDeleted: true}, {isVerified: true}],
+    });
     console.log(user);
     if (!blog || !user) {
       return null;
@@ -273,6 +359,8 @@ module.exports = {
   unfollowBlog,
   createBlog,
   deleteBlog,
+  isBlocked,
+  userUnblockBlog,
   verfiyAccount,
   google,
   googleInfo,

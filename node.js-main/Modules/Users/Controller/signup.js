@@ -8,6 +8,7 @@ const userServices = require('./services');
 // const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const {StatusCodes} = require('http-status-codes');
+const control=require('./control');
 // const schema = require('../../../Model/model');
 /* =========== /// <==> End <==> ===========*/
 
@@ -64,6 +65,19 @@ const signUp = async (req, res) => {
       // ==========================Create Primary Blog========================//
       // =================================================================
       // =================================================================
+    const req = {
+        decoded: {
+          email: email,
+        },
+        body:
+         {
+           name: blogName,
+
+         },
+      };
+      
+    await control.createBlog(req);
+  
 
       const token = jwt.sign({email, role: 'user'}, process.env.KEY);
       userServices.verifyMail(blogName, email, token);

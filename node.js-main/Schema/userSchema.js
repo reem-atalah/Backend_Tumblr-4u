@@ -39,6 +39,10 @@ const userSchema = mongoose.Schema({
     deafult: 'trurBlue',
   },
 
+  followedTags: {
+    type: [String],
+  },
+
   following_blogs: [{type: String}],
 
   likes_posts_id: [{type: String}],
@@ -75,10 +79,9 @@ const userSchema = mongoose.Schema({
 /* ======================== <-- User Hooks --> ======================== */
 
 /* ------------ Hashing Password In Sign Up ------------ */
-/*userSchema.pre('save', async function() {
+  userSchema.pre('save', async function() {
   this.password = await bcrypt.hash(this.password, 8);
-  // this.cpassword = await bcrypt.hash(this.cpassword, 8);
-});*/
+});
 
 /* =========== <--> End <--> =========== */
 
