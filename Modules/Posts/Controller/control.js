@@ -67,7 +67,7 @@ const uploadImgg = async () =>{
 
   // give our container a name
   const containerName = blobServiceClient
-      .getContainerClient('Tumber4uImgContainer');
+      .getContainerClient('imagess');
 
   console.log('containerName', containerName.containerName);
 
