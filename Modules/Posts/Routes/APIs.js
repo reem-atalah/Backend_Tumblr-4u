@@ -18,16 +18,28 @@ const postEndPoints = require('../endPoints');
 
 /* ====================== /// <==> User APIs <==> /// ====================== */
 
-/* ----------- <---> Upload Img <---> ----------- */
-router.post('/:blogId/posts/uploadImgg',
+/* ----------- <---> Upload data <---> ----------- */
+router.post('/:blogId/posts/data',
     // validateRequest(postJoi.uploadImgValidations),
     // isAuthorized(postEndPoints.uploadeImg),
     async (req, res) => {
       // console.log(req.files);
       result= await postFunctions.uploadImgg();
+      // console.log('result: ', result);
+      res.json(result);
+    });
+
+/* ----------- <---> Upload Img <---> ----------- */
+router.post('/:blogId/posts/uploadImg',
+    // validateRequest(postJoi.uploadImgValidations),
+    isAuthorized(postEndPoints.uploadeImg),
+    async (req, res) => {
+      // console.log(req.files);
+      result= await postFunctions.uploadImg(req, req.body.files);
       console.log('result: ', result);
       res.json(result);
     });
+
 
 /* ----------- <---> Random Posts <---> ----------- */
 // no validation, no authentication
@@ -238,7 +250,27 @@ router.get('/dashboard',
       });
     },
 );
-
+/* ----------- <---> Get Blog Posts <---> ----------- */
+router.get('/blog/:blogId/getBlogPosts',
+    isAuthorized(postEndPoints.getBlogPosts),
+    (req, res) => {
+      postFunctions.getBlogPosts(req.params.blogId).then((ret) => {
+        if (ret.msg === 'Blog Posts Got Successfully') {
+          res.status(StatusCodes.OK).json({
+            'res': {
+              'messege': ret.msg,
+              'blog': ret.blog,
+              'postsToShow': ret.postsToShow,
+            }
+          });
+        } else if (ret.msg === 'Error In Get Blog Posts Function') {
+          res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(ret.msg); 
+        } else {
+          res.status(StatusCodes.BAD_REQUEST).json(ret.msg);
+        };
+      });
+    },
+);
 /* ----------- <---> Delete a Post <---> ----------- */
 router.delete('/posts/:postId/delete_post',
     // validateRequest(postJoi.createPostValidations),

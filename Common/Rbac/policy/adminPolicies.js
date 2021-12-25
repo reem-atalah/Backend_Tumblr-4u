@@ -37,6 +37,7 @@ const adminPolicies = [
   postEndPoints.getNotes,
   postEndPoints.getDashboard,
   postEndPoints.uploadeImg,
+  postEndPoints.getBlogPosts,
 ];
 /* =========== <--> End <--> =========== */
 

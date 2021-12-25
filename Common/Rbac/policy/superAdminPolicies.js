@@ -37,7 +37,7 @@ const superAdminPolicies = [
   postEndPoints.getNotes,
   postEndPoints.getDashboard,
   postEndPoints.uploadeImg,
-
+  postEndPoints.getBlogPosts,
 ];
 /* =========== <--> End <--> =========== */
 

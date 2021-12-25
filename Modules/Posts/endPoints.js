@@ -15,7 +15,7 @@ const removeReblog = 'Posts: removeReblog';
 const getNotes = 'Posts: getNotes';
 const getDashboard = 'Posts: getDashboard';
 const shareWith = 'Posts: shareWith';
-
+const getBlogPosts ='Posts: getBlogPosts';
 const uploadeImg = 'Posts: uploadeImg';
 
 // const Get_Posts = 'Post:Get_Posts';
@@ -36,6 +36,7 @@ const postEndPoints = {
   getDashboard,
   shareWith,
   uploadeImg,
+  getBlogPosts,
 };
 /* =========== <--> End <--> =========== */
 

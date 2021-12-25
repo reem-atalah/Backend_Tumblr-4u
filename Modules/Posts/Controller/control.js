@@ -65,31 +65,38 @@ const uploadImgg = async () =>{
   const blobServiceClient = await BlobServiceClient
       .fromConnectionString(process.env.AZURE_STORAGE_CONNECTION_STRING);
 
-  // give our container a name
   const containerName = blobServiceClient
       .getContainerClient('imagess');
 
-  console.log('containerName', containerName.containerName);
+  // console.log('containerName', containerName.containerName);
 
   const containerClient = await blobServiceClient
       .getContainerClient(containerName.containerName);
 
-  console.log('containerClient', containerClient);
+  // console.log('containerClient', containerClient);
 
-  const content = 'Hello world!';
-  const blobName = 'newblob' + new Date().getTime();
+  const content = 'Hello Rema!';
+  const blobName = 'newblob' + new Date().getTime()+'.txt';
   const blockBlobClient = containerClient.getBlockBlobClient(blobName);
-  console.log('blockBlobClient: ', blockBlobClient);
+  // console.log('blockBlobClient: ', blockBlobClient);
   const uploadBlobResponse = await blockBlobClient.upload(content, content.length);
   // console.log(`Upload block blob ${blobName} successfully`, uploadBlobResponse.requestId);
+
+  console.log('\nListing blobs...');
+
+  // List the blob(s) in the container.
+  for await (const blob of containerClient.listBlobsFlat()) {
+    console.log('\t', blob.name);
+  }
+  return 'https://tumblrstorage.blob.core.windows.net/imagess/'+blobName;
 };
 
-const uploadImg = async (files) =>{
-  // console.log(files);
-  // files.forEach(async (file) => { // multiple images
-  // const file= files.file; // one image
+const uploadImg = async (req, files) =>{
+  // console.log('files: ', files);
+  // // files.forEach(async (file) => { // multiple images
+  // // const file= files.file; // one image
 
-  // convert image from base64 to original image
+  // // convert image from base64 to original image
   // const match=files.match(/^data:([A-Za-z-+\/]+);base64,(.+)$/);
   // const response = {};
 
@@ -103,12 +110,8 @@ const uploadImg = async (files) =>{
   // const imageBuffer = decodedImg.data;
   // const type = decodedImg.type;
   // const extension = mime.extension(type);
-  // const fileName = 'image.' + extension;
-
-  // const file= imageBuffer;
   // const uploadDate = new Date().toISOString().replace(/:/g, '-');
-  // const blobName = fileName + uploadDate + extension;
-  // console.log('file: ', file);
+  // const blobName = 'image' + uploadDate + '.'+ extension;
 
   // const boundary= multipart.getBoundary(type);
   // const parts = multipart.Parse(response.data, boundary);
@@ -117,37 +120,44 @@ const uploadImg = async (files) =>{
   const blobServiceClient = await BlobServiceClient
       .fromConnectionString(process.env.AZURE_STORAGE_CONNECTION_STRING);
 
-  // give our container a name
   const containerName = blobServiceClient
-      .getContainerClient('Tumber4uImgContainer');
+      .getContainerClient('imagess');
 
-  console.log('containerName', containerName.containerName);
+  // console.log('containerName', containerName.containerName);
 
   const containerClient = await blobServiceClient
       .getContainerClient(containerName.containerName);
 
-  // create container
-  // const createContainerResponse = await containerClient.create();
-  // console.log('Container was created successfully. requestId: ',
-  //     createContainerResponse.requestId);
-
-  // const form = new formidable.IncomingForm();
+  // console.log('containerClient', containerClient);
+  let blobName;
+  let form = new formidable.IncomingForm();
   // new Promise(function(resolve, reject) {
-  //   form.parse(files, async function(files) {
-  //     const file = files.file;
-  //     const filePath = file.path;
-  data ='Hello World!';
-  const blockBlobClient = containerClient.getBlockBlobClient(blobName);
-  const uploadBlobResponse = await blockBlobClient
-      .upload(data, data.length);
-  // .upload(parts[0].data, parts[0].data.length);
-  console.log('uploaded successfully', blobName, ' Id:', uploadBlobResponse.requestId);
-  console.log('uploaded successfully');
-  //     if (err) reject(err);
-  //     else resolve([fields, files]);
+  form.parse(req, async function(err, fields, files) {
+    const file = files.file;
+    blobName = 'test' + 0 + files.file;
+    console.log('blobName: ', blobName);
+    const contentType = file.type;
+    const filePath = file.path;
+    // data ='Hello World!';
+    const blockBlobClient = containerClient.getBlockBlobClient(blobName);
+    console.log('Uploading to Azure storage as blob:', blobName);
+
+    const uploadBlobResponse = await blockBlobClient
+        .uploadFile(filePath);
+    // .upload(data, data.length);
+    // .upload(parts[0].data, parts[0].data.length);
+    // console.log('uploaded successfully', blobName, ' Id:', uploadBlobResponse.requestId);
+  //   if (err) reject(err);
+  //   else resolve([fields, files]);
   //   });
-  // });
-  return 'https://tumblr4u.blob.core.windows.net/images/'+blobName;
+  });
+  console.log('\nListing blobs...');
+
+  // List the blob(s) in the container.
+  for await (const blob of containerClient.listBlobsFlat()) {
+    console.log('\t', blob.name);
+  }
+  return 'https://tumblrstorage.blob.core.windows.net/imagess/'+blobName;
 
   // });
 
@@ -770,15 +780,15 @@ const getNotes = async (postId) => {
  * @returns {string} Array of posts objects.
  */
 
- const getDashboard = async (userEmail) => {
+const getDashboard = async (userEmail) => {
   try {
-    //var ret = ['', []];
+    // var ret = ['', []];
     ret = {
       msg: '',
       user: {},
       blog: {},
-      postsToShow: []
-    }
+      postsToShow: [],
+    };
     postsToShow = [];
     // postsToShow = [
     //   {
@@ -786,15 +796,15 @@ const getNotes = async (postId) => {
     //     notes: []
     //   }
     // ];
-    //const existingUser = await schema.users.findOne({_id: userId});
+    // const existingUser = await schema.users.findOne({_id: userId});
     const existingUser = await schema.users.findOne({email: userEmail});
     if (existingUser) {
-      //ret.user = existingUser;
+      // ret.user = existingUser;
       const userId = existingUser._id;
       const blogId = existingUser.blogsId[0];
       const existingBlog = await schema.blogs.findOne({_id: blogId});
       if (existingBlog) {
-        //ret.blog = existingBlog;
+        // ret.blog = existingBlog;
         const postsArray = existingBlog.postsIds;
         for (let i=0; i<postsArray.length; i++) {
           const existingPost = await schema.Posts.findOne({_id: postsArray[i]});
@@ -804,12 +814,12 @@ const getNotes = async (postId) => {
             //   notes: getNotes(existingPost._id)
             // }
             postsToShow.push(existingPost);
-            //postsToShow.push(obj);
+            // postsToShow.push(obj);
           }
         }
       } else {
-          ret.msg = 'Blog Not Found';
-          return ret;
+        ret.msg = 'Blog Not Found';
+        return ret;
       }
       // checking all follwed blogs to get their posts
       const followingBlogsArray = existingUser.following_blogs;
@@ -835,7 +845,7 @@ const getNotes = async (postId) => {
       }
       postsToShow.sort(function(x, y){
         return y._id.getTimestamp() - x._id.getTimestamp();
-      })
+      });
       ret.msg = 'Dashboard Got Successfully';
       ret.user = existingUser;
       ret.blog = existingBlog;
