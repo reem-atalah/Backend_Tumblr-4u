@@ -261,10 +261,10 @@ router.get('/blog/:blogId/getBlogPosts',
               'messege': ret.msg,
               'blog': ret.blog,
               'postsToShow': ret.postsToShow,
-            }
+            },
           });
         } else if (ret.msg === 'Error In Get Blog Posts Function') {
-          res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(ret.msg); 
+          res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(ret.msg);
         } else {
           res.status(StatusCodes.BAD_REQUEST).json(ret.msg);
         };
