@@ -130,7 +130,7 @@ const uploadImg = async (req, files) =>{
 
   // console.log('containerClient', containerClient);
   let blobName;
-  let form = new formidable.IncomingForm();
+  const form = new formidable.IncomingForm();
   // new Promise(function(resolve, reject) {
   form.parse(req, async function(err, fields, files) {
     const file = files.file;
@@ -860,6 +860,53 @@ const getDashboard = async (userEmail) => {
     return ret;
   }
 };
+
+/* ----------- <---> Get Blog Posts <---> ----------- */ // *** <===> Done <===>  *** //
+
+/**
+ * @function
+ * @name getBlogPosts
+ * @description Get dashboard of a blog.
+ * @param {string} userId - Id of the user to get its blogs' posts.
+ * @param {string} blogId - Id of the blog to get its posts.
+ *
+ * @returns {string} Array of posts objects.
+ */
+
+const getBlogPosts = async (blogId) => {
+  try {
+    // var ret = ['', []];
+    ret = {
+      msg: '',
+      blog: {},
+      postsToShow: [],
+    };
+    postsToShow = [];
+    const existingBlog = await schema.blogs.findOne({_id: blogId});
+    if (existingBlog) {
+      const postsArray = existingBlog.postsIds;
+      for (let i=0; i<postsArray.length; i++) {
+        const existingPost = await schema.Posts.findOne({_id: postsArray[i]});
+        if (existingPost) {
+          postsToShow.push(existingPost);
+        }
+      }
+    } else {
+      ret.msg = 'Blog Not Found';
+      return ret;
+    }
+    postsToShow.sort(function(x, y){
+      return y._id.getTimestamp() - x._id.getTimestamp();
+    });
+    ret.msg = 'Blog Posts Got Successfully';
+    ret.blog = existingBlog;
+    ret.postsToShow = postsToShow;
+    return ret;
+  } catch (error) {
+    ret.msg = 'Error In Get Blog Posts Function';
+    return ret;
+  }
+};
 /* =========== /// <==> End <==> ===========*/
 
 /* =============== /// <==> Export Post Functions <==> /// =============== */
@@ -883,6 +930,7 @@ module.exports = {
   uploadImgg,
   retrieveRandomPosts,
   retrieveTrendingPosts,
+  getBlogPosts,
 };
 
 /* =========== /// <==> End <==> ===========*/
