@@ -22,12 +22,12 @@ router.post('/:blogId/posts/create_post',
     validateRequest(postJoi.createPostValidations),
     isAuthorized(postEndPoints.createPost),
     (req, res) => {
-      postFunctions.createPost(req.params.blogId,
+      postFunctions.createPost(req.url,req.params.blogId,
           req.body.postHtml, req.body.type, req.body.state, req.body.tags).then((ret) => {
             if (ret[0] === 'Post Created Successfully') {
               res.status(StatusCodes.OK).json({
                 'res': {
-                  'messege': ret[0],
+                  'message': ret[0],
                   'Post Id': ret[1],
                 }
               });
@@ -49,7 +49,7 @@ router.get('/posts/:postId/show_post',
         if (ret[0] === 'Post Returned Successfully') {
           res.status(StatusCodes.OK).json({
             'res': {
-              'messege': ret[0],
+              'message': ret[0],
               'Post Content': ret[1],
             }
           });
@@ -72,7 +72,7 @@ router.put('/:blogId/:postId/comment',
             if (ret[0] === 'Comment Posted Successfully') {
               res.status(StatusCodes.OK).json({
                 'res': {
-                  'messege': ret[0],
+                  'message': ret[0],
                   'commend Id': ret[1],
                 }
               });
@@ -115,7 +115,7 @@ router.put('/:blogId/:postId/reblog_post',
             if (ret[0] === 'Post Reblogged Successfully') {
               res.status(StatusCodes.OK).json({
                 'res': {
-                  'messege': ret[0],
+                  'message': ret[0],
                   'Reblog Id': ret[1],
                 }
               });
@@ -171,7 +171,7 @@ router.get('/posts/:postId/notes',
         if (ret.msg === 'Notes Got Successfully') {
           res.status(StatusCodes.OK).json({
             'res': {
-              'messege': ret.msg,
+              'message': ret.msg,
               'notes': ret.notes,
             }
           });
@@ -192,7 +192,7 @@ router.get('/dashboard',
         if (ret.msg === 'Dashboard Got Successfully') {
           res.status(StatusCodes.OK).json({
             'res': {
-              'messege': ret.msg,
+              'message': ret.msg,
               'user': ret.user,
               'blog': ret.blog,
               'postsToShow': ret.postsToShow,
@@ -215,7 +215,7 @@ router.get('/blog/:blogId/getBlogPosts',
         if (ret.msg === 'Blog Posts Got Successfully') {
           res.status(StatusCodes.OK).json({
             'res': {
-              'messege': ret.msg,
+              'message': ret.msg,
               'blog': ret.blog,
               'postsToShow': ret.postsToShow,
             }
@@ -230,11 +230,11 @@ router.get('/blog/:blogId/getBlogPosts',
 );
 
 /* ----------- <---> Delete a Post <---> ----------- */
-router.delete('/posts/:postId/delete_post',
+router.delete('/post/:postId/delete_post',
     // validateRequest(postJoi.createPostValidations),
     isAuthorized(postEndPoints.deletePost),
     (req, res) => {
-      postFunctions.deletePost(req.params.postId, req.params.reblogId).then((ret) => {
+      postFunctions.deletePost(req.params.postId).then((ret) => {
         if (ret === 'Post Deleted Successfully') {
           res.status(StatusCodes.OK).json(ret);
         } else if (ret === 'Error In Delete Post Function') {
@@ -247,14 +247,48 @@ router.delete('/posts/:postId/delete_post',
 );
 
 /* ----------- <---> Edit a Post <---> ----------- */
-router.put('/:postId/:reblogId/remove_reblog',
+router.put('/post/:postId/edit_post',
     // validateRequest(postJoi.createPostValidations),
-    isAuthorized(postEndPoints.removeReblog),
+    isAuthorized(postEndPoints.editPost),
     (req, res) => {
-      postFunctions.removeReblog(req.params.postId, req.params.reblogId).then((ret) => {
-        if (ret === 'Reblog Removed Successfully') {
+      postFunctions.editPost(req.params.postId, req.body.postHtml).then((ret) => {
+        if (ret === 'Post Edited Successfully') {
           res.status(StatusCodes.OK).json(ret);
-        } else if (ret === 'Error In Remove Reblog Function') {
+        } else if (ret === 'Error In Edit Post Function') {
+          res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(ret); 
+        } else {
+          res.status(StatusCodes.BAD_REQUEST).json(ret);
+        };
+      });
+    },
+);
+
+/* ----------- <---> Report a Post <---> ----------- */
+router.put('/post/:postId/report_post',
+    // validateRequest(postJoi.createPostValidations),
+    isAuthorized(postEndPoints.reportPost),
+    (req, res) => {
+      postFunctions.reportPost(req.params.postId).then((ret) => {
+        if (ret === 'Post Reported Successfully') {
+          res.status(StatusCodes.OK).json(ret);
+        } else if (ret === 'Error In Report Post Function') {
+          res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(ret); 
+        } else {
+          res.status(StatusCodes.BAD_REQUEST).json(ret);
+        };
+      });
+    },
+);
+
+/* ----------- <---> Share With <---> ----------- */
+router.get('/post/:postId/share_with',
+    // validateRequest(postJoi.createPostValidations),
+    isAuthorized(postEndPoints.sharePost),
+    (req, res) => {
+      postFunctions.sharePost(req.params.postId).then((ret) => {
+        if (ret === 'Post Shared Successfully') {
+          res.status(StatusCodes.OK).json(ret);
+        } else if (ret === 'Error In Share Post Function') {
           res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(ret); 
         } else {
           res.status(StatusCodes.BAD_REQUEST).json(ret);

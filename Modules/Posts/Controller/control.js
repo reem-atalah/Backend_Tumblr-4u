@@ -27,11 +27,11 @@ const mongoose = require('mongoose');
  * @returns {String} Created Post Id.
  */
 
-const createPost = async (blogId, postHtml, type, state, tags) => {
+const createPost = async (url,blogId, postHtml, type, state, tags) => {
   try {
     var ret = ['',''];
     const existingBlog = await schema.blogs.findOne({_id: blogId});
-    if (existingBlog) {
+    if (existingBlog && existingBlog.isDeleted == false) {
       const newNotes = new schema.notes();
       newNotes.save();
       const notesId = newNotes._id;
@@ -42,6 +42,7 @@ const createPost = async (blogId, postHtml, type, state, tags) => {
       existingBlog.save();
       ret[0] = 'Post Created Successfully';
       ret[1] = newPost._id;
+      console.log("req url: ", url)
       return ret;
     } else {
       ret[0] = 'Blog Not Found';
@@ -104,8 +105,8 @@ const makeComment = async (blogId, postId, text) => {
     const notesId = existingPost.notesId;
     // const notesId = req.params.notesId;
     const existingNotes = await schema.notes.findOne({_id: notesId});
-    if (existingBlog) {
-      if (existingPost) {
+    if (existingBlog && existingBlog.isDeleted == false) {
+      if (existingPost && existingPost.isDeleted == false) {
         const notesId = existingPost.notesId;
         const existingNotes = await schema.notes.findOne({_id: notesId});
         const commentingBlogTitle = existingBlog.title;
@@ -221,8 +222,8 @@ const likePress = async (blogId, postId) => {
     const existingPost = await schema.Posts.findOne({_id: postId});
     const notesId = existingPost.notesId;
     const existingNotes = await schema.notes.findOne({_id: notesId});
-    if (existingBlog) {
-      if (existingPost) {
+    if (existingBlog && existingBlog.isDeleted == false) {
+      if (existingPost && existingPost.isDeleted == false) {
         if (existingNotes) {
           //likingBlogId = blogId;
           const like = {blogId}
@@ -286,8 +287,8 @@ const reblogPost = async (blogId, postId, text) => {
     const existingPost = await schema.Posts.findOne({_id: postId});
     const notesId = existingPost.notesId;
     const existingNotes = await schema.notes.findOne({_id: notesId});
-    if (existingBlog) {
-      if (existingPost) {
+    if (existingBlog && existingBlog.isDeleted == false) {
+      if (existingPost && existingPost.isDeleted == false) {
         const rebloggingId = blogId;
         if (existingNotes) {
           const reblog = {
@@ -337,7 +338,7 @@ const removeComment = async (postId, commentId) => {
   try {
     var ret = '';
     const existingPost = await schema.Posts.findOne({_id: postId});
-    if (existingPost) {
+    if (existingPost && existingPost.isDeleted == false) {
       const notesId = existingPost.notesId;
       const existingNotes = await schema.notes.findOne({_id: notesId});
       if (existingNotes) {
@@ -383,7 +384,7 @@ const removeComment = async (postId, commentId) => {
 const removeReblog = async (postId, reblogId) => {
   try {
     const existingPost = await schema.Posts.findOne({_id: postId});
-    if (existingPost) {
+    if (existingPost && existingPost.isDeleted == false) {
       const notesId = existingPost.notesId;
       const existingNotes = await schema.notes.findOne({_id: notesId});
       if (existingNotes) {
@@ -436,7 +437,7 @@ const getNotes = async (postId) => {
       }]
     }
     const existingPost = await schema.Posts.findOne({_id: postId});
-    if (existingPost) {
+    if (existingPost && existingPost.isDeleted == false) {
       const notesId = existingPost.notesId;
       const existingNotes = await schema.notes.findOne({_id: notesId});
       if (existingNotes) {
@@ -517,16 +518,16 @@ const getDashboard = async (userEmail) => {
     //const existingUser = await schema.users.findOne({_id: userId});
     const existingUser = await schema.users.findOne({email: userEmail});
     if (existingUser) {
-      //ret.user = existingUser;
+      ret.user = existingUser;
       const userId = existingUser._id;
       const blogId = existingUser.blogsId[0];
       const existingBlog = await schema.blogs.findOne({_id: blogId});
-      if (existingBlog) {
-        //ret.blog = existingBlog;
+      if (existingBlog && existingBlog.isDeleted == false) {
+        ret.blog = existingBlog;
         const postsArray = existingBlog.postsIds;
         for (let i=0; i<postsArray.length; i++) {
           const existingPost = await schema.Posts.findOne({_id: postsArray[i]});
-          if (existingPost) {
+          if (existingPost && existingPost.isDeleted == false) {
             // const obj = {
             //   post: existingPost,
             //   notes: getNotes(existingPost._id)
@@ -543,11 +544,11 @@ const getDashboard = async (userEmail) => {
       const followingBlogsArray = existingUser.following_blogs;
       for (let i=0; i<followingBlogsArray.length; i++) {
         const existingFoBlog = await schema.blogs.findOne({_id: followingBlogsArray[i]});
-        if (existingFoBlog) {
+        if (existingFoBlog && existingFoBlog.isDeleted == false) {
           const foPostsArray = existingFoBlog.postsIds;
           for (let j=0; j<foPostsArray.length; j++) {
             const existingFoPost = await schema.Posts.findOne({_id: foPostsArray[j]});
-            if (existingFoPost) {
+            if (existingFoPost && existingFoPost.isDeleted == false) {
               postsToShow.push(existingFoPost);
               // const obj = {
               //   post: existingFoPost,
@@ -557,16 +558,16 @@ const getDashboard = async (userEmail) => {
             }
           }
         } else {
-          ret.msg = 'Following Blog Not Found';
-          return ret;
+          //ret.msg = 'Following Blog Not Found';
+          //return ret;
         }
       }
       postsToShow.sort(function(x, y){
         return y._id.getTimestamp() - x._id.getTimestamp();
       })
       ret.msg = 'Dashboard Got Successfully';
-      ret.user = existingUser;
-      ret.blog = existingBlog;
+      //ret.user = existingUser;
+      //ret.blog = existingBlog;
       ret.postsToShow = postsToShow;
       return ret;
     } else {
@@ -626,6 +627,118 @@ const getDashboard = async (userEmail) => {
   }
 };
 
+/* ----------- <---> Delete Post <---> ----------- */ // *** <===> Done <===>  *** //
+
+/**
+ * @function
+ * @name deletePost
+ * @description Deletes a Post.
+ * @param {string} postId - Id of the post to delete.
+ *
+ * @returns {string} .
+ */
+
+ const deletePost = async (postId) => {
+  try {
+    ret = '';
+    const existingPost = await schema.Posts.findOne({_id: postId});
+    if (existingPost && existingPost.isDeleted == false) {
+      existingPost.isDeleted = true;
+      existingPost.save();
+      ret = 'Post Deleted Successfully'
+      return ret;
+    } else {
+      ret = 'Post Not Found';
+      return ret;
+    };
+  } catch (error) {
+    ret = 'Error In Delete Post Function';
+    return ret;
+  };
+};
+
+/* ----------- <---> Edit Post <---> ----------- */ // *** <===> Done <===>  *** //
+
+/**
+ * @function
+ * @name editPost
+ * @description Edits a Post.
+ * @param {string} postId - Id of the post to edit.
+ *
+ * @returns {string} .
+ */
+
+ const editPost = async (postId, postHtml) => {
+  try {
+    ret = '';
+    const existingPost = await schema.Posts.findOne({_id: postId});
+    if (existingPost && existingPost.isDeleted == false) {
+      existingPost.postHtml = postHtml;
+      existingPost.save();
+      ret = 'Post Edited Successfully';
+      //console.log(existingPost)
+      return ret;
+    } else {
+      ret = 'Post Not Found';
+      return ret;
+    }
+  } catch (error) {
+    ret = 'Error In Edit Post Function';
+    return ret;
+  };
+};
+
+/* ----------- <---> Report Post <---> ----------- */ // *** <===> Done <===>  *** //
+
+/**
+ * @function
+ * @name reportPost
+ * @description Reports a Post.
+ * @param {string} postId - Id of the post to report.
+ *
+ * @returns {string} .
+ */
+
+ const reportPost = async (postId) => {
+  try {
+    const existingPost = await schema.Posts.findOne({_id: postId});
+    if (existingPost && existingPost.isDeleted == false) {
+      existingPost.isReported = true;
+      existingPost.save();
+      ret = 'Post Reported Successfully'
+      return ret;
+    } else {
+      ret = 'Post Not Found';
+      return ret;
+    }
+  } catch (error) {
+    ret = 'Error In Report Post Function';
+    return ret;
+  };
+};
+
+/* ----------- <---> Share Post <---> ----------- */ // *** <===> Done <===>  *** //
+
+/**
+ * @function
+ * @name sharePost
+ * @description Shares a Post.
+ * @param {string} postId - Id of the post to share.
+ *
+ * @returns {string} .
+ */
+
+ const sharePost = async (postId) => {
+  try {
+    const existingPost = await schema.Posts.findOne({_id: postId});
+    if (existingPost) {
+    }
+  } catch (error) {
+    ret = 'Error In Share Post Function';
+    return ret;
+  };
+};
+
 /* =========== /// <==> End <==> ===========*/
 
 /* =============== /// <==> Export Post Functions <==> /// =============== */
@@ -639,10 +752,10 @@ module.exports = {
   reblogPost,
   removeComment,
   removeReblog,
-  // editPost,
-  // deletePost,
-  // shareWith,
-  // blogValidation
+  editPost,
+  deletePost,
+  sharePost,
+  reportPost,
   getNotes,
   getDashboard,
   getBlogPosts,
