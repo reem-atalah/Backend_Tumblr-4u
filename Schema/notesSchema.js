@@ -12,6 +12,7 @@ const mongoose = require('mongoose');
 /* ============== /// <==> Notes Schema <==> /// ============== */
 
 const notesSchema = mongoose.Schema({
+  postId: {type: String},
   likes: [
     {
     noteType: {type: String, default: 'like'},
@@ -35,6 +36,7 @@ const notesSchema = mongoose.Schema({
       isDeleted: {type: Boolean, default: false},
     },
   ],
+  isDeleted: {type: Boolean, default: false},
 });
 
 /* =========== /// <==> End <==> ===========*/

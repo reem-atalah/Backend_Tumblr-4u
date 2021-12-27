@@ -30,10 +30,10 @@ const postSchema = mongoose.Schema({
     required: true,
   },
   tags: {type: [String]},
-  // date: { type: Date }
   notesId: {type: String},
-  isDeleted: {type: Boolean},
-
+  isDeleted: {type: Boolean, default: false},
+  isReported: {type: Boolean, default: false},
+  postUrl: {type: String},
 }, {
   Timestamps: true,
 });

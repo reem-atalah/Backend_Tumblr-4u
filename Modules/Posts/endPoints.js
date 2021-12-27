@@ -14,14 +14,12 @@ const removeComment = 'Posts: removeComment';
 const removeReblog = 'Posts: removeReblog';
 const getNotes = 'Posts: getNotes';
 const getDashboard = 'Posts: getDashboard';
-const shareWith = 'Posts: shareWith';
-const getBlogPosts ='Posts: getBlogPosts';
+const sharePost = 'Posts: sharePost';
+const reportPost = 'Posts: reportPost';
+const getBlogPosts = 'Posts: getBlogPosts';
+const activityFeed = 'Posts: activityFeed';
 const uploadeImg = 'Posts: uploadeImg';
 const uploadStream = 'Posts : uploadStream';
-
-// const Get_Posts = 'Post:Get_Posts';
-// const Get_All_Posts = 'Post:Get_All_Posts';
-// const Block_Post = 'Post:Block_Post';
 
 const postEndPoints = {
   createPost,
@@ -35,9 +33,11 @@ const postEndPoints = {
   removeReblog,
   getNotes,
   getDashboard,
-  shareWith,
-  uploadeImg,
+  sharePost,
   getBlogPosts,
+  reportPost,
+  activityFeed,
+  uploadeImg,
   uploadStream,
 };
 /* =========== <--> End <--> =========== */

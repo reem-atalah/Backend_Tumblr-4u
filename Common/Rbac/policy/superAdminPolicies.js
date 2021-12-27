@@ -36,8 +36,11 @@ const superAdminPolicies = [
   postEndPoints.removeReblog,
   postEndPoints.getNotes,
   postEndPoints.getDashboard,
-  postEndPoints.uploadeImg,
   postEndPoints.getBlogPosts,
+  postEndPoints.reportPost,
+  postEndPoints.sharePost,
+  postEndPoints.activityFeed,
+  postEndPoints.uploadeImg,
 ];
 /* =========== <--> End <--> =========== */
 
