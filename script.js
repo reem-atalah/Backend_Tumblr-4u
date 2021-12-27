@@ -15,6 +15,7 @@ const postRoutes = require('./Modules/Posts/Routes/APIs');
 const cors =require('cors');
 const fileUpload = require('express-fileupload');
 server.use(fileUpload());
+const path = require('path');
 
 /* ========== /// <==> Calling Config Function OF dotenv <==> /// =========== */
 dotenv.config();
@@ -44,7 +45,6 @@ server.use(blogRoutes);
 server.use(postRoutes);
 server.use(express.json());
 server.use(express.urlencoded({extended: false}));
-
 
 
 /* =========== /// <==> End <==> ===========*/

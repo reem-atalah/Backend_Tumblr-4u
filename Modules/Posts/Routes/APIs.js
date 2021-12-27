@@ -14,28 +14,50 @@ const cmMidwReqValidate = '../../../Common/Middlewares/requestValidation';
 const validateRequest = require(cmMidwReqValidate);
 const isAuthorized = require('../../../Common/Middlewares/isAuthorized');
 const postEndPoints = require('../endPoints');
+const fileUpload = require('express-fileupload');
+
 /* =========== /// <==> End <==> ===========*/
 
 /* ====================== /// <==> User APIs <==> /// ====================== */
 
+/* ----------- <---> Upload stream <---> ----------- */
+router.post('/:blogId/posts/uploadLocal',
+    // validateRequest(postJoi.uploadImgValidations),
+    // isAuthorized(postEndPoints.uploadStream),
+    async (req, res) => {
+      result = await postFunctions.uploadLocalImg(req.files);
+      console.log('result: ', result);
+      res.json(result);
+    });
+
+/* ----------- <---> Upload stream <---> ----------- */
+router.post('/:blogId/posts/uploadStream',
+    // validateRequest(postJoi.uploadImgValidations),
+    // isAuthorized(postEndPoints.uploadStream),
+    async (req, res) => {
+      result = await postFunctions.uploadStream(req.files);
+      console.log('result: ', result);
+      res.json(result);
+    });
 /* ----------- <---> Upload data <---> ----------- */
 router.post('/:blogId/posts/data',
     // validateRequest(postJoi.uploadImgValidations),
     // isAuthorized(postEndPoints.uploadeImg),
     async (req, res) => {
       // console.log(req.files);
+
       result= await postFunctions.uploadImgg();
       // console.log('result: ', result);
       res.json(result);
     });
 
-/* ----------- <---> Upload Img <---> ----------- */
+/* ----------- <---> Upload Img Base64 <---> ----------- */
 router.post('/:blogId/posts/uploadImg',
     // validateRequest(postJoi.uploadImgValidations),
     isAuthorized(postEndPoints.uploadeImg),
     async (req, res) => {
-      // console.log(req.files);
-      result= await postFunctions.uploadImg(req, req.body.files);
+      // console.log(req.body.file);
+      result= await postFunctions.uploadImgBase(req.body.file);
       console.log('result: ', result);
       res.json(result);
     });

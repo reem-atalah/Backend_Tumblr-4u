@@ -19,6 +19,12 @@ const fs = require('fs');
 const formidable = require('formidable');
 const multipart = require('parse-multipart');
 const {Mongoose} = require('mongoose');
+const multer = require('multer');
+const path = require('path');
+const inMemoryStorage = multer.memoryStorage();
+
+// const getStream = require('into-stream');
+
 /* =========== /// <==> End <==> ===========*/
 
 /* =============== /// <==> Post Functions <==> /// =============== */
@@ -60,6 +66,155 @@ const {Mongoose} = require('mongoose');
 // } catch (e) {
 //   next(e);
 // }
+const uploadLocalImg = async (files)=>{
+  console.log('files: ', files.file.length);
+  if (files.file.length != null) {
+    files.file.forEach((file)=>{
+      const extension = file.mimetype.split('/')[1];
+      // console.log('extension:', extension);
+      const name = file.name.split('.')[0];
+      // console.log('name:', name);
+      const filePath =`${__dirname}/images/${name}.`+extension;
+      // console.log('filePath:', filePath);
+
+      // const file = files.file;
+      file.mv(`${__dirname}/images/${name}.`+extension, (err) => {
+        if (err) {
+          return res.status(500).send(err);
+        }
+      });
+    });
+  } else {
+    const extension = files.file.mimetype.split('/')[1];
+    // console.log('extension:', extension);
+    const name = files.file.name.split('.')[0];
+    // console.log('name:', name);
+    const filePath =`${__dirname}/images/${name}.`+extension;
+    // console.log('filePath:', filePath);
+
+    // const file = files.file;
+    files.file.mv(`${__dirname}/images/${name}.`+extension, (err) => {
+      if (err) {
+        return res.status(500).send(err);
+      }
+    });
+  }
+
+  // console.log('file local: ', files.file);
+  const success = 'Uploaded locally succesfully';
+  return success;
+};
+
+
+const uploadStream = async (files) =>{
+  const blobServiceClient = await BlobServiceClient
+      .fromConnectionString(process.env.AZURE_STORAGE_CONNECTION_STRING);
+
+  const containerName = blobServiceClient
+      .getContainerClient('imagess');
+
+  const containerClient = await blobServiceClient
+      .getContainerClient(containerName.containerName);
+
+  // console.log('files', files);
+
+  const blobNames=[];
+  files.file.forEach(async (file)=>{
+    const extension = file.mimetype.split('/')[1];
+    // console.log('file.mimetype:', file.mimetype);
+
+    const name = file.name.split('.')[0];
+    const blobName = name + new Date().getTime()+ '.' +extension;
+    const filePath =`${__dirname}/images/${name}.`+extension;
+
+    // console.log('blobName: ', blobName);
+
+    const blockBlobClient = containerClient.getBlockBlobClient(blobName);
+    const uploadBlobResponse=await blockBlobClient.uploadFile(filePath);
+    await blockBlobClient.setHTTPHeaders({blobContentType: file.mimetype});
+    console.log(`Upload block blob ${blobName} successfully`, uploadBlobResponse.requestId);
+    blobNames.push(blobName);
+  });
+
+  console.log('\nListing blobs...');
+  for await (const blob of containerClient.listBlobsFlat()) {
+    console.log('\t', blob.name);
+  }
+  return blobNames;
+  // return 'https://tumblrstorage.blob.core.windows.net/imagess/'+blobName;
+};
+
+const uploadAny = async (blobName)=>{
+  const blobServiceClient = await BlobServiceClient
+      .fromConnectionString(process.env.AZURE_STORAGE_CONNECTION_STRING);
+
+  const containerName = blobServiceClient
+      .getContainerClient('imagess');
+
+  const containerClient = await blobServiceClient
+      .getContainerClient(containerName.containerName);
+
+  const blockBlobClient = containerClient.getBlockBlobClient(blobName);
+
+  const fileSize = fs.statSync(__dirname+'/images/'+blobName).size;
+  // const readableStream = fs.createReadStream(blobName, 'utf-8');
+
+  // console.log('__dirname: ', __dirname+'/images/'+blobName);
+  // blockBlobClient.uploadStream(readableStream, fileSize,
+  //     function(error, result, response) {
+  //       if (error) {
+  //         console.log(error);
+  //       }
+  //       console.log({message: 'blob uploaded'});
+  //     });
+
+  // blockBlobClient.createBlockBlobFromStream(containerName.containerName,
+  //     blobName, readableStream, fileSize,
+  //     function(error, result, response) {
+  //       if (error) {
+  //         console.log(error);
+  //       }
+  //       console.log({message: 'blob uploaded'});
+  //     });
+};
+
+const uploadImgBase = async (files) =>{
+  // console.log('files: ', files);
+  // files.forEach(async (file) => { // multiple images
+  // const file= files.file; // one image
+
+  // convert image from base64 to original image
+  const match=files.match(/^data:([A-Za-z-+\/]+);base64,(.+)$/);
+  const response = {};
+
+  if (match.length !== 3) {
+    return new Error('Invalid input string');
+  }
+
+  response.type = match[1];
+  response.data= Buffer.from(match[2], 'base64');
+  const decodedImg = response;
+  const imageBuffer = decodedImg.data;
+  const type = decodedImg.type; // mimetype
+  const extension = mime.extension(type);
+  const uploadDate = new Date().toISOString().replace(/:/g, '-');
+  const blobName = 'image' + uploadDate + '.'+ extension;
+  console.log('blobName base64 func.: ', blobName);
+
+  try {
+    fs.writeFileSync(__dirname+'/images/' + blobName, imageBuffer, 'utf8');
+    console.log('upload base64 locally successfully');
+  } catch (e) {
+    console.log(e);
+  }
+
+  uploadAny(blobName);
+
+  return blobName;
+
+  // check this link: https://www.py4u.net/discuss/1293154
+};
+
 
 const uploadImgg = async () =>{
   const blobServiceClient = await BlobServiceClient
@@ -89,79 +244,6 @@ const uploadImgg = async () =>{
     console.log('\t', blob.name);
   }
   return 'https://tumblrstorage.blob.core.windows.net/imagess/'+blobName;
-};
-
-const uploadImg = async (req, files) =>{
-  // console.log('files: ', files);
-  // // files.forEach(async (file) => { // multiple images
-  // // const file= files.file; // one image
-
-  // // convert image from base64 to original image
-  // const match=files.match(/^data:([A-Za-z-+\/]+);base64,(.+)$/);
-  // const response = {};
-
-  // if (match.length !== 3) {
-  //   return new Error('Invalid input string');
-  // }
-
-  // response.type = match[1];
-  // response.data= Buffer.from(match[2], 'base64');
-  // const decodedImg = response;
-  // const imageBuffer = decodedImg.data;
-  // const type = decodedImg.type;
-  // const extension = mime.extension(type);
-  // const uploadDate = new Date().toISOString().replace(/:/g, '-');
-  // const blobName = 'image' + uploadDate + '.'+ extension;
-
-  // const boundary= multipart.getBoundary(type);
-  // const parts = multipart.Parse(response.data, boundary);
-
-  // connect to azure
-  const blobServiceClient = await BlobServiceClient
-      .fromConnectionString(process.env.AZURE_STORAGE_CONNECTION_STRING);
-
-  const containerName = blobServiceClient
-      .getContainerClient('imagess');
-
-  // console.log('containerName', containerName.containerName);
-
-  const containerClient = await blobServiceClient
-      .getContainerClient(containerName.containerName);
-
-  // console.log('containerClient', containerClient);
-  let blobName;
-  const form = new formidable.IncomingForm();
-  // new Promise(function(resolve, reject) {
-  form.parse(req, async function(err, fields, files) {
-    const file = files.file;
-    blobName = 'test' + 0 + files.file;
-    console.log('blobName: ', blobName);
-    const contentType = file.type;
-    const filePath = file.path;
-    // data ='Hello World!';
-    const blockBlobClient = containerClient.getBlockBlobClient(blobName);
-    console.log('Uploading to Azure storage as blob:', blobName);
-
-    const uploadBlobResponse = await blockBlobClient
-        .uploadFile(filePath);
-    // .upload(data, data.length);
-    // .upload(parts[0].data, parts[0].data.length);
-    // console.log('uploaded successfully', blobName, ' Id:', uploadBlobResponse.requestId);
-  //   if (err) reject(err);
-  //   else resolve([fields, files]);
-  //   });
-  });
-  console.log('\nListing blobs...');
-
-  // List the blob(s) in the container.
-  for await (const blob of containerClient.listBlobsFlat()) {
-    console.log('\t', blob.name);
-  }
-  return 'https://tumblrstorage.blob.core.windows.net/imagess/'+blobName;
-
-  // });
-
-  // check this link: https://www.py4u.net/discuss/1293154
 };
 
 /* ----------- <---> Random Post <---> ------ */ // *** <===> Done <===>  *** //
@@ -926,11 +1008,13 @@ module.exports = {
   // blogValidation
   getNotes,
   getDashboard,
-  uploadImg,
+  uploadImgBase,
   uploadImgg,
   retrieveRandomPosts,
   retrieveTrendingPosts,
   getBlogPosts,
+  uploadStream,
+  uploadLocalImg,
 };
 
 /* =========== /// <==> End <==> ===========*/

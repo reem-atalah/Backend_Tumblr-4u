@@ -17,6 +17,7 @@ const getDashboard = 'Posts: getDashboard';
 const shareWith = 'Posts: shareWith';
 const getBlogPosts ='Posts: getBlogPosts';
 const uploadeImg = 'Posts: uploadeImg';
+const uploadStream = 'Posts : uploadStream';
 
 // const Get_Posts = 'Post:Get_Posts';
 // const Get_All_Posts = 'Post:Get_All_Posts';
@@ -37,6 +38,7 @@ const postEndPoints = {
   shareWith,
   uploadeImg,
   getBlogPosts,
+  uploadStream,
 };
 /* =========== <--> End <--> =========== */
 
