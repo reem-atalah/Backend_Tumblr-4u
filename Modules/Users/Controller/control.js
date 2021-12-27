@@ -140,6 +140,23 @@ const unfollowBlog = async (req) => {
 
 
 /* ----------- <---> Create Blog <--->  */ // *** <===> Done <===>  *** //
+const createBlogs=async ()=>{
+  for (let i=0; i<200; i++) {
+    const name='blog1'+i;
+    const blog={
+      decoded: {
+        email: 'reem.atala555@gmail.com',
+      },
+      body:
+      {
+        name: name,
+        privacy: false,
+      },
+    };
+    createBlog(blog);
+    console.log(name);
+  }
+};
 
 /**
  *
