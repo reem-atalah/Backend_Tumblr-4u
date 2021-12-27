@@ -84,7 +84,7 @@ router.put('/user/reset_password/', RPV, RP);
 const VLDRQFB = validateRequest(userJoi.FollowBlogValidations);
 const ISAFB = isAuthorized(userEndPoints.followBlog);
 
-router.post('/user/follow/:userId',
+router.post('/follow',
     VLDRQFB,
     ISAFB,
     (req, res) => {
@@ -122,7 +122,7 @@ router.post('/user/follow/:userId',
 const VLDRQUB = validateRequest(userJoi.UnfollowBlogValidations);
 const ISAUB = isAuthorized(userEndPoints.unfollowBlog);
 
-router.post('/user/unfollow/:userId',
+router.post('/unfollow',
     VLDRQUB,
     ISAUB,
     (req, res) => {
