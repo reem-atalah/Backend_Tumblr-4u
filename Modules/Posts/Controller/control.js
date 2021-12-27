@@ -10,6 +10,7 @@
 const {StatusCodes} = require('http-status-codes');
 const schema = require('../../../Model/model');
 const {BlobServiceClient} = require('@azure/storage-blob');
+const azure = require('azure-storage');
 const fileUpload = require('express-fileupload');
 const express = require('express');
 const server = express();
@@ -144,38 +145,23 @@ const uploadStream = async (files) =>{
   // return 'https://tumblrstorage.blob.core.windows.net/imagess/'+blobName;
 };
 
-const uploadAny = async (blobName)=>{
-  const blobServiceClient = await BlobServiceClient
+
+const uploadAny = async (blobName, type)=>{
+  console.log('blobName: ', blobName);
+  const blobServiceClient = BlobServiceClient
       .fromConnectionString(process.env.AZURE_STORAGE_CONNECTION_STRING);
 
   const containerName = blobServiceClient
       .getContainerClient('imagess');
 
-  const containerClient = await blobServiceClient
-      .getContainerClient(containerName.containerName);
+  const blobService = azure.createBlobService();
 
-  const blockBlobClient = containerClient.getBlockBlobClient(blobName);
-
-  const fileSize = fs.statSync(__dirname+'/images/'+blobName).size;
-  // const readableStream = fs.createReadStream(blobName, 'utf-8');
-
-  // console.log('__dirname: ', __dirname+'/images/'+blobName);
-  // blockBlobClient.uploadStream(readableStream, fileSize,
-  //     function(error, result, response) {
-  //       if (error) {
-  //         console.log(error);
-  //       }
-  //       console.log({message: 'blob uploaded'});
-  //     });
-
-  // blockBlobClient.createBlockBlobFromStream(containerName.containerName,
-  //     blobName, readableStream, fileSize,
-  //     function(error, result, response) {
-  //       if (error) {
-  //         console.log(error);
-  //       }
-  //       console.log({message: 'blob uploaded'});
-  //     });
+  console.log('containerName.containerName: ', containerName.containerName);
+  fs.createReadStream(__dirname+'/images/'+blobName)
+      .pipe(blobService
+          .createWriteStreamToBlockBlob(containerName.containerName,
+              blobName, {blockIdPrefix: 'block',
+                contentSettings: {contentType: type}}));
 };
 
 const uploadImgBase = async (files) =>{
@@ -208,7 +194,7 @@ const uploadImgBase = async (files) =>{
     console.log(e);
   }
 
-  uploadAny(blobName);
+  uploadAny(blobName, type);
 
   return blobName;
 
