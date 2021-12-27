@@ -442,6 +442,7 @@ const showPost = async (url,postId) => {
     });
     if (existingPost) {
       existingPost.postUrl = url;
+      existingPost.save();
       ret.msg = 'Post Returned Successfully';
       ret.post = existingPost;
       return ret;

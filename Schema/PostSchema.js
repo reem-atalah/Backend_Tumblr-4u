@@ -29,11 +29,11 @@ const postSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  tags: {type: [String]},
+  tags: [String],
   notesId: {type: String},
   isDeleted: {type: Boolean, default: false},
   isReported: {type: Boolean, default: false},
-  postUrl: {type: String},
+  postUrl: {type: String, default: ''},
 }, {
   Timestamps: true,
 });
