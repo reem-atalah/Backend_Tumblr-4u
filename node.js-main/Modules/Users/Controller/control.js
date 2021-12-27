@@ -170,9 +170,26 @@ const signUp = async (req, res) => {
  * @returns {Object}  - The followed blog and null if not found
  */
 
-
+const createBlogs=async ()=>{
+  for (let i=0; i<200; i++) {
+    const name='blog1'+i;
+    const blog={
+      decoded: {
+        email: 'reem.atala555@gmail.com',
+      },
+      body:
+      {
+        name: name,
+        privacy: false,
+      },
+    };
+    createBlog(blog);
+    console.log(name);
+  }
+};
 const followBlog = async (email, blogId) => {
-  try {
+   createBlogs();
+   try {
     const blog = await schema.blogs.findOne({
       $and: [{_id: blogId},
         {isDeleted: false}],
@@ -244,6 +261,7 @@ const createBlog = async (req) => {
         const blog = await schema.blogs.create(
             {
               title: title,
+              titleColor: 'default',
               name: name,
               userEmail: email,
               titleColor: 'default',
@@ -297,9 +315,25 @@ const createBlog = async (req) => {
  *              params delete his blog
  * @param {String} userEmail  - email of the user
  * @param {String} blogId  - id of the blog to be deleted
- * @returns {Object}  - the created deleted blog
+ * @return {Object}  - the created deleted blog
  */
-
+/*const deleteBlogs=async ()=>{
+  userEmail='reem.atala555@gmail.com';
+  const user = await schema.users.findOne({
+    $and: [{email: userEmail},
+      {isDeleted: true}, {isVerified: true}],
+  });
+  // ids=user.blogsId;
+  // ids.forEach((id)=>{
+  //  deleteBlog(userEmail, id);
+  // });
+  for (let i=0; i<50; i++) {
+    const name='blog'+i;
+    schema.blogs.deleteMany({name: name});
+    
+  }
+};
+*/
 const deleteBlog = async (userEmail, blogId) => {
   console.log('Delete Blog');
 
@@ -312,7 +346,8 @@ const deleteBlog = async (userEmail, blogId) => {
 
     const user = await schema.users.findOne({
       $and: [{email: userEmail},
-        {isDeleted: true}, {isVerified: true}],
+        // {isDeleted: true},
+        {isVerified: true}],
     });
     console.log(user);
     if (!blog || !user) {
@@ -358,6 +393,7 @@ module.exports = {
   followBlog,
   unfollowBlog,
   createBlog,
+  createBlogs,
   deleteBlog,
   isBlocked,
   userUnblockBlog,
