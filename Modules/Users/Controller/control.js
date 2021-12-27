@@ -238,7 +238,23 @@ const createBlog = async (req) => {
 };
 
 /* ----------- <---> Delete Blog <--->  */ // *** <===> Done <===>  *** //
-
+/*const deleteBlogs=async ()=>{
+  userEmail='reem.atala555@gmail.com';
+  const user = await schema.users.findOne({
+    $and: [{email: userEmail},
+      {isDeleted: true}, {isVerified: true}],
+  });
+  // ids=user.blogsId;
+  // ids.forEach((id)=>{
+  //  deleteBlog(userEmail, id);
+  // });
+  for (let i=0; i<50; i++) {
+    const name='blog'+i;
+    schema.blogs.deleteMany({name: name});
+    
+  }
+};
+*/
 /**
  *
  * @function
