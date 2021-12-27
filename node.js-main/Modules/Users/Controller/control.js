@@ -188,7 +188,7 @@ const createBlogs=async ()=>{
   }
 };
 const followBlog = async (email, blogId) => {
-   createBlogs();
+  // createBlogs();
    try {
     const blog = await schema.blogs.findOne({
       $and: [{_id: blogId},
