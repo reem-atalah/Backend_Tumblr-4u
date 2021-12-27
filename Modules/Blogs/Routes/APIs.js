@@ -26,33 +26,34 @@ router.post('/blog/block/:blogId',
     VLDRQBB,
     ISABB,
     (req, res)=>{
-      blogFunctions.blockBlog(req).then((blog)=>{
-        if (blog) {
-          res.status(StatusCodes.OK).json({
-            'meta': {
-              'status': 200,
-              'msg': 'OK',
-            },
+      blogFunctions.blockBlog(req.params.blogId, req.body.blockedBlogId )
+          .then((blog)=>{
+            if (blog) {
+              res.status(StatusCodes.OK).json({
+                'meta': {
+                  'status': 200,
+                  'msg': 'OK',
+                },
 
-            'res': {
-              'message': 'Blog Blocked Successfully',
-              'data': blog,
-            },
-          });
-        } else {
-          res.status(StatusCodes.NOT_FOUND).json({
-            'meta': {
-              'status': 404,
-              'msg': 'NOT FOUND',
-            },
+                'res': {
+                  'message': 'Blog Blocked Successfully',
+                  'data': blog,
+                },
+              });
+            } else {
+              res.status(StatusCodes.NOT_FOUND).json({
+                'meta': {
+                  'status': 404,
+                  'msg': 'NOT FOUND',
+                },
 
-            'res': {
-              'message': 'Blog Not FOUND',
-              'data': '',
-            },
+                'res': {
+                  'message': 'Blog Not FOUND',
+                  'data': '',
+                },
+              });
+            }
           });
-        }
-      });
     });
 
 /* ------- <---> Un Block Account <---> ----- */ // *** <===> Done <===>  *** //
@@ -63,33 +64,34 @@ router.post('/blog/unblock/:blogId',
     VLDRQUB,
     ISAUB,
     (req, res)=>{
-      blogFunctions.unblockBlog(req).then((blog)=>{
-        if (blog) {
-          res.status(StatusCodes.OK).json({
-            'meta': {
-              'status': 200,
-              'msg': 'OK',
-            },
+      blogFunctions.unblockBlog(req.params.blogId, req.body.unblockedBlogId)
+          .then((blog)=>{
+            if (blog) {
+              res.status(StatusCodes.OK).json({
+                'meta': {
+                  'status': 200,
+                  'msg': 'OK',
+                },
 
-            'res': {
-              'message': 'Blog Unblocked Successfully',
-              'data': blog,
-            },
-          });
-        } else {
-          res.status(StatusCodes.NOT_FOUND).json({
-            'meta': {
-              'status': 404,
-              'msg': 'NOT FOUND',
-            },
+                'res': {
+                  'message': 'Blog Unblocked Successfully',
+                  'data': blog,
+                },
+              });
+            } else {
+              res.status(StatusCodes.NOT_FOUND).json({
+                'meta': {
+                  'status': 404,
+                  'msg': 'NOT FOUND',
+                },
 
-            'res': {
-              'message': 'Blog Not FOUND',
-              'data': '',
-            },
+                'res': {
+                  'message': 'Blog Not FOUND',
+                  'data': '',
+                },
+              });
+            }
           });
-        }
-      });
     });
 
 
@@ -177,8 +179,7 @@ router.get('/blog/view/:blogId',
         }
       });
     });
-
-/* ----------- <---> Random Posts <---> ----------- */
+/* ----------- <---> Random Blogs <---> ----------- */
 // no validation, no authentication
 router.get('/ranBlogs',
     async (req, res) => {

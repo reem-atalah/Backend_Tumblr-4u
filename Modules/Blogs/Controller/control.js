@@ -2,7 +2,7 @@
 
 /* ================ /// <==> Variables Declaration <==> /// ================ */
 const schema = require('../../../Model/model');
-
+const {unfollowBlog}=require('../../../Modules/Users/Controller/unfollowBlog');
 /* =========== /// <==> End <==> ===========*/
 
 
@@ -21,17 +21,15 @@ const schema = require('../../../Model/model');
  */
 
 
-const blockBlog = async (req) => {
-  console.log(req.params);
+const blockBlog = async (blogId, blockedBlogId) => {
   try {
-    const blogId = req.params.blogId;
-    const blockedBlogId = req.body.blockedBlogId;
     const blockedBlog = await schema.blogs.findOne(
         {$and: [{_id: blockedBlogId}, {isDeleted: false}]});
     if (blockedBlog) {
       const blog = await schema.blogs.findOne(
           {$and: [{_id: blogId}, {isDeleted: false}]});
       if (blog) {
+        unfollowBlog(blog.userEmail, blockedBlogId);
         blog.blockedBlogs.push(blockedBlogId);
         blog.save();
         return blockedBlog;
@@ -58,12 +56,8 @@ const blockBlog = async (req) => {
  */
 
 
-const unblockBlog = async (req) => {
-  console.log(req.params);
+const unblockBlog = async (blogId, unblockedBlogId) => {
   try {
-    const blogId = req.params.blogId;
-    const unblockedBlogId= req.body.unblockedBlogId;
-
     const unblockedBlog = await schema.blogs.findOne(
         {$and: [{_id: unblockedBlogId}, {isDeleted: false}]});
     if (unblockedBlog) {
@@ -109,15 +103,16 @@ const editBlog = async (req) => {
     const headerImage = req.body.headerImage;
     const avatar = req.body.avatar;
     const title = req.body.title;
+    const titleColor = req.body.titleColor;
     const background = req.body.background;
     const password = req.body.password;
     const theme = req.body.theme;
     const description = req.body.description;
-
     let message = 'OK';
-
-    const blog = await schema.blogs.findOne({$and: [{_id: blogId},
-      {isDeleted: false}]});
+    const blog = await schema.blogs.findOne({
+      $and: [{_id: blogId},
+        {isDeleted: false}],
+    });
     if (blog) {
       if (password) {
         blog.password = password;
@@ -143,6 +138,9 @@ const editBlog = async (req) => {
       if (title) {
         blog.title = title;
       }
+      if (titleColor) {
+        blog.titleColor = titleColor;
+      }
       if (name) {
         const anotherBlog = await schema.blogs.findOne({'name': name});
 
@@ -160,7 +158,6 @@ const editBlog = async (req) => {
       blog.save();
       if (message === 'OK') {
         console.log(blog);
-
         return blog;
       } else {
         return message;
@@ -172,7 +169,6 @@ const editBlog = async (req) => {
     console.log(error.message);
   }
 };
-
 /**
  *
  * @function
@@ -184,8 +180,10 @@ const editBlog = async (req) => {
 
 const retrieveBlog = async (blogId) => {
   try {
-    const blog= await schema.blogs.findOne({$and: [{_id: blogId},
-      {isDeleted: false}]});
+    const blog = await schema.blogs.findOne({
+      $and: [{_id: blogId},
+        {isDeleted: false}],
+    });
     if (blog) {
       return blog;
     } else {
@@ -195,7 +193,6 @@ const retrieveBlog = async (blogId) => {
     console.log(error.message);
   }
 };
-
 /* --------- <---> Random Blogs <---> ------ */ // *** <===> Done <===>  *** //
 
 /**

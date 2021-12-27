@@ -19,7 +19,7 @@ const searchEndPoints = require('../endPoints');
 
 router.get('/autoCompleteSearchDash/:wordName',
     validateRequest(searchJoi.searchValidations),
-    isAuthorized(searchEndPoints.getSearchDash),
+    // isAuthorized(searchEndPoints.getSearchDash),// no need for authentication
     async (req, res)=>{
       result=await seachDashboard
           .autoCompleteSearchDash(req.decoded.email, req.params.wordName);
