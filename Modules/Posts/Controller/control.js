@@ -875,11 +875,9 @@ const getNotes = async (notesId) => {
     ret = {
       msg: '',
       notes: [],
-      notesCount: {
-        likesCount: 0,
-        reblogsCount: 0,
-        allNotesCount: 0
-      }
+      likesCount: 0,
+      reblogsCount: 0,
+      notesCount: 0
     };
 
     const existingNotes = await schema.notes.findOne({
@@ -917,9 +915,9 @@ const getNotes = async (notesId) => {
       }
 
       ret.msg = 'Notes Got Successfully';
-      ret.notesCount.likesCount = countsArray[0];
-      ret.notesCount.reblogsCount = countsArray[1];
-      ret.notesCount.allNotesCount = countsArray[2];
+      ret.likesCount = countsArray[0];
+      ret.reblogsCount = countsArray[1];
+      ret.notesCount = countsArray[2];
       ret.notes = notes;
       return ret;
     } else {

@@ -231,6 +231,8 @@ router.get('/:notesId/notes',
             'res': {
               'message': ret.msg,
               'notes': ret.notes,
+              'likesCount': ret.likesCount,
+              'reblogsCount': ret.reblogsCount,
               'notesCount': ret.notesCount
             },
           });
