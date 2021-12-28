@@ -310,7 +310,7 @@ router.put('/:postId/edit_post',
     // validateRequest(postJoi.createPostValidations),
     isAuthorized(postEndPoints.editPost),
     (req, res) => {
-      postFunctions.editPost(req.params.postId, req.body.postHtml).then((ret) => {
+      postFunctions.editPost(req.params.postId, req.body.postHtml, req.body.tags).then((ret) => {
         if (ret === 'Post Edited Successfully') {
           res.status(StatusCodes.OK).json(ret);
         } else if (ret === 'Error In Edit Post Function') {

@@ -491,8 +491,8 @@ const showPost = async (url, postId) => {
       _id: postId,
     });
     if (existingPost) {
-      existingPost.postUrl = url;
-      existingPost.save();
+      // existingPost.postUrl = url;
+      // existingPost.save();
       ret.msg = 'Post Returned Successfully';
       ret.post = existingPost;
       return ret;
@@ -647,19 +647,19 @@ const loopObjAndCheck = (arr, element) => {
 
 const likePress = async (blogId, postId) => {
   try {
-    var ret = '';
+    ret = '';
     const existingBlog = await schema.blogs.findOne({
-      _id: blogId,
+      _id: blogId
     });
     const existingPost = await schema.Posts.findOne({
-      _id: postId,
+      _id: postId
     });
-    const notesId = existingPost.notesId;
-    const existingNotes = await schema.notes.findOne({
-      _id: notesId,
-    });
+
     if (existingBlog && existingBlog.isDeleted == false) {
       if (existingPost && existingPost.isDeleted == false) {
+        const notesId = existingPost.notesId;
+        const existingNotes = await schema.notes.findOne({
+          _id: notesId});
         if (existingNotes && existingNotes.isDeleted == false) {
           // likingBlogId = blogId;
           const like = {
@@ -690,7 +690,6 @@ const likePress = async (blogId, postId) => {
           ret = 'Notes Not Found';
           return ret;
         }
-        res.status(StatusCodes.OK).json('Post Liked Successfully');
       } else {
         ret = 'Post Not Found';
         return ret;
@@ -1141,7 +1140,7 @@ const deletePost = async (postId) => {
  * @returns {string} .
  */
 
-const editPost = async (postId, postHtml) => {
+const editPost = async (postId, postHtml, tags) => {
   try {
     ret = '';
     const existingPost = await schema.Posts.findOne({
@@ -1149,6 +1148,7 @@ const editPost = async (postId, postHtml) => {
     });
     if (existingPost && existingPost.isDeleted == false) {
       existingPost.postHtml = postHtml;
+      existingPost.tags = tags;
       existingPost.save();
       ret = 'Post Edited Successfully';
       // console.log(existingPost)
