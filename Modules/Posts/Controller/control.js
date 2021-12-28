@@ -147,7 +147,7 @@ const uploadStream = async (files) =>{
 
 
 const uploadAny = async (blobName, type)=>{
-  console.log('blobName: ', blobName);
+  // console.log('blobName: ', blobName);
   const blobServiceClient = BlobServiceClient
       .fromConnectionString(process.env.AZURE_STORAGE_CONNECTION_STRING);
 
@@ -156,8 +156,9 @@ const uploadAny = async (blobName, type)=>{
 
   const blobService = azure.createBlobService();
 
-  console.log('containerName.containerName: ', containerName.containerName);
-  fs.createReadStream(__dirname+'/images/'+blobName)
+  // console.log("type.split('/')[0]: ", type.split('/')[0]);
+  // console.log('containerName.containerName: ', containerName.containerName);
+  fs.createReadStream(__dirname+'/'+type.split('/')[0]+'/'+blobName)
       .pipe(blobService
           .createWriteStreamToBlockBlob(containerName.containerName,
               blobName, {blockIdPrefix: 'block',
@@ -166,13 +167,14 @@ const uploadAny = async (blobName, type)=>{
 };
 
 const uploadImgBase = async (files) =>{
-  console.log('files: ', files.length);
   const blobUrls=[];
 
   if (files.length <= 10) {
     files.forEach(async (file)=>{
       // convert image from base64 to original image
+      console.log('file: ', file.substr(0, 26));
       const match=file.match(/^data:([A-Za-z-+\/]+);base64,(.+)$/);
+      // console.log('match: ', match);
       const response = {};
 
       if (match.length !== 3) {
@@ -180,18 +182,20 @@ const uploadImgBase = async (files) =>{
       }
 
       response.type = match[1];
+      // console.log('response.type: ', response.type);
       response.data= Buffer.from(match[2], 'base64');
       const decodedImg = response;
       const imageBuffer = decodedImg.data;
       const type = decodedImg.type; // mimetype
-      const extension = mime.extension(type);
+      // const extension = mime.extension(type);
       const uploadDate = new Date().toISOString().replace(/:/g, '-');
-      const blobName = 'image' + uploadDate + '.'+ extension;
-      console.log('blobName base64 func.: ', blobName);
+      const blobName = type.split('/')[0]+ uploadDate + '.'+ type.split('/')[1];
+      // console.log('blobName base64 func.: ', blobName);
 
       try {
-        fs.writeFileSync(__dirname+'/images/' + blobName, imageBuffer, 'utf8');
-        console.log('upload base64 locally successfully');
+        fs.writeFileSync(__dirname+'/'+type.split('/')[0]+'/' + blobName,
+            imageBuffer, 'utf8');
+        // console.log('upload base64 locally successfully');
       } catch (e) {
         console.log(e);
       }
@@ -201,8 +205,10 @@ const uploadImgBase = async (files) =>{
     });
   } else {
     // convert image from base64 to original image
+    console.log('files: ', files.substr(0, 26));
     const match=files.match(/^data:([A-Za-z-+\/]+);base64,(.+)$/);
     const response = {};
+    // console.log('match: ', match);
 
     if (match.length !== 3) {
       return new Error('Invalid input string');
@@ -213,14 +219,15 @@ const uploadImgBase = async (files) =>{
     const decodedImg = response;
     const imageBuffer = decodedImg.data;
     const type = decodedImg.type; // mimetype
-    const extension = mime.extension(type);
+    // const extension = mime.extension(type);
     const uploadDate = new Date().toISOString().replace(/:/g, '-');
-    const blobName = 'image' + uploadDate + '.'+ extension;
-    console.log('blobName base64 func.: ', blobName);
+    const blobName = type.split('/')[0]+ uploadDate + '.'+ type.split('/')[1];
+    // console.log('type: ', type.split('/')[1]);
 
     try {
-      fs.writeFileSync(__dirname+'/images/' + blobName, imageBuffer, 'utf8');
-      console.log('upload base64 locally successfully');
+      fs.writeFileSync(__dirname+'/'+type.split('/')[0]+'/' + blobName,
+          imageBuffer, 'utf8');
+      // console.log('upload base64 locally successfully');
     } catch (e) {
       console.log(e);
     }
@@ -229,7 +236,7 @@ const uploadImgBase = async (files) =>{
     blobUrls.push(blob);
   }
 
-  console.log('blobUrls: ', blobUrls);
+  // console.log('blobUrls: ', blobUrls);
   return blobUrls;
 
   // check this link: https://www.py4u.net/discuss/1293154
