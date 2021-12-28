@@ -62,6 +62,7 @@ const autoCompleteSearchDash = async (userEmail) => {
   // if there's no word then retrieve interested tags
   const resultFollowedTag=[];
   const resultPostHashTag=[];
+  // const totalResultPostHashTag=[];
 
   // gets all posts with the followed tags
   const searchFollowedTag= await schema.users.find({_id: userId});
@@ -72,6 +73,7 @@ const autoCompleteSearchDash = async (userEmail) => {
     await data.followedTags.forEach(async (followedTag) => {
       resultFollowedTag.push(followedTag);
       try {
+        // resultPostHashTag.push(followedTag);
         searchPostFollowedTag.forEach((dataPosts) => {
           dataPosts.tags.forEach((tag)=>{
             if (tag == followedTag) {
@@ -81,12 +83,13 @@ const autoCompleteSearchDash = async (userEmail) => {
           });
         });
       } catch (e) {
-        console.log('error..', e);
+        // console.log('error..', e);
         if (e !== BreakException) throw e;
       }
+      // totalResultPostHashTag.push(resultPostHashTag);
     });
   });
-  console.log('resultPostHashTag: ', resultPostHashTag);
+  // console.log('resultPostHashTag: ', resultPostHashTag);
   result={
     resultFollowedTag: resultFollowedTag,
     resultPostHashTag: resultPostHashTag,
