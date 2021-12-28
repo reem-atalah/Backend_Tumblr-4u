@@ -21,7 +21,7 @@ const fileUpload = require('express-fileupload');
 /* ====================== /// <==> User APIs <==> /// ====================== */
 
 /* ----------- <---> Upload stream <---> ----------- */
-router.post('/:blogId/posts/uploadLocal',
+router.post('/:blogId/uploadLocal',
     // validateRequest(postJoi.uploadImgValidations),
     // isAuthorized(postEndPoints.uploadStream),
     async (req, res) => {
@@ -31,7 +31,7 @@ router.post('/:blogId/posts/uploadLocal',
     });
 
 /* ----------- <---> Upload stream <---> ----------- */
-router.post('/:blogId/posts/uploadStream',
+router.post('/:blogId/uploadStream',
     // validateRequest(postJoi.uploadImgValidations),
     // isAuthorized(postEndPoints.uploadStream),
     async (req, res) => {
@@ -40,7 +40,7 @@ router.post('/:blogId/posts/uploadStream',
       res.json(result);
     });
 /* ----------- <---> Upload data <---> ----------- */
-router.post('/:blogId/posts/data',
+router.post('/:blogId/data',
     // validateRequest(postJoi.uploadImgValidations),
     // isAuthorized(postEndPoints.uploadeImg),
     async (req, res) => {
@@ -52,7 +52,7 @@ router.post('/:blogId/posts/data',
     });
 
 /* ----------- <---> Upload Img Base64 <---> ----------- */
-router.post('/:blogId/posts/uploadImg',
+router.post('/:blogId/uploadImg',
     // validateRequest(postJoi.uploadImgValidations),
     isAuthorized(postEndPoints.uploadeImg),
     async (req, res) => {
