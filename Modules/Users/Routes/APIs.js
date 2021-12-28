@@ -185,9 +185,7 @@ router.get('/user/new/blog/',
     VLDRQCB,
     ISACB,
     (req, res) => {
-      userFunctions.createBlog(
-          req.decoded.email, req.body.title, req.body.name,
-          req.body.privacy, req.body.password).then((blog) => {
+      userFunctions.createBlog(req).then((blog) => {
         if (blog) {
           res.status(StatusCodes.CREATED).json({
             'meta': {
