@@ -524,28 +524,22 @@ const makeComment = async (blogId, postId, text) => {
   try {
     var ret = '';
     const existingBlog = await schema.blogs.findOne({
-      _id: blogId,
+      _id: blogId
     });
     const existingPost = await schema.Posts.findOne({
-      _id: postId,
+      _id: postId
     });
-    const notesId = existingPost.notesId;
-    // const notesId = req.params.notesId;
-    const existingNotes = await schema.notes.findOne({
-      _id: notesId,
-    });
+    
     if (existingBlog && existingBlog.isDeleted == false) {
       if (existingPost && existingPost.isDeleted == false) {
         const notesId = existingPost.notesId;
-        const existingNotes = await schema.notes.findOne({
-          _id: notesId,
-        });
-        const commentingBlogTitle = existingBlog.title;
-        const commentingBlogId = blogId;
+        const existingNotes = await schema.notes.findOne({_id: notesId});
+        //const commentingBlogTitle = existingBlog.title;
+        //const commentingBlogId = blogId;
         if (existingNotes && existingNotes.isDeleted == false) {
           const comment = {
             blogId,
-            text,
+            text
           };
           const lenBefore = existingNotes.comments.length;
           existingNotes.comments.push(comment);
@@ -658,8 +652,7 @@ const likePress = async (blogId, postId) => {
     if (existingBlog && existingBlog.isDeleted == false) {
       if (existingPost && existingPost.isDeleted == false) {
         const notesId = existingPost.notesId;
-        const existingNotes = await schema.notes.findOne({
-          _id: notesId});
+        const existingNotes = await schema.notes.findOne({_id: notesId});
         if (existingNotes && existingNotes.isDeleted == false) {
           // likingBlogId = blogId;
           const like = {
@@ -726,13 +719,12 @@ const reblogPost = async (blogId, postId, text) => {
     const existingPost = await schema.Posts.findOne({
       _id: postId,
     });
-    const notesId = existingPost.notesId;
-    const existingNotes = await schema.notes.findOne({
-      _id: notesId,
-    });
+    
     if (existingBlog && existingBlog.isDeleted == false) {
       if (existingPost && existingPost.isDeleted == false) {
-        const rebloggingId = blogId;
+        const notesId = existingPost.notesId;
+        const existingNotes = await schema.notes.findOne({_id: notesId});
+        //const rebloggingId = blogId;
         if (existingNotes && existingNotes.isDeleted == false) {
           const reblog = {
             blogId,
