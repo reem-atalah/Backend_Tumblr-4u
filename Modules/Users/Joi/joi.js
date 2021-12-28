@@ -89,9 +89,10 @@ const userJoi = {
       blogId: joi.string().required(),
     }),
   },
-   DoesFollowValidations: {
+  DoesFollowValidations: {
     body: joi.object().required().keys({
     }),
+  },
   getInterestsFromUserValidations: {
     body: joi.object().required().keys({
       interests: joi.array().required(),
