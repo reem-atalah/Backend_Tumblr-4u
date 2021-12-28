@@ -189,7 +189,8 @@ const createBlog = async (req) => {
     if (anotherBlog === null) {
       const user = await schema.users.findOne({
         $and: [{email: email},
-          {isDeleted: false}, {isVerified: true}]});
+          {isDeleted: false}],
+      });
       if (user) {
         if (user.blogsId.length === 0) {
           isPrimary = true;
@@ -202,7 +203,10 @@ const createBlog = async (req) => {
         const blog = await schema.blogs.create(
             {
               title: title,
+              titleColor: 'default',
               name: name,
+              userEmail: email,
+              titleColor: 'default',
               privacy: privacy,
               password: password,
               updated: 0,
@@ -226,12 +230,14 @@ const createBlog = async (req) => {
         console.log(blog._id);
         ids = user.blogsId;
         ids.push(blog._id);
-        await schema.users.findOneAndUpdate({$and: [{email: email},
-          {isDeleted: false}, {isVerified: true}]}, {blogsId: ids});
+        await schema.users.findOneAndUpdate({
+          $and: [{email: email},
+            {isDeleted: false}],
+        }, {blogsId: ids});
         console.log(user);
         return blog;
       } else {
-        return 'User is deleted';
+        return null;
       }
     } else {
       return null;
