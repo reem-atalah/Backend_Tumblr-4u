@@ -8,7 +8,7 @@
 //  */
 // /* =============== /// <==> Variables Declaration <==> /// =============== */
 const schema = require('../../../../Model/model');
-
+const BreakException = {};
 /* ======= /// <==> Calling Connection Function OF Database <==> /// ======== */
 const mongoose = require('mongoose');
 /* =========== /// <==> End <==> ===========*/
@@ -83,7 +83,7 @@ const autoCompleteSearchDash = async (userEmail, wordName) => {
             });
           });
         } catch (e) {
-          console.log('error..');
+          console.log('error..', e);
           if (e !== BreakException) throw e;
         }
       });

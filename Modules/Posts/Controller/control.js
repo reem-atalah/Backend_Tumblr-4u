@@ -278,9 +278,13 @@ const uploadImgg = async () =>{
 const retrieveRandomPosts = async () => {
   const randomPosts = await schema.Posts.find({isDeleted: false});
   randomPostsLim =[];
-  randomNumb= Math.floor(Math.random() * randomPosts.length-10);
-  for (let i=randomNumb; i<randomNumb+10; i++) {
-    randomPostsLim.push(randomPosts[i]);
+  let i =0;
+  while (i < 10) {
+    randomNumb= Math.floor(Math.random() * randomPosts.length-10);
+    if (randomPosts[randomNumb] != null) {
+      randomPostsLim.push(randomPosts[randomNumb]);
+      i+=1;
+    }
   }
   return randomPostsLim;
 };
@@ -1218,8 +1222,31 @@ const activityFeed = async (blogId) => {
   try {
     const existingBlog = await schema.Posts.findOne({
       _id: blogId,
+    // ret = {
+    //   msg: '',
+    //   daily: [],
+    //   hourly: [],
+    //   lastDay: [],
+    //   lastThreeDays: [],
+    //   lastWeek: []
+    // };
+    // const existingBlog = await schema.blogs.findOne({
+    //   _id: blogId
     });
-    if (existingBlog && existingBlog.isDeleted == false) {}
+    if (existingBlog && existingBlog.isDeleted == false) {
+      for (let i=0; i<existingBlog.postsIds.length; i++) {
+        const existingPost = await schema.Posts.findOne({_id: existingBlog.postsIds[i]});
+        if (existingPost && existingPost.isDeleted == false) {
+          existingNotes = await schema.notes.findOne({_id: existingPost.notesId});
+          if (existingNotes && existingNotes.isDeleted == false) {
+            notesArray = getNotes(existingNotes._id);
+            for (let j=0; j<notesArray.length; j++) {
+              // if(notesArray[j]._id.getTimestamp() ==)
+            }
+          }
+        }
+      }
+    }
   } catch (error) {
     ret = 'Error In Activity Feed Function';
     return ret;
