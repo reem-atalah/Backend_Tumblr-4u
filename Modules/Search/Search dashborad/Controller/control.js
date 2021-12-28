@@ -39,15 +39,13 @@ async () => {
  *
  *
  * @returns {Array} Result array have 4 arrays.
- *                     - array 1: has the tags in posts with this regex
- *                     - array 2: posts with the tags with this regex
- *                     - array 3: has the blogs this regex
- *                     - array 4: has the posts with interested tags this regex
+ *                     - array 1: has the tags followed by the user
+ *                     - array 2: posts for the tags followed by the user
 
  */
 // use "npm run doc" to make function documentation
 
-const autoCompleteSearchDash = async (userEmail, wordName) => {
+const autoCompleteSearchDash = async (userEmail) => {
   // get userId
   const user = await schema.users.find({email: userEmail});
   if (user.isDeleted == true) {
@@ -60,42 +58,59 @@ const autoCompleteSearchDash = async (userEmail, wordName) => {
 
   let result = [];
 
-  if (!wordName || wordName==null ) {
-    // if there's no word then retrieve interested tags
-    const resultFollowedTag=[];
-    const resultPostHashTag=[];
+  // if (!wordName || wordName==null ) {
+  // if there's no word then retrieve interested tags
+  const resultFollowedTag=[];
+  const resultPostHashTag=[];
 
-    // gets all posts with the followed tags
-    const searchFollowedTag= await schema.users.find({_id: userId});
-    const searchPostFollowedTag= await schema.Posts.find();
-    // store in result, the blogs
-    searchFollowedTag.forEach(async (data) => {
+  // gets all posts with the followed tags
+  const searchFollowedTag= await schema.users.find({_id: userId});
+  const searchPostFollowedTag= await schema.Posts.find();
+  // store in result, the blogs
+  searchFollowedTag.forEach(async (data) => {
     // he gets me the user, now get the followedTags
-      await data.followedTags.forEach(async (followedTag) => {
-        resultFollowedTag.push(followedTag);
-        try {
-          searchPostFollowedTag.forEach((dataPosts) => {
-            dataPosts.tags.forEach((tag)=>{
-              if (tag == followedTag) {
-                resultPostHashTag.push(dataPosts);
-                throw BreakException;
-              }
-            });
+    await data.followedTags.forEach(async (followedTag) => {
+      resultFollowedTag.push(followedTag);
+      try {
+        searchPostFollowedTag.forEach((dataPosts) => {
+          dataPosts.tags.forEach((tag)=>{
+            if (tag == followedTag) {
+              resultPostHashTag.push(dataPosts);
+              throw BreakException;
+            }
           });
-        } catch (e) {
-          console.log('error..', e);
-          if (e !== BreakException) throw e;
-        }
-      });
+        });
+      } catch (e) {
+        console.log('error..', e);
+        if (e !== BreakException) throw e;
+      }
     });
-    console.log('resultPostHashTag: ', resultPostHashTag);
-    result={
-      resultFollowedTag: resultFollowedTag,
-      resultPostHashTag: resultPostHashTag,
-    };
-    return result;
-  }
+  });
+  console.log('resultPostHashTag: ', resultPostHashTag);
+  result={
+    resultFollowedTag: resultFollowedTag,
+    resultPostHashTag: resultPostHashTag,
+  };
+  return result;
+  // }
+};
 
+/* -------- <---> AutoComplete Search Dashboard with word <---> ----------- */
+
+/**
+ * @function
+ * @name  autoCompleteSearchDashWord
+ * @description Applies search on posts/tags
+ * @param {Object} wordName - Holds the request body: wordName.
+ *
+ *
+ * @return {Array} Result array have 4 arrays.
+ *                     - array 1: has the tags in posts with this regex
+ *                     - array 2: posts with the tags with this regex
+ *                     - array 3: has the blogs this regex
+
+ */
+const autoCompleteSearchDashWord = async (wordName) =>{
   const regex= new RegExp(wordName, 'i');
   // gets all posts with the needed tag
   const searchTags= await schema.Posts.find(tagSpecified={tags: {$in: regex}});
@@ -106,12 +121,19 @@ const autoCompleteSearchDash = async (userEmail, wordName) => {
   const resultBlogs=[];
   const resultPostHashTag=[];
 
+  const same=[];
   // store in result, the hash tags
   // store in result, the posts with hash tags
   searchTags.forEach((data) => {
     data.tags.forEach((semiData) => {
       if (semiData.match(regex)) {
-        resultHashTag.push(semiData);
+        if (same.includes(semiData)) {
+          // console.log('then what?');
+        } else {
+          resultHashTag.push(semiData);
+          same.push(semiData);
+        }
+        // console.log('same: ', same);
         resultPostHashTag.push(data);
       }
     });
@@ -177,6 +199,7 @@ function search() {
 // /* ============= /// <==> Export Search Functions <==> /// =============== */
 module.exports = {
   autoCompleteSearchDash,
+  autoCompleteSearchDashWord,
   search,
 };
 // /* =========== /// <==> End <==> ===========*/

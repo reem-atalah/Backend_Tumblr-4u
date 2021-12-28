@@ -22,7 +22,7 @@ router.get('/autoCompleteSearchDash/:wordName',
     // isAuthorized(searchEndPoints.getSearchDash),// no need for authentication
     async (req, res)=>{
       result=await seachDashboard
-          .autoCompleteSearchDash(req.decoded.email, req.params.wordName);
+          .autoCompleteSearchDashWord(req.params.wordName);
       if (result == null) {
         res.status(StatusCodes.NOT_FOUND).json({
           'meta': {
@@ -45,7 +45,7 @@ router.get('/autoCompleteSearchDash',
     isAuthorized(searchEndPoints.getSearchDash),
     async (req, res)=>{
       result=await seachDashboard
-          .autoCompleteSearchDash(req.decoded.email, null);
+          .autoCompleteSearchDash(req.decoded.email);
       if (result == null) {
         res.status(StatusCodes.NOT_FOUND).json({
           'meta': {
