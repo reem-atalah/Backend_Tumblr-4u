@@ -80,7 +80,27 @@ const RPV = validateRequest(userJoi.ResetPasswordValidations);
 router.put('/user/reset_password/', RPV, RP);
 
 /* ----------- <---> Follow <---> ----------- */
+const VLDRQDF=validateRequest(userJoi.DoesFollowValidations);
+const ISADF=isAuthorized(userEndPoints.doesFollow);
+router.post('/user/doesFollow/:blogId',
+    VLDRQDF,
+    ISADF,
+    (req, res)=>{
+      userFunctions.doesFollow(req.decoded.email, req.params.blogId)
+          .then((blog)=>{
+            res.status(StatusCodes.OK).json({
+              'meta': {
+                'status': 200,
+                'msg': 'OK',
+              },
 
+              'res': {
+                'message': '',
+                'data': blog,
+              },
+            });
+          });
+    });
 const VLDRQFB = validateRequest(userJoi.FollowBlogValidations);
 const ISAFB = isAuthorized(userEndPoints.followBlog);
 
