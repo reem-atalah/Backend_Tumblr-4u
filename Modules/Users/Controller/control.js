@@ -54,7 +54,11 @@ const resetPassword = require('./resetPassword');
 
 
 /* ------ <---> Follow Blog <---> */ // *** <===> Done <===>  *** //
-
+const doesFollow=async (email, blogId)=>{
+  return await schema.users.findOne(
+      {$and: [{email: email}, {following_blogs: blogId},
+        {isVerified: true}, {isDeleted: false}]});
+};
 /**
  *
  * @function
@@ -356,6 +360,7 @@ module.exports = {
   login,
   followBlog,
   unfollowBlog,
+  doesFollow,
   createBlog,
   deleteBlog,
   verfiyAccount,
