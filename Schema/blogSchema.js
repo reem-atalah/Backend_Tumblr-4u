@@ -22,14 +22,14 @@ const blogSchema = new mongoose.Schema({
   headerImage: String,
   background: String,
   titleColor: String,
-  reblog_parent_id: {
+  reblog_parent_id: { // not assigned in db
     type: 'String',
     required: false,
 
   },
   blockedBlogs: [String],
   followers: [String],
-  group_blogs_id: {
+  group_blogs_id: { // not assigned in db
     type: 'String',
     required: false,
 
@@ -68,7 +68,7 @@ const blogSchema = new mongoose.Schema({
   isDeleted: {
     type: 'Boolean',
   },
-  themeId: String,
+  themeId: String, // not assigned in db
 }, {
   Timestamps: true,
 });
