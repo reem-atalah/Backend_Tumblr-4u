@@ -231,6 +231,7 @@ router.get('/:notesId/notes',
             'res': {
               'message': ret.msg,
               'notes': ret.notes,
+              'notesCount': ret.notesCount
             },
           });
         } else if (ret.msg === 'Error In Get Notes Function') {
