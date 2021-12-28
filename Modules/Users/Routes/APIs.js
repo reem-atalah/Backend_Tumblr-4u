@@ -181,7 +181,7 @@ const VLDRQCB = validateRequest(userJoi.CreateBlogValidations);
 const ISACB = isAuthorized(userEndPoints.createBlog);
 // const CB=userFunctions.createBlog();
 
-router.post('/user/new/blog/',
+router.post('/user/new/blog',
     VLDRQCB,
     ISACB,
     (req, res) => {
@@ -219,12 +219,12 @@ const VLDRQDB = validateRequest(userJoi.DeleteBlogValidations);
 const ISADB = isAuthorized(userEndPoints.deleteBlog);
 // const DB=userFunctions.deleteBlog;
 
-router.post('/user/delete/blog/:userId',
+router.post('/user/delete/blog',
     VLDRQDB,
     ISADB,
     (req, res) => {
       userFunctions.deleteBlog(
-          req.params.userId, req.body.blogId).then((blog) => {
+          req.decoded.email, req.body.blogId).then((blog)=> {
         console.log(blog);
         if (blog) {
           res.status(StatusCodes.OK).json({
@@ -252,6 +252,61 @@ router.post('/user/delete/blog/:userId',
         }
       });
     });
+ const VLDRQDU = validateRequest(userJoi.DeleteUserValidations);
+    const ISADU = isAuthorized(userEndPoints.deleteUser);
+    // const DB=userFunctions.deleteBlog;
+    
+    router.post('/user/delete',
+        VLDRQDU,
+        ISADU,
+        (req, res)=>{
+          userFunctions.deleteUser(
+              req.decoded.email).then((user)=> {
+            if (user) {
+              res.status(StatusCodes.OK).json({
+                'meta': {
+                  'status': 200,
+                  'msg': 'OK',
+                },
+                'res': {
+                  'message': 'User Deleted Successfully',
+                  'data': user,
+                },
+              });
+            } else {
+              res.status(StatusCodes.NOT_FOUND).json({
+                'meta': {
+                  'status': 404,
+                  'msg': 'NOT FOUND',
+                },
+    
+                'res': {
+                  'message': 'User Not FOUND',
+                  'data': '',
+                },
+              });
+            }
+          });
+        });
+/* ----------- <---> Get Interests <---> ----------------- */
+router.post('/getInterestsFromUser',
+    validateRequest(userJoi.getInterestsFromUserValidations),
+    isAuthorized(userEndPoints.getInterests),
+    async (req, res)=>{
+      await userFunctions.
+          getInterests(req.decoded.email, req.body.interests);
+
+      res.status(StatusCodes.OK).json({
+        'meta': {
+          'status': 200,
+          'msg': 'OK',
+        },
+        'res': {
+          'message': 'Interested saved Successfully',
+        },
+      });
+    },
+);
 
 /* ----------- <---> Get Interests <---> ----------------- */
 router.post('/getInterestsFromUser',
