@@ -168,6 +168,7 @@ const uploadAny = async (blobName, type)=>{
 
 const uploadImgBase = async (files) =>{
   const blobUrls=[];
+  // console.log(files);
 
   if (files.length <= 10) {
     files.forEach(async (file)=>{
@@ -205,8 +206,8 @@ const uploadImgBase = async (files) =>{
     });
   } else {
     // convert image from base64 to original image
-    console.log('files: ', files.substr(0, 26));
-    const match=files.match(/^data:([A-Za-z-+\/]+);base64,(.+)$/);
+    console.log('files: ', files.substr(-20,-1).match((/^data:([A-Za-z1-9-+\/]+);base64,(.+)$/)));
+    const match=files.match(/^data:([A-Za-z1-9-+\/]+);base64,(.+)$/);
     const response = {};
     // console.log('match: ', match);
 
@@ -222,7 +223,7 @@ const uploadImgBase = async (files) =>{
     // const extension = mime.extension(type);
     const uploadDate = new Date().toISOString().replace(/:/g, '-');
     const blobName = type.split('/')[0]+ uploadDate + '.'+ type.split('/')[1];
-    // console.log('type: ', type.split('/')[1]);
+    console.log('imageBuffer: ', imageBuffer.byteLength); 
 
     try {
       fs.writeFileSync(__dirname+'/'+type.split('/')[0]+'/' + blobName,
@@ -242,6 +243,10 @@ const uploadImgBase = async (files) =>{
   // check this link: https://www.py4u.net/discuss/1293154
 };
 
+const uploadVideo=async (files) =>{
+  let match = files.replace(/^data:(.*?);base64,/, ""); // <--- make it any type
+    match= files.replace(/ /g, '+'); // <--- this is important
+}
 
 const uploadImgg = async () =>{
   const blobServiceClient = await BlobServiceClient
@@ -1286,6 +1291,7 @@ module.exports = {
   getBlogPosts,
   uploadStream,
   uploadLocalImg,
+  uploadVideo,
 };
 
 /* =========== /// <==> End <==> ===========*/
