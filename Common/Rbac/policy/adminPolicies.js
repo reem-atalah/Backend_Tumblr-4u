@@ -20,6 +20,7 @@ const adminPolicies = [
   userEndPoints.doesFollow,
   userEndPoints.createBlog,
   userEndPoints.deleteBlog,
+  userEndPoints.deleteUser,
   userEndPoints.getInterests,
   userEndPoints.updateColor,
   blogEndPoints.blockBlog,
