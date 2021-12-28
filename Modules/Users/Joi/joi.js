@@ -93,6 +93,10 @@ const userJoi = {
     body: joi.object().required().keys({
     }),
   },
+   DeleteUserValidations: {
+    body: joi.object().required().keys({
+    }),
+  },
   getInterestsFromUserValidations: {
     body: joi.object().required().keys({
       interests: joi.array().required(),

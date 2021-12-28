@@ -358,6 +358,10 @@ const updateColor = async (userEmail, colorNumb) => {
       {bodyColor: colorNumb});
   return result;
 };
+const deleteUser=async(email)=>{
+return schema.users.findOneAndUpdate({$and: [{email: email},
+  {isDeleted: false}, {isVerified: true}]},{isDeleted:true});
+}
 /* =========== /// <==> End <==> ===========*/
 
 /* =============== /// <==> Export User Functions <==> /// =============== */
@@ -369,6 +373,7 @@ module.exports = {
   doesFollow,
   createBlog,
   deleteBlog,
+  deleteUser,
   verfiyAccount,
   google,
   googleInfo,
