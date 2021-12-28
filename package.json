@@ -39,13 +39,12 @@
     "parse-multipart": "^1.0.4",
     "passport": "^0.4.1",
     "passport-google-oauth2": "^0.2.0",
-    "path": "^0.12.7"
+    "path": "^0.12.7",
+    "socket.io": "^4.4.0"
   },
   "devDependencies": {
     "chai": "^4.3.4",
     "chai-http": "^4.3.0",
-    "eslint": "^8.2.0",
-    "eslint-config-google": "^0.14.0",
     "mocha": "^9.1.3",
     "mochawesome": "^7.0.1",
     "nodemon": "^2.0.15",
