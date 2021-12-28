@@ -17,6 +17,7 @@ const userAdminPolicies = [
   searchEndPt.getSearchDash,
   userEndPoints.followBlog,
   userEndPoints.unfollowBlog,
+  userEndPoints.doesFollow,
   userEndPoints.createBlog,
   userEndPoints.deleteBlog,
   userEndPoints.getInterests,
