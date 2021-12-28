@@ -102,7 +102,7 @@ const userJoi = {
       bodyColor: joi.number().required(),
     }),
   },
-}
+};
 /* =========== /// <==> End <==> ===========*/
 
 /* ============= /// <==> Exports User Joi Validations <==> /// ============= */
