@@ -56,8 +56,11 @@ router.post('/:blogId/uploadImg',
     // validateRequest(postJoi.uploadImgValidations),
     isAuthorized(postEndPoints.uploadeImg),
     async (req, res) => {
-      // console.log(req.body.file);
+      console.log('req.body: ', req.body.file.length);
       result= await postFunctions.uploadImgBase(req.body.file);
+      result={
+        images: result,
+      };
       console.log('result: ', result);
       res.json(result);
     });
@@ -69,6 +72,9 @@ router.get('/ranPosts',
     async (req, res) => {
       result= await postFunctions.retrieveRandomPosts();
       console.log('result: ', result.length);
+      result={
+        postsToShow: result,
+      };
       res.json(result);
     });
 
@@ -78,6 +84,9 @@ router.get('/trendPosts',
     async (req, res) => {
       result= await postFunctions.retrieveTrendingPosts();
       console.log('result: ', result);
+      result={
+        postsToShow: result,
+      };
       res.json(result);
     });
 
@@ -88,14 +97,14 @@ router.post('/:blogId/create_post',
     (req, res) => {
       postFunctions.createPost(req.params.blogId,
           req.body.postHtml, req.body.type, req.body.state, req.body.tags).then((ret) => {
-            if (ret === 'Post Created Successfully') {
-              res.status(StatusCodes.OK).json(ret);
-            } else if (ret === 'Error in Create Post Function') {
-              res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(ret); 
-            } else {
-              res.status(StatusCodes.BAD_REQUEST).json(ret);
-            };
-          }); 
+        if (ret === 'Post Created Successfully') {
+          res.status(StatusCodes.OK).json(ret);
+        } else if (ret === 'Error in Create Post Function') {
+          res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(ret);
+        } else {
+          res.status(StatusCodes.BAD_REQUEST).json(ret);
+        };
+      });
     });
 
 
@@ -104,20 +113,20 @@ router.get('/:postId/show_post',
     // validateRequest(postJoi.showPostValidations),
     isAuthorized(postEndPoints.showPost),
     (req, res) => {
-      postFunctions.showPost(req.url,req.params.postId).then((ret) => {
+      postFunctions.showPost(req.url, req.params.postId).then((ret) => {
         if (ret.msg === 'Post Returned Successfully') {
           res.status(StatusCodes.OK).json({
             'res': {
               'message': ret.msg,
               'post': ret.post,
-            }
+            },
           });
         } else if (ret.msg === 'Error in Show post Function') {
-          res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(ret.msg); 
+          res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(ret.msg);
         } else {
           res.status(StatusCodes.BAD_REQUEST).json(ret.msg);
         };
-      }); 
+      });
     },
 );
 
@@ -128,14 +137,14 @@ router.put('/:blogId/:postId/comment',
     (req, res) => {
       postFunctions.makeComment(req.params.blogId,
           req.params.postId, req.body.text).then((ret) => {
-            if (ret === 'Comment Posted Successfully') {
-              res.status(StatusCodes.OK).json(ret);
-            } else if (ret === 'Error in Make Comment Function') {
-              res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(ret); 
-            } else {
-              res.status(StatusCodes.BAD_REQUEST).json(ret);
-            };
-          }); 
+        if (ret === 'Comment Posted Successfully') {
+          res.status(StatusCodes.OK).json(ret);
+        } else if (ret === 'Error in Make Comment Function') {
+          res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(ret);
+        } else {
+          res.status(StatusCodes.BAD_REQUEST).json(ret);
+        };
+      });
     },
 );
 
@@ -166,14 +175,14 @@ router.put('/:blogId/:postId/reblog_post',
     (req, res) => {
       postFunctions.reblogPost(req.params.blogId,
           req.params.postId, req.body.text).then((ret) => {
-            if (ret === 'Post Reblogged Successfully') {
-              res.status(StatusCodes.OK).json(ret.msg);
-            } else if (ret === 'Error in Reblog Post Function') {
-              res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(ret); 
-            } else {
-              res.status(StatusCodes.BAD_REQUEST).json(ret);
-            };
-          });
+        if (ret === 'Post Reblogged Successfully') {
+          res.status(StatusCodes.OK).json(ret.msg);
+        } else if (ret === 'Error in Reblog Post Function') {
+          res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(ret);
+        } else {
+          res.status(StatusCodes.BAD_REQUEST).json(ret);
+        };
+      });
     },
 );
 
@@ -222,10 +231,10 @@ router.get('/:notesId/notes',
             'res': {
               'message': ret.msg,
               'notes': ret.notes,
-            }
+            },
           });
         } else if (ret.msg === 'Error In Get Notes Function') {
-          res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(ret.msg); 
+          res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(ret.msg);
         } else {
           res.status(StatusCodes.BAD_REQUEST).json(ret.msg);
         };
@@ -288,7 +297,7 @@ router.delete('/:postId/delete_post',
         if (ret === 'Post Deleted Successfully') {
           res.status(StatusCodes.OK).json(ret);
         } else if (ret === 'Error In Delete Post Function') {
-          res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(ret); 
+          res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(ret);
         } else {
           res.status(StatusCodes.BAD_REQUEST).json(ret);
         };
@@ -305,7 +314,7 @@ router.put('/:postId/edit_post',
         if (ret === 'Post Edited Successfully') {
           res.status(StatusCodes.OK).json(ret);
         } else if (ret === 'Error In Edit Post Function') {
-          res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(ret); 
+          res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(ret);
         } else {
           res.status(StatusCodes.BAD_REQUEST).json(ret);
         };
@@ -322,7 +331,7 @@ router.put('/:postId/report_post',
         if (ret === 'Post Reported Successfully') {
           res.status(StatusCodes.OK).json(ret);
         } else if (ret === 'Error In Report Post Function') {
-          res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(ret); 
+          res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(ret);
         } else {
           res.status(StatusCodes.BAD_REQUEST).json(ret);
         };
@@ -339,7 +348,7 @@ router.get('/:postId/share_with',
         if (ret === 'Post Shared Successfully') {
           res.status(StatusCodes.OK).json(ret);
         } else if (ret === 'Error In Share Post Function') {
-          res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(ret); 
+          res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(ret);
         } else {
           res.status(StatusCodes.BAD_REQUEST).json(ret);
         };
@@ -356,7 +365,7 @@ router.get('/blog/:blogId/activity_feed',
         if (ret === 'Activity Feed Got Successfully') {
           res.status(StatusCodes.OK).json(ret);
         } else if (ret === 'Error In Activity Feed Function') {
-          res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(ret); 
+          res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(ret);
         } else {
           res.status(StatusCodes.BAD_REQUEST).json(ret);
         };

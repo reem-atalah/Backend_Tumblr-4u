@@ -185,6 +185,9 @@ router.get('/ranBlogs',
     async (req, res) => {
       result= await blogFunctions.retrieveRandomBlogs();
       console.log('result: ', result.length);
+      result={
+        ranBlogs: result,
+      };
       res.json(result);
     });
 
