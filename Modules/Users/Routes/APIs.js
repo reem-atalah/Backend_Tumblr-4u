@@ -181,7 +181,7 @@ const VLDRQCB = validateRequest(userJoi.CreateBlogValidations);
 const ISACB = isAuthorized(userEndPoints.createBlog);
 // const CB=userFunctions.createBlog();
 
-router.get('/user/new/blog/',
+router.post('/user/new/blog/',
     VLDRQCB,
     ISACB,
     (req, res) => {
