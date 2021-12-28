@@ -27,8 +27,8 @@ server.use(passport.initialize());
 server.use(passport.session());
 
 // const seed= require('./Configurations/seed_db');
-
-
+//const {seedDB}=require('./Configurations/seed_db')
+//seedDB();
 /* =========== /// <==> End <==> ===========*/
 
 
