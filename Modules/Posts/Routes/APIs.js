@@ -176,7 +176,7 @@ router.put('/:blogId/:postId/reblog_post',
       postFunctions.reblogPost(req.params.blogId,
           req.params.postId, req.body.text).then((ret) => {
         if (ret === 'Post Reblogged Successfully') {
-          res.status(StatusCodes.OK).json(ret.msg);
+          res.status(StatusCodes.OK).json(ret);
         } else if (ret === 'Error in Reblog Post Function') {
           res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(ret);
         } else {
