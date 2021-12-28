@@ -35,7 +35,7 @@ const verifyMail = async (name, email, token) => {
     subject: "Hello ✔", // Subject line
     html: `
         <h3> Hi ${name}</h3>
-        <p>To verify your mail click <a href=http://localhost:5000/user/verify/${token}>here</a></p>
+        <p>To verify your mail click <a href=http://tumblr4u.eastus.cloudapp.azure.com:5000/user/verify/${token}>here</a></p>
         `, // html body
   });
 
