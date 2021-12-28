@@ -72,7 +72,7 @@ router.put('/user/email', GEV, AGE, GE);
 /* ----------- <---> Forget Password <---> ----------- */
 const FP = userFunctions.forgetPassword;
 const FPV = validateRequest(userJoi.ForgetPasswordValidations);
-router.get('/user/forget_password', FPV, FP);
+router.post('/user/forget_password', FPV, FP);
 
 /* ----------- <---> Reset Password <---> ----------- */
 const RP = userFunctions.resetPassword;
