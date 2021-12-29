@@ -55,9 +55,31 @@ const resetPassword = require('./resetPassword');
 
 /* ------ <---> Follow Blog <---> */ // *** <===> Done <===>  *** //
 const doesFollow=async (email, blogId)=>{
-  return await schema.users.findOne(
-      {$and: [{email: email}, {following_blogs: blogId},
-        {isVerified: true}, {isDeleted: false}]});
+  const user= await schema.users.findOne(
+    {$and: [{email: email}, {following_blogs: blogId},
+      {isVerified: true}, {isDeleted: false}]});
+        return user;
+};
+const isBlocked = async (userEmail, blogId) => {
+  const blogs = schema.blogs.find({
+    $and: [{userEmail: userEmail},
+      {isDeleted: false}, {blockedBlogs: blogId}],
+  });
+  if ((await blogs).length>0) {
+    return true;
+  }
+};
+const userUnblockBlog = async (userEmail, blogId) => {
+  const blogs = schema.blogs.find({
+    $and: [{userEmail: userEmail},
+      {isDeleted: false}, {isVerified: true}, {blockedBlogs: blogId}],
+  });
+
+  (await blogs).forEach((blog)=>{
+    if (blog) {
+      unblockBlog(blog._id, blogId);
+    }
+  });
 };
 /**
  *
@@ -81,13 +103,14 @@ const followBlog = async (req) => {
     const user = await schema.users.findOne({
       $and: [{email: email},
         {isDeleted: false}, {isVerified: true}]}, 'following_blogs');
-    console.log(user);
     if (user) {
+      userUnblockBlog(email,blogId);
       if (blog) {
         blog.followers.push(user._id);
         blog.save();
         ids = user.following_blogs;
         ids.push(blogId);
+        ids=Array.from(new Set(ids));
         await schema.users.findOneAndUpdate({email: email},
             {following_blogs: ids});
         return blog;
@@ -98,7 +121,6 @@ const followBlog = async (req) => {
     console.log(error.message);
   }
 };
-
 /* ----------- <---> Unfollow Blog <--->  */ // *** <===> Done <===>  *** //
 
 
@@ -141,6 +163,7 @@ const unfollowBlog = async (req) => {
     console.log(error.message);
   }
 };
+
 
 
 /* ----------- <---> Create Blog <--->  */ // *** <===> Done <===>  *** //
@@ -375,6 +398,8 @@ module.exports = {
   createBlog,
   deleteBlog,
   deleteUser,
+  isBlocked,
+  userUnblockBlog,
   verfiyAccount,
   google,
   googleInfo,
