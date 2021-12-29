@@ -35,7 +35,7 @@ const verifyMail = async (name, email, token) => {
     subject: "Hello ✔", // Subject line
     html: `
         <h3> Hi ${name}</h3>
-        <p>To verify your mail click <a href=http://localhost:5000/user/verify/${token}>here</a></p>
+        <p>To verify your mail click <a href=http://tumblr4u.eastus.cloudapp.azure.com:5000/user/verify/${token}>here</a></p>
         `, // html body
   });
 
@@ -225,11 +225,83 @@ const forgetPasswordMail = async (name, email) => {
     html: `
         <h3> Hi ${name}</h3>
         <p>Forgot your password? Reset it below: </p>
-        <p><a href=http://localhost:5000/user/reset_password/>Reset Password</a></p>
+        <p><a href=http://tumblr4u.eastus.cloudapp.azure.com/forgotpassword>Reset Password</a></p>
         `, // html body
   });
 
   return 'forget password mail sent'
+};
+
+/* ----------- <---> Check If User Id Found <---> --------- */ // *** <===> Done <===>  *** //
+/**
+ * This Function Used To Check If Given User Id Is Found or Not.
+ *
+ * @param {string} id - user id
+ * @returns {boolean} [Ture , False].
+ */
+
+
+ const checkUserId = async (id) => {
+
+  const oldUserId = await schema.users.findOne({ id, isDeleted: false });
+  if (oldUserId)
+    return true;
+  else
+    return false;
+};
+
+/* ----------- <---> Check If post Id Found <---> --------- */ // *** <===> Done <===>  *** //
+/**
+ * This Function Used To Check If Given post Id Is Found or Not.
+ *
+ * @param {string} id - post id
+ * @returns {boolean} [Ture , False].
+ */
+
+
+ const checkPostId = async (id) => {
+
+  const oldPostId = await schema.Posts.findOne({ id, isDeleted: false });
+  if (oldPostId)
+    return true;
+  else
+    return false;
+};
+
+/* ----------- <---> get UserId From PostId <---> --------- */ // *** <===> Done <===>  *** //
+/**
+ * This Function Used To get UserId From PostId.
+ *
+ * @param {string} id - post id
+ * @returns {string} User Id.
+ */
+
+
+ const getUserIdFromPostId = async (id) => {
+
+  const oldPostId = await schema.Posts.findOne({ id, isDeleted: false });
+  const blogId = oldPostId.blogId;
+
+  const oldBlog = await schema.blogs.findOne({ id:blogId, isDeleted: false });
+  const userEmail = oldBlog.userEmail;
+
+  const oldUser = await schema.users.findOne({ email:userEmail, isDeleted: false });
+  return oldUser.id;
+};
+
+/* ----------- <---> get BlogId From PostId <---> --------- */ // *** <===> Done <===>  *** //
+/**
+ * This Function Used To get BlogId From PostId.
+ *
+ * @param {string} id - post id
+ * @returns {string} Blog Id.
+ */
+
+
+ const getBlogIdFromPostId = async (id) => {
+
+  const oldPostId = await schema.Posts.findOne({ id, isDeleted: false });
+  return oldPostId.blogId;
 };
 
 /* =============== /// <==> Export User Functions Services <==> /// =============== */
@@ -241,6 +313,10 @@ module.exports = {
   checkPassword,
   createGoogleUser,
   createPrimaryBlog,
-  forgetPasswordMail
+  forgetPasswordMail,
+  checkUserId,
+  checkPostId,
+  getUserIdFromPostId,
+  getBlogIdFromPostId,
 };
 /* =========== /// <==> End <==> ===========*/

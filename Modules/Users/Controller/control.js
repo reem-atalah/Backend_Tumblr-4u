@@ -54,7 +54,11 @@ const resetPassword = require('./resetPassword');
 
 
 /* ------ <---> Follow Blog <---> */ // *** <===> Done <===>  *** //
-
+const doesFollow=async (email, blogId)=>{
+  return await schema.users.findOne(
+      {$and: [{email: email}, {following_blogs: blogId},
+        {isVerified: true}, {isDeleted: false}]});
+};
 /**
  *
  * @function
@@ -185,7 +189,8 @@ const createBlog = async (req) => {
     if (anotherBlog === null) {
       const user = await schema.users.findOne({
         $and: [{email: email},
-          {isDeleted: false}, {isVerified: true}]});
+          {isDeleted: false}],
+      });
       if (user) {
         if (user.blogsId.length === 0) {
           isPrimary = true;
@@ -198,7 +203,10 @@ const createBlog = async (req) => {
         const blog = await schema.blogs.create(
             {
               title: title,
+              titleColor: 'default',
               name: name,
+              userEmail: email,
+              titleColor: 'default',
               privacy: privacy,
               password: password,
               updated: 0,
@@ -222,12 +230,14 @@ const createBlog = async (req) => {
         console.log(blog._id);
         ids = user.blogsId;
         ids.push(blog._id);
-        await schema.users.findOneAndUpdate({$and: [{email: email},
-          {isDeleted: false}, {isVerified: true}]}, {blogsId: ids});
+        await schema.users.findOneAndUpdate({
+          $and: [{email: email},
+            {isDeleted: false}],
+        }, {blogsId: ids});
         console.log(user);
         return blog;
       } else {
-        return 'User is deleted';
+        return null;
       }
     } else {
       return null;
@@ -277,13 +287,15 @@ const deleteBlog = async (userEmail, blogId) => {
     console.log(userEmail);
 
     const user = await schema.users.findOne({$and: [{email: userEmail},
-      {isDeleted: true}, {isVerified: true}]});
+      {isDeleted: false}, {isVerified: true}]});
     console.log(user);
     if (!blog || !user) {
       return null;
     } else {
-      const users = await schema.users.find({isDeleted: false});
-      const blogs = await schema.blogs.find({isDeleted: false});
+      const users = await schema.users.find({$and: [{following_blogs: blogId},
+        {isDeleted: false}]});
+      const blogs = await schema.blogs.find({$and: [{blockedBlogs: blogId},
+        {isDeleted: false}]});
 
       for (var i = 0; i < users.length; i++) {
         ids = users[i].following_blogs;
@@ -311,7 +323,6 @@ const deleteBlog = async (userEmail, blogId) => {
     console.log(error.message);
   }
 };
-
 
 /* ----------- <---> Get Interests <--->  */ // *** <===> Done <===>  *** //
 
@@ -348,6 +359,10 @@ const updateColor = async (userEmail, colorNumb) => {
       {bodyColor: colorNumb});
   return result;
 };
+const deleteUser=async(email)=>{
+return schema.users.findOneAndUpdate({$and: [{email: email},
+  {isDeleted: false}, {isVerified: true}]},{isDeleted:true});
+}
 /* =========== /// <==> End <==> ===========*/
 
 /* =============== /// <==> Export User Functions <==> /// =============== */
@@ -356,8 +371,10 @@ module.exports = {
   login,
   followBlog,
   unfollowBlog,
+  doesFollow,
   createBlog,
   deleteBlog,
+  deleteUser,
   verfiyAccount,
   google,
   googleInfo,

@@ -6,9 +6,13 @@
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth2').Strategy;
 
-const clientId = '633147263244-qjs8lmqb79ohr4ahtulevhh8qpbn0bu3.apps.googleusercontent.com';
-const clientSecret = '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';
-const callbackApi= 'http://localhost:5000/google/callback'
+//const clientId = '633147263244-qjs8lmqb79ohr4ahtulevhh8qpbn0bu3.apps.googleusercontent.com';
+//const clientSecret = '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';
+//const callbackApi= 'http://localhost:5000/google/callback'
+
+const clientId = '633147263244-de25i1dmnlouuje0l0jcnesjla574bec.apps.googleusercontent.com';
+const clientSecret = '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';
+const callbackApi= 'http://tumblr4u.eastus.cloudapp.azure.com/google/callback'
 /*----------- End ------------*/
 
 /*--------------------------- // <=====> Passport FUnctions  <=====> // ---------------------------*/
