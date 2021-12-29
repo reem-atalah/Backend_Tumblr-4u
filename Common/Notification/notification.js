@@ -14,6 +14,8 @@ const socket = (app) => {
     io.on('connection', socket => { // Opened Chanel between user client and server.
         console.log(socket.id);
 
+        socket.emit('test','Connnection Is Done');
+
         socket.on('join-room', (room, cb) => {
             socket.join(room)
             cb(`joined ${room}`)
