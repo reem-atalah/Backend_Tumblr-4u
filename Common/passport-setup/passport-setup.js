@@ -12,7 +12,7 @@ const GoogleStrategy = require('passport-google-oauth2').Strategy;
 
 const clientId = '633147263244-de25i1dmnlouuje0l0jcnesjla574bec.apps.googleusercontent.com';
 const clientSecret = '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';
-const callbackApi= 'http://tumblr4u.eastus.cloudapp.azure.com/google/callback'
+const callbackApi= 'http://tumblr4u.eastus.cloudapp.azure.com'
 /*----------- End ------------*/
 
 /*--------------------------- // <=====> Passport FUnctions  <=====> // ---------------------------*/
