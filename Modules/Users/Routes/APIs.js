@@ -125,9 +125,8 @@ router.post('/follow',
           res.status(StatusCodes.NOT_FOUND).json({
             'meta': {
               'status': 404,
-              'msg': 'BAD_REQUEST',
-            },
-
+                 'msg': 'NOT FOUND',         
+                  },
             'res': {
               'error': 'Blog not found',
               'data': '',
