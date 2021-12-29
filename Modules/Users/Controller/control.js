@@ -223,7 +223,7 @@ const createBlog = async (req) => {
         if (privacy) {
           password = req.body.password;
         }
-        const blog = await schema.blogs.create(
+        const blog = new schema.blogs(
             {
               title: title,
               titleColor: 'default',
@@ -250,6 +250,7 @@ const createBlog = async (req) => {
               avatar: 'default',
             },
         );
+        blog.save();
         console.log(blog._id);
         ids = user.blogsId;
         ids.push(blog._id);
