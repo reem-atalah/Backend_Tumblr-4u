@@ -10,11 +10,16 @@ const userServices = require('../../Modules/Users/Controller/services');
 /* =============== /// <==> Open Connection <==> /// ============= */
 
 const socket = (app) => {
-    const io = require('socket.io')(app)
+    const io = require('socket.io')(app, {
+        cors: {
+            origin: "*",
+        }
+    });
+
     io.on('connection', socket => { // Opened Chanel between user client and server.
         console.log(socket.id);
 
-        io.emit('test','Connnection Is Done');
+        io.emit('test', 'Connnection Is Done');
 
         socket.on('join-room', (room, cb) => {
             socket.join(room)
