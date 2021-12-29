@@ -16,7 +16,7 @@ const cors =require('cors');
 const fileUpload = require('express-fileupload');
 server.use(fileUpload());
 const path = require('path');
-
+const socket = require('./Common/Notification/notification');
 /* ========== /// <==> Calling Config Function OF dotenv <==> /// =========== */
 dotenv.config();
 /* =========== /// <==> End <==> ===========*/
@@ -56,4 +56,8 @@ const app = server.listen(process.env.PORT, () => {
   console.log('Server Is Built (:');
 });
 module.exports = app;
+/* =========== /// <==> End <==> ===========*/
+
+/* ================= /// <==> Calling Socket Function <==> /// =============== */
+socket(app);
 /* =========== /// <==> End <==> ===========*/

@@ -9,6 +9,7 @@ const postSchema = require('../Schema/PostSchema');
 const userSchema = require('../Schema/userSchema');
 const blogSchema = require('../Schema/blogSchema');
 const notesSchema = require('../Schema/notesSchema');
+const notificationSchema = require('../Schema/notificationSchema');
 
 /* =========== /// <==> End <==> ===========*/
 
@@ -17,6 +18,7 @@ const users = mongoose.model('Users', userSchema.userSchema);
 const Posts = mongoose.model('Posts', postSchema.postSchema);
 const blogs = mongoose.model('blogs', blogSchema.blogSchema);
 const notes = mongoose.model('notes', notesSchema.notesSchema);
+const notifications = mongoose.model('notifications', notificationSchema.notificaitonSchema);
 
 /* =========== /// <==> End <==> ===========*/
 
@@ -26,5 +28,6 @@ module.exports = {
   Posts,
   blogs,
   notes,
+  notifications,
 };
 /* =========== /// <==> End <==> ===========*/
