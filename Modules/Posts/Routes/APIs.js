@@ -154,7 +154,7 @@ router.put('/:blogId/:postId/like_press',
     // validateRequest(postJoi.createPostValidations),
     isAuthorized(postEndPoints.likePress),
     (req, res) => {
-      postFunctions.likePress(req.params.blogId, req.params.postId).then((ret) => {
+      postFunctions.likePress(req.params.blogId, req.params.postId, req.decoded.email).then((ret) => {
         if (ret === 'Post Liked Successfully') {
           res.status(StatusCodes.OK).json(ret);
         } else if (ret === 'Post Unliked Successfully') {
