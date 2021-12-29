@@ -287,13 +287,15 @@ const deleteBlog = async (userEmail, blogId) => {
     console.log(userEmail);
 
     const user = await schema.users.findOne({$and: [{email: userEmail},
-      {isDeleted: true}, {isVerified: true}]});
+      {isDeleted: false}, {isVerified: true}]});
     console.log(user);
     if (!blog || !user) {
       return null;
     } else {
-      const users = await schema.users.find({isDeleted: false});
-      const blogs = await schema.blogs.find({isDeleted: false});
+      const users = await schema.users.find({$and: [{following_blogs: blogId},
+        {isDeleted: false}]});
+      const blogs = await schema.blogs.find({$and: [{blockedBlogs: blogId},
+        {isDeleted: false}]});
 
       for (var i = 0; i < users.length; i++) {
         ids = users[i].following_blogs;
@@ -321,7 +323,6 @@ const deleteBlog = async (userEmail, blogId) => {
     console.log(error.message);
   }
 };
-
 
 /* ----------- <---> Get Interests <--->  */ // *** <===> Done <===>  *** //
 
