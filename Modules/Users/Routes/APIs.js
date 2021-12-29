@@ -146,7 +146,8 @@ router.post('/unfollow',
     VLDRQUB,
     ISAUB,
     (req, res) => {
-      userFunctions.unfollowBlog(req).then((blog) => {
+ userFunctions.unfollowBlog(req).then((blog) => {
+   console.log('unfollow')
         if (blog) {
           res.status(StatusCodes.OK).json({
             'meta': {
@@ -175,8 +176,8 @@ router.post('/unfollow',
       });
     });
 
-/* ----------- <---> Create Blog <---> ----------- */
 
+/* ----------- <---> Create Blog <---> ----------- */
 const VLDRQCB = validateRequest(userJoi.CreateBlogValidations);
 const ISACB = isAuthorized(userEndPoints.createBlog);
 // const CB=userFunctions.createBlog();
@@ -198,9 +199,9 @@ router.post('/user/new/blog',
             },
           });
         } else {
-          res.status(StatusCodes.BAD_REQUEST).json({
+          res.status(StatusCodes.NOT_FOUND).json({
             'meta': {
-              'status': 400,
+              'status': 404,
               'msg': 'NOT FOUND',
             },
 
