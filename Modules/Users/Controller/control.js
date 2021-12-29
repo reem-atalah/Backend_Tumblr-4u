@@ -251,7 +251,6 @@ const createBlog = async (req) => {
             },
         );
         blog.save();
-        console.log(blog._id);
         ids = user.blogsId;
         ids.push(blog._id);
         await schema.users.findOneAndUpdate({
