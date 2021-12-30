@@ -19,10 +19,11 @@ const mime = require('mime');
 const fs = require('fs');
 const formidable = require('formidable');
 const multipart = require('parse-multipart');
-const {Mongoose} = require('mongoose');
+const {Mongoose, now} = require('mongoose');
 const multer = require('multer');
 const path = require('path');
 const inMemoryStorage = multer.memoryStorage();
+
 
 // const getStream = require('into-stream');
 
@@ -174,7 +175,7 @@ const uploadImgBase = async (files) =>{
     files.forEach(async (file)=>{
       // convert image from base64 to original image
       console.log('file: ', file.substr(0, 26));
-      const match=file.match(/^data:([A-Za-z-+\/]+);base64,(.+)$/);
+      const match=file.match(/^data:([A-Za-z1-9-+\/]+);base64,(.+)$/);
       // console.log('match: ', match);
       const response = {};
 
@@ -639,7 +640,7 @@ const loopObjAndCheck = (arr, element) => {
  * @returns {string} .
  */
 
-const likePress = async (blogId, postId) => {
+const likePress = async (blogId, postId, userEmail) => {
   try {
     ret = '';
     const existingBlog = await schema.blogs.findOne({
@@ -648,6 +649,7 @@ const likePress = async (blogId, postId) => {
     const existingPost = await schema.Posts.findOne({
       _id: postId
     });
+    const existingUser = await schema.users.findOne({email: userEmail});
 
     if (existingBlog && existingBlog.isDeleted == false) {
       if (existingPost && existingPost.isDeleted == false) {
@@ -667,16 +669,22 @@ const likePress = async (blogId, postId) => {
             likesArray[pos].isDeleted = true;
             existingNotes.save();
             ret = 'Post Unliked Successfully';
+            existingUser.likes_posts_id.pull(postId);
+            existingUser.save();
             return ret;
           } else if (existAndDeleted) {
             likesArray[pos].isDeleted = false;
             existingNotes.save();
             ret = 'Post Liked Successfully';
+            existingUser.likes_posts_id.push(postId);
+            existingUser.save();
             return ret;
           } else {
             existingNotes.likes.push(like);
             existingNotes.save();
             ret = 'Post Liked Successfully';
+            existingUser.likes_posts_id.push(postId);
+            existingUser.save();
             return ret;
           }
         } else {
@@ -1224,15 +1232,15 @@ const sharePost = async (postId) => {
  * @function
  * @name activityFeed
  * @description Gets activity feed of a post.
- * @param {string} postId - Id of the blog to get its activity feed.
+ * @param {string} blogId - Id of the blog to get its activity feed.
  *
  * @returns {string} .
  */
 
 const activityFeed = async (blogId) => {
   try {
-    const existingBlog = await schema.Posts.findOne({
-      _id: blogId,
+    ret = '';
+    const existingBlog = await schema.blogs.findOne({_id: blogId});
     // ret = {
     //   msg: '',
     //   daily: [],
@@ -1243,21 +1251,27 @@ const activityFeed = async (blogId) => {
     // };
     // const existingBlog = await schema.blogs.findOne({
     //   _id: blogId
-    });
-    if (existingBlog && existingBlog.isDeleted == false) {
-      for (let i=0; i<existingBlog.postsIds.length; i++) {
-        const existingPost = await schema.Posts.findOne({_id: existingBlog.postsIds[i]});
-        if (existingPost && existingPost.isDeleted == false) {
-          existingNotes = await schema.notes.findOne({_id: existingPost.notesId});
-          if (existingNotes && existingNotes.isDeleted == false) {
-            notesArray = getNotes(existingNotes._id);
-            for (let j=0; j<notesArray.length; j++) {
-              // if(notesArray[j]._id.getTimestamp() ==)
-            }
-          }
-        }
-      }
-    }
+    
+    //var mydate = new Date();
+    //console.log(mydate.getDate());
+    console.log('off');
+    // if (existingBlog && existingBlog.isDeleted == false) {
+    //   for (let i=0; i<existingBlog.postsIds.length; i++) {
+    //     const existingPost = await schema.Posts.findOne({_id: existingBlog.postsIds[i]});
+    //     if (existingPost && existingPost.isDeleted == false) {
+    //       existingNotes = await schema.notes.findOne({_id: existingPost.notesId});
+    //       if (existingNotes && existingNotes.isDeleted == false) {
+    //         notesArray = getNotes(existingNotes._id);
+            //console.log(now.isoWeek())
+            // for (let j=0; j<notesArray.length; j++) {
+            //   //if(notesArray[j]._id.getTimestamp().isoWeek() == now.isoWeek())
+            // }
+      //     }
+      //   }
+      // }
+    //}
+    ret = 'Activity Feed Got Successfullly';
+    return ret;
   } catch (error) {
     ret = 'Error In Activity Feed Function';
     return ret;

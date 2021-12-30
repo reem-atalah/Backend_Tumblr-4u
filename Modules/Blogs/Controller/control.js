@@ -115,7 +115,10 @@ const editBlog = async (req) => {
     });
     if (blog) {
       if (password) {
-        blog.password = password;
+        await schema.blogs.findOneAndUpdate({
+          $and: [{_id: blogId},
+            {isDeleted: false}],
+        },{password:password});
       }
       if (theme) {
         blog.theme = theme;
@@ -155,7 +158,7 @@ const editBlog = async (req) => {
           message = 'URL is not available';
         }
       }
-      blog.save();
+        blog.save();
       if (message === 'OK') {
         console.log(blog);
         return blog;

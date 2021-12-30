@@ -117,6 +117,7 @@ router.post('/follow',
             'msg': 'OK',
           },
 
+<<<<<<< HEAD
           'res': {
             'message': 'Blog Followed Successfully',
             'data': blog,
@@ -135,6 +136,26 @@ router.post('/follow',
           },
         });
       }
+=======
+            'res': {
+              'message': 'Blog Followed Successfully',
+              'data': blog,
+            },
+          });
+        } else {
+          res.status(StatusCodes.NOT_FOUND).json({
+            'meta': {
+              'status': 404,
+                 'msg': 'NOT FOUND',         
+                  },
+            'res': {
+              'error': 'Blog not found',
+              'data': '',
+            },
+          });
+        }
+      });
+>>>>>>> e0870e6c0d6b1275fad52e68ba244cfee99d779d
     });
   });
 
@@ -144,6 +165,7 @@ const VLDRQUB = validateRequest(userJoi.UnfollowBlogValidations);
 const ISAUB = isAuthorized(userEndPoints.unfollowBlog);
 
 router.post('/unfollow',
+<<<<<<< HEAD
   VLDRQUB,
   ISAUB,
   (req, res) => {
@@ -154,6 +176,19 @@ router.post('/unfollow',
             'status': 200,
             'msg': 'OK',
           },
+=======
+    VLDRQUB,
+    ISAUB,
+    (req, res) => {
+ userFunctions.unfollowBlog(req).then((blog) => {
+   console.log('unfollow')
+        if (blog) {
+          res.status(StatusCodes.OK).json({
+            'meta': {
+              'status': 200,
+              'msg': 'OK',
+            },
+>>>>>>> e0870e6c0d6b1275fad52e68ba244cfee99d779d
 
           'res': {
             'message': 'Blog Unfollowed Successfully',
@@ -176,13 +211,14 @@ router.post('/unfollow',
     });
   });
 
-/* ----------- <---> Create Blog <---> ----------- */
 
+/* ----------- <---> Create Blog <---> ----------- */
 const VLDRQCB = validateRequest(userJoi.CreateBlogValidations);
 const ISACB = isAuthorized(userEndPoints.createBlog);
 // const CB=userFunctions.createBlog();
 
 router.post('/user/new/blog',
+<<<<<<< HEAD
   VLDRQCB,
   ISACB,
   (req, res) => {
@@ -204,6 +240,29 @@ router.post('/user/new/blog',
             'status': 400,
             'msg': 'NOT FOUND',
           },
+=======
+    VLDRQCB,
+    ISACB,
+    (req, res) => {
+      userFunctions.createBlog(req).then((blog) => {
+        if (blog) {
+          res.status(StatusCodes.CREATED).json({
+            'meta': {
+              'status': 201,
+              'msg': 'CREATED',
+            },
+            'res': {
+              'message': 'Blog Created Successfully',
+              'data': blog,
+            },
+          });
+        } else {
+          res.status(StatusCodes.NOT_FOUND).json({
+            'meta': {
+              'status': 404,
+              'msg': 'NOT FOUND',
+            },
+>>>>>>> e0870e6c0d6b1275fad52e68ba244cfee99d779d
 
           'res': {
             'message': 'URL is not available',
