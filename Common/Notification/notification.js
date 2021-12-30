@@ -24,8 +24,8 @@ const socket = async (app) => {
 
         socket.on('join-room', (room) => {
             socket.emit('joined-room', 'Join Room Success');
-            socket.emit('test3', 'Tessssssssssssssssssssssssst3');
             const userId = userServices.getIdFromToken(room);
+            socket.emit('test3', userId);
             socket.join(userId)
         });
 
