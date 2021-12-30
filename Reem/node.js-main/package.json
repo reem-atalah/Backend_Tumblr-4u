@@ -1,0 +1,26 @@
+{
+    "name": "project",
+    "version": "1.0.0",
+    "description": "",
+    "main": "script.js",
+    "scripts": {
+        "start": "nodemon script.js"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "bcrypt": "^5.0.1",
+        "dotenv": "^10.0.0",
+        "easy-rbac": "^3.1.1",
+        "express": "^4.17.1",
+        "fs": "^0.0.1-security",
+        "http-status-codes": "^2.1.4",
+        "joi": "^17.4.2",
+        "jsonwebtoken": "^8.5.1",
+        "mongoose": "^6.0.7"
+    },
+    "devDependencies": {
+        "nodemon": "^2.0.13"
+    }
+}

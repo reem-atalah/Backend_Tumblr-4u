@@ -6,6 +6,7 @@
 
 /* ============== /// <==> Variables Declaration <==> /// ============== */
 const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
 
 /* =========== /// <==> End <==> ===========*/
 
@@ -74,6 +75,9 @@ const blogSchema = new mongoose.Schema({
 });
 
 /* =========== /// <==> End <==> ===========*/
+blogSchema.pre('save', async function() {
+  this.password = await bcrypt.hash(this.password, 8);
+});
 
 /* ============== /// <==> Export Blog Module Schema <==> /// ============== */
 module.exports = {

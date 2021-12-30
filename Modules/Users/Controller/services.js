@@ -225,7 +225,7 @@ const forgetPasswordMail = async (name, email) => {
     html: `
         <h3> Hi ${name}</h3>
         <p>Forgot your password? Reset it below: </p>
-        <p><a href=http://tumblr4u.eastus.cloudapp.azure.com/forgotpassword>Reset Password</a></p>
+        <p><a href=http://tumblr4u.eastus.cloudapp.azure.com/resetpassword>Reset Password</a></p>
         `, // html body
   });
 
@@ -241,7 +241,7 @@ const forgetPasswordMail = async (name, email) => {
  */
 
 
- const checkUserId = async (id) => {
+const checkUserId = async (id) => {
 
   const oldUserId = await schema.users.findOne({ id, isDeleted: false });
   if (oldUserId)
@@ -259,10 +259,10 @@ const forgetPasswordMail = async (name, email) => {
  */
 
 
- const checkPostId = async (id) => {
+const checkPostId = async (id) => {
 
-  const oldPostId = await schema.Posts.findOne({ id, isDeleted: false });
-  if (oldPostId)
+  const oldPost = await schema.Posts.find({_id:id, isDeleted: false });
+  if (oldPost.length)
     return true;
   else
     return false;
@@ -277,17 +277,19 @@ const forgetPasswordMail = async (name, email) => {
  */
 
 
- const getUserIdFromPostId = async (id) => {
+const getUserIdFromPostId = async (id) => {
 
-  const oldPostId = await schema.Posts.findOne({ id, isDeleted: false });
-  const blogId = oldPostId.blogId;
+  const oldPost = await schema.Posts.findOne({ _id: id, isDeleted: false });
+  const blogId = oldPost.blogId;
 
-  const oldBlog = await schema.blogs.findOne({ id:blogId, isDeleted: false });
+  const oldBlog = await schema.blogs.findOne({ _id: blogId, isDeleted: false });
+
   const userEmail = oldBlog.userEmail;
 
-  const oldUser = await schema.users.findOne({ email:userEmail, isDeleted: false });
+  const oldUser = await schema.users.findOne({ email: userEmail, isDeleted: false });
   return oldUser.id;
 };
+
 
 /* ----------- <---> get BlogId From PostId <---> --------- */ // *** <===> Done <===>  *** //
 /**
@@ -298,10 +300,25 @@ const forgetPasswordMail = async (name, email) => {
  */
 
 
- const getBlogIdFromPostId = async (id) => {
-
-  const oldPostId = await schema.Posts.findOne({ id, isDeleted: false });
+const getBlogIdFromPostId = async (id) => {
+  const oldPostId = await schema.Posts.findOne({ _id:id, isDeleted: false });
   return oldPostId.blogId;
+};
+
+/* ----------- <---> get Userid From Token <---> --------- */ // *** <===> Done <===>  *** //
+/**
+ * This Function Used To get User Id From Email.
+ *
+ * @param {string} token - user token
+ * @returns {string} user Id.
+ */
+
+
+const getIdFromToken = async (token) => {
+
+  const decoded = jwt.verify(token, process.env.KEY);
+  const oldUser = await schema.users.findOne({ email: decoded.email });
+  return oldUser.id;
 };
 
 /* =============== /// <==> Export User Functions Services <==> /// =============== */
@@ -318,5 +335,6 @@ module.exports = {
   checkPostId,
   getUserIdFromPostId,
   getBlogIdFromPostId,
+  getIdFromToken
 };
 /* =========== /// <==> End <==> ===========*/

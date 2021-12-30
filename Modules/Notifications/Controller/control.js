@@ -26,13 +26,14 @@ const userServices = require('../../Users/Controller/services');
 const addNotification = async (postId, type) => {
     try {
 
-        const ispostFound = await userServices.checkPost(postId);
+        const ispostFound = await userServices.checkPostId(postId);
         if (ispostFound) {
             const userId = await userServices.getUserIdFromPostId(postId)
             const blogId = await userServices.getBlogIdFromPostId(postId)
 
-            const blogName = await schema.blogs.findOne({ id: blogId }).name;
-
+            const blog = await schema.blogs.findOne({ id: blogId });
+            const blogName = blog.name;
+            
             var content;
             if (type == 'like' || type == 'reblog' || type == 'note')
                 content = `${blogName} ${type} your Post`
@@ -48,17 +49,7 @@ const addNotification = async (postId, type) => {
             });
             const data = await newNotification.save();
 
-            return {
-                'meta': {
-                    'status': 201,
-                    'msg': 'CREATED',
-                },
-
-                'res': {
-                    'mes': 'Notification Created (<:>)',
-                    'data': '',
-                },
-            };
+            return 'Created';
 
         } else {
             return {
