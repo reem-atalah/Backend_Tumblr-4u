@@ -14,7 +14,7 @@ const isAuthorized = require('../../../Common/Middlewares/isAuthorized');
 const userEndPoints = require('../endPoints');
 const passport = require('passport');
 require('../../../Common/passport-setup/passport-setup');
-const {StatusCodes} = require('http-status-codes');
+const { StatusCodes } = require('http-status-codes');
 
 
 // const isAuthorized = require('../../../Common/Middlewares/isAuthorized');
@@ -31,6 +31,7 @@ const {StatusCodes} = require('http-status-codes');
 const VLDRQSU = validateRequest(userJoi.SignUpValidations);
 const SU = userFunctions.signUp;
 
+router.get('/', (req, res) => { res.send('Hello, World!') });
 router.post('/signup', VLDRQSU, SU);
 
 /* ----------- <---> Sign In <---> ----------- */
@@ -50,7 +51,7 @@ router.use(passport.initialize());
 router.use(passport.session());
 
 router.get('/google',
-    passport.authenticate('google', {scope: ['profile', 'email']}));
+  passport.authenticate('google', { scope: ['profile', 'email'] }));
 const GO = userFunctions.google;
 const GI = userFunctions.googleInfo;
 const VGI = validateRequest(userJoi.GoogleInfoValidations);
@@ -80,62 +81,62 @@ const RPV = validateRequest(userJoi.ResetPasswordValidations);
 router.put('/user/reset_password/', RPV, RP);
 
 /* ----------- <---> Follow <---> ----------- */
-const VLDRQDF=validateRequest(userJoi.DoesFollowValidations);
-const ISADF=isAuthorized(userEndPoints.doesFollow);
+const VLDRQDF = validateRequest(userJoi.DoesFollowValidations);
+const ISADF = isAuthorized(userEndPoints.doesFollow);
 router.post('/user/doesFollow/:blogId',
-    VLDRQDF,
-    ISADF,
-    (req, res)=>{
-      userFunctions.doesFollow(req.decoded.email, req.params.blogId)
-          .then((blog)=>{
-            res.status(StatusCodes.OK).json({
-              'meta': {
-                'status': 200,
-                'msg': 'OK',
-              },
+  VLDRQDF,
+  ISADF,
+  (req, res) => {
+    userFunctions.doesFollow(req.decoded.email, req.params.blogId)
+      .then((blog) => {
+        res.status(StatusCodes.OK).json({
+          'meta': {
+            'status': 200,
+            'msg': 'OK',
+          },
 
-              'res': {
-                'message': '',
-                'data': blog,
-              },
-            });
-          });
-    });
+          'res': {
+            'message': '',
+            'data': blog,
+          },
+        });
+      });
+  });
 const VLDRQFB = validateRequest(userJoi.FollowBlogValidations);
 const ISAFB = isAuthorized(userEndPoints.followBlog);
 
 router.post('/follow',
-    VLDRQFB,
-    ISAFB,
-    (req, res) => {
-      userFunctions.followBlog(req).then((blog) => {
-        if (blog) {
-          res.status(StatusCodes.OK).json({
-            'meta': {
-              'status': 200,
-              'msg': 'OK',
-            },
+  VLDRQFB,
+  ISAFB,
+  (req, res) => {
+    userFunctions.followBlog(req).then((blog) => {
+      if (blog) {
+        res.status(StatusCodes.OK).json({
+          'meta': {
+            'status': 200,
+            'msg': 'OK',
+          },
 
-            'res': {
-              'message': 'Blog Followed Successfully',
-              'data': blog,
-            },
-          });
-        } else {
-          res.status(StatusCodes.NOT_FOUND).json({
-            'meta': {
-              'status': 404,
-              'msg': 'BAD_REQUEST',
-            },
+          'res': {
+            'message': 'Blog Followed Successfully',
+            'data': blog,
+          },
+        });
+      } else {
+        res.status(StatusCodes.NOT_FOUND).json({
+          'meta': {
+            'status': 404,
+            'msg': 'BAD_REQUEST',
+          },
 
-            'res': {
-              'error': 'Blog not found',
-              'data': '',
-            },
-          });
-        }
-      });
+          'res': {
+            'error': 'Blog not found',
+            'data': '',
+          },
+        });
+      }
     });
+  });
 
 /* ----------- <---> UnFollow <---> ----------- */
 
@@ -143,37 +144,37 @@ const VLDRQUB = validateRequest(userJoi.UnfollowBlogValidations);
 const ISAUB = isAuthorized(userEndPoints.unfollowBlog);
 
 router.post('/unfollow',
-    VLDRQUB,
-    ISAUB,
-    (req, res) => {
-      userFunctions.unfollowBlog(req).then((blog) => {
-        if (blog) {
-          res.status(StatusCodes.OK).json({
-            'meta': {
-              'status': 200,
-              'msg': 'OK',
-            },
+  VLDRQUB,
+  ISAUB,
+  (req, res) => {
+    userFunctions.unfollowBlog(req).then((blog) => {
+      if (blog) {
+        res.status(StatusCodes.OK).json({
+          'meta': {
+            'status': 200,
+            'msg': 'OK',
+          },
 
-            'res': {
-              'message': 'Blog Unfollowed Successfully',
-              'data': blog,
-            },
-          });
-        } else {
-          res.status(StatusCodes.NOT_FOUND).json({
-            'meta': {
-              'status': 404,
-              'msg': 'NOT FOUND',
-            },
+          'res': {
+            'message': 'Blog Unfollowed Successfully',
+            'data': blog,
+          },
+        });
+      } else {
+        res.status(StatusCodes.NOT_FOUND).json({
+          'meta': {
+            'status': 404,
+            'msg': 'NOT FOUND',
+          },
 
-            'res': {
-              'error': 'Blog not found',
-              'data': '',
-            },
-          });
-        }
-      });
+          'res': {
+            'error': 'Blog not found',
+            'data': '',
+          },
+        });
+      }
     });
+  });
 
 /* ----------- <---> Create Blog <---> ----------- */
 
@@ -182,36 +183,36 @@ const ISACB = isAuthorized(userEndPoints.createBlog);
 // const CB=userFunctions.createBlog();
 
 router.post('/user/new/blog',
-    VLDRQCB,
-    ISACB,
-    (req, res) => {
-      userFunctions.createBlog(req).then((blog) => {
-        if (blog) {
-          res.status(StatusCodes.CREATED).json({
-            'meta': {
-              'status': 201,
-              'msg': 'CREATED',
-            },
-            'res': {
-              'message': 'Blog Created Successfully',
-              'data': blog,
-            },
-          });
-        } else {
-          res.status(StatusCodes.BAD_REQUEST).json({
-            'meta': {
-              'status': 400,
-              'msg': 'NOT FOUND',
-            },
+  VLDRQCB,
+  ISACB,
+  (req, res) => {
+    userFunctions.createBlog(req).then((blog) => {
+      if (blog) {
+        res.status(StatusCodes.CREATED).json({
+          'meta': {
+            'status': 201,
+            'msg': 'CREATED',
+          },
+          'res': {
+            'message': 'Blog Created Successfully',
+            'data': blog,
+          },
+        });
+      } else {
+        res.status(StatusCodes.BAD_REQUEST).json({
+          'meta': {
+            'status': 400,
+            'msg': 'NOT FOUND',
+          },
 
-            'res': {
-              'message': 'URL is not available',
-              'data': '',
-            },
-          });
-        }
-      });
+          'res': {
+            'message': 'URL is not available',
+            'data': '',
+          },
+        });
+      }
     });
+  });
 
 /* ----------- <---> Delete Blog <---> ----------- */
 
@@ -220,11 +221,11 @@ const ISADB = isAuthorized(userEndPoints.deleteBlog);
 // const DB=userFunctions.deleteBlog;
 
 router.post('/user/delete/blog',
-    VLDRQDB,
-    ISADB,
-    (req, res) => {
-      userFunctions.deleteBlog(
-          req.decoded.email, req.body.blogId).then((blog)=> {
+  VLDRQDB,
+  ISADB,
+  (req, res) => {
+    userFunctions.deleteBlog(
+      req.decoded.email, req.body.blogId).then((blog) => {
         console.log(blog);
         if (blog) {
           res.status(StatusCodes.OK).json({
@@ -251,101 +252,101 @@ router.post('/user/delete/blog',
           });
         }
       });
-    });
- const VLDRQDU = validateRequest(userJoi.DeleteUserValidations);
-    const ISADU = isAuthorized(userEndPoints.deleteUser);
-    // const DB=userFunctions.deleteBlog;
-    
-    router.post('/user/delete',
-        VLDRQDU,
-        ISADU,
-        (req, res)=>{
-          userFunctions.deleteUser(
-              req.decoded.email).then((user)=> {
-            if (user) {
-              res.status(StatusCodes.OK).json({
-                'meta': {
-                  'status': 200,
-                  'msg': 'OK',
-                },
-                'res': {
-                  'message': 'User Deleted Successfully',
-                  'data': user,
-                },
-              });
-            } else {
-              res.status(StatusCodes.NOT_FOUND).json({
-                'meta': {
-                  'status': 404,
-                  'msg': 'NOT FOUND',
-                },
-    
-                'res': {
-                  'message': 'User Not FOUND',
-                  'data': '',
-                },
-              });
-            }
+  });
+const VLDRQDU = validateRequest(userJoi.DeleteUserValidations);
+const ISADU = isAuthorized(userEndPoints.deleteUser);
+// const DB=userFunctions.deleteBlog;
+
+router.post('/user/delete',
+  VLDRQDU,
+  ISADU,
+  (req, res) => {
+    userFunctions.deleteUser(
+      req.decoded.email).then((user) => {
+        if (user) {
+          res.status(StatusCodes.OK).json({
+            'meta': {
+              'status': 200,
+              'msg': 'OK',
+            },
+            'res': {
+              'message': 'User Deleted Successfully',
+              'data': user,
+            },
           });
-        });
+        } else {
+          res.status(StatusCodes.NOT_FOUND).json({
+            'meta': {
+              'status': 404,
+              'msg': 'NOT FOUND',
+            },
+
+            'res': {
+              'message': 'User Not FOUND',
+              'data': '',
+            },
+          });
+        }
+      });
+  });
 /* ----------- <---> Get Interests <---> ----------------- */
 router.post('/getInterestsFromUser',
-    validateRequest(userJoi.getInterestsFromUserValidations),
-    isAuthorized(userEndPoints.getInterests),
-    async (req, res)=>{
-      await userFunctions.
-          getInterests(req.decoded.email, req.body.interests);
+  validateRequest(userJoi.getInterestsFromUserValidations),
+  isAuthorized(userEndPoints.getInterests),
+  async (req, res) => {
+    await userFunctions.
+      getInterests(req.decoded.email, req.body.interests);
 
-      res.status(StatusCodes.OK).json({
-        'meta': {
-          'status': 200,
-          'msg': 'OK',
-        },
-        'res': {
-          'message': 'Interested saved Successfully',
-        },
-      });
-    },
+    res.status(StatusCodes.OK).json({
+      'meta': {
+        'status': 200,
+        'msg': 'OK',
+      },
+      'res': {
+        'message': 'Interested saved Successfully',
+      },
+    });
+  },
 );
 
 /* ----------- <---> Get Interests <---> ----------------- */
 router.post('/getInterestsFromUser',
-    validateRequest(userJoi.getInterestsFromUserValidations),
-    isAuthorized(userEndPoints.getInterests),
-    async (req, res)=>{
-      await userFunctions.
-          getInterests(req.decoded.email, req.body.interests);
+  validateRequest(userJoi.getInterestsFromUserValidations),
+  isAuthorized(userEndPoints.getInterests),
+  async (req, res) => {
+    await userFunctions.
+      getInterests(req.decoded.email, req.body.interests);
 
-      res.status(StatusCodes.OK).json({
-        'meta': {
-          'status': 200,
-          'msg': 'OK',
-        },
-        'res': {
-          'message': 'Interested saved Successfully',
-        },
-      });
-    },
+    res.status(StatusCodes.OK).json({
+      'meta': {
+        'status': 200,
+        'msg': 'OK',
+      },
+      'res': {
+        'message': 'Interested saved Successfully',
+      },
+    });
+  },
 );
 
 /* ----------- <---> Update Color <---> ----------------- */
 router.put('/updateColor',
-    validateRequest(userJoi.updateColorValidations),
-    isAuthorized(userEndPoints.updateColor),
-    async (req, res)=>{
-      result = await userFunctions.
-          updateColor(req.decoded.email, req.body.bodyColor);
-      res.json(result);
-      // res.status(StatusCodes.OK).json({
-      //   'meta': {
-      //     'status': 200,
-      //     'msg': 'OK',
-      //   },
-      //   'res': {
-      //     'message': 'Color Updated Successfully',
-      //   },
-      // });
-    },
+  validateRequest(userJoi.updateColorValidations),
+  isAuthorized(userEndPoints.updateColor),
+  async (req, res) => {
+    result = await userFunctions.
+      updateColor(req.decoded.email, req.body.bodyColor);
+    res.json(result);
+    // res.status(StatusCodes.OK).json({
+    //   'meta': {
+    //     'status': 200,
+    //     'msg': 'OK',
+    //   },
+    //   'res': {
+    //     'message': 'Color Updated Successfully',
+    //   },
+    // });
+  },
 );
 /* =========== /// <==> End <==> ===========*/
 
