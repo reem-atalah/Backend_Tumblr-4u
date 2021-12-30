@@ -25,6 +25,7 @@ const socket = async (app) => {
         socket.on('join-room', (room, cb) => {
 
             const userId = userServices.getIdFromToken(room);
+            socket.join(userId)
             cb(`joined ${room}`)
         });
 

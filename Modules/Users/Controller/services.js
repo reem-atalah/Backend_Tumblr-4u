@@ -225,7 +225,7 @@ const forgetPasswordMail = async (name, email) => {
     html: `
         <h3> Hi ${name}</h3>
         <p>Forgot your password? Reset it below: </p>
-        <p><a href=http://tumblr4u.eastus.cloudapp.azure.com/forgotpassword>Reset Password</a></p>
+        <p><a href=http://tumblr4u.eastus.cloudapp.azure.com/resetpassword>Reset Password</a></p>
         `, // html body
   });
 
