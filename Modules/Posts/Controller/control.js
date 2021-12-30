@@ -647,26 +647,18 @@ const loopObjAndCheck = (arr, element) => {
 
 const likePress = async (blogId, postId) => {
   try {
-    ret = '';
-    const existingBlog = await schema.blogs.findOne({
-      _id: blogId
-    });
-    const existingPost = await schema.Posts.findOne({
-      _id: postId
-    });
+    var ret = '';
+    const existingBlog = await schema.blogs.findOne({_id: blogId});
+    const existingPost = await schema.Posts.findOne({_id: postId});
     if (existingBlog && existingBlog.isDeleted == false && existingBlog.isPrimary == true) {
       userEmail = existingBlog.userEmail;
-      const existingUser = await schema.users.findOne({
-        email: userEmail
-      });
+      const existingUser = await schema.users.findOne({email: userEmail});
       if (existingPost && existingPost.isDeleted == false) {
         const notesId = existingPost.notesId;
-        const existingNotes = await schema.notes.findOne({
-          _id: notesId
-        });
+        const existingNotes = await schema.notes.findOne({_id: notesId});
         if (existingNotes && existingNotes.isDeleted == false) {
           const like = {
-            blogId,
+            blogId
           };
           const likesArray = existingNotes.likes;
           const existAndNotDeleted = loopLikeAndCheck(likesArray, blogId)[0];
@@ -677,23 +669,29 @@ const likePress = async (blogId, postId) => {
             likesArray[pos].isDeleted = true;
             existingNotes.save();
             ret = 'Post Unliked Successfully';
-            existingUser.likes_posts_id.pull(postId);
-            existingUser.save();
+            if(existingUser) {
+              existingUser.likes_posts_id.pull(postId);
+              existingUser.save();
+            }
             return ret;
           } else if (existAndDeleted) {
             likesArray[pos].isDeleted = false;
             existingNotes.save();
             ret = 'Post Liked Successfully';
-            existingUser.likes_posts_id.push(postId);
-            existingUser.save();
-
+            if(existingUser) {
+              existingUser.likes_posts_id.push(postId);
+              existingUser.save();
+            }
+        
             return ret;
           } else {
             existingNotes.likes.push(like);
             existingNotes.save();
             ret = 'Post Liked Successfully';
-            existingUser.likes_posts_id.push(postId);
-            existingUser.save();
+            if(existingUser) {
+              existingUser.likes_posts_id.push(postId);
+              existingUser.save();
+            }
             return ret;
           }
         } else {
