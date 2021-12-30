@@ -7,6 +7,7 @@ const {unfollowBlog}=require('../../../Modules/Users/Controller/unfollowBlog');
 
 
 /* ==================== /// <==> Blog Functions <==> /// ==================== */
+/* -------- <---> Block Blog <---> ------- */ // *** <===> Done <===>  *** //
 
 /**
  *
@@ -29,8 +30,13 @@ const blockBlog = async (blogId, blockedBlogId) => {
       const blog = await schema.blogs.findOne(
           {$and: [{_id: blogId}, {isDeleted: false}]});
       if (blog) {
+        console.log("block");
+
         unfollowBlog(blog.userEmail, blockedBlogId);
-        blog.blockedBlogs.push(blockedBlogId);
+        let ids=blog.blockedBlogs;
+        ids.push(blockedBlogId);
+        ids=Array.from(new Set(ids));
+        blog.blockedBlogs=ids;
         blog.save();
         return blockedBlog;
       }
@@ -40,7 +46,7 @@ const blockBlog = async (blogId, blockedBlogId) => {
     console.log(error.message);
   }
 };
-/* -------- <---> Unfollow Blog <---> ------- */ // *** <===> Done <===>  *** //
+/* -------- <---> Unblock Blog <---> ------- */ // *** <===> Done <===>  *** //
 
 
 /**
