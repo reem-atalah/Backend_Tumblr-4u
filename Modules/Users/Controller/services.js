@@ -284,15 +284,21 @@ const checkPostId = async (id) => {
 
 
 const getUserIdFromPostId = async (id) => {
+  console.log('==========================================================================================')
 
   const oldPost = await schema.Posts.findOne({ _id: id, isDeleted: false });
   const blogId = oldPost.blogId;
-
+  console.log(blogId)
   const oldBlog = await schema.blogs.findOne({ _id: blogId, isDeleted: false });
 
+  console.log(oldBlog)
   const userEmail = oldBlog.userEmail;
+  console.log(userEmail)
 
   const oldUser = await schema.users.findOne({ email: userEmail, isDeleted: false });
+  console.log(oldUser)
+  console.log('==========================================================================================')
+  
   return oldUser.id;
 };
 
