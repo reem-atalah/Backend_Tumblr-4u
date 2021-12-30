@@ -43,7 +43,7 @@ const socket = async (app) => {
             const data = await notificationFunction.getNotification(input.postId);
             console.log(data);
 
-            socket.to(room).emit('update-notification-list', data)
+            io.to(room).emit('update-notification-list', data)
         });
 
         socket.on('note', async (input) => {
@@ -55,7 +55,7 @@ const socket = async (app) => {
             const data = await notificationFunction.getNotification(input.postId);
             console.log(data);
 
-            socket.to(room).emit('update-notification-list', data)
+            io.to(room).emit('update-notification-list', data)
         });
 
         socket.on('reblog', async (input) => {
@@ -67,7 +67,7 @@ const socket = async (app) => {
             const data = await notificationFunction.getNotification(input.postId);
             console.log(data);
 
-            socket.to(room).emit('update-notification-list', data)
+            io.to(room).emit('update-notification-list', data)
         });
 
         socket.on('follow', async (input) => {
@@ -79,7 +79,7 @@ const socket = async (app) => {
             const data = await notificationFunction.getNotification(input.postId);
             console.log(data);
 
-            socket.to(room).emit('update-notification-list', data)
+            io.to(room).emit('update-notification-list', data)
         });
 
         socket.on('unfollow', async (input) => {
@@ -91,7 +91,7 @@ const socket = async (app) => {
             const data = await notificationFunction.getNotification(input.postId);
             console.log(data);
 
-            socket.to(room).emit('update-notification-list', data)
+            io.to(room).emit('update-notification-list', data)
         });
 
         socket.on('send', async (input) => {
@@ -104,8 +104,8 @@ const socket = async (app) => {
             const data = await notificationFunction.getChat(sendBlogName,receiveBlogName);
             console.log(data);
 
-            socket.to(sendUserId).emit('update-chat-list', data, receiveBlogName)
-            socket.to(receiveUserId).emit('update-chat-list', data, sendBlogName)
+            io.to(sendUserId).emit('update-chat-list', data, receiveBlogName)
+            io.to(receiveUserId).emit('update-chat-list', data, sendBlogName)
 
         });
 
