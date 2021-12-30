@@ -10,7 +10,7 @@ const joi = require('joi');
 const postJoi = {
   uploadImgValidations: {
     body: joi.object().required().keys({
-      files: joi.string().required(),
+      file: joi.string().required(),
     }), 
   },
   createPostValidations: {
