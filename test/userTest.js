@@ -187,8 +187,8 @@ describe('User APIs', () => {
   describe('Create Primary Blog Function', () => {
     // ----------------// <=====> 1-Case <=====> //----------------//
     it('It Should Create Primary Blog When User Sign up ', (done) => {
-      const email = 'ahmed.ayman.cmp@gmail.com';
-      const name = 'Game-2023';
+      const email = 'ahmedatcmp@gmail.com';
+      const name = 'Game-1';
 
       userServices.createPrimaryBlog(email, name).then((result) => {
         expect(result).to.be.eq('Blog Created');

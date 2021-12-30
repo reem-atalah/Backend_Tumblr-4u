@@ -190,12 +190,11 @@ const createPrimaryBlog = async (email, name) => {
     const data = await newBlog.save();
 
     const blog = await schema.blogs.findOne({ name });
-    console.log(blog);
     let ids = user.blogsId;
-    console.log(ids);
     ids.push(blog.id);
     const userData = await schema.users.updateOne({ email }, { blogsId: ids });
-    console.log(userData.modifiedCount);
+    
+    const Data = await schema.users.findOne({ email });
 
     return 'Blog Created';
   } catch (error) {
