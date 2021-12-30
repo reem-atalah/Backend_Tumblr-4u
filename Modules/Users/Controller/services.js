@@ -324,7 +324,7 @@ const getIdFromToken = async (token) => {
 
   const decoded = jwt.verify(token, process.env.KEY);
   const oldUser = await schema.users.findOne({ email: decoded.email });
-  return oldUser._id;
+  return oldUser.id;
 };
 
 /* =============== /// <==> Export User Functions Services <==> /// =============== */
