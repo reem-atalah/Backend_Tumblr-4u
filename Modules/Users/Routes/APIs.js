@@ -249,10 +249,6 @@ router.post('/user/new/blog',
 
 /* ----------- <---> Delete Blog <---> ----------- */
 
-const VLDRQDB = validateRequest(userJoi.DeleteBlogValidations);
-const ISADB = isAuthorized(userEndPoints.deleteBlog);
-// const DB=userFunctions.deleteBlog;
-
 router.post('/user/delete/blog',
   VLDRQDB,
   ISADB,
