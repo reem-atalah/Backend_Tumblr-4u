@@ -95,12 +95,15 @@ const unblockBlog = async (blogId, unblockedBlogId) => {
  * @param {String} avatar
  * @param {Boolean} showAvatar
  * @param {String} title
+ * @param {Boolean} showTitle
  * @param {String} titleColor
  * @param {String} background 
  * @param {String} password 
  * @param {String} theme
  * @param {String} description 
  * @param {Boolean} showDescription
+ * @param {Boolean} showHeaderImage
+ * @param {Boolean} stretchHeaderImage
  * @return {Object} - A blog object
  */
 
@@ -120,6 +123,9 @@ const editBlog = async (req) => {
     const description = req.body.description;
     const showDescription = req.body.showDescription;
     const showAvatar=req.body.showAvatar;
+    const showHeaderImage = req.body.showHeaderImage;
+    const stretchHeaderImage=req.body.stretchHeaderImage;
+    const showTitle = req.body.showTitle;
     let message = 'OK';
     const blog = await schema.blogs.findOne({
       $and: [{_id: blogId},
@@ -133,6 +139,18 @@ const editBlog = async (req) => {
       if(blog.showDescription!=showDescription)
       {
         blog.showDescription=!blog.showDescription;
+      }
+      if(blog.showHeaderImage!=showHeaderImage)
+      {
+        blog.showHeaderImage=!blog.showHeaderImage;
+      }
+      if(blog.stretchHeaderImage!=stretchHeaderImage)
+      {
+        blog.stretchHeaderImage=!blog.stretchHeaderImage;
+      }
+      if(blog.showTitle!=showTitle)
+      {
+        blog.showTitle=!blog.showTitle;
       }
       if (password) {
         await schema.blogs.findOneAndUpdate({
