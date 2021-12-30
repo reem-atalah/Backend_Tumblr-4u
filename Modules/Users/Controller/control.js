@@ -53,41 +53,36 @@ const resetPassword = require('./resetPassword');
 // =================== End ===================//
 
 
-/* ------ <---> Follow Blog <---> */ // *** <===> Done <===>  *** //
+/* ------ <---> Does Follow <---> */ // *** <===> Done <===>  *** //
+/**
+ *
+ * @function
+ * @name doesFollow
+ * @description this function checks if a user follows a blog
+ * @param {String} userEmail - The email of the user 
+ * @param {String} blogId - The id of the blog 
+ * @returns {Object}  - Returns the user if he/she follows the blog or null otherwise
+ */
+
 const doesFollow=async (email, blogId)=>{
+  try{
   const user= await schema.users.findOne(
     {$and: [{email: email}, {following_blogs: blogId},
       {isVerified: true}, {isDeleted: false}]});
         return user;
+      } catch (error) {
+          console.log(error.message);
+      }
 };
-const isBlocked = async (userEmail, blogId) => {
-  const blogs = schema.blogs.find({
-    $and: [{userEmail: userEmail},
-      {isDeleted: false}, {blockedBlogs: blogId}],
-  });
-  if ((await blogs).length>0) {
-    return true;
-  }
-};
-const userUnblockBlog = async (userEmail, blogId) => {
-  const blogs = schema.blogs.find({
-    $and: [{userEmail: userEmail},
-      {isDeleted: false}, {isVerified: true}, {blockedBlogs: blogId}],
-  });
 
-  (await blogs).forEach((blog)=>{
-    if (blog) {
-      unblockBlog(blog._id, blogId);
-    }
-  });
-};
+/* ------ <---> Follow Blog <---> */ // *** <===> Done <===>  *** //
 /**
  *
  * @function
  * @name followBlog
  * @description this function makes the user whose id sent in
  *              params follow the blog whose id in the body
- * @param {String} userId - The id of the user who follows the blog
+ * @param {String} userEmail - The email of the user who follows the blog
  * @param {String} blogId - The id of the blog to be followed
  * @returns {Object}  - The followed blog and null if not found
  */
@@ -104,7 +99,7 @@ const followBlog = async (req) => {
       $and: [{email: email},
         {isDeleted: false}, {isVerified: true}]}, 'following_blogs');
     if (user) {
-      userUnblockBlog(email,blogId);
+      userServices.userUnblockBlog(email,blogId);
       if (blog) {
         blog.followers.push(user._id);
         blog.save();
@@ -130,7 +125,7 @@ const followBlog = async (req) => {
  * @name unfollowBlog
  * @description this function removes the user whose id sent in
  *               params from followers of the blog whose id in the body
- * @param {String} userId - The id of the user who unfollows the blog
+ * @param {String} userEmail - The email of the user who unfollows the blog
  * @param {String} blogId - The id of the blog to be unfollowed
  * @returns {Object}  - The unfollowed blog
  */
@@ -165,7 +160,6 @@ const unfollowBlog = async (req) => {
 };
 
 
-
 /* ----------- <---> Create Blog <--->  */ // *** <===> Done <===>  *** //
 const createBlogs=async ()=>{
   for (let i=0; i<200; i++) {
@@ -184,6 +178,7 @@ const createBlogs=async ()=>{
     console.log(name);
   }
 };
+/* ----------- <---> Create Blog <--->  */ // *** <===> Done <===>  *** //
 
 /**
  *
@@ -195,7 +190,7 @@ const createBlogs=async ()=>{
  * @param {String} title  - Title of the blog
  * @param {String} name  - URL of the blog and it should be unique
  * @param {Boolean} privacy  - Indicates wether the blog has a password or not
- * @param {String} password  - The password of the blog if it's private
+ * @param {String} [password]  - The password of the blog if it's private
  * @returns res status and message or error massege in case of errors.
  */
 
@@ -300,8 +295,6 @@ const createBlog = async (req) => {
  */
 
 const deleteBlog = async (userEmail, blogId) => {
-  console.log('Delete Blog');
-
   try {
     const blog = await schema.blogs.findOne({
       $and: [{'_id': blogId},
@@ -315,7 +308,7 @@ const deleteBlog = async (userEmail, blogId) => {
     if (!blog || !user) {
       return null;
     } else {
-        const users = await schema.users.find({$and: [{following_blogs: blogId},
+      const users = await schema.users.find({$and: [{following_blogs: blogId},
         {isDeleted: false},{isVerified: true}]});
       const blogs = await schema.blogs.find({$and: [{blockedBlogs: blogId},
         {isDeleted: false}]});
@@ -386,6 +379,16 @@ const updateColor = async (userEmail, colorNumb) => {
       {bodyColor: colorNumb});
   return result;
 };
+/* ----------- <---> Delete User <--->  */ // *** <===> Done <===>  *** //
+
+/**
+ *
+ * @function
+ * @name deleteUser
+ * @description This Function deletes the user (user.isDeleted=true)
+ * @param {String} userEmail  - email of the user
+ * @returns {Object}    - The deleted user
+ */
 const deleteUser = async (email) => {
   try{
   const user = await schema.users.findOne({
@@ -404,6 +407,14 @@ const deleteUser = async (email) => {
   console.log(error.message);
 }
 }
+/**
+ *
+ * @function
+ * @name retrieveUser
+ * @description This Function retrieves a user
+ * @param {String} userId - Id of the user
+ * @returns {Object}    - The user 
+ */
 const retrieveUser=async(userId)=>{
   try{
  return await schema.users.findOne({$and: [{ _id: userId },
@@ -426,8 +437,6 @@ module.exports = {
   createBlog,
   deleteBlog,
   deleteUser,
-  isBlocked,
-  userUnblockBlog,
   verfiyAccount,
   google,
   googleInfo,
