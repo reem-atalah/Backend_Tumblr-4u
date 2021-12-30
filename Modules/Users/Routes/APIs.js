@@ -61,8 +61,10 @@ router.put('/google/info', VGI, IA, GI);
 
 /* ----------- <---> android Sign Up With Google <---> ----------- */
 const GSA = userFunctions.androidSignUpWithGoogle;
+const newGoogle = userFunctions.newGoogle;
 const GAV = validateRequest(userJoi.GoogleAndroidValidations);
 router.post('/androidSignUpWithGoogle', GAV, GSA);
+router.post('/newGoogle', newGoogle);
 
 /* ----------- <---> Change Email <---> ----------- */
 const GE = userFunctions.changeEmail;

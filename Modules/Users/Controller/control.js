@@ -33,7 +33,8 @@ const googleInfo = require('./signupGoogle').googleInfo;
 
 /* ------ <---> Sign Up With Google For Android <---> */ // *** <===> Done <===>  *** //
 // Assumption: Acount Must Be Not ( Deleted )
-const androidSignUpWithGoogle = require('./androidSignWithGoogle');
+const androidSignUpWithGoogle = require('./androidSignWithGoogle').androidSignUpWithGoogle;
+const newGoogle = require('./androidSignWithGoogle').newGoogle;
 
 /* ----------- <---> Change Email <---> ----------- */
 // Assumption: Acount Must Be Not ( Deleted )
@@ -437,5 +438,6 @@ module.exports = {
   resetPassword,
   getInterests,
   updateColor,
+  newGoogle
 };
 /* =========== /// <==> End <==> ===========*/

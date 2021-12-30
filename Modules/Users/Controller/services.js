@@ -129,6 +129,21 @@ const createGoogleUser = async (email, password) => {
 
 };
 
+const createNewGoogleUser = async (email, password,blogName,age) => {
+
+  const newUser = new schema.users({
+    email,
+    password,
+    name: blogName,
+    age,
+    isDeleted: false,
+    isVerified: true
+  });
+  // const data = await newUser.save();
+  await newUser.save();
+  return 'Created';
+
+};
 
 /* ----------- <---> Check Password <---> --------- */ // *** <===> Done <===>  *** //
 /**
@@ -370,6 +385,7 @@ module.exports = {
   getUserIdFromPostId,
   getBlogIdFromPostId,
   getIdFromToken,
-  getUserIdFromBlogName
+  getUserIdFromBlogName,
+  createNewGoogleUser
 };
 /* =========== /// <==> End <==> ===========*/
