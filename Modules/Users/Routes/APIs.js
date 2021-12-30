@@ -289,43 +289,25 @@ router.post('/user/delete',
         }
       });
   });
-/* ----------- <---> Get Interests <---> ----------------- */
-router.post('/getInterestsFromUser',
-  validateRequest(userJoi.getInterestsFromUserValidations),
-  isAuthorized(userEndPoints.getInterests),
-  async (req, res) => {
-    await userFunctions.
-      getInterests(req.decoded.email, req.body.interests);
-
-    res.status(StatusCodes.OK).json({
-      'meta': {
-        'status': 200,
-        'msg': 'OK',
-      },
-      'res': {
-        'message': 'Interested saved Successfully',
-      },
-    });
-  },
-);
 
 /* ----------- <---> Get Interests <---> ----------------- */
 router.post('/getInterestsFromUser',
   validateRequest(userJoi.getInterestsFromUserValidations),
   isAuthorized(userEndPoints.getInterests),
   async (req, res) => {
-    await userFunctions.
+    result = await userFunctions.
       getInterests(req.decoded.email, req.body.interests);
 
-    res.status(StatusCodes.OK).json({
-      'meta': {
-        'status': 200,
-        'msg': 'OK',
-      },
-      'res': {
-        'message': 'Interested saved Successfully',
-      },
-    });
+    // res.status(StatusCodes.OK).json({
+    //   'meta': {
+    //     'status': 200,
+    //     'msg': 'OK',
+    //   },
+    //   'res': {
+    //     'message': 'Interested saved Successfully',
+    //   },
+    // });
+    res.json(result);
   },
 );
 

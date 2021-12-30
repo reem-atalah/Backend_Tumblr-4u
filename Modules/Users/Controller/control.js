@@ -360,8 +360,12 @@ const deleteBlog = async (userEmail, blogId) => {
  */
 
 const getInterests = async (userEmail, interstArr) => {
-  await schema.users.findOneAndUpdate({$and: [{email: userEmail}]},
+  console.log(userEmail);
+  const user = await schema.users.findOneAndUpdate({$and: [{email: userEmail}]},
       {followedTags: interstArr});
+      console.log(user);
+      return user;
+
 };
 
 /* ----------- <---> Update color <--->  */ // *** <===> Done <===>  *** //
@@ -383,8 +387,18 @@ const updateColor = async (userEmail, colorNumb) => {
   return result;
 };
 const deleteUser=async(email)=>{
-return schema.users.findOneAndUpdate({$and: [{email: email},
-  {isDeleted: false}, {isVerified: true}]},{isDeleted:true});
+ const user= await schema.users.findOne({$and: [{email: email},
+    {isDeleted: false}, {isVerified: true}]});
+    if(user)
+    {
+const l=user.blogsId.length;
+for(var i=l-1;i>0;i--)
+{
+  deleteBlog(email,user.blogsId[i]);
+}
+return  deleteBlog(email,user.blogsId[0]);
+    }
+    return null;
 }
 /* =========== /// <==> End <==> ===========*/
 
