@@ -175,7 +175,7 @@ const uploadImgBase = async (files) =>{
     files.forEach(async (file)=>{
       // convert image from base64 to original image
       console.log('file: ', file.substr(0, 26));
-      const match=file.match(/^data:([A-Za-z-+\/]+);base64,(.+)$/);
+      const match=file.match(/^data:([A-Za-z1-9-+\/]+);base64,(.+)$/);
       // console.log('match: ', match);
       const response = {};
 
