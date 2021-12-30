@@ -19,6 +19,7 @@ const getBlogPosts = 'Posts: getBlogPosts';
 const activityFeed = 'Posts: activityFeed';
 const uploadeImg = 'Posts: uploadeImg';
 const uploadStream = 'Posts : uploadStream';
+const getLikedPosts = 'Posts: getLikedPosts';
 
 const postEndPoints = {
   createPost,
@@ -37,6 +38,7 @@ const postEndPoints = {
   activityFeed,
   uploadeImg,
   uploadStream,
+  getLikedPosts,
 };
 /* =========== <--> End <--> =========== */
 

@@ -1036,7 +1036,6 @@ const getDashboard = async (userEmail) => {
  * @function
  * @name getBlogPosts
  * @description Get dashboard of a blog.
- * @param {string} userId - Id of the user to get its blogs' posts.
  * @param {string} blogId - Id of the blog to get its posts.
  *
  * @returns {string} Array of posts objects.
@@ -1301,6 +1300,63 @@ const activityFeed = async (blogId) => {
     return ret;
   };
 };
+
+/* ----------- <---> Get Liked Posts <---> ----------- */ // *** <===> Done <===>  *** //
+
+/**
+ * @function
+ * @name getLikedPosts
+ * @description Get Liked Posts of a user.
+ * @param {string} blogId - Id of the blog to get its posts.
+ *
+ * @returns {string} Array of posts objects.
+ */
+
+ const getLikedPosts = async (blogId) => {
+  try {
+    ret = {
+      msg: '',
+      blog: {},
+      postsToShow: [],
+    };
+    postsToShow = [];
+    const existingBlog = await schema.blogs.findOne({
+      _id: blogId,
+    });
+    if (existingBlog && existingBlog.isDeleted == false) {
+      const userEmail = existingBlog.userEmail;
+      const existingUser = await schema.users.findOne({email: userEmail});
+      if(existingUser) {
+        likedPosts = existingUser.likes_posts_id;
+      } else {
+        ret.msg = 'User Not Found';
+        return ret;
+      }
+      for (let i = 0; i < likedPosts.length; i++) {
+        const existingPost = await schema.Posts.findOne({
+          _id: likedPosts[i],
+        });
+        if (existingPost && existingPost.isDeleted == false) {
+          postsToShow.push(existingPost);
+        }
+      }
+    } else {
+      ret.msg = 'Blog Not Found';
+      return ret;
+    }
+    postsToShow.sort(function (x, y) {
+      return y._id.getTimestamp() - x._id.getTimestamp();
+    });
+    ret.msg = 'Liked Posts Got Successfully';
+    ret.blog = existingBlog;
+    ret.postsToShow = postsToShow;
+    return ret;
+  } catch (error) {
+    ret.msg = 'Error In Get Liked Posts Function';
+    return ret;
+  }
+};
+
 /* =========== /// <==> End <==> ===========*/
 
 /* =============== /// <==> Export Post Functions <==> /// =============== */
@@ -1328,6 +1384,7 @@ module.exports = {
   uploadStream,
   uploadLocalImg,
   uploadVideo,
+  getLikedPosts,
 };
 
 /* =========== /// <==> End <==> ===========*/

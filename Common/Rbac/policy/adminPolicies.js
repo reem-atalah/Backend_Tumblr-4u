@@ -42,6 +42,7 @@ const adminPolicies = [
   postEndPoints.reportPost,
   postEndPoints.activityFeed,
   postEndPoints.uploadeImg,
+  postEndPoints.getLikedPosts,
 ];
 /* =========== <--> End <--> =========== */
 

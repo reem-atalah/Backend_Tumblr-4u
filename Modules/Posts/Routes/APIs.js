@@ -361,6 +361,29 @@ router.get('/blog/:blogId/activity_feed',
     },
 );
 
+/* ----------- <---> Get Liked Posts <---> ----------- */
+router.get('/blog/:blogId/getLikedPosts',
+    //validateRequest(postJoi.getBlogPostsValidations),
+    isAuthorized(postEndPoints.getLikedPosts),
+    (req, res) => {
+      postFunctions.getLikedPosts(req.params.blogId).then((ret) => {
+        if (ret.msg === 'Liked Posts Got Successfully') {
+          res.status(StatusCodes.OK).json({
+            'res': {
+              'messege': ret.msg,
+              'blog': ret.blog,
+              'postsToShow': ret.postsToShow,
+            },
+          });
+        } else if (ret.msg === 'Error In Get Blog Posts Function') {
+          res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(ret.msg);
+        } else {
+          res.status(StatusCodes.BAD_REQUEST).json(ret.msg);
+        };
+      });
+    },
+);
+
 /* =========== /// <==> End <==> ===========*/
 
 /* =================== /// <==> Export Post APIs <==> /// =================== */
