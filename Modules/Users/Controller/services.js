@@ -359,6 +359,27 @@ const getUserIdFromBlogName = async (name) => {
  *
  * @function
  * @name isBlocked
+ * @description this function checks if a blog of a user blocks a blog
+ * @param {String} userEmail - The email of the user 
+ * @param {String} blogId - The id of the blog 
+ * @returns {Object}  - Returns the true if one of the user blogs blocks the blog
+ */
+
+ const isBlocked = async (userEmail, blogId) => {
+  const blogs = schema.blogs.find({
+    $and: [{userEmail: userEmail},
+      {isDeleted: false}, {blockedBlogs: blogId}],
+  });
+  if ((await blogs).length>0) {
+    return true;
+  }
+  return false;
+};
+/* ------ <---> User Unblock Blog <---> */ // *** <===> Done <===>  *** //
+/**
+ *
+ * @function
+ * @name userUnblockBlog
  * @description this function makes all blogs of a user unblock a blog
  * @param {String} userEmail - The email of the user 
  * @param {String} blogId - The id of the blog 
