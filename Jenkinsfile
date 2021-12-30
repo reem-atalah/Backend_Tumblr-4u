@@ -43,7 +43,7 @@ post {
              subject: "Failed Pipeline: ${currentBuild.fullDisplayName}",
              body: "Something is wrong with ${env.BUILD_URL}"
             }
-    }
+    
     failure {
         mail to: 'mina.labib00@eng-st.cu.edu.eg ,mohamed.ahmedmoreb@gmail.com ,ahmed.ayman.1420@gmail.com',
              subject: "Failed Pipeline: ${currentBuild.fullDisplayName}",
