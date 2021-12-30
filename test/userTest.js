@@ -23,6 +23,7 @@ const userServices = require('../Modules/Users/Controller/services');
 const nodemailer = require('nodemailer');
 const jwt = require('jsonwebtoken');
 const { expect } = require('chai');
+const notificationFunction = require('../Modules/Notifications/Controller/control');
 
 // const connect = require('../Configurations/configuration');
 
@@ -213,6 +214,25 @@ describe('User APIs', () => {
       }).catch(done);
     });
   });
+
+  /*
+  ///////// <---------> ======== <---------> ///////// =====================>
+  ///////// <---------> add Notification <---------> ///////// ===========>
+  ///////// <---------> ======== <---------> ///////// =====================>
+  */
+  describe('Create Notification', () => {
+    // ----------------// <=====> 1-Case <=====> //----------------//
+    it('It Should Create Notification', (done) => {
+      const postId = '61ca5d92a8a4556c5b24f209';
+      const type = 'like';
+
+      notificationFunction.addNotification(postId, type).then((result) => {
+        expect(result).to.be.eq('Created');
+        done();
+      }).catch(done);
+    });
+  });
+
 });
 
 
