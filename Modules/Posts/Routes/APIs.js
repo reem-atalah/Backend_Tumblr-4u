@@ -53,7 +53,7 @@ router.post('/data',
 
 /* ----------- <---> Upload Img Base64 <---> ----------- */
 router.post('/uploadImg',
-    // validateRequest(postJoi.uploadImgValidations),
+    //validateRequest(postJoi.uploadImgValidations),
     isAuthorized(postEndPoints.uploadeImg),
     async (req, res) => {
       console.log('req.body: ', req.body.file.length);
@@ -110,7 +110,7 @@ router.post('/:blogId/create_post',
 
 /* ----------- <---> Show Post <---> ----------- */
 router.get('/:postId/show_post',
-    // validateRequest(postJoi.showPostValidations),
+    //validateRequest(postJoi.showPostValidations),
     isAuthorized(postEndPoints.showPost),
     (req, res) => {
       postFunctions.showPost(req.url, req.params.postId).then((ret) => {
@@ -132,7 +132,7 @@ router.get('/:postId/show_post',
 
 /* ----------- <---> Comment on a Post <---> ----------- */
 router.put('/:blogId/:postId/comment',
-    // validateRequest(postJoi.createPostValidations),
+    //validateRequest(postJoi.commentPostValidations),
     isAuthorized(postEndPoints.makeComment),
     (req, res) => {
       postFunctions.makeComment(req.params.blogId,
@@ -151,10 +151,10 @@ router.put('/:blogId/:postId/comment',
 
 /* ----------- <---> Like a Post <---> ----------- */
 router.put('/:blogId/:postId/like_press',
-    // validateRequest(postJoi.createPostValidations),
+    //validateRequest(postJoi.likePostValidations),
     isAuthorized(postEndPoints.likePress),
     (req, res) => {
-      postFunctions.likePress(req.params.blogId, req.params.postId, req.decoded.email).then((ret) => {
+      postFunctions.likePress(req.params.blogId, req.params.postId).then((ret) => {
         if (ret === 'Post Liked Successfully') {
           res.status(StatusCodes.OK).json(ret);
         } else if (ret === 'Post Unliked Successfully') {
@@ -170,7 +170,7 @@ router.put('/:blogId/:postId/like_press',
 
 /* ----------- <---> Reblog a Post <---> ----------- */
 router.put('/:blogId/:postId/reblog_post',
-    // validateRequest(postJoi.createPostValidations),
+    //validateRequest(postJoi.reblogPostValidations),
     isAuthorized(postEndPoints.reblogPost),
     (req, res) => {
       postFunctions.reblogPost(req.params.blogId,
@@ -188,7 +188,7 @@ router.put('/:blogId/:postId/reblog_post',
 
 /* ----------- <---> Remove a comment <---> ----------- */
 router.delete('/:postId/:commentId/remove_comment',
-    // validateRequest(postJoi.createPostValidations),
+    //validateRequest(postJoi.removeCommentValidations),
     isAuthorized(postEndPoints.removeComment),
     (req, res) => {
       postFunctions.removeComment(req.params.postId, req.params.commentId).then((ret) => {
@@ -205,7 +205,7 @@ router.delete('/:postId/:commentId/remove_comment',
 
 /* ----------- <---> Delete a rebloged Post <---> ----------- */
 router.delete('/:postId/:reblogId/remove_reblog',
-    // validateRequest(postJoi.createPostValidations),
+    //validateRequest(postJoi.removeReblogValidations),
     isAuthorized(postEndPoints.removeReblog),
     (req, res) => {
       postFunctions.removeReblog(req.params.postId, req.params.reblogId).then((ret) => {
@@ -222,7 +222,7 @@ router.delete('/:postId/:reblogId/remove_reblog',
 
 /* ----------- <---> Get Post Notes <---> ----------- */
 router.get('/:notesId/notes',
-    // validateRequest(postJoi.showPostValidations),
+    //validateRequest(postJoi.getNotesValidations),
     isAuthorized(postEndPoints.getNotes),
     (req, res) => {
       postFunctions.getNotes(req.params.notesId).then((ret) => {
@@ -247,6 +247,7 @@ router.get('/:notesId/notes',
 
 /* ----------- <---> Get User Dashboard <---> ----------- */
 router.get('/dashboard',
+    //validateRequest(postJoi.getDashboardValidations), 
     isAuthorized(postEndPoints.getDashboard),
     (req, res) => {
       postFunctions.getDashboard(req.decoded.email).then((ret) => {
@@ -271,6 +272,7 @@ router.get('/dashboard',
 );
 /* ----------- <---> Get Blog Posts <---> ----------- */
 router.get('/blog/:blogId/getBlogPosts',
+    //validateRequest(postJoi.getBlogPostsValidations),
     isAuthorized(postEndPoints.getBlogPosts),
     (req, res) => {
       postFunctions.getBlogPosts(req.params.blogId).then((ret) => {
@@ -293,7 +295,7 @@ router.get('/blog/:blogId/getBlogPosts',
 
 /* ----------- <---> Delete a Post <---> ----------- */
 router.delete('/:postId/delete_post',
-    // validateRequest(postJoi.createPostValidations),
+    //validateRequest(postJoi.deletePostValidations),
     isAuthorized(postEndPoints.deletePost),
     (req, res) => {
       postFunctions.deletePost(req.params.postId).then((ret) => {
@@ -310,7 +312,7 @@ router.delete('/:postId/delete_post',
 
 /* ----------- <---> Edit a Post <---> ----------- */
 router.put('/:postId/edit_post',
-    // validateRequest(postJoi.createPostValidations),
+    //validateRequest(postJoi.editPostValidations),
     isAuthorized(postEndPoints.editPost),
     (req, res) => {
       postFunctions.editPost(req.params.postId, req.body.postHtml, req.body.tags).then((ret) => {
@@ -327,7 +329,7 @@ router.put('/:postId/edit_post',
 
 /* ----------- <---> Report a Post <---> ----------- */
 router.put('/:postId/report_post',
-    // validateRequest(postJoi.createPostValidations),
+    //validateRequest(postJoi.reportPostValidations),
     isAuthorized(postEndPoints.reportPost),
     (req, res) => {
       postFunctions.reportPost(req.params.postId).then((ret) => {
@@ -342,35 +344,18 @@ router.put('/:postId/report_post',
     },
 );
 
-/* ----------- <---> Share With <---> ----------- */
-router.get('/:postId/share_with',
-    // validateRequest(postJoi.createPostValidations),
-    isAuthorized(postEndPoints.sharePost),
-    (req, res) => {
-      postFunctions.sharePost(req.params.postId).then((ret) => {
-        if (ret === 'Post Shared Successfully') {
-          res.status(StatusCodes.OK).json(ret);
-        } else if (ret === 'Error In Share Post Function') {
-          res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(ret);
-        } else {
-          res.status(StatusCodes.BAD_REQUEST).json(ret);
-        };
-      });
-    },
-);
-
 /* ----------- <---> Activity Feed <---> ----------- */
 router.get('/blog/:blogId/activity_feed',
-    // validateRequest(postJoi.createPostValidations),
+    //validateRequest(postJoi.activityFeedValidations),
     isAuthorized(postEndPoints.activityFeed),
     (req, res) => {
       postFunctions.activityFeed(req.params.blogId).then((ret) => {
-        if (ret === 'Activity Feed Got Successfully') {
+        if (ret.msg === 'Activity Feed Got Successfully') {
           res.status(StatusCodes.OK).json(ret);
-        } else if (ret === 'Error In Activity Feed Function') {
-          res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(ret);
+        } else if (ret.msg === 'Error In Activity Feed Function') {
+          res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(ret.msg);
         } else {
-          res.status(StatusCodes.BAD_REQUEST).json(ret);
+          res.status(StatusCodes.BAD_REQUEST).json(ret.msg);
         };
       });
     },

@@ -8,6 +8,7 @@ const { StatusCodes } = require('http-status-codes');
 const bcrypt = require('bcrypt');
 const schema = require('../../../Model/model');
 const jwt = require('jsonwebtoken');
+const { CLOSING } = require('ws');
 /* =========== /// <==> End <==> ===========*/
 
 /* ----------- <---> verify Email <---> --------- */ // *** <===> Done <===>  *** //
@@ -161,14 +162,17 @@ const createPrimaryBlog = async (email, name) => {
 
     const newBlog = new schema.blogs(
       {
-        title: 'UnTitled',
+        title: 'Untitled',
+        titleColor: 'default',
         name: name,
+        userEmail: email,
+        titleColor: 'default',
         privacy: false,
+        password: 'password',
         updated: 0,
         description: '',
-        password: 'password',
         isBlockedFromPrimary: false,
-        isPrimary: isPrimary,
+        isPrimary: true,
         blogVisitor: 0,
         followedTags: [],
         postsIds: [],
@@ -189,6 +193,8 @@ const createPrimaryBlog = async (email, name) => {
     let ids = user.blogsId;
     ids.push(blog.id);
     const userData = await schema.users.updateOne({ email }, { blogsId: ids });
+    
+    const Data = await schema.users.findOne({ email });
 
     return 'Blog Created';
   } catch (error) {
@@ -261,8 +267,8 @@ const checkUserId = async (id) => {
 
 const checkPostId = async (id) => {
 
-  const oldPostId = await schema.Posts.findOne({ id, isDeleted: false });
-  if (oldPostId)
+  const oldPost = await schema.Posts.find({ _id: id, isDeleted: false });
+  if (oldPost.length)
     return true;
   else
     return false;
@@ -279,15 +285,17 @@ const checkPostId = async (id) => {
 
 const getUserIdFromPostId = async (id) => {
 
-  const oldPostId = await schema.Posts.findOne({ id, isDeleted: false });
-  const blogId = oldPostId.blogId;
+  const oldPost = await schema.Posts.findOne({ _id: id, isDeleted: false });
+  const blogId = oldPost.blogId;
 
-  const oldBlog = await schema.blogs.findOne({ id: blogId, isDeleted: false });
+  const oldBlog = await schema.blogs.findOne({ _id: blogId, isDeleted: false });
+
   const userEmail = oldBlog.userEmail;
 
   const oldUser = await schema.users.findOne({ email: userEmail, isDeleted: false });
   return oldUser.id;
 };
+
 
 /* ----------- <---> get BlogId From PostId <---> --------- */ // *** <===> Done <===>  *** //
 /**
@@ -299,8 +307,7 @@ const getUserIdFromPostId = async (id) => {
 
 
 const getBlogIdFromPostId = async (id) => {
-
-  const oldPostId = await schema.Posts.findOne({ id, isDeleted: false });
+  const oldPostId = await schema.Posts.findOne({ _id: id, isDeleted: false });
   return oldPostId.blogId;
 };
 
@@ -317,7 +324,7 @@ const getIdFromToken = async (token) => {
 
   const decoded = jwt.verify(token, process.env.KEY);
   const oldUser = await schema.users.findOne({ email: decoded.email });
-  return oldUser.id;
+  return oldUser._id;
 };
 
 /* =============== /// <==> Export User Functions Services <==> /// =============== */

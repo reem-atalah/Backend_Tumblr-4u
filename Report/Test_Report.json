@@ -1,15 +1,15 @@
 {
   "stats": {
-    "suites": 34,
-    "tests": 47,
-    "passes": 15,
+    "suites": 36,
+    "tests": 50,
+    "passes": 18,
     "pending": 0,
     "failures": 32,
-    "start": "2021-12-30T10:25:33.834Z",
-    "end": "2021-12-30T10:25:46.207Z",
-    "duration": 12373,
-    "testsRegistered": 47,
-    "passPercent": 31.914893617021278,
+    "start": "2021-12-30T14:07:51.150Z",
+    "end": "2021-12-30T14:08:04.906Z",
+    "duration": 13756,
+    "testsRegistered": 50,
+    "passPercent": 36,
     "pendingPercent": 0,
     "other": 0,
     "hasOther": false,
@@ -18,7 +18,7 @@
   },
   "results": [
     {
-      "uuid": "10fe7ee4-968e-410e-a36c-096cad3b1e68",
+      "uuid": "3090136b-caf9-4bed-9f20-66377f76110a",
       "title": "",
       "fullFile": "",
       "file": "",
@@ -27,7 +27,7 @@
       "tests": [],
       "suites": [
         {
-          "uuid": "1c333362-0c67-4384-ae00-ebf18ace4569",
+          "uuid": "8a74dd1b-9bc3-43f7-97c9-0a0030b15ea2",
           "title": "Post APIs",
           "fullFile": "C:\\Users\\CMP\\OneDrive\\Documents\\GitHub\\Backend_Tumblr-4u\\test\\postTest.js",
           "file": "\\test\\postTest.js",
@@ -36,7 +36,7 @@
           "tests": [],
           "suites": [
             {
-              "uuid": "30f30277-6767-4388-b372-277cce2a5f41",
+              "uuid": "3e17b850-2a85-4866-b2bc-ef047f723dae",
               "title": "Function createPost",
               "fullFile": "C:\\Users\\CMP\\OneDrive\\Documents\\GitHub\\Backend_Tumblr-4u\\test\\postTest.js",
               "file": "\\test\\postTest.js",
@@ -47,7 +47,7 @@
                   "title": "It Should Create New Post",
                   "fullTitle": "Post APIs Function createPost It Should Create New Post",
                   "timedOut": false,
-                  "duration": 3180,
+                  "duration": 3130,
                   "state": "failed",
                   "speed": null,
                   "pass": false,
@@ -60,8 +60,8 @@
                     "estack": "AssertionError: expected 'Blog Not Found' to be an array\n    at C:\\Users\\CMP\\OneDrive\\Documents\\GitHub\\Backend_Tumblr-4u\\test\\postTest.js:43:27\n    at processTicksAndRejections (node:internal/process/task_queues:96:5)",
                     "diff": null
                   },
-                  "uuid": "34d2b955-04a5-44a1-ac89-ec5c56a5f530",
-                  "parentUUID": "30f30277-6767-4388-b372-277cce2a5f41",
+                  "uuid": "428f6600-a871-4568-936f-8ee3d414c867",
+                  "parentUUID": "3e17b850-2a85-4866-b2bc-ef047f723dae",
                   "isHook": false,
                   "skipped": false
                 }
@@ -69,17 +69,17 @@
               "suites": [],
               "passes": [],
               "failures": [
-                "34d2b955-04a5-44a1-ac89-ec5c56a5f530"
+                "428f6600-a871-4568-936f-8ee3d414c867"
               ],
               "pending": [],
               "skipped": [],
-              "duration": 3180,
+              "duration": 3130,
               "root": false,
               "rootEmpty": false,
               "_timeout": 100000
             },
             {
-              "uuid": "ff56496e-4214-45fb-8e58-b3b32b49037d",
+              "uuid": "62047c59-2ba9-4c1f-9914-f2f0273d1a0f",
               "title": "Function showPost",
               "fullFile": "C:\\Users\\CMP\\OneDrive\\Documents\\GitHub\\Backend_Tumblr-4u\\test\\postTest.js",
               "file": "\\test\\postTest.js",
@@ -90,7 +90,7 @@
                   "title": "It Should Show Post",
                   "fullTitle": "Post APIs Function showPost It Should Show Post",
                   "timedOut": false,
-                  "duration": 144,
+                  "duration": 137,
                   "state": "failed",
                   "speed": null,
                   "pass": false,
@@ -103,8 +103,8 @@
                     "estack": "AssertionError: expected { msg: 'Post Not Found', post: {} } to be an array\n    at C:\\Users\\CMP\\OneDrive\\Documents\\GitHub\\Backend_Tumblr-4u\\test\\postTest.js:59:27\n    at processTicksAndRejections (node:internal/process/task_queues:96:5)",
                     "diff": null
                   },
-                  "uuid": "9a95c87e-ef1f-4cd0-9024-375490b413a0",
-                  "parentUUID": "ff56496e-4214-45fb-8e58-b3b32b49037d",
+                  "uuid": "1802e0a6-dc8f-4c5c-b410-ac2f0f903878",
+                  "parentUUID": "62047c59-2ba9-4c1f-9914-f2f0273d1a0f",
                   "isHook": false,
                   "skipped": false
                 }
@@ -112,17 +112,17 @@
               "suites": [],
               "passes": [],
               "failures": [
-                "9a95c87e-ef1f-4cd0-9024-375490b413a0"
+                "1802e0a6-dc8f-4c5c-b410-ac2f0f903878"
               ],
               "pending": [],
               "skipped": [],
-              "duration": 144,
+              "duration": 137,
               "root": false,
               "rootEmpty": false,
               "_timeout": 100000
             },
             {
-              "uuid": "157cb64e-dc3f-4751-becf-bf38e01d4e10",
+              "uuid": "c36375c0-8620-405e-8c29-05132e3f2402",
               "title": "Function makeComment",
               "fullFile": "C:\\Users\\CMP\\OneDrive\\Documents\\GitHub\\Backend_Tumblr-4u\\test\\postTest.js",
               "file": "\\test\\postTest.js",
@@ -133,7 +133,7 @@
                   "title": "It Should Make Comment",
                   "fullTitle": "Post APIs Function makeComment It Should Make Comment",
                   "timedOut": false,
-                  "duration": 287,
+                  "duration": 279,
                   "state": "failed",
                   "speed": null,
                   "pass": false,
@@ -146,8 +146,8 @@
                     "estack": "AssertionError: expected 'Blog Not Found' to be an array\n    at C:\\Users\\CMP\\OneDrive\\Documents\\GitHub\\Backend_Tumblr-4u\\test\\postTest.js:79:27\n    at processTicksAndRejections (node:internal/process/task_queues:96:5)",
                     "diff": null
                   },
-                  "uuid": "516531a7-31cd-4542-9ed0-445715c522cd",
-                  "parentUUID": "157cb64e-dc3f-4751-becf-bf38e01d4e10",
+                  "uuid": "97391d41-cc7e-42e1-a224-1d4ad18de9a6",
+                  "parentUUID": "c36375c0-8620-405e-8c29-05132e3f2402",
                   "isHook": false,
                   "skipped": false
                 }
@@ -155,17 +155,17 @@
               "suites": [],
               "passes": [],
               "failures": [
-                "516531a7-31cd-4542-9ed0-445715c522cd"
+                "97391d41-cc7e-42e1-a224-1d4ad18de9a6"
               ],
               "pending": [],
               "skipped": [],
-              "duration": 287,
+              "duration": 279,
               "root": false,
               "rootEmpty": false,
               "_timeout": 100000
             },
             {
-              "uuid": "fbd31cfe-1e37-48b0-a161-611fb6bfa797",
+              "uuid": "e865dbb9-7eb1-4fb2-814a-9d98d4a3a807",
               "title": "Function removeComment",
               "fullFile": "C:\\Users\\CMP\\OneDrive\\Documents\\GitHub\\Backend_Tumblr-4u\\test\\postTest.js",
               "file": "\\test\\postTest.js",
@@ -176,7 +176,7 @@
                   "title": "It Should Remove a Comment",
                   "fullTitle": "Post APIs Function removeComment It Should Remove a Comment",
                   "timedOut": false,
-                  "duration": 146,
+                  "duration": 142,
                   "state": "failed",
                   "speed": null,
                   "pass": false,
@@ -189,8 +189,8 @@
                     "estack": "AssertionError: expected 'Post Not Found' to equal 'Comment Removed Successfully'\n    at C:\\Users\\CMP\\OneDrive\\Documents\\GitHub\\Backend_Tumblr-4u\\test\\postTest.js:98:31\n    at processTicksAndRejections (node:internal/process/task_queues:96:5)",
                     "diff": "- Post Not Found\n+ Comment Removed Successfully\n"
                   },
-                  "uuid": "7a5d55f6-92a8-4229-aa0f-7c713a0aaa45",
-                  "parentUUID": "fbd31cfe-1e37-48b0-a161-611fb6bfa797",
+                  "uuid": "e804b3f9-6f13-4be0-aee9-afc33ba3ee92",
+                  "parentUUID": "e865dbb9-7eb1-4fb2-814a-9d98d4a3a807",
                   "isHook": false,
                   "skipped": false
                 }
@@ -198,17 +198,17 @@
               "suites": [],
               "passes": [],
               "failures": [
-                "7a5d55f6-92a8-4229-aa0f-7c713a0aaa45"
+                "e804b3f9-6f13-4be0-aee9-afc33ba3ee92"
               ],
               "pending": [],
               "skipped": [],
-              "duration": 146,
+              "duration": 142,
               "root": false,
               "rootEmpty": false,
               "_timeout": 100000
             },
             {
-              "uuid": "bdf758a3-a691-469e-bdcf-3c5156f0e877",
+              "uuid": "3b2ab423-749b-4238-910c-c51ce129ef1a",
               "title": "Function reblogPost",
               "fullFile": "C:\\Users\\CMP\\OneDrive\\Documents\\GitHub\\Backend_Tumblr-4u\\test\\postTest.js",
               "file": "\\test\\postTest.js",
@@ -219,7 +219,7 @@
                   "title": "It Should Reblog a Post",
                   "fullTitle": "Post APIs Function reblogPost It Should Reblog a Post",
                   "timedOut": false,
-                  "duration": 290,
+                  "duration": 289,
                   "state": "failed",
                   "speed": null,
                   "pass": false,
@@ -232,8 +232,8 @@
                     "estack": "AssertionError: expected 'Blog Not Found' to be an array\n    at C:\\Users\\CMP\\OneDrive\\Documents\\GitHub\\Backend_Tumblr-4u\\test\\postTest.js:118:31\n    at processTicksAndRejections (node:internal/process/task_queues:96:5)",
                     "diff": null
                   },
-                  "uuid": "91c2f2dd-8ce9-4ab3-9051-38499318c8e6",
-                  "parentUUID": "bdf758a3-a691-469e-bdcf-3c5156f0e877",
+                  "uuid": "56b295da-531c-454d-942c-9ae7f31671e1",
+                  "parentUUID": "3b2ab423-749b-4238-910c-c51ce129ef1a",
                   "isHook": false,
                   "skipped": false
                 }
@@ -241,17 +241,17 @@
               "suites": [],
               "passes": [],
               "failures": [
-                "91c2f2dd-8ce9-4ab3-9051-38499318c8e6"
+                "56b295da-531c-454d-942c-9ae7f31671e1"
               ],
               "pending": [],
               "skipped": [],
-              "duration": 290,
+              "duration": 289,
               "root": false,
               "rootEmpty": false,
               "_timeout": 100000
             },
             {
-              "uuid": "6784377b-53ed-4c71-8880-9dd9554876e0",
+              "uuid": "32a5e802-b7b8-4969-8e5d-bf9b6203dea5",
               "title": "Function removeReblog",
               "fullFile": "C:\\Users\\CMP\\OneDrive\\Documents\\GitHub\\Backend_Tumblr-4u\\test\\postTest.js",
               "file": "\\test\\postTest.js",
@@ -262,7 +262,7 @@
                   "title": "It Should Remove a Reblog",
                   "fullTitle": "Post APIs Function removeReblog It Should Remove a Reblog",
                   "timedOut": false,
-                  "duration": 143,
+                  "duration": 137,
                   "state": "failed",
                   "speed": null,
                   "pass": false,
@@ -275,8 +275,8 @@
                     "estack": "AssertionError: expected 'Post Not Found' to equal 'Reblog Removed Successfully'\n    at C:\\Users\\CMP\\OneDrive\\Documents\\GitHub\\Backend_Tumblr-4u\\test\\postTest.js:137:31\n    at processTicksAndRejections (node:internal/process/task_queues:96:5)",
                     "diff": "- Post Not Found\n+ Reblog Removed Successfully\n"
                   },
-                  "uuid": "666f7ccc-cf97-46bf-bc8e-8e9f833779f8",
-                  "parentUUID": "6784377b-53ed-4c71-8880-9dd9554876e0",
+                  "uuid": "9d5b1a71-5b37-44fb-bede-58716246eba0",
+                  "parentUUID": "32a5e802-b7b8-4969-8e5d-bf9b6203dea5",
                   "isHook": false,
                   "skipped": false
                 }
@@ -284,17 +284,17 @@
               "suites": [],
               "passes": [],
               "failures": [
-                "666f7ccc-cf97-46bf-bc8e-8e9f833779f8"
+                "9d5b1a71-5b37-44fb-bede-58716246eba0"
               ],
               "pending": [],
               "skipped": [],
-              "duration": 143,
+              "duration": 137,
               "root": false,
               "rootEmpty": false,
               "_timeout": 100000
             },
             {
-              "uuid": "ec776806-4480-4429-890e-70da1a68a4d4",
+              "uuid": "a3eeb13b-5df9-44c7-9e39-d56dcc32c1e9",
               "title": "Function loopAndCheck",
               "fullFile": "C:\\Users\\CMP\\OneDrive\\Documents\\GitHub\\Backend_Tumblr-4u\\test\\postTest.js",
               "file": "\\test\\postTest.js",
@@ -318,8 +318,8 @@
                     "estack": "TypeError: postFunctions.loopAndCheck is not a function\n    at Context.<anonymous> (test\\postTest.js:148:21)\n    at processImmediate (node:internal/timers:464:21)",
                     "diff": null
                   },
-                  "uuid": "25c1b604-af06-47a9-a3a2-c6362dd1927c",
-                  "parentUUID": "ec776806-4480-4429-890e-70da1a68a4d4",
+                  "uuid": "c138d255-3fd1-435a-a255-2d91a096b159",
+                  "parentUUID": "a3eeb13b-5df9-44c7-9e39-d56dcc32c1e9",
                   "isHook": false,
                   "skipped": false
                 }
@@ -327,7 +327,7 @@
               "suites": [],
               "passes": [],
               "failures": [
-                "25c1b604-af06-47a9-a3a2-c6362dd1927c"
+                "c138d255-3fd1-435a-a255-2d91a096b159"
               ],
               "pending": [],
               "skipped": [],
@@ -337,7 +337,7 @@
               "_timeout": 100000
             },
             {
-              "uuid": "98a54670-8774-45fb-a4cd-082f6e2662aa",
+              "uuid": "d3eeec37-42c8-4a35-b3e6-0771120d7869",
               "title": "Function loopObjAndCheck",
               "fullFile": "C:\\Users\\CMP\\OneDrive\\Documents\\GitHub\\Backend_Tumblr-4u\\test\\postTest.js",
               "file": "\\test\\postTest.js",
@@ -361,8 +361,8 @@
                     "estack": "AssertionError: expected 0 to equal 1\n    at Context.<anonymous> (test\\postTest.js:164:64)\n    at processImmediate (node:internal/timers:464:21)",
                     "diff": "- 0\n+ 1\n"
                   },
-                  "uuid": "0922c089-d2c2-4c1e-a2a3-acd1aed77673",
-                  "parentUUID": "98a54670-8774-45fb-a4cd-082f6e2662aa",
+                  "uuid": "cf9161e6-7052-48b2-a9bf-3d17402dfc49",
+                  "parentUUID": "d3eeec37-42c8-4a35-b3e6-0771120d7869",
                   "isHook": false,
                   "skipped": false
                 }
@@ -370,7 +370,7 @@
               "suites": [],
               "passes": [],
               "failures": [
-                "0922c089-d2c2-4c1e-a2a3-acd1aed77673"
+                "cf9161e6-7052-48b2-a9bf-3d17402dfc49"
               ],
               "pending": [],
               "skipped": [],
@@ -380,7 +380,7 @@
               "_timeout": 100000
             },
             {
-              "uuid": "943b6ef5-bb8d-4461-8a38-2417d749dd02",
+              "uuid": "e3607ed1-cd97-443c-969f-84c745321c36",
               "title": "Function likePress",
               "fullFile": "C:\\Users\\CMP\\OneDrive\\Documents\\GitHub\\Backend_Tumblr-4u\\test\\postTest.js",
               "file": "\\test\\postTest.js",
@@ -391,7 +391,7 @@
                   "title": "It Should Like or Unlike a Post",
                   "fullTitle": "Post APIs Function likePress It Should Like or Unlike a Post",
                   "timedOut": false,
-                  "duration": 436,
+                  "duration": 278,
                   "state": "passed",
                   "speed": "slow",
                   "pass": true,
@@ -400,26 +400,26 @@
                   "context": null,
                   "code": "const req = {\n  params: {\n    blogId: '619957113df6b45019c42d06',\n    postId: '61ae667d8b4d5620ce937992',\n  },\n};\npostFunctions.likePress(req.params.blogId, req.params.postId).then((ret) => {\n  expect(ret).to.be.a('string');\n  // expect(ret).to.be.eq('Post Liked Successfully');\n  done();\n}).catch(done);",
                   "err": {},
-                  "uuid": "ba380704-4b0b-40c8-9965-dd6590b57843",
-                  "parentUUID": "943b6ef5-bb8d-4461-8a38-2417d749dd02",
+                  "uuid": "272732ef-9c49-4b13-9f9a-3765b652df97",
+                  "parentUUID": "e3607ed1-cd97-443c-969f-84c745321c36",
                   "isHook": false,
                   "skipped": false
                 }
               ],
               "suites": [],
               "passes": [
-                "ba380704-4b0b-40c8-9965-dd6590b57843"
+                "272732ef-9c49-4b13-9f9a-3765b652df97"
               ],
               "failures": [],
               "pending": [],
               "skipped": [],
-              "duration": 436,
+              "duration": 278,
               "root": false,
               "rootEmpty": false,
               "_timeout": 100000
             },
             {
-              "uuid": "48f9d7dd-c28e-432c-850a-d676aa897d66",
+              "uuid": "2290e46b-9a5f-45d2-876a-21870ac6f27d",
               "title": "Function getNotes",
               "fullFile": "C:\\Users\\CMP\\OneDrive\\Documents\\GitHub\\Backend_Tumblr-4u\\test\\postTest.js",
               "file": "\\test\\postTest.js",
@@ -430,7 +430,7 @@
                   "title": "It Should Get Post Notes",
                   "fullTitle": "Post APIs Function getNotes It Should Get Post Notes",
                   "timedOut": false,
-                  "duration": 147,
+                  "duration": 141,
                   "state": "failed",
                   "speed": null,
                   "pass": false,
@@ -443,8 +443,8 @@
                     "estack": "AssertionError: expected { Object (msg, notes, ...) } to be an array\n    at C:\\Users\\CMP\\OneDrive\\Documents\\GitHub\\Backend_Tumblr-4u\\test\\postTest.js:196:27\n    at processTicksAndRejections (node:internal/process/task_queues:96:5)",
                     "diff": null
                   },
-                  "uuid": "f999ed59-6592-495e-8113-77649ce594c5",
-                  "parentUUID": "48f9d7dd-c28e-432c-850a-d676aa897d66",
+                  "uuid": "9781f46e-3c40-424e-b8f2-3c19e18420eb",
+                  "parentUUID": "2290e46b-9a5f-45d2-876a-21870ac6f27d",
                   "isHook": false,
                   "skipped": false
                 }
@@ -452,17 +452,17 @@
               "suites": [],
               "passes": [],
               "failures": [
-                "f999ed59-6592-495e-8113-77649ce594c5"
+                "9781f46e-3c40-424e-b8f2-3c19e18420eb"
               ],
               "pending": [],
               "skipped": [],
-              "duration": 147,
+              "duration": 141,
               "root": false,
               "rootEmpty": false,
               "_timeout": 100000
             },
             {
-              "uuid": "e402c1f5-7f7d-4521-8cc7-57637e64fa47",
+              "uuid": "dfb335d2-b4db-48d5-b534-3b0bbca323e5",
               "title": "Function getDashboard",
               "fullFile": "C:\\Users\\CMP\\OneDrive\\Documents\\GitHub\\Backend_Tumblr-4u\\test\\postTest.js",
               "file": "\\test\\postTest.js",
@@ -473,7 +473,7 @@
                   "title": "It Should Get Dashboard",
                   "fullTitle": "Post APIs Function getDashboard It Should Get Dashboard",
                   "timedOut": false,
-                  "duration": 149,
+                  "duration": 144,
                   "state": "failed",
                   "speed": null,
                   "pass": false,
@@ -486,8 +486,8 @@
                     "estack": "AssertionError: expected { Object (msg, user, ...) } to be an array\n    at C:\\Users\\CMP\\OneDrive\\Documents\\GitHub\\Backend_Tumblr-4u\\test\\postTest.js:213:27\n    at processTicksAndRejections (node:internal/process/task_queues:96:5)",
                     "diff": null
                   },
-                  "uuid": "3d54d847-4372-4e09-af90-acddbe3bbf23",
-                  "parentUUID": "e402c1f5-7f7d-4521-8cc7-57637e64fa47",
+                  "uuid": "f2089931-7669-4d80-8c46-20a8a5460b82",
+                  "parentUUID": "dfb335d2-b4db-48d5-b534-3b0bbca323e5",
                   "isHook": false,
                   "skipped": false
                 }
@@ -495,11 +495,11 @@
               "suites": [],
               "passes": [],
               "failures": [
-                "3d54d847-4372-4e09-af90-acddbe3bbf23"
+                "f2089931-7669-4d80-8c46-20a8a5460b82"
               ],
               "pending": [],
               "skipped": [],
-              "duration": 149,
+              "duration": 144,
               "root": false,
               "rootEmpty": false,
               "_timeout": 100000
@@ -515,7 +515,7 @@
           "_timeout": 100000
         },
         {
-          "uuid": "e8934a0b-028e-4bca-b728-01591091cbcd",
+          "uuid": "a108dcdd-267b-4483-a26b-ff6b2a9ff968",
           "title": "Search APIs",
           "fullFile": "C:\\Users\\CMP\\OneDrive\\Documents\\GitHub\\Backend_Tumblr-4u\\test\\searchTest.js",
           "file": "\\test\\searchTest.js",
@@ -524,7 +524,7 @@
           "tests": [],
           "suites": [
             {
-              "uuid": "22501c18-352a-4a22-8130-1e37cae6ef4b",
+              "uuid": "e59f91b2-36c7-4d6f-950e-edf8e95d80ab",
               "title": "Search Dashboard Testing",
               "fullFile": "C:\\Users\\CMP\\OneDrive\\Documents\\GitHub\\Backend_Tumblr-4u\\test\\searchTest.js",
               "file": "\\test\\searchTest.js",
@@ -535,7 +535,7 @@
                   "title": "It Should get element of hashtags in posts",
                   "fullTitle": "Search APIs Search Dashboard Testing It Should get element of hashtags in posts",
                   "timedOut": false,
-                  "duration": 144,
+                  "duration": 143,
                   "state": "failed",
                   "speed": null,
                   "pass": false,
@@ -548,8 +548,8 @@
                     "estack": "TypeError: Cannot read properties of undefined (reading '_id')\n    at Object.autoCompleteSearchDash (Modules\\Search\\Search dashborad\\Controller\\control.js:55:26)\n    at processTicksAndRejections (node:internal/process/task_queues:96:5)",
                     "diff": null
                   },
-                  "uuid": "bf5c92aa-64d5-4d7f-ab87-e6adb49513b3",
-                  "parentUUID": "22501c18-352a-4a22-8130-1e37cae6ef4b",
+                  "uuid": "a931a222-9e2c-422f-b391-5b76dda31a60",
+                  "parentUUID": "e59f91b2-36c7-4d6f-950e-edf8e95d80ab",
                   "isHook": false,
                   "skipped": false
                 },
@@ -557,7 +557,7 @@
                   "title": "It shows that it is not case sensitive",
                   "fullTitle": "Search APIs Search Dashboard Testing It shows that it is not case sensitive",
                   "timedOut": false,
-                  "duration": 144,
+                  "duration": 137,
                   "state": "failed",
                   "speed": null,
                   "pass": false,
@@ -570,8 +570,8 @@
                     "estack": "TypeError: Cannot read properties of undefined (reading '_id')\n    at Object.autoCompleteSearchDash (Modules\\Search\\Search dashborad\\Controller\\control.js:55:26)\n    at processTicksAndRejections (node:internal/process/task_queues:96:5)",
                     "diff": null
                   },
-                  "uuid": "73a3ecef-2cfb-46da-b047-3ea193fb1ed6",
-                  "parentUUID": "22501c18-352a-4a22-8130-1e37cae6ef4b",
+                  "uuid": "ce3a7075-11b0-44cd-979b-bb8f090fb4af",
+                  "parentUUID": "e59f91b2-36c7-4d6f-950e-edf8e95d80ab",
                   "isHook": false,
                   "skipped": false
                 },
@@ -579,7 +579,7 @@
                   "title": "It Should get posts has the hashtags with the regex",
                   "fullTitle": "Search APIs Search Dashboard Testing It Should get posts has the hashtags with the regex",
                   "timedOut": false,
-                  "duration": 143,
+                  "duration": 138,
                   "state": "failed",
                   "speed": null,
                   "pass": false,
@@ -592,8 +592,8 @@
                     "estack": "TypeError: Cannot read properties of undefined (reading '_id')\n    at Object.autoCompleteSearchDash (Modules\\Search\\Search dashborad\\Controller\\control.js:55:26)\n    at processTicksAndRejections (node:internal/process/task_queues:96:5)",
                     "diff": null
                   },
-                  "uuid": "fafd0748-931a-443f-870b-4d676412cdc3",
-                  "parentUUID": "22501c18-352a-4a22-8130-1e37cae6ef4b",
+                  "uuid": "db6d3c0c-a404-418a-8c79-82a651a3a5f4",
+                  "parentUUID": "e59f91b2-36c7-4d6f-950e-edf8e95d80ab",
                   "isHook": false,
                   "skipped": false
                 },
@@ -601,7 +601,7 @@
                   "title": "It Should get blog with the regex",
                   "fullTitle": "Search APIs Search Dashboard Testing It Should get blog with the regex",
                   "timedOut": false,
-                  "duration": 144,
+                  "duration": 139,
                   "state": "failed",
                   "speed": null,
                   "pass": false,
@@ -614,8 +614,8 @@
                     "estack": "TypeError: Cannot read properties of undefined (reading '_id')\n    at Object.autoCompleteSearchDash (Modules\\Search\\Search dashborad\\Controller\\control.js:55:26)\n    at processTicksAndRejections (node:internal/process/task_queues:96:5)",
                     "diff": null
                   },
-                  "uuid": "626f911c-cd6d-4d2a-b817-62fad13b229b",
-                  "parentUUID": "22501c18-352a-4a22-8130-1e37cae6ef4b",
+                  "uuid": "ad2ca43a-3f74-42bc-9cf1-c71318dd1e86",
+                  "parentUUID": "e59f91b2-36c7-4d6f-950e-edf8e95d80ab",
                   "isHook": false,
                   "skipped": false
                 },
@@ -623,7 +623,7 @@
                   "title": "It Should get followed/interested tags by a blog",
                   "fullTitle": "Search APIs Search Dashboard Testing It Should get followed/interested tags by a blog",
                   "timedOut": false,
-                  "duration": 162,
+                  "duration": 139,
                   "state": "failed",
                   "speed": null,
                   "pass": false,
@@ -636,8 +636,8 @@
                     "estack": "TypeError: Cannot read properties of undefined (reading '_id')\n    at Object.autoCompleteSearchDash (Modules\\Search\\Search dashborad\\Controller\\control.js:55:26)\n    at processTicksAndRejections (node:internal/process/task_queues:96:5)",
                     "diff": null
                   },
-                  "uuid": "db701999-9e86-47c5-b0a2-75d79dd07cd9",
-                  "parentUUID": "22501c18-352a-4a22-8130-1e37cae6ef4b",
+                  "uuid": "ebd70921-4102-481b-82b8-77b8d346c3ec",
+                  "parentUUID": "e59f91b2-36c7-4d6f-950e-edf8e95d80ab",
                   "isHook": false,
                   "skipped": false
                 }
@@ -645,15 +645,15 @@
               "suites": [],
               "passes": [],
               "failures": [
-                "bf5c92aa-64d5-4d7f-ab87-e6adb49513b3",
-                "73a3ecef-2cfb-46da-b047-3ea193fb1ed6",
-                "fafd0748-931a-443f-870b-4d676412cdc3",
-                "626f911c-cd6d-4d2a-b817-62fad13b229b",
-                "db701999-9e86-47c5-b0a2-75d79dd07cd9"
+                "a931a222-9e2c-422f-b391-5b76dda31a60",
+                "ce3a7075-11b0-44cd-979b-bb8f090fb4af",
+                "db6d3c0c-a404-418a-8c79-82a651a3a5f4",
+                "ad2ca43a-3f74-42bc-9cf1-c71318dd1e86",
+                "ebd70921-4102-481b-82b8-77b8d346c3ec"
               ],
               "pending": [],
               "skipped": [],
-              "duration": 737,
+              "duration": 696,
               "root": false,
               "rootEmpty": false,
               "_timeout": 100000
@@ -669,7 +669,7 @@
           "_timeout": 100000
         },
         {
-          "uuid": "68ac81f4-8979-40c7-b04b-7b29a90ca2ad",
+          "uuid": "3bd29560-ed07-4e50-a98b-6988ce27de09",
           "title": "UserBlog Methodes testing",
           "fullFile": "C:\\Users\\CMP\\OneDrive\\Documents\\GitHub\\Backend_Tumblr-4u\\test\\test.js",
           "file": "\\test\\test.js",
@@ -678,7 +678,7 @@
           "tests": [],
           "suites": [
             {
-              "uuid": "87d70a6b-213f-4dcf-bd7d-d6bd2e4af9ab",
+              "uuid": "f665d8b7-847f-43fb-8813-966061de175c",
               "title": "Create Blog Testing",
               "fullFile": "C:\\Users\\CMP\\OneDrive\\Documents\\GitHub\\Backend_Tumblr-4u\\test\\test.js",
               "file": "\\test\\test.js",
@@ -689,7 +689,7 @@
                   "title": "should create a new blog",
                   "fullTitle": "UserBlog Methodes testing Create Blog Testing should create a new blog",
                   "timedOut": false,
-                  "duration": 1,
+                  "duration": 4,
                   "state": "failed",
                   "speed": null,
                   "pass": false,
@@ -702,8 +702,8 @@
                     "estack": "AssertionError: expected undefined to be an object\n    at C:\\Users\\CMP\\OneDrive\\Documents\\GitHub\\Backend_Tumblr-4u\\test\\test.js:32:27\n    at processTicksAndRejections (node:internal/process/task_queues:96:5)",
                     "diff": null
                   },
-                  "uuid": "2caeff0a-c879-489e-90f3-1da9bef8c593",
-                  "parentUUID": "87d70a6b-213f-4dcf-bd7d-d6bd2e4af9ab",
+                  "uuid": "93a87d2a-cd9d-4ce5-b3c8-644a7aaeef9c",
+                  "parentUUID": "f665d8b7-847f-43fb-8813-966061de175c",
                   "isHook": false,
                   "skipped": false
                 },
@@ -711,7 +711,7 @@
                   "title": "should return false because there is already a blog with the same name",
                   "fullTitle": "UserBlog Methodes testing Create Blog Testing should return false because there is already a blog with the same name",
                   "timedOut": false,
-                  "duration": 0,
+                  "duration": 3,
                   "state": "failed",
                   "speed": null,
                   "pass": false,
@@ -724,8 +724,8 @@
                     "estack": "AssertionError: expected undefined to equal null\n    at C:\\Users\\CMP\\OneDrive\\Documents\\GitHub\\Backend_Tumblr-4u\\test\\test.js:52:31\n    at processTicksAndRejections (node:internal/process/task_queues:96:5)",
                     "diff": null
                   },
-                  "uuid": "33537ff0-439e-4ddc-a17b-afa95612af30",
-                  "parentUUID": "87d70a6b-213f-4dcf-bd7d-d6bd2e4af9ab",
+                  "uuid": "e9a393ec-d578-4332-8fa8-8a0ad0424147",
+                  "parentUUID": "f665d8b7-847f-43fb-8813-966061de175c",
                   "isHook": false,
                   "skipped": false
                 }
@@ -733,18 +733,18 @@
               "suites": [],
               "passes": [],
               "failures": [
-                "2caeff0a-c879-489e-90f3-1da9bef8c593",
-                "33537ff0-439e-4ddc-a17b-afa95612af30"
+                "93a87d2a-cd9d-4ce5-b3c8-644a7aaeef9c",
+                "e9a393ec-d578-4332-8fa8-8a0ad0424147"
               ],
               "pending": [],
               "skipped": [],
-              "duration": 1,
+              "duration": 7,
               "root": false,
               "rootEmpty": false,
               "_timeout": 100000
             },
             {
-              "uuid": "5cc488e2-6ae2-4ae4-84c5-b4922ac3fdc2",
+              "uuid": "501bc4f8-74db-4261-98e7-3c3ce268b587",
               "title": "Delete Blog Testing",
               "fullFile": "C:\\Users\\CMP\\OneDrive\\Documents\\GitHub\\Backend_Tumblr-4u\\test\\test.js",
               "file": "\\test\\test.js",
@@ -755,7 +755,7 @@
                   "title": "should delete the blog",
                   "fullTitle": "UserBlog Methodes testing Delete Blog Testing should delete the blog",
                   "timedOut": false,
-                  "duration": 306,
+                  "duration": 302,
                   "state": "failed",
                   "speed": null,
                   "pass": false,
@@ -768,8 +768,8 @@
                     "estack": "AssertionError: expected null to be an object\n    at C:\\Users\\CMP\\OneDrive\\Documents\\GitHub\\Backend_Tumblr-4u\\test\\test.js:69:27\n    at processTicksAndRejections (node:internal/process/task_queues:96:5)",
                     "diff": null
                   },
-                  "uuid": "042eff85-f57b-4439-92c0-c6f24ed9c0d8",
-                  "parentUUID": "5cc488e2-6ae2-4ae4-84c5-b4922ac3fdc2",
+                  "uuid": "8381c22a-c963-43c8-b282-d8d0bc3ad3d2",
+                  "parentUUID": "501bc4f8-74db-4261-98e7-3c3ce268b587",
                   "isHook": false,
                   "skipped": false
                 },
@@ -777,7 +777,7 @@
                   "title": "should return false because there is no blog with the requested id",
                   "fullTitle": "UserBlog Methodes testing Delete Blog Testing should return false because there is no blog with the requested id",
                   "timedOut": false,
-                  "duration": 2,
+                  "duration": 4,
                   "state": "failed",
                   "speed": null,
                   "pass": false,
@@ -790,8 +790,8 @@
                     "estack": "AssertionError: expected undefined to equal null\n    at C:\\Users\\CMP\\OneDrive\\Documents\\GitHub\\Backend_Tumblr-4u\\test\\test.js:87:37\n    at processTicksAndRejections (node:internal/process/task_queues:96:5)",
                     "diff": null
                   },
-                  "uuid": "45b9319b-b721-4573-877c-85c4da2e6faa",
-                  "parentUUID": "5cc488e2-6ae2-4ae4-84c5-b4922ac3fdc2",
+                  "uuid": "6c263c64-3c48-4e18-a2a1-1f3841634605",
+                  "parentUUID": "501bc4f8-74db-4261-98e7-3c3ce268b587",
                   "isHook": false,
                   "skipped": false
                 }
@@ -799,18 +799,18 @@
               "suites": [],
               "passes": [],
               "failures": [
-                "042eff85-f57b-4439-92c0-c6f24ed9c0d8",
-                "45b9319b-b721-4573-877c-85c4da2e6faa"
+                "8381c22a-c963-43c8-b282-d8d0bc3ad3d2",
+                "6c263c64-3c48-4e18-a2a1-1f3841634605"
               ],
               "pending": [],
               "skipped": [],
-              "duration": 308,
+              "duration": 306,
               "root": false,
               "rootEmpty": false,
               "_timeout": 100000
             },
             {
-              "uuid": "224b712c-2db4-4e0f-ba03-62fc6bb01b14",
+              "uuid": "b91c93e6-bcf1-4635-b740-25f2e4573afd",
               "title": "Retrieve Blog Testing",
               "fullFile": "C:\\Users\\CMP\\OneDrive\\Documents\\GitHub\\Backend_Tumblr-4u\\test\\test.js",
               "file": "\\test\\test.js",
@@ -821,7 +821,7 @@
                   "title": "should retrieve all the blog info given its name",
                   "fullTitle": "UserBlog Methodes testing Retrieve Blog Testing should retrieve all the blog info given its name",
                   "timedOut": false,
-                  "duration": 1,
+                  "duration": 3,
                   "state": "failed",
                   "speed": null,
                   "pass": false,
@@ -834,8 +834,8 @@
                     "estack": "AssertionError: expected undefined to be an object\n    at C:\\Users\\CMP\\OneDrive\\Documents\\GitHub\\Backend_Tumblr-4u\\test\\test.js:101:27\n    at processTicksAndRejections (node:internal/process/task_queues:96:5)",
                     "diff": null
                   },
-                  "uuid": "97a36a86-31a8-446e-aa2b-fa834dad2fbc",
-                  "parentUUID": "224b712c-2db4-4e0f-ba03-62fc6bb01b14",
+                  "uuid": "96302385-f26a-44a6-b841-f885571dc3b2",
+                  "parentUUID": "b91c93e6-bcf1-4635-b740-25f2e4573afd",
                   "isHook": false,
                   "skipped": false
                 },
@@ -843,7 +843,7 @@
                   "title": "should return null as there is no blog with the given name",
                   "fullTitle": "UserBlog Methodes testing Retrieve Blog Testing should return null as there is no blog with the given name",
                   "timedOut": false,
-                  "duration": 1,
+                  "duration": 2,
                   "state": "failed",
                   "speed": null,
                   "pass": false,
@@ -856,8 +856,8 @@
                     "estack": "AssertionError: expected undefined to equal null\n    at C:\\Users\\CMP\\OneDrive\\Documents\\GitHub\\Backend_Tumblr-4u\\test\\test.js:113:27\n    at processTicksAndRejections (node:internal/process/task_queues:96:5)",
                     "diff": null
                   },
-                  "uuid": "b2e6c848-db21-4d8d-98f1-462fc955ce67",
-                  "parentUUID": "224b712c-2db4-4e0f-ba03-62fc6bb01b14",
+                  "uuid": "7c02ef59-b535-4ea9-becd-3d39cff84c1b",
+                  "parentUUID": "b91c93e6-bcf1-4635-b740-25f2e4573afd",
                   "isHook": false,
                   "skipped": false
                 }
@@ -865,18 +865,18 @@
               "suites": [],
               "passes": [],
               "failures": [
-                "97a36a86-31a8-446e-aa2b-fa834dad2fbc",
-                "b2e6c848-db21-4d8d-98f1-462fc955ce67"
+                "96302385-f26a-44a6-b841-f885571dc3b2",
+                "7c02ef59-b535-4ea9-becd-3d39cff84c1b"
               ],
               "pending": [],
               "skipped": [],
-              "duration": 2,
+              "duration": 5,
               "root": false,
               "rootEmpty": false,
               "_timeout": 100000
             },
             {
-              "uuid": "83cdf580-7176-4f29-84bd-4653362183ee",
+              "uuid": "03037ee0-e06f-4de4-a5a4-25e4b314a1b0",
               "title": "Edit Blog Testing",
               "fullFile": "C:\\Users\\CMP\\OneDrive\\Documents\\GitHub\\Backend_Tumblr-4u\\test\\test.js",
               "file": "\\test\\test.js",
@@ -887,7 +887,7 @@
                   "title": "should edit the blog and return object",
                   "fullTitle": "UserBlog Methodes testing Edit Blog Testing should edit the blog and return object",
                   "timedOut": false,
-                  "duration": 144,
+                  "duration": 138,
                   "state": "failed",
                   "speed": null,
                   "pass": false,
@@ -900,8 +900,8 @@
                     "estack": "AssertionError: expected null to be an object\n    at C:\\Users\\CMP\\OneDrive\\Documents\\GitHub\\Backend_Tumblr-4u\\test\\test.js:132:27\n    at processTicksAndRejections (node:internal/process/task_queues:96:5)",
                     "diff": null
                   },
-                  "uuid": "345bd723-b46a-4e46-8b46-7480865cff8a",
-                  "parentUUID": "83cdf580-7176-4f29-84bd-4653362183ee",
+                  "uuid": "ba6b02fc-17f8-4dd7-a37a-f24ebca391ed",
+                  "parentUUID": "03037ee0-e06f-4de4-a5a4-25e4b314a1b0",
                   "isHook": false,
                   "skipped": false
                 },
@@ -909,7 +909,7 @@
                   "title": "should return a message as there is another blog with that name",
                   "fullTitle": "UserBlog Methodes testing Edit Blog Testing should return a message as there is another blog with that name",
                   "timedOut": false,
-                  "duration": 144,
+                  "duration": 142,
                   "state": "failed",
                   "speed": null,
                   "pass": false,
@@ -922,8 +922,8 @@
                     "estack": "AssertionError: expected null to equal 'URL is not available'\n    at C:\\Users\\CMP\\OneDrive\\Documents\\GitHub\\Backend_Tumblr-4u\\test\\test.js:151:31\n    at processTicksAndRejections (node:internal/process/task_queues:96:5)",
                     "diff": null
                   },
-                  "uuid": "af960987-40ba-4a94-a7df-d7a0af0250d1",
-                  "parentUUID": "83cdf580-7176-4f29-84bd-4653362183ee",
+                  "uuid": "ad73f3df-b98d-4bc4-89a1-0b66a6197c0e",
+                  "parentUUID": "03037ee0-e06f-4de4-a5a4-25e4b314a1b0",
                   "isHook": false,
                   "skipped": false
                 },
@@ -931,7 +931,7 @@
                   "title": "should return null as there is no a blog with the given id",
                   "fullTitle": "UserBlog Methodes testing Edit Blog Testing should return null as there is no a blog with the given id",
                   "timedOut": false,
-                  "duration": 144,
+                  "duration": 140,
                   "state": "passed",
                   "speed": "slow",
                   "pass": true,
@@ -940,29 +940,29 @@
                   "context": null,
                   "code": "const req={\n  params: {\n    blogId: '61b33c94c4bab40bee182b6f',\n  },\n  body: {\n    name: 'nour',\n  },\n};\nblogFunctions.editBlog(req).then((res) => {\n  expect(res).to.be.eq(null);\n  done();\n}).catch(done);",
                   "err": {},
-                  "uuid": "d4cea906-d53d-43d0-a9fd-c7b7841f0a00",
-                  "parentUUID": "83cdf580-7176-4f29-84bd-4653362183ee",
+                  "uuid": "d3ad629b-6cb9-464b-8baf-17835003c672",
+                  "parentUUID": "03037ee0-e06f-4de4-a5a4-25e4b314a1b0",
                   "isHook": false,
                   "skipped": false
                 }
               ],
               "suites": [],
               "passes": [
-                "d4cea906-d53d-43d0-a9fd-c7b7841f0a00"
+                "d3ad629b-6cb9-464b-8baf-17835003c672"
               ],
               "failures": [
-                "345bd723-b46a-4e46-8b46-7480865cff8a",
-                "af960987-40ba-4a94-a7df-d7a0af0250d1"
+                "ba6b02fc-17f8-4dd7-a37a-f24ebca391ed",
+                "ad73f3df-b98d-4bc4-89a1-0b66a6197c0e"
               ],
               "pending": [],
               "skipped": [],
-              "duration": 432,
+              "duration": 420,
               "root": false,
               "rootEmpty": false,
               "_timeout": 100000
             },
             {
-              "uuid": "0682e48d-d877-49bf-97d4-9488c893fd63",
+              "uuid": "801cbc03-dcc4-4fd6-b37b-f4c3225b241d",
               "title": "Follow Blog Testing",
               "fullFile": "C:\\Users\\CMP\\OneDrive\\Documents\\GitHub\\Backend_Tumblr-4u\\test\\test.js",
               "file": "\\test\\test.js",
@@ -973,7 +973,7 @@
                   "title": "should return object of the followed blog",
                   "fullTitle": "UserBlog Methodes testing Follow Blog Testing should return object of the followed blog",
                   "timedOut": false,
-                  "duration": 1,
+                  "duration": 3,
                   "state": "failed",
                   "speed": null,
                   "pass": false,
@@ -986,8 +986,8 @@
                     "estack": "AssertionError: expected undefined to be an object\n    at C:\\Users\\CMP\\OneDrive\\Documents\\GitHub\\Backend_Tumblr-4u\\test\\test.js:182:27\n    at processTicksAndRejections (node:internal/process/task_queues:96:5)",
                     "diff": null
                   },
-                  "uuid": "159b471f-668e-4786-a069-b24a820f84b8",
-                  "parentUUID": "0682e48d-d877-49bf-97d4-9488c893fd63",
+                  "uuid": "a271fa23-d935-461a-bc67-a2393eb8b347",
+                  "parentUUID": "801cbc03-dcc4-4fd6-b37b-f4c3225b241d",
                   "isHook": false,
                   "skipped": false
                 },
@@ -995,7 +995,7 @@
                   "title": "should return null as there is no a blog with the given id",
                   "fullTitle": "UserBlog Methodes testing Follow Blog Testing should return null as there is no a blog with the given id",
                   "timedOut": false,
-                  "duration": 0,
+                  "duration": 3,
                   "state": "failed",
                   "speed": null,
                   "pass": false,
@@ -1008,8 +1008,8 @@
                     "estack": "AssertionError: expected undefined to equal null\n    at C:\\Users\\CMP\\OneDrive\\Documents\\GitHub\\Backend_Tumblr-4u\\test\\test.js:197:27\n    at processTicksAndRejections (node:internal/process/task_queues:96:5)",
                     "diff": null
                   },
-                  "uuid": "6a650fd3-96cd-46ae-bba1-4d7e24b5c6a3",
-                  "parentUUID": "0682e48d-d877-49bf-97d4-9488c893fd63",
+                  "uuid": "c8ac1548-8fb6-4a38-8e01-5b8198c4dcc2",
+                  "parentUUID": "801cbc03-dcc4-4fd6-b37b-f4c3225b241d",
                   "isHook": false,
                   "skipped": false
                 }
@@ -1017,18 +1017,18 @@
               "suites": [],
               "passes": [],
               "failures": [
-                "159b471f-668e-4786-a069-b24a820f84b8",
-                "6a650fd3-96cd-46ae-bba1-4d7e24b5c6a3"
+                "a271fa23-d935-461a-bc67-a2393eb8b347",
+                "c8ac1548-8fb6-4a38-8e01-5b8198c4dcc2"
               ],
               "pending": [],
               "skipped": [],
-              "duration": 1,
+              "duration": 6,
               "root": false,
               "rootEmpty": false,
               "_timeout": 100000
             },
             {
-              "uuid": "b2a53bbc-517d-4755-81bc-e3aa45781678",
+              "uuid": "f5bd2a8c-03b4-4a85-8a74-eafa7693f43c",
               "title": "Follow Blog Testing",
               "fullFile": "C:\\Users\\CMP\\OneDrive\\Documents\\GitHub\\Backend_Tumblr-4u\\test\\test.js",
               "file": "\\test\\test.js",
@@ -1039,7 +1039,7 @@
                   "title": "should return object of the unfollowed blog",
                   "fullTitle": "UserBlog Methodes testing Follow Blog Testing should return object of the unfollowed blog",
                   "timedOut": false,
-                  "duration": 1,
+                  "duration": 4,
                   "state": "failed",
                   "speed": null,
                   "pass": false,
@@ -1052,8 +1052,8 @@
                     "estack": "AssertionError: expected undefined to be an object\n    at C:\\Users\\CMP\\OneDrive\\Documents\\GitHub\\Backend_Tumblr-4u\\test\\test.js:214:27\n    at processTicksAndRejections (node:internal/process/task_queues:96:5)",
                     "diff": null
                   },
-                  "uuid": "67898a50-296a-41ec-bf0a-0108021df5ea",
-                  "parentUUID": "b2a53bbc-517d-4755-81bc-e3aa45781678",
+                  "uuid": "a82e825c-c07f-4ac5-9037-76d907fb677d",
+                  "parentUUID": "f5bd2a8c-03b4-4a85-8a74-eafa7693f43c",
                   "isHook": false,
                   "skipped": false
                 },
@@ -1061,7 +1061,7 @@
                   "title": "should return null as there is no a blog with the given id",
                   "fullTitle": "UserBlog Methodes testing Follow Blog Testing should return null as there is no a blog with the given id",
                   "timedOut": false,
-                  "duration": 1,
+                  "duration": 2,
                   "state": "failed",
                   "speed": null,
                   "pass": false,
@@ -1074,8 +1074,8 @@
                     "estack": "AssertionError: expected undefined to equal null\n    at C:\\Users\\CMP\\OneDrive\\Documents\\GitHub\\Backend_Tumblr-4u\\test\\test.js:229:27\n    at processTicksAndRejections (node:internal/process/task_queues:96:5)",
                     "diff": null
                   },
-                  "uuid": "595fcbd3-a09e-46e1-8cd7-87532419ab80",
-                  "parentUUID": "b2a53bbc-517d-4755-81bc-e3aa45781678",
+                  "uuid": "0f5f5d8a-f91e-467d-a600-d52a501f0670",
+                  "parentUUID": "f5bd2a8c-03b4-4a85-8a74-eafa7693f43c",
                   "isHook": false,
                   "skipped": false
                 }
@@ -1083,18 +1083,18 @@
               "suites": [],
               "passes": [],
               "failures": [
-                "67898a50-296a-41ec-bf0a-0108021df5ea",
-                "595fcbd3-a09e-46e1-8cd7-87532419ab80"
+                "a82e825c-c07f-4ac5-9037-76d907fb677d",
+                "0f5f5d8a-f91e-467d-a600-d52a501f0670"
               ],
               "pending": [],
               "skipped": [],
-              "duration": 2,
+              "duration": 6,
               "root": false,
               "rootEmpty": false,
               "_timeout": 100000
             },
             {
-              "uuid": "a60d074a-94c9-465f-8abc-0392189a8c4f",
+              "uuid": "18028008-588e-4f15-a64b-b4b9dc527f58",
               "title": "Unfollow Blog Testing",
               "fullFile": "C:\\Users\\CMP\\OneDrive\\Documents\\GitHub\\Backend_Tumblr-4u\\test\\test.js",
               "file": "\\test\\test.js",
@@ -1105,7 +1105,7 @@
                   "title": "should return object of the unfollowed blog",
                   "fullTitle": "UserBlog Methodes testing Unfollow Blog Testing should return object of the unfollowed blog",
                   "timedOut": false,
-                  "duration": 1,
+                  "duration": 3,
                   "state": "failed",
                   "speed": null,
                   "pass": false,
@@ -1118,8 +1118,8 @@
                     "estack": "AssertionError: expected undefined to be an object\n    at C:\\Users\\CMP\\OneDrive\\Documents\\GitHub\\Backend_Tumblr-4u\\test\\test.js:246:27\n    at processTicksAndRejections (node:internal/process/task_queues:96:5)",
                     "diff": null
                   },
-                  "uuid": "720bc1db-09b8-4757-a830-e6c61cb92cf2",
-                  "parentUUID": "a60d074a-94c9-465f-8abc-0392189a8c4f",
+                  "uuid": "cd76bd89-d9fc-41dd-a959-21438273c389",
+                  "parentUUID": "18028008-588e-4f15-a64b-b4b9dc527f58",
                   "isHook": false,
                   "skipped": false
                 },
@@ -1127,7 +1127,7 @@
                   "title": "should return null as there is no a blog with the given id",
                   "fullTitle": "UserBlog Methodes testing Unfollow Blog Testing should return null as there is no a blog with the given id",
                   "timedOut": false,
-                  "duration": 1,
+                  "duration": 2,
                   "state": "failed",
                   "speed": null,
                   "pass": false,
@@ -1140,8 +1140,8 @@
                     "estack": "AssertionError: expected undefined to equal null\n    at C:\\Users\\CMP\\OneDrive\\Documents\\GitHub\\Backend_Tumblr-4u\\test\\test.js:261:27\n    at processTicksAndRejections (node:internal/process/task_queues:96:5)",
                     "diff": null
                   },
-                  "uuid": "78869e6a-d25e-47f0-9e48-193994549a8f",
-                  "parentUUID": "a60d074a-94c9-465f-8abc-0392189a8c4f",
+                  "uuid": "774c13b9-90bc-4422-ae35-4d2a3a5b688c",
+                  "parentUUID": "18028008-588e-4f15-a64b-b4b9dc527f58",
                   "isHook": false,
                   "skipped": false
                 }
@@ -1149,18 +1149,18 @@
               "suites": [],
               "passes": [],
               "failures": [
-                "720bc1db-09b8-4757-a830-e6c61cb92cf2",
-                "78869e6a-d25e-47f0-9e48-193994549a8f"
+                "cd76bd89-d9fc-41dd-a959-21438273c389",
+                "774c13b9-90bc-4422-ae35-4d2a3a5b688c"
               ],
               "pending": [],
               "skipped": [],
-              "duration": 2,
+              "duration": 5,
               "root": false,
               "rootEmpty": false,
               "_timeout": 100000
             },
             {
-              "uuid": "c28c0ce9-d857-4c53-b457-70ef42acfb8d",
+              "uuid": "c4923dec-d1ff-49bb-b444-0bbd5d12d4a3",
               "title": "Block Blog Testing",
               "fullFile": "C:\\Users\\CMP\\OneDrive\\Documents\\GitHub\\Backend_Tumblr-4u\\test\\test.js",
               "file": "\\test\\test.js",
@@ -1171,7 +1171,7 @@
                   "title": "should return object of the blocked blog",
                   "fullTitle": "UserBlog Methodes testing Block Blog Testing should return object of the blocked blog",
                   "timedOut": false,
-                  "duration": 144,
+                  "duration": 140,
                   "state": "failed",
                   "speed": null,
                   "pass": false,
@@ -1184,8 +1184,8 @@
                     "estack": "AssertionError: expected null to be an object\n    at C:\\Users\\CMP\\OneDrive\\Documents\\GitHub\\Backend_Tumblr-4u\\test\\test.js:279:27\n    at processTicksAndRejections (node:internal/process/task_queues:96:5)",
                     "diff": null
                   },
-                  "uuid": "3d3baa04-596e-4b3d-b1cb-55771b9c2850",
-                  "parentUUID": "c28c0ce9-d857-4c53-b457-70ef42acfb8d",
+                  "uuid": "129dec5d-5c4b-4a76-9fcb-8f55f486b96b",
+                  "parentUUID": "c4923dec-d1ff-49bb-b444-0bbd5d12d4a3",
                   "isHook": false,
                   "skipped": false
                 },
@@ -1193,7 +1193,7 @@
                   "title": "should return null as there is no a blog with the given id",
                   "fullTitle": "UserBlog Methodes testing Block Blog Testing should return null as there is no a blog with the given id",
                   "timedOut": false,
-                  "duration": 145,
+                  "duration": 139,
                   "state": "passed",
                   "speed": "slow",
                   "pass": true,
@@ -1202,28 +1202,28 @@
                   "context": null,
                   "code": "const req={\n  params: {\n    blogId: '61b3724efad9ac6d6c719f58',\n  },\n  body: {\n    blockedBlogId: '619938113df6b45019c42d06',\n  },\n};\nblogFunctions.blockBlog(req).then((res) => {\n  expect(res).to.be.eq(null);\n  done();\n}).catch(done);",
                   "err": {},
-                  "uuid": "1d0cf50d-e400-4bd2-91b2-e3432bb20a69",
-                  "parentUUID": "c28c0ce9-d857-4c53-b457-70ef42acfb8d",
+                  "uuid": "68251d26-9d1d-4ced-9f2e-ffc4bee110ab",
+                  "parentUUID": "c4923dec-d1ff-49bb-b444-0bbd5d12d4a3",
                   "isHook": false,
                   "skipped": false
                 }
               ],
               "suites": [],
               "passes": [
-                "1d0cf50d-e400-4bd2-91b2-e3432bb20a69"
+                "68251d26-9d1d-4ced-9f2e-ffc4bee110ab"
               ],
               "failures": [
-                "3d3baa04-596e-4b3d-b1cb-55771b9c2850"
+                "129dec5d-5c4b-4a76-9fcb-8f55f486b96b"
               ],
               "pending": [],
               "skipped": [],
-              "duration": 289,
+              "duration": 279,
               "root": false,
               "rootEmpty": false,
               "_timeout": 100000
             },
             {
-              "uuid": "f1ce05dc-389c-472f-9fc5-d631ecf2a873",
+              "uuid": "caa78497-bd59-409d-b91f-bcc745a15a3f",
               "title": "Unblock Blog Testing",
               "fullFile": "C:\\Users\\CMP\\OneDrive\\Documents\\GitHub\\Backend_Tumblr-4u\\test\\test.js",
               "file": "\\test\\test.js",
@@ -1234,7 +1234,7 @@
                   "title": "should return object of the unblocked blog",
                   "fullTitle": "UserBlog Methodes testing Unblock Blog Testing should return object of the unblocked blog",
                   "timedOut": false,
-                  "duration": 151,
+                  "duration": 139,
                   "state": "failed",
                   "speed": null,
                   "pass": false,
@@ -1247,8 +1247,8 @@
                     "estack": "AssertionError: expected null to be an object\n    at C:\\Users\\CMP\\OneDrive\\Documents\\GitHub\\Backend_Tumblr-4u\\test\\test.js:313:27\n    at processTicksAndRejections (node:internal/process/task_queues:96:5)",
                     "diff": null
                   },
-                  "uuid": "dddf2d11-e3f2-4661-a84e-23b3fcdeaf33",
-                  "parentUUID": "f1ce05dc-389c-472f-9fc5-d631ecf2a873",
+                  "uuid": "cec7804e-82f0-4ffb-9058-c8e74a3f8a56",
+                  "parentUUID": "caa78497-bd59-409d-b91f-bcc745a15a3f",
                   "isHook": false,
                   "skipped": false
                 },
@@ -1256,7 +1256,7 @@
                   "title": "should return null as there is no a blog with the given id",
                   "fullTitle": "UserBlog Methodes testing Unblock Blog Testing should return null as there is no a blog with the given id",
                   "timedOut": false,
-                  "duration": 147,
+                  "duration": 151,
                   "state": "passed",
                   "speed": "slow",
                   "pass": true,
@@ -1265,22 +1265,22 @@
                   "context": null,
                   "code": "const req={\n  params: {\n    blogId: '61b3724efad9ac6d6c719f58',\n  },\n  body: {\n    unblockedBlogId: '619938113df6b45019c42d06',\n  },\n};\nblogFunctions.unblockBlog(req).then((res) => {\n  expect(res).to.be.eq(null);\n  done();\n}).catch(done);",
                   "err": {},
-                  "uuid": "50b55b69-fdc9-40fe-9791-7f7fd743a87c",
-                  "parentUUID": "f1ce05dc-389c-472f-9fc5-d631ecf2a873",
+                  "uuid": "22ab66d5-cf1e-408f-bbc2-16c08a64c129",
+                  "parentUUID": "caa78497-bd59-409d-b91f-bcc745a15a3f",
                   "isHook": false,
                   "skipped": false
                 }
               ],
               "suites": [],
               "passes": [
-                "50b55b69-fdc9-40fe-9791-7f7fd743a87c"
+                "22ab66d5-cf1e-408f-bbc2-16c08a64c129"
               ],
               "failures": [
-                "dddf2d11-e3f2-4661-a84e-23b3fcdeaf33"
+                "cec7804e-82f0-4ffb-9058-c8e74a3f8a56"
               ],
               "pending": [],
               "skipped": [],
-              "duration": 298,
+              "duration": 290,
               "root": false,
               "rootEmpty": false,
               "_timeout": 100000
@@ -1296,7 +1296,7 @@
           "_timeout": 100000
         },
         {
-          "uuid": "98bd5fea-4d1a-44e5-9d87-df2356cb6aec",
+          "uuid": "67272902-d7d7-42de-b0e5-01999093d03a",
           "title": "User APIs",
           "fullFile": "C:\\Users\\CMP\\OneDrive\\Documents\\GitHub\\Backend_Tumblr-4u\\test\\userTest.js",
           "file": "\\test\\userTest.js",
@@ -1305,7 +1305,7 @@
           "tests": [],
           "suites": [
             {
-              "uuid": "8c61ea7f-9bb0-417a-92b4-d9b7af9eafcb",
+              "uuid": "f4ce519d-1c79-4113-85d4-68b74bc4dd49",
               "title": "Check Mail Function",
               "fullFile": "C:\\Users\\CMP\\OneDrive\\Documents\\GitHub\\Backend_Tumblr-4u\\test\\userTest.js",
               "file": "\\test\\userTest.js",
@@ -1316,7 +1316,7 @@
                   "title": "It Should Return True",
                   "fullTitle": "User APIs Check Mail Function It Should Return True",
                   "timedOut": false,
-                  "duration": 149,
+                  "duration": 150,
                   "state": "passed",
                   "speed": "slow",
                   "pass": true,
@@ -1325,8 +1325,8 @@
                   "context": null,
                   "code": "const email = 'ahmed.ayman.1420@gmail.com';\nuserServices.checkMail(email).then((result) => {\n  expect(result).to.be.eq(true);\n  done();\n}).catch(done);",
                   "err": {},
-                  "uuid": "05dcf265-9cb2-4451-8733-ecff480190ae",
-                  "parentUUID": "8c61ea7f-9bb0-417a-92b4-d9b7af9eafcb",
+                  "uuid": "c87e64f9-9c8b-4b5c-913c-ea751b064ae7",
+                  "parentUUID": "f4ce519d-1c79-4113-85d4-68b74bc4dd49",
                   "isHook": false,
                   "skipped": false
                 },
@@ -1334,7 +1334,7 @@
                   "title": "It Should Return False",
                   "fullTitle": "User APIs Check Mail Function It Should Return False",
                   "timedOut": false,
-                  "duration": 144,
+                  "duration": 140,
                   "state": "passed",
                   "speed": "slow",
                   "pass": true,
@@ -1343,27 +1343,27 @@
                   "context": null,
                   "code": "const email = 'Afnan@gmail.com';\nuserServices.checkMail(email).then((result) => {\n  expect(result).to.be.eq(false);\n  done();\n}).catch(done);",
                   "err": {},
-                  "uuid": "04685db8-710b-4089-b8ff-50fc7692b722",
-                  "parentUUID": "8c61ea7f-9bb0-417a-92b4-d9b7af9eafcb",
+                  "uuid": "aa000109-7729-473e-8ffe-3a67ce41ad83",
+                  "parentUUID": "f4ce519d-1c79-4113-85d4-68b74bc4dd49",
                   "isHook": false,
                   "skipped": false
                 }
               ],
               "suites": [],
               "passes": [
-                "05dcf265-9cb2-4451-8733-ecff480190ae",
-                "04685db8-710b-4089-b8ff-50fc7692b722"
+                "c87e64f9-9c8b-4b5c-913c-ea751b064ae7",
+                "aa000109-7729-473e-8ffe-3a67ce41ad83"
               ],
               "failures": [],
               "pending": [],
               "skipped": [],
-              "duration": 293,
+              "duration": 290,
               "root": false,
               "rootEmpty": false,
               "_timeout": 100000
             },
             {
-              "uuid": "8edc18d7-f1f2-4fdf-ab25-eec6c87544fe",
+              "uuid": "571f367b-d7bb-4e7f-8091-b91b9b25bab8",
               "title": "Check blogName Function",
               "fullFile": "C:\\Users\\CMP\\OneDrive\\Documents\\GitHub\\Backend_Tumblr-4u\\test\\userTest.js",
               "file": "\\test\\userTest.js",
@@ -1374,7 +1374,7 @@
                   "title": "It Should Return True",
                   "fullTitle": "User APIs Check blogName Function It Should Return True",
                   "timedOut": false,
-                  "duration": 143,
+                  "duration": 140,
                   "state": "failed",
                   "speed": null,
                   "pass": false,
@@ -1387,8 +1387,8 @@
                     "estack": "AssertionError: expected false to equal true\n    at C:\\Users\\CMP\\OneDrive\\Documents\\GitHub\\Backend_Tumblr-4u\\test\\userTest.js:80:30\n    at processTicksAndRejections (node:internal/process/task_queues:96:5)",
                     "diff": "- false\n+ true\n"
                   },
-                  "uuid": "c4031e7b-00fa-4923-9224-036f411a658c",
-                  "parentUUID": "8edc18d7-f1f2-4fdf-ab25-eec6c87544fe",
+                  "uuid": "dab7adc7-e4be-4a67-8556-2308b6842774",
+                  "parentUUID": "571f367b-d7bb-4e7f-8091-b91b9b25bab8",
                   "isHook": false,
                   "skipped": false
                 },
@@ -1396,7 +1396,7 @@
                   "title": "It Should Return False",
                   "fullTitle": "User APIs Check blogName Function It Should Return False",
                   "timedOut": false,
-                  "duration": 144,
+                  "duration": 140,
                   "state": "passed",
                   "speed": "slow",
                   "pass": true,
@@ -1405,28 +1405,28 @@
                   "context": null,
                   "code": "const blogName = 'ABCD';\nuserServices.checkBlogName(blogName).then((result) => {\n  expect(result).to.be.eq(false);\n  done();\n}).catch(done);",
                   "err": {},
-                  "uuid": "a10e2311-21a0-4d0b-b834-67fd7d25b890",
-                  "parentUUID": "8edc18d7-f1f2-4fdf-ab25-eec6c87544fe",
+                  "uuid": "5637e4f6-e9c7-4895-b61a-7fe673203102",
+                  "parentUUID": "571f367b-d7bb-4e7f-8091-b91b9b25bab8",
                   "isHook": false,
                   "skipped": false
                 }
               ],
               "suites": [],
               "passes": [
-                "a10e2311-21a0-4d0b-b834-67fd7d25b890"
+                "5637e4f6-e9c7-4895-b61a-7fe673203102"
               ],
               "failures": [
-                "c4031e7b-00fa-4923-9224-036f411a658c"
+                "dab7adc7-e4be-4a67-8556-2308b6842774"
               ],
               "pending": [],
               "skipped": [],
-              "duration": 287,
+              "duration": 280,
               "root": false,
               "rootEmpty": false,
               "_timeout": 100000
             },
             {
-              "uuid": "482895d9-9890-4bf1-a986-de17a110f3d3",
+              "uuid": "067a5eb1-d4fb-4592-a91b-dbc05c109a88",
               "title": "Create User Function",
               "fullFile": "C:\\Users\\CMP\\OneDrive\\Documents\\GitHub\\Backend_Tumblr-4u\\test\\userTest.js",
               "file": "\\test\\userTest.js",
@@ -1437,7 +1437,7 @@
                   "title": "It Should Create New User",
                   "fullTitle": "User APIs Create User Function It Should Create New User",
                   "timedOut": false,
-                  "duration": 182,
+                  "duration": 215,
                   "state": "passed",
                   "speed": "slow",
                   "pass": true,
@@ -1446,26 +1446,26 @@
                   "context": null,
                   "code": "const email = 'ahmed.ayman.cmp@gmail.com';\nconst blogName = 'CMP';\nconst password = '12345';\nconst age = '21';\nuserServices.createUser(email, password, blogName, age).then((result) => {\n  expect(result).to.be.eq('Created');\n  done();\n}).catch(done);",
                   "err": {},
-                  "uuid": "54747e47-ff47-4614-9fff-f0e3cf7a871b",
-                  "parentUUID": "482895d9-9890-4bf1-a986-de17a110f3d3",
+                  "uuid": "00d812c7-fe73-4d85-b574-7488e9f0b193",
+                  "parentUUID": "067a5eb1-d4fb-4592-a91b-dbc05c109a88",
                   "isHook": false,
                   "skipped": false
                 }
               ],
               "suites": [],
               "passes": [
-                "54747e47-ff47-4614-9fff-f0e3cf7a871b"
+                "00d812c7-fe73-4d85-b574-7488e9f0b193"
               ],
               "failures": [],
               "pending": [],
               "skipped": [],
-              "duration": 182,
+              "duration": 215,
               "root": false,
               "rootEmpty": false,
               "_timeout": 100000
             },
             {
-              "uuid": "04f36ea7-ae2f-42d0-a962-1be53cd7a9c5",
+              "uuid": "bdcddc92-29c6-48d8-98af-3db15b2ae235",
               "title": "Send Verification Mail To User",
               "fullFile": "C:\\Users\\CMP\\OneDrive\\Documents\\GitHub\\Backend_Tumblr-4u\\test\\userTest.js",
               "file": "\\test\\userTest.js",
@@ -1476,7 +1476,7 @@
                   "title": "It Should Send Verification Mail To User",
                   "fullTitle": "User APIs Send Verification Mail To User It Should Send Verification Mail To User",
                   "timedOut": false,
-                  "duration": 1427,
+                  "duration": 1738,
                   "state": "passed",
                   "speed": "slow",
                   "pass": true,
@@ -1485,26 +1485,26 @@
                   "context": null,
                   "code": "const name = 'Rema';\nconst email = 'reem.atala555@gmail.com';\nconst token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJlZW0uYXRhbGE1NTVAZ21haWwuY29tIiwicm9sZSI6InVzZXIiLCJpYXQiOjE2MzkwNzk3MDd9.V3NXoggu_z7xWDQC8XksfFLsfkjuJsIaWqFwH10nBlE';\nuserServices.verifyMail(name, email, token).then((result) => {\n  expect(result).to.be.eq('verification mail sent');\n  done();\n}).catch(done);",
                   "err": {},
-                  "uuid": "ad45244a-a953-4434-937f-8dac1c2695ab",
-                  "parentUUID": "04f36ea7-ae2f-42d0-a962-1be53cd7a9c5",
+                  "uuid": "3155cc52-a566-48a1-943e-7fe6e0e51d9a",
+                  "parentUUID": "bdcddc92-29c6-48d8-98af-3db15b2ae235",
                   "isHook": false,
                   "skipped": false
                 }
               ],
               "suites": [],
               "passes": [
-                "ad45244a-a953-4434-937f-8dac1c2695ab"
+                "3155cc52-a566-48a1-943e-7fe6e0e51d9a"
               ],
               "failures": [],
               "pending": [],
               "skipped": [],
-              "duration": 1427,
+              "duration": 1738,
               "root": false,
               "rootEmpty": false,
               "_timeout": 100000
             },
             {
-              "uuid": "dbd2c434-9e99-4b0e-9415-c5b16ddbf2f9",
+              "uuid": "94e98de6-36ab-435c-be4c-1b7b042012ca",
               "title": "Checks Input Password",
               "fullFile": "C:\\Users\\CMP\\OneDrive\\Documents\\GitHub\\Backend_Tumblr-4u\\test\\userTest.js",
               "file": "\\test\\userTest.js",
@@ -1515,17 +1515,17 @@
                   "title": "It Should Return True",
                   "fullTitle": "User APIs Checks Input Password It Should Return True",
                   "timedOut": false,
-                  "duration": 30,
+                  "duration": 67,
                   "state": "passed",
-                  "speed": "fast",
+                  "speed": "medium",
                   "pass": true,
                   "fail": false,
                   "pending": false,
                   "context": null,
                   "code": "const password = '123';\nconst oldPassword =\n  '$2b$08$0eaSh6V.pAvCyX8LFE12Ve52cSHUUPVrV0h7DDx0SwA5eCSIGsKsq';\nuserServices.checkPassword(password, oldPassword).then((result) => {\n  expect(result).to.be.eq(true);\n  done();\n}).catch(done);",
                   "err": {},
-                  "uuid": "f9b8ebc5-d25c-4755-ad9c-ac9bcf8ce42f",
-                  "parentUUID": "dbd2c434-9e99-4b0e-9415-c5b16ddbf2f9",
+                  "uuid": "c8b5d985-631d-4782-ae82-67edd1a262a4",
+                  "parentUUID": "94e98de6-36ab-435c-be4c-1b7b042012ca",
                   "isHook": false,
                   "skipped": false
                 },
@@ -1533,36 +1533,36 @@
                   "title": "It Should Return False",
                   "fullTitle": "User APIs Checks Input Password It Should Return False",
                   "timedOut": false,
-                  "duration": 16,
+                  "duration": 64,
                   "state": "passed",
-                  "speed": "fast",
+                  "speed": "medium",
                   "pass": true,
                   "fail": false,
                   "pending": false,
                   "context": null,
                   "code": "const password = '12345';\nconst oldPassword =\n  '$2b$08$0eaSh6V.pAvCyX8LFE12Ve52cSHUUPVrV0h7DDx0SwA5eCSIGsKsq';\nuserServices.checkPassword(password, oldPassword).then((result) => {\n  expect(result).to.be.eq(false);\n  done();\n}).catch(done);",
                   "err": {},
-                  "uuid": "51e95edd-106e-4c89-a841-dfad8c9a982b",
-                  "parentUUID": "dbd2c434-9e99-4b0e-9415-c5b16ddbf2f9",
+                  "uuid": "9d56f72a-5b73-4f71-b63b-127669e0a2eb",
+                  "parentUUID": "94e98de6-36ab-435c-be4c-1b7b042012ca",
                   "isHook": false,
                   "skipped": false
                 }
               ],
               "suites": [],
               "passes": [
-                "f9b8ebc5-d25c-4755-ad9c-ac9bcf8ce42f",
-                "51e95edd-106e-4c89-a841-dfad8c9a982b"
+                "c8b5d985-631d-4782-ae82-67edd1a262a4",
+                "9d56f72a-5b73-4f71-b63b-127669e0a2eb"
               ],
               "failures": [],
               "pending": [],
               "skipped": [],
-              "duration": 46,
+              "duration": 131,
               "root": false,
               "rootEmpty": false,
               "_timeout": 100000
             },
             {
-              "uuid": "920cf88f-a412-451b-a89b-47c0775f166c",
+              "uuid": "19ec119a-850b-4870-a539-a0217b1b2a7f",
               "title": "Create User Google Function",
               "fullFile": "C:\\Users\\CMP\\OneDrive\\Documents\\GitHub\\Backend_Tumblr-4u\\test\\userTest.js",
               "file": "\\test\\userTest.js",
@@ -1573,7 +1573,7 @@
                   "title": "It Should Create New Google User",
                   "fullTitle": "User APIs Create User Google Function It Should Create New Google User",
                   "timedOut": false,
-                  "duration": 163,
+                  "duration": 215,
                   "state": "passed",
                   "speed": "slow",
                   "pass": true,
@@ -1582,26 +1582,26 @@
                   "context": null,
                   "code": "const email = 'ahmed.ayman.cmp@gmail.com';\nconst password = '12345';\nuserServices.createUser(email, password).then((result) => {\n  expect(result).to.be.eq('Created');\n  done();\n}).catch(done);",
                   "err": {},
-                  "uuid": "fde7a19a-808e-4192-ab3f-18ae8f3a6bcf",
-                  "parentUUID": "920cf88f-a412-451b-a89b-47c0775f166c",
+                  "uuid": "97eb05e9-6246-46d2-816c-4a72f011b425",
+                  "parentUUID": "19ec119a-850b-4870-a539-a0217b1b2a7f",
                   "isHook": false,
                   "skipped": false
                 }
               ],
               "suites": [],
               "passes": [
-                "fde7a19a-808e-4192-ab3f-18ae8f3a6bcf"
+                "97eb05e9-6246-46d2-816c-4a72f011b425"
               ],
               "failures": [],
               "pending": [],
               "skipped": [],
-              "duration": 163,
+              "duration": 215,
               "root": false,
               "rootEmpty": false,
               "_timeout": 100000
             },
             {
-              "uuid": "6ce6e1f2-a54e-4a50-afc4-ec5bf8126a59",
+              "uuid": "57144760-9db0-4d80-bb32-f7a1e067afd2",
               "title": "Create Primary Blog Function",
               "fullFile": "C:\\Users\\CMP\\OneDrive\\Documents\\GitHub\\Backend_Tumblr-4u\\test\\userTest.js",
               "file": "\\test\\userTest.js",
@@ -1612,35 +1612,35 @@
                   "title": "It Should Create Primary Blog When User Sign up ",
                   "fullTitle": "User APIs Create Primary Blog Function It Should Create Primary Blog When User Sign up ",
                   "timedOut": false,
-                  "duration": 628,
+                  "duration": 852,
                   "state": "passed",
                   "speed": "slow",
                   "pass": true,
                   "fail": false,
                   "pending": false,
                   "context": null,
-                  "code": "const email = 'ahmed.ayman.cmp@gmail.com';\nconst name = 'Game-2023';\nuserServices.createPrimaryBlog(email, name).then((result) => {\n  expect(result).to.be.eq('Blog Created');\n  done();\n}).catch(done);",
+                  "code": "const email = 'ahmedatcmp@gmail.com';\nconst name = 'Game-1';\nuserServices.createPrimaryBlog(email, name).then((result) => {\n  expect(result).to.be.eq('Blog Created');\n  done();\n}).catch(done);",
                   "err": {},
-                  "uuid": "102d61bb-71f1-401a-9598-71548613ec62",
-                  "parentUUID": "6ce6e1f2-a54e-4a50-afc4-ec5bf8126a59",
+                  "uuid": "a163dbf4-4f78-455b-bb15-924f0c7e6c02",
+                  "parentUUID": "57144760-9db0-4d80-bb32-f7a1e067afd2",
                   "isHook": false,
                   "skipped": false
                 }
               ],
               "suites": [],
               "passes": [
-                "102d61bb-71f1-401a-9598-71548613ec62"
+                "a163dbf4-4f78-455b-bb15-924f0c7e6c02"
               ],
               "failures": [],
               "pending": [],
               "skipped": [],
-              "duration": 628,
+              "duration": 852,
               "root": false,
               "rootEmpty": false,
               "_timeout": 100000
             },
             {
-              "uuid": "85a7155b-1ac9-4961-aa9e-3e33c57587e8",
+              "uuid": "72f95003-d667-410e-a386-b00070bd1c45",
               "title": "Forget Passowrd Mail",
               "fullFile": "C:\\Users\\CMP\\OneDrive\\Documents\\GitHub\\Backend_Tumblr-4u\\test\\userTest.js",
               "file": "\\test\\userTest.js",
@@ -1651,7 +1651,7 @@
                   "title": "It Should Sned Email To User",
                   "fullTitle": "User APIs Forget Passowrd Mail It Should Sned Email To User",
                   "timedOut": false,
-                  "duration": 1394,
+                  "duration": 1507,
                   "state": "passed",
                   "speed": "slow",
                   "pass": true,
@@ -1660,26 +1660,123 @@
                   "context": null,
                   "code": "const name = 'Rema';\nconst email = 'ahmed.ayman.1420@gmail.com';\nuserServices.forgetPasswordMail(name, email).then((result) => {\n  expect(result).to.be.eq('forget password mail sent');\n  done();\n}).catch(done);",
                   "err": {},
-                  "uuid": "23a55981-29fa-47b4-b3a2-6f4b0c7d94b8",
-                  "parentUUID": "85a7155b-1ac9-4961-aa9e-3e33c57587e8",
+                  "uuid": "626bb436-790f-4fa4-a5ce-810f3e959c84",
+                  "parentUUID": "72f95003-d667-410e-a386-b00070bd1c45",
                   "isHook": false,
                   "skipped": false
                 }
               ],
               "suites": [],
               "passes": [
-                "23a55981-29fa-47b4-b3a2-6f4b0c7d94b8"
+                "626bb436-790f-4fa4-a5ce-810f3e959c84"
               ],
               "failures": [],
               "pending": [],
               "skipped": [],
-              "duration": 1394,
+              "duration": 1507,
               "root": false,
               "rootEmpty": false,
               "_timeout": 100000
             },
             {
-              "uuid": "da417011-6e3c-4fe8-b981-dbba58f76d45",
+              "uuid": "df5ca44b-eef6-4862-86d9-ece4e0bf6d44",
+              "title": "Check Post Id",
+              "fullFile": "C:\\Users\\CMP\\OneDrive\\Documents\\GitHub\\Backend_Tumblr-4u\\test\\userTest.js",
+              "file": "\\test\\userTest.js",
+              "beforeHooks": [],
+              "afterHooks": [],
+              "tests": [
+                {
+                  "title": "It Check Post Id",
+                  "fullTitle": "User APIs Check Post Id It Check Post Id",
+                  "timedOut": false,
+                  "duration": 142,
+                  "state": "passed",
+                  "speed": "slow",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "const postId = '61ca5d91a8a4556c5b24f1f4';\nuserServices.checkPostId(postId).then((result) => {\n  expect(result).to.be.eq(true);\n  done();\n}).catch(done);",
+                  "err": {},
+                  "uuid": "e37c7fe1-d50a-408a-b817-2ea77a7a3f0d",
+                  "parentUUID": "df5ca44b-eef6-4862-86d9-ece4e0bf6d44",
+                  "isHook": false,
+                  "skipped": false
+                },
+                {
+                  "title": "It Check Post Id",
+                  "fullTitle": "User APIs Check Post Id It Check Post Id",
+                  "timedOut": false,
+                  "duration": 144,
+                  "state": "passed",
+                  "speed": "slow",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "const postId = '61ca5d91a8a4556c5b24f1f0';\nuserServices.checkPostId(postId).then((result) => {\n  expect(result).to.be.eq(false);\n  done();\n}).catch(done);",
+                  "err": {},
+                  "uuid": "89f9b231-ad9e-4b5c-a4bf-712d45973b8a",
+                  "parentUUID": "df5ca44b-eef6-4862-86d9-ece4e0bf6d44",
+                  "isHook": false,
+                  "skipped": false
+                }
+              ],
+              "suites": [],
+              "passes": [
+                "e37c7fe1-d50a-408a-b817-2ea77a7a3f0d",
+                "89f9b231-ad9e-4b5c-a4bf-712d45973b8a"
+              ],
+              "failures": [],
+              "pending": [],
+              "skipped": [],
+              "duration": 286,
+              "root": false,
+              "rootEmpty": false,
+              "_timeout": 100000
+            },
+            {
+              "uuid": "29f88e29-7625-4e14-8bb2-0a23190759e3",
+              "title": "get UserId From PostId ",
+              "fullFile": "C:\\Users\\CMP\\OneDrive\\Documents\\GitHub\\Backend_Tumblr-4u\\test\\userTest.js",
+              "file": "\\test\\userTest.js",
+              "beforeHooks": [],
+              "afterHooks": [],
+              "tests": [
+                {
+                  "title": "get UserId From PostId ",
+                  "fullTitle": "User APIs get UserId From PostId  get UserId From PostId ",
+                  "timedOut": false,
+                  "duration": 429,
+                  "state": "passed",
+                  "speed": "slow",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "const postId = '61ca5d92a8a4556c5b24f1fa';\nuserServices.getUserIdFromPostId(postId).then((result) => {\n  expect(result).to.be.eq('61c9d749b33bf76a71baed86');\n  done();\n}).catch(done);",
+                  "err": {},
+                  "uuid": "d17f69a3-c607-4055-9db5-9348203b0b2f",
+                  "parentUUID": "29f88e29-7625-4e14-8bb2-0a23190759e3",
+                  "isHook": false,
+                  "skipped": false
+                }
+              ],
+              "suites": [],
+              "passes": [
+                "d17f69a3-c607-4055-9db5-9348203b0b2f"
+              ],
+              "failures": [],
+              "pending": [],
+              "skipped": [],
+              "duration": 429,
+              "root": false,
+              "rootEmpty": false,
+              "_timeout": 100000
+            },
+            {
+              "uuid": "287ba752-256f-4c0e-a534-dad294a14ca3",
               "title": "Create Notification",
               "fullFile": "C:\\Users\\CMP\\OneDrive\\Documents\\GitHub\\Backend_Tumblr-4u\\test\\userTest.js",
               "file": "\\test\\userTest.js",
@@ -1690,29 +1787,29 @@
                   "title": "It Should Create Notification",
                   "fullTitle": "User APIs Create Notification It Should Create Notification",
                   "timedOut": false,
-                  "duration": 903,
+                  "duration": 1000,
                   "state": "passed",
                   "speed": "slow",
                   "pass": true,
                   "fail": false,
                   "pending": false,
                   "context": null,
-                  "code": "const postId = '61ca5d92a8a4556c5b24f209';\nconst type = 'like';\nnotificationFunction.addNotification(postId, type).then((result) => {\n  expect(result).to.be.eq('Created');\n  done();\n}).catch(done);",
+                  "code": "const postId = '61ca5d92a8a4556c5b24f1fa';\nconst type = 'like';\nnotificationFunction.addNotification(postId, type).then((result) => {\n  expect(result).to.be.eq('Created');\n  done();\n}).catch(done);",
                   "err": {},
-                  "uuid": "eba9d843-c93e-41d6-a5a2-556acd5c5f4b",
-                  "parentUUID": "da417011-6e3c-4fe8-b981-dbba58f76d45",
+                  "uuid": "89d57ed2-f2bd-455c-8e90-cf1e0ed5e344",
+                  "parentUUID": "287ba752-256f-4c0e-a534-dad294a14ca3",
                   "isHook": false,
                   "skipped": false
                 }
               ],
               "suites": [],
               "passes": [
-                "eba9d843-c93e-41d6-a5a2-556acd5c5f4b"
+                "89d57ed2-f2bd-455c-8e90-cf1e0ed5e344"
               ],
               "failures": [],
               "pending": [],
               "skipped": [],
-              "duration": 903,
+              "duration": 1000,
               "root": false,
               "rootEmpty": false,
               "_timeout": 100000

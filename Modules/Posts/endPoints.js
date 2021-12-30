@@ -14,7 +14,6 @@ const removeComment = 'Posts: removeComment';
 const removeReblog = 'Posts: removeReblog';
 const getNotes = 'Posts: getNotes';
 const getDashboard = 'Posts: getDashboard';
-const sharePost = 'Posts: sharePost';
 const reportPost = 'Posts: reportPost';
 const getBlogPosts = 'Posts: getBlogPosts';
 const activityFeed = 'Posts: activityFeed';
@@ -33,7 +32,6 @@ const postEndPoints = {
   removeReblog,
   getNotes,
   getDashboard,
-  sharePost,
   getBlogPosts,
   reportPost,
   activityFeed,

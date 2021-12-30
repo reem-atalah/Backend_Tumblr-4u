@@ -22,19 +22,24 @@ const socket = async (app) => {
 
         io.emit('test', 'Connnection Is Done');
 
-        socket.on('join-room', (room, cb) => {
-
+        socket.on('join-room', (room) => {
+            socket.emit('joined-room', 'Join Room Success');
+            console.log('Before User Id');
             const userId = userServices.getIdFromToken(room);
-            socket.join(userId)
-            cb(`joined ${room}`)
+            console.log(userId);
+            socket.join(userId);
         });
 
-        socket.emit('joined-room', 'Join Room Success');
 
         socket.on('like', (postId) => {
+            socket.emit('test1', postId);
+            console.log(postId);
             notificationFunction.addNotification(postId, 'like');
             const room = userServices.getUserIdFromPostId(postId);
+            console.log(room);
+            socket.emit('test2', room);
             const data = notificationFunction.getNotification(postId);
+            socket.emit('test2', data);
             socket.to(room).emit('update-notification-list', data)
         });
 

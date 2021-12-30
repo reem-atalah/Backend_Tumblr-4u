@@ -7,9 +7,13 @@
 /* =============== /// <==> Variables Declaration <==> /// =============== */
 // const bcrypt = require('bcrypt');
 // const jwt = require('jsonwebtoken');
-const {StatusCodes} = require('http-status-codes');
+const {
+  StatusCodes
+} = require('http-status-codes');
 const schema = require('../../../Model/model');
-const {BlobServiceClient} = require('@azure/storage-blob');
+const {
+  BlobServiceClient
+} = require('@azure/storage-blob');
 const azure = require('azure-storage');
 const fileUpload = require('express-fileupload');
 const express = require('express');
@@ -19,7 +23,10 @@ const mime = require('mime');
 const fs = require('fs');
 const formidable = require('formidable');
 const multipart = require('parse-multipart');
-const {Mongoose, now} = require('mongoose');
+const {
+  Mongoose,
+  now
+} = require('mongoose');
 const multer = require('multer');
 const path = require('path');
 const inMemoryStorage = multer.memoryStorage();
@@ -68,19 +75,19 @@ const inMemoryStorage = multer.memoryStorage();
 // } catch (e) {
 //   next(e);
 // }
-const uploadLocalImg = async (files)=>{
+const uploadLocalImg = async (files) => {
   // console.log('files: ', files.file.length);
   if (files.file.length != null) {
-    files.file.forEach((file)=>{
+    files.file.forEach((file) => {
       const extension = file.mimetype.split('/')[1];
       // console.log('extension:', extension);
       const name = file.name.split('.')[0];
       // console.log('name:', name);
-      const filePath =`${__dirname}/images/${name}.`+extension;
+      const filePath = `${__dirname}/images/${name}.` + extension;
       // console.log('filePath:', filePath);
 
       // const file = files.file;
-      file.mv(`${__dirname}/images/${name}.`+extension, (err) => {
+      file.mv(`${__dirname}/images/${name}.` + extension, (err) => {
         if (err) {
           return res.status(500).send(err);
         }
@@ -91,11 +98,11 @@ const uploadLocalImg = async (files)=>{
     // console.log('extension:', extension);
     const name = files.file.name.split('.')[0];
     // console.log('name:', name);
-    const filePath =`${__dirname}/images/${name}.`+extension;
+    const filePath = `${__dirname}/images/${name}.` + extension;
     // console.log('filePath:', filePath);
 
     // const file = files.file;
-    files.file.mv(`${__dirname}/images/${name}.`+extension, (err) => {
+    files.file.mv(`${__dirname}/images/${name}.` + extension, (err) => {
       if (err) {
         return res.status(500).send(err);
       }
@@ -108,32 +115,34 @@ const uploadLocalImg = async (files)=>{
 };
 
 
-const uploadStream = async (files) =>{
+const uploadStream = async (files) => {
   const blobServiceClient = await BlobServiceClient
-      .fromConnectionString(process.env.AZURE_STORAGE_CONNECTION_STRING);
+    .fromConnectionString(process.env.AZURE_STORAGE_CONNECTION_STRING);
 
   const containerName = blobServiceClient
-      .getContainerClient('imagess');
+    .getContainerClient('imagess');
 
   const containerClient = await blobServiceClient
-      .getContainerClient(containerName.containerName);
+    .getContainerClient(containerName.containerName);
 
   // console.log('files', files);
 
-  const blobNames=[];
-  files.file.forEach(async (file)=>{
+  const blobNames = [];
+  files.file.forEach(async (file) => {
     const extension = file.mimetype.split('/')[1];
     // console.log('file.mimetype:', file.mimetype);
 
     const name = file.name.split('.')[0];
-    const blobName = name + new Date().getTime()+ '.' +extension;
-    const filePath =`${__dirname}/images/${name}.`+extension;
+    const blobName = name + new Date().getTime() + '.' + extension;
+    const filePath = `${__dirname}/images/${name}.` + extension;
 
     // console.log('blobName: ', blobName);
 
     const blockBlobClient = containerClient.getBlockBlobClient(blobName);
-    const uploadBlobResponse=await blockBlobClient.uploadFile(filePath);
-    await blockBlobClient.setHTTPHeaders({blobContentType: file.mimetype});
+    const uploadBlobResponse = await blockBlobClient.uploadFile(filePath);
+    await blockBlobClient.setHTTPHeaders({
+      blobContentType: file.mimetype
+    });
     console.log(`Upload block blob ${blobName} successfully`, uploadBlobResponse.requestId);
     blobNames.push(blobName);
   });
@@ -147,32 +156,36 @@ const uploadStream = async (files) =>{
 };
 
 
-const uploadAny = async (blobName, type)=>{
+const uploadAny = async (blobName, type) => {
   // console.log('blobName: ', blobName);
   const blobServiceClient = BlobServiceClient
-      .fromConnectionString(process.env.AZURE_STORAGE_CONNECTION_STRING);
+    .fromConnectionString(process.env.AZURE_STORAGE_CONNECTION_STRING);
 
   const containerName = blobServiceClient
-      .getContainerClient('imagess');
+    .getContainerClient('imagess');
 
   const blobService = azure.createBlobService();
 
   // console.log("type.split('/')[0]: ", type.split('/')[0]);
   // console.log('containerName.containerName: ', containerName.containerName);
-  fs.createReadStream(__dirname+'/'+type.split('/')[0]+'/'+blobName)
-      .pipe(blobService
-          .createWriteStreamToBlockBlob(containerName.containerName,
-              blobName, {blockIdPrefix: 'block',
-                contentSettings: {contentType: type}}));
-  return 'https://tumblrstorage.blob.core.windows.net/imagess/'+blobName;
+  fs.createReadStream(__dirname + '/' + type.split('/')[0] + '/' + blobName)
+    .pipe(blobService
+      .createWriteStreamToBlockBlob(containerName.containerName,
+        blobName, {
+          blockIdPrefix: 'block',
+          contentSettings: {
+            contentType: type
+          }
+        }));
+  return 'https://tumblrstorage.blob.core.windows.net/imagess/' + blobName;
 };
 
-const uploadImgBase = async (files) =>{
-  const blobUrls=[];
+const uploadImgBase = async (files) => {
+  const blobUrls = [];
   // console.log(files);
 
   if (files.length <= 10) {
-    files.forEach(async (file)=>{
+    files.forEach(async (file) => {
       // convert image from base64 to original image
       console.log('file: ', file.substr(0, 26));
       const match=file.match(/^data:([A-Za-z1-9-+\/]+);base64,(.+)$/);
@@ -185,30 +198,30 @@ const uploadImgBase = async (files) =>{
 
       response.type = match[1];
       // console.log('response.type: ', response.type);
-      response.data= Buffer.from(match[2], 'base64');
+      response.data = Buffer.from(match[2], 'base64');
       const decodedImg = response;
       const imageBuffer = decodedImg.data;
       const type = decodedImg.type; // mimetype
       // const extension = mime.extension(type);
       const uploadDate = new Date().toISOString().replace(/:/g, '-');
-      const blobName = type.split('/')[0]+ uploadDate + '.'+ type.split('/')[1];
+      const blobName = type.split('/')[0] + uploadDate + '.' + type.split('/')[1];
       // console.log('blobName base64 func.: ', blobName);
 
       try {
-        fs.writeFileSync(__dirname+'/'+type.split('/')[0]+'/' + blobName,
-            imageBuffer, 'utf8');
+        fs.writeFileSync(__dirname + '/' + type.split('/')[0] + '/' + blobName,
+          imageBuffer, 'utf8');
         // console.log('upload base64 locally successfully');
       } catch (e) {
         console.log(e);
       }
 
-      blob=await uploadAny(blobName, type);
+      blob = await uploadAny(blobName, type);
       blobUrls.push(blob);
     });
   } else {
     // convert image from base64 to original image
-    console.log('files: ', files.substr(-20,-1).match((/^data:([A-Za-z1-9-+\/]+);base64,(.+)$/)));
-    const match=files.match(/^data:([A-Za-z1-9-+\/]+);base64,(.+)$/);
+    console.log('files: ', files.substr(-20, -1).match((/^data:([A-Za-z1-9-+\/]+);base64,(.+)$/)));
+    const match = files.match(/^data:([A-Za-z1-9-+\/]+);base64,(.+)$/);
     const response = {};
     // console.log('match: ', match);
 
@@ -217,24 +230,24 @@ const uploadImgBase = async (files) =>{
     }
 
     response.type = match[1];
-    response.data= Buffer.from(match[2], 'base64');
+    response.data = Buffer.from(match[2], 'base64');
     const decodedImg = response;
     const imageBuffer = decodedImg.data;
     const type = decodedImg.type; // mimetype
     // const extension = mime.extension(type);
     const uploadDate = new Date().toISOString().replace(/:/g, '-');
-    const blobName = type.split('/')[0]+ uploadDate + '.'+ type.split('/')[1];
-    console.log('imageBuffer: ', imageBuffer.byteLength); 
+    const blobName = type.split('/')[0] + uploadDate + '.' + type.split('/')[1];
+    console.log('imageBuffer: ', imageBuffer.byteLength);
 
     try {
-      fs.writeFileSync(__dirname+'/'+type.split('/')[0]+'/' + blobName,
-          imageBuffer, 'utf8');
+      fs.writeFileSync(__dirname + '/' + type.split('/')[0] + '/' + blobName,
+        imageBuffer, 'utf8');
       // console.log('upload base64 locally successfully');
     } catch (e) {
       console.log(e);
     }
 
-    blob=await uploadAny(blobName, type);
+    blob = await uploadAny(blobName, type);
     blobUrls.push(blob);
   }
 
@@ -244,27 +257,27 @@ const uploadImgBase = async (files) =>{
   // check this link: https://www.py4u.net/discuss/1293154
 };
 
-const uploadVideo=async (files) =>{
+const uploadVideo = async (files) => {
   let match = files.replace(/^data:(.*?);base64,/, ""); // <--- make it any type
-    match= files.replace(/ /g, '+'); // <--- this is important
+  match = files.replace(/ /g, '+'); // <--- this is important
 }
 
-const uploadImgg = async () =>{
+const uploadImgg = async () => {
   const blobServiceClient = await BlobServiceClient
-      .fromConnectionString(process.env.AZURE_STORAGE_CONNECTION_STRING);
+    .fromConnectionString(process.env.AZURE_STORAGE_CONNECTION_STRING);
 
   const containerName = blobServiceClient
-      .getContainerClient('imagess');
+    .getContainerClient('imagess');
 
   // console.log('containerName', containerName.containerName);
 
   const containerClient = await blobServiceClient
-      .getContainerClient(containerName.containerName);
+    .getContainerClient(containerName.containerName);
 
   // console.log('containerClient', containerClient);
 
   const content = 'Hello Rema!';
-  const blobName = 'newblob' + new Date().getTime()+'.txt';
+  const blobName = 'newblob' + new Date().getTime() + '.txt';
   const blockBlobClient = containerClient.getBlockBlobClient(blobName);
   // console.log('blockBlobClient: ', blockBlobClient);
   const uploadBlobResponse = await blockBlobClient.upload(content, content.length);
@@ -276,7 +289,7 @@ const uploadImgg = async () =>{
   for await (const blob of containerClient.listBlobsFlat()) {
     console.log('\t', blob.name);
   }
-  return 'https://tumblrstorage.blob.core.windows.net/imagess/'+blobName;
+  return 'https://tumblrstorage.blob.core.windows.net/imagess/' + blobName;
 };
 
 /* ----------- <---> Random Post <---> ------ */ // *** <===> Done <===>  *** //
@@ -289,14 +302,16 @@ const uploadImgg = async () =>{
  */
 
 const retrieveRandomPosts = async () => {
-  const randomPosts = await schema.Posts.find({isDeleted: false});
-  randomPostsLim =[];
-  let i =0;
+  const randomPosts = await schema.Posts.find({
+    isDeleted: false
+  });
+  randomPostsLim = [];
+  let i = 0;
   while (i < 10) {
-    randomNumb= Math.floor(Math.random() * randomPosts.length-10);
+    randomNumb = Math.floor(Math.random() * randomPosts.length - 10);
     if (randomPosts[randomNumb] != null) {
       randomPostsLim.push(randomPosts[randomNumb]);
-      i+=1;
+      i += 1;
     }
   }
   return randomPostsLim;
@@ -316,42 +331,42 @@ const retrieveTrendingPosts = async () => {
   //     .find(); // {isDeleted: false} {_id: '61ae667d8b4d5620ce937992'}
 
   // postId:  new ObjectId("61975a0d6181e2ed7c11aa3e")
-  const maxLikes= await schema.notes.find();
-  const postss= await schema.Posts.find();
-  maxNotes=[0, 0, 0, 0, 0, 0, 0, 0, 0, 0]; // 10
-  trendingPostsLim =[];
+  const maxLikes = await schema.notes.find();
+  const postss = await schema.Posts.find();
+  maxNotes = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]; // 10
+  trendingPostsLim = [];
   BreakException = {};
-  let i=0;
+  let i = 0;
 
   maxLikes.forEach(async (data) => {
-    if (data.reblogs != null){
-      countReblogs=data.reblogs.length;
+    if (data.reblogs != null) {
+      countReblogs = data.reblogs.length;
     } else {
-      countReblogs=0;
+      countReblogs = 0;
     }
 
-    if (data.comments != null){
-      countComm=data.comments.length;
+    if (data.comments != null) {
+      countComm = data.comments.length;
     } else {
-      countComm=0;
+      countComm = 0;
     }
 
-    if (data.likes != null){
-      countLike=data.likes.length;
+    if (data.likes != null) {
+      countLike = data.likes.length;
     } else {
-      countLike=0;
+      countLike = 0;
     }
     const notesCount = countLike + countComm + countReblogs;
     console.log('notesCount1: ', notesCount);
 
-    if (notesCount > maxNotes[i]){
+    if (notesCount > maxNotes[i]) {
       console.log('notesCount2: ', notesCount);
-      maxNotes[i]=notesCount;
+      maxNotes[i] = notesCount;
       try {
         postss.forEach((dataPosts) => {
-          if (dataPosts.notesId == data._id){
+          if (dataPosts.notesId == data._id) {
             console.log('dataPosts.notesId: ', dataPosts.notesId);
-            trendingPostsLim[i] =dataPosts;
+            trendingPostsLim[i] = dataPosts;
             throw BreakException;
           }
         });
@@ -360,13 +375,13 @@ const retrieveTrendingPosts = async () => {
         if (e !== BreakException) throw e;
       }
 
-      i=i+1;
+      i = i + 1;
       console.log('trendingPostsLim: ', trendingPostsLim, 'i: ', i);
     }
   });
   console.log('maxNotes: ', maxNotes);
   let result = [];
-  result={
+  result = {
     countNotesEachPost: maxNotes,
     trendingPostsLim: trendingPostsLim,
   };
@@ -430,7 +445,6 @@ const retrieveTrendingPosts = async () => {
 
 const createPost = async (blogId, postHtml, type, state, tags) => {
   try {
-    // var ret = ['', ''];
     ret = '';
     const existingBlog = await schema.blogs.findOne({
       _id: blogId,
@@ -458,8 +472,6 @@ const createPost = async (blogId, postHtml, type, state, tags) => {
       console.log(existingBlog);
       ret = 'Post Created Successfully';
       console.log(newPost);
-      // ret[1] = newPost._id;
-      // console.log("req url: ", url)
       return ret;
     } else {
       ret = 'Blog Not Found';
@@ -471,6 +483,8 @@ const createPost = async (blogId, postHtml, type, state, tags) => {
   };
 };
 
+/* ----------- <---> Show Post <---> ---- */ // *** <===> Done <===>  *** //
+
 /**
  * @function
  * @name showPost
@@ -480,8 +494,6 @@ const createPost = async (blogId, postHtml, type, state, tags) => {
  * @returns {Object} the blog post content in the form of html string.
  */
 
-/* ----------- <---> Show Post <---> ---- */ // *** <===> Done <===>  *** //
-// Assumption: Edit Post Function Just Updates ( postHtml )
 const showPost = async (url, postId) => {
   try {
     ret = {
@@ -491,9 +503,7 @@ const showPost = async (url, postId) => {
     const existingPost = await schema.Posts.findOne({
       _id: postId,
     });
-    if (existingPost) {
-      // existingPost.postUrl = url;
-      // existingPost.save();
+    if (existingPost && existingPost.isDeleted == false) {
       ret.msg = 'Post Returned Successfully';
       ret.post = existingPost;
       return ret;
@@ -520,7 +530,6 @@ const showPost = async (url, postId) => {
  * @returns {string} The id of the comment.
  */
 
-// const makeComment = async (req, res) => {
 const makeComment = async (blogId, postId, text) => {
   try {
     var ret = '';
@@ -530,24 +539,20 @@ const makeComment = async (blogId, postId, text) => {
     const existingPost = await schema.Posts.findOne({
       _id: postId
     });
-    
-    if (existingBlog && existingBlog.isDeleted == false) {
+
+    if (existingBlog && existingBlog.isDeleted == false && existingBlog.isPrimary == true) {
       if (existingPost && existingPost.isDeleted == false) {
         const notesId = existingPost.notesId;
-        const existingNotes = await schema.notes.findOne({_id: notesId});
-        //const commentingBlogTitle = existingBlog.title;
-        //const commentingBlogId = blogId;
+        const existingNotes = await schema.notes.findOne({
+          _id: notesId
+        });
         if (existingNotes && existingNotes.isDeleted == false) {
           const comment = {
             blogId,
             text
           };
-          const lenBefore = existingNotes.comments.length;
           existingNotes.comments.push(comment);
           existingNotes.save();
-          const commentsArrayAfter = existingNotes.comments;
-          const commentObj = commentsArrayAfter[lenBefore];
-          const commentId = commentObj._id;
         } else {
           ret = 'Notes Not Found';
           return ret;
@@ -640,25 +645,20 @@ const loopObjAndCheck = (arr, element) => {
  * @returns {string} .
  */
 
-const likePress = async (blogId, postId, userEmail) => {
+const likePress = async (blogId, postId) => {
   try {
-    ret = '';
-    const existingBlog = await schema.blogs.findOne({
-      _id: blogId
-    });
-    const existingPost = await schema.Posts.findOne({
-      _id: postId
-    });
-    const existingUser = await schema.users.findOne({email: userEmail});
-
-    if (existingBlog && existingBlog.isDeleted == false) {
+    var ret = '';
+    const existingBlog = await schema.blogs.findOne({_id: blogId});
+    const existingPost = await schema.Posts.findOne({_id: postId});
+    if (existingBlog && existingBlog.isDeleted == false && existingBlog.isPrimary == true) {
+      userEmail = existingBlog.userEmail;
+      const existingUser = await schema.users.findOne({email: userEmail});
       if (existingPost && existingPost.isDeleted == false) {
         const notesId = existingPost.notesId;
         const existingNotes = await schema.notes.findOne({_id: notesId});
         if (existingNotes && existingNotes.isDeleted == false) {
-          // likingBlogId = blogId;
           const like = {
-            blogId,
+            blogId
           };
           const likesArray = existingNotes.likes;
           const existAndNotDeleted = loopLikeAndCheck(likesArray, blogId)[0];
@@ -669,22 +669,29 @@ const likePress = async (blogId, postId, userEmail) => {
             likesArray[pos].isDeleted = true;
             existingNotes.save();
             ret = 'Post Unliked Successfully';
-            existingUser.likes_posts_id.pull(postId);
-            existingUser.save();
+            if(existingUser) {
+              existingUser.likes_posts_id.pull(postId);
+              existingUser.save();
+            }
             return ret;
           } else if (existAndDeleted) {
             likesArray[pos].isDeleted = false;
             existingNotes.save();
             ret = 'Post Liked Successfully';
-            existingUser.likes_posts_id.push(postId);
-            existingUser.save();
+            if(existingUser) {
+              existingUser.likes_posts_id.push(postId);
+              existingUser.save();
+            }
+        
             return ret;
           } else {
             existingNotes.likes.push(like);
             existingNotes.save();
             ret = 'Post Liked Successfully';
-            existingUser.likes_posts_id.push(postId);
-            existingUser.save();
+            if(existingUser) {
+              existingUser.likes_posts_id.push(postId);
+              existingUser.save();
+            }
             return ret;
           }
         } else {
@@ -727,23 +734,20 @@ const reblogPost = async (blogId, postId, text) => {
     const existingPost = await schema.Posts.findOne({
       _id: postId,
     });
-    
+
     if (existingBlog && existingBlog.isDeleted == false) {
       if (existingPost && existingPost.isDeleted == false) {
         const notesId = existingPost.notesId;
-        const existingNotes = await schema.notes.findOne({_id: notesId});
-        //const rebloggingId = blogId;
+        const existingNotes = await schema.notes.findOne({
+          _id: notesId
+        });
         if (existingNotes && existingNotes.isDeleted == false) {
           const reblog = {
             blogId,
             text,
           };
-          const lenBefore = existingNotes.reblogs.length;
           existingNotes.reblogs.push(reblog);
           existingNotes.save();
-          const reblogsArrayAfter = existingNotes.reblogs;
-          const reblogObj = reblogsArrayAfter[lenBefore];
-          const reblogId = reblogObj._id;
         } else {
           ret = 'Notes Not Found';
           return ret;
@@ -879,7 +883,6 @@ const removeReblog = async (postId, reblogId) => {
 
 const getNotes = async (notesId) => {
   try {
-    // var ret = ['',[]];
     ret = {
       msg: '',
       notes: [],
@@ -895,30 +898,38 @@ const getNotes = async (notesId) => {
       const likesArray = existingNotes.likes;
       const commentsArray = existingNotes.comments;
       const reblogsArray = existingNotes.reblogs;
-      const likesCount = likesArray.length;
-      const reblogsCount = reblogsArray.length;
-      const commentsCount = commentsArray.length;
+      likesCount = 0;
+      reblogsCount = 0;
+      commentsCount = 0;
+      for (let i = 0; i < likesArray.length; i++) {
+        if (likesArray[i].isDeleted == false) {
+          likesCount++;
+        }
+      }
+      for (let i = 0; i < commentsArray.length; i++) {
+        if (commentsArray[i].isDeleted == false) {
+          commentsCount++;
+        }
+      }
+      for (let i = 0; i < reblogsArray.length; i++) {
+        if (commentsArray[i].isDeleted == false) {
+          reblogsCount++;
+        }
+      }
       const notesCount = likesCount + commentsCount + reblogsCount;
       countsArray = [likesCount, reblogsCount, notesCount];
-      
-      // const notes = [likesArray,
-      //   commentsArray, reblogsArray, countsArray]; // array of arrays
+
       const notesArray = [];
       for (let i = 0; i < notesCount; i++) {
         notesArray.push(likesArray[i]);
         notesArray.push(commentsArray[i]);
         notesArray.push(reblogsArray[i]);
       }
-      notesArray.sort(function(x, y) {
+      notesArray.sort(function (x, y) {
         return y._id.getTimestamp() - x._id.getTimestamp();
       });
       const notes = [];
       for (let i = 0; i < notesCount; i++) {
-        // blog = await schema.blogs.findOne({_id: blogId});
-        // obj = {
-        // note: notesArray[i],
-        // blogThatMadeNote: blog
-        // }
         notes.push(notesArray[i]);
       }
 
@@ -952,7 +963,6 @@ const getNotes = async (notesId) => {
 
 const getDashboard = async (userEmail) => {
   try {
-    // var ret = ['', []];
     ret = {
       msg: '',
       user: {},
@@ -960,13 +970,6 @@ const getDashboard = async (userEmail) => {
       postsToShow: [],
     };
     postsToShow = [];
-    // postsToShow = [
-    //   {
-    //     post: {},
-    //     notes: []
-    //   }
-    // ];
-    // const existingUser = await schema.users.findOne({_id: userId});
     const existingUser = await schema.users.findOne({
       email: userEmail,
     });
@@ -977,20 +980,16 @@ const getDashboard = async (userEmail) => {
       const existingBlog = await schema.blogs.findOne({
         _id: blogId,
       });
-      if (existingBlog && existingBlog.isDeleted == false) {
+      // Getting posts of primary blog
+      if (existingBlog && existingBlog.isDeleted == false && existingBlog.isBlockedFromPrimary == false) {
         ret.blog = existingBlog;
         const postsArray = existingBlog.postsIds;
         for (let i = 0; i < postsArray.length; i++) {
           const existingPost = await schema.Posts.findOne({
             _id: postsArray[i],
           });
-          if (existingPost && existingPost.isDeleted == false) {
-            // const obj = {
-            //   post: existingPost,
-            //   notes: getNotes(existingPost._id)
-            // }
+          if (existingPost && existingPost.isDeleted == false && existingPost.isReported == false) {
             postsToShow.push(existingPost);
-            // postsToShow.push(obj);
           }
         }
       } else {
@@ -1003,32 +1002,22 @@ const getDashboard = async (userEmail) => {
         const existingFoBlog = await schema.blogs.findOne({
           _id: followingBlogsArray[i],
         });
-        if (existingFoBlog && existingFoBlog.isDeleted == false) {
+        if (existingFoBlog && existingFoBlog.isDeleted == false && existingFoBlog.isBlockedFromPrimary == false) {
           const foPostsArray = existingFoBlog.postsIds;
           for (let j = 0; j < foPostsArray.length; j++) {
             const existingFoPost = await schema.Posts.findOne({
               _id: foPostsArray[j],
             });
-            if (existingFoPost && existingFoPost.isDeleted == false) {
+            if (existingFoPost && existingFoPost.isDeleted == false && existingFoPost.isReported == false) {
               postsToShow.push(existingFoPost);
-              // const obj = {
-              //   post: existingFoPost,
-              //   notes: getNotes(existingFoPost._id)
-              // }
-              // postsToShow.push(obj);
             }
           }
-        } else {
-          // ret.msg = 'Following Blog Not Found';
-          // return ret;
-        }
+        } 
       }
-      postsToShow.sort(function(x, y) {
+      postsToShow.sort(function (x, y) {
         return y._id.getTimestamp() - x._id.getTimestamp();
       });
       ret.msg = 'Dashboard Got Successfully';
-      // ret.user = existingUser;
-      // ret.blog = existingBlog;
       ret.postsToShow = postsToShow;
       return ret;
     } else {
@@ -1055,7 +1044,6 @@ const getDashboard = async (userEmail) => {
 
 const getBlogPosts = async (blogId) => {
   try {
-    // var ret = ['', []];
     ret = {
       msg: '',
       blog: {},
@@ -1065,13 +1053,13 @@ const getBlogPosts = async (blogId) => {
     const existingBlog = await schema.blogs.findOne({
       _id: blogId,
     });
-    if (existingBlog) {
+    if (existingBlog && existingBlog.isDeleted == false) {
       const postsArray = existingBlog.postsIds;
       for (let i = 0; i < postsArray.length; i++) {
         const existingPost = await schema.Posts.findOne({
           _id: postsArray[i],
         });
-        if (existingPost) {
+        if (existingPost && existingPost.isDeleted == false) {
           postsToShow.push(existingPost);
         }
       }
@@ -1079,7 +1067,7 @@ const getBlogPosts = async (blogId) => {
       ret.msg = 'Blog Not Found';
       return ret;
     }
-    postsToShow.sort(function(x, y) {
+    postsToShow.sort(function (x, y) {
       return y._id.getTimestamp() - x._id.getTimestamp();
     });
     ret.msg = 'Blog Posts Got Successfully';
@@ -1111,19 +1099,21 @@ const deletePost = async (postId) => {
     });
     if (existingPost && existingPost.isDeleted == false) {
       existingPost.isDeleted = true;
-      existingNotes = await schema.notes.findOne({_id: existingPost.notesId});
+      existingNotes = await schema.notes.findOne({
+        _id: existingPost.notesId
+      });
       if (existingNotes && existingNotes.isDeleted == false) {
         existingNotes.isDeleted = true;
         existingNotes.save();
       }
       existingPost.save();
-      const existingBlog = await schema.blogs.findOne({_id: existingPost.blogId});
+      const existingBlog = await schema.blogs.findOne({
+        _id: existingPost.blogId
+      });
       if (existingBlog && existingBlog.isDeleted == false) {
         existingBlog.postsIds.pull(existingPost._id);
         existingBlog.save();
       }
-      console.log(existingPost);
-      console.log(existingBlog);
       ret = 'Post Deleted Successfully';
       return ret;
     } else {
@@ -1158,7 +1148,6 @@ const editPost = async (postId, postHtml, tags) => {
       existingPost.tags = tags;
       existingPost.save();
       ret = 'Post Edited Successfully';
-      // console.log(existingPost)
       return ret;
     } else {
       ret = 'Post Not Found';
@@ -1183,7 +1172,7 @@ const editPost = async (postId, postHtml, tags) => {
 
 const reportPost = async (postId) => {
   try {
-    ret ='';
+    ret = '';
     const existingPost = await schema.Posts.findOne({
       _id: postId,
     });
@@ -1202,30 +1191,6 @@ const reportPost = async (postId) => {
   };
 };
 
-/* ----------- <---> Share Post <---> ----------- */ // *** <===> Done <===>  *** //
-
-/**
- * @function
- * @name sharePost
- * @description Shares a Post.
- * @param {string} postId - Id of the post to share.
- *
- * @returns {string} .
- */
-
-const sharePost = async (postId) => {
-  try {
-    ret = '';
-    const existingPost = await schema.Posts.findOne({
-      _id: postId,
-    });
-    if (existingPost) {}
-  } catch (error) {
-    ret = 'Error In Share Post Function';
-    return ret;
-  };
-};
-
 /* ----------- <---> Activity Feed <---> ----------- */ // *** <===> Done <===>  *** //
 
 /**
@@ -1239,41 +1204,100 @@ const sharePost = async (postId) => {
 
 const activityFeed = async (blogId) => {
   try {
-    ret = '';
-    const existingBlog = await schema.blogs.findOne({_id: blogId});
-    // ret = {
-    //   msg: '',
-    //   daily: [],
-    //   hourly: [],
-    //   lastDay: [],
-    //   lastThreeDays: [],
-    //   lastWeek: []
-    // };
-    // const existingBlog = await schema.blogs.findOne({
-    //   _id: blogId
-    
-    //var mydate = new Date();
-    //console.log(mydate.getDate());
-    console.log('off');
-    // if (existingBlog && existingBlog.isDeleted == false) {
-    //   for (let i=0; i<existingBlog.postsIds.length; i++) {
-    //     const existingPost = await schema.Posts.findOne({_id: existingBlog.postsIds[i]});
-    //     if (existingPost && existingPost.isDeleted == false) {
-    //       existingNotes = await schema.notes.findOne({_id: existingPost.notesId});
-    //       if (existingNotes && existingNotes.isDeleted == false) {
-    //         notesArray = getNotes(existingNotes._id);
-            //console.log(now.isoWeek())
-            // for (let j=0; j<notesArray.length; j++) {
-            //   //if(notesArray[j]._id.getTimestamp().isoWeek() == now.isoWeek())
-            // }
-      //     }
-      //   }
-      // }
-    //}
-    ret = 'Activity Feed Got Successfullly';
+    const existingBlog = await schema.blogs.findOne({
+      _id: blogId
+    });
+    ret = {
+      msg: '',
+      daily: [],
+      hourly: [],
+      lastDay: [],
+      lastThreeDays: [],
+      lastWeek: []
+    };
+    daily = []
+    hourly = [],
+      lastDay = [],
+      lastThreeDays = [],
+      lastWeek = []
+
+    var mydate = new Date();
+
+    if (existingBlog && existingBlog.isDeleted == false) {
+      for (let i = 0; i < existingBlog.postsIds.length; i++) {
+        const existingPost = await schema.Posts.findOne({
+          _id: existingBlog.postsIds[i]
+        });
+        if (existingPost && existingPost.isDeleted == false) {
+          existingNotes = await schema.notes.findOne({
+            _id: existingPost.notesId
+          });
+          if (existingNotes && existingNotes.isDeleted == false) {
+            notesObj = await getNotes(existingNotes._id);
+            notesArray = notesObj.notes;
+            for (let j = 0; j < notesArray.length; j++) {
+              idDay = notesArray[j]._id.getTimestamp().getDate();
+              if (notesArray[j]._id.getTimestamp().getHours() == mydate.getHours()) {
+                hourly.push(notesArray[j]);
+                hourly.push({
+                  'postId': existingPost._id
+                });
+              }
+              if (idDay == mydate.getDate()) {
+                daily.push(notesArray[j]);
+                daily.push({
+                  'postId': existingPost._id
+                });
+              }
+              if (idDay == mydate.getDate() - 1) {
+                lastDay.push(notesArray[j]);
+                lastDay.push({
+                  'postId': existingPost._id
+                });
+              }
+              if (idDay == mydate.getDate() - 1 ||
+                idDay == mydate.getDate() - 2 ||
+                idDay == mydate.getDate() - 3) {
+                lastThreeDays.push(notesArray[j]);
+                lastThreeDays.push({
+                  'postId': existingPost._id
+                });
+              }
+              if (idDay == mydate.getDate() - 1 ||
+                idDay == mydate.getDate() - 2 ||
+                idDay == mydate.getDate() - 3 ||
+                idDay == mydate.getDate() - 4 ||
+                idDay == mydate.getDate() - 5 ||
+                idDay == mydate.getDate() - 6 ||
+                idDay == mydate.getDate() - 7) {
+                lastWeek.push(notesArray[j]);
+                lastWeek.push({
+                  'postId': existingPost._id
+                });
+              }
+            }
+          } else {
+            ret.msg = 'Notes Not Found';
+            return ret;
+          }
+        } else {
+          ret.msg = 'Post Not Found';
+          return ret;
+        }
+      }
+    } else {
+      ret.msg = 'Blog Not Found';
+      return ret;
+    }
+    ret.msg = 'Activity Feed Got Successfully';
+    ret.hourly = hourly;
+    ret.daily = daily;
+    ret.lastDay = lastDay;
+    ret.lastThreeDays = lastThreeDays;
+    ret.lastWeek = lastWeek;
     return ret;
   } catch (error) {
-    ret = 'Error In Activity Feed Function';
+    ret.msg = 'Error In Activity Feed Function';
     return ret;
   };
 };
@@ -1293,7 +1317,6 @@ module.exports = {
   editPost,
   deletePost,
   reportPost,
-  sharePost,
   activityFeed,
   getNotes,
   getDashboard,

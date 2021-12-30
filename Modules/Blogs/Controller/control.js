@@ -7,6 +7,7 @@ const {unfollowBlog}=require('../../../Modules/Users/Controller/unfollowBlog');
 
 
 /* ==================== /// <==> Blog Functions <==> /// ==================== */
+/* -------- <---> Block Blog <---> ------- */ // *** <===> Done <===>  *** //
 
 /**
  *
@@ -29,8 +30,13 @@ const blockBlog = async (blogId, blockedBlogId) => {
       const blog = await schema.blogs.findOne(
           {$and: [{_id: blogId}, {isDeleted: false}]});
       if (blog) {
+        console.log("block");
+
         unfollowBlog(blog.userEmail, blockedBlogId);
-        blog.blockedBlogs.push(blockedBlogId);
+        let ids=blog.blockedBlogs;
+        ids.push(blockedBlogId);
+        ids=Array.from(new Set(ids));
+        blog.blockedBlogs=ids;
         blog.save();
         return blockedBlog;
       }
@@ -40,7 +46,7 @@ const blockBlog = async (blogId, blockedBlogId) => {
     console.log(error.message);
   }
 };
-/* -------- <---> Unfollow Blog <---> ------- */ // *** <===> Done <===>  *** //
+/* -------- <---> Unblock Blog <---> ------- */ // *** <===> Done <===>  *** //
 
 
 /**
@@ -76,21 +82,25 @@ const unblockBlog = async (blogId, unblockedBlogId) => {
 };
 
 
+
 /**
  *
  * @function
  * @name editBlog
  * @description    -  It retrieves a blog given its id
- * @param {String} blogId  - id of the blog
- * @param {String} title
+ * @param {String} blogId 
  * @param {String} accent
- * @param {String} name
- * @param {String} password
+ * @param {String} name 
  * @param {String} headerImage
- * @param {String} background
  * @param {String} avatar
+ * @param {Boolean} showAvatar
+ * @param {String} title
+ * @param {String} titleColor
+ * @param {String} background 
+ * @param {String} password 
  * @param {String} theme
- * @param {String} description
+ * @param {String} description 
+ * @param {Boolean} showDescription
  * @return {Object} - A blog object
  */
 
@@ -108,12 +118,22 @@ const editBlog = async (req) => {
     const password = req.body.password;
     const theme = req.body.theme;
     const description = req.body.description;
+    const showDescription = req.body.showDescription;
+    const showAvatar=req.body.showAvatar;
     let message = 'OK';
     const blog = await schema.blogs.findOne({
       $and: [{_id: blogId},
         {isDeleted: false}],
     });
     if (blog) {
+      if(blog.showAvatar!=showAvatar)
+      {
+        blog.showAvatar=!blog.showAvatar;
+      }
+      if(blog.showDescription!=showDescription)
+      {
+        blog.showDescription=!blog.showDescription;
+      }
       if (password) {
         await schema.blogs.findOneAndUpdate({
           $and: [{_id: blogId},
