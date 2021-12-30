@@ -22,12 +22,11 @@ const socket = async (app) => {
 
         io.emit('test', 'Connnection Is Done');
 
-        socket.on('join-room', (room, cb) => {
+        socket.on('join-room', (room) => {
             socket.emit('joined-room', 'Join Room Success');
             socket.emit('test3', 'Tessssssssssssssssssssssssst3');
             const userId = userServices.getIdFromToken(room);
             socket.join(userId)
-            cb(`joined ${room}`)
         });
 
 
