@@ -193,7 +193,7 @@ const createPrimaryBlog = async (email, name) => {
     let ids = user.blogsId;
     ids.push(blog.id);
     const userData = await schema.users.updateOne({ email }, { blogsId: ids });
-    
+
     const Data = await schema.users.findOne({ email });
 
     return 'Blog Created';
@@ -327,6 +327,25 @@ const getIdFromToken = async (token) => {
   return oldUser.id;
 };
 
+
+
+/* ----------- <---> get Userid From Blog Name <---> --------- */ // *** <===> Done <===>  *** //
+/**
+ * This Function Used To get User Id From Blog Name.
+ *
+ * @param {string} blogName - blog name
+ * @returns {string} user Id.
+ */
+
+
+const getUserIdFromBlogName = async (name) => {
+  const oldBlog = await schema.blogs.findOne({ name, isDeleted: false });
+
+  const email = oldBlog.userEmail;
+  const oldUser = await schema.users.findOne({ email });
+  return oldUser.id;
+};
+
 /* =============== /// <==> Export User Functions Services <==> /// =============== */
 module.exports = {
   verifyMail,
@@ -341,6 +360,7 @@ module.exports = {
   checkPostId,
   getUserIdFromPostId,
   getBlogIdFromPostId,
-  getIdFromToken
+  getIdFromToken,
+  getUserIdFromBlogName
 };
 /* =========== /// <==> End <==> ===========*/

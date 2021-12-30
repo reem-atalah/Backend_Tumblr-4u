@@ -93,6 +93,22 @@ const socket = async (app) => {
 
             socket.to(room).emit('update-notification-list', data)
         });
+
+        socket.on('send', async (input) => {
+
+            const { sendBlogName,receiveBlogName, message, token } = input;
+            const sendUserId = await userServices.getIdFromToken(token);
+            const receiveUserId = await userServices.getUserIdFromBlogName(receiveBlogName);
+
+            await notificationFunction.addchat(message, sendUserId, receiveUserId, sendBlogName, receiveBlogName);
+            const data = await notificationFunction.getChat(sendBlogName,receiveBlogName);
+            console.log(data);
+
+            socket.to(sendUserId).emit('update-chat-list', data, receiveBlogName)
+            socket.to(receiveUserId).emit('update-chat-list', data, sendBlogName)
+
+        });
+
     });
 };
 /* =========== /// <==> End <==> ===========*/
