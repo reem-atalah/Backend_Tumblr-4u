@@ -38,7 +38,7 @@ const addNotification = async (postId, type) => {
             if (type == 'like' || type == 'reblog' || type == 'note')
                 content = `${blogName} ${type} your Post`
             else
-                content = `${blogName} follow you`
+                content = `${blogName} ${type} your Blog`
 
             const newNotification = new schema.notifications({
                 type,
