@@ -431,11 +431,6 @@ module.exports = {
   getBlogIdFromPostId,
   getIdFromToken,
   getUserIdFromBlogName,
-<<<<<<< HEAD
   createNewGoogleUser
-=======
-  isBlocked,
-  userUnblockBlog
->>>>>>> 2bca24d84925372c2d35a693725e46a1532fa208
 };
 /* =========== /// <==> End <==> ===========*/
