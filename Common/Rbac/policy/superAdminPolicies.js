@@ -21,6 +21,7 @@ const superAdminPolicies = [
   userEndPoints.createBlog,
   userEndPoints.deleteBlog,
   userEndPoints.deleteUser,
+  userEndPoints.retrieveUser,
   userEndPoints.getInterests,
   userEndPoints.updateColor,
   blogEndPoints.blockBlog,
