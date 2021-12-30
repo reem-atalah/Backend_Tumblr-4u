@@ -39,7 +39,7 @@ const login = async (req, res) => {
           process.env.KEY);
 
         // Return More Data At Login
-        const oldBlog = await schema.users.findOne({ name:oldUser.name })
+        const oldBlog = await schema.blogs.findOne({ userEmail:oldUser.email })
 
         res.status(StatusCodes.OK).json({
           'meta': {
