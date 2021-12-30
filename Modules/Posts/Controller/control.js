@@ -901,32 +901,45 @@ const getNotes = async (notesId) => {
       likesCount = 0;
       reblogsCount = 0;
       commentsCount = 0;
+      notesArray = [];
       for (let i = 0; i < likesArray.length; i++) {
         if (likesArray[i].isDeleted == false) {
           likesCount++;
+          notesArray.push(likesArray[i]);
         }
       }
       for (let i = 0; i < commentsArray.length; i++) {
         if (commentsArray[i].isDeleted == false) {
           commentsCount++;
+          notesArray.push(commentsArray[i]);
         }
       }
       for (let i = 0; i < reblogsArray.length; i++) {
         if (commentsArray[i].isDeleted == false) {
           reblogsCount++;
+          notesArray.push(reblogsArray[i]);
         }
       }
       const notesCount = likesCount + commentsCount + reblogsCount;
       countsArray = [likesCount, reblogsCount, notesCount];
 
-      const notesArray = [];
-      for (let i = 0; i < notesCount; i++) {
-        notesArray.push(likesArray[i]);
-        notesArray.push(commentsArray[i]);
-        notesArray.push(reblogsArray[i]);
-      }
+      
+      // for (let i = 0; i < notesCount; i++) {
+      //   if (likesArray[i].isDeleted == false) {
+      //     notesArray.push(likesArray[i]);
+      //   }
+      //   if (commentsArray[i].isDeleted == false) {
+      //     notesArray.push(commentsArray[i]);
+      //   }
+      //   if (commentsArray[i].isDeleted == false) {
+      //     notesArray.push(reblogsArray[i]);
+      //   }
+      // }
       notesArray.sort(function (x, y) {
-        return y._id.getTimestamp() - x._id.getTimestamp();
+        if(x && y) {
+          return y._id.getTimestamp() - x._id.getTimestamp();
+        }
+        
       });
       const notes = [];
       for (let i = 0; i < notesCount; i++) {
