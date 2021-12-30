@@ -247,6 +247,8 @@ router.post('/user/new/blog',
     });
   });
 
+  const VLDRQDB = validateRequest(userJoi.DeleteBlogValidations);
+const ISADB = isAuthorized(userEndPoints.deleteBlog);
 /* ----------- <---> Delete Blog <---> ----------- */
 
 router.post('/user/delete/blog',
