@@ -235,7 +235,7 @@ router.post('/user/new/blog',
         res.status(StatusCodes.BAD_REQUEST).json({
           'meta': {
             'status': 400,
-            'msg': 'NOT FOUND',
+           'msg': 'BAD REQUEST',
           },
 
           'res': {
