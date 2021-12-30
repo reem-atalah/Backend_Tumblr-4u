@@ -354,7 +354,31 @@ const getUserIdFromBlogName = async (name) => {
   const oldUser = await schema.users.findOne({ email });
   return oldUser.id;
 };
+/* ------ <---> Is Blocked <---> */ // *** <===> Done <===>  *** //
+/**
+ *
+ * @function
+ * @name isBlocked
+ * @description this function makes all blogs of a user unblock a blog
+ * @param {String} userEmail - The email of the user 
+ * @param {String} blogId - The id of the blog 
+ */
+const userUnblockBlog = async (userEmail, blogId) => {
+  try{
+  const blogs = schema.blogs.find({
+    $and: [{userEmail: userEmail},
+      {isDeleted: false}, {isVerified: true}, {blockedBlogs: blogId}],
+  });
 
+  (await blogs).forEach((blog)=>{
+    if (blog) {
+      unblockBlog(blog._id, blogId);
+    }
+  });
+} catch (error) {
+  console.log(error.message);
+}
+};
 /* =============== /// <==> Export User Functions Services <==> /// =============== */
 module.exports = {
   verifyMail,
@@ -370,6 +394,8 @@ module.exports = {
   getUserIdFromPostId,
   getBlogIdFromPostId,
   getIdFromToken,
-  getUserIdFromBlogName
+  getUserIdFromBlogName,
+  isBlocked,
+  userUnblockBlog
 };
 /* =========== /// <==> End <==> ===========*/
