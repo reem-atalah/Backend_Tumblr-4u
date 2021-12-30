@@ -361,7 +361,7 @@ const deleteBlog = async (userEmail, blogId) => {
 
 const getInterests = async (userEmail, interstArr) => {
   console.log(userEmail);
-  const user = await schema.users.findOneAndUpdate([{email: userEmail}],
+  const user = await schema.users.findOneAndUpdate({$and: [{email: userEmail}]},
       {followedTags: interstArr});
       console.log(user);
       return user;
