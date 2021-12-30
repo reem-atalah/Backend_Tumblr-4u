@@ -40,7 +40,6 @@ const adminPolicies = [
   postEndPoints.getDashboard,
   postEndPoints.getBlogPosts,
   postEndPoints.reportPost,
-  postEndPoints.sharePost,
   postEndPoints.activityFeed,
   postEndPoints.uploadeImg,
 ];
