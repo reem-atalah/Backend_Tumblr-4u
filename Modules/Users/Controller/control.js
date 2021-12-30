@@ -315,8 +315,8 @@ const deleteBlog = async (userEmail, blogId) => {
     if (!blog || !user) {
       return null;
     } else {
-      const users = await schema.users.find({$and: [{following_blogs: blogId},
-        {isDeleted: false}]});
+        const users = await schema.users.find({$and: [{following_blogs: blogId},
+        {isDeleted: false},{isVerified: true}]});
       const blogs = await schema.blogs.find({$and: [{blockedBlogs: blogId},
         {isDeleted: false}]});
 
