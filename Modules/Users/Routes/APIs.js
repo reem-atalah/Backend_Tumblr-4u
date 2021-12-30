@@ -137,7 +137,40 @@ router.post('/follow',
       }
     });
   });
+const VLDRQRU = validateRequest(userJoi.RetrieveUserValidations);
+const ISARU = isAuthorized(userEndPoints.retrieveUser);
 
+router.get('/user/:userId',
+    VLDRQRU,
+    ISARU,
+    (req, res) => {
+      userFunctions.retrieveUser(req.params.userId).then((user) => {
+        if (user){
+          res.status(StatusCodes.OK).json({
+            'meta': {
+              'status': 200,
+              'msg': 'OK',
+            },
+
+            'res': {
+              'message': 'User Retrieved Successfully',
+              'data': user,
+            },
+          });
+        } else {
+          res.status(StatusCodes.NOT_FOUND).json({
+            'meta': {
+              'status': 404,
+                 'msg': 'NOT FOUND',         
+                  },
+            'res': {
+              'error': 'User not found',
+              'data': '',
+            },
+          });
+        }
+      });
+    });
 /* ----------- <---> UnFollow <---> ----------- */
 
 const VLDRQUB = validateRequest(userJoi.UnfollowBlogValidations);
