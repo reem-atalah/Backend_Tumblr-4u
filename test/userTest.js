@@ -197,11 +197,11 @@ describe('User APIs', () => {
     });
   });
 
-    /*
-  ///////// <---------> ======== <---------> ///////// =====================>
-  ///////// <---------> Forget Password Mail <---------> ///////// ===========>
-  ///////// <---------> ======== <---------> ///////// =====================>
-  */
+  /*
+///////// <---------> ======== <---------> ///////// =====================>
+///////// <---------> Forget Password Mail <---------> ///////// ===========>
+///////// <---------> ======== <---------> ///////// =====================>
+*/
   describe('Forget Passowrd Mail', () => {
     // ----------------// <=====> 1-Case <=====> //----------------//
     it('It Should Sned Email To User', (done) => {
@@ -215,6 +215,49 @@ describe('User APIs', () => {
     });
   });
 
+
+  /*
+  ///////// <---------> ======== <---------> ///////// =====================>
+  ///////// <---------> Check Post Id <---------> ///////// ===========>
+  ///////// <---------> ======== <---------> ///////// =====================>
+  */
+  describe('Check Post Id', () => {
+    // ----------------// <=====> 1-Case <=====> //----------------//
+    it('It Check Post Id', (done) => {
+      const postId = '61ca5d91a8a4556c5b24f1f4';
+
+      userServices.checkPostId(postId).then((result) => {
+        expect(result).to.be.eq(true);
+        done();
+      }).catch(done);
+    });
+    // ----------------// <=====> 2-Case <=====> //----------------//
+    it('It Check Post Id', (done) => {
+      const postId = '61ca5d91a8a4556c5b24f1f0';
+
+      userServices.checkPostId(postId).then((result) => {
+        expect(result).to.be.eq(false);
+        done();
+      }).catch(done);
+    });
+  });
+
+  /*
+    ///////// <---------> ======== <---------> ///////// =====================>
+    ///////// <---------> get UserId From PostId <---------> ///////// ===========>
+    ///////// <---------> ======== <---------> ///////// =====================>
+    */
+  describe('get UserId From PostId ', () => {
+    // ----------------// <=====> 1-Case <=====> //----------------//
+    it('get UserId From PostId ', (done) => {
+      const postId = '61ca5d92a8a4556c5b24f1fa';
+      userServices.getUserIdFromPostId(postId).then((result) => {
+        expect(result).to.be.eq('61c9d749b33bf76a71baed86');
+        done();
+      }).catch(done);
+    });
+  });
+//61ca5d92a8a4556c5b24f209
   /*
   ///////// <---------> ======== <---------> ///////// =====================>
   ///////// <---------> add Notification <---------> ///////// ===========>
@@ -223,7 +266,7 @@ describe('User APIs', () => {
   describe('Create Notification', () => {
     // ----------------// <=====> 1-Case <=====> //----------------//
     it('It Should Create Notification', (done) => {
-      const postId = '61ca5d92a8a4556c5b24f209';
+      const postId = '61ca5d92a8a4556c5b24f1fa';
       const type = 'like';
 
       notificationFunction.addNotification(postId, type).then((result) => {

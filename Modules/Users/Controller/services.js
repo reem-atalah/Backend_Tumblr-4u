@@ -261,8 +261,8 @@ const checkUserId = async (id) => {
 
 const checkPostId = async (id) => {
 
-  const oldPostId = await schema.Posts.findOne({ id, isDeleted: false });
-  if (oldPostId)
+  const oldPost = await schema.Posts.find({_id:id, isDeleted: false });
+  if (oldPost.length)
     return true;
   else
     return false;
@@ -279,15 +279,17 @@ const checkPostId = async (id) => {
 
 const getUserIdFromPostId = async (id) => {
 
-  const oldPostId = await schema.Posts.findOne({ id, isDeleted: false });
-  const blogId = oldPostId.blogId;
+  const oldPost = await schema.Posts.findOne({ _id: id, isDeleted: false });
+  const blogId = oldPost.blogId;
 
-  const oldBlog = await schema.blogs.findOne({ id: blogId, isDeleted: false });
+  const oldBlog = await schema.blogs.findOne({ _id: blogId, isDeleted: false });
+
   const userEmail = oldBlog.userEmail;
 
   const oldUser = await schema.users.findOne({ email: userEmail, isDeleted: false });
   return oldUser.id;
 };
+
 
 /* ----------- <---> get BlogId From PostId <---> --------- */ // *** <===> Done <===>  *** //
 /**
@@ -299,8 +301,7 @@ const getUserIdFromPostId = async (id) => {
 
 
 const getBlogIdFromPostId = async (id) => {
-
-  const oldPostId = await schema.Posts.findOne({ id, isDeleted: false });
+  const oldPostId = await schema.Posts.findOne({ _id:id, isDeleted: false });
   return oldPostId.blogId;
 };
 

@@ -31,8 +31,9 @@ const addNotification = async (postId, type) => {
             const userId = await userServices.getUserIdFromPostId(postId)
             const blogId = await userServices.getBlogIdFromPostId(postId)
 
-            const blogName = await schema.blogs.findOne({ id: blogId }).name;
-
+            const blog = await schema.blogs.findOne({ id: blogId });
+            const blogName = blog.name;
+            
             var content;
             if (type == 'like' || type == 'reblog' || type == 'note')
                 content = `${blogName} ${type} your Post`
