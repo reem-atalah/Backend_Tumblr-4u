@@ -21,7 +21,7 @@ const socket = async (app) => {
     io.on('connection', socket => { // Opened Chanel between user client and server.
         console.log('Client Socket ID : ' + socket.id);
 
-        io.emit('Connection Is Done')
+        io.emit('test','Connection Is Done')
 
         socket.on('join-room', async (data) => {
             const userId = await userServices.getIdFromToken(data.token);
