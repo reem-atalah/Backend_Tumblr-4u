@@ -32,8 +32,10 @@ const socket = async (app) => {
         socket.emit('joined-room', 'Join Room Success');
 
         socket.on('like', (postId) => {
+            io.emit('test1', postId);
             notificationFunction.addNotification(postId, 'like');
             const room = userServices.getUserIdFromPostId(postId);
+            io.emit('test2', room);
             const data = notificationFunction.getNotification(postId);
             socket.to(room).emit('update-notification-list', data)
         });
