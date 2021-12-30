@@ -31,34 +31,36 @@ const socket = async (app) => {
         });
 
 
-        socket.on('like', async (postId) => {
-            console.log(postId.postId);
-            await notificationFunction.addNotification(postId.postId, 'like');
-            const room = await userServices.getUserIdFromPostId(postId.postId);
+        socket.on('like', async (input) => {
+            console.log(input.postId);
+            await notificationFunction.addNotification(input.postId, 'like');
+            const room = await userServices.getUserIdFromPostId(input.postId);
             console.log(room);
 
-            const data = await notificationFunction.getNotification(postId.postId);
+            const data = await notificationFunction.getNotification(input.postId);
             console.log(data);
 
             socket.to(room).emit('update-notification-list', data)
         });
 
-        socket.on('note', async (postId) => {
-            await notificationFunction.addNotification(postId, 'note');
-            const room = await userServices.getUserIdFromPostId(postId);
+        socket.on('note', async (input) => {
+            await notificationFunction.addNotification(input.postId, 'note');
+            const room = await userServices.getUserIdFromPostId(input.postId);
             console.log(room);
             
-            const data = await notificationFunction.getNotification(postId);
+            const data = await notificationFunction.getNotification(input.postId);
             console.log(data);
             
             socket.to(room).emit('update-notification-list', data)
         });
 
-        socket.on('reblog', async (postId) => {
-            await notificationFunction.addNotification(postId, 'reblog');
+        socket.on('reblog', async (input) => {
+            await notificationFunction.addNotification(input.postId, 'reblog');
+            const room = await userServices.getUserIdFromPostId(input.postId);
+            console.log(room);
             
-            const room = await userServices.getUserIdFromPostId(postId);
-            const data = await notificationFunction.getNotification(postId);
+            const data = await notificationFunction.getNotification(input.postId);
+            console.log(data);
             
             socket.to(room).emit('update-notification-list', data)
         });
