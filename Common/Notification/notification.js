@@ -21,6 +21,8 @@ const socket = async (app) => {
     io.on('connection', socket => { // Opened Chanel between user client and server.
         console.log('Client Socket ID : ' + socket.id);
 
+        io.emit('Connection Is Done')
+
         socket.on('join-room', async (data) => {
             const userId = await userServices.getIdFromToken(data.token);
 
@@ -32,6 +34,7 @@ const socket = async (app) => {
 
 
         socket.on('like', async (input) => {
+            console.log('Like');
             console.log(input.postId);
             await notificationFunction.addNotification(input.postId, 'like');
             const room = await userServices.getUserIdFromPostId(input.postId);
@@ -44,38 +47,50 @@ const socket = async (app) => {
         });
 
         socket.on('note', async (input) => {
+            console.log('Note');
             await notificationFunction.addNotification(input.postId, 'note');
             const room = await userServices.getUserIdFromPostId(input.postId);
             console.log(room);
-            
+
             const data = await notificationFunction.getNotification(input.postId);
             console.log(data);
-            
+
             socket.to(room).emit('update-notification-list', data)
         });
 
         socket.on('reblog', async (input) => {
+            console.log('Reblog');
             await notificationFunction.addNotification(input.postId, 'reblog');
             const room = await userServices.getUserIdFromPostId(input.postId);
             console.log(room);
-            
+
             const data = await notificationFunction.getNotification(input.postId);
             console.log(data);
-            
+
             socket.to(room).emit('update-notification-list', data)
         });
 
-        socket.on('follow', (postId) => {
-            notificationFunction.addNotification(postId, 'follow');
-            const room = userServices.getUserIdFromPostId(postId);
-            const data = notificationFunction.getNotification(postId);
+        socket.on('follow', async (input) => {
+            console.log('Follow');
+            await notificationFunction.addNotification(input.postId, 'follow');
+            const room = await userServices.getUserIdFromPostId(input.postId);
+            console.log(room);
+
+            const data = await notificationFunction.getNotification(input.postId);
+            console.log(data);
+
             socket.to(room).emit('update-notification-list', data)
         });
 
-        socket.on('unfollow', (postId) => {
-            notificationFunction.addNotification(postId, 'unfollow');
-            const room = userServices.getUserIdFromPostId(postId);
-            const data = notificationFunction.getNotification(postId);
+        socket.on('unfollow', async (input) => {
+            console.log('Unfollow');
+            await notificationFunction.addNotification(input.postId, 'unfollow');
+            const room = await userServices.getUserIdFromPostId(input.postId);
+            console.log(room);
+
+            const data = await notificationFunction.getNotification(input.postId);
+            console.log(data);
+
             socket.to(room).emit('update-notification-list', data)
         });
     });

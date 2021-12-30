@@ -9,12 +9,14 @@ const doesFollow = 'User:doesFollow';
 const createBlog = 'User:createBlog';
 const deleteBlog = 'User:deleteBlog';
 const deleteUser = 'User:deleteUser';
+const retrieveUser='User:retrieveUser';
 const googleInfo = 'User:googleInfo';
 const changeEmail = 'User:changeEmail';
 const getInterests = 'User: getInterests';
 const updateColor = 'User: updateColor';
 
 const userEndPoints = {
+  retrieveUser,
   followBlog,
   unfollowBlog,
   doesFollow,

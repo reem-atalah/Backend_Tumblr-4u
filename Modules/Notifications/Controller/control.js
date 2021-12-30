@@ -33,13 +33,15 @@ const addNotification = async (postId, type) => {
 
             const blog = await schema.blogs.findOne({ id: blogId });
             const blogName = blog.name;
-            
-            var content;
-            if (type == 'like' || type == 'reblog' || type == 'note')
-                content = `${blogName} ${type} your Post`
-            else
-                content = `${blogName} follow you`
 
+
+            var content;
+            if (type == 'like' || type == 'reblog' || type == 'note') {
+                content = `${blogName} ${type} your Post`;
+            }
+            else{
+                content = `${blogName} ${type} your Blog`
+            }
             const newNotification = new schema.notifications({
                 type,
                 userId,
@@ -94,11 +96,11 @@ const addNotification = async (postId, type) => {
  * @returns {object} - { Object }
  */
 
- const getNotification = async (postId) => {
+const getNotification = async (postId) => {
     try {
 
         const userId = await userServices.getUserIdFromPostId(postId)
-        const data = await schema.notifications.findOne({userId});
+        const data = await schema.notifications.find({ userId });
         return data;
 
     } catch (error) {
