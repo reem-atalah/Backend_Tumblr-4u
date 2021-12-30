@@ -2,7 +2,6 @@
 
 /* ================ /// <==> Variables Declaration <==> /// ================ */
 const schema = require('../../../Model/model');
-const {unfollowBlog}=require('../../../Modules/Users/Controller/unfollowBlog');
 /* =========== /// <==> End <==> ===========*/
 
 
@@ -32,7 +31,6 @@ const blockBlog = async (blogId, blockedBlogId) => {
       if (blog) {
         console.log("block");
 
-        unfollowBlog(blog.userEmail, blockedBlogId);
         let ids=blog.blockedBlogs;
         ids.push(blockedBlogId);
         ids=Array.from(new Set(ids));
