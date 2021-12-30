@@ -321,10 +321,13 @@ const getBlogIdFromPostId = async (id) => {
 
 
 const getIdFromToken = async (token) => {
-
-  const decoded = jwt.verify(token, process.env.KEY);
-  const oldUser = await schema.users.findOne({ email: decoded.email });
-  return oldUser.id;
+  try {
+    const decoded = jwt.verify(token, process.env.KEY);
+    const oldUser = await schema.users.findOne({ email: decoded.email });
+    return oldUser.id;
+  }catch(error){
+    console.log('Send Token Ya Donkey');
+  }
 };
 
 

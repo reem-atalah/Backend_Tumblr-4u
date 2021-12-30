@@ -57,7 +57,7 @@ const signUp = async (req, res) => {
         },
       });
     } else {
-      const userRT = userServices.createUser(email, password, blogName, age);
+      const userRT = await userServices.createUser(email, password, blogName, age);
       console.log(userRT);
 
       const user = await schema.users.findOne({email});
@@ -65,7 +65,7 @@ const signUp = async (req, res) => {
       console.log(user);
       // =================================================================
       // =================================================================
-      userServices.createPrimaryBlog(email, blogName);
+      await userServices.createPrimaryBlog(email, blogName);
       // ==========================Create Primary Blog========================//
       // =================================================================
       // =================================================================
