@@ -53,7 +53,7 @@ router.post('/data',
 
 /* ----------- <---> Upload Img Base64 <---> ----------- */
 router.post('/uploadImg',
-    validateRequest(postJoi.uploadImgValidations),
+    // validateRequest(postJoi.uploadImgValidations),
     isAuthorized(postEndPoints.uploadeImg),
     async (req, res) => {
       console.log('req.body: ', req.body.file.length);
