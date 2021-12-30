@@ -55,7 +55,7 @@ server.use(userRoutes);
 server.use(blogRoutes);
 server.use(postRoutes);
 server.use(express.json());
-server.use(express.urlencoded({extended: false}));
+server.use(express.urlencoded({ limit: '50mb', extended: false, parameterLimit: 50000 }));
 
 
 /* =========== /// <==> End <==> ===========*/
