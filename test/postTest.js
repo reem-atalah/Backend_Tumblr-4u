@@ -15,6 +15,7 @@ const mongoose = require('mongoose');
 const connect = require('../Configurations/configuration');
 const postControl = require('../Modules/Posts/Controller/control');
 const assert = require('assert');
+const fs = require('fs');
 
 chai.should();
 chai.use(chaiHttp);
@@ -121,7 +122,6 @@ describe('Post APIs', () => {
             done();
           }).catch(done);
     });
-  });
 
   describe('Function removeReblog', () => {
     it('It Should Remove a Reblog', (done) => {
@@ -175,6 +175,7 @@ describe('Post APIs', () => {
       done();
     });
   });
+//   // ----------------// <=====> Create Post <=====> //----------------//
 
   describe('Function likePress', () => {
     it('It Should Like or Unlike a Post', (done) => {

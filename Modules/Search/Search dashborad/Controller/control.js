@@ -33,12 +33,11 @@ async () => {
 /**
  * @function
  * @name  autoCompleteSearchDash
- * @description Applies search on posts/tags
- * @param {Object} userEmail -get id of the user
- * @param {Object} wordName - Holds the request body: wordName.
+ * @description Gets interests of the user
+ * @param {String} userEmail -get email of the user
  *
  *
- * @returns {Array} Result array have 4 arrays.
+ * @returns {Array} Result array have 2 arrays.
  *                     - array 1: has the tags followed by the user
  *                     - array 2: posts for the tags followed by the user
 
@@ -103,11 +102,11 @@ const autoCompleteSearchDash = async (userEmail) => {
 /**
  * @function
  * @name  autoCompleteSearchDashWord
- * @description Applies search on posts/tags
- * @param {Object} wordName - Holds the request body: wordName.
+ * @description Applies search on posts/tags/blogs
+ * @param {String} wordName - Holds the request body: wordName to search with.
  *
  *
- * @return {Array} Result array have 4 arrays.
+ * @return {Array} Result array have 3 arrays.
  *                     - array 1: has the tags in posts with this regex
  *                     - array 2: posts with the tags with this regex
  *                     - array 3: has the blogs this regex

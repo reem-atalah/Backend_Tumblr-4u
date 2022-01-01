@@ -36,7 +36,7 @@
 //  */
 // /* =============== /// &lt;==> Variables Declaration &lt;==> /// =============== */
 const schema = require('../../../../Model/model');
-
+const BreakException = {};
 /* ======= /// &lt;==> Calling Connection Function OF Database &lt;==> /// ======== */
 const mongoose = require('mongoose');
 /* =========== /// &lt;==> End &lt;==> ===========*/
@@ -61,55 +61,86 @@ async () => {
 /**
  * @function
  * @name  autoCompleteSearchDash
- * @description Applies search on posts/tags
- * @param {Object} userId -get id of the user
- * @param {Object} wordName - Holds the request body: wordName.
+ * @description Gets interests of the user
+ * @param {String} userEmail -get email of the user
  *
  *
- * @returns {Array} Result array have 4 arrays.
- *                     - array 1: has the tags in posts with this regex
- *                     - array 2: posts with the tags with this regex
- *                     - array 3: has the blogs this regex
- *                     - array 4: has the posts with interested tags this regex
+ * @returns {Array} Result array have 2 arrays.
+ *                     - array 1: has the tags followed by the user
+ *                     - array 2: posts for the tags followed by the user
 
  */
 // use "npm run doc" to make function documentation
 
-const autoCompleteSearchDash = async (userEmail, wordName) => {
+const autoCompleteSearchDash = async (userEmail) => {
   // get userId
   const user = await schema.users.find({email: userEmail});
   if (user.isDeleted == true) {
     return null;
   }
 
-  // console.log(user);
-  const userId = user._id;
+  const userId = user[0]._id;
   await schema.users.findOneAndUpdate({$and: [{email: userEmail},
     {isVerified: true}]}, {isDeleted: false});
 
   let result = [];
 
-  if (!wordName) {
-    // if there's no word then retrieve interested tags
-    const resultFollowedTag=[];
+  // if (!wordName || wordName==null ) {
+  // if there's no word then retrieve interested tags
+  const resultFollowedTag=[];
+  const resultPostHashTag=[];
+  // const totalResultPostHashTag=[];
 
-    // gets all posts with the followed tags
-    const searchFollowedTag= await schema.users.find({_id: userId});
-
-    // store in result, the blogs
-    searchFollowedTag.forEach((data) => {
+  // gets all posts with the followed tags
+  const searchFollowedTag= await schema.users.find({_id: userId});
+  const searchPostFollowedTag= await schema.Posts.find();
+  // store in result, the blogs
+  searchFollowedTag.forEach(async (data) => {
     // he gets me the user, now get the followedTags
-      data.followedTags.forEach((folloedTag) => {
-        resultFollowedTag.push(folloedTag);
-      });
+    await data.followedTags.forEach(async (followedTag) => {
+      resultFollowedTag.push(followedTag);
+      try {
+        // resultPostHashTag.push(followedTag);
+        searchPostFollowedTag.forEach((dataPosts) => {
+          dataPosts.tags.forEach((tag)=>{
+            if (tag == followedTag) {
+              resultPostHashTag.push(dataPosts);
+              throw BreakException;
+            }
+          });
+        });
+      } catch (e) {
+        // console.log('error..', e);
+        if (e !== BreakException) throw e;
+      }
+      // totalResultPostHashTag.push(resultPostHashTag);
     });
+  });
+  // console.log('resultPostHashTag: ', resultPostHashTag);
+  result={
+    resultFollowedTag: resultFollowedTag,
+    resultPostHashTag: resultPostHashTag,
+  };
+  return result;
+  // }
+};
 
-    result={
-      resultFollowedTag: resultFollowedTag,
-    };
-    return result;
-  }
+/* -------- &lt;---> AutoComplete Search Dashboard with word &lt;---> ----------- */
 
+/**
+ * @function
+ * @name  autoCompleteSearchDashWord
+ * @description Applies search on posts/tags/blogs
+ * @param {String} wordName - Holds the request body: wordName to search with.
+ *
+ *
+ * @return {Array} Result array have 3 arrays.
+ *                     - array 1: has the tags in posts with this regex
+ *                     - array 2: posts with the tags with this regex
+ *                     - array 3: has the blogs this regex
+
+ */
+const autoCompleteSearchDashWord = async (wordName) =>{
   const regex= new RegExp(wordName, 'i');
   // gets all posts with the needed tag
   const searchTags= await schema.Posts.find(tagSpecified={tags: {$in: regex}});
@@ -120,12 +151,19 @@ const autoCompleteSearchDash = async (userEmail, wordName) => {
   const resultBlogs=[];
   const resultPostHashTag=[];
 
+  const same=[];
   // store in result, the hash tags
   // store in result, the posts with hash tags
   searchTags.forEach((data) => {
     data.tags.forEach((semiData) => {
       if (semiData.match(regex)) {
-        resultHashTag.push(semiData);
+        if (same.includes(semiData)) {
+          // console.log('then what?');
+        } else {
+          resultHashTag.push(semiData);
+          same.push(semiData);
+        }
+        // console.log('same: ', same);
         resultPostHashTag.push(data);
       }
     });
@@ -191,6 +229,7 @@ function search() {
 // /* ============= /// &lt;==> Export Search Functions &lt;==> /// =============== */
 module.exports = {
   autoCompleteSearchDash,
+  autoCompleteSearchDashWord,
   search,
 };
 // /* =========== /// &lt;==> End &lt;==> ===========*/
@@ -204,13 +243,13 @@ module.exports = {
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#androidSignUpWithGoogle">androidSignUpWithGoogle</a></li><li><a href="global.html#autoCompleteSearchDash">autoCompleteSearchDash</a></li><li><a href="global.html#blockBlog">blockBlog</a></li><li><a href="global.html#changeEmail">changeEmail</a></li><li><a href="global.html#checkBlogName">checkBlogName</a></li><li><a href="global.html#checkMail">checkMail</a></li><li><a href="global.html#checkPassword">checkPassword</a></li><li><a href="global.html#createBlog">createBlog</a></li><li><a href="global.html#createGoogleUser">createGoogleUser</a></li><li><a href="global.html#createPost">createPost</a></li><li><a href="global.html#createPrimaryBlog">createPrimaryBlog</a></li><li><a href="global.html#createUser">createUser</a></li><li><a href="global.html#deleteBlog">deleteBlog</a></li><li><a href="global.html#editBlog">editBlog</a></li><li><a href="global.html#followBlog">followBlog</a></li><li><a href="global.html#forgetPassword">forgetPassword</a></li><li><a href="global.html#forgetPasswordMail">forgetPasswordMail</a></li><li><a href="global.html#getDashboard">getDashboard</a></li><li><a href="global.html#getInterestsFromUser">getInterestsFromUser</a></li><li><a href="global.html#getNotes">getNotes</a></li><li><a href="global.html#google">google</a></li><li><a href="global.html#googleInfo">googleInfo</a></li><li><a href="global.html#isAuthorized">isAuthorized</a></li><li><a href="global.html#likePress">likePress</a></li><li><a href="global.html#login">login</a></li><li><a href="global.html#loopAndCheck">loopAndCheck</a></li><li><a href="global.html#loopObjAndCheck">loopObjAndCheck</a></li><li><a href="global.html#makePost">makePost</a></li><li><a href="global.html#mongoose">mongoose</a></li><li><a href="global.html#reblogPost">reblogPost</a></li><li><a href="global.html#removeComment">removeComment</a></li><li><a href="global.html#removeReblog">removeReblog</a></li><li><a href="global.html#resetPassword">resetPassword</a></li><li><a href="global.html#retrieveBlog">retrieveBlog</a></li><li><a href="global.html#retrieveRandomBlogs">retrieveRandomBlogs</a></li><li><a href="global.html#retrieveRandomPosts">retrieveRandomPosts</a></li><li><a href="global.html#retrieveTrendingPosts">retrieveTrendingPosts</a></li><li><a href="global.html#search">search</a></li><li><a href="global.html#showPost">showPost</a></li><li><a href="global.html#signUp">signUp</a></li><li><a href="global.html#unblockBlog">unblockBlog</a></li><li><a href="global.html#unfollowBlog">unfollowBlog</a></li><li><a href="global.html#verfiyAccount">verfiyAccount</a></li><li><a href="global.html#verifyMail">verifyMail</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#activityFeed">activityFeed</a></li><li><a href="global.html#androidSignUpWithGoogle">androidSignUpWithGoogle</a></li><li><a href="global.html#autoCompleteSearchDash">autoCompleteSearchDash</a></li><li><a href="global.html#autoCompleteSearchDashWord">autoCompleteSearchDashWord</a></li><li><a href="global.html#blockBlog">blockBlog</a></li><li><a href="global.html#changeEmail">changeEmail</a></li><li><a href="global.html#checkBlogName">checkBlogName</a></li><li><a href="global.html#checkMail">checkMail</a></li><li><a href="global.html#checkPassword">checkPassword</a></li><li><a href="global.html#checkPostId">checkPostId</a></li><li><a href="global.html#checkUserId">checkUserId</a></li><li><a href="global.html#createBlog">createBlog</a></li><li><a href="global.html#createGoogleUser">createGoogleUser</a></li><li><a href="global.html#createPost">createPost</a></li><li><a href="global.html#createPrimaryBlog">createPrimaryBlog</a></li><li><a href="global.html#createUser">createUser</a></li><li><a href="global.html#deleteBlog">deleteBlog</a></li><li><a href="global.html#deletePost">deletePost</a></li><li><a href="global.html#deleteUser">deleteUser</a></li><li><a href="global.html#doesFollow">doesFollow</a></li><li><a href="global.html#editBlog">editBlog</a></li><li><a href="global.html#editPost">editPost</a></li><li><a href="global.html#followBlog">followBlog</a></li><li><a href="global.html#forgetPassword">forgetPassword</a></li><li><a href="global.html#forgetPasswordMail">forgetPasswordMail</a></li><li><a href="global.html#getBlogIdFromPostId">getBlogIdFromPostId</a></li><li><a href="global.html#getBlogPosts">getBlogPosts</a></li><li><a href="global.html#getDashboard">getDashboard</a></li><li><a href="global.html#getIdFromToken">getIdFromToken</a></li><li><a href="global.html#getInterests">getInterests</a></li><li><a href="global.html#getLikedPosts">getLikedPosts</a></li><li><a href="global.html#getNotes">getNotes</a></li><li><a href="global.html#getUserIdFromBlogName">getUserIdFromBlogName</a></li><li><a href="global.html#getUserIdFromPostId">getUserIdFromPostId</a></li><li><a href="global.html#google">google</a></li><li><a href="global.html#googleInfo">googleInfo</a></li><li><a href="global.html#isAuthorized">isAuthorized</a></li><li><a href="global.html#isBlocked">isBlocked</a></li><li><a href="global.html#likePress">likePress</a></li><li><a href="global.html#login">login</a></li><li><a href="global.html#loopAndCheck">loopAndCheck</a></li><li><a href="global.html#loopObjAndCheck">loopObjAndCheck</a></li><li><a href="global.html#makePost">makePost</a></li><li><a href="global.html#mongoose">mongoose</a></li><li><a href="global.html#reblogPost">reblogPost</a></li><li><a href="global.html#removeComment">removeComment</a></li><li><a href="global.html#removeReblog">removeReblog</a></li><li><a href="global.html#reportPost">reportPost</a></li><li><a href="global.html#resetPassword">resetPassword</a></li><li><a href="global.html#retrieveBlog">retrieveBlog</a></li><li><a href="global.html#retrieveRandomBlogs">retrieveRandomBlogs</a></li><li><a href="global.html#retrieveRandomPosts">retrieveRandomPosts</a></li><li><a href="global.html#retrieveTrendingPosts">retrieveTrendingPosts</a></li><li><a href="global.html#retrieveUser">retrieveUser</a></li><li><a href="global.html#search">search</a></li><li><a href="global.html#showPost">showPost</a></li><li><a href="global.html#signUp">signUp</a></li><li><a href="global.html#unblockBlog">unblockBlog</a></li><li><a href="global.html#unfollowBlog">unfollowBlog</a></li><li><a href="global.html#updateColor">updateColor</a></li><li><a href="global.html#uploadAny">uploadAny</a></li><li><a href="global.html#uploadImgBase">uploadImgBase</a></li><li><a href="global.html#uploadImgg">uploadImgg</a></li><li><a href="global.html#uploadLocalImg">uploadLocalImg</a></li><li><a href="global.html#uploadStream">uploadStream</a></li><li><a href="global.html#userUnblockBlog">userUnblockBlog</a></li><li><a href="global.html#verfiyAccount">verfiyAccount</a></li><li><a href="global.html#verifyMail">verifyMail</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Wed Dec 22 2021 21:55:02 GMT+0200 (Eastern European Standard Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Sat Jan 01 2022 13:16:04 GMT+0200 (Eastern European Standard Time)
 </footer>
 
 <script> prettyPrint(); </script>

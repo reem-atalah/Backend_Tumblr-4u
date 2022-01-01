@@ -25,6 +25,9 @@ const blogSchema = new mongoose.Schema({
   titleColor: String,
   showDescription:Boolean,
   showAvatar:Boolean,
+  showHeaderImage:Boolean,
+  stretchHeaderImage:Boolean,
+  showTitle:Boolean,
   reblog_parent_id: { // not assigned in db
     type: 'String',
     required: false,

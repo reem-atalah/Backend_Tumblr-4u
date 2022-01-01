@@ -2,7 +2,6 @@
 
 /* ================ /// <==> Variables Declaration <==> /// ================ */
 const schema = require('../../../Model/model');
-const {unfollowBlog}=require('../../../Modules/Users/Controller/unfollowBlog');
 /* =========== /// <==> End <==> ===========*/
 
 
@@ -21,7 +20,6 @@ const {unfollowBlog}=require('../../../Modules/Users/Controller/unfollowBlog');
  * @returns {Object} - The blocked blog and null if not found
  */
 
-
 const blockBlog = async (blogId, blockedBlogId) => {
   try {
     const blockedBlog = await schema.blogs.findOne(
@@ -32,7 +30,6 @@ const blockBlog = async (blogId, blockedBlogId) => {
       if (blog) {
         console.log("block");
 
-        unfollowBlog(blog.userEmail, blockedBlogId);
         let ids=blog.blockedBlogs;
         ids.push(blockedBlogId);
         ids=Array.from(new Set(ids));
@@ -61,7 +58,6 @@ const blockBlog = async (blogId, blockedBlogId) => {
  * @returns {Object} - The unblocked blog and null if not found
  */
 
-
 const unblockBlog = async (blogId, unblockedBlogId) => {
   try {
     const unblockedBlog = await schema.blogs.findOne(
@@ -81,13 +77,11 @@ const unblockBlog = async (blogId, unblockedBlogId) => {
   }
 };
 
-
-
 /**
  *
  * @function
  * @name editBlog
- * @description    -  It retrieves a blog given its id
+ * @description    -  It edits a blog given its id and the fields that the user wants to edit
  * @param {String} blogId 
  * @param {String} accent
  * @param {String} name 
@@ -95,15 +89,17 @@ const unblockBlog = async (blogId, unblockedBlogId) => {
  * @param {String} avatar
  * @param {Boolean} showAvatar
  * @param {String} title
+ * @param {Boolean} showTitle
  * @param {String} titleColor
  * @param {String} background 
  * @param {String} password 
  * @param {String} theme
  * @param {String} description 
  * @param {Boolean} showDescription
- * @return {Object} - A blog object
+ * @param {Boolean} showHeaderImage
+ * @param {Boolean} stretchHeaderImage
+ * @returns {Object} - An object of the editted blog
  */
-
 
 const editBlog = async (req) => {
   try {
@@ -120,6 +116,9 @@ const editBlog = async (req) => {
     const description = req.body.description;
     const showDescription = req.body.showDescription;
     const showAvatar=req.body.showAvatar;
+    const showHeaderImage = req.body.showHeaderImage;
+    const stretchHeaderImage=req.body.stretchHeaderImage;
+    const showTitle = req.body.showTitle;
     let message = 'OK';
     const blog = await schema.blogs.findOne({
       $and: [{_id: blogId},
@@ -133,6 +132,18 @@ const editBlog = async (req) => {
       if(blog.showDescription!=showDescription)
       {
         blog.showDescription=!blog.showDescription;
+      }
+      if(blog.showHeaderImage!=showHeaderImage)
+      {
+        blog.showHeaderImage=!blog.showHeaderImage;
+      }
+      if(blog.stretchHeaderImage!=stretchHeaderImage)
+      {
+        blog.stretchHeaderImage=!blog.stretchHeaderImage;
+      }
+      if(blog.showTitle!=showTitle)
+      {
+        blog.showTitle=!blog.showTitle;
       }
       if (password) {
         await schema.blogs.findOneAndUpdate({
@@ -197,10 +208,9 @@ const editBlog = async (req) => {
  * @function
  * @name retrieveBlog
  * @description    -  It retrieves a blog given its id
- * @param {String} blogId - name of the blog
+ * @param {String} blogId - Id of the blog
  * @return {Object} - A blog object
  */
-
 const retrieveBlog = async (blogId) => {
   try {
     const blog = await schema.blogs.findOne({
@@ -222,7 +232,9 @@ const retrieveBlog = async (blogId) => {
  *
  * @function
  * @name retrieveRandomBlogs
- * @description This function gets random blogs for explore
+ * @description This function gets random blogs for explore/checkout these blogs
+ * 
+ * @returns {Array}    - Array of blogs
  */
 
 const retrieveRandomBlogs = async () => {

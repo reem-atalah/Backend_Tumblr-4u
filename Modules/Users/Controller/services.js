@@ -129,6 +129,21 @@ const createGoogleUser = async (email, password) => {
 
 };
 
+const createNewGoogleUser = async (email, password,blogName,age) => {
+
+  const newUser = new schema.users({
+    email,
+    password,
+    name: blogName,
+    age,
+    isDeleted: false,
+    isVerified: true
+  });
+  // const data = await newUser.save();
+  await newUser.save();
+  return 'Created';
+
+};
 
 /* ----------- <---> Check Password <---> --------- */ // *** <===> Done <===>  *** //
 /**
@@ -193,7 +208,7 @@ const createPrimaryBlog = async (email, name) => {
     let ids = user.blogsId;
     ids.push(blog.id);
     const userData = await schema.users.updateOne({ email }, { blogsId: ids });
-    
+
     const Data = await schema.users.findOne({ email });
 
     return 'Blog Created';
@@ -284,15 +299,21 @@ const checkPostId = async (id) => {
 
 
 const getUserIdFromPostId = async (id) => {
+  console.log('==========================================================================================')
 
   const oldPost = await schema.Posts.findOne({ _id: id, isDeleted: false });
   const blogId = oldPost.blogId;
-
+  console.log(blogId)
   const oldBlog = await schema.blogs.findOne({ _id: blogId, isDeleted: false });
 
+  console.log(oldBlog)
   const userEmail = oldBlog.userEmail;
+  console.log(userEmail)
 
   const oldUser = await schema.users.findOne({ email: userEmail, isDeleted: false });
+  console.log(oldUser)
+  console.log('==========================================================================================')
+  
   return oldUser.id;
 };
 
@@ -321,12 +342,79 @@ const getBlogIdFromPostId = async (id) => {
 
 
 const getIdFromToken = async (token) => {
-
-  const decoded = jwt.verify(token, process.env.KEY);
-  const oldUser = await schema.users.findOne({ email: decoded.email });
-  return oldUser.id;
+  try {
+    const decoded = jwt.verify(token, process.env.KEY);
+    const oldUser = await schema.users.findOne({ email: decoded.email });
+    return oldUser.id;
+  }catch(error){
+    console.log('Send Token Ya Donkey');
+  }
 };
 
+
+
+/* ----------- <---> get Userid From Blog Name <---> --------- */ // *** <===> Done <===>  *** //
+/**
+ * This Function Used To get User Id From Blog Name.
+ *
+ * @param {string} blogName - blog name
+ * @returns {string} user Id.
+ */
+
+
+const getUserIdFromBlogName = async (name) => {
+  const oldBlog = await schema.blogs.findOne({ name, isDeleted: false });
+
+  const email = oldBlog.userEmail;
+  const oldUser = await schema.users.findOne({ email });
+  return oldUser.id;
+};
+/* ------ <---> Is Blocked <---> */ // *** <===> Done <===>  *** //
+/**
+ *
+ * @function
+ * @name isBlocked
+ * @description this function checks if a blog of a user blocks a blog
+ * @param {String} userEmail - The email of the user 
+ * @param {String} blogId - The id of the blog 
+ * @returns {Object}  - Returns the true if one of the user blogs blocks the blog
+ */
+
+ const isBlocked = async (userEmail, blogId) => {
+  const blogs = schema.blogs.find({
+    $and: [{userEmail: userEmail},
+      {isDeleted: false}, {blockedBlogs: blogId}],
+  });
+  if ((await blogs).length>0) {
+    return true;
+  }
+  return false;
+};
+/* ------ <---> User Unblock Blog <---> */ // *** <===> Done <===>  *** //
+/**
+ *
+ * @function
+ * @name userUnblockBlog
+ * @description this function makes all blogs of a user unblock a blog
+ * @param {String} userEmail - The email of the user 
+ * @param {String} blogId - The id of the blog 
+ */
+const userUnblockBlog = async (userEmail, blogId) => {
+  try{
+  const blogs = schema.blogs.find({
+    $and: [{userEmail: userEmail},
+      {isDeleted: false}, {isVerified: true}, {blockedBlogs: blogId}],
+  });
+
+  (await blogs).forEach((blog)=>{
+    if (blog) {
+      unblockBlog(blog._id, blogId);
+    }
+  });
+} catch (error) {
+  console.log(error.message);
+}
+};
 /* =============== /// <==> Export User Functions Services <==> /// =============== */
 module.exports = {
   verifyMail,
@@ -341,6 +429,8 @@ module.exports = {
   checkPostId,
   getUserIdFromPostId,
   getBlogIdFromPostId,
-  getIdFromToken
+  getIdFromToken,
+  getUserIdFromBlogName,
+  createNewGoogleUser
 };
 /* =========== /// <==> End <==> ===========*/

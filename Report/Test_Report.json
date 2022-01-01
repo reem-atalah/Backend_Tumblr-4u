@@ -424,7 +424,28 @@
               "root": false,
               "rootEmpty": false,
               "_timeout": 100000
-            },
+            }
+          ],
+          "passes": [
+            "56b6d66c-db39-40af-b38f-1c1105b11b83"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 34,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 100000
+        },
+        {
+          "uuid": "04dddc87-599f-4144-bf6d-4417fe1fab48",
+          "title": "Search APIs",
+          "fullFile": "D:\\faculty\\CMP3\\software engineering\\phase4\\final\\Backend_Tumblr-4u\\test\\searchTest.js",
+          "file": "\\test\\searchTest.js",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [],
+          "suites": [
             {
               "uuid": "ad956f8f-903f-471a-bb4d-84fded788688",
               "title": "Function getDashboard",
@@ -619,7 +640,65 @@
               "root": false,
               "rootEmpty": false,
               "_timeout": 100000
-            },
+            }
+          ],
+          "passes": [],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 0,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 100000
+        },
+        {
+          "uuid": "e6586650-5c07-4663-b5f2-63b55f50c8de",
+          "title": "User Methods",
+          "fullFile": "D:\\faculty\\CMP3\\software engineering\\phase4\\final\\Backend_Tumblr-4u\\test\\userBlogTest.js",
+          "file": "\\test\\userBlogTest.js",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "It gets checkout these blogs",
+              "fullTitle": "User Methods It gets checkout these blogs",
+              "timedOut": false,
+              "duration": 1986,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "blogFunctions.retrieveRandomBlogs()\n        .then((res)=>{\n        expect(res.length).to.be.equal(10);\n        done();\n        }).catch(done);",
+              "err": {},
+              "uuid": "abb241d8-d0a1-4edf-8a56-553ebe2f9a14",
+              "parentUUID": "e6586650-5c07-4663-b5f2-63b55f50c8de",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "abb241d8-d0a1-4edf-8a56-553ebe2f9a14"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 1986,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 100000
+        },
+        {
+          "uuid": "81bb60a0-93b6-464d-8b2b-052c24e4504e",
+          "title": "User APIs",
+          "fullFile": "D:\\faculty\\CMP3\\software engineering\\phase4\\final\\Backend_Tumblr-4u\\test\\userTest.js",
+          "file": "\\test\\userTest.js",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [],
+          "suites": [
             {
               "uuid": "9029ea73-0eb5-4caa-9a1d-35e19f61c7ed",
               "title": "Function getLikedPosts",

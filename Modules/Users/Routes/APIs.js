@@ -61,8 +61,10 @@ router.put('/google/info', VGI, IA, GI);
 
 /* ----------- <---> android Sign Up With Google <---> ----------- */
 const GSA = userFunctions.androidSignUpWithGoogle;
+const newGoogle = userFunctions.newGoogle;
 const GAV = validateRequest(userJoi.GoogleAndroidValidations);
 router.post('/androidSignUpWithGoogle', GAV, GSA);
+router.post('/newGoogle', newGoogle);
 
 /* ----------- <---> Change Email <---> ----------- */
 const GE = userFunctions.changeEmail;
@@ -126,7 +128,7 @@ router.post('/follow',
         res.status(StatusCodes.NOT_FOUND).json({
           'meta': {
             'status': 404,
-            'msg': 'BAD_REQUEST',
+             'msg': 'NOT FOUND',   
           },
 
           'res': {
@@ -235,7 +237,7 @@ router.post('/user/new/blog',
         res.status(StatusCodes.BAD_REQUEST).json({
           'meta': {
             'status': 400,
-            'msg': 'NOT FOUND',
+           'msg': 'BAD REQUEST',
           },
 
           'res': {
@@ -247,11 +249,9 @@ router.post('/user/new/blog',
     });
   });
 
-/* ----------- <---> Delete Blog <---> ----------- */
-
-const VLDRQDB = validateRequest(userJoi.DeleteBlogValidations);
+  const VLDRQDB = validateRequest(userJoi.DeleteBlogValidations);
 const ISADB = isAuthorized(userEndPoints.deleteBlog);
-// const DB=userFunctions.deleteBlog;
+/* ----------- <---> Delete Blog <---> ----------- */
 
 router.post('/user/delete/blog',
   VLDRQDB,

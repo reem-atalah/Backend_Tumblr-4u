@@ -21,7 +21,7 @@ const socket = async (app) => {
     io.on('connection', socket => { // Opened Chanel between user client and server.
         console.log('Client Socket ID : ' + socket.id);
 
-        io.emit('Connection Is Done')
+        io.emit('test','Connection Is Done')
 
         socket.on('join-room', async (data) => {
             const userId = await userServices.getIdFromToken(data.token);
@@ -43,7 +43,7 @@ const socket = async (app) => {
             const data = await notificationFunction.getNotification(input.postId);
             console.log(data);
 
-            socket.to(room).emit('update-notification-list', data)
+            io.to(room).emit('update-notification-list', data)
         });
 
         socket.on('note', async (input) => {
@@ -55,7 +55,7 @@ const socket = async (app) => {
             const data = await notificationFunction.getNotification(input.postId);
             console.log(data);
 
-            socket.to(room).emit('update-notification-list', data)
+            io.to(room).emit('update-notification-list', data)
         });
 
         socket.on('reblog', async (input) => {
@@ -67,7 +67,7 @@ const socket = async (app) => {
             const data = await notificationFunction.getNotification(input.postId);
             console.log(data);
 
-            socket.to(room).emit('update-notification-list', data)
+            io.to(room).emit('update-notification-list', data)
         });
 
         socket.on('follow', async (input) => {
@@ -79,7 +79,7 @@ const socket = async (app) => {
             const data = await notificationFunction.getNotification(input.postId);
             console.log(data);
 
-            socket.to(room).emit('update-notification-list', data)
+            io.to(room).emit('update-notification-list', data)
         });
 
         socket.on('unfollow', async (input) => {
@@ -91,8 +91,24 @@ const socket = async (app) => {
             const data = await notificationFunction.getNotification(input.postId);
             console.log(data);
 
-            socket.to(room).emit('update-notification-list', data)
+            io.to(room).emit('update-notification-list', data)
         });
+
+        socket.on('send', async (input) => {
+
+            const { sendBlogName,receiveBlogName, message, token } = input;
+            const sendUserId = await userServices.getIdFromToken(token);
+            const receiveUserId = await userServices.getUserIdFromBlogName(receiveBlogName);
+
+            await notificationFunction.addchat(message, sendUserId, receiveUserId, sendBlogName, receiveBlogName);
+            const data = await notificationFunction.getChat(sendBlogName,receiveBlogName);
+            console.log(data);
+
+            io.to(sendUserId).emit('update-chat-list', data, receiveBlogName)
+            io.to(receiveUserId).emit('update-chat-list', data, sendBlogName)
+
+        });
+
     });
 };
 /* =========== /// <==> End <==> ===========*/

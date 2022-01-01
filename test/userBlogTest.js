@@ -1,20 +1,32 @@
-// /* eslint-disable linebreak-style */
-// // ///////////////////////////////////////////////////////////////////
-// // / <==> /// This File Is The Unit Testing OF Search APIS  /// <==> ///
-// // ///////////////////////////////////////////////////////////////////
+/* eslint-disable linebreak-style */
+// ///////////////////////////////////////////////////////////////////
+// / <==> /// This File Is The Unit Testing OF Search APIS  /// <==> ///
+// ///////////////////////////////////////////////////////////////////
 
-// // ================ /// <==> Variables Declaration <==> /// ================
-// const chai = require('chai');
-// const chaiHttp = require('chai-http');
-// const server = require('../script');
-// chai.should();
-// chai.use(chaiHttp);
-// // =========== /// <==> End <==> ===========*/
+// ================ /// <==> Variables Declaration <==> /// ================
+const chai = require('chai');
+const chaiHttp = require('chai-http');
+const server = require('../script');
+chai.should();
+chai.use(chaiHttp);
+const blogFunctions = require('../Modules/Blogs/Controller/control');
+const {expect} = require('chai');
 
-// // ============= /// <==> Unit Testing for followBlog <==> /// =============
-// describe('User Methods', () => {
-// // ----------------// <=====> Search for hashtags <=====> //-------------//
 
+// =========== /// <==> End <==> ===========*/
+
+// ============= /// <==> Unit Testing for followBlog <==> /// =============
+describe('User Methods', () => {
+// ----------------// <=====> Search for hashtags <=====> //-------------//
+// --------// <=====> get checkout these blogs <=====> //------------//
+    it('It gets checkout these blogs', (done) => {
+    
+        blogFunctions.retrieveRandomBlogs()
+            .then((res)=>{
+            expect(res.length).to.be.equal(10);
+            done();
+            }).catch(done);
+    });
 //   describe('User follows a blog', () => {
 //     let itShouldDo='It should put the userId in followers array of blog and';
 //     itShouldDo+='put blogId in the following_blogs array of the user';
@@ -166,5 +178,5 @@
 //           });
 //     });
 //   });
-// });
-// // =========== /// <==> End <==> ===========*/
+});
+// =========== /// <==> End <==> ===========*/
