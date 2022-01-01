@@ -28,7 +28,7 @@
  * 
  * @apiParam {String} userId User's Id.
  * @apisuccess {Object} User object
- *@apiSuccessExample Response Data:
+ * @apiSuccessExample Response Data:
  *      HTTP/1.1 200 OK
  *      {
  *          "meta": {
@@ -70,7 +70,7 @@
  * @apiVersion 0.0.0 
  * @apiPermission User, Admin, Super_Admin
  * 
- * @apiParam {String} Token User's Secret Code.
+ * @apiHeader {String} Token User's Secret Code.
  *
  * @apiSuccessExample Response Data:
  *      HTTP/1.1 200 OK
@@ -81,7 +81,8 @@
  *                  },
  * 
  *          "response":{
- *                       "data": "{ Object Contains User Settings }"
+ *                      "message":"User Deleted Successfully",
+ *                       "data": "{ Object Contains User's primary blog }"
  *                     }   
  *      }
  * 
