@@ -43,8 +43,53 @@ chai.use(chaiHttp);
 =====*/
 /* =======================================*/
 
-describe('User APIs', () => {
-
+describe('User Functions', () => {
+   /*
+   ///////// <---------> ======== <---------> ///////// =====================>
+   ///////// <---------> Retrieve User <---------> ///////// =====================>
+   ///////// <---------> ======== <---------> ///////// =====================>
+  */
+ describe('Retrieve User Testing', () => {
+    it('should return the user with the given id', (done) => {
+     
+      const userId='61c9e0215954b6332bc203f0';
+      userFunctions.retrieveUser(userId).then((res) => {
+        expect(res).to.be.a('object');
+        done();
+      }).catch(done);
+    });
+    it('should return null as the user is not found', (done) => {
+     
+      const userId='61c9e0215994b6332bc203f0';
+      userFunctions.retrieveUser(userId).then((res) => {
+        expect(res).to.be.a('null');
+        done();
+      }).catch(done);
+    });
+  });
+     /*
+   ///////// <---------> ======== <---------> ///////// =====================>
+   ///////// <---------> Delete User <---------> ///////// =====================>
+   ///////// <---------> ======== <---------> ///////// =====================>
+  */
+  const userEmail='rawaa.2000@gmail.com';
+  describe('Delete User Testing', ()=>{
+    it('should delete the user and return its primary Blog after deletion', (done)=>{
+       userFunctions.deleteUser(userEmail)
+        .then((res)=>{
+        expect(res).to.be.a('object');
+        done();
+      }).catch(done);
+    });
+    it('should return false because there is no user with the requested email'
+        , (done)=>{
+            userFunctions.deleteUser(userEmail)
+                .then((res)=>{
+                  expect(res).to.be.eq(null);
+                  done();
+                }).catch(done);
+          });
+  });
    /*
    ///////// <---------> ======== <---------> ///////// =====================>
    ///////// <---------> Update User <---------> ///////// =====================>
