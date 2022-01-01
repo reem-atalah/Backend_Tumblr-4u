@@ -182,9 +182,9 @@
 
     {{subTemplate "article-param-block" params=article.header _hasType=_hasTypeInHeaderFields section="header"}}
     {{subTemplate "article-param-block" params=article.parameter _hasType=_hasTypeInParameterFields section="parameter"}}
+    {{subTemplate "article-param-block" params=article.success _hasType=_hasTypeInSuccessFields section="success"}}
     {{subTemplate "article-query-block" params=article.query _hasType=_hasTypeInParameterFields section="query"}}
     {{subTemplate "article-body-block" params=article.body _hasType=_hasTypeInParameterFields section="body"}}
-    {{subTemplate "article-param-block" params=article.success _hasType=_hasTypeInSuccessFields section="success"}}
     {{subTemplate "article-param-block" params=article.error _col1="Name" _hasType=_hasTypeInErrorFields section="error"}}
 
     {{subTemplate "article-sample-request" article=article id=id}}
@@ -368,7 +368,6 @@
               <div class="form-group">
                 <label class="col-md-3 control-label" for="sample-request-header-field-{{field}}">{{field}}</label>
                 <div class="input-group">
-                  <span class="input-group-addon">{{{type}}}</span>
                   <input type="text" id="sample-request-header-field-{{field}}"
                     class="form-control sample-request-input"
                     value="{{#if defaultValue}}{{ defaultValue }}{{/if}}"
@@ -376,6 +375,7 @@
                     data-family="header"
                     data-name="{{field}}"
                     data-group="{{@../index}}">
+                  <span class="input-group-addon">{{{type}}}</span>
                 </div>
               </div>
               {{/each}}
@@ -399,8 +399,8 @@
             <div class="{{../id}}-sample-request-param-body {{../id}}-sample-header-content-type-body hide">
               <div class="form-group">
                 <div class="input-group">
-                  <div class="input-group-addon">json</div>
                   <textarea id="sample-request-body-json" class="form-control sample-request-body" data-sample-request-body-group="sample-request-param-{{@./index}}" rows="6" style="OVERFLOW: visible" {{#if optional}}data-sample-request-param-optional="true"{{/if}}></textarea>
+                  <div class="input-group-addon">json</div>
                 </div>
               </div>
             </div>
@@ -409,8 +409,8 @@
               <div class="form-group">
                 <label class="col-md-3 control-label" for="sample-request-param-field-{{field}}">{{field}}</label>
                 <div class="input-group">
-                  <div class="input-group-addon">{{{type}}}</div>
                   {{#if allowedValues}}
+                  <div class="input-group-addon">{{{type}}}</div>
                   <div class="input-group-addon sample-request-select">
                     <select class="form-control" data-name="{{field}}" data-family="query" data-group="{{@../index}}" {{#if optional}}data-optional="true"{{/if}}>
                       <option value="" class="empty">&lt;{{__ "No value"}}&gt;</option>
@@ -421,9 +421,8 @@
                   </div>
                   <input class="invisible">
                   {{else}}
-                  <div class="sample-request-input-{{type}}-container"><div>
                   <input id="sample-request-param-field-{{field}}"
-                    class="{{#ifCond type '!==' 'Boolean'}}form-control{{/ifCond}} sample-request-param"
+                    class="form-control sample-request-param"
                     type="{{setInputType type}}"
                     value="{{#if defaultValue}}{{ defaultValue }}{{/if}}"
                     placeholder="{{#if defaultValue}}{{ defaultValue }}{{else}}{{field}}{{/if}}"
@@ -431,7 +430,7 @@
                     data-family="query"
                     data-group="{{@../index}}"
                     {{#if optional}}data-optional="true"{{/if}}>
-                  </div></div>
+                  <div class="input-group-addon">{{{type}}}</div>
                   {{/if}}
                 </div>
               </div>
@@ -460,17 +459,15 @@
                 </div>
                 <input class="invisible">
                 {{else}}
-                <div class="sample-request-input-{{type}}-container"><div>
-                  <input id="sample-request-param-field-{{field}}"
-                    class="{{#ifCond type '!==' 'Boolean'}}form-control{{/ifCond}} sample-request-input"
-                    type="{{setInputType type}}"
-                    value="{{#if defaultValue}}{{ defaultValue }}{{/if}}"
-                    placeholder="{{#if defaultValue}}{{ defaultValue }}{{else}}{{field}}{{/if}}"
-                    data-name="{{field}}"
-                    data-family="query"
-                    data-group="{{@../index}}"
-                    {{#if optional}}data-optional="true"{{/if}}>
-                </div></div>
+                <input id="sample-request-param-field-{{field}}"
+                  class="form-control sample-request-input"
+                  type="{{setInputType type}}"
+                  value="{{#if defaultValue}}{{ defaultValue }}{{/if}}"
+                  placeholder="{{#if defaultValue}}{{ defaultValue }}{{else}}{{field}}{{/if}}"
+                  data-name="{{field}}"
+                  data-family="query"
+                  data-group="{{@../index}}"
+                  {{#if optional}}data-optional="true"{{/if}}>
                 {{/if}}
               </div>
             </div>
@@ -519,9 +516,8 @@
                 </div>
                 <input class="invisible">
                 {{else}}
-                <div class="sample-request-input-{{type}}-container"><div>
-                  <input id="sample-request-param-field-{{field}}"
-                  class="{{#ifCond type '!==' 'Boolean'}}form-control{{/ifCond}} sample-request-input"
+                <input id="sample-request-param-field-{{field}}"
+                  class="form-control sample-request-input"
                   type="{{setInputType type}}"
                   value="{{#ifCond type '!==' 'Boolean'}}{{#if defaultValue}}{{ defaultValue }}{{/if}}{{/ifCond}}"
                   {{#if checked}}checked{{/if}}
@@ -530,7 +526,6 @@
                   data-name="{{field}}"
                   data-content-type="form"
                   {{#if optional}}data-optional="true"{{/if}}>
-                  </div></div>
                 {{/if}}
               </div>
             </div>
