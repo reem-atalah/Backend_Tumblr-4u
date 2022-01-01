@@ -60,7 +60,7 @@ const resetPassword = require('./resetPassword');
  * @function
  * @name doesFollow
  * @description this function checks if a user follows a blog
- * @param {String} userEmail - The email of the user 
+ * @param {String} email - The email of the user 
  * @param {String} blogId - The id of the blog 
  * @returns {Object}  - Returns the user if he/she follows the blog or null otherwise
  */
@@ -76,18 +76,17 @@ const doesFollow=async (email, blogId)=>{
       }
 };
 
+
 /* ------ <---> Follow Blog <---> */ // *** <===> Done <===>  *** //
 /**
  *
  * @function
  * @name followBlog
- * @description this function makes the user whose id sent in
- *              params follow the blog whose id in the body
+ * @description this function makes the user follow the blog whose id in the body
  * @param {String} userEmail - The email of the user who follows the blog
  * @param {String} blogId - The id of the blog to be followed
  * @returns {Object}  - The followed blog and null if not found
  */
-
 
 const followBlog = async (req) => {
   try {
@@ -119,7 +118,6 @@ const followBlog = async (req) => {
 };
 /* ----------- <---> Unfollow Blog <--->  */ // *** <===> Done <===>  *** //
 
-
 /**
  *
  * @function
@@ -128,10 +126,8 @@ const followBlog = async (req) => {
  *               params from followers of the blog whose id in the body
  * @param {String} userEmail - The email of the user who unfollows the blog
  * @param {String} blogId - The id of the blog to be unfollowed
- * @returns {Object}  - The unfollowed blog
+ * @returns {Object}  - The unfollowed blog and null if not found
  */
-
-
 const unfollowBlog = async (req) => {
   try {
     const email = req.decoded.email;
@@ -185,16 +181,14 @@ const createBlogs=async ()=>{
  *
  * @function
  * @name createBlog
- * @description This function allows the user whose id sent in
- *              params create a new blog
+ * @description This function allows the user to create a new blog
  * @param {String} userEmail  -email of the user
  * @param {String} title  - Title of the blog
  * @param {String} name  - URL of the blog and it should be unique
  * @param {Boolean} privacy  - Indicates wether the blog has a password or not
  * @param {String} [password]  - The password of the blog if it's private
- * @returns res status and message or error massege in case of errors.
+ * @returns {Object}  - The created blog
  */
-
 const createBlog = async (req) => {
   try {
     const email = req.decoded.email;
@@ -284,15 +278,16 @@ const createBlog = async (req) => {
   }
 };
 */
+/* ----------- <---> Delete Blog <--->  */ // *** <===> Done <===>  *** //
+
 /**
  *
  * @function
  * @name deleteBlog
- * @description This function allows the user whose id sent in
- *              params delete his blog
+ * @description This function allows the user to delete his blog
  * @param {String} userEmail  - id of the user
  * @param {String} blogId  - id of the blog to be deleted
- * @returns {Object}  - the created deleted blog
+ * @returns {Object}  - the deleted blog
  */
 
 const deleteBlog = async (userEmail, blogId) => {
@@ -386,13 +381,12 @@ const updateColor = async (userEmail, colorNumb) => {
   return result;
 };
 /* ----------- <---> Delete User <--->  */ // *** <===> Done <===>  *** //
-
 /**
  *
  * @function
  * @name deleteUser
- * @description This Function deletes the user (user.isDeleted=true)
- * @param {String} userEmail  - email of the user
+ * @description This Function deletes the user and its blogs(user.isDeleted=true)
+ * @param {String} email  - email of the user
  * @returns {Object}    - The deleted user
  */
 const deleteUser = async (email) => {
