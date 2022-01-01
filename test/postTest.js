@@ -101,17 +101,6 @@ describe('Post APIs', () => {
     });
   });
 
-    // --------// <=====> upload audio on cloud <=====> //------------//
-  it('It tests uploading audio on server, gets url', (done) => {
-    const blobName = 'audio2021-12-28T04-06-07.388Z.mpeg';
-
-    postFunctions.uploadAny(blobName, 'audio/mpeg')
-        .then((res)=>{
-          expect(res)
-            .to.be.equal('https://tumblrstorage.blob.core.windows.net/imagess/'+blobName);
-          done();
-        }).catch(done);
-  });
 //   // ----------------// <=====> Create Post <=====> //----------------//
 
   // describe('Function createPost', () => {

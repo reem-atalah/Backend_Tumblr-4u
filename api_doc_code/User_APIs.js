@@ -776,33 +776,73 @@
 
 /*=================== End =====================*/
 
+
 /*
 ===================== ///////// <---------> ==================== <---------> ///////// =====================> 
-===================== ///////// <--------->  Change Color Scheme <---------> ///////// =====================> 
+===================== ///////// <--------->  User Interests <---------> ///////// =====================> 
 ===================== ///////// <---------> ==================== <---------> ///////// =====================> 
 */
 
 /**
- * @api {put} /user/color Change Color Scheme.
+ * @api {post} /getInterestsFromUser Interests
+ * 
+ * @apiName getInterests
+ * @apiGroup User
+ * @apiVersion 0.0.0 
+ * @apiPermission User, Admin, Super_Admin
+ * 
+ * @apidescription changes the color theme of tumblr for the user
+ * 
+ * 
+ * @apiHeader {String} Token User's Secret Code.
+ * @apiParam {Array} interests array of tags user chosen to follow.
+ * 
+ * @apiSuccessExample Response Data:
+ *      HTTP/1.1 200 OK
+ *      {
+ *          "response":{
+ *                      User Object
+ *                     }   
+ *      }
+ * 
+ * @apiErrorExample Response Error:
+ *      HTTP/1.1 400 BAD REQUEST
+ *      {
+ *          "error": "Error In Input Data"
+ *      }
+ *      HTTP/1.1 401 Unauthorized
+ *      {
+ *          "error": "User Is Unauthorized"
+ *      }
+ */
+
+/*=================== End =====================*/
+
+/*
+===================== ///////// <---------> ==================== <---------> ///////// =====================> 
+===================== ///////// <--------->  Change Color Theme <---------> ///////// =====================> 
+===================== ///////// <---------> ==================== <---------> ///////// =====================> 
+*/
+
+/**
+ * @api {put} /updateColor Change Color Theme.
  * 
  * @apiName colorScheme
  * @apiGroup User
  * @apiVersion 0.0.0 
  * @apiPermission User, Admin, Super_Admin
  * 
- * @apiParam {String} Token User's Secret Code.
- * @apiParam {String} Color New Color Scheme.
+ * @apidescription changes the color theme of tumblr for the user
+ * 
+ * 
+ * @apiHeader {String} Token User's Secret Code.
+ * @apiParam {Number} bodyColor New Color.
  * 
  * @apiSuccessExample Response Data:
  *      HTTP/1.1 200 OK
  *      {
- *          "meta": {
- *                       "status": 200,
- *                       "msg": "OK"
- *                  },
- * 
  *          "response":{
- *                      "message": "{ Color Scheme Updated Successfully }"
+ *                      User Object
  *                     }   
  *      }
  * 

@@ -1356,33 +1356,22 @@
 */
 
 /**
- * @api {get} /Check_out_these_blogs Check out these blogs
- * @apiName getCheckBlog
+ * @api {get} /ranBlogs Check out these blogs
+ * @apiName ranBlogs
  * @apiGroup Blog
  * @apiPermission  User, admin, super admin
- * @apidescription retrieve unfollowed blogs as recommendations to be followed
+ * @apidescription retrieve blogs to be followed by other blogs
  * @apiVersion 0.0.0
  *
- * @apiParam {String} Token User's Secret Code.
- * @apiParam {String} user_id  user's ID to know who he/she follows
  *
  * @apiSuccessExample Response Data:
  *      HTTP/1.1 200 OK
  *      {
- *          "meta": {
- *                       "status": 200,
- *                       "msg": "OK"
- *                  },
- *
  *          "response":{
- *                       "data": "[gets some of the blogs not followed by the user]"
+ *                       "ranBlogs": "[array of random 10 blogs]"
  *                     }
  *      }
  * @apiErrorExample Response Error:
- *      HTTP/1.1 400 BAD REQUEST
- *      {
- *          "error": "Error In Input Data"
- *      }
  *      HTTP/1.1 401 Unauthorized
  *      {
  *          "error": "User Is Unauthorized"

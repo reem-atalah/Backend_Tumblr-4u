@@ -15,6 +15,54 @@
 
 /*
 ===================== ///////// <---------> ============= <---------> ///////// =====================>
+===================== ///////// <---------> Upload Media <---------> ///////// =====================>
+===================== ///////// <---------> ============== <---------> ///////// =====================>
+*/
+
+/**
+ * @api {post} /uploadImg Upload Media on Server
+ * @apiName uploadImg
+ * @apiGroup Post
+ * @apiPermission User, Admin, Super_Admin
+
+ * 
+ * @apidescription upload media types: photo, audio, video.
+ * @apiVersion 0.0.0
+ *
+ * @apiHeader {String} Token User's Secret Code.
+ * 
+ * @apiParam {String} multiple base64 image/s or video/s or audio/s strings
+ * 
+ * @apiSuccess {Array} images array of links to the server
+ * 
+ * @apiSuccessExample Response Data:
+ *      HTTP/1.1 200 OK
+ *      {
+ *          "res":{
+ *                      "images": "array of links to the uploaded media on cloud server"
+ *                     }   
+ *      }
+ * 
+ * @apiErrorExample Response Error:
+ *      HTTP/1.1 400 BAD REQUEST
+ *      {
+ *          "error": "Blog Not Found"
+ *      }
+ *      HTTP/1.1 401 Unauthorized
+ *      {
+ *          "error": "User Is Unauthorized"
+ *      }
+ *      HTTP/1.1 500 Internal Server Error
+ *      {
+ *          "error": "Error In Upload Function"
+ *      }
+ */
+
+/*=================== End =====================*/
+
+
+/*
+===================== ///////// <---------> ============= <---------> ///////// =====================>
 ===================== ///////// <---------> Create a Blog Post <---------> ///////// =====================>
 ===================== ///////// <---------> ============== <---------> ///////// =====================>
 */
@@ -659,226 +707,226 @@
 /*=================== End =====================*/
 
 
-/*
-===================== ///////// <---------> =========== <---------> ///////// =====================> 
-===================== ///////// <---------> Pin a Blog Post <---------> ///////// =====================> 
-===================== ///////// <---------> =========== <---------> ///////// =====================> 
-*/
+// /*
+// ===================== ///////// <---------> =========== <---------> ///////// =====================> 
+// ===================== ///////// <---------> Pin a Blog Post <---------> ///////// =====================> 
+// ===================== ///////// <---------> =========== <---------> ///////// =====================> 
+// */
 
-/**
- * @api {put} /pin/post Pin a Blog Post
- * 
- * @apiName pinPost
- * @apiGroup Post
- * @apiVersion 0.0.0 
- * @apiPermission User, Admin, Super_Admin
- * 
- * @apiParam {String} Token User's Secret Code.
- * @apiParam {String} Post_Id Post's ID
- * @apiParam {String} Blog_Id Blog's Id
- *
- * @apiSuccessExample Response Data:
- *      HTTP/1.1 200 OK
- *      {
- *          "meta": {
- *                       "status": 200,
- *                       "msg": "OK"
- *                  },
- * 
- *          "response":{
- *                      "message": "Post Pinned Successfully"
- *                     }   
- *      }
- * 
- * @apiErrorExample Response Error:
- *      HTTP/1.1 400 BAD REQUEST
- *      {
- *          "error": "Error In Input Data"
- *      }
- *      HTTP/1.1 401 Unauthorized
- *      {
- *          "error": "User Is Unauthorized"
- *      } 
- */
+// /**
+//  * @api {put} /pin/post Pin a Blog Post
+//  * 
+//  * @apiName pinPost
+//  * @apiGroup Post
+//  * @apiVersion 0.0.0 
+//  * @apiPermission User, Admin, Super_Admin
+//  * 
+//  * @apiParam {String} Token User's Secret Code.
+//  * @apiParam {String} Post_Id Post's ID
+//  * @apiParam {String} Blog_Id Blog's Id
+//  *
+//  * @apiSuccessExample Response Data:
+//  *      HTTP/1.1 200 OK
+//  *      {
+//  *          "meta": {
+//  *                       "status": 200,
+//  *                       "msg": "OK"
+//  *                  },
+//  * 
+//  *          "response":{
+//  *                      "message": "Post Pinned Successfully"
+//  *                     }   
+//  *      }
+//  * 
+//  * @apiErrorExample Response Error:
+//  *      HTTP/1.1 400 BAD REQUEST
+//  *      {
+//  *          "error": "Error In Input Data"
+//  *      }
+//  *      HTTP/1.1 401 Unauthorized
+//  *      {
+//  *          "error": "User Is Unauthorized"
+//  *      } 
+//  */
 
-/*=================== End =====================*/
+// /*=================== End =====================*/
 
 
-/*
-===================== ///////// <---------> ================= <---------> ///////// =====================> 
-===================== ///////// <---------> GetQueuedPosts <---------> ///////// =====================> 
-===================== ///////// <---------> ================= <---------> ///////// =====================> 
-*/
+// /*
+// ===================== ///////// <---------> ================= <---------> ///////// =====================> 
+// ===================== ///////// <---------> GetQueuedPosts <---------> ///////// =====================> 
+// ===================== ///////// <---------> ================= <---------> ///////// =====================> 
+// */
 
-/**
- * @api {get} /blog/queue  GetQueuedPosts
- * @apiDescription Gives you a list of the currently queued posts for the specified blog.
- * @apiName getQueuedPosts
- * 
- * @apiGroup Post
- * @apiPermission User, Admin, Super_Admin
- * @apiVersion 0.0.0
- * 
- * @apiParam {String} Token User's Secret Code.
- * @apiParam {String} blog_id The ID of the blog has the post
- * 
- * @apiSuccessExample Response Data:
- *      HTTP/1.1 200 OK
- *      {
- *          "meta": {
- *                       "status": 200,
- *                       "msg": "OK"
- *                  },
- * 
- *          "response":{
- *                      "data": "[Array of Queued Posts]"
- *                     }   
- *      }
- * 
- * @apiErrorExample Response Error:
- *      HTTP/1.1 400 BAD REQUEST
- *      {
- *          "error": "Error In Input Data"
- *      }
- *      HTTP/1.1 401 Unauthorized
- *      {
- *          "error": "User Is Unauthorized"
- *      } 
- */
-
-/*=================== End =====================*/
-
-/*
-===================== ///////// <---------> ====================== <---------> ///////// =====================> 
-===================== ///////// <---------> Reorder Queued Posts <---------> ///////// =====================> 
-===================== ///////// <---------> ====================== <---------> ///////// =====================> 
-*/
-
-/**
- * @api {put} /blog/queue/reorder   Reorder Queued Posts
- * @apiDescription This allows you to reorder a post within the queue, moving it after an existing queued post, or to the top.
- * @apiName reorderQueuedPosts
- * @apiGroup Post
- * @apiPermission User, Admin, Super_Admin
- * @apiVersion 0.0.0
- * 
- * @apiParam {String} Token User's Secret Code.
- * @apiParam {String} blog_id The ID of the bloghas the post
- * @apiParam {String} post_id Post ID to move.
- * @apiParam {String} [insert_after="0"] Which post ID to move it after, or 0 to make it the first post
- * @apiParam {Array} UnOrdered_Queued_posts all queued posts
- * 
- * @apiSuccessExample Response Data:
- *      HTTP/1.1 200 OK
- *      {
- *          "meta": {
- *                       "status": 200,
- *                       "msg": "OK"
- *                  },
- * 
- *          "response":{
- *                      "data": "[Array of Ordered_Queued_posts change time of each post]"
- *                     }   
- *      }
- * 
- * @apiErrorExample Response Error:
- *      HTTP/1.1 400 BAD REQUEST
- *      {
- *          "error": "Error In Input Data"
- *      }
- *      HTTP/1.1 401 Unauthorized
- *      {
- *          "error": "User Is Unauthorized"
- *      }
- */
+// /**
+//  * @api {get} /blog/queue  GetQueuedPosts
+//  * @apiDescription Gives you a list of the currently queued posts for the specified blog.
+//  * @apiName getQueuedPosts
+//  * 
+//  * @apiGroup Post
+//  * @apiPermission User, Admin, Super_Admin
+//  * @apiVersion 0.0.0
+//  * 
+//  * @apiParam {String} Token User's Secret Code.
+//  * @apiParam {String} blog_id The ID of the blog has the post
+//  * 
+//  * @apiSuccessExample Response Data:
+//  *      HTTP/1.1 200 OK
+//  *      {
+//  *          "meta": {
+//  *                       "status": 200,
+//  *                       "msg": "OK"
+//  *                  },
+//  * 
+//  *          "response":{
+//  *                      "data": "[Array of Queued Posts]"
+//  *                     }   
+//  *      }
+//  * 
+//  * @apiErrorExample Response Error:
+//  *      HTTP/1.1 400 BAD REQUEST
+//  *      {
+//  *          "error": "Error In Input Data"
+//  *      }
+//  *      HTTP/1.1 401 Unauthorized
+//  *      {
+//  *          "error": "User Is Unauthorized"
+//  *      } 
+//  */
 
 /*=================== End =====================*/
 
-/*
-===================== ///////// <---------> ====================== <---------> ///////// =====================> 
-===================== ///////// <---------> Shuffle Queued Posts <---------> ///////// =====================> 
-===================== ///////// <---------> ====================== <---------> ///////// =====================> 
-*/
+// /*
+// ===================== ///////// <---------> ====================== <---------> ///////// =====================> 
+// ===================== ///////// <---------> Reorder Queued Posts <---------> ///////// =====================> 
+// ===================== ///////// <---------> ====================== <---------> ///////// =====================> 
+// */
 
-/**
- * @api {post} /blog/queue/shuffle  Shuffle Queued Posts
- * @apiDescription This randomly shuffles the queue for the specified blog.
- * @apiName shuffleQueuedPosts
- * @apiGroup Post
- * @apiPermission User, Admin, Super_Admin
- * @apiVersion 0.0.0
- * 
- * @apiParam {String} Token User's Secret Code.
- * @apiParam {String} blog_id The ID of the bloghas the post
- * @apiParam {String} [insert_after="0"] Which post ID to move it after, or 0 to make it the first post
- * @apiParam {Array} UnOrdered_Queued_posts all queued posts
- * 
- * @apiSuccessExample Response Data:
- *      HTTP/1.1 200 OK
- *      {
- *          "meta": {
- *                       "status": 200,
- *                       "msg": "OK"
- *                  },
- * 
- *          "response":{
- *                      "data": "[Array of Ordered_Queued_posts change time of each post after shuffeling]"
- *                     }   
- *      }
- * 
- * @apiErrorExample Response Error:
- *      HTTP/1.1 400 BAD REQUEST
- *      {
- *          "error": "Error In Input Data"
- *      }
- *      HTTP/1.1 401 Unauthorized
- *      {
- *          "error": "User Is Unauthorized"
- *      }
- */
+// /**
+//  * @api {put} /blog/queue/reorder   Reorder Queued Posts
+//  * @apiDescription This allows you to reorder a post within the queue, moving it after an existing queued post, or to the top.
+//  * @apiName reorderQueuedPosts
+//  * @apiGroup Post
+//  * @apiPermission User, Admin, Super_Admin
+//  * @apiVersion 0.0.0
+//  * 
+//  * @apiParam {String} Token User's Secret Code.
+//  * @apiParam {String} blog_id The ID of the bloghas the post
+//  * @apiParam {String} post_id Post ID to move.
+//  * @apiParam {String} [insert_after="0"] Which post ID to move it after, or 0 to make it the first post
+//  * @apiParam {Array} UnOrdered_Queued_posts all queued posts
+//  * 
+//  * @apiSuccessExample Response Data:
+//  *      HTTP/1.1 200 OK
+//  *      {
+//  *          "meta": {
+//  *                       "status": 200,
+//  *                       "msg": "OK"
+//  *                  },
+//  * 
+//  *          "response":{
+//  *                      "data": "[Array of Ordered_Queued_posts change time of each post]"
+//  *                     }   
+//  *      }
+//  * 
+//  * @apiErrorExample Response Error:
+//  *      HTTP/1.1 400 BAD REQUEST
+//  *      {
+//  *          "error": "Error In Input Data"
+//  *      }
+//  *      HTTP/1.1 401 Unauthorized
+//  *      {
+//  *          "error": "User Is Unauthorized"
+//  *      }
+//  */
 
-/*=================== End =====================*/
+// /*=================== End =====================*/
 
-/*
-===================== ///////// <---------> ====================== <---------> ///////// =====================> 
-===================== ///////// <---------> Retrieve Draft Posts <---------> ///////// =====================> 
-===================== ///////// <---------> ====================== <---------> ///////// =====================> 
-*/
+// /*
+// ===================== ///////// <---------> ====================== <---------> ///////// =====================> 
+// ===================== ///////// <---------> Shuffle Queued Posts <---------> ///////// =====================> 
+// ===================== ///////// <---------> ====================== <---------> ///////// =====================> 
+// */
 
-/**
- * @api {get} /blog/draft Retrieve Draft Posts
- * @apiName retrieveDraftPosts
- * @apiGroup Post
- * @apiPermission User, Admin, Super_Admin
- * @apidescription get the posts which were published as drafts to the owner of the post
- * @apiVersion 0.0.0
- * 
- * @apiParam {String} Token User's Secret Code.
- * @apiParam {String} blog_id The ID of the blog has the post
- * 
- * @apiSuccessExample Response Data:
- *      HTTP/1.1 200 OK
- *      {
- *          "meta": {
- *                       "status": 200,
- *                       "msg": "OK"
- *                  },
- * 
- *          "response":{
- *                      "data": "[Array of posts was posted as drafts]"
- *                     }   
- *      }
- * 
- * @apiErrorExample Response Error:
- *      HTTP/1.1 400 BAD REQUEST
- *      {
- *          "error": "Error In Input Data"
- *      }
- *      HTTP/1.1 401 Unauthorized
- *      {
- *          "error": "User Is Unauthorized"
- *      }
- */
+// /**
+//  * @api {post} /blog/queue/shuffle  Shuffle Queued Posts
+//  * @apiDescription This randomly shuffles the queue for the specified blog.
+//  * @apiName shuffleQueuedPosts
+//  * @apiGroup Post
+//  * @apiPermission User, Admin, Super_Admin
+//  * @apiVersion 0.0.0
+//  * 
+//  * @apiParam {String} Token User's Secret Code.
+//  * @apiParam {String} blog_id The ID of the bloghas the post
+//  * @apiParam {String} [insert_after="0"] Which post ID to move it after, or 0 to make it the first post
+//  * @apiParam {Array} UnOrdered_Queued_posts all queued posts
+//  * 
+//  * @apiSuccessExample Response Data:
+//  *      HTTP/1.1 200 OK
+//  *      {
+//  *          "meta": {
+//  *                       "status": 200,
+//  *                       "msg": "OK"
+//  *                  },
+//  * 
+//  *          "response":{
+//  *                      "data": "[Array of Ordered_Queued_posts change time of each post after shuffeling]"
+//  *                     }   
+//  *      }
+//  * 
+//  * @apiErrorExample Response Error:
+//  *      HTTP/1.1 400 BAD REQUEST
+//  *      {
+//  *          "error": "Error In Input Data"
+//  *      }
+//  *      HTTP/1.1 401 Unauthorized
+//  *      {
+//  *          "error": "User Is Unauthorized"
+//  *      }
+//  */
+
+// /*=================== End =====================*/
+
+// /*
+// ===================== ///////// <---------> ====================== <---------> ///////// =====================> 
+// ===================== ///////// <---------> Retrieve Draft Posts <---------> ///////// =====================> 
+// ===================== ///////// <---------> ====================== <---------> ///////// =====================> 
+// */
+
+// /**
+//  * @api {get} /blog/draft Retrieve Draft Posts
+//  * @apiName retrieveDraftPosts
+//  * @apiGroup Post
+//  * @apiPermission User, Admin, Super_Admin
+//  * @apidescription get the posts which were published as drafts to the owner of the post
+//  * @apiVersion 0.0.0
+//  * 
+//  * @apiParam {String} Token User's Secret Code.
+//  * @apiParam {String} blog_id The ID of the blog has the post
+//  * 
+//  * @apiSuccessExample Response Data:
+//  *      HTTP/1.1 200 OK
+//  *      {
+//  *          "meta": {
+//  *                       "status": 200,
+//  *                       "msg": "OK"
+//  *                  },
+//  * 
+//  *          "response":{
+//  *                      "data": "[Array of posts was posted as drafts]"
+//  *                     }   
+//  *      }
+//  * 
+//  * @apiErrorExample Response Error:
+//  *      HTTP/1.1 400 BAD REQUEST
+//  *      {
+//  *          "error": "Error In Input Data"
+//  *      }
+//  *      HTTP/1.1 401 Unauthorized
+//  *      {
+//  *          "error": "User Is Unauthorized"
+//  *      }
+//  */
 
 /*=================== End =====================*/
 
@@ -890,16 +938,14 @@
 */
 
 /**
- * @api {get} /dashboard/autoCompleteSearchDash Get Posts with search content
+ * @api {get} /autoCompleteSearchDash/:wordName Get Posts with search content
  * @apiName autoCompleteSearchDash
  * @apiGroup Post
- * @apiPermission User, Admin, Super_Admin
+ * @apiPermission Guests, User, Admin, Super_Admin
  *
  * @apidescription Get Posts with search content
  * @apiVersion 0.0.0
  *
- * @apiParam {String} Token User's Secret Code.
- * @apiParam {String} userId the user id to get the interested tags he/she follows
  * @apiParam {String} wordName The content in the posts you'd like to retrieve.
  *
  * @apiSuccessExample Response Data:
@@ -909,64 +955,106 @@
  *          resultBlogs: resultBlogs, //if I have word // gets all mention blogs with the regex
  *          resultFollowedTag: resultFollowedTag //if I don't have word // gets all posts with the followed/interested tags
  *      }
- *
- * @apiErrorExample Response Error:
- *      HTTP/1.1 400 BAD REQUEST
- *      {
- *          "error": ",userId, is required"
- *      }
- *      HTTP/1.1 401 Unauthorized
- *      {
- *          "error": "User Is Unauthorized"
- *      }
  */ 
 
 
 /*
+===================== ///////// <---------> ================ <---------> ///////// =====================>
+===================== ///////// <---------> Get Posts with search content in dashboard <---------> ///////// =====================>
+===================== ///////// <---------> ================ <---------> ///////// =====================>
+*/
+
+/**
+ * @api {get} /autoCompleteSearchDash/:wordName Get Posts with search content
+ * @apiName autoCompleteSearchDash
+ * @apiGroup Post
+ * @apiPermission Guests, User, Admin, Super_Admin
+ *
+ * @apidescription Get Posts with search content
+ * @apiVersion 0.0.0
+ *
+ * @apiHeader {String} Token User's Secret Code.
+ * @apiSuccessExample Response Data:
+ *      result={
+ *          resultPostHashTag: resultPostHashTag, //get posts of the interests
+ *          resultFollowedTag: resultFollowedTag //if I don't have word // gets all posts with the followed/interested tags
+ *      }
+ */ 
+
+// /*
+// ===================== ///////// <---------> ================ <---------> ///////// =====================> 
+// ===================== ///////// <---------> Get Posts with search content in a specific blog <---------> ///////// =====================> 
+// ===================== ///////// <---------> ================ <---------> ///////// =====================> 
+// */
+
+// /**
+//  * @api {get} /blog/search_content Get Posts with search content in a specific blog
+//  * @apiName getPostsWithSearchContentInBlog
+//  * @apiGroup Post
+//  * @apiPermission User, Admin, Super_Admin
+//  * 
+//  * @apidescription Get Posts with search content in a specific blog
+//  * @apiVersion 0.0.0
+//  *
+//  * @apiParam {String} Token User's Secret Code.
+//  * @apiParam {String} post-id The ID of the post.
+//  * @apiParam {String} blog-id The ID of the blog to search in.
+//  * @apiParam {String} search_content The content in the posts you'd like to retrieve.
+//  *
+//  * @apiSuccessExample Response Data:
+//  *      HTTP/1.1 200 OK
+//  *      {
+//  *          "meta": {
+//  *                       "status": 200,
+//  *                       "msg": "OK"
+//  *                  },
+//  * 
+//  *          "response":{
+//  *                      "data": "[ Posts ]"
+//  *                     }   
+//  *      }
+//  * 
+//  * @apiErrorExample Response Error:
+//  *      HTTP/1.1 400 BAD REQUEST
+//  *      {
+//  *          "error": "Error In Input Data"
+//  *      }
+//  *      HTTP/1.1 401 Unauthorized
+//  *      {
+//  *          "error": "User Is Unauthorized"
+//  *      }
+//  */
+
+/*=================== End =====================*/
+
+
+/*
 ===================== ///////// <---------> ================ <---------> ///////// =====================> 
-===================== ///////// <---------> Get Posts with search content in a specific blog <---------> ///////// =====================> 
+===================== ///////// <---------> Get Trending Posts <---------> ///////// =====================> 
 ===================== ///////// <---------> ================ <---------> ///////// =====================> 
 */
 
 /**
- * @api {get} /blog/search_content Get Posts with search content in a specific blog
- * @apiName getPostsWithSearchContentInBlog
+ * @api {get} /trendPosts Get Trending Posts 
+ * @apiName trendPosts
  * @apiGroup Post
- * @apiPermission User, Admin, Super_Admin
+ * @apiPermission Guests, User, Admin, Super_Admin
  * 
- * @apidescription Get Posts with search content in a specific blog
+ * @apidescription Get Posts for the trending page
  * @apiVersion 0.0.0
- *
- * @apiParam {String} Token User's Secret Code.
- * @apiParam {String} post-id The ID of the post.
- * @apiParam {String} blog-id The ID of the blog to search in.
- * @apiParam {String} search_content The content in the posts you'd like to retrieve.
  *
  * @apiSuccessExample Response Data:
  *      HTTP/1.1 200 OK
  *      {
- *          "meta": {
- *                       "status": 200,
- *                       "msg": "OK"
- *                  },
- * 
  *          "response":{
- *                      "data": "[ Posts ]"
+ *                      "postsToShow": {
+ *                                          countNotesEachPost: [array of 10 numbers of notes counts]
+ *                                          trendingPostsLim: [array of 10 top posts]
+ *                                      }
  *                     }   
  *      }
  * 
- * @apiErrorExample Response Error:
- *      HTTP/1.1 400 BAD REQUEST
- *      {
- *          "error": "Error In Input Data"
- *      }
- *      HTTP/1.1 401 Unauthorized
- *      {
- *          "error": "User Is Unauthorized"
- *      }
  */
-
-/*=================== End =====================*/
 
 
 /*
@@ -976,27 +1064,19 @@
 */
 
 /**
- * @api {get} /explore Get Explore Posts 
- * @apiName getExplorePosts
+ * @api {get} /ranPosts Get Explore Posts 
+ * @apiName ranPosts
  * @apiGroup Post
- * @apiPermission User, Admin, Super_Admin
+ * @apiPermission Guests, User, Admin, Super_Admin
  * 
  * @apidescription Get Posts for the explore page
  * @apiVersion 0.0.0
  *
- * @apiParam {String} Token User's Secret Code.
- * @apiParam {String} type where the type of posts are {text/photos/gifs/quotes/chats/audio/videos/asks/staff picks/trending/for you}
- *
  * @apiSuccessExample Response Data:
  *      HTTP/1.1 200 OK
  *      {
- *          "meta": {
- *                       "status": 200,
- *                       "msg": "OK"
- *                  },
- * 
  *          "response":{
- *                      "data": "[ type_posts the posts with certain type as choosen ]"
+ *                      "ranBlogs": "[array of random 10 blogs]"
  *                     }   
  *      }
  * 
