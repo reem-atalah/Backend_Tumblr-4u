@@ -346,11 +346,14 @@ const deleteBlog = async (userEmail, blogId) => {
 /**
  *
  * @function
- * @name getInterestsFromUser
+ * @name getInterests
  * @description This function get from the user his interest tags(followedTags)
  *                choosen while signing up
- * @param {String} userEmail  - id of the user
+ * @param {String} userEmail  - email of the user
  * @param {String} interstArr  - interests tags array
+ * @return {Object}    - The user with updated interests 
+ * 
+
  */
 
 const getInterests = async (userEmail, interstArr) => {
@@ -368,10 +371,12 @@ const getInterests = async (userEmail, interstArr) => {
  *
  * @function
  * @name updateColor
- * @description This function get from the user his interest tags(followedTags)
- *                choosen while signing up
- * @param {String} userEmail  - id of the user
- * @param {String} colorNumb  - id of the user
+ * @description This function updates the color theme
+ * @param {String} userEmail  - email of the user
+ * @param {String} colorNumb  - the color number wants to be updated
+ * 
+ * 
+ * @return {Object}    - The user with updated color
  */
 
 const updateColor = async (userEmail, colorNumb) => {

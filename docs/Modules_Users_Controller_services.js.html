@@ -36,6 +36,7 @@ const { StatusCodes } = require('http-status-codes');
 const bcrypt = require('bcrypt');
 const schema = require('../../../Model/model');
 const jwt = require('jsonwebtoken');
+const { CLOSING } = require('ws');
 /* =========== /// &lt;==> End &lt;==> ===========*/
 
 /* ----------- &lt;---> verify Email &lt;---> --------- */ // *** &lt;===> Done &lt;===>  *** //
@@ -63,7 +64,7 @@ const verifyMail = async (name, email, token) => {
     subject: "Hello ✔", // Subject line
     html: `
         &lt;h3> Hi ${name}&lt;/h3>
-        &lt;p>To verify your mail click &lt;a href=http://localhost:5000/user/verify/${token}>here&lt;/a>&lt;/p>
+        &lt;p>To verify your mail click &lt;a href=http://tumblr4u.eastus.cloudapp.azure.com:5000/user/verify/${token}>here&lt;/a>&lt;/p>
         `, // html body
   });
 
@@ -156,6 +157,21 @@ const createGoogleUser = async (email, password) => {
 
 };
 
+const createNewGoogleUser = async (email, password,blogName,age) => {
+
+  const newUser = new schema.users({
+    email,
+    password,
+    name: blogName,
+    age,
+    isDeleted: false,
+    isVerified: true
+  });
+  // const data = await newUser.save();
+  await newUser.save();
+  return 'Created';
+
+};
 
 /* ----------- &lt;---> Check Password &lt;---> --------- */ // *** &lt;===> Done &lt;===>  *** //
 /**
@@ -189,14 +205,17 @@ const createPrimaryBlog = async (email, name) => {
 
     const newBlog = new schema.blogs(
       {
-        title: 'UnTitled',
+        title: 'Untitled',
+        titleColor: 'default',
         name: name,
+        userEmail: email,
+        titleColor: 'default',
         privacy: false,
+        password: 'password',
         updated: 0,
         description: '',
-        password: 'password',
         isBlockedFromPrimary: false,
-        isPrimary: isPrimary,
+        isPrimary: true,
         blogVisitor: 0,
         followedTags: [],
         postsIds: [],
@@ -217,6 +236,8 @@ const createPrimaryBlog = async (email, name) => {
     let ids = user.blogsId;
     ids.push(blog.id);
     const userData = await schema.users.updateOne({ email }, { blogsId: ids });
+
+    const Data = await schema.users.findOne({ email });
 
     return 'Blog Created';
   } catch (error) {
@@ -253,13 +274,175 @@ const forgetPasswordMail = async (name, email) => {
     html: `
         &lt;h3> Hi ${name}&lt;/h3>
         &lt;p>Forgot your password? Reset it below: &lt;/p>
-        &lt;p>&lt;a href=http://localhost:5000/user/reset_password/>Reset Password&lt;/a>&lt;/p>
+        &lt;p>&lt;a href=http://tumblr4u.eastus.cloudapp.azure.com/resetpassword>Reset Password&lt;/a>&lt;/p>
         `, // html body
   });
 
   return 'forget password mail sent'
 };
 
+/* ----------- &lt;---> Check If User Id Found &lt;---> --------- */ // *** &lt;===> Done &lt;===>  *** //
+/**
+ * This Function Used To Check If Given User Id Is Found or Not.
+ *
+ * @param {string} id - user id
+ * @returns {boolean} [Ture , False].
+ */
+
+
+const checkUserId = async (id) => {
+
+  const oldUserId = await schema.users.findOne({ id, isDeleted: false });
+  if (oldUserId)
+    return true;
+  else
+    return false;
+};
+
+/* ----------- &lt;---> Check If post Id Found &lt;---> --------- */ // *** &lt;===> Done &lt;===>  *** //
+/**
+ * This Function Used To Check If Given post Id Is Found or Not.
+ *
+ * @param {string} id - post id
+ * @returns {boolean} [Ture , False].
+ */
+
+
+const checkPostId = async (id) => {
+
+  const oldPost = await schema.Posts.find({ _id: id, isDeleted: false });
+  if (oldPost.length)
+    return true;
+  else
+    return false;
+};
+
+/* ----------- &lt;---> get UserId From PostId &lt;---> --------- */ // *** &lt;===> Done &lt;===>  *** //
+/**
+ * This Function Used To get UserId From PostId.
+ *
+ * @param {string} id - post id
+ * @returns {string} User Id.
+ */
+
+
+const getUserIdFromPostId = async (id) => {
+  console.log('==========================================================================================')
+
+  const oldPost = await schema.Posts.findOne({ _id: id, isDeleted: false });
+  const blogId = oldPost.blogId;
+  console.log(blogId)
+  const oldBlog = await schema.blogs.findOne({ _id: blogId, isDeleted: false });
+
+  console.log(oldBlog)
+  const userEmail = oldBlog.userEmail;
+  console.log(userEmail)
+
+  const oldUser = await schema.users.findOne({ email: userEmail, isDeleted: false });
+  console.log(oldUser)
+  console.log('==========================================================================================')
+  
+  return oldUser.id;
+};
+
+
+/* ----------- &lt;---> get BlogId From PostId &lt;---> --------- */ // *** &lt;===> Done &lt;===>  *** //
+/**
+ * This Function Used To get BlogId From PostId.
+ *
+ * @param {string} id - post id
+ * @returns {string} Blog Id.
+ */
+
+
+const getBlogIdFromPostId = async (id) => {
+  const oldPostId = await schema.Posts.findOne({ _id: id, isDeleted: false });
+  return oldPostId.blogId;
+};
+
+/* ----------- &lt;---> get Userid From Token &lt;---> --------- */ // *** &lt;===> Done &lt;===>  *** //
+/**
+ * This Function Used To get User Id From Email.
+ *
+ * @param {string} token - user token
+ * @returns {string} user Id.
+ */
+
+
+const getIdFromToken = async (token) => {
+  try {
+    const decoded = jwt.verify(token, process.env.KEY);
+    const oldUser = await schema.users.findOne({ email: decoded.email });
+    return oldUser.id;
+  }catch(error){
+    console.log('Send Token Ya Donkey');
+  }
+};
+
+
+
+/* ----------- &lt;---> get Userid From Blog Name &lt;---> --------- */ // *** &lt;===> Done &lt;===>  *** //
+/**
+ * This Function Used To get User Id From Blog Name.
+ *
+ * @param {string} blogName - blog name
+ * @returns {string} user Id.
+ */
+
+
+const getUserIdFromBlogName = async (name) => {
+  const oldBlog = await schema.blogs.findOne({ name, isDeleted: false });
+
+  const email = oldBlog.userEmail;
+  const oldUser = await schema.users.findOne({ email });
+  return oldUser.id;
+};
+/* ------ &lt;---> Is Blocked &lt;---> */ // *** &lt;===> Done &lt;===>  *** //
+/**
+ *
+ * @function
+ * @name isBlocked
+ * @description this function checks if a blog of a user blocks a blog
+ * @param {String} userEmail - The email of the user 
+ * @param {String} blogId - The id of the blog 
+ * @returns {Object}  - Returns the true if one of the user blogs blocks the blog
+ */
+
+ const isBlocked = async (userEmail, blogId) => {
+  const blogs = schema.blogs.find({
+    $and: [{userEmail: userEmail},
+      {isDeleted: false}, {blockedBlogs: blogId}],
+  });
+  if ((await blogs).length>0) {
+    return true;
+  }
+  return false;
+};
+/* ------ &lt;---> User Unblock Blog &lt;---> */ // *** &lt;===> Done &lt;===>  *** //
+/**
+ *
+ * @function
+ * @name userUnblockBlog
+ * @description this function makes all blogs of a user unblock a blog
+ * @param {String} userEmail - The email of the user 
+ * @param {String} blogId - The id of the blog 
+ */
+const userUnblockBlog = async (userEmail, blogId) => {
+  try{
+  const blogs = schema.blogs.find({
+    $and: [{userEmail: userEmail},
+      {isDeleted: false}, {isVerified: true}, {blockedBlogs: blogId}],
+  });
+
+  (await blogs).forEach((blog)=>{
+    if (blog) {
+      unblockBlog(blog._id, blogId);
+    }
+  });
+} catch (error) {
+  console.log(error.message);
+}
+};
 /* =============== /// &lt;==> Export User Functions Services &lt;==> /// =============== */
 module.exports = {
   verifyMail,
@@ -269,9 +452,17 @@ module.exports = {
   checkPassword,
   createGoogleUser,
   createPrimaryBlog,
-  forgetPasswordMail
+  forgetPasswordMail,
+  checkUserId,
+  checkPostId,
+  getUserIdFromPostId,
+  getBlogIdFromPostId,
+  getIdFromToken,
+  getUserIdFromBlogName,
+  createNewGoogleUser
 };
-/* =========== /// &lt;==> End &lt;==> ===========*/</code></pre>
+/* =========== /// &lt;==> End &lt;==> ===========*/
+</code></pre>
         </article>
     </section>
 
@@ -281,13 +472,13 @@ module.exports = {
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#androidSignUpWithGoogle">androidSignUpWithGoogle</a></li><li><a href="global.html#autoCompleteSearchDash">autoCompleteSearchDash</a></li><li><a href="global.html#blockBlog">blockBlog</a></li><li><a href="global.html#changeEmail">changeEmail</a></li><li><a href="global.html#checkBlogName">checkBlogName</a></li><li><a href="global.html#checkMail">checkMail</a></li><li><a href="global.html#checkPassword">checkPassword</a></li><li><a href="global.html#createBlog">createBlog</a></li><li><a href="global.html#createGoogleUser">createGoogleUser</a></li><li><a href="global.html#createPost">createPost</a></li><li><a href="global.html#createPrimaryBlog">createPrimaryBlog</a></li><li><a href="global.html#createUser">createUser</a></li><li><a href="global.html#deleteBlog">deleteBlog</a></li><li><a href="global.html#editBlog">editBlog</a></li><li><a href="global.html#followBlog">followBlog</a></li><li><a href="global.html#forgetPassword">forgetPassword</a></li><li><a href="global.html#forgetPasswordMail">forgetPasswordMail</a></li><li><a href="global.html#getDashboard">getDashboard</a></li><li><a href="global.html#getInterestsFromUser">getInterestsFromUser</a></li><li><a href="global.html#getNotes">getNotes</a></li><li><a href="global.html#google">google</a></li><li><a href="global.html#googleInfo">googleInfo</a></li><li><a href="global.html#isAuthorized">isAuthorized</a></li><li><a href="global.html#likePress">likePress</a></li><li><a href="global.html#login">login</a></li><li><a href="global.html#loopAndCheck">loopAndCheck</a></li><li><a href="global.html#loopObjAndCheck">loopObjAndCheck</a></li><li><a href="global.html#makePost">makePost</a></li><li><a href="global.html#mongoose">mongoose</a></li><li><a href="global.html#reblogPost">reblogPost</a></li><li><a href="global.html#removeComment">removeComment</a></li><li><a href="global.html#removeReblog">removeReblog</a></li><li><a href="global.html#resetPassword">resetPassword</a></li><li><a href="global.html#retrieveBlog">retrieveBlog</a></li><li><a href="global.html#retrieveRandomBlogs">retrieveRandomBlogs</a></li><li><a href="global.html#retrieveRandomPosts">retrieveRandomPosts</a></li><li><a href="global.html#retrieveTrendingPosts">retrieveTrendingPosts</a></li><li><a href="global.html#search">search</a></li><li><a href="global.html#showPost">showPost</a></li><li><a href="global.html#signUp">signUp</a></li><li><a href="global.html#unblockBlog">unblockBlog</a></li><li><a href="global.html#unfollowBlog">unfollowBlog</a></li><li><a href="global.html#verfiyAccount">verfiyAccount</a></li><li><a href="global.html#verifyMail">verifyMail</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#activityFeed">activityFeed</a></li><li><a href="global.html#androidSignUpWithGoogle">androidSignUpWithGoogle</a></li><li><a href="global.html#autoCompleteSearchDash">autoCompleteSearchDash</a></li><li><a href="global.html#autoCompleteSearchDashWord">autoCompleteSearchDashWord</a></li><li><a href="global.html#blockBlog">blockBlog</a></li><li><a href="global.html#changeEmail">changeEmail</a></li><li><a href="global.html#checkBlogName">checkBlogName</a></li><li><a href="global.html#checkMail">checkMail</a></li><li><a href="global.html#checkPassword">checkPassword</a></li><li><a href="global.html#checkPostId">checkPostId</a></li><li><a href="global.html#checkUserId">checkUserId</a></li><li><a href="global.html#createBlog">createBlog</a></li><li><a href="global.html#createGoogleUser">createGoogleUser</a></li><li><a href="global.html#createPost">createPost</a></li><li><a href="global.html#createPrimaryBlog">createPrimaryBlog</a></li><li><a href="global.html#createUser">createUser</a></li><li><a href="global.html#deleteBlog">deleteBlog</a></li><li><a href="global.html#deletePost">deletePost</a></li><li><a href="global.html#deleteUser">deleteUser</a></li><li><a href="global.html#doesFollow">doesFollow</a></li><li><a href="global.html#editBlog">editBlog</a></li><li><a href="global.html#editPost">editPost</a></li><li><a href="global.html#followBlog">followBlog</a></li><li><a href="global.html#forgetPassword">forgetPassword</a></li><li><a href="global.html#forgetPasswordMail">forgetPasswordMail</a></li><li><a href="global.html#getBlogIdFromPostId">getBlogIdFromPostId</a></li><li><a href="global.html#getBlogPosts">getBlogPosts</a></li><li><a href="global.html#getDashboard">getDashboard</a></li><li><a href="global.html#getIdFromToken">getIdFromToken</a></li><li><a href="global.html#getInterests">getInterests</a></li><li><a href="global.html#getLikedPosts">getLikedPosts</a></li><li><a href="global.html#getNotes">getNotes</a></li><li><a href="global.html#getUserIdFromBlogName">getUserIdFromBlogName</a></li><li><a href="global.html#getUserIdFromPostId">getUserIdFromPostId</a></li><li><a href="global.html#google">google</a></li><li><a href="global.html#googleInfo">googleInfo</a></li><li><a href="global.html#isAuthorized">isAuthorized</a></li><li><a href="global.html#isBlocked">isBlocked</a></li><li><a href="global.html#likePress">likePress</a></li><li><a href="global.html#login">login</a></li><li><a href="global.html#loopAndCheck">loopAndCheck</a></li><li><a href="global.html#loopObjAndCheck">loopObjAndCheck</a></li><li><a href="global.html#makePost">makePost</a></li><li><a href="global.html#mongoose">mongoose</a></li><li><a href="global.html#reblogPost">reblogPost</a></li><li><a href="global.html#removeComment">removeComment</a></li><li><a href="global.html#removeReblog">removeReblog</a></li><li><a href="global.html#reportPost">reportPost</a></li><li><a href="global.html#resetPassword">resetPassword</a></li><li><a href="global.html#retrieveBlog">retrieveBlog</a></li><li><a href="global.html#retrieveRandomBlogs">retrieveRandomBlogs</a></li><li><a href="global.html#retrieveRandomPosts">retrieveRandomPosts</a></li><li><a href="global.html#retrieveTrendingPosts">retrieveTrendingPosts</a></li><li><a href="global.html#retrieveUser">retrieveUser</a></li><li><a href="global.html#search">search</a></li><li><a href="global.html#showPost">showPost</a></li><li><a href="global.html#signUp">signUp</a></li><li><a href="global.html#unblockBlog">unblockBlog</a></li><li><a href="global.html#unfollowBlog">unfollowBlog</a></li><li><a href="global.html#updateColor">updateColor</a></li><li><a href="global.html#uploadAny">uploadAny</a></li><li><a href="global.html#uploadImgBase">uploadImgBase</a></li><li><a href="global.html#uploadImgg">uploadImgg</a></li><li><a href="global.html#uploadLocalImg">uploadLocalImg</a></li><li><a href="global.html#uploadStream">uploadStream</a></li><li><a href="global.html#userUnblockBlog">userUnblockBlog</a></li><li><a href="global.html#verfiyAccount">verfiyAccount</a></li><li><a href="global.html#verifyMail">verifyMail</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Wed Dec 22 2021 21:55:02 GMT+0200 (Eastern European Standard Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Sat Jan 01 2022 13:16:04 GMT+0200 (Eastern European Standard Time)
 </footer>
 
 <script> prettyPrint(); </script>

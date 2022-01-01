@@ -170,7 +170,7 @@
     
 
     
-    <h4 class="name" id="androidSignUpWithGoogle"><span class="type-signature">(async) </span>androidSignUpWithGoogle<span class="signature">(googleToken)</span><span class="type-signature"> &rarr; {object}</span></h4>
+    <h4 class="name" id="activityFeed"><span class="type-signature"></span>activityFeed<span class="signature">(blogId)</span><span class="type-signature"> &rarr; {string}</span></h4>
     
 
     
@@ -178,7 +178,7 @@
 
 
 <div class="description">
-    This Function Used To Register New User For Android.
+    Gets activity feed of a post.
 </div>
 
 
@@ -214,7 +214,7 @@
 
         <tr>
             
-                <td class="name"><code>googleToken</code></td>
+                <td class="name"><code>blogId</code></td>
             
 
             <td class="type">
@@ -230,7 +230,7 @@
 
             
 
-            <td class="description last">Google Token</td>
+            <td class="description last">Id of the blog to get its activity feed.</td>
         </tr>
 
     
@@ -271,7 +271,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Modules_Users_Controller_androidSignWithGoogle.js.html">Modules/Users/Controller/androidSignWithGoogle.js</a>, <a href="Modules_Users_Controller_androidSignWithGoogle.js.html#line24">line 24</a>
+        <a href="Modules_Posts_Controller_control.js.html">Modules/Posts/Controller/control.js</a>, <a href="Modules_Posts_Controller_control.js.html#line1276">line 1276</a>
     </li></ul></dd>
     
 
@@ -300,7 +300,7 @@
 
         
 <div class="param-desc">
-    - { Object }
+    .
 </div>
 
 
@@ -311,7 +311,7 @@
     </dt>
     <dd>
         
-<span class="param-type">object</span>
+<span class="param-type">string</span>
 
 
     </dd>
@@ -488,7 +488,7 @@
     
 
     
-    <h4 class="name" id="autoCompleteSearchDash"><span class="type-signature"></span>autoCompleteSearchDash<span class="signature">(userId, wordName)</span><span class="type-signature"> &rarr; {Array}</span></h4>
+    <h4 class="name" id="androidSignUpWithGoogle"><span class="type-signature">(async) </span>androidSignUpWithGoogle<span class="signature">(googleToken)</span><span class="type-signature"> &rarr; {object}</span></h4>
     
 
     
@@ -496,7 +496,7 @@
 
 
 <div class="description">
-    Applies search on posts/tags
+    This Function Used To Register New User For Android.
 </div>
 
 
@@ -532,13 +532,13 @@
 
         <tr>
             
-                <td class="name"><code>userId</code></td>
+                <td class="name"><code>googleToken</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">Object</span>
+<span class="param-type">string</span>
 
 
             
@@ -548,20 +548,156 @@
 
             
 
-            <td class="description last">get id of the user</td>
+            <td class="description last">Google Token</td>
         </tr>
 
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Modules_Users_Controller_androidSignWithGoogle.js.html">Modules/Users/Controller/androidSignWithGoogle.js</a>, <a href="Modules_Users_Controller_androidSignWithGoogle.js.html#line24">line 24</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    - { Object }
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">object</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="autoCompleteSearchDash"><span class="type-signature"></span>autoCompleteSearchDash<span class="signature">(userEmail)</span><span class="type-signature"> &rarr; {Array}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Gets interests of the user
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
     
 
         <tr>
             
-                <td class="name"><code>wordName</code></td>
+                <td class="name"><code>userEmail</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">Object</span>
+<span class="param-type">String</span>
 
 
             
@@ -571,7 +707,7 @@
 
             
 
-            <td class="description last">Holds the request body: wordName.</td>
+            <td class="description last">get email of the user</td>
         </tr>
 
     
@@ -641,11 +777,166 @@
 
         
 <div class="param-desc">
-    Result array have 4 arrays.
-                    - array 1: has the tags in posts with this regex
-                    - array 2: posts with the tags with this regex
-                    - array 3: has the blogs this regex
-                    - array 4: has the posts with interested tags this regex
+    Result array have 2 arrays.                    - array 1: has the tags followed by the user                    - array 2: posts for the tags followed by the user
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Array</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="autoCompleteSearchDashWord"><span class="type-signature"></span>autoCompleteSearchDashWord<span class="signature">(wordName)</span><span class="type-signature"> &rarr; {Array}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Applies search on posts/tags/blogs
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>wordName</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Holds the request body: wordName to search with.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Modules_Search_Search%20dashborad_Controller_control.js.html">Modules/Search/Search dashborad/Controller/control.js</a>, <a href="Modules_Search_Search%20dashborad_Controller_control.js.html#line102">line 102</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    Result array have 3 arrays.                    - array 1: has the tags in posts with this regex                    - array 2: posts with the tags with this regex                    - array 3: has the blogs this regex
 </div>
 
 
@@ -682,8 +973,7 @@
 
 
 <div class="description">
-    this function blocks the blog whose id
-             sent in the body from the blog whose id in params
+    this function blocks the blog whose id             sent in the body from the blog whose id in params
 </div>
 
 
@@ -1368,7 +1658,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Modules_Users_Controller_services.js.html">Modules/Users/Controller/services.js</a>, <a href="Modules_Users_Controller_services.js.html#line70">line 70</a>
+        <a href="Modules_Users_Controller_services.js.html">Modules/Users/Controller/services.js</a>, <a href="Modules_Users_Controller_services.js.html#line71">line 71</a>
     </li></ul></dd>
     
 
@@ -1527,7 +1817,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Modules_Users_Controller_services.js.html">Modules/Users/Controller/services.js</a>, <a href="Modules_Users_Controller_services.js.html#line70">line 70</a>
+        <a href="Modules_Users_Controller_services.js.html">Modules/Users/Controller/services.js</a>, <a href="Modules_Users_Controller_services.js.html#line71">line 71</a>
     </li></ul></dd>
     
 
@@ -1686,7 +1976,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Modules_Users_Controller_services.js.html">Modules/Users/Controller/services.js</a>, <a href="Modules_Users_Controller_services.js.html#line54">line 54</a>
+        <a href="Modules_Users_Controller_services.js.html">Modules/Users/Controller/services.js</a>, <a href="Modules_Users_Controller_services.js.html#line55">line 55</a>
     </li></ul></dd>
     
 
@@ -1845,7 +2135,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Modules_Users_Controller_services.js.html">Modules/Users/Controller/services.js</a>, <a href="Modules_Users_Controller_services.js.html#line54">line 54</a>
+        <a href="Modules_Users_Controller_services.js.html">Modules/Users/Controller/services.js</a>, <a href="Modules_Users_Controller_services.js.html#line55">line 55</a>
     </li></ul></dd>
     
 
@@ -2027,7 +2317,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Modules_Users_Controller_services.js.html">Modules/Users/Controller/services.js</a>, <a href="Modules_Users_Controller_services.js.html#line141">line 141</a>
+        <a href="Modules_Users_Controller_services.js.html">Modules/Users/Controller/services.js</a>, <a href="Modules_Users_Controller_services.js.html#line157">line 157</a>
     </li></ul></dd>
     
 
@@ -2209,7 +2499,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Modules_Users_Controller_services.js.html">Modules/Users/Controller/services.js</a>, <a href="Modules_Users_Controller_services.js.html#line141">line 141</a>
+        <a href="Modules_Users_Controller_services.js.html">Modules/Users/Controller/services.js</a>, <a href="Modules_Users_Controller_services.js.html#line157">line 157</a>
     </li></ul></dd>
     
 
@@ -2267,7 +2557,7 @@
     
 
     
-    <h4 class="name" id="createBlog"><span class="type-signature"></span>createBlog<span class="signature">(userEmail, title, name, privacy, password)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="checkPostId"><span class="type-signature">(async) </span>checkPostId<span class="signature">(id)</span><span class="type-signature"> &rarr; {boolean}</span></h4>
     
 
     
@@ -2275,8 +2565,7 @@
 
 
 <div class="description">
-    This function allows the user whose id sent in
-             params create a new blog
+    This Function Used To Check If Given post Id Is Found or Not.
 </div>
 
 
@@ -2299,6 +2588,644 @@
 
         <th>Type</th>
 
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>id</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">post id</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Modules_Users_Controller_services.js.html">Modules/Users/Controller/services.js</a>, <a href="Modules_Users_Controller_services.js.html#line283">line 283</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    [Ture , False].
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">boolean</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="checkPostId"><span class="type-signature">(async) </span>checkPostId<span class="signature">(id)</span><span class="type-signature"> &rarr; {boolean}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    This Function Used To Check If Given post Id Is Found or Not.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>id</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">post id</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Modules_Users_Controller_services.js.html">Modules/Users/Controller/services.js</a>, <a href="Modules_Users_Controller_services.js.html#line283">line 283</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    [Ture , False].
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">boolean</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="checkUserId"><span class="type-signature">(async) </span>checkUserId<span class="signature">(id)</span><span class="type-signature"> &rarr; {boolean}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    This Function Used To Check If Given User Id Is Found or Not.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>id</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">user id</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Modules_Users_Controller_services.js.html">Modules/Users/Controller/services.js</a>, <a href="Modules_Users_Controller_services.js.html#line265">line 265</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    [Ture , False].
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">boolean</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="checkUserId"><span class="type-signature">(async) </span>checkUserId<span class="signature">(id)</span><span class="type-signature"> &rarr; {boolean}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    This Function Used To Check If Given User Id Is Found or Not.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>id</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">user id</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Modules_Users_Controller_services.js.html">Modules/Users/Controller/services.js</a>, <a href="Modules_Users_Controller_services.js.html#line265">line 265</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    [Ture , False].
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">boolean</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="createBlog"><span class="type-signature"></span>createBlog<span class="signature">(userEmail, title, name, privacy, password<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    This function allows the user whose id sent in             params create a new blog
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
         
 
         
@@ -2325,6 +3252,14 @@
             </td>
 
             
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
 
             
 
@@ -2347,6 +3282,14 @@
             
             </td>
 
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
             
 
             
@@ -2371,6 +3314,14 @@
             </td>
 
             
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
 
             
 
@@ -2394,6 +3345,14 @@
             </td>
 
             
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
 
             
 
@@ -2416,6 +3375,16 @@
             
             </td>
 
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
             
 
             
@@ -2461,7 +3430,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Modules_Users_Controller_control.js.html">Modules/Users/Controller/control.js</a>, <a href="Modules_Users_Controller_control.js.html#line144">line 144</a>
+        <a href="Modules_Users_Controller_control.js.html">Modules/Users/Controller/control.js</a>, <a href="Modules_Users_Controller_control.js.html#line184">line 184</a>
     </li></ul></dd>
     
 
@@ -2507,7 +3476,7 @@
     
 
     
-    <h4 class="name" id="createBlog"><span class="type-signature"></span>createBlog<span class="signature">(userEmail, title, name, privacy, password)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="createBlog"><span class="type-signature"></span>createBlog<span class="signature">(userEmail, title, name, privacy, password<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
     
 
     
@@ -2515,8 +3484,7 @@
 
 
 <div class="description">
-    This function allows the user whose id sent in
-             params create a new blog
+    This function allows the user whose id sent in             params create a new blog
 </div>
 
 
@@ -2539,6 +3507,8 @@
 
         <th>Type</th>
 
+        
+        <th>Attributes</th>
         
 
         
@@ -2565,6 +3535,14 @@
             </td>
 
             
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
 
             
 
@@ -2587,6 +3565,14 @@
             
             </td>
 
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
             
 
             
@@ -2611,6 +3597,14 @@
             </td>
 
             
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
 
             
 
@@ -2634,6 +3628,14 @@
             </td>
 
             
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
 
             
 
@@ -2656,6 +3658,16 @@
             
             </td>
 
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
             
 
             
@@ -2701,7 +3713,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Modules_Users_Controller_control.js.html">Modules/Users/Controller/control.js</a>, <a href="Modules_Users_Controller_control.js.html#line144">line 144</a>
+        <a href="Modules_Users_Controller_control.js.html">Modules/Users/Controller/control.js</a>, <a href="Modules_Users_Controller_control.js.html#line184">line 184</a>
     </li></ul></dd>
     
 
@@ -2871,7 +3883,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Modules_Users_Controller_services.js.html">Modules/Users/Controller/services.js</a>, <a href="Modules_Users_Controller_services.js.html#line112">line 112</a>
+        <a href="Modules_Users_Controller_services.js.html">Modules/Users/Controller/services.js</a>, <a href="Modules_Users_Controller_services.js.html#line113">line 113</a>
     </li></ul></dd>
     
 
@@ -3053,7 +4065,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Modules_Users_Controller_services.js.html">Modules/Users/Controller/services.js</a>, <a href="Modules_Users_Controller_services.js.html#line112">line 112</a>
+        <a href="Modules_Users_Controller_services.js.html">Modules/Users/Controller/services.js</a>, <a href="Modules_Users_Controller_services.js.html#line113">line 113</a>
     </li></ul></dd>
     
 
@@ -3304,7 +4316,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Modules_Posts_Controller_control.js.html">Modules/Posts/Controller/control.js</a>, <a href="Modules_Posts_Controller_control.js.html#line206">line 206</a>
+        <a href="Modules_Posts_Controller_control.js.html">Modules/Posts/Controller/control.js</a>, <a href="Modules_Posts_Controller_control.js.html#line501">line 501</a>
     </li></ul></dd>
     
 
@@ -3486,7 +4498,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Modules_Users_Controller_services.js.html">Modules/Users/Controller/services.js</a>, <a href="Modules_Users_Controller_services.js.html#line156">line 156</a>
+        <a href="Modules_Users_Controller_services.js.html">Modules/Users/Controller/services.js</a>, <a href="Modules_Users_Controller_services.js.html#line172">line 172</a>
     </li></ul></dd>
     
 
@@ -3668,7 +4680,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Modules_Users_Controller_services.js.html">Modules/Users/Controller/services.js</a>, <a href="Modules_Users_Controller_services.js.html#line156">line 156</a>
+        <a href="Modules_Users_Controller_services.js.html">Modules/Users/Controller/services.js</a>, <a href="Modules_Users_Controller_services.js.html#line172">line 172</a>
     </li></ul></dd>
     
 
@@ -3896,7 +4908,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Modules_Users_Controller_services.js.html">Modules/Users/Controller/services.js</a>, <a href="Modules_Users_Controller_services.js.html#line90">line 90</a>
+        <a href="Modules_Users_Controller_services.js.html">Modules/Users/Controller/services.js</a>, <a href="Modules_Users_Controller_services.js.html#line91">line 91</a>
     </li></ul></dd>
     
 
@@ -4124,7 +5136,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Modules_Users_Controller_services.js.html">Modules/Users/Controller/services.js</a>, <a href="Modules_Users_Controller_services.js.html#line90">line 90</a>
+        <a href="Modules_Users_Controller_services.js.html">Modules/Users/Controller/services.js</a>, <a href="Modules_Users_Controller_services.js.html#line91">line 91</a>
     </li></ul></dd>
     
 
@@ -4190,8 +5202,7 @@
 
 
 <div class="description">
-    This function allows the user whose id sent in
-             params delete his blog
+    This function allows the user whose id sent in             params delete his blog
 </div>
 
 
@@ -4307,7 +5318,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Modules_Users_Controller_control.js.html">Modules/Users/Controller/control.js</a>, <a href="Modules_Users_Controller_control.js.html#line225">line 225</a>
+        <a href="Modules_Users_Controller_control.js.html">Modules/Users/Controller/control.js</a>, <a href="Modules_Users_Controller_control.js.html#line287">line 287</a>
     </li></ul></dd>
     
 
@@ -4373,8 +5384,7 @@
 
 
 <div class="description">
-    This function allows the user whose id sent in
-             params delete his blog
+    This function allows the user whose id sent in             params delete his blog
 </div>
 
 
@@ -4490,7 +5500,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Modules_Users_Controller_control.js.html">Modules/Users/Controller/control.js</a>, <a href="Modules_Users_Controller_control.js.html#line225">line 225</a>
+        <a href="Modules_Users_Controller_control.js.html">Modules/Users/Controller/control.js</a>, <a href="Modules_Users_Controller_control.js.html#line287">line 287</a>
     </li></ul></dd>
     
 
@@ -4548,7 +5558,848 @@
     
 
     
-    <h4 class="name" id="editBlog"><span class="type-signature"></span>editBlog<span class="signature">(blogId, title, accent, name, password, headerImage, background, avatar, theme, description)</span><span class="type-signature"> &rarr; {Object}</span></h4>
+    <h4 class="name" id="deletePost"><span class="type-signature"></span>deletePost<span class="signature">(postId)</span><span class="type-signature"> &rarr; {string}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Deletes a Post.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>postId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Id of the post to delete.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Modules_Posts_Controller_control.js.html">Modules/Posts/Controller/control.js</a>, <a href="Modules_Posts_Controller_control.js.html#line1165">line 1165</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    .
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">string</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="deleteUser"><span class="type-signature"></span>deleteUser<span class="signature">(userEmail)</span><span class="type-signature"> &rarr; {Object}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    This Function deletes the user (user.isDeleted=true)
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>userEmail</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">email of the user</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Modules_Users_Controller_control.js.html">Modules/Users/Controller/control.js</a>, <a href="Modules_Users_Controller_control.js.html#line388">line 388</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    - The deleted user
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Object</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="deleteUser"><span class="type-signature"></span>deleteUser<span class="signature">(userEmail)</span><span class="type-signature"> &rarr; {Object}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    This Function deletes the user (user.isDeleted=true)
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>userEmail</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">email of the user</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Modules_Users_Controller_control.js.html">Modules/Users/Controller/control.js</a>, <a href="Modules_Users_Controller_control.js.html#line388">line 388</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    - The deleted user
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Object</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="doesFollow"><span class="type-signature"></span>doesFollow<span class="signature">(userEmail, blogId)</span><span class="type-signature"> &rarr; {Object}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    this function checks if a user follows a blog
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>userEmail</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The email of the user</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>blogId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The id of the blog</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Modules_Users_Controller_control.js.html">Modules/Users/Controller/control.js</a>, <a href="Modules_Users_Controller_control.js.html#line58">line 58</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    - Returns the user if he/she follows the blog or null otherwise
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Object</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="doesFollow"><span class="type-signature"></span>doesFollow<span class="signature">(userEmail, blogId)</span><span class="type-signature"> &rarr; {Object}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    this function checks if a user follows a blog
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>userEmail</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The email of the user</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>blogId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The id of the blog</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Modules_Users_Controller_control.js.html">Modules/Users/Controller/control.js</a>, <a href="Modules_Users_Controller_control.js.html#line58">line 58</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    - Returns the user if he/she follows the blog or null otherwise
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Object</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="editBlog"><span class="type-signature"></span>editBlog<span class="signature">(blogId, accent, name, headerImage, avatar, showAvatar, title, showTitle, titleColor, background, password, theme, description, showDescription, showHeaderImage, stretchHeaderImage)</span><span class="type-signature"> &rarr; {Object}</span></h4>
     
 
     
@@ -4593,29 +6444,6 @@
         <tr>
             
                 <td class="name"><code>blogId</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">String</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">id of the blog</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>title</code></td>
             
 
             <td class="type">
@@ -4684,7 +6512,7 @@
 
         <tr>
             
-                <td class="name"><code>password</code></td>
+                <td class="name"><code>headerImage</code></td>
             
 
             <td class="type">
@@ -4707,7 +6535,99 @@
 
         <tr>
             
-                <td class="name"><code>headerImage</code></td>
+                <td class="name"><code>avatar</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>showAvatar</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>title</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>showTitle</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>titleColor</code></td>
             
 
             <td class="type">
@@ -4753,7 +6673,7 @@
 
         <tr>
             
-                <td class="name"><code>avatar</code></td>
+                <td class="name"><code>password</code></td>
             
 
             <td class="type">
@@ -4819,6 +6739,75 @@
         </tr>
 
     
+
+        <tr>
+            
+                <td class="name"><code>showDescription</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>showHeaderImage</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>stretchHeaderImage</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
     </tbody>
 </table>
 
@@ -4856,7 +6845,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Modules_Blogs_Controller_control.js.html">Modules/Blogs/Controller/control.js</a>, <a href="Modules_Blogs_Controller_control.js.html#line85">line 85</a>
+        <a href="Modules_Blogs_Controller_control.js.html">Modules/Blogs/Controller/control.js</a>, <a href="Modules_Blogs_Controller_control.js.html#line83">line 83</a>
     </li></ul></dd>
     
 
@@ -4914,7 +6903,7 @@
     
 
     
-    <h4 class="name" id="followBlog"><span class="type-signature"></span>followBlog<span class="signature">(userId, blogId)</span><span class="type-signature"> &rarr; {Object}</span></h4>
+    <h4 class="name" id="editPost"><span class="type-signature"></span>editPost<span class="signature">(postId)</span><span class="type-signature"> &rarr; {string}</span></h4>
     
 
     
@@ -4922,8 +6911,7 @@
 
 
 <div class="description">
-    this function makes the user whose id sent in
-             params follow the blog whose id in the body
+    Edits a Post.
 </div>
 
 
@@ -4959,7 +6947,166 @@
 
         <tr>
             
-                <td class="name"><code>userId</code></td>
+                <td class="name"><code>postId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Id of the post to edit.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Modules_Posts_Controller_control.js.html">Modules/Posts/Controller/control.js</a>, <a href="Modules_Posts_Controller_control.js.html#line1211">line 1211</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    .
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">string</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="followBlog"><span class="type-signature"></span>followBlog<span class="signature">(userEmail, blogId)</span><span class="type-signature"> &rarr; {Object}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    this function makes the user whose id sent in             params follow the blog whose id in the body
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>userEmail</code></td>
             
 
             <td class="type">
@@ -4975,7 +7122,7 @@
 
             
 
-            <td class="description last">The id of the user who follows the blog</td>
+            <td class="description last">The email of the user who follows the blog</td>
         </tr>
 
     
@@ -5039,7 +7186,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Modules_Users_Controller_control.js.html">Modules/Users/Controller/control.js</a>, <a href="Modules_Users_Controller_control.js.html#line58">line 58</a>
+        <a href="Modules_Users_Controller_control.js.html">Modules/Users/Controller/control.js</a>, <a href="Modules_Users_Controller_control.js.html#line80">line 80</a>
     </li></ul></dd>
     
 
@@ -5097,7 +7244,7 @@
     
 
     
-    <h4 class="name" id="followBlog"><span class="type-signature"></span>followBlog<span class="signature">(userId, blogId)</span><span class="type-signature"> &rarr; {Object}</span></h4>
+    <h4 class="name" id="followBlog"><span class="type-signature"></span>followBlog<span class="signature">(userEmail, blogId)</span><span class="type-signature"> &rarr; {Object}</span></h4>
     
 
     
@@ -5105,8 +7252,7 @@
 
 
 <div class="description">
-    this function makes the user whose id sent in
-             params follow the blog whose id in the body
+    this function makes the user whose id sent in             params follow the blog whose id in the body
 </div>
 
 
@@ -5142,7 +7288,7 @@
 
         <tr>
             
-                <td class="name"><code>userId</code></td>
+                <td class="name"><code>userEmail</code></td>
             
 
             <td class="type">
@@ -5158,7 +7304,7 @@
 
             
 
-            <td class="description last">The id of the user who follows the blog</td>
+            <td class="description last">The email of the user who follows the blog</td>
         </tr>
 
     
@@ -5222,7 +7368,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Modules_Users_Controller_control.js.html">Modules/Users/Controller/control.js</a>, <a href="Modules_Users_Controller_control.js.html#line58">line 58</a>
+        <a href="Modules_Users_Controller_control.js.html">Modules/Users/Controller/control.js</a>, <a href="Modules_Users_Controller_control.js.html#line80">line 80</a>
     </li></ul></dd>
     
 
@@ -5722,7 +7868,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Modules_Users_Controller_services.js.html">Modules/Users/Controller/services.js</a>, <a href="Modules_Users_Controller_services.js.html#line211">line 211</a>
+        <a href="Modules_Users_Controller_services.js.html">Modules/Users/Controller/services.js</a>, <a href="Modules_Users_Controller_services.js.html#line232">line 232</a>
     </li></ul></dd>
     
 
@@ -5892,7 +8038,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Modules_Users_Controller_services.js.html">Modules/Users/Controller/services.js</a>, <a href="Modules_Users_Controller_services.js.html#line211">line 211</a>
+        <a href="Modules_Users_Controller_services.js.html">Modules/Users/Controller/services.js</a>, <a href="Modules_Users_Controller_services.js.html#line232">line 232</a>
     </li></ul></dd>
     
 
@@ -5925,6 +8071,483 @@
 </div>
 
 
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="getBlogIdFromPostId"><span class="type-signature">(async) </span>getBlogIdFromPostId<span class="signature">(id)</span><span class="type-signature"> &rarr; {string}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    This Function Used To get BlogId From PostId.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>id</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">post id</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Modules_Users_Controller_services.js.html">Modules/Users/Controller/services.js</a>, <a href="Modules_Users_Controller_services.js.html#line330">line 330</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    Blog Id.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">string</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="getBlogIdFromPostId"><span class="type-signature">(async) </span>getBlogIdFromPostId<span class="signature">(id)</span><span class="type-signature"> &rarr; {string}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    This Function Used To get BlogId From PostId.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>id</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">post id</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Modules_Users_Controller_services.js.html">Modules/Users/Controller/services.js</a>, <a href="Modules_Users_Controller_services.js.html#line330">line 330</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    Blog Id.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">string</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="getBlogPosts"><span class="type-signature"></span>getBlogPosts<span class="signature">(blogId)</span><span class="type-signature"> &rarr; {string}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Get dashboard of a blog.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>blogId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Id of the blog to get its posts.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Modules_Posts_Controller_control.js.html">Modules/Posts/Controller/control.js</a>, <a href="Modules_Posts_Controller_control.js.html#line1116">line 1116</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    Array of posts objects.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">string</span>
+
+
+    </dd>
+</dl>
 
     
 
@@ -6062,7 +8685,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Modules_Posts_Controller_control.js.html">Modules/Posts/Controller/control.js</a>, <a href="Modules_Posts_Controller_control.js.html#line635">line 635</a>
+        <a href="Modules_Posts_Controller_control.js.html">Modules/Posts/Controller/control.js</a>, <a href="Modules_Posts_Controller_control.js.html#line1035">line 1035</a>
     </li></ul></dd>
     
 
@@ -6120,7 +8743,7 @@
     
 
     
-    <h4 class="name" id="getInterestsFromUser"><span class="type-signature"></span>getInterestsFromUser<span class="signature">(userEmail)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="getIdFromToken"><span class="type-signature">(async) </span>getIdFromToken<span class="signature">(token)</span><span class="type-signature"> &rarr; {string}</span></h4>
     
 
     
@@ -6128,8 +8751,325 @@
 
 
 <div class="description">
-    This function get from the user his interest tags(followedTags)
-               choosen while signing up
+    This Function Used To get User Id From Email.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>token</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">user token</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Modules_Users_Controller_services.js.html">Modules/Users/Controller/services.js</a>, <a href="Modules_Users_Controller_services.js.html#line344">line 344</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    user Id.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">string</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="getIdFromToken"><span class="type-signature">(async) </span>getIdFromToken<span class="signature">(token)</span><span class="type-signature"> &rarr; {string}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    This Function Used To get User Id From Email.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>token</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">user token</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Modules_Users_Controller_services.js.html">Modules/Users/Controller/services.js</a>, <a href="Modules_Users_Controller_services.js.html#line344">line 344</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    user Id.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">string</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="getInterests"><span class="type-signature"></span>getInterests<span class="signature">(userEmail, interstArr)</span><span class="type-signature"> &rarr; {Object}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    This function get from the user his interest tags(followedTags)               choosen while signing up
 </div>
 
 
@@ -6181,7 +9121,30 @@
 
             
 
-            <td class="description last">id of the user</td>
+            <td class="description last">email of the user</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>interstArr</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">interests tags array</td>
         </tr>
 
     
@@ -6222,7 +9185,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Modules_Users_Controller_control.js.html">Modules/Users/Controller/control.js</a>, <a href="Modules_Users_Controller_control.js.html#line285">line 285</a>
+        <a href="Modules_Users_Controller_control.js.html">Modules/Users/Controller/control.js</a>, <a href="Modules_Users_Controller_control.js.html#line346">line 346</a>
     </li></ul></dd>
     
 
@@ -6247,6 +9210,28 @@
 
 
 
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    - The user with updated interests
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Object</span>
+
+
+    </dd>
+</dl>
+
+    
 
 
 
@@ -6258,7 +9243,7 @@
     
 
     
-    <h4 class="name" id="getInterestsFromUser"><span class="type-signature"></span>getInterestsFromUser<span class="signature">(userEmail)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="getInterests"><span class="type-signature"></span>getInterests<span class="signature">(userEmail, interstArr)</span><span class="type-signature"> &rarr; {Object}</span></h4>
     
 
     
@@ -6266,8 +9251,7 @@
 
 
 <div class="description">
-    This function get from the user his interest tags(followedTags)
-               choosen while signing up
+    This function get from the user his interest tags(followedTags)               choosen while signing up
 </div>
 
 
@@ -6319,7 +9303,30 @@
 
             
 
-            <td class="description last">id of the user</td>
+            <td class="description last">email of the user</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>interstArr</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">interests tags array</td>
         </tr>
 
     
@@ -6360,7 +9367,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Modules_Users_Controller_control.js.html">Modules/Users/Controller/control.js</a>, <a href="Modules_Users_Controller_control.js.html#line285">line 285</a>
+        <a href="Modules_Users_Controller_control.js.html">Modules/Users/Controller/control.js</a>, <a href="Modules_Users_Controller_control.js.html#line346">line 346</a>
     </li></ul></dd>
     
 
@@ -6385,6 +9392,187 @@
 
 
 
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    - The user with updated interests
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Object</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="getLikedPosts"><span class="type-signature"></span>getLikedPosts<span class="signature">(blogId)</span><span class="type-signature"> &rarr; {string}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Get Liked Posts of a user.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>blogId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Id of the blog to get its posts.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Modules_Posts_Controller_control.js.html">Modules/Posts/Controller/control.js</a>, <a href="Modules_Posts_Controller_control.js.html#line1387">line 1387</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    Array of posts objects.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">string</span>
+
+
+    </dd>
+</dl>
+
+    
 
 
 
@@ -6497,7 +9685,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Modules_Posts_Controller_control.js.html">Modules/Posts/Controller/control.js</a>, <a href="Modules_Posts_Controller_control.js.html#line589">line 589</a>
+        <a href="Modules_Posts_Controller_control.js.html">Modules/Posts/Controller/control.js</a>, <a href="Modules_Posts_Controller_control.js.html#line943">line 943</a>
     </li></ul></dd>
     
 
@@ -6527,6 +9715,642 @@
         
 <div class="param-desc">
     Array of arrays, contains 4 arrays: likesArray, commentsArray, reblogsArray, countsArray(likesCount, reblogsCount, notesCount)
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">string</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="getUserIdFromBlogName"><span class="type-signature">(async) </span>getUserIdFromBlogName<span class="signature">(blogName)</span><span class="type-signature"> &rarr; {string}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    This Function Used To get User Id From Blog Name.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>blogName</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">blog name</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Modules_Users_Controller_services.js.html">Modules/Users/Controller/services.js</a>, <a href="Modules_Users_Controller_services.js.html#line365">line 365</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    user Id.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">string</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="getUserIdFromBlogName"><span class="type-signature">(async) </span>getUserIdFromBlogName<span class="signature">(blogName)</span><span class="type-signature"> &rarr; {string}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    This Function Used To get User Id From Blog Name.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>blogName</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">blog name</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Modules_Users_Controller_services.js.html">Modules/Users/Controller/services.js</a>, <a href="Modules_Users_Controller_services.js.html#line365">line 365</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    user Id.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">string</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="getUserIdFromPostId"><span class="type-signature">(async) </span>getUserIdFromPostId<span class="signature">(id)</span><span class="type-signature"> &rarr; {string}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    This Function Used To get UserId From PostId.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>id</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">post id</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Modules_Users_Controller_services.js.html">Modules/Users/Controller/services.js</a>, <a href="Modules_Users_Controller_services.js.html#line301">line 301</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    User Id.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">string</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="getUserIdFromPostId"><span class="type-signature">(async) </span>getUserIdFromPostId<span class="signature">(id)</span><span class="type-signature"> &rarr; {string}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    This Function Used To get UserId From PostId.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>id</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">post id</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Modules_Users_Controller_services.js.html">Modules/Users/Controller/services.js</a>, <a href="Modules_Users_Controller_services.js.html#line301">line 301</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    User Id.
 </div>
 
 
@@ -7298,6 +11122,370 @@
     
 
     
+    <h4 class="name" id="isBlocked"><span class="type-signature"></span>isBlocked<span class="signature">(userEmail, blogId)</span><span class="type-signature"> &rarr; {Object}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    this function checks if a blog of a user blocks a blog
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>userEmail</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The email of the user</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>blogId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The id of the blog</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Modules_Users_Controller_services.js.html">Modules/Users/Controller/services.js</a>, <a href="Modules_Users_Controller_services.js.html#line373">line 373</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    - Returns the true if one of the user blogs blocks the blog
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Object</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="isBlocked"><span class="type-signature"></span>isBlocked<span class="signature">(userEmail, blogId)</span><span class="type-signature"> &rarr; {Object}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    this function checks if a blog of a user blocks a blog
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>userEmail</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The email of the user</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>blogId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The id of the blog</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Modules_Users_Controller_services.js.html">Modules/Users/Controller/services.js</a>, <a href="Modules_Users_Controller_services.js.html#line373">line 373</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    - Returns the true if one of the user blogs blocks the blog
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Object</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
     <h4 class="name" id="likePress"><span class="type-signature"></span>likePress<span class="signature">(blogId, postId)</span><span class="type-signature"> &rarr; {string}</span></h4>
     
 
@@ -7422,7 +11610,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Modules_Posts_Controller_control.js.html">Modules/Posts/Controller/control.js</a>, <a href="Modules_Posts_Controller_control.js.html#line389">line 389</a>
+        <a href="Modules_Posts_Controller_control.js.html">Modules/Posts/Controller/control.js</a>, <a href="Modules_Posts_Controller_control.js.html#line706">line 706</a>
     </li></ul></dd>
     
 
@@ -7968,7 +12156,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Modules_Posts_Controller_control.js.html">Modules/Posts/Controller/control.js</a>, <a href="Modules_Posts_Controller_control.js.html#line337">line 337</a>
+        <a href="Modules_Posts_Controller_control.js.html">Modules/Posts/Controller/control.js</a>, <a href="Modules_Posts_Controller_control.js.html#line646">line 646</a>
     </li></ul></dd>
     
 
@@ -8173,7 +12361,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Modules_Posts_Controller_control.js.html">Modules/Posts/Controller/control.js</a>, <a href="Modules_Posts_Controller_control.js.html#line361">line 361</a>
+        <a href="Modules_Posts_Controller_control.js.html">Modules/Posts/Controller/control.js</a>, <a href="Modules_Posts_Controller_control.js.html#line678">line 678</a>
     </li></ul></dd>
     
 
@@ -8378,7 +12566,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Modules_Posts_Controller_control.js.html">Modules/Posts/Controller/control.js</a>, <a href="Modules_Posts_Controller_control.js.html#line276">line 276</a>
+        <a href="Modules_Posts_Controller_control.js.html">Modules/Posts/Controller/control.js</a>, <a href="Modules_Posts_Controller_control.js.html#line590">line 590</a>
     </li></ul></dd>
     
 
@@ -8583,7 +12771,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Modules_Posts_Controller_control.js.html">Modules/Posts/Controller/control.js</a>, <a href="Modules_Posts_Controller_control.js.html#line443">line 443</a>
+        <a href="Modules_Posts_Controller_control.js.html">Modules/Posts/Controller/control.js</a>, <a href="Modules_Posts_Controller_control.js.html#line785">line 785</a>
     </li></ul></dd>
     
 
@@ -8765,7 +12953,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Modules_Posts_Controller_control.js.html">Modules/Posts/Controller/control.js</a>, <a href="Modules_Posts_Controller_control.js.html#line498">line 498</a>
+        <a href="Modules_Posts_Controller_control.js.html">Modules/Posts/Controller/control.js</a>, <a href="Modules_Posts_Controller_control.js.html#line841">line 841</a>
     </li></ul></dd>
     
 
@@ -8947,7 +13135,166 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Modules_Posts_Controller_control.js.html">Modules/Posts/Controller/control.js</a>, <a href="Modules_Posts_Controller_control.js.html#line544">line 544</a>
+        <a href="Modules_Posts_Controller_control.js.html">Modules/Posts/Controller/control.js</a>, <a href="Modules_Posts_Controller_control.js.html#line892">line 892</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    .
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">string</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="reportPost"><span class="type-signature"></span>reportPost<span class="signature">(postId)</span><span class="type-signature"> &rarr; {string}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Reports a Post.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>postId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Id of the post to report.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Modules_Posts_Controller_control.js.html">Modules/Posts/Controller/control.js</a>, <a href="Modules_Posts_Controller_control.js.html#line1244">line 1244</a>
     </li></ul></dd>
     
 
@@ -9516,7 +13863,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Modules_Blogs_Controller_control.js.html">Modules/Blogs/Controller/control.js</a>, <a href="Modules_Blogs_Controller_control.js.html#line176">line 176</a>
+        <a href="Modules_Blogs_Controller_control.js.html">Modules/Blogs/Controller/control.js</a>, <a href="Modules_Blogs_Controller_control.js.html#line210">line 210</a>
     </li></ul></dd>
     
 
@@ -9574,7 +13921,7 @@
     
 
     
-    <h4 class="name" id="retrieveRandomBlogs"><span class="type-signature"></span>retrieveRandomBlogs<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="retrieveRandomBlogs"><span class="type-signature"></span>retrieveRandomBlogs<span class="signature">()</span><span class="type-signature"> &rarr; {Array}</span></h4>
     
 
     
@@ -9582,7 +13929,7 @@
 
 
 <div class="description">
-    This function gets random blogs for explore
+    This function gets random blogs for explore/checkout these blogs
 </div>
 
 
@@ -9626,7 +13973,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Modules_Blogs_Controller_control.js.html">Modules/Blogs/Controller/control.js</a>, <a href="Modules_Blogs_Controller_control.js.html#line201">line 201</a>
+        <a href="Modules_Blogs_Controller_control.js.html">Modules/Blogs/Controller/control.js</a>, <a href="Modules_Blogs_Controller_control.js.html#line236">line 236</a>
     </li></ul></dd>
     
 
@@ -9651,6 +13998,28 @@
 
 
 
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    - Array of blogs
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Array</span>
+
+
+    </dd>
+</dl>
+
+    
 
 
 
@@ -9662,7 +14031,7 @@
     
 
     
-    <h4 class="name" id="retrieveRandomPosts"><span class="type-signature"></span>retrieveRandomPosts<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="retrieveRandomPosts"><span class="type-signature"></span>retrieveRandomPosts<span class="signature">()</span><span class="type-signature"> &rarr; {Array}</span></h4>
     
 
     
@@ -9670,7 +14039,7 @@
 
 
 <div class="description">
-    This function gets random posts for explore
+    This function gets random posts for explore/radar
 </div>
 
 
@@ -9714,7 +14083,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Modules_Posts_Controller_control.js.html">Modules/Posts/Controller/control.js</a>, <a href="Modules_Posts_Controller_control.js.html#line135">line 135</a>
+        <a href="Modules_Posts_Controller_control.js.html">Modules/Posts/Controller/control.js</a>, <a href="Modules_Posts_Controller_control.js.html#line361">line 361</a>
     </li></ul></dd>
     
 
@@ -9739,6 +14108,28 @@
 
 
 
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    - Array of posts
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Array</span>
+
+
+    </dd>
+</dl>
+
+    
 
 
 
@@ -9750,7 +14141,7 @@
     
 
     
-    <h4 class="name" id="retrieveTrendingPosts"><span class="type-signature"></span>retrieveTrendingPosts<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="retrieveTrendingPosts"><span class="type-signature"></span>retrieveTrendingPosts<span class="signature">()</span><span class="type-signature"> &rarr; {Array}</span></h4>
     
 
     
@@ -9758,7 +14149,7 @@
 
 
 <div class="description">
-    This function gets random posts for explore
+    This function gets trending posts for explore
 </div>
 
 
@@ -9802,7 +14193,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Modules_Posts_Controller_control.js.html">Modules/Posts/Controller/control.js</a>, <a href="Modules_Posts_Controller_control.js.html#line154">line 154</a>
+        <a href="Modules_Posts_Controller_control.js.html">Modules/Posts/Controller/control.js</a>, <a href="Modules_Posts_Controller_control.js.html#line388">line 388</a>
     </li></ul></dd>
     
 
@@ -9827,6 +14218,346 @@
 
 
 
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    - Array of trending posts
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Array</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="retrieveUser"><span class="type-signature"></span>retrieveUser<span class="signature">(userId)</span><span class="type-signature"> &rarr; {Object}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    This Function retrieves a user
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>userId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Id of the user</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Modules_Users_Controller_control.js.html">Modules/Users/Controller/control.js</a>, <a href="Modules_Users_Controller_control.js.html#line414">line 414</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    - The user
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Object</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="retrieveUser"><span class="type-signature"></span>retrieveUser<span class="signature">(userId)</span><span class="type-signature"> &rarr; {Object}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    This Function retrieves a user
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>userId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Id of the user</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Modules_Users_Controller_control.js.html">Modules/Users/Controller/control.js</a>, <a href="Modules_Users_Controller_control.js.html#line414">line 414</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    - The user
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Object</span>
+
+
+    </dd>
+</dl>
+
+    
 
 
 
@@ -9890,7 +14621,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Modules_Search_Search%20dashborad_Controller_control.js.html">Modules/Search/Search dashborad/Controller/control.js</a>, <a href="Modules_Search_Search%20dashborad_Controller_control.js.html#line123">line 123</a>
+        <a href="Modules_Search_Search%20dashborad_Controller_control.js.html">Modules/Search/Search dashborad/Controller/control.js</a>, <a href="Modules_Search_Search%20dashborad_Controller_control.js.html#line161">line 161</a>
     </li></ul></dd>
     
 
@@ -10027,7 +14758,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Modules_Posts_Controller_control.js.html">Modules/Posts/Controller/control.js</a>, <a href="Modules_Posts_Controller_control.js.html#line245">line 245</a>
+        <a href="Modules_Posts_Controller_control.js.html">Modules/Posts/Controller/control.js</a>, <a href="Modules_Posts_Controller_control.js.html#line556">line 556</a>
     </li></ul></dd>
     
 
@@ -10549,8 +15280,7 @@
 
 
 <div class="description">
-    this function remove the blog whose id sent in
-             the body from blocked blogs of the blog whose id in params
+    this function remove the blog whose id sent in             the body from blocked blogs of the blog whose id in params
 </div>
 
 
@@ -10666,7 +15396,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Modules_Blogs_Controller_control.js.html">Modules/Blogs/Controller/control.js</a>, <a href="Modules_Blogs_Controller_control.js.html#line48">line 48</a>
+        <a href="Modules_Blogs_Controller_control.js.html">Modules/Blogs/Controller/control.js</a>, <a href="Modules_Blogs_Controller_control.js.html#line49">line 49</a>
     </li></ul></dd>
     
 
@@ -10724,7 +15454,7 @@
     
 
     
-    <h4 class="name" id="unfollowBlog"><span class="type-signature"></span>unfollowBlog<span class="signature">(userId, blogId)</span><span class="type-signature"> &rarr; {Object}</span></h4>
+    <h4 class="name" id="unfollowBlog"><span class="type-signature"></span>unfollowBlog<span class="signature">(userEmail, blogId)</span><span class="type-signature"> &rarr; {Object}</span></h4>
     
 
     
@@ -10732,8 +15462,7 @@
 
 
 <div class="description">
-    this function removes the user whose id sent in
-              params from followers of the blog whose id in the body
+    this function removes the user whose id sent in              params from followers of the blog whose id in the body
 </div>
 
 
@@ -10769,7 +15498,7 @@
 
         <tr>
             
-                <td class="name"><code>userId</code></td>
+                <td class="name"><code>userEmail</code></td>
             
 
             <td class="type">
@@ -10785,7 +15514,7 @@
 
             
 
-            <td class="description last">The id of the user who unfollows the blog</td>
+            <td class="description last">The email of the user who unfollows the blog</td>
         </tr>
 
     
@@ -10849,7 +15578,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Modules_Users_Controller_control.js.html">Modules/Users/Controller/control.js</a>, <a href="Modules_Users_Controller_control.js.html#line101">line 101</a>
+        <a href="Modules_Users_Controller_control.js.html">Modules/Users/Controller/control.js</a>, <a href="Modules_Users_Controller_control.js.html#line123">line 123</a>
     </li></ul></dd>
     
 
@@ -10907,7 +15636,7 @@
     
 
     
-    <h4 class="name" id="unfollowBlog"><span class="type-signature"></span>unfollowBlog<span class="signature">(userId, blogId)</span><span class="type-signature"> &rarr; {Object}</span></h4>
+    <h4 class="name" id="unfollowBlog"><span class="type-signature"></span>unfollowBlog<span class="signature">(userEmail, blogId)</span><span class="type-signature"> &rarr; {Object}</span></h4>
     
 
     
@@ -10915,8 +15644,7 @@
 
 
 <div class="description">
-    this function removes the user whose id sent in
-              params from followers of the blog whose id in the body
+    this function removes the user whose id sent in              params from followers of the blog whose id in the body
 </div>
 
 
@@ -10952,7 +15680,7 @@
 
         <tr>
             
-                <td class="name"><code>userId</code></td>
+                <td class="name"><code>userEmail</code></td>
             
 
             <td class="type">
@@ -10968,7 +15696,7 @@
 
             
 
-            <td class="description last">The id of the user who unfollows the blog</td>
+            <td class="description last">The email of the user who unfollows the blog</td>
         </tr>
 
     
@@ -11032,7 +15760,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Modules_Users_Controller_control.js.html">Modules/Users/Controller/control.js</a>, <a href="Modules_Users_Controller_control.js.html#line101">line 101</a>
+        <a href="Modules_Users_Controller_control.js.html">Modules/Users/Controller/control.js</a>, <a href="Modules_Users_Controller_control.js.html#line123">line 123</a>
     </li></ul></dd>
     
 
@@ -11079,6 +15807,1459 @@
 </dl>
 
     
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="updateColor"><span class="type-signature"></span>updateColor<span class="signature">(userEmail, colorNumb)</span><span class="type-signature"> &rarr; {Object}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    This function updates the color theme
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>userEmail</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">email of the user</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>colorNumb</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">the color number wants to be updated</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Modules_Users_Controller_control.js.html">Modules/Users/Controller/control.js</a>, <a href="Modules_Users_Controller_control.js.html#line370">line 370</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    - The user with updated color
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Object</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="updateColor"><span class="type-signature"></span>updateColor<span class="signature">(userEmail, colorNumb)</span><span class="type-signature"> &rarr; {Object}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    This function updates the color theme
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>userEmail</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">email of the user</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>colorNumb</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">the color number wants to be updated</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Modules_Users_Controller_control.js.html">Modules/Users/Controller/control.js</a>, <a href="Modules_Users_Controller_control.js.html#line370">line 370</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    - The user with updated color
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Object</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="uploadAny"><span class="type-signature"></span>uploadAny<span class="signature">(blobName, type)</span><span class="type-signature"> &rarr; {String}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    This function upload this media(image/audio/video) comes from function uploadImgBase on server cloud
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>blobName</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">media name</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>type</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">media type</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Modules_Posts_Controller_control.js.html">Modules/Posts/Controller/control.js</a>, <a href="Modules_Posts_Controller_control.js.html#line187">line 187</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    - Url of media uploaded on server cloud
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">String</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="uploadImgBase"><span class="type-signature"></span>uploadImgBase<span class="signature">(files)</span><span class="type-signature"> &rarr; {Array}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    This function changes media from base64 to normal media base according to its type(image/audio/video)             and calls function uploadAny to upload this media on server cloud
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>files</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">string or array of strings according number of media                             asserted to the function</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Modules_Posts_Controller_control.js.html">Modules/Posts/Controller/control.js</a>, <a href="Modules_Posts_Controller_control.js.html#line224">line 224</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    - Array of Urls with links of media uploaded on server cloud
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Array</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="uploadImgg"><span class="type-signature"></span>uploadImgg<span class="signature">()</span><span class="type-signature"> &rarr; {String}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    This function upload data in text file on server cloud
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Modules_Posts_Controller_control.js.html">Modules/Posts/Controller/control.js</a>, <a href="Modules_Posts_Controller_control.js.html#line320">line 320</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    - Url of media uploaded on server cloud
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">String</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="uploadLocalImg"><span class="type-signature"></span>uploadLocalImg<span class="signature">(files)</span><span class="type-signature"> &rarr; {String}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    This function upload this media(image/audio/video) files               after changing from base64 on local storage
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>files</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">string or array of strings according number of media                             asserted to the function</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Modules_Posts_Controller_control.js.html">Modules/Posts/Controller/control.js</a>, <a href="Modules_Posts_Controller_control.js.html#line81">line 81</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    - success message
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">String</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="uploadStream"><span class="type-signature"></span>uploadStream<span class="signature">(files)</span><span class="type-signature"> &rarr; {Array}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    This function upload this media(image/audio/video) files not base64
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>files</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">file or array of files according number of media                             asserted to the function</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Modules_Posts_Controller_control.js.html">Modules/Posts/Controller/control.js</a>, <a href="Modules_Posts_Controller_control.js.html#line134">line 134</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    - Array of names of media on server
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Array</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="userUnblockBlog"><span class="type-signature"></span>userUnblockBlog<span class="signature">(userEmail, blogId)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    this function makes all blogs of a user unblock a blog
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>userEmail</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The email of the user</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>blogId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The id of the blog</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Modules_Users_Controller_services.js.html">Modules/Users/Controller/services.js</a>, <a href="Modules_Users_Controller_services.js.html#line394">line 394</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="userUnblockBlog"><span class="type-signature"></span>userUnblockBlog<span class="signature">(userEmail, blogId)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    this function makes all blogs of a user unblock a blog
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>userEmail</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The email of the user</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>blogId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The id of the blog</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Modules_Users_Controller_services.js.html">Modules/Users/Controller/services.js</a>, <a href="Modules_Users_Controller_services.js.html#line394">line 394</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -11509,7 +17690,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Modules_Users_Controller_services.js.html">Modules/Users/Controller/services.js</a>, <a href="Modules_Users_Controller_services.js.html#line23">line 23</a>
+        <a href="Modules_Users_Controller_services.js.html">Modules/Users/Controller/services.js</a>, <a href="Modules_Users_Controller_services.js.html#line24">line 24</a>
     </li></ul></dd>
     
 
@@ -11656,7 +17837,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Modules_Users_Controller_services.js.html">Modules/Users/Controller/services.js</a>, <a href="Modules_Users_Controller_services.js.html#line23">line 23</a>
+        <a href="Modules_Users_Controller_services.js.html">Modules/Users/Controller/services.js</a>, <a href="Modules_Users_Controller_services.js.html#line24">line 24</a>
     </li></ul></dd>
     
 
@@ -11712,13 +17893,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#androidSignUpWithGoogle">androidSignUpWithGoogle</a></li><li><a href="global.html#autoCompleteSearchDash">autoCompleteSearchDash</a></li><li><a href="global.html#blockBlog">blockBlog</a></li><li><a href="global.html#changeEmail">changeEmail</a></li><li><a href="global.html#checkBlogName">checkBlogName</a></li><li><a href="global.html#checkMail">checkMail</a></li><li><a href="global.html#checkPassword">checkPassword</a></li><li><a href="global.html#createBlog">createBlog</a></li><li><a href="global.html#createGoogleUser">createGoogleUser</a></li><li><a href="global.html#createPost">createPost</a></li><li><a href="global.html#createPrimaryBlog">createPrimaryBlog</a></li><li><a href="global.html#createUser">createUser</a></li><li><a href="global.html#deleteBlog">deleteBlog</a></li><li><a href="global.html#editBlog">editBlog</a></li><li><a href="global.html#followBlog">followBlog</a></li><li><a href="global.html#forgetPassword">forgetPassword</a></li><li><a href="global.html#forgetPasswordMail">forgetPasswordMail</a></li><li><a href="global.html#getDashboard">getDashboard</a></li><li><a href="global.html#getInterestsFromUser">getInterestsFromUser</a></li><li><a href="global.html#getNotes">getNotes</a></li><li><a href="global.html#google">google</a></li><li><a href="global.html#googleInfo">googleInfo</a></li><li><a href="global.html#isAuthorized">isAuthorized</a></li><li><a href="global.html#likePress">likePress</a></li><li><a href="global.html#login">login</a></li><li><a href="global.html#loopAndCheck">loopAndCheck</a></li><li><a href="global.html#loopObjAndCheck">loopObjAndCheck</a></li><li><a href="global.html#makePost">makePost</a></li><li><a href="global.html#mongoose">mongoose</a></li><li><a href="global.html#reblogPost">reblogPost</a></li><li><a href="global.html#removeComment">removeComment</a></li><li><a href="global.html#removeReblog">removeReblog</a></li><li><a href="global.html#resetPassword">resetPassword</a></li><li><a href="global.html#retrieveBlog">retrieveBlog</a></li><li><a href="global.html#retrieveRandomBlogs">retrieveRandomBlogs</a></li><li><a href="global.html#retrieveRandomPosts">retrieveRandomPosts</a></li><li><a href="global.html#retrieveTrendingPosts">retrieveTrendingPosts</a></li><li><a href="global.html#search">search</a></li><li><a href="global.html#showPost">showPost</a></li><li><a href="global.html#signUp">signUp</a></li><li><a href="global.html#unblockBlog">unblockBlog</a></li><li><a href="global.html#unfollowBlog">unfollowBlog</a></li><li><a href="global.html#verfiyAccount">verfiyAccount</a></li><li><a href="global.html#verifyMail">verifyMail</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#activityFeed">activityFeed</a></li><li><a href="global.html#androidSignUpWithGoogle">androidSignUpWithGoogle</a></li><li><a href="global.html#autoCompleteSearchDash">autoCompleteSearchDash</a></li><li><a href="global.html#autoCompleteSearchDashWord">autoCompleteSearchDashWord</a></li><li><a href="global.html#blockBlog">blockBlog</a></li><li><a href="global.html#changeEmail">changeEmail</a></li><li><a href="global.html#checkBlogName">checkBlogName</a></li><li><a href="global.html#checkMail">checkMail</a></li><li><a href="global.html#checkPassword">checkPassword</a></li><li><a href="global.html#checkPostId">checkPostId</a></li><li><a href="global.html#checkUserId">checkUserId</a></li><li><a href="global.html#createBlog">createBlog</a></li><li><a href="global.html#createGoogleUser">createGoogleUser</a></li><li><a href="global.html#createPost">createPost</a></li><li><a href="global.html#createPrimaryBlog">createPrimaryBlog</a></li><li><a href="global.html#createUser">createUser</a></li><li><a href="global.html#deleteBlog">deleteBlog</a></li><li><a href="global.html#deletePost">deletePost</a></li><li><a href="global.html#deleteUser">deleteUser</a></li><li><a href="global.html#doesFollow">doesFollow</a></li><li><a href="global.html#editBlog">editBlog</a></li><li><a href="global.html#editPost">editPost</a></li><li><a href="global.html#followBlog">followBlog</a></li><li><a href="global.html#forgetPassword">forgetPassword</a></li><li><a href="global.html#forgetPasswordMail">forgetPasswordMail</a></li><li><a href="global.html#getBlogIdFromPostId">getBlogIdFromPostId</a></li><li><a href="global.html#getBlogPosts">getBlogPosts</a></li><li><a href="global.html#getDashboard">getDashboard</a></li><li><a href="global.html#getIdFromToken">getIdFromToken</a></li><li><a href="global.html#getInterests">getInterests</a></li><li><a href="global.html#getLikedPosts">getLikedPosts</a></li><li><a href="global.html#getNotes">getNotes</a></li><li><a href="global.html#getUserIdFromBlogName">getUserIdFromBlogName</a></li><li><a href="global.html#getUserIdFromPostId">getUserIdFromPostId</a></li><li><a href="global.html#google">google</a></li><li><a href="global.html#googleInfo">googleInfo</a></li><li><a href="global.html#isAuthorized">isAuthorized</a></li><li><a href="global.html#isBlocked">isBlocked</a></li><li><a href="global.html#likePress">likePress</a></li><li><a href="global.html#login">login</a></li><li><a href="global.html#loopAndCheck">loopAndCheck</a></li><li><a href="global.html#loopObjAndCheck">loopObjAndCheck</a></li><li><a href="global.html#makePost">makePost</a></li><li><a href="global.html#mongoose">mongoose</a></li><li><a href="global.html#reblogPost">reblogPost</a></li><li><a href="global.html#removeComment">removeComment</a></li><li><a href="global.html#removeReblog">removeReblog</a></li><li><a href="global.html#reportPost">reportPost</a></li><li><a href="global.html#resetPassword">resetPassword</a></li><li><a href="global.html#retrieveBlog">retrieveBlog</a></li><li><a href="global.html#retrieveRandomBlogs">retrieveRandomBlogs</a></li><li><a href="global.html#retrieveRandomPosts">retrieveRandomPosts</a></li><li><a href="global.html#retrieveTrendingPosts">retrieveTrendingPosts</a></li><li><a href="global.html#retrieveUser">retrieveUser</a></li><li><a href="global.html#search">search</a></li><li><a href="global.html#showPost">showPost</a></li><li><a href="global.html#signUp">signUp</a></li><li><a href="global.html#unblockBlog">unblockBlog</a></li><li><a href="global.html#unfollowBlog">unfollowBlog</a></li><li><a href="global.html#updateColor">updateColor</a></li><li><a href="global.html#uploadAny">uploadAny</a></li><li><a href="global.html#uploadImgBase">uploadImgBase</a></li><li><a href="global.html#uploadImgg">uploadImgg</a></li><li><a href="global.html#uploadLocalImg">uploadLocalImg</a></li><li><a href="global.html#uploadStream">uploadStream</a></li><li><a href="global.html#userUnblockBlog">userUnblockBlog</a></li><li><a href="global.html#verfiyAccount">verfiyAccount</a></li><li><a href="global.html#verifyMail">verifyMail</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Wed Dec 22 2021 21:55:02 GMT+0200 (Eastern European Standard Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Sat Jan 01 2022 13:16:04 GMT+0200 (Eastern European Standard Time)
 </footer>
 
 <script> prettyPrint(); </script>

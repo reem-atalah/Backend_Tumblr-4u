@@ -75,6 +75,21 @@ const inMemoryStorage = multer.memoryStorage();
 // } catch (e) {
 //   next(e);
 // }
+
+/* ----------- <---> Upload files locally <--->  */ // *** <===> Done <===>  *** //
+
+/**
+ *
+ * @function
+ * @name uploadLocalImg
+ * @description This function upload this media(image/audio/video) files  
+ *              after changing from base64 on local storage
+ *
+ * @param {Array} files  - string or array of strings according number of media 
+ *                             asserted to the function
+ * @returns {String}    - success message
+ */
+
 const uploadLocalImg = async (files) => {
   // console.log('files: ', files.file.length);
   if (files.file.length != null) {
@@ -114,6 +129,18 @@ const uploadLocalImg = async (files) => {
   return success;
 };
 
+/* ----------- <---> Upload files on server <--->  */ // *** <===> Done <===>  *** //
+
+/**
+ *
+ * @function
+ * @name uploadStream
+ * @description This function upload this media(image/audio/video) files not base64
+ *
+ * @param {Array} files  - file or array of files according number of media 
+ *                             asserted to the function
+ * @returns {Array}    - Array of names of media on server
+ */
 
 const uploadStream = async (files) => {
   const blobServiceClient = await BlobServiceClient
@@ -155,6 +182,18 @@ const uploadStream = async (files) => {
   // return 'https://tumblrstorage.blob.core.windows.net/imagess/'+blobName;
 };
 
+/* ----------- <---> Upload media on server <--->  */ // *** <===> Done <===>  *** //
+
+/**
+ *
+ * @function
+ * @name uploadAny
+ * @description This function upload this media(image/audio/video) comes from function uploadImgBase on server cloud
+ *
+ * @param {String} blobName  - media name
+ * @param {String} type  - media type
+ * @returns {String}    - Url of media uploaded on server cloud
+ */
 
 const uploadAny = async (blobName, type) => {
   // console.log('blobName: ', blobName);
@@ -179,6 +218,20 @@ const uploadAny = async (blobName, type) => {
         }));
   return 'https://tumblrstorage.blob.core.windows.net/imagess/' + blobName;
 };
+
+/* ----------- <---> Change base64 media <--->  */ // *** <===> Done <===>  *** //
+
+/**
+ *
+ * @function
+ * @name uploadImgBase
+ * @description This function changes media from base64 to normal media base according to its type(image/audio/video)
+ *              and calls function uploadAny to upload this media on server cloud
+ *
+ * @param {Array} files  - string or array of strings according number of media 
+ *                             asserted to the function
+ * @returns {Array}    - Array of Urls with links of media uploaded on server cloud
+ */
 
 const uploadImgBase = async (files) => {
   const blobUrls = [];
@@ -262,6 +315,17 @@ const uploadVideo = async (files) => {
   match = files.replace(/ /g, '+'); // <--- this is important
 }
 
+/* ----------- <---> Upload data on server <--->  */ // *** <===> Done <===>  *** //
+
+/**
+ *
+ * @function
+ * @name uploadImgg
+ * @description This function upload data in text file on server cloud
+ *
+ * @returns {String}    - Url of media uploaded on server cloud
+ */
+
 const uploadImgg = async () => {
   const blobServiceClient = await BlobServiceClient
     .fromConnectionString(process.env.AZURE_STORAGE_CONNECTION_STRING);
@@ -298,7 +362,9 @@ const uploadImgg = async () => {
  *
  * @function
  * @name retrieveRandomPosts
- * @description This function gets random posts for explore
+ * @description This function gets random posts for explore/radar
+ * 
+ * @returns {Array}    - Array of posts
  */
 
 const retrieveRandomPosts = async () => {
@@ -323,7 +389,9 @@ const retrieveRandomPosts = async () => {
  *
  * @function
  * @name retrieveTrendingPosts
- * @description This function gets random posts for explore
+ * @description This function gets trending posts for explore
+ * 
+ * @returns {Array}    - Array of trending posts
  */
 
 const retrieveTrendingPosts = async () => {

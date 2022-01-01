@@ -20,7 +20,6 @@ const schema = require('../../../Model/model');
  * @returns {Object} - The blocked blog and null if not found
  */
 
-
 const blockBlog = async (blogId, blockedBlogId) => {
   try {
     const blockedBlog = await schema.blogs.findOne(
@@ -238,7 +237,9 @@ const retrieveBlog = async (blogId) => {
  *
  * @function
  * @name retrieveRandomBlogs
- * @description This function gets random blogs for explore
+ * @description This function gets random blogs for explore/checkout these blogs
+ * 
+ * @returns {Array}    - Array of blogs
  */
 
 const retrieveRandomBlogs = async () => {
