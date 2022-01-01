@@ -58,7 +58,6 @@ const blockBlog = async (blogId, blockedBlogId) => {
  * @returns {Object} - The unblocked blog and null if not found
  */
 
-
 const unblockBlog = async (blogId, unblockedBlogId) => {
   try {
     const unblockedBlog = await schema.blogs.findOne(
@@ -78,13 +77,11 @@ const unblockBlog = async (blogId, unblockedBlogId) => {
   }
 };
 
-
-
 /**
  *
  * @function
  * @name editBlog
- * @description    -  It retrieves a blog given its id
+ * @description    -  It edits a blog given its id and the fields that the user wants to edit
  * @param {String} blogId 
  * @param {String} accent
  * @param {String} name 
@@ -101,9 +98,8 @@ const unblockBlog = async (blogId, unblockedBlogId) => {
  * @param {Boolean} showDescription
  * @param {Boolean} showHeaderImage
  * @param {Boolean} stretchHeaderImage
- * @return {Object} - A blog object
+ * @returns {Object} - An object of the editted blog
  */
-
 
 const editBlog = async (req) => {
   try {
@@ -212,10 +208,9 @@ const editBlog = async (req) => {
  * @function
  * @name retrieveBlog
  * @description    -  It retrieves a blog given its id
- * @param {String} blogId - name of the blog
+ * @param {String} blogId - Id of the blog
  * @return {Object} - A blog object
  */
-
 const retrieveBlog = async (blogId) => {
   try {
     const blog = await schema.blogs.findOne({
