@@ -645,7 +645,7 @@ const makeComment = async (blogId, postId, text) => {
 
 /**
  * @function
- * @name loopAndCheck
+ * @name loopLikeAndCheck
  * @description Loop on an array and check if an element exists.
  * @param {array} arr - Array to loop on.
  * @param {string} element - Element to look for.
