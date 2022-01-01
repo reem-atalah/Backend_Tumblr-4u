@@ -90,7 +90,7 @@ describe('Post APIs', () => {
       const req = {
         params: {
           postId: '61ca5d91a8a4556c5b24f1f4',
-          commentId: '61d09371d53d981f8a647ef6',
+          commentId: '61d098b4c92d5ab7b4455652',
         },
       };
 
@@ -122,13 +122,14 @@ describe('Post APIs', () => {
             done();
           }).catch(done);
     });
+  });
 
   describe('Function removeReblog', () => {
     it('It Should Remove a Reblog', (done) => {
       const req = {
         params: {
           postId: '61ca5d91a8a4556c5b24f1f4',
-          reblogId: '61d09372d53d981f8a647f43',
+          reblogId: '61d092fae53277ba394a109c',
         },
       };
 
@@ -175,7 +176,6 @@ describe('Post APIs', () => {
       done();
     });
   });
-//   // ----------------// <=====> Create Post <=====> //----------------//
 
   describe('Function likePress', () => {
     it('It Should Like or Unlike a Post', (done) => {
@@ -266,7 +266,7 @@ describe('Post APIs', () => {
     it('It Should Delete a Post', (done) => {
       const req = {
         params: {
-          postId: '61d09370d53d981f8a647ecc',
+          postId: '61ce04ea704243e325d035cb',
         },
       };
 
@@ -325,6 +325,82 @@ describe('Post APIs', () => {
       }).catch(done);
     });
   });
+
+  // --------// <=====> upload media on cloud <=====> //------------//
+  describe('Upload media APIs', () => {
+    // --------// <=====> upload image on cloud <=====> //------------//
+      it('It tests uploading image on server, gets url', (done) => {
+        const blobName = 'image2022-1-1T03-59-05.770Z.jpg';
+    
+        postFunctions.uploadAny(blobName, 'image/jpeg')
+            .then((res)=>{
+              expect(res)
+                .to.be.equal('https://tumblrstorage.blob.core.windows.net/imagess/'+blobName);
+              done();
+            }).catch(done);
+      });
+    
+      // --------// <=====> upload video on cloud <=====> //------------//
+      it('It tests uploading video on server, gets url', (done) => {
+        const blobName = 'video2022-01-01T15-23-27.384Z.mp4';
+    
+        postFunctions.uploadAny(blobName, 'video/mp4')
+            .then((res)=>{
+              expect(res)
+                .to.be.equal('https://tumblrstorage.blob.core.windows.net/imagess/'+blobName);
+              done();
+            }).catch(done);
+      });
+    
+      // --------// <=====> upload audio on cloud <=====> //------------//
+      it('It tests uploading audio on server, gets url', (done) => {
+        const blobName = 'audio2021-12-28T04-06-07.388Z.mpeg';
+    
+        postFunctions.uploadAny(blobName, 'audio/mpeg')
+            .then((res)=>{
+              expect(res)
+                .to.be.equal('https://tumblrstorage.blob.core.windows.net/imagess/'+blobName);
+              done();
+            }).catch(done);
+      });
+    });
+    
+    describe('Random posts APIs', () => {
+        
+      // --------// <=====> get radar posts <=====> //------------//
+      it('It tests radar posts', (done) => {
+    
+        postFunctions.retrieveRandomPosts()
+            .then((res)=>{
+              expect(res.length).to.be.equal(10);
+              done();
+            }).catch(done);
+      });
+  
+      // --------// <=====> get trending posts <=====> //------------//
+      it('It tests trending posts', (done) => {
+        post=[
+          {
+            "_id": "61ca5d91a8a4556c5b24f1f4",
+            "blogId": '61c9d6b82569f9abb33ebe04',
+            "postHtml": '<img width="100%" src="https://tumblrstorage.blob.core.windows.net/imagess/image2022-1-1T03-59-05.770Z.jpg]" alt="">',
+            "type": 'text',
+            "state": 'published',
+            "tags": [ 'edit', 'cmp', 'Trending' ],
+            "notesId": '61ca5d91a8a4556c5b24f1f3',
+            "isDeleted": false,
+            "isReported": false,
+            "postUrl": '/61ca5d91a8a4556c5b24f1f4/show_post',
+            "__v": 1
+          }
+        ]
+        postFunctions.retrieveTrendingPosts()
+            .then((res)=>{
+              expect(res.trendingPostsLim[0].notesId).to.be.equal(post[0].notesId);
+              done();
+            }).catch(done);
+      });
+    });
 
 });
 /* =========== /// <==> End <==> ===========*/
