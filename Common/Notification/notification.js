@@ -35,6 +35,7 @@ const socket = async (app) => {
 
         socket.on('like', async (input) => {
             console.log('Like');
+            console.log(input);
             console.log(input.postId);
             await notificationFunction.addNotification(input.postId, 'like');
             const room = await userServices.getUserIdFromPostId(input.postId);
