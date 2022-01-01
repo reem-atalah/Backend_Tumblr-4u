@@ -369,6 +369,28 @@ describe('User Functions', () => {
     });
   });
 
+  /*
+  ///////// <---------> ======== <---------> ///////// =====================>
+  ///////// <---------> add Chat <---------> ///////// ===========>
+  ///////// <---------> ======== <---------> ///////// =====================>
+  */
+  describe('Create New Chat', () => {
+    // ----------------// <=====> 1-Case <=====> //----------------//
+    it('It Should Create New Chat Message', (done) => {
+
+      message = 'Test';
+      sendUserId = '61c9d749b33bf76a71baed86';
+      receiveUserId = '61c9e0215954b6332bc203f0';
+      sendBlogName = 'CMP-2023';
+      recieveBlogName = 'Engineer';
+
+      notificationFunction.addchat(message, sendUserId, receiveUserId, sendBlogName, recieveBlogName).then((result) => {
+        expect(result).to.be.eq('Created');
+        done();
+      }).catch(done);
+    });
+  });
+
 });
 
 
