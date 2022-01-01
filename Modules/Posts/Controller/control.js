@@ -1466,6 +1466,7 @@ module.exports = {
   uploadLocalImg,
   uploadVideo,
   getLikedPosts,
+  uploadAny, // added this after thursday, to call it in unit testing
 };
 
 /* =========== /// <==> End <==> ===========*/
