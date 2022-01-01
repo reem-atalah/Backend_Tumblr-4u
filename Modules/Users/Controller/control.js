@@ -411,7 +411,7 @@ const deleteUser = async (email) => {
  *
  * @function
  * @name retrieveUser
- * @description This Function retrieves a user
+ * @description This Function retrieves a user given its id
  * @param {String} userId - Id of the user
  * @returns {Object}    - The user 
  */
