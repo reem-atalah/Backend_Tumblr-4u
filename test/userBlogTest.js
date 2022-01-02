@@ -12,8 +12,8 @@ const dotenv = require('dotenv');
 const connection = require('../Configurations/configuration');
 const blogFunctions = require('../Modules/Blogs/Controller/control');
 const { Schema } = require('mongoose');
-dotenv.config();
-connection();
+//dotenv.config();
+//connection();
 describe('UserBlog Methodes Testing', () => {
   it('It gets checkout these blogs', (done) => {
     
@@ -25,7 +25,7 @@ describe('UserBlog Methodes Testing', () => {
 });
 
   const email= 'rawaa.2000@gmail.com';
-  const blogName='nour25';
+  const blogName='nour244202033';
   describe('Create Blog Testing', ()=>{
 
     it('should create a new blog', (done)=>{
@@ -258,7 +258,7 @@ describe('UserBlog Methodes Testing', () => {
     });
   });
  
-  const blogId='61d09ec21eb41129bd43045a';
+  const blogId='61d0f0c1936fcfdfbdac3d02';
   describe('Delete Blog Testing', ()=>{
     it('should delete the blog', (done)=>{
        userFunctions.deleteBlog(email, blogId)

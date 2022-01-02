@@ -90,7 +90,7 @@ describe('Post APIs', () => {
       const req = {
         params: {
           postId: '61ca5d91a8a4556c5b24f1f4',
-          commentId: '61d098b4c92d5ab7b4455652',
+          commentId: '61d0896fdfed7734fc1afcfe',
         },
       };
 
@@ -129,7 +129,7 @@ describe('Post APIs', () => {
       const req = {
         params: {
           postId: '61ca5d91a8a4556c5b24f1f4',
-          reblogId: '61d092fae53277ba394a109c',
+          reblogId: '61d08579d8591f8b72b7b4c9',
         },
       };
 
@@ -266,7 +266,7 @@ describe('Post APIs', () => {
     it('It Should Delete a Post', (done) => {
       const req = {
         params: {
-          postId: '61ce04ea704243e325d035cb',
+          postId: '61ca5d94a8a4556c5b24f233',
         },
       };
 
@@ -279,7 +279,7 @@ describe('Post APIs', () => {
   });
 
   describe('Function getBlogPosts', () => {
-    it('It Should Blog Posts', (done) => {
+    it('It Should get Blog Posts', (done) => {
       const req = {
         params: {
           blogId: '61c9d6b82569f9abb33ebe04'

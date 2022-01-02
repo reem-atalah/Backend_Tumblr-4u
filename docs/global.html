@@ -3193,7 +3193,7 @@
     
 
     
-    <h4 class="name" id="createBlog"><span class="type-signature"></span>createBlog<span class="signature">(userEmail, title, name, privacy, password<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="createBlog"><span class="type-signature"></span>createBlog<span class="signature">(userEmail, title, name, privacy, password<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Object}</span></h4>
     
 
     
@@ -3201,7 +3201,7 @@
 
 
 <div class="description">
-    This function allows the user whose id sent in             params create a new blog
+    This function allows the user to create a new blog
 </div>
 
 
@@ -3430,7 +3430,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Modules_Users_Controller_control.js.html">Modules/Users/Controller/control.js</a>, <a href="Modules_Users_Controller_control.js.html#line184">line 184</a>
+        <a href="Modules_Users_Controller_control.js.html">Modules/Users/Controller/control.js</a>, <a href="Modules_Users_Controller_control.js.html#line180">line 180</a>
     </li></ul></dd>
     
 
@@ -3459,10 +3459,22 @@
 
         
 <div class="param-desc">
-    res status and message or error massege in case of errors.
+    - The created blog
 </div>
 
 
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Object</span>
+
+
+    </dd>
+</dl>
 
     
 
@@ -3476,7 +3488,7 @@
     
 
     
-    <h4 class="name" id="createBlog"><span class="type-signature"></span>createBlog<span class="signature">(userEmail, title, name, privacy, password<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="createBlog"><span class="type-signature"></span>createBlog<span class="signature">(userEmail, title, name, privacy, password<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Object}</span></h4>
     
 
     
@@ -3484,7 +3496,7 @@
 
 
 <div class="description">
-    This function allows the user whose id sent in             params create a new blog
+    This function allows the user to create a new blog
 </div>
 
 
@@ -3713,7 +3725,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Modules_Users_Controller_control.js.html">Modules/Users/Controller/control.js</a>, <a href="Modules_Users_Controller_control.js.html#line184">line 184</a>
+        <a href="Modules_Users_Controller_control.js.html">Modules/Users/Controller/control.js</a>, <a href="Modules_Users_Controller_control.js.html#line180">line 180</a>
     </li></ul></dd>
     
 
@@ -3742,10 +3754,22 @@
 
         
 <div class="param-desc">
-    res status and message or error massege in case of errors.
+    - The created blog
 </div>
 
 
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Object</span>
+
+
+    </dd>
+</dl>
 
     
 
@@ -5202,7 +5226,7 @@
 
 
 <div class="description">
-    This function allows the user whose id sent in             params delete his blog
+    This function allows the user to delete his blog
 </div>
 
 
@@ -5318,7 +5342,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Modules_Users_Controller_control.js.html">Modules/Users/Controller/control.js</a>, <a href="Modules_Users_Controller_control.js.html#line287">line 287</a>
+        <a href="Modules_Users_Controller_control.js.html">Modules/Users/Controller/control.js</a>, <a href="Modules_Users_Controller_control.js.html#line283">line 283</a>
     </li></ul></dd>
     
 
@@ -5347,7 +5371,7 @@
 
         
 <div class="param-desc">
-    - the created deleted blog
+    - the deleted blog
 </div>
 
 
@@ -5384,7 +5408,7 @@
 
 
 <div class="description">
-    This function allows the user whose id sent in             params delete his blog
+    This function allows the user to delete his blog
 </div>
 
 
@@ -5500,7 +5524,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Modules_Users_Controller_control.js.html">Modules/Users/Controller/control.js</a>, <a href="Modules_Users_Controller_control.js.html#line287">line 287</a>
+        <a href="Modules_Users_Controller_control.js.html">Modules/Users/Controller/control.js</a>, <a href="Modules_Users_Controller_control.js.html#line283">line 283</a>
     </li></ul></dd>
     
 
@@ -5529,7 +5553,7 @@
 
         
 <div class="param-desc">
-    - the created deleted blog
+    - the deleted blog
 </div>
 
 
@@ -5717,7 +5741,7 @@
     
 
     
-    <h4 class="name" id="deleteUser"><span class="type-signature"></span>deleteUser<span class="signature">(userEmail)</span><span class="type-signature"> &rarr; {Object}</span></h4>
+    <h4 class="name" id="deleteUser"><span class="type-signature"></span>deleteUser<span class="signature">(email)</span><span class="type-signature"> &rarr; {Object}</span></h4>
     
 
     
@@ -5725,7 +5749,7 @@
 
 
 <div class="description">
-    This Function deletes the user (user.isDeleted=true)
+    This Function deletes the user and its blogs(user.isDeleted=true)
 </div>
 
 
@@ -5761,7 +5785,7 @@
 
         <tr>
             
-                <td class="name"><code>userEmail</code></td>
+                <td class="name"><code>email</code></td>
             
 
             <td class="type">
@@ -5818,7 +5842,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Modules_Users_Controller_control.js.html">Modules/Users/Controller/control.js</a>, <a href="Modules_Users_Controller_control.js.html#line388">line 388</a>
+        <a href="Modules_Users_Controller_control.js.html">Modules/Users/Controller/control.js</a>, <a href="Modules_Users_Controller_control.js.html#line384">line 384</a>
     </li></ul></dd>
     
 
@@ -5876,7 +5900,7 @@
     
 
     
-    <h4 class="name" id="deleteUser"><span class="type-signature"></span>deleteUser<span class="signature">(userEmail)</span><span class="type-signature"> &rarr; {Object}</span></h4>
+    <h4 class="name" id="deleteUser"><span class="type-signature"></span>deleteUser<span class="signature">(email)</span><span class="type-signature"> &rarr; {Object}</span></h4>
     
 
     
@@ -5884,7 +5908,7 @@
 
 
 <div class="description">
-    This Function deletes the user (user.isDeleted=true)
+    This Function deletes the user and its blogs(user.isDeleted=true)
 </div>
 
 
@@ -5920,7 +5944,7 @@
 
         <tr>
             
-                <td class="name"><code>userEmail</code></td>
+                <td class="name"><code>email</code></td>
             
 
             <td class="type">
@@ -5977,7 +6001,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Modules_Users_Controller_control.js.html">Modules/Users/Controller/control.js</a>, <a href="Modules_Users_Controller_control.js.html#line388">line 388</a>
+        <a href="Modules_Users_Controller_control.js.html">Modules/Users/Controller/control.js</a>, <a href="Modules_Users_Controller_control.js.html#line384">line 384</a>
     </li></ul></dd>
     
 
@@ -6035,7 +6059,7 @@
     
 
     
-    <h4 class="name" id="doesFollow"><span class="type-signature"></span>doesFollow<span class="signature">(userEmail, blogId)</span><span class="type-signature"> &rarr; {Object}</span></h4>
+    <h4 class="name" id="doesFollow"><span class="type-signature"></span>doesFollow<span class="signature">(email, blogId)</span><span class="type-signature"> &rarr; {Object}</span></h4>
     
 
     
@@ -6079,7 +6103,7 @@
 
         <tr>
             
-                <td class="name"><code>userEmail</code></td>
+                <td class="name"><code>email</code></td>
             
 
             <td class="type">
@@ -6217,7 +6241,7 @@
     
 
     
-    <h4 class="name" id="doesFollow"><span class="type-signature"></span>doesFollow<span class="signature">(userEmail, blogId)</span><span class="type-signature"> &rarr; {Object}</span></h4>
+    <h4 class="name" id="doesFollow"><span class="type-signature"></span>doesFollow<span class="signature">(email, blogId)</span><span class="type-signature"> &rarr; {Object}</span></h4>
     
 
     
@@ -6261,7 +6285,7 @@
 
         <tr>
             
-                <td class="name"><code>userEmail</code></td>
+                <td class="name"><code>email</code></td>
             
 
             <td class="type">
@@ -6407,7 +6431,7 @@
 
 
 <div class="description">
-    -  It retrieves a blog given its id
+    -  It edits a blog given its id and the fields that the user wants to edit
 </div>
 
 
@@ -6845,7 +6869,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Modules_Blogs_Controller_control.js.html">Modules/Blogs/Controller/control.js</a>, <a href="Modules_Blogs_Controller_control.js.html#line83">line 83</a>
+        <a href="Modules_Blogs_Controller_control.js.html">Modules/Blogs/Controller/control.js</a>, <a href="Modules_Blogs_Controller_control.js.html#line80">line 80</a>
     </li></ul></dd>
     
 
@@ -6874,7 +6898,7 @@
 
         
 <div class="param-desc">
-    - A blog object
+    - An object of the editted blog
 </div>
 
 
@@ -7070,7 +7094,7 @@
 
 
 <div class="description">
-    this function makes the user whose id sent in             params follow the blog whose id in the body
+    this function makes the user follow the blog whose id in the body
 </div>
 
 
@@ -7186,7 +7210,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Modules_Users_Controller_control.js.html">Modules/Users/Controller/control.js</a>, <a href="Modules_Users_Controller_control.js.html#line80">line 80</a>
+        <a href="Modules_Users_Controller_control.js.html">Modules/Users/Controller/control.js</a>, <a href="Modules_Users_Controller_control.js.html#line81">line 81</a>
     </li></ul></dd>
     
 
@@ -7252,7 +7276,7 @@
 
 
 <div class="description">
-    this function makes the user whose id sent in             params follow the blog whose id in the body
+    this function makes the user follow the blog whose id in the body
 </div>
 
 
@@ -7368,7 +7392,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Modules_Users_Controller_control.js.html">Modules/Users/Controller/control.js</a>, <a href="Modules_Users_Controller_control.js.html#line80">line 80</a>
+        <a href="Modules_Users_Controller_control.js.html">Modules/Users/Controller/control.js</a>, <a href="Modules_Users_Controller_control.js.html#line81">line 81</a>
     </li></ul></dd>
     
 
@@ -9185,7 +9209,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Modules_Users_Controller_control.js.html">Modules/Users/Controller/control.js</a>, <a href="Modules_Users_Controller_control.js.html#line346">line 346</a>
+        <a href="Modules_Users_Controller_control.js.html">Modules/Users/Controller/control.js</a>, <a href="Modules_Users_Controller_control.js.html#line341">line 341</a>
     </li></ul></dd>
     
 
@@ -9367,7 +9391,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Modules_Users_Controller_control.js.html">Modules/Users/Controller/control.js</a>, <a href="Modules_Users_Controller_control.js.html#line346">line 346</a>
+        <a href="Modules_Users_Controller_control.js.html">Modules/Users/Controller/control.js</a>, <a href="Modules_Users_Controller_control.js.html#line341">line 341</a>
     </li></ul></dd>
     
 
@@ -12032,7 +12056,7 @@
     
 
     
-    <h4 class="name" id="loopAndCheck"><span class="type-signature"></span>loopAndCheck<span class="signature">(arr, element)</span><span class="type-signature"> &rarr; {string}</span></h4>
+    <h4 class="name" id="loopLikeAndCheck"><span class="type-signature"></span>loopLikeAndCheck<span class="signature">(arr, element)</span><span class="type-signature"> &rarr; {string}</span></h4>
     
 
     
@@ -13822,7 +13846,7 @@
 
             
 
-            <td class="description last">name of the blog</td>
+            <td class="description last">Id of the blog</td>
         </tr>
 
     
@@ -13863,7 +13887,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Modules_Blogs_Controller_control.js.html">Modules/Blogs/Controller/control.js</a>, <a href="Modules_Blogs_Controller_control.js.html#line210">line 210</a>
+        <a href="Modules_Blogs_Controller_control.js.html">Modules/Blogs/Controller/control.js</a>, <a href="Modules_Blogs_Controller_control.js.html#line206">line 206</a>
     </li></ul></dd>
     
 
@@ -13973,7 +13997,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Modules_Blogs_Controller_control.js.html">Modules/Blogs/Controller/control.js</a>, <a href="Modules_Blogs_Controller_control.js.html#line236">line 236</a>
+        <a href="Modules_Blogs_Controller_control.js.html">Modules/Blogs/Controller/control.js</a>, <a href="Modules_Blogs_Controller_control.js.html#line231">line 231</a>
     </li></ul></dd>
     
 
@@ -14259,7 +14283,7 @@
 
 
 <div class="description">
-    This Function retrieves a user
+    This Function retrieves a user given its id
 </div>
 
 
@@ -14352,7 +14376,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Modules_Users_Controller_control.js.html">Modules/Users/Controller/control.js</a>, <a href="Modules_Users_Controller_control.js.html#line414">line 414</a>
+        <a href="Modules_Users_Controller_control.js.html">Modules/Users/Controller/control.js</a>, <a href="Modules_Users_Controller_control.js.html#line410">line 410</a>
     </li></ul></dd>
     
 
@@ -14418,7 +14442,7 @@
 
 
 <div class="description">
-    This Function retrieves a user
+    This Function retrieves a user given its id
 </div>
 
 
@@ -14511,7 +14535,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Modules_Users_Controller_control.js.html">Modules/Users/Controller/control.js</a>, <a href="Modules_Users_Controller_control.js.html#line414">line 414</a>
+        <a href="Modules_Users_Controller_control.js.html">Modules/Users/Controller/control.js</a>, <a href="Modules_Users_Controller_control.js.html#line410">line 410</a>
     </li></ul></dd>
     
 
@@ -15578,7 +15602,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Modules_Users_Controller_control.js.html">Modules/Users/Controller/control.js</a>, <a href="Modules_Users_Controller_control.js.html#line123">line 123</a>
+        <a href="Modules_Users_Controller_control.js.html">Modules/Users/Controller/control.js</a>, <a href="Modules_Users_Controller_control.js.html#line121">line 121</a>
     </li></ul></dd>
     
 
@@ -15607,7 +15631,7 @@
 
         
 <div class="param-desc">
-    - The unfollowed blog
+    - The unfollowed blog and null if not found
 </div>
 
 
@@ -15760,7 +15784,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Modules_Users_Controller_control.js.html">Modules/Users/Controller/control.js</a>, <a href="Modules_Users_Controller_control.js.html#line123">line 123</a>
+        <a href="Modules_Users_Controller_control.js.html">Modules/Users/Controller/control.js</a>, <a href="Modules_Users_Controller_control.js.html#line121">line 121</a>
     </li></ul></dd>
     
 
@@ -15789,7 +15813,7 @@
 
         
 <div class="param-desc">
-    - The unfollowed blog
+    - The unfollowed blog and null if not found
 </div>
 
 
@@ -15942,7 +15966,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Modules_Users_Controller_control.js.html">Modules/Users/Controller/control.js</a>, <a href="Modules_Users_Controller_control.js.html#line370">line 370</a>
+        <a href="Modules_Users_Controller_control.js.html">Modules/Users/Controller/control.js</a>, <a href="Modules_Users_Controller_control.js.html#line365">line 365</a>
     </li></ul></dd>
     
 
@@ -16124,7 +16148,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Modules_Users_Controller_control.js.html">Modules/Users/Controller/control.js</a>, <a href="Modules_Users_Controller_control.js.html#line370">line 370</a>
+        <a href="Modules_Users_Controller_control.js.html">Modules/Users/Controller/control.js</a>, <a href="Modules_Users_Controller_control.js.html#line365">line 365</a>
     </li></ul></dd>
     
 
@@ -17893,13 +17917,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#activityFeed">activityFeed</a></li><li><a href="global.html#androidSignUpWithGoogle">androidSignUpWithGoogle</a></li><li><a href="global.html#autoCompleteSearchDash">autoCompleteSearchDash</a></li><li><a href="global.html#autoCompleteSearchDashWord">autoCompleteSearchDashWord</a></li><li><a href="global.html#blockBlog">blockBlog</a></li><li><a href="global.html#changeEmail">changeEmail</a></li><li><a href="global.html#checkBlogName">checkBlogName</a></li><li><a href="global.html#checkMail">checkMail</a></li><li><a href="global.html#checkPassword">checkPassword</a></li><li><a href="global.html#checkPostId">checkPostId</a></li><li><a href="global.html#checkUserId">checkUserId</a></li><li><a href="global.html#createBlog">createBlog</a></li><li><a href="global.html#createGoogleUser">createGoogleUser</a></li><li><a href="global.html#createPost">createPost</a></li><li><a href="global.html#createPrimaryBlog">createPrimaryBlog</a></li><li><a href="global.html#createUser">createUser</a></li><li><a href="global.html#deleteBlog">deleteBlog</a></li><li><a href="global.html#deletePost">deletePost</a></li><li><a href="global.html#deleteUser">deleteUser</a></li><li><a href="global.html#doesFollow">doesFollow</a></li><li><a href="global.html#editBlog">editBlog</a></li><li><a href="global.html#editPost">editPost</a></li><li><a href="global.html#followBlog">followBlog</a></li><li><a href="global.html#forgetPassword">forgetPassword</a></li><li><a href="global.html#forgetPasswordMail">forgetPasswordMail</a></li><li><a href="global.html#getBlogIdFromPostId">getBlogIdFromPostId</a></li><li><a href="global.html#getBlogPosts">getBlogPosts</a></li><li><a href="global.html#getDashboard">getDashboard</a></li><li><a href="global.html#getIdFromToken">getIdFromToken</a></li><li><a href="global.html#getInterests">getInterests</a></li><li><a href="global.html#getLikedPosts">getLikedPosts</a></li><li><a href="global.html#getNotes">getNotes</a></li><li><a href="global.html#getUserIdFromBlogName">getUserIdFromBlogName</a></li><li><a href="global.html#getUserIdFromPostId">getUserIdFromPostId</a></li><li><a href="global.html#google">google</a></li><li><a href="global.html#googleInfo">googleInfo</a></li><li><a href="global.html#isAuthorized">isAuthorized</a></li><li><a href="global.html#isBlocked">isBlocked</a></li><li><a href="global.html#likePress">likePress</a></li><li><a href="global.html#login">login</a></li><li><a href="global.html#loopAndCheck">loopAndCheck</a></li><li><a href="global.html#loopObjAndCheck">loopObjAndCheck</a></li><li><a href="global.html#makePost">makePost</a></li><li><a href="global.html#mongoose">mongoose</a></li><li><a href="global.html#reblogPost">reblogPost</a></li><li><a href="global.html#removeComment">removeComment</a></li><li><a href="global.html#removeReblog">removeReblog</a></li><li><a href="global.html#reportPost">reportPost</a></li><li><a href="global.html#resetPassword">resetPassword</a></li><li><a href="global.html#retrieveBlog">retrieveBlog</a></li><li><a href="global.html#retrieveRandomBlogs">retrieveRandomBlogs</a></li><li><a href="global.html#retrieveRandomPosts">retrieveRandomPosts</a></li><li><a href="global.html#retrieveTrendingPosts">retrieveTrendingPosts</a></li><li><a href="global.html#retrieveUser">retrieveUser</a></li><li><a href="global.html#search">search</a></li><li><a href="global.html#showPost">showPost</a></li><li><a href="global.html#signUp">signUp</a></li><li><a href="global.html#unblockBlog">unblockBlog</a></li><li><a href="global.html#unfollowBlog">unfollowBlog</a></li><li><a href="global.html#updateColor">updateColor</a></li><li><a href="global.html#uploadAny">uploadAny</a></li><li><a href="global.html#uploadImgBase">uploadImgBase</a></li><li><a href="global.html#uploadImgg">uploadImgg</a></li><li><a href="global.html#uploadLocalImg">uploadLocalImg</a></li><li><a href="global.html#uploadStream">uploadStream</a></li><li><a href="global.html#userUnblockBlog">userUnblockBlog</a></li><li><a href="global.html#verfiyAccount">verfiyAccount</a></li><li><a href="global.html#verifyMail">verifyMail</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#activityFeed">activityFeed</a></li><li><a href="global.html#androidSignUpWithGoogle">androidSignUpWithGoogle</a></li><li><a href="global.html#autoCompleteSearchDash">autoCompleteSearchDash</a></li><li><a href="global.html#autoCompleteSearchDashWord">autoCompleteSearchDashWord</a></li><li><a href="global.html#blockBlog">blockBlog</a></li><li><a href="global.html#changeEmail">changeEmail</a></li><li><a href="global.html#checkBlogName">checkBlogName</a></li><li><a href="global.html#checkMail">checkMail</a></li><li><a href="global.html#checkPassword">checkPassword</a></li><li><a href="global.html#checkPostId">checkPostId</a></li><li><a href="global.html#checkUserId">checkUserId</a></li><li><a href="global.html#createBlog">createBlog</a></li><li><a href="global.html#createGoogleUser">createGoogleUser</a></li><li><a href="global.html#createPost">createPost</a></li><li><a href="global.html#createPrimaryBlog">createPrimaryBlog</a></li><li><a href="global.html#createUser">createUser</a></li><li><a href="global.html#deleteBlog">deleteBlog</a></li><li><a href="global.html#deletePost">deletePost</a></li><li><a href="global.html#deleteUser">deleteUser</a></li><li><a href="global.html#doesFollow">doesFollow</a></li><li><a href="global.html#editBlog">editBlog</a></li><li><a href="global.html#editPost">editPost</a></li><li><a href="global.html#followBlog">followBlog</a></li><li><a href="global.html#forgetPassword">forgetPassword</a></li><li><a href="global.html#forgetPasswordMail">forgetPasswordMail</a></li><li><a href="global.html#getBlogIdFromPostId">getBlogIdFromPostId</a></li><li><a href="global.html#getBlogPosts">getBlogPosts</a></li><li><a href="global.html#getDashboard">getDashboard</a></li><li><a href="global.html#getIdFromToken">getIdFromToken</a></li><li><a href="global.html#getInterests">getInterests</a></li><li><a href="global.html#getLikedPosts">getLikedPosts</a></li><li><a href="global.html#getNotes">getNotes</a></li><li><a href="global.html#getUserIdFromBlogName">getUserIdFromBlogName</a></li><li><a href="global.html#getUserIdFromPostId">getUserIdFromPostId</a></li><li><a href="global.html#google">google</a></li><li><a href="global.html#googleInfo">googleInfo</a></li><li><a href="global.html#isAuthorized">isAuthorized</a></li><li><a href="global.html#isBlocked">isBlocked</a></li><li><a href="global.html#likePress">likePress</a></li><li><a href="global.html#login">login</a></li><li><a href="global.html#loopLikeAndCheck">loopLikeAndCheck</a></li><li><a href="global.html#loopObjAndCheck">loopObjAndCheck</a></li><li><a href="global.html#makePost">makePost</a></li><li><a href="global.html#mongoose">mongoose</a></li><li><a href="global.html#reblogPost">reblogPost</a></li><li><a href="global.html#removeComment">removeComment</a></li><li><a href="global.html#removeReblog">removeReblog</a></li><li><a href="global.html#reportPost">reportPost</a></li><li><a href="global.html#resetPassword">resetPassword</a></li><li><a href="global.html#retrieveBlog">retrieveBlog</a></li><li><a href="global.html#retrieveRandomBlogs">retrieveRandomBlogs</a></li><li><a href="global.html#retrieveRandomPosts">retrieveRandomPosts</a></li><li><a href="global.html#retrieveTrendingPosts">retrieveTrendingPosts</a></li><li><a href="global.html#retrieveUser">retrieveUser</a></li><li><a href="global.html#search">search</a></li><li><a href="global.html#showPost">showPost</a></li><li><a href="global.html#signUp">signUp</a></li><li><a href="global.html#unblockBlog">unblockBlog</a></li><li><a href="global.html#unfollowBlog">unfollowBlog</a></li><li><a href="global.html#updateColor">updateColor</a></li><li><a href="global.html#uploadAny">uploadAny</a></li><li><a href="global.html#uploadImgBase">uploadImgBase</a></li><li><a href="global.html#uploadImgg">uploadImgg</a></li><li><a href="global.html#uploadLocalImg">uploadLocalImg</a></li><li><a href="global.html#uploadStream">uploadStream</a></li><li><a href="global.html#userUnblockBlog">userUnblockBlog</a></li><li><a href="global.html#verfiyAccount">verfiyAccount</a></li><li><a href="global.html#verifyMail">verifyMail</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Sat Jan 01 2022 13:16:04 GMT+0200 (Eastern European Standard Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Sun Jan 02 2022 01:23:07 GMT+0200 (Eastern European Standard Time)
 </footer>
 
 <script> prettyPrint(); </script>

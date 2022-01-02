@@ -24,7 +24,7 @@ const nodemailer = require('nodemailer');
 const jwt = require('jsonwebtoken');
 const { expect } = require('chai');
 const notificationFunction = require('../Modules/Notifications/Controller/control');
-const userFunc = require('../Modules/Users/Controller/control');
+const userFunctions = require('../Modules/Users/Controller/control');
 
 
 // const connect = require('../Configurations/configuration');
@@ -111,7 +111,7 @@ describe('User Functions', () => {
         "nasa",
         "education"
       ]
-      userFunc.getInterests(email, interests)
+      userFunctions.getInterests(email, interests)
       .then((result) => {
         expect(result.followedTags[0]).to.be.eq(interests[0]);
         done();
@@ -127,7 +127,7 @@ describe('User Functions', () => {
     it('It updates color theme of the user', (done) => {
       const email = 'nour.2020@gmail.com';
       const colorNumb=3;
-      userFunc.updateColor(email, colorNumb).then((result) => {
+      userFunctions.updateColor(email, colorNumb).then((result) => {
         console.log('result: ', result);
         expect(result.bodyColor).to.be.eq(colorNumb);
         done();
@@ -363,6 +363,28 @@ describe('User Functions', () => {
       const type = 'like';
 
       notificationFunction.addNotification(postId, type).then((result) => {
+        expect(result).to.be.eq('Created');
+        done();
+      }).catch(done);
+    });
+  });
+
+  /*
+  ///////// <---------> ======== <---------> ///////// =====================>
+  ///////// <---------> add Chat <---------> ///////// ===========>
+  ///////// <---------> ======== <---------> ///////// =====================>
+  */
+  describe('Create New Chat', () => {
+    // ----------------// <=====> 1-Case <=====> //----------------//
+    it('It Should Create New Chat Message', (done) => {
+
+      message = 'Test';
+      sendUserId = '61c9d749b33bf76a71baed86';
+      receiveUserId = '61c9e0215954b6332bc203f0';
+      sendBlogName = 'CMP-2023';
+      recieveBlogName = 'Engineer';
+
+      notificationFunction.addchat(message, sendUserId, receiveUserId, sendBlogName, recieveBlogName).then((result) => {
         expect(result).to.be.eq('Created');
         done();
       }).catch(done);
