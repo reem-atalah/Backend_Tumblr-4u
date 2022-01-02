@@ -25,7 +25,7 @@
  * @apidescription delete a blog
  * @apiVersion 0.0.0
  *
- * @apiParam {String} Token User's Secret Code.
+ * @apiHeader {String} Token User's Secret Code.
  * @apiParam {String} blogId The ID of the blog wanted to be deleted
  * 
  * @apiSuccess {Object} The deleted blog
@@ -76,7 +76,7 @@
  * @apidescription retrieve all information about the blog
  * @apiVersion 0.0.0
  *
- * @apiParam {String} Token User's Secret Code.
+ * @apiHeader {String} Token User's Secret Code.
  * @apiParam {String} blogId Blog's Unique Name.
  * 
  * @apiSuccess {Object} The Blog
@@ -122,7 +122,7 @@
  * @apidescription blocks a blog so you can't see the blog or its posts
  * @apiVersion 0.0.0
  *
- * @apiParam {String} Token User's Secret Code.
+ * @apiHeader {String} Token User's Secret Code.
  * @apiParam {String} blogId  Id of the blocking blog
  * @apiParam {String} blockedBlogId Id if the blog to be blocked
  * 
@@ -172,8 +172,7 @@
  * @apiPermission User, Admin, Super_Admin
  * @apidescription removes a block from a blog
  * @apiVersion 0.0.0
-
- * @apiParam {String} Token User's Secret Code.
+ * @apiHeader {String} Token User's Secret Code.
  * @apiParam {String} blogId Id of the requesting Blog
  * @apiParam {String} unblockedBlogId Id of the blog to be unblocked
  * 
@@ -222,7 +221,7 @@
  * @apidescription Follow a blog
  * @apiVersion 0.0.0
  *
- * @apiParam {String} Token User's Secret Code.
+ * @apiHeader {String} Token User's Secret Code.
  * @apiParam {String} blogId Id of the followed blog.
  * @apiSuccess {Object} The followed blog
  * @apiSuccessExample Response Data:
@@ -269,7 +268,7 @@
  * @apidescription Unfollow a blog
  * @apiVersion 0.0.0
  *
- * @apiParam {String} Token User's Secret Code.
+ * @apiHeader {String} Token User's Secret Code.
  * @apiParam {String} blogId Id of the unfollowed blog.
  * 
  * @apiSuccess {Object} The unfollowed blog
@@ -316,7 +315,7 @@
  * @apidescription Follow a blog
  * @apiVersion 0.0.0
  *
- * @apiParam {String} Token User's Secret Code.
+ * @apiHeader {String} Token User's Secret Code.
  * @apiParam {String} blogId Id of the followed blog.
  * @apiSuccess {Object} The user
  * @apiSuccessExample Response Data:
@@ -359,7 +358,7 @@
  * @apiVersion 0.0.0
  * @apiPermission User, Admin, Super_Admin
  *
- * @apiParam {String} Token User's Secret Code.
+ * @apiHeader {String} Token User's Secret Code.
  * @apiParam {String} Title Blog's Title
  * @apiParam {String} name Name of the Blog and must be unique
  * @apiparam {Boolean} privacy  Wether the blog is private or not
@@ -405,6 +404,7 @@
  * @apiVersion 0.0.0
  * @apiPermission User, Admin, Super_Admin
  *
+ * @apiHeader {String} Token User's Secret Code.
  * @apiparam {String} blogId  - id of the blog
  * @apiparam {String} [title]
  * @apiparam {String} [accent]
