@@ -9,7 +9,7 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const { number } = require('joi');
 /* =========== /// <==> End <==> ===========*/
-
+ 
 /* ============== /// <==> Chat Module Schema <==> /// ============== */
 const chatSchema = mongoose.Schema({
   chat: {

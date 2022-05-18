@@ -8,7 +8,7 @@ const schema = require('../../Model/model');
 const notificationFunction = require('../../Modules/Notifications/Controller/control');
 const userServices = require('../../Modules/Users/Controller/services');
 /* =========== /// <==> End <==> ===========*/
-
+ 
 /* =============== /// <==> Open Connection <==> /// ============= */
 
 const socket = async (app) => {

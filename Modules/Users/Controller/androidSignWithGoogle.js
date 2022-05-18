@@ -13,7 +13,7 @@ const nanoid = require('nanoid').nanoid;
 
 /* ----------- <---> Sign Up With Google For Android <---> ------- */ // *** <===> Done <===>  *** //
 // Assumption: Account Must Be Not Deleted
-
+ 
 /**
  * This Function Used To Register New User For Android.
  * @param {string} googleToken - Google Token

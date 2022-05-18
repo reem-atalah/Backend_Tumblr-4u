@@ -20,7 +20,7 @@ const { CLOSING } = require('ws');
  *
  * @returns Send Email To User.
  */
-
+ 
 const verifyMail = async (name, email, token) => {
   let transporter = nodemailer.createTransport({
     service: 'gmail',

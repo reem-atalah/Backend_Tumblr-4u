@@ -13,7 +13,7 @@ const schema = require('../../../Model/model');
 
 /* ----------- <---> Sign Up <---> ------- */ // *** <===> Done <===>  *** //
 // Assumption: Account Must Be Not Deleted
-
+ 
 /**
  * This Function Used To Register New User.
  *

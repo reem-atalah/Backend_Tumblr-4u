@@ -12,7 +12,7 @@ const notesSchema = require('../Schema/notesSchema');
 const notificationSchema = require('../Schema/notificationSchema');
 const chatSchema = require('../Schema/chatSchema');
 /* =========== /// <==> End <==> ===========*/
-
+ 
 /* ================ /// <==> Create  Model <==> /// ================ */
 const users = mongoose.model('Users', userSchema.userSchema);
 const Posts = mongoose.model('Posts', postSchema.postSchema);
