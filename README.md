@@ -7,7 +7,6 @@
   <img src="https://img.shields.io/badge/Framework-expressjs-pink" alt="Website" />
   <img src="https://img.shields.io/badge/Database-MongoDB-pink" alt="Website" />
   <img src="https://img.shields.io/badge/Unit%20testing-mocha-pink" alt="Website" />
-  <img src="https://img.shields.io/badge/Documentation-jsdoc-pink" alt="Website" />
    <img src="https://img.shields.io/badge/Function%20Documentation-jsdoc-pink" alt="Website" />
   <img src="https://img.shields.io/badge/API%20Documentation-apidoc-pink" alt="Website" />
 </p>
